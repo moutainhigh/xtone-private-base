@@ -70,7 +70,6 @@ public class Redirect {
     
     Gson gson = new Gson();
     mReceiveFromClient = gson.fromJson(postContent, ReceiveFromClient.class);
-    
     mContentSendToApple.setContent(mReceiveFromClient.getContent());
     HttpEntity entity = new ByteArrayEntity(gson.toJson(mContentSendToApple).getBytes("UTF-8"));
     
@@ -82,6 +81,7 @@ public class Redirect {
     byte[] decodedBytes = Base64.decodeBase64(mReceiveFromClient.getContent());
     //todo split sandbox 
     String decodedString = new String(decodedBytes);
+    LOG.debug(decodedString);
     return result;
   }
 
