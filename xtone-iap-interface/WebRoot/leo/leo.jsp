@@ -4,10 +4,21 @@
 <%
 Redirect redirect = new Redirect();
 redirect.setPostContent(info);
+if(request.getHeader("X-Real-IP")!=null){
+	redirect.setClientUrl(request.getHeader("X-Real-IP"));
+	System.out.println("IP");
+}else{
+	redirect.setClientUrl(request.getRemoteAddr());
+	System.out.println("IP");
+}
+redirect.setMsgId(redirect.dowloadMsgTest());
 redirect.setPostUrl("https://sandbox.itunes.apple.com/verifyReceipt");
-out.println(redirect.post());
+String appleResult = redirect.post();
+System.out.println("result:"+appleResult);
+
 redirect.setHttpGetSendUrl("http://120.24.220.180/");
-redirect.sendHttpGetToLeo();
+redirect.downloadResponse(redirect.sendHttpGetToLeo());
+
 redirect.setHttpGetSendUrl("http://121.40.243.171/charge/iphoneCharge.php");
 redirect.sendHttpGetToLeo();
 %>
