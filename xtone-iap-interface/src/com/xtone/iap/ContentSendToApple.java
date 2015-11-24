@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class ContentSendToApple {
   
   @SerializedName("receipt-data")
-  private String content;
+  private String content; 
 
   public String getContent() {
     return content;
