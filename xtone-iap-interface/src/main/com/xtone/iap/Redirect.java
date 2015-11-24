@@ -29,7 +29,15 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.xtone.server.ClientServer;
-
+/**
+ * 该类为工具类，用于给leo.jsp提供相关方法
+ * 
+ * @author        hongjiabin
+ * @ClassName:    Redirect.java
+ * @data          2015-11-24
+ * @version       1.0  2015-11-24
+ * @company:      xtone           
+ */
 public class Redirect {
   
   private final static Logger LOG = Logger.getLogger("Redirect.class");
@@ -97,6 +105,13 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
     this.postContent = postContent;
   }
 
+  /**
+   * 该方法用于对苹果验证网址发出post请求，并
+   * 将苹果返回的数据以字符串的形式返回给调用者
+   * ，在post请求发出后会调用Redirect的downloadAppleMsg
+   * 将苹果返还的相关数据进行持久化
+   * @return 苹果返还的相关信息
+   */
   public String post()  {
     HttpClient client = new DefaultHttpClient();
     HttpPost request = new HttpPost(postUrl);
@@ -132,8 +147,12 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
     return result;
   }
   
-  
-
+  /**
+   * 该类用于像CP服务端发送请求，
+   * 将服务端返还的数据以字符串的
+   * 形式返还给调用方
+   * @return CP服务端反馈信息
+   */
   public String sendHttpGetToLeo(){
     CloseableHttpClient client = HttpClientBuilder.create().build();
 
@@ -206,7 +225,10 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
 	  mReceiveFromMsg.setPurchaseInfo(purchaseInfo);
 	  Date date = new Date();
 	  long time = date.getTime();
-	  mReceiveFromMsg.setIp(this.getClientUrl());
+	  
+//	  if()
+//	  
+//	  this.setPostUrl(mReceiveFromMsg.getEnvironment());
 	  System.out.println(new ClientServer().insertMsg(mReceiveFromMsg, time));
 	  
 //	  LOG.debug(time);
@@ -240,6 +262,12 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
 	    return result;
 	  }
   
+  /**
+   * 该方法用于将客户端的验证信息进行
+   * 解码后，转化成ReceiveFromClient对象
+   * 并将对象中的信息存入数据库
+   * @return  该用户数据的ID
+   */
   public Integer dowloadMsgTest() 
   {
 	  System.out.println("download");
@@ -263,6 +291,14 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
 	  Date date = new Date();
 	  long time = date.getTime();
 	  mReceiveFromMsg.setIp(this.getClientUrl());
+	  mReceiveFromMsg.setIp(this.getClientUrl());
+	  String enviroment = mReceiveFromMsg.getEnvironment();
+	  if(enviroment.equals("Sandbox"))
+	  {
+		  this.setPostUrl("https://sandbox.itunes.apple.com/verifyReceipt");
+	  }else {
+		  this.setPostUrl("https://buy.itunes.apple.com/verifyReceipt");
+	  }
 	  ClientServer server = new ClientServer();
 	  System.out.println(server.insertMsg(mReceiveFromMsg, time));
 	  return server.getLastInsertId();
@@ -271,6 +307,14 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
 	  
   }
   
+  /**
+   * 该方法用于将苹果验证网址返还的数据
+   * 进行持久化，该方法有两个参数，applMsg
+   * 是post返还的验证字符串，id则为dowloadMsgTest
+   * 在存储信息时产生的用户ID
+   * @param appleMsg
+   * @param id
+   */
   public void downloadAppleMsg(String appleMsg,int id)
   {
 	  Date date = new Date();
@@ -278,6 +322,10 @@ private RequestConfig requestConfig = RequestConfig.custom().setConnectionReques
 	  System.out.println("update="+new ClientServer().updateAppleMsg(id, appleMsg, time));
   }
   
+  /**
+   * 该方法用于
+   * @param result
+   */
   public void downloadResponse(String result)
   {
 	  Date date = new Date();

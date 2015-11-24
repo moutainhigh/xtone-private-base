@@ -12,7 +12,10 @@ if(request.getHeader("X-Real-IP")!=null){
 	System.out.println("IP");
 }
 redirect.setMsgId(redirect.dowloadMsgTest());
-redirect.setPostUrl("https://sandbox.itunes.apple.com/verifyReceipt");
+/*  
+   对苹果地址判断的方法 
+*/
+
 String appleResult = redirect.post();
 System.out.println("result:"+appleResult);
 
