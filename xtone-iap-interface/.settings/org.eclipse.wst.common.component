@@ -2,7 +2,7 @@
     <wb-module deploy-name="demo-interface">
         <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main"/>
         <property name="java-output-path" value="/demo-interface/WebRoot/WEB-INF/classes"/>
         <property name="context-root" value="demo-interface"/>
     </wb-module>
