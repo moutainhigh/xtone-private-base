@@ -39,6 +39,11 @@ public abstract class ConnConfigMain
         ds.setMaxIdle(8);
         ds.setMinIdle(4);
         ds.setMaxWait(2048);
+        ds.setRemoveAbandoned(true);
+        ds.setRemoveAbandonedTimeout(60);  
+        ds.setLogAbandoned(true);
+        ds.setMinEvictableIdleTimeMillis(30*1000);
+        ds.setTimeBetweenEvictionRunsMillis(10*1000);
         return ds;
     }
 
