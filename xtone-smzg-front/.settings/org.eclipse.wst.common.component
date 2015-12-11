@@ -3,6 +3,8 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-jee/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/product"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config/test"/>
         <property name="java-output-path" value="/demo-interface/WebRoot/WEB-INF/classes"/>
         <property name="context-root" value="demo-interface-smzg"/>
     </wb-module>

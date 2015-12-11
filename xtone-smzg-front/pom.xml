@@ -83,7 +83,7 @@
 		<profile> 
 			<id>product</id> 
 			<properties>
-				<runtime.env>src\packageConfig\product</runtime.env>
+				<runtime.env>config\product</runtime.env>
 				<final.name>smzg.xtonegame.com</final.name>
 			</properties>
 			<activation>
@@ -93,7 +93,7 @@
 		<profile> 
 			<id>test</id> 
 			<properties>
-				<runtime.env>src\packageConfig\test</runtime.env>
+				<runtime.env>config\test</runtime.env>
 				<final.name>smzg.xtonegame.com-test</final.name>
 			</properties>
 		</profile>
