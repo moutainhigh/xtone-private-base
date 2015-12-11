@@ -5,7 +5,13 @@ import com.xtone.iap.ReceiveFromMsg;
 
 public class ClientServer {
 //	  LOG.debug(signature+";"+purchaseInfo+";"+environment+";"+pod+";"+signingStatus);
-	public boolean insertMsg(ReceiveFromMsg msg,long time)
+//	public boolean insertMsg(ReceiveFromMsg msg,long time)
+//	{
+//		System.out.println("insert....");
+//		return new LeoDao().insertMsg(msg, time);
+//	}
+	
+	public int insertMsg(ReceiveFromMsg msg,long time)
 	{
 		System.out.println("insert....");
 		return new LeoDao().insertMsg(msg, time);
@@ -13,6 +19,7 @@ public class ClientServer {
 	
 	public Integer getLastInsertId()
 	{
+		System.out.println("getId...");
 		return new LeoDao().getLastInsertId();
 	}
 	

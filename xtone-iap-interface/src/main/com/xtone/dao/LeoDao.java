@@ -2,9 +2,12 @@ package com.xtone.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.Map;
 
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
@@ -16,6 +19,7 @@ public class LeoDao {
 	public void findAll()
 	{
 		Connection con = null;
+		PreparedStatement ps = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		
@@ -23,13 +27,16 @@ public class LeoDao {
 		try {
 			con = com.xtone.util.DBUtil.getConnection();
 			System.out.println("con"+con);
-			stmt = con.createStatement();
-			rs = stmt.executeQuery("SELECT * FROM `tbl_iap_leo_logs`");
-			while (rs.next()) {
-				System.out.println("id:"+rs.getInt(1));
-				
-			}
 			String sql = "SELECT * FROM `tbl_iap_leo_logs`";
+			ps = con.prepareStatement(sql);
+//			stmt = con.createStatement();
+			rs = ps.executeQuery();
+//			rs = stmt.executeQuery("SELECT * FROM `tbl_iap_leo_logs`");
+//			while (rs.next()) {
+//				System.out.println("id:"+rs.getInt(1));
+//				
+//			}
+//			String sql = "SELECT * FROM `tbl_iap_leo_logs`";
 			
 			new JdbcControl().query(sql,
 					new QueryCallBack() {
@@ -49,20 +56,76 @@ public class LeoDao {
 		
 	}
 	
-	public boolean insertMsg(ReceiveFromMsg msg,long time)
+//	public boolean insertMsg(ReceiveFromMsg msg,long time)
+//	{
+////		String sql = "INSERT INTO `tbl_iap_leo_logs`(ADDTIME,ip,signature,purchaseInfo,environment,pod,signingStatus) VALUE("
+////				+ time+",'"+msg.getIp()+"','"+msg.getSignature()+"','"
+////				+ msg.getPurchaseInfo()+"','"+msg.getEnvironment()+"','"
+////				+ msg.getPod()+"','"+msg.getSigningStatus()+"')";
+////		
+////		System.out.println("insert success!");
+////		return new JdbcControl().execute(sql);
+//		String sql = "INSERT INTO `tbl_iap_leo_logs`(ADDTIME,ip,signature,purchaseInfo,environment,pod,signingStatus) VALUE(?,?,?,?,?,?,?)";
+//		
+//		
+//		Connection con = null;
+//		PreparedStatement ps = null;
+//		
+//		try {
+//			con = com.xtone.util.DBUtil.getConnection();
+//			ps = con.prepareStatement(sql);
+//			ps.setLong(1, time);
+//			ps.setString(2, msg.getIp());
+//			ps.setString(3, msg.getSignature());
+//			ps.setString(4, msg.getPurchaseInfo());
+//			ps.setString(5, msg.getEnvironment());
+//			ps.setString(6, msg.getPod());
+//			ps.setString(7, msg.getSigningStatus());
+//			return ps.execute();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return false;
+//		
+//	}
+	
+	
+	public int insertMsg(ReceiveFromMsg msg,long time)
 	{
-		String sql = "INSERT INTO `tbl_iap_leo_logs`(ADDTIME,ip,signature,purchaseInfo,environment,pod,signingStatus) VALUE("
-				+ time+",'"+msg.getIp()+"','"+msg.getSignature()+"','"
-				+ msg.getPurchaseInfo()+"','"+msg.getEnvironment()+"','"
-				+ msg.getPod()+"','"+msg.getSigningStatus()+"')";
+		String sql = "INSERT INTO `tbl_iap_leo_logs`(ADDTIME,ip,signature,purchaseInfo,environment,pod,signingStatus) VALUE(?,?,?,?,?,?,?)";
 		
-		System.out.println("insert success!");
-		return new JdbcControl().execute(sql);
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = com.xtone.util.DBUtil.getConnection();
+			ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			ps.setLong(1, time);
+			ps.setString(2, msg.getIp());
+			ps.setString(3, msg.getSignature());
+     		ps.setString(4, msg.getPurchaseInfo());
+			ps.setString(5, msg.getEnvironment());
+			ps.setString(6, msg.getPod());
+			ps.setString(7, msg.getSigningStatus());
+			ps.executeUpdate();
+			ResultSet rs = ps.getGeneratedKeys(); //获取结果  
+			int a =0;
+			if (rs.next()) {
+			   a = rs.getInt(1);//取得ID
+			}
+			ps.clearParameters();
+			return a;
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return 0;
+		
 	}
 	
 	public Integer getLastInsertId()
 	{
-		String sql = "SELECT LAST_INSERT_ID()";
+		String sql = "select @@IDENTITY ";
 		
 		return (Integer)new JdbcControl().query(sql, new QueryCallBack() {
 			
@@ -77,19 +140,50 @@ public class LeoDao {
 	}
 	
 	public boolean updateMsg(int id,String appleMsg,long time)
-	{
-		String sql = "UPDATE `tbl_iap_leo_logs` SET "
-				+ "appleResponse='"+appleMsg+"',appleResponseTime="+time+" WHERE id = "+id;
+	{	
+		String sql = "UPDATE `tbl_iap_leo_logs` SET appleResponse=?,appleResponseTime=? WHERE id = ?";
 		
-		return new JdbcControl().execute(sql);
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = com.xtone.util.DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, appleMsg);
+			ps.setLong(2, time);
+			ps.setInt(3, id);
+			ps.clearParameters();
+			return ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public boolean updateResponseMsg(int id,String result,String url,long time)
 	{
-		String sql = "UPDATE `tbl_iap_leo_logs` SET "
-				+ "syncResponse='"+result+"',syncAddress='"+url+"',syncResponseTime="+time+" WHERE id = "+id;
+//		String sql = "UPDATE `tbl_iap_leo_logs` SET "
+//				+ "syncResponse='"+result+"',syncAddress='"+url+"',syncResponseTime="+time+" WHERE id = "+id;
 		
-		return new JdbcControl().execute(sql);
+		String sql = "UPDATE `tbl_iap_leo_logs` SET syncResponse=?,syncAddress=?,syncResponseTime=? WHERE id = ?";
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		try {
+			con = com.xtone.util.DBUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setString(1, result);
+			ps.setString(2, url);
+			ps.setLong(3, time);
+			ps.setInt(4, id);
+			ps.clearParameters();
+			return ps.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 	
 	public static void main(String[] args) {

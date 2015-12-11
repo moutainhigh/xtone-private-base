@@ -19,9 +19,14 @@ redirect.setMsgId(redirect.dowloadMsgTest());
 String appleResult = redirect.post();
 System.out.println("result:"+appleResult);
 
-redirect.setHttpGetSendUrl("http://120.24.220.180/");
-redirect.downloadResponse(redirect.sendHttpGetToLeo());
-
 redirect.setHttpGetSendUrl("http://121.40.243.171/charge/iphoneCharge.php");
-redirect.sendHttpGetToLeo();
+//redirect.setHttpGetSendUrl("http://120.24.220.180/");
+String msg = redirect.sendHttpGetToLeo();
+if(msg.equals("")){
+	msg = "返回信息为空";
+}
+redirect.downloadResponse(msg);
+
+//redirect.setHttpGetSendUrl("http://121.40.243.171/charge/iphoneCharge.php");
+//redirect.sendHttpGetToLeo();
 %>

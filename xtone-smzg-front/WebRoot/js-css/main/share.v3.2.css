@@ -1,0 +1,559 @@
+span.NIE-share *,.NIE-share * {
+	text-decoration:none;
+	font-weight:400;
+	text-align:left;
+	font-family:simSun,Arial
+}
+.NIE-share1 .NIE-share-txt {
+	font-size:12px;
+	line-height:17px;
+	padding-left:3px
+}
+.NIE-share2 .NIE-share-txt {
+	font-size:18px;
+	font-weight:700;
+	line-height:32px
+}
+a.NIE-share,.NIE-share1 .NIE-share-iconBtn a img,.NIE-share1 .NIE-share-more em,.NIE-share-more a,#NIE-share-panel div a,#NIE-share-sideBar div span p a,#NIE-share-sideBar div div ul a {
+	background:url(./img/icon.v5.png) no-repeat;
+	_background:url(./img/icon.v5.p8.png) no-repeat
+}
+.NIE-share-iconBtn a {
+	margin-right:3px
+}
+.NIE-share-iconBtn a img {
+	vertical-align:middle;
+	border:0!important;
+	margin:0!important
+}
+.NIE-share1 .NIE-share-iconBtn a:hover img {
+	background-position-x:-150px!important
+}
+.NIE-share-more a,#NIE-share-panel div a,#NIE-share-sideBar div span p a,#NIE-share-sideBar div div ul a {
+	height:14px;
+	line-height:12px;
+	float:left;
+	text-indent:25px;
+	color:#333;
+	font-size:12px;
+	border:1px #fff solid;
+	text-decoration:none;
+	overflow:hidden;
+	display:inline-block
+}
+.NIE-share-v2 span,#NIE-share-panel,#NIE-share-sideBar div span p a,#NIE-share-sideBar div div ul a {
+	text-align:left!important
+}
+.NIE-share1 .NIE-share-iconBtn {
+	font-size:14px
+}
+.NIE-share1 .NIE-share-iconBtn a img {
+	width:20px;
+	height:20px
+}
+.NIE-share2 .NIE-share-iconBtn a img,.NIE-share2 .NIE-share-more em {
+	background:url(./img/icon.b.v5.png) no-repeat;
+	_background:url(./img/icon.b.v5.p8.png) no-repeat
+}
+.NIE-share2 .NIE-share-iconBtn {
+	font-size:36px
+}
+.NIE-share2 .NIE-share-iconBtn a img {
+	width:36px;
+	height:36px
+}
+.NIE-share2 .NIE-share-iconBtn a:hover img {
+	background-position-x:-80px!important
+}
+.NIE-share-more {
+	position:relative;
+	display:inline-block!important
+}
+.NIE-share1 .NIE-share-more {
+	width:22px
+}
+.NIE-share1 .NIE-share-more em {
+	position:absolute;
+	top:-13px;
+	width:42px;
+	height:20px;
+	color:#fff;
+	font-size:12px;
+	text-indent:16px;
+	line-height:17px!important;
+	font-style:normal;
+	background-position:0 -375px;
+	display:inline-block;
+	overflow:hidden
+}
+.NIE-share1 .NIE-share-more em:hover {
+	background-position-x:-150px!important
+}
+.NIE-share2 .NIE-share-more em {
+	position:absolute;
+	top:-26px;
+	width:36px;
+	height:36px;
+	line-height:999px;
+	display:inline-block;
+	overflow:hidden;
+	background-position:0 -280px
+}
+.NIE-share2 .NIE-share-more em:hover {
+	background-position:-80px -280px
+}
+.NIE-share-more span,.NIE-share-more ul {
+	position:absolute!important;
+	z-index:9;
+	width:198px;
+	padding:2px;
+	border:1px #c2c2c2 solid;
+	background:#fff;
+	overflow:hidden;
+	display:none;
+	list-style:none
+}
+.NIE-share1 .NIE-share-more span {
+	left:0;
+	top:4px
+}
+.NIE-share2 .NIE-share-more span {
+	left:0;
+	top:8px
+}
+.NIE-share-more a {
+	width:87px;
+	padding:5px
+}
+.NIE-share-more a:hover,#NIE-share-sideBar div span p a:hover,#NIE-share-sideBar div div ul a:hover {
+	color:#000;
+	background-color:#f0f0f0;
+	border-color:#e0e0e0;
+	text-decoration:none
+}
+.NIE-share-more a,#NIE-share-sideBar div span p a,#NIE-share-sideBar div div ul a {
+	text-decoration:none!important
+}
+#NIE-share-panel,#NIE-share-panel button,#NIE-share-panel input,#NIE-share-sideBar div b,#NIE-share-sideBar div span,#NIE-share-sideBar div span button,#NIE-share-sideBar div div,#NIE-share-sideBar div div button {
+	background:url(http://res.nie.netease.com/comm/js/nie/util/share/img/items.jpg)
+}
+#NIE-share-panel div a:hover,a.NIE-share-btn:hover {
+	background-color:#f0f0f0;
+	border-color:#e0e0e0
+}
+#NIE-share-panel {
+	position:absolute;
+	z-index:999;
+	width:320px;
+	height:360px;
+	padding:4px;
+	background-position:-119px -24px;
+	background-color:#fff;
+	border:1px #c2c2c2 solid;
+	overflow:hidden;
+	-webkit-box-shadow:0 2px 7px #333,0 0 0 #999 inset;
+	-moz-box-shadow:0 2px 7px #333,0 0 0 #999 inset;
+	box-shadow:0 2px 7px #333,0 0 0 #999 inset
+}
+#NIE-share-panel button {
+	position:absolute;
+	z-index:2;
+	right:10px;
+	top:10px;
+	width:12px;
+	height:12px;
+	border:0;
+	cursor:pointer
+}
+#NIE-share-panel button.hover {
+	background-position:0 -12px
+}
+#NIE-share-panel h3,#NIE-share-sideBar div div h3 {
+	position:relative;
+	margin:10px 5px;
+	color:#575757;
+	font-weight:700;
+	font-size:16px
+}
+#NIE-share-panel input {
+	width:308px;
+	height:22px;
+	padding-left:10px;
+	margin-bottom:5px;
+	color:#c2c2c2;
+	line-height:22px;
+	border:1px #c2c2c2 solid;
+	background-color:#fff;
+	background-position:100% -1px;
+	background-repeat:no-repeat
+}
+#NIE-share-panel div {
+	width:309px;
+	height:277px;
+	padding:5px;
+	background:#fff;
+	border:1px #c2c2c2 solid;
+	overflow-y:scroll
+}
+#NIE-share-panel div a {
+	width:82px;
+	padding:6px 3px
+}
+#NIE-share-sideBar {
+	position:absolute;
+	right:0;
+	width:30px;
+	height:450px;
+	overflow:hidden
+}
+#NIE-share-sideBar ul,#NIE-share-sideBar ul li {
+	list-style:none;
+	padding:0;
+	margin:0
+}
+#NIE-share-sideBar .sideBarShareBox {
+	position:absolute;
+	right:-120px;
+	width:150px
+}
+#NIE-share-sideBar div b {
+	width:30px;
+	height:102px;
+	margin-top:38px;
+	float:left;
+	display:inline-block;
+	background:url(./img/sideBar.tip.png)
+}
+#NIE-share-sideBar div div {
+	width:110px;
+	float:left;
+	margin:0;
+	padding:4px;
+	background-color:#fff;
+	background-position:0 -24px;
+	border:1px #c2c2c2 solid;
+	display:inline-block
+}
+#NIE-share-sideBar div div button {
+	position:absolute;
+	z-index:2;
+	right:7px;
+	top:10px;
+	width:12px;
+	height:12px;
+	border:0;
+	cursor:pointer
+}
+#NIE-share-sideBar div div button.hover {
+	background-position:0 -12px
+}
+#NIE-share-sideBar div div ul {
+	width:98px;
+	margin:0;
+	padding:5px;
+	background:#fff;
+	border:1px #c2c2c2 solid;
+	display:inline-block;
+	overflow:hidden
+}
+#NIE-share-sideBar div div ul a {
+	width:85px;
+	padding:5px
+}
+#NIE-share-txt,#NIE-share-img {
+	position:absolute;
+	z-index:99;
+	padding:0 3px 7px;
+	line-height:16px;
+	background:#fbfbfb;
+	border:1px #c2c2c2 solid;
+	display:none;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	-khtml-border-radius:20px;
+	border-radius:20px;
+	*padding-top:3px
+}
+a.NIE-share {
+	height:20px;
+	text-indent:22px;
+	font-size:12px;
+	text-decoration:none;
+	line-height:20px;
+	display:inline-block;
+	margin-right:10px
+}
+.NIE-share,.NIE-share-iconBtn,.NIE-share ul,.NIE-share li,.NIE-share-more,.NIE-share-more ul,.NIE-share-more ul li,.shareUL,.shareUL li {
+	display:inline;
+	padding:0;
+	margin:0;
+	list-style:none
+}
+.NIE-share-more {
+	*display:inline!important
+}
+.NIE-share-more ul {
+	display:none;
+	padding:2px
+}
+.NIE-share-more li {
+	float:left;
+	width:99px;
+	overflow:hidden
+}
+.NIE-share1 .NIE-share-more ul {
+	left:0;
+	top:4px
+}
+.NIE-share2 .NIE-share-more ul {
+	left:0;
+	top:8px
+}
+.NIE-share-iconBtn {
+	position:relative;
+	font-size:41px
+}
+.NIE-share1 .NIE-share-iconBtn {
+	font-size:20px
+}
+.NIE-share2 .NIE-share-iconBtn {
+	top:9px;
+	*top:0
+}
+.NIE-share2 .NIE-share-iconBtn a {
+	display:inline-block;
+	width:36px;
+	height:36px;
+	margin-right:3px;
+	background-image:url(./img/icon.b.v5.png);
+	_background-image:url(./img/icon.b.v5.p8.png);
+	background-repeat:no-repeat;
+	background-position:0 0
+}
+.NIE-share1 .NIE-share-iconBtn a {
+	display:inline-block;
+	width:20px;
+	height:20px;
+	margin-right:3px;
+	background-image:url(./img/icon.v5.png);
+	_background-image:url(./img/icon.v5.p8.png);
+	background-repeat:no-repeat;
+	background-position:0 0
+}
+.NIE-share2 .NIE-share-iconBtn a img,.NIE-share1 .NIE-share-iconBtn a img {
+	display:none
+}
+.NIE-share-more .NIE-share-btn23,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn23,.shareUL .NIE-share-btn23 {
+	background-position:5px -348px
+}
+.NIE-share-more .NIE-share-btn22,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn22,.shareUL .NIE-share-btn22 {
+	background-position:5px -323px
+}
+.NIE-share-more .NIE-share-btn1,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn1,.shareUL .NIE-share-btn1 {
+	background-position:5px 2px
+}
+.NIE-share-more .NIE-share-btn2,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn2,.shareUL .NIE-share-btn2 {
+	background-position:5px -23px
+}
+.NIE-share-more .NIE-share-btn3,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn3,.shareUL .NIE-share-btn3 {
+	background-position:5px -48px
+}
+.NIE-share-more .NIE-share-btn4,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn4,.shareUL .NIE-share-btn4 {
+	background-position:5px -73px
+}
+.NIE-share-more .NIE-share-btn6,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn6,.shareUL .NIE-share-btn6 {
+	background-position:5px -123px
+}
+.NIE-share-more .NIE-share-btn7,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn7,.shareUL .NIE-share-btn7 {
+	background-position:5px -148px
+}
+.NIE-share-more .NIE-share-btn8,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn8,.shareUL .NIE-share-btn8 {
+	background-position:5px -173px
+}
+.NIE-share-more .NIE-share-btn9,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn9,.shareUL .NIE-share-btn9 {
+	background-position:5px -198px
+}
+.NIE-share-more .NIE-share-btn10,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn10,.shareUL .NIE-share-btn10 {
+	background-position:5px -223px
+}
+.NIE-share-more .NIE-share-btn11,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn11,.shareUL .NIE-share-btn11 {
+	background-position:5px -248px
+}
+.NIE-share-more .NIE-share-btn13,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn13,.shareUL .NIE-share-btn13 {
+	background-position:5px -298px
+}
+.NIE-share-more .NIE-share-btn14,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn14,.shareUL .NIE-share-btn14 {
+	background-position:5px -448px
+}
+.NIE-share-more .NIE-share-btn21,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn21,.shareUL .NIE-share-btn121 {
+	background-position:5px -423px
+}
+.NIE-share-more .NIE-share-btn24,#NIE-share-sideBar .sideBarShareBox div ul .NIE-share-btn24,.shareUL .NIE-share-btn124 {
+	background-position:5px -473px
+}
+.shareUL a {
+	text-indent:27px;
+	line-height:24px;
+	padding-bottom:2px
+}
+.NIE-share .NIE-share-iconBtn,.NIE-share .NIE-share-iconBtn li,.NIE-share .NIE-share-more ul,.NIE-share .NIE-share-more ul li,.NIE-share .NIE-share-more ul li a {
+	list-style:none
+}
+.shareUL {
+	margin:0;
+	padding:0
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn23 {
+	background-position:0 0
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn23:hover {
+	background-position:-80px 0
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn22 {
+	background-position:0 -40px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn22:hover {
+	background-position:-80px -40px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn5 {
+	background-position:0 -240px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn5:hover {
+	background-position:-80px -240px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn2 {
+	background-position:0 -120px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn2:hover {
+	background-position:-80px -120px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn1 {
+	background-position:0 -80px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn1:hover {
+	background-position:-80px -80px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn4 {
+	background-position:0 -200px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn4:hover {
+	background-position:-80px -200px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn8 {
+	background-position:0 -160px
+}
+.NIE-share2 .NIE-share-iconBtn .NIE-share-btn8:hover {
+	background-position:-80px -160px
+}
+.NIE-share1 .NIE-share-iconBtn {
+	top:6px;
+	*top:1px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn23 {
+	background-position:0 -350px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn23:hover {
+	background-position:-150px -350px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn22 {
+	background-position:0 -325px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn22:hover {
+	background-position:-150px -325px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn5 {
+	background-position:0 -100px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn5:hover {
+	background-position:-150px -100px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn2 {
+	background-position:0 -25px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn2:hover {
+	background-position:-150px -25px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn1 {
+	background-position:0 0
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn1:hover {
+	background-position:-150px 0
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn4 {
+	background-position:0 -75px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn4:hover {
+	background-position:-150px -75px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn3 {
+	background-position:0 -50px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn3:hover {
+	background-position:-150px -50px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn6 {
+	background-position:0 -125px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn6:hover {
+	background-position:-150px -125px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn7 {
+	background-position:0 -150px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn7:hover {
+	background-position:-150px -150px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn8 {
+	background-position:0 -175px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn8:hover {
+	background-position:-150px -175px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn9 {
+	background-position:0 -200px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn9:hover {
+	background-position:-150pxpx -200px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn10 {
+	background-position:0 -225px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn10:hover {
+	background-position:-150px -225px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn11 {
+	background-position:0 -250px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn11:hover {
+	background-position:-150px -250px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn13 {
+	background-position:0 -300px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn13:hover {
+	background-position:-150px -300px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn18 {
+	background-position:0 -400px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn18:hover {
+	background-position:-150px -400px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn21 {
+	background-position:0 -425px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn21:hover {
+	background-position:-150px -425px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn14 {
+	background-position:0 -450px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn14:hover {
+	background-position:-150px -450px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn24 {
+	background-position:0 -475px
+}
+.NIE-share1 .NIE-share-iconBtn .NIE-share-btn24:hover {
+	background-position:-150px -475px
+}
