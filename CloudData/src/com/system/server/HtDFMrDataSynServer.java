@@ -18,7 +18,10 @@ public class HtDFMrDataSynServer
 {
 	Logger logger = Logger.getLogger(HtDFMrDataSynServer.class);
 	
-	public void startSynData()
+	/**
+	 * 同步普通点播数据到大数据
+	 */
+	public void startSynSmsData()
 	{
 		long startMils = System.currentTimeMillis();
 		
@@ -62,20 +65,22 @@ public class HtDFMrDataSynServer
 		
 		NetServer netServer = new NetServer();
 		
-		String synUrl = ConfigManager.getConfigData("CREDIT_SYN_DATA_URL", "");
+		String synUrl = ConfigManager.getConfigData("CREDIT_SMS_SYN_DATA_URL", "");
 		
-		String baseFilePath = ConfigManager.getConfigData("UN_SYN_DATA_FILE_PATH","./");
+		String baseFilePath = ConfigManager.getConfigData("UN_SYN_SMS_DATA_FILE_PATH","./");
 		
 		if(StringUtil.isNullOrEmpty(synUrl))
 		{
 			FileUtil.saveDataToFile(data, baseFilePath, "tbl_mr_" + date + "_" + startHour + ".txt");
-			return;
+			logger.info("loadUnSynDbData finish syn url empty");
 		}
-		
-		if(!netServer.synDataList(synUrl, data))
+		else
 		{
-			FileUtil.saveDataToFile(data, baseFilePath, "tbl_mr_" + date + "_" + startHour + ".txt");
-			return;
+			if(!netServer.synDataList(synUrl, data))
+			{
+				FileUtil.saveDataToFile(data, baseFilePath, "tbl_mr_" + date + "_" + startHour + ".txt");
+				logger.info("loadUnSynDbData finish syn data not finish");
+			}
 		}
 		
 		logger.info("loadUnSynDbData finish syn data");
@@ -124,7 +129,7 @@ public class HtDFMrDataSynServer
 	
 	private void loadUnSynFileData()
 	{
-		String baseFilePath = ConfigManager.getConfigData("UN_SYN_DATA_FILE_PATH","");
+		String baseFilePath = ConfigManager.getConfigData("UN_SYN_SMS_DATA_FILE_PATH","");
 		
 		if(StringUtil.isNullOrEmpty(baseFilePath))
 			return;
@@ -136,7 +141,7 @@ public class HtDFMrDataSynServer
 		
 		NetServer netServer = new NetServer();
 		
-		String synUrl = ConfigManager.getConfigData("CREDIT_SYN_DATA_URL", "");
+		String synUrl = ConfigManager.getConfigData("CREDIT_SMS_SYN_DATA_URL", "");
 		
 		if(StringUtil.isNullOrEmpty(synUrl))
 			return;

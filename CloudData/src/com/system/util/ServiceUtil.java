@@ -122,9 +122,9 @@ public class ServiceUtil
 		return "";
 	}
 	
-	public static void main(String[] args)
-	{
-		System.out.println("send get data:" + sendData("http://127.0.0.1:8080/credit_base/re.jsp", null, "你是我的小鸡"));
-	}
 	
 }
+
+
+
+

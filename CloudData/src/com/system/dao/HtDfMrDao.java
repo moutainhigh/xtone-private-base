@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
+import com.system.model.HtDFMonthModel;
 import com.system.model.HtDFMrModel;
 import com.system.util.StringUtil;
 
@@ -74,6 +75,85 @@ public class HtDfMrDao
 					list.add(model);
 				}
 				
+				return list;
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<HtDFMonthModel> loadHtDFMonthSpData(String startDate,String endDate)
+	{
+		String sql = "SELECT DATE_FORMAT(a.`mr_date`,'%Y%m01') date_month,d.id sp_id,";
+		sql += " d.`short_name` sp_name,c.`operator`,f.id cp_id,f.`short_name` cp_name,";
+		sql += " c.`name` sp_trone_name,b.`price`,SUM(a.`data_rows`) total_data_rows";
+		sql += " FROM daily_log.`tbl_mr_summer` a";
+		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` c ON b.`sp_trone_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_sp d ON c.`sp_id` = d.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_trone_order` e ON a.`trone_order_id` = e.`id`";
+		sql += " LEFT JOIN daily_config.tbl_cp f ON e.`cp_id` = f.`id`";
+		sql += " WHERE record_type = 1 and a.mr_date >= '"+ startDate +"' and a.mr_date <= '"+ endDate +"'";
+		sql += " GROUP BY date_month,c.id,b.`price`";
+		
+		return (List<HtDFMonthModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<HtDFMonthModel> list = new ArrayList<HtDFMonthModel>();
+				
+				while(rs.next())
+				{
+					HtDFMonthModel model = new HtDFMonthModel();
+					
+					model.setAmount(rs.getInt("price")*100);
+					model.setChannelName(StringUtil.getString(rs.getString("cp_name"), ""));
+					model.setOprator(rs.getInt("operator"));
+					model.setProductName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
+					model.setStaticDate(StringUtil.getString(rs.getString("date_month"), ""));
+					model.setUserCount(rs.getInt("total_data_rows"));
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<HtDFMonthModel> loadHtDFMonthCpData(String startDate,String endDate)
+	{
+		String sql = " SELECT DATE_FORMAT(a.`mr_date`,'%Y%m01') date_month,e.id sp_id,";
+		sql += " e.`short_name` sp_name,f.id cp_id,d.`operator`,f.`short_name` cp_name,";
+		sql += " d.`name` sp_trone_name,c.`price`,SUM(a.`data_rows`) total_data_rows";
+		sql += " FROM daily_log.tbl_cp_mr_summer a";
+		sql += " LEFT JOIN daily_config.`tbl_trone_order` b ON a.`trone_order_id` = b.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_trone` c ON b.`trone_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` d ON c.`sp_trone_id` = d.`id`";
+		sql += " LEFT JOIN daily_config.tbl_sp e ON d.`sp_id` = e.`id`";
+		sql += " LEFT JOIN daily_config.tbl_cp f ON b.`cp_id` = f.`id`";
+		sql += " WHERE record_type = 1 and a.mr_date >= '"+ startDate +"' and a.mr_date <= '"+ endDate +"'";
+		sql += " GROUP BY date_month,d.id,c.`price`";
+		
+		return (List<HtDFMonthModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<HtDFMonthModel> list = new ArrayList<HtDFMonthModel>();
+				
+				while(rs.next())
+				{
+					HtDFMonthModel model = new HtDFMonthModel();
+					
+					model.setAmount(rs.getInt("price")*100);
+					model.setChannelName(StringUtil.getString(rs.getString("cp_name"), ""));
+					model.setOprator(rs.getInt("operator"));
+					model.setProductName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
+					model.setStaticDate(StringUtil.getString(rs.getString("date_month"), ""));
+					model.setUserCount(rs.getInt("total_data_rows"));
+					list.add(model);
+				}
 				return list;
 			}
 		});
