@@ -14,13 +14,27 @@
 					
 	String keyWord = StringUtil.getString(request.getParameter("keyword"), "");
 	
+	int chkType = StringUtil.getInteger(request.getParameter("chktype"), 1);
+	
 	String month = StringUtil.getString(request.getParameter("month"),defaultMonth);
 	
 	List<DetailDataVo> list = null;
 	
 	if(!StringUtil.isNullOrEmpty(keyWord))
 	{
-		list = new MrDetailServer().loadDetailDataByPhoneMsg(keyWord, month);
+		String[] keys = keyWord.split("\r\n");
+		
+		String data = "";
+		
+		for(String key : keys)
+		{
+			data += "'" + key + "',";
+		}
+		
+		data = data.substring(0,data.length()-1);
+		
+		if(keys.length<=100)
+			list = new MrDetailServer().loadDetailDataByPhoneMsg(data, month,chkType);
 	}
 	
 	if(list==null)
@@ -40,23 +54,28 @@
 	
 	$(function()
 	{
-		$("#input_keyword").val(<%= keyWord %>);
+		setRadioCheck("chktype",<%= chkType %>);
 	});
 	
 </script>
 <body>
 	<div class="main_content">
 		<div class="content" >
-			<form action="detail.jsp"  method="get" style="margin-top: 10px">
+			<form action="detail.jsp"  method="post" style="margin-top: 10px">
 				<dl>
 					<dd class="dd01_me">月份</dd>
 					<dd class="dd03_me">
 						<input name="month"  type="text" value="<%=month%>" 
 							onclick="WdatePicker({ dateFmt: 'yyyyMM', isShowToday:false, isShowClear:false,readOnly:true })" style="width: 100px;">
 					</dd>
+					<dd style="margin-left: 10px;">
+						<input type="radio" value="1"  name="chktype" checked="checked" />号码
+						<input type="radio" value="2"  name="chktype" />IMEI
+						<input type="radio" value="3"  name="chktype" />IMSI
+					</dd>
 					<dd class="dd01_me">关键字</dd>
 					<dd class="dd03_me">
-						<input name="keyword" type="text" value="<%= keyWord %>" />
+						<textarea name="keyword"  style="width:120px;height: 25px;"><%= keyWord %></textarea>
 					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit" />
