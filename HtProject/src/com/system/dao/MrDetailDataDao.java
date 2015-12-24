@@ -13,8 +13,23 @@ import com.system.vo.DetailDataVo;
 public class MrDetailDataDao
 {
 	@SuppressWarnings("unchecked")
-	public List<DetailDataVo> loadDetailDataByPhoneMsg(String keyWord,String table)
+	public List<DetailDataVo> loadDetailDataByPhoneMsg(String keyWord,String table,int type)
 	{
+		String chkType = "a.mobile";
+		
+		if(type==1)
+		{
+			chkType = "a.mobile";
+		}
+		else if(type==2)
+		{
+			chkType = "a.imei";
+		}
+		else if(type==3)
+		{
+			chkType = "a.imsi";
+		}
+		
 		String sql = " SELECT a.`imei`,a.`imsi`,a.`mobile`,";
 		sql += " g.`name` province_name,h.`name` city_name,e.`short_name` sp_name,d.`name` sp_trone_name,";
 		sql += " b.`price`,f.`short_name` cp_name,a.`syn_flag`,a.`create_date`";
@@ -26,7 +41,7 @@ public class MrDetailDataDao
 		sql += " LEFT JOIN daily_config.`tbl_cp` f ON c.`cp_id` = f.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_province` g ON a.`province_id` = g.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_city` h ON a.`city_id` = h.`id`";
-		sql += " WHERE a.imei LIKE '%"+ keyWord +"%' OR a.imsi LIKE '%"+ keyWord +"%' OR a.`mobile` LIKE '%"+ keyWord +"%' order by a.create_date desc limit 0,100";
+		sql += " WHERE "+ chkType +" in ("+ keyWord +") order by a.create_date desc limit 0,100";
 		
 		return (List<DetailDataVo>)new JdbcControl().query(sql, new QueryCallBack()
 		{

@@ -7,8 +7,8 @@ import com.system.vo.DetailDataVo;
 
 public class MrDetailServer
 {
-	public List<DetailDataVo> loadDetailDataByPhoneMsg(String keyWord,String table)
+	public List<DetailDataVo> loadDetailDataByPhoneMsg(String keyWord,String table,int type)
 	{
-		return new MrDetailDataDao().loadDetailDataByPhoneMsg(keyWord, table);
+		return new MrDetailDataDao().loadDetailDataByPhoneMsg(keyWord, table,type);
 	}
 }
