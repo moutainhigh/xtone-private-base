@@ -12,7 +12,7 @@
 	String appname = StringUtil.getString(request.getParameter("app_name"), "");
 	String appkey = StringUtil.getString(request.getParameter("app_key"), "");
 	int hold_percent = StringUtil.getInteger(request.getParameter("hold_persent"), 0);
-	
+	int userid = StringUtil.getInteger(request.getParameter("userid"), -1);
 	
 	
 	
@@ -28,6 +28,7 @@
 	}
 	else
 	{
+		model.setUser_id(userid);
 		new AdAppServer().addApp(model);
 	}
 	

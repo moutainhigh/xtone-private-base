@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.system.constant.Constant;
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
@@ -15,6 +17,8 @@ import com.system.util.StringUtil;
 
 public class UserDao
 {
+	private final static Logger LOG = Logger.getLogger("UserDao.class");
+	
 	public Map<String, Object> loadUser(int pageIndex,int groupId)
 	{
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM  daily_config.`tbl_group_user` a LEFT JOIN  daily_config.tbl_user b ON a.`user_id` = b.`id` where 1=1 ";
@@ -63,6 +67,7 @@ public class UserDao
 					model.setQq(StringUtil.getString(rs.getString("qq"),""));
 					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
 					model.setStatus(rs.getInt("status"));
+					//model.setCreateUser(rs.getInt("create_user"));
 					
 					if(model.getId()>0)
 						list.add(model);
@@ -81,7 +86,7 @@ public class UserDao
 		
 		String query = "";
 		
-		String sql2 = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM daily_config.tbl_user where 1=1 ";
+		String sql2 = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM daily_config.tbl_user a LEFT JOIN daily_config.`tbl_user` b ON b.`id`=a.`create_user` where 1=1 ";
 		
 		if(groupId>0)
 			query = " and group_id =" + groupId;
@@ -111,9 +116,9 @@ public class UserDao
 			}
 		}));
 		
-		String order = " order by id desc ";
+		String order = " order by a.id desc ";
 		
-		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.* " : " * ")) + query + order + limit, new QueryCallBack()
+		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.* " : " a.*,b.`nick_name` group_name ")) + query + order + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -132,6 +137,7 @@ public class UserDao
 					model.setQq(StringUtil.getString(rs.getString("qq"),""));
 					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
 					model.setStatus(rs.getInt("status"));
+					model.setCreateUser(rs.getString("group_name"));
 					
 					if(model.getId()>0)
 						list.add(model);

@@ -14,6 +14,7 @@
 <%
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	int id = StringUtil.getInteger(request.getParameter("id"), -1);
+	int userId = StringUtil.getInteger(request.getParameter("userid"), -1);
 	int type = StringUtil.getInteger(request.getParameter("type"), 0);
 	//String appname = StringUtil.getString(request.getParameter("appname"), "");
 	int appid = StringUtil.getInteger(request.getParameter("appname"), -1);
@@ -59,6 +60,7 @@
 	}
 	else
 	{
+		model.setUserid(userId);
 		new AdChannelServer().addChannel(model);
 	}
 	

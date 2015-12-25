@@ -1,3 +1,5 @@
+<%@page import="com.system.util.PinYinUtil"%>
+<%@page import="java.util.LinkedHashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.system.server.SpTroneServer"%>
 <%@page import="com.system.model.SpTroneModel"%>
@@ -37,9 +39,10 @@
 			.getString(request.getParameter("enddate"), defaultEndDate);
 	
 	int sortType = StringUtil.getInteger(request.getParameter("sort_type"), 1);
-	
-	int spId = StringUtil.getInteger(request.getParameter("sp_id"), -1);
-	int cpId = StringUtil.getInteger(request.getParameter("cp_id"), -1);
+	String spname = StringUtil.getString(request.getParameter("sp_trone_name2"), "");
+	String cpname = StringUtil.getString(request.getParameter("cp_name"), "");
+	int spId = StringUtil.getInteger(request.getParameter("nameid"), -1);
+	int cpId = StringUtil.getInteger(request.getParameter("cp_nameid"), -1);
 	int spTroneId = StringUtil.getInteger(request.getParameter("sp_trone"), -1);
 	int troneId = StringUtil.getInteger(request.getParameter("trone"), -1);
 	int troneOrderId = StringUtil.getInteger(request.getParameter("trone_order"), -1);
@@ -51,7 +54,53 @@
 	Map<String, Object> map =  new MrServer().getMrData(startDate,endDate, spId,spTroneId, troneId, cpId, troneOrderId, provinceId, cityId,operatorId,dataType,sortType);
 	
 	List<SpModel> spList = new SpServer().loadSp();
+	/****************   SP  ********************/
+	Map<Integer,String> aToG = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> hToL = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> mToT = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> wToZ = new LinkedHashMap<Integer,String>();
+	PinYinUtil util = new PinYinUtil();
+	String str = "";
+	int temp;
+	for(SpModel model : spList){
+		str = util.getPinYinHeadChar(model.getShortName().substring(0,1));
+		temp = StringUtil.getInteger(StringUtil.stringToAscii(str), 0);
+		
+		if(temp>64&&temp<=71){
+			aToG.put(model.getId(), model.getShortName());
+		}else if(temp>71&&temp<=76){
+			hToL.put(model.getId(), model.getShortName());
+		}else if(temp>76&&temp<=84){
+			mToT.put(model.getId(), model.getShortName());
+		}else if(temp>84&&temp<=90){
+			wToZ.put(model.getId(), model.getShortName());
+		}
+	}
+	/****************   SP  ********************/
+	
 	List<CpModel> cpList = new CpServer().loadCp();
+	/****************   CP  ********************/
+	Map<Integer,String> aToG2 = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> hToL2 = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> mToT2 = new LinkedHashMap<Integer,String>();
+	Map<Integer,String> wToZ2 = new LinkedHashMap<Integer,String>();
+	util = new PinYinUtil();
+	str = "";
+	for(CpModel model : cpList){
+		str = util.getPinYinHeadChar(model.getShortName().substring(0,1));
+		temp = StringUtil.getInteger(StringUtil.stringToAscii(str), 0);
+		
+		if(temp>64&&temp<=71){
+			aToG2.put(model.getId(), model.getShortName());
+		}else if(temp>71&&temp<=76){
+			hToL2.put(model.getId(), model.getShortName());
+		}else if(temp>76&&temp<=84){
+			mToT2.put(model.getId(), model.getShortName());
+		}else if(temp>84&&temp<=90){
+			wToZ2.put(model.getId(), model.getShortName());
+		}
+	}
+	/****************   CP  ********************/
 	List<TroneModel> troneList = new TroneServer().loadTroneList();
 	//List<TroneOrderModel> troneOrderList = new TroneOrderServer().loadTroneOrderList();
 	
@@ -108,7 +157,7 @@
 		obj.troneOrderName = troneOrderName;
 		return obj;
 	}
-
+	
 	var cityList = new Array();
 	<%for(CityModel city : cityList){%>
 	cityList.push(new joCity(<%= city.getId() %>,<%= city.getProvinceId() %>,'<%= city.getName() %>'));<%}%>
@@ -136,15 +185,15 @@
 		$("#sel_sort_type").val(<%= sortType %>);
 		
 		//SP的二级联动
-		$("#sel_sp").val(<%= spId %>);
-		$("#sel_sp").change(troneChange);
+		$("#nameid").val(<%= spId %>);
+		$("#sp_trone_name").change(troneChange);
 		troneChange();
 		$("#sel_sp_trone").val(<%= spTroneId %>);
 		$("#sel_trone").val(<%= troneId %>);
 		
 		//CP的二级联动
 		$("#sel_cp").val(<%= cpId %>);	
-		$("#sel_cp").change(troneOrderChange);
+		$("#cp_name").change(troneOrderChange);
 		troneOrderChange();
 		$("#sel_trone_order").val(<%= troneOrderId %>);
 		
@@ -161,8 +210,12 @@
 	
 	function troneChange()
 	{
-		var spId = $("#sel_sp").val();
-		
+		//alert("aaaaa");
+		if (isNullOrEmpty($("#sp_trone_name").val())) 
+		{
+			$("#nameid").val(-1);
+		}
+		var spId = $("#nameid").val();
 		$("#sel_sp_trone").empty(); 
 		$("#sel_sp_trone").append("<option value='-1'>全部</option>");
 		for(i=0; i<spTroneArray.length; i++)
@@ -186,7 +239,11 @@
 	
 	function troneOrderChange()
 	{
-		var cpId = $("#sel_cp").val();
+		if (isNullOrEmpty($("#cp_name").val())) 
+		{
+			$("#cp_nameid").val(-1);
+		}
+		var cpId = $("#cp_nameid").val();
 		$("#sel_trone_order").empty(); 
 		$("#sel_trone_order").append("<option value='-1'>全部</option>");
 		for(i=0; i<troneOrderList.length; i++)
@@ -196,6 +253,84 @@
 				$("#sel_trone_order").append("<option value='" + troneOrderList[i].id + "'>" + troneOrderList[i].troneOrderName + "</option>");
 			}
 		}
+	}
+	
+	function SP()
+	{
+		var obj = $("#SPtrone");
+		
+		var ss = obj.parent().find('.search_form_suggest');
+		
+		//点击本身显示隐藏
+	    
+		if(obj.hasClass('boxSearchHover') )
+	    {
+	    	obj.removeClass('boxSearchHover');
+	    	obj.children('.btn_search').removeClass('btn_search_current');
+	    	obj.parent().find('#sp_search_form_suggest').hide();
+	    }
+	    else
+	    {
+	    	obj.addClass('boxSearchHover');
+	    	obj.children('.btn_search').addClass('btn_search_current');
+	    	obj.parent().find('#sp_search_form_suggest').show();
+	    }
+		obj.next().find('.clr_after a').on('click',function(){
+	        
+	    	$('#sp_trone_name').val($(this).text());
+	    	//alert($(this).find('.nameid').val());
+	    	$('#nameid').val($(this).find('.nameid').val());
+	    	obj.removeClass('boxSearchHover');
+	    	obj.children('.btn_search').removeClass('btn_search_current');
+	    	obj.parent().find('#sp_search_form_suggest').hide();
+	    	obj.find('span.key_word b').text($(this).text());
+	    	troneChange();
+	      });
+	    //event.stopPropagation();
+	    obj.next().find('.search_city_result a').click(function(){
+	      
+	    	obj.find('span.key_word b').text($(this).text());
+	    });
+	    
+	}
+	
+	function CP(){
+		var obj = $("#CPtrone");
+		
+		var ss = obj.parent().find('.search_form_suggest');
+		
+		//点击本身显示隐藏
+	    
+		if(obj.hasClass('boxSearchHover') )
+	    {
+	    	obj.removeClass('boxSearchHover');
+	    	obj.children('.btn_search').removeClass('btn_search_current');
+	    	obj.parent().find('#cp_search_form_suggest').hide();
+	    }
+	    else
+	    {
+	    	obj.addClass('boxSearchHover');
+	    	obj.children('.btn_search').addClass('btn_search_current');
+	    	obj.parent().find('#cp_search_form_suggest').show();
+	    }
+		obj.next().find('.clr_after a').on('click',function(){
+	        
+	    	$('#cp_name').val($(this).text());
+	    	//alert($(this).find('.nameid').val());
+	    	$('#cp_nameid').val($(this).find('.nameid').val());
+	    	obj.removeClass('boxSearchHover');
+	    	obj.children('.btn_search').removeClass('btn_search_current');
+	    	obj.parent().find('#cp_search_form_suggest').hide();
+	    	obj.find('span.key_word b').text($(this).text());
+	    	troneOrderChange();
+	      });
+	    //event.stopPropagation();
+	    obj.next().find('.search_city_result a').click(function(){
+	      
+	    	obj.find('span.key_word b').text($(this).text());
+		
+	    });
+	    
 	}
 	
 	function provinceChange()
@@ -217,7 +352,7 @@
 <body>
 	<div class="main_content">
 		<div class="content" >
-			<form action="mr1.jsp"  method="get" style="margin-top: 10px">
+			<form action="mr1.jsp"  method="post" style="margin-top: 10px">
 				<dl>
 					<dd class="dd01_me">开始日期</dd>
 					<dd class="dd03_me">
@@ -229,20 +364,70 @@
 						<input name="enddate" type="text" value="<%=endDate%>" 
 							onclick="WdatePicker({isShowClear:false,readOnly:true})" style="width: 100px;">
 					</dd>
-					<dd class="dd01_me">SP</dd>
-					<dd class="dd04_me">
-						<select name="sp_id" id="sel_sp" style="width: 110px;" title="选择SP">
-							<option value="-1">全部</option>
-							<%
-							for(SpModel sp : spList)
-							{
-								%>
-							<option value="<%= sp.getId() %>"><%= sp.getShortName() %></option>	
-								<%
-							}
-							%>
-						</select>
-					</dd>
+					<dd class="dd01_me"s >SP</dd>		
+						<dd class="dd03_me" id="SPtrone">
+							<input name="sp_trone_name2"  value="<%=spname %>" id="sp_trone_name"
+								type="text" style="width: 150px" class="boxSearch" autocomplete="off" onclick="SP()" >
+							<input type="hidden" id="nameid" name="nameid" >
+						</dd>				
+						<dd class="dd04_me">
+							<div class="search_form_suggest" id="sp_search_form_suggest" style="display:none;top:35px;left:457px;">
+								 <div class="thLeft thPadT5 tab_select">
+						            <dl class="clrfix">
+						              <dt>ABCDEFG</dt>
+						              	<dd class="clr_after">
+						              	<%
+						              		for(Map.Entry entry : aToG.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+							             </dd>
+						              </dl>
+						             <dl class="clrfix">
+						              <dt>HIJKL</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : hToL.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            <dl class="clrfix">
+						              <dt>MNOPQRST</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : mToT.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            <dl class="clrfix">
+						              <dt>WSYZ</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : wToZ.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            </div>
+							</div>
+						</dd>
 					<dd class="dd01_me">SP业务</dd>
 						<dd class="dd04_me">
 						<select name="sp_trone" id="sel_sp_trone" style="width: 110px;"></select>
@@ -261,20 +446,70 @@
 						<select name="trone" id="sel_trone" title="请选择通道" style="width: 110px;"></select>
 					</dd>
 					
-					<dd class="dd01_me">CP</dd>
-					<dd class="dd04_me">
-						<select name="cp_id" id="sel_cp" title="选择CP" style="width: 110px;">
-							<option value="-1">全部</option>
-							<%
-							for(CpModel cp : cpList)
-							{
-								%>
-							<option value="<%= cp.getId() %>"><%= cp.getShortName() %></option>	
-								<%
-							}
-							%>
-						</select>
-					</dd>
+					<dd class="dd01_me">CP</dd>		
+						<dd class="dd03_me" id="CPtrone">
+							<input name="cp_name"  value="<%=cpname %>" id="cp_name"
+								type="text" style="width: 150px" class="boxSearch" autocomplete="off" onclick="CP()">
+							<input type="hidden" id="cp_nameid" name="cp_nameid" >
+						</dd>				
+						<dd class="dd04_me">
+							<div class="search_form_suggest" id="cp_search_form_suggest" style="display:none;top:79px;left:244px;">
+								 <div class="thLeft thPadT5 tab_select">
+						            <dl class="clrfix">
+						              <dt>ABCDEFG</dt>
+						              	<dd class="clr_after">
+						              	<%
+						              		for(Map.Entry entry : aToG2.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+							             </dd>
+						              </dl>
+						             <dl class="clrfix">
+						              <dt>HIJKL</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : hToL2.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            <dl class="clrfix">
+						              <dt>MNOPQRST</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : mToT2.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            <dl class="clrfix">
+						              <dt>WSYZ</dt>
+						              <dd class="clr_after">
+						                <%
+						              		for(Map.Entry entry : wToZ2.entrySet()){
+						              	%>
+							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
+							                
+							             <%
+						              		}
+							             %>
+						              </dd>
+						            </dl>
+						            </div>
+							</div>
+						</dd>
 					<!--  
 					<dd>
 						<dd class="dd01_me">业务</dd>

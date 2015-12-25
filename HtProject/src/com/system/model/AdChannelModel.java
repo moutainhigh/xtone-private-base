@@ -8,9 +8,10 @@ public class AdChannelModel {
 	private String channel;
 	private String name;
 	private String hold_percent; 
-	
+	private String createName;
 	private int userid;
 	private double scale;
+	
 	public int getId() {
 		return id;
 	}
@@ -66,5 +67,10 @@ public class AdChannelModel {
 	public void setAppkey(String appkey) {
 		this.appkey = appkey;
 	}
-	
+	public String getCreateName() {
+		return createName;
+	}
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
 }

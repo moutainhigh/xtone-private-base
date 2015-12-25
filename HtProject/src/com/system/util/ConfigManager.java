@@ -84,6 +84,6 @@ public class ConfigManager
 
 	public static void main(String[] args){
 		//System.out.println(System.getProperty("java.class.path").split(";")[0]);
-		System.out.println(getConfigData("SlaveDb"));
+		System.out.println(getConfigData("MainConfigDbServer"));
 	}
 }

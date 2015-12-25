@@ -1,3 +1,7 @@
+<%@page import="com.system.server.GroupRightServer"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.system.model.SystemUserModel"%>
+<%@page import="com.system.server.SystemUserServer"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.system.model.GroupModel"%>
 <%@page import="com.system.server.GroupServer"%>
@@ -21,17 +25,33 @@
 	
 	String nickName = StringUtil.getString(request.getParameter("nickname"), "");
 	
+	int userId =  ((UserModel)session.getAttribute("user")).getId();
 	
+	userId =77;
+	
+	//Map<String,Object> map = new SystemUserServer().load(userId);
 	
 	//String nickName = new String(StringUtil.getString(request.getParameter("nickname"), "").getBytes("utf-8"),"utf-8");
 	
-	List<GroupModel> groupList = new GroupServer().loadAllGroup();
+	String str = new SystemUserServer().loadUserGroup(userId);
+	String[] strArray = str.split(",");
+	List<GroupModel> groupList = new ArrayList<GroupModel>();
+	GroupModel model2 = null;
+	//strList = "";
+	for(int i=0;i<strArray.length;i++){
+		model2 = new GroupModel();
+		model2.setName(new GroupRightServer().loadNameById(StringUtil.getInteger(strArray[i], 0)));
+		model2.setId(StringUtil.getInteger(strArray[i], 0));
+		groupList.add(model2);
+	}
+	
+	//List<GroupModel> groupList2 = new GroupServer().loadAllGroup();
 
 	//Map<String, Object> map =  new UserServer().loadUser(pageIndex, groupId);
 	
-	Map<String, Object> map =  new UserServer().loadUser(pageIndex, groupId,userName,nickName);
+	Map<String, Object> map =  new SystemUserServer().load(pageIndex, groupId,userName,nickName,userId);
 	
-	List<UserModel> list = (List<UserModel>)map.get("list");
+	List<SystemUserModel> list = (List<SystemUserModel>)map.get("list");
 	
 	int rowCount = (Integer)map.get("rows");
 	
@@ -59,7 +79,7 @@
 	{
 		if(confirm('真的要删除吗？'))
 		{
-			window.location.href = "action.jsp?type=6&id=" + id;	
+			window.location.href = "useraction.jsp?type=6&id=" + id;	
 		}
 	}
 	
@@ -77,7 +97,7 @@
 	<div class="main_content">
 		<div class="content" >
 			<dl>
-				<dd class="ddbtn" ><a href="useradd.jsp">增  加</a></dd>
+				<dd class="ddbtn" ><a href="useradd.jsp?userId=<%=userId %>">增  加</a></dd>
 			</dl>
 			<form action="user.jsp"  method="post" style="margin-top: 10px">
 				<dl>
@@ -126,18 +146,18 @@
 			<tbody>
 				<%
 					int rowNum = 1;
-					for (UserModel model : list)
+					for (SystemUserModel model : list)
 					{
 				%>
 				<tr>
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getName()%></td>
-					<td><%=model.getNickName()%></td>
+					<td><%=model.getNick_name()%></td>
 					<td><%=model.getMail()%></td>
 					<td><%= model.getQq() %></td>
 					<td><%= model.getPhone() %></td>
 					<td><%= model.getStatus()==1 ? "正常" : "停用" %></td>
-					<td><%= model.getCreateUser() %></td>
+					<td><%= model.getCreate_user() %></td>
 					<td>
 						<a href="useredit.jsp?id=<%= model.getId() %>">修改</a>
 						<a href="#" onclick="delUser(<%= model.getId() %>)">删除</a>
@@ -150,7 +170,7 @@
 				
 			<tbody>
 				<tr>
-					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="10" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

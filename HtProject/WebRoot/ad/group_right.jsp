@@ -1,4 +1,6 @@
-<%@page import="com.system.model.UserModel"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.system.model.GroupRightModel"%>
+<%@page import="com.system.server.GroupRightServer"%>
 <%@page import="com.system.model.AdAppModel"%>
 <%@page import="com.system.server.AdAppServer"%>
 <%@page import="java.util.HashMap"%>
@@ -12,25 +14,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	int userId =  ((UserModel)session.getAttribute("user")).getId();
     int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
-    String appname = StringUtil.getString(request.getParameter("appname"), "");
-    String appkey = StringUtil.getString(request.getParameter("appkey"), "");
+	String group = StringUtil.getString(request.getParameter("group"), "");
     
-
-    
-	Map<String,Object> map = new AdAppServer().loadApp(pageIndex, appname, appkey);
+	Map<String,Object> map = new GroupRightServer().load(pageIndex, group);
+	//Map<String,Object> map = new AdAppServer().loadApp(pageIndex, appname, appkey);
 	
-	List<AdAppModel> list = (List<AdAppModel>)map.get("list");
+	List<GroupRightModel> list = (List<GroupRightModel>)map.get("list");
+	List<GroupRightModel> list2 = new ArrayList<GroupRightModel>();
+	String[] strArray = null; 
+	String strList = "";
+	for(GroupRightModel model:list){
+		String str = model.getGroupList();
+		strArray = str.split(",");
+		strList = "";
+		for(int i=0;i<strArray.length;i++){
+			//DAO将strArray[i]中的值转化为name,并且拼接到字符串strlist上
+			//str = strArray[i];
+			strList += new GroupRightServer().loadNameById(StringUtil.getInteger(strArray[i], 0))+"	&nbsp;";
+		}
+		model.setGroupList(strList);
+		list2.add(model);
+	}
 	
 	int rowCount = (Integer)map.get("rows");
 	
 	Map<String,String> params = new HashMap<String,String>();
 	
-	params.put("appname", appname);
-	params.put("appkey", appkey);
+	params.put("group", group);
+	//params.put("appkey", appkey);
 	
-	String pageData = PageUtil.initPageQuery("app.jsp",params,rowCount,pageIndex); 
+	String pageData = PageUtil.initPageQuery("group_right.jsp",params,rowCount,pageIndex); 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,7 +60,7 @@
 	  {
 		  if(confirm('真的要删除吗？'))
 		  {
-			  window.location.href = "appaction.jsp?id=" + id+"&type=1";	
+			  window.location.href = "groupRightAction.jsp?id=" + id+"&type=1";	
 		  }
 	  }
 	
@@ -56,17 +70,17 @@
     <div class="main_content">
 		<div class="content" >
 			<dl>
-				<dd class="ddbtn" ><a href="appadd.jsp?userid=<%=userId %>">增  加</a></dd>
-				<form action="app.jsp"  method="post" id="formid">
+				<dd class="ddbtn" ><a href="groupRightAdd.jsp?pageindex=<%=pageIndex %>">增  加</a></dd>
+				<form action="group_right.jsp"  method="post" id="formid">
 				<dl>
-					<dd class="dd01_me">应用名</dd>
+					<dd class="dd01_me">角色</dd>
 					<dd class="dd03_me">
-						<input name="appname" id="input_appkey" value="<%=appname %>" type="text" style="width: 150px">
+						<input name="group" id="input_appkey" value="<%=group %>" type="text" style="width: 150px">
 					</dd>
-					<dd class="dd01_me">应用KEY</dd>
+					<!--  <dd class="dd01_me">应用KEY</dd>
 					<dd class="dd03_me">
-						<input name="appkey" id="input_appkey" value="<%=appkey %>" type="text" style="width: 150px">
-					</dd>
+						<input name="appkey" id="input_appkey" value="" type="text" style="width: 150px">
+					</dd>-->
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit" >
 					</dd>
@@ -78,29 +92,28 @@
 			<thead>
 				<tr>
 					<td>序号</td>
-					<td>应用名</td>
-					<td>应用KEY</td>
-					<td>扣量比</td>
-					<td>所属账号</td>
+					<td>角色</td>
+					<td>授权角色</td>
+					<td>备注</td>
 					<td>操作</td>
 				</tr>
 			</thead>
 			<tbody>
 				<%
 					int rowNum = 1;
-					for (AdAppModel model : list)
+					for (GroupRightModel model : list2)
 					
 					{
 						
 				%>
 				<tr>
 					<td><%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
-					<td><%=model.getAppname()%></td>
-					<td><%=model.getAppkey()%></td>
-					<td><%=model.getHold_percent()%></td>
-					<td><%=model.getCreateName()%></td>
+					<td><%=model.getName() %></td>
+					<td><%=model.getGroupList() %></td>
+					<td><%=model.getRemark() %></td>
+					
 					<td>
-						<a href="appedit.jsp?id=<%= model.getId() %>
+						<a href="groupRightEdit.jsp?id=<%= model.getId() %>
 						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
 					</td>

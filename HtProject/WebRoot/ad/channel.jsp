@@ -1,3 +1,4 @@
+<%@page import="com.system.model.UserModel"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="com.system.server.AdAppServer"%>
 <%@page import="com.system.model.AdAppModel"%>
@@ -16,6 +17,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	int userId =  ((UserModel)session.getAttribute("user")).getId();
     Map<String,Object> name = new AdAppServer().loadApp(1);
     int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	int appnameid = StringUtil.getInteger(request.getParameter("appname"), 0);
@@ -96,7 +98,7 @@
     <div class="main_content">
 		<div class="content" >
 			<dl>
-				<dd class="ddbtn" ><a href="channeladd.jsp">增  加</a></dd>
+				<dd class="ddbtn" ><a href="channeladd.jsp?userid=<%=userId%>">增  加</a></dd>
 			</dl>
 			<form action="channel.jsp"  method="get" id="formid">
 				<dl>
@@ -153,6 +155,7 @@
 					<td>渠道</td>
 					<td>扣量比</td>
 					<td>分成比例</td>
+					<td>所属账号</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -176,6 +179,7 @@
 						scale = b.setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue(); 
 					%>
 					<td><%= scale%>%</td>
+					<td><%=model.getCreateName() %></td>
 					<td>
 						<a href="channeledit.jsp?id=<%= model.getId() %>
 						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">修改</a>

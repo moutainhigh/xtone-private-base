@@ -1,10 +1,19 @@
+<%@page import="com.system.server.GroupServer"%>
+<%@page import="com.system.model.GroupModel"%>
+<%@page import="com.system.server.GroupRightServer"%>
+<%@page import="com.system.model.GroupRightModel"%>
+<%@page import="com.system.dao.GroupRightDao"%>
+<%@page import="java.util.List"%>
 <%@page import="com.system.server.CpServer"%>
 <%@page import="com.system.model.CpModel"%>
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	int userid = StringUtil.getInteger(request.getParameter("userid"), -1);
+	List<GroupRightModel> list = new GroupRightServer().loadGroup();
+	List<GroupModel> groupList = new GroupServer().loadAllGroup();
+	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,37 +35,31 @@
 	}
 	function subForm() 
 	{
-		if (isNullOrEmpty($("#input_app_name").val())) 
+		
+		
+		if($("#appname").val()<0)
 		{
-			alert("请输入应用名");
-			$("#input_app_name").focus();
+			alert("请选择角色");
+			$("#appname").focus();
 			return;
 		}
 		
-		if (isNullOrEmpty($("#input_app_key").val())) 
+		/*if (isNullOrEmpty($("#group_list").val())) 
 		{
-			alert("请输入应用KEY");
-			$("#input_app_key").focus();
+			alert("请输入授权角色");
+			$("#group_list").focus();
+			return;
+		}*/
+		
+		console.log($("#remark").val());
+		
+		if(isNullOrEmpty($("#remark").val()))
+		{
+			alert("请输入备注！");
+			$("#remark").focus();
 			return;
 		}
 		
-		console.log($("#input_remark").val());
-		
-		if(!(isNum($("#input_hold_persent").val()+1)))
-		{
-			alert("请输入整数！");
-			$("#input_hold_persent").focus();
-			return;
-		}
-		
-		var num = parseInt($("#input_hold_persent").val(), 10);
-		
-		if(num<0||num>100)
-		{
-			alert("请输入0~100之间的整数");
-			$("#input_hold_persent").focus();
-			return;
-		}
 		
 		document.getElementById("addform").submit();
 	}
@@ -67,37 +70,56 @@
 		<div class="content" style="margin-top: 10px">
 			<dl>
 				<dd class="ddbtn" >
-				<label>添加APP</label>
+				<label>添加角色</label>
 				</dd>
 			</dl>
 			<br />	<br />		
 			<dl>
-				<form action="appaction.jsp" method="post" id="addform">
-				<input type="hidden" value="<%=userid %>" name="userid">
+				<form action="groupRightAction.jsp?pageindex=<%=pageIndex %>" method="post" id="addform">
+				
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">应用名</dd>
-					<dd class="dd03_me">
-						<input type="text" name="app_name" id="input_app_name"
-							style="width: 200px">
+					<dd class="dd01_me">角色</dd>
+					<dd class="dd04_me">
+						<select name="group" id="group" style="width: 200px;" title="选择group">
+							<option value="-1">请选择角色名</option>
+							<%
+							
+							for(GroupRightModel group : list)
+							{
+								%>
+							<option value="<%= group.getGroupId() %>"><%= group.getName() %></option>	
+								<%
+							}
+							%>
+						</select>
 					</dd>
 
 					<br />
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">应用KEY</dd>
+					<dd class="dd01_me">授权角色</dd><br />
+					<br />
+					<%
+					for (GroupModel group : groupList)
+					{
+					%>
+					<dd class="dd01_me"><%=group.getName()%></dd>
 					<dd class="dd03_me">
-						<input type="text" name="app_key" id="input_app_key"
-							style="width: 200px">
+						<input type="checkbox" name="groupid" style="width: 25px;float:left" value="<%= group.getId() %>"  id="groupid_<%= group.getId() %>" >
 					</dd>
+					<br /><br />
+					<%
+					}
+					%>
 
 					<br />
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">扣量比</dd>
+					<dd class="dd01_me">备注</dd>
 					<dd class="dd03_me">
-						<input type="text" name="hold_persent" id="input_hold_persent"
+						<input type="text" name="remark" id="remark"
 							style="width: 200px">
 					</dd>
 					

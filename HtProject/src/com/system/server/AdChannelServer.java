@@ -40,9 +40,6 @@ public class AdChannelServer {
 	
 	public boolean addChannel(AdChannelModel model)
 	{
-		System.out.println(model.getScale());
-		System.out.println(model.getChannel());
-		//return false;
 		return new AdChannelDao().addChannel(model);
 	}
 	

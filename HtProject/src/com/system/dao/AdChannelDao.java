@@ -142,7 +142,8 @@ public class AdChannelDao {
 	{
 		String sqlcount = " count(*) ";
 		String sql = "select "+Constant.CONSTANT_REPLACE_STRING+"from "
-				+ "daily_config.`tbl_ad_channel` a LEFT JOIN daily_config.`tbl_ad_app` b ON a.`appid` = b.id"
+				+ "daily_config.`tbl_ad_channel` a LEFT JOIN daily_config.`tbl_ad_app` b ON a.`appid` = b.id "
+				+ " LEFT JOIN daily_config.`tbl_user` c ON a.`user_id` = c.id "
 				+ " WHERE 1=1 ";
 		
 		if(appid>0)
@@ -187,7 +188,7 @@ public class AdChannelDao {
 		
 		result.put("rows", count);
 		
-		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " * ")+limit,
+		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " a.*,c.nick_name,b.* ")+limit,
 				new QueryCallBack() {
 					
 					@Override
@@ -204,6 +205,7 @@ public class AdChannelDao {
 							model.setAppname(rs.getString("appname"));
 							model.setAppkey(rs.getString("appkey"));
 							model.setScale(rs.getDouble("scale"));
+							model.setCreateName(rs.getString("nick_name"));
 							list.add(model);
 						}
 						
@@ -261,9 +263,9 @@ public class AdChannelDao {
 		
 		System.out.println("add_appid:"+id);
 		
-		String sql = "insert into daily_config.`tbl_ad_channel`(appid,channel,hold_percent,name,scale) "
+		String sql = "insert into daily_config.`tbl_ad_channel`(appid,channel,hold_percent,name,scale,user_id) "
 				+ "value("+id+",'"+model.getChannel()+"',"+model.getHold_percent()+",'"
-				+model.getName()+"',"+model.getScale()+")";
+				+model.getName()+"',"+model.getScale()+","+model.getUserid()+")";
 		return new JdbcControl().execute(sql);
 	}
 	

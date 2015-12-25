@@ -90,5 +90,7 @@ public class PinYinUtil
 	{
 		System.out.println(getPinYin("关你屌事啊？！"));
 		System.out.println(getPinYinHeadChar("关我屌事啊？！"));
+		String str = "银河";
+		
 	}
 }

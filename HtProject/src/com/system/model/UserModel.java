@@ -10,6 +10,7 @@ public class UserModel
 	private String qq;
 	private String phone;
 	private int status;
+	private String createUser;
 	
 	public int getId()
 	{
@@ -67,7 +68,6 @@ public class UserModel
 	{
 		this.phone = phone;
 	}
-	
 	@Override
 	public boolean equals(Object model)
 	{
@@ -93,6 +93,12 @@ public class UserModel
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	public String getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
 	}
 	
 }

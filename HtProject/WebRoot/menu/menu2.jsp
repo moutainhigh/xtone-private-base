@@ -103,7 +103,7 @@
 		
 		 var newHtml = "<input type='text' id='myput_" + editId + "' style='width:30px;background-color:#CDC5BF;text-align:center;' value='"+ curShowRows +"' />";
 		
-		 newHtml += "<input type='button' value='更新' style='margin-left: 10px' onclick='updateShowData(" + editId + ")'/>";
+		 newHtml += "<input type='button' value='更新' style='margin-left: 10px' onclick='updateDbData(" + editId + ","+curShowRows+")'/>";
 		 
 		 newHtml += "<input type='button' value='取消' style='margin-left: 10px' onclick='cancelShowData(" + editId + ")'/>";
 		
@@ -152,9 +152,11 @@
 			$("#span_" + editId).html($("#hid_" + editId).val());
 		}
 	  
-	  function updateDbData(editId,newShowRows)
+	  function updateDbData(editId,oldShowRows)
 		{
-			var oldShowRows = $("#hid_" + editId).val();
+			var newShowRows = $("#myput_" + editId).val();
+			
+			var oldRows = oldShowRows;
 			
 			console.log("id:"+editId);
 			
@@ -164,7 +166,7 @@
 			{
 				value : newShowRows,
 				mid :editId,
-				type:1
+				type:3
 			}, 
 			function(data) 
 			{
@@ -178,7 +180,7 @@
 				else 
 				{
 					alert("修改失败！请联系管理员");
-					$("#span_" + editId).html($("#hid_" + editId).val());
+					$("#span_" + editId).html(oldRows);
 				}
 			});
 		}

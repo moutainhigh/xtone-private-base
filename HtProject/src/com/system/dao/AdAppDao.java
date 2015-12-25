@@ -59,6 +59,52 @@ public class AdAppDao {
 		return result;
 	}
 	
+	public Map<String, Object> loadAppByPageindex2()
+	{
+		System.out.println( "   loadAppByPageindex.... ");
+		//String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
+		
+		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING
+				+ " FROM daily_config.`tbl_ad_app` ORDER BY id ASC ";
+		
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		JdbcControl control = new JdbcControl();
+		
+		result.put("rows", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " count(*) "),
+				new QueryCallBack() {
+					
+					@Override
+					public Object onCallBack(ResultSet rs) throws SQLException {
+						if(rs.next())
+							return rs.getInt(1);
+						return 0;
+					}
+				}));
+		
+		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " * "),
+				new QueryCallBack() {
+					
+					@Override
+					public Object onCallBack(ResultSet rs) throws SQLException {
+						List<AdAppModel> list = new ArrayList<AdAppModel>();
+						AdAppModel model = null;
+						while (rs.next()) {
+							model = new AdAppModel();
+							model.setId(rs.getInt("id"));
+							model.setAppkey(rs.getString("appkey"));
+							model.setAppname(rs.getString("appname"));
+							model.setHold_percent(rs.getInt("hold_percent"));
+							list.add(model);
+						}
+						
+						return list;
+					}
+				})); 
+		
+		return result;
+	}
+	
 	public Map<String, Object> loadApp()
 	{
 		//String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
@@ -109,7 +155,9 @@ public class AdAppDao {
 		String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING
-				+ " FROM daily_config.`tbl_ad_app` WHERE 1=1 ";
+				+ " FROM daily_config.`tbl_ad_app` a "
+				+ " LEFT JOIN daily_config.`tbl_user` b ON a.`user_id` = b.id "
+				+ " WHERE 1=1 ";
 		
 		if(!StringUtil.isNullOrEmpty(appname))
 		{
@@ -121,7 +169,7 @@ public class AdAppDao {
 			sql += " AND appkey LIKE '%"+appkey+"%' ";
 		}
 		
-		sql +=" ORDER BY id ASC ";
+		sql +=" ORDER BY a.id ASC ";
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -138,7 +186,7 @@ public class AdAppDao {
 					}
 				}));
 		
-		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " * ")+limit,
+		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " a.*,b.nick_name ")+limit,
 				new QueryCallBack() {
 					
 					@Override
@@ -151,6 +199,7 @@ public class AdAppDao {
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
+							model.setCreateName(rs.getString("nick_name"));
 							list.add(model);
 						}
 						
@@ -195,6 +244,7 @@ public class AdAppDao {
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
+							System.out.println("rs:"+rs.getInt("id"));
 							return model;
 						}
 						
@@ -221,13 +271,16 @@ public class AdAppDao {
 	public boolean addApp(AdAppModel model)
 	{
 		String sql = "insert into daily_config.`tbl_ad_app`("
-				+ "appkey,appname,hold_percent) value("
-				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()
+				+ "appkey,appname,hold_percent,user_id) value("
+				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()+","+model.getUser_id()
 				+ ")";
 		
 		return new JdbcControl().execute(sql);
 	}
 	
-	
+	public static void main(String[] args) {
+		AdAppDao dao = new AdAppDao();
+		
+	}
 	
 }

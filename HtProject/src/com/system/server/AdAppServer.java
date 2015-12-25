@@ -14,7 +14,10 @@ public class AdAppServer {
 	{
 		return new AdAppDao().loadAppByPageindex(pageindex);
 	}
-	
+	public Map<String, Object> loadAppToChannel()
+	{
+		return new AdAppDao().loadAppByPageindex2();
+	}
 	public Map<String, Object> loadApp()
 	{
 		return new AdAppDao().loadApp();

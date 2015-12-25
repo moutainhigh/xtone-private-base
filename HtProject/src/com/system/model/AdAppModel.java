@@ -6,6 +6,7 @@ public class AdAppModel {
 	String appname;
 	int hold_percent;
 	int user_id;
+	String createName;
 	
 	public int getId() {
 		return id;
@@ -37,6 +38,10 @@ public class AdAppModel {
 	public void setUser_id(int user_id) {
 		this.user_id = user_id;
 	}
-	
-	
+	public String getCreateName() {
+		return createName;
+	}
+	public void setCreateName(String createName) {
+		this.createName = createName;
+	}
 }
