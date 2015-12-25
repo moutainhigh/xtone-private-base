@@ -16,6 +16,9 @@
 	String contractEndDate = StringUtil.getString(request.getParameter("contract_end_date"), StringUtil.getDefaultDate());
 	String query = request.getQueryString();
 	
+	
+	
+	
 	SpModel model = new SpModel();
 	model.setId(id);
 	model.setFullName(fullName);
