@@ -12,6 +12,7 @@
 <%@page import="java.net.URLDecoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <!-- 游戏渠道CPS扣量管理 -->
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();/* 获取之前一个随机的时间 */
 	String defaultEndDate = StringUtil.getDefaultDate();    /* 获得当前系统时间 */

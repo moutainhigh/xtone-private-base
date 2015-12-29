@@ -10,6 +10,9 @@
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<!-- 游戏 渠道 CPA 分成 显示数据 -->
+	
 <%
 	String defaultStartDate = StringUtil.getMonthHeadDate();
 	String defaultEndDate = StringUtil.getDefaultDate();

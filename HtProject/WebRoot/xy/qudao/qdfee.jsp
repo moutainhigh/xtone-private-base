@@ -12,6 +12,9 @@
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<!-- 游戏 CP  CPS 分成 显示界面 -->
+	
 <%
 	String defaultStartDate = StringUtil.getMonthHeadDate();
 	String defaultEndDate = StringUtil.getDefaultDate();
