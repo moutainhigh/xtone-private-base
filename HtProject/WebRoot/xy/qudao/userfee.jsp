@@ -10,6 +10,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<!-- 游戏 渠道 CPS 显示 界面 -->
+    
 <%
   String defaultStartDate = StringUtil.getMonthHeadDate();
 
@@ -91,7 +93,7 @@
 					<td><%=model.getActiveDate()%></td>
 					<td class="or"><%=model.getAppName()%></td>
 					<td><%= model.getDataRows() %></td>
-					<td class="or"><%= StringUtil.getDecimalFormat((Double)model.) %></td>
+					<td class="or"><%= StringUtil.getDecimalFormat((Double)model.getShowAmount()) %></td>
 				</tr>
 				<%
 					}

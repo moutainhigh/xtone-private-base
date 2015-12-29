@@ -10,6 +10,9 @@
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<!-- 游戏 渠道 激活 扣量 管理 -->
+	
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();
 	String defaultEndDate = StringUtil.getDefaultDate();

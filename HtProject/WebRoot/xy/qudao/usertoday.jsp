@@ -10,6 +10,9 @@
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<!-- 游戏当日激活数据展示 -->	
+	
 <%
 	String appKey = StringUtil.getString(request.getParameter("appkey"), "");
 

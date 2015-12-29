@@ -12,6 +12,7 @@
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<!-- 游戏CP信息费管理 -->
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();
 	String defaultEndDate = StringUtil.getDefaultDate();
