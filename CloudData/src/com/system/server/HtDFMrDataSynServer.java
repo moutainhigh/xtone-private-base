@@ -90,6 +90,17 @@ public class HtDFMrDataSynServer
 	{
 		StringBuffer sb = new StringBuffer();
 		
+		String serviceName = "";
+		
+		if(model.getSPID()==42 && model.getCPID()== 43)
+		{
+			serviceName =  model.getOPERATOR_NAME() + "-" + model.getSP_TORNE_NAME();
+		}
+		else
+		{
+			serviceName = model.getSP_NAME() + "-" + model.getSP_TORNE_NAME();
+		}
+		
 		try
 		{
 			sb.append("IMEI=" + URLEncoder.encode(model.getIMEI(),"UTF-8") + "&");
@@ -117,7 +128,9 @@ public class HtDFMrDataSynServer
 			sb.append("CITY_NAME=" + URLEncoder.encode(model.getCITY_NAME(),"UTF-8") + "&");
 			sb.append("IVR_TIME=" + model.getIVR_TIME() + "&");
 			sb.append("SYN_FLAG=" + model.getSYN_FLAG() + "&");
-			sb.append("OPERATOR=" + model.getOPERATOR());
+			sb.append("OPERATOR=" + model.getOPERATOR() + "&");
+			
+			sb.append("SERVICE_NAME=" + URLEncoder.encode(serviceName,"UTF-8"));
 		}
 		catch(Exception ex)
 		{

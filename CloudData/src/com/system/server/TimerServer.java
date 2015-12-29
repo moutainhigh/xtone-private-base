@@ -88,7 +88,7 @@ public class TimerServer
 		}
 	}
 	
-	// 每隔一小时扫描daily_log.tbl_mr_xxxx，把更新的数据传到大数据中心
+	//每月的7号把上个月包月的数据同步到大数据中心
 	private class AnalyDataTimerTask2 extends TimerTask
 	{
 		@Override

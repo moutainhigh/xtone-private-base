@@ -28,6 +28,7 @@ public class HtDFMrModel
 	private int  IVR_TIME;
 	private int  SYN_FLAG;
 	private int OPERATOR;
+	private String OPERATOR_NAME;
 	
 	public String getIMEI()
 	{
@@ -236,5 +237,13 @@ public class HtDFMrModel
 	public void setOPERATOR(int oPERATOR)
 	{
 		OPERATOR = oPERATOR;
+	}
+	public String getOPERATOR_NAME()
+	{
+		return OPERATOR_NAME;
+	}
+	public void setOPERATOR_NAME(String oPERATOR_NAME)
+	{
+		OPERATOR_NAME = oPERATOR_NAME;
 	}
 }
