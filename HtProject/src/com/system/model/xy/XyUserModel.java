@@ -10,7 +10,14 @@ public class XyUserModel
 	private int dataRows;
 	private int showDataRows;
 	private int status;
+	private double showAmount;
 	
+	public double getShowAmount() {
+		return showAmount;
+	}
+	public void setShowAmount(double showAmount) {
+		this.showAmount = showAmount;
+	}
 	public int getId()
 	{
 		return id;
