@@ -237,7 +237,7 @@ public class MrDao
 		return map;
 	}
 	
-	public Map<String,Object> getCpMrTodayShowData(String tableName,String startDate,int userId)
+	public Map<String,Object> getCpMrTodayShowData(String tableName,String startDate,int userId,int spTroneId)
 	{
 		final Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -246,8 +246,14 @@ public class MrDao
 		sql += " LEFT JOIN daily_config.`tbl_trone_order` b ON a.`trone_order_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_trone` d ON b.trone_id = d.id";
 		sql += " LEFT JOIN daily_config.`tbl_cp` c ON b.`cp_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` e ON d.sp_trone_id = e.id ";
 		sql += " WHERE a.`create_date` >= '" + startDate + " 00:00:00' AND a.`create_date` <= '" + startDate + " 23:59:59'";
 		sql += " AND c.user_id = " + userId;
+		
+		if(spTroneId>0)
+		{
+			sql += " AND e.id = " + spTroneId;
+		}
 		
 		new JdbcControl().query(sql, new QueryCallBack()
 		{
@@ -266,7 +272,7 @@ public class MrDao
 		return map;
 	}
 	
-	public Map<String,Object> getCpMrShowData(String startDate,String endDate,int userId)
+	public Map<String,Object> getCpMrShowData(String startDate,String endDate,int userId,int spTroneId)
 	{
 		final Map<String, Object> map = new HashMap<String, Object>();
 		
@@ -279,8 +285,16 @@ public class MrDao
 		sql += " LEFT JOIN daily_config.`tbl_trone_order` b ON a.`trone_order_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_trone` d ON b.trone_id = d.id";
 		sql += " LEFT JOIN daily_config.`tbl_cp` c ON b.`cp_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` e ON d.sp_trone_id = e.id ";		
+		
 		sql += " WHERE a.`mr_date` >= '" + startDate + "' AND a.`mr_date` <= '" + endDate + "'";
-		sql += " AND c.user_id = " + userId + " GROUP BY a.`mr_date` order by a.mr_date";
+		
+		if(spTroneId>0)
+			sql += " AND e.id =" + spTroneId;
+		
+		sql += " AND c.user_id = " + userId ;
+				
+		String groupOrder = " GROUP BY a.`mr_date` order by a.mr_date";
 		
 		JdbcControl control = new JdbcControl();
 		
@@ -298,7 +312,7 @@ public class MrDao
 			}
 		});
 		
-		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query), new QueryCallBack()
+		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + groupOrder, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -352,7 +366,7 @@ public class MrDao
 		String queryParams = result[0];
 		String joinId = result[1];
 		
-		String sql = "select a.show_title,aa,bb,cc,dd from (";
+		String sql = "select a.show_title,aa,bb,cc,dd,a.join_id from (";
 		sql += " select  " + joinId + " join_id," + queryParams + " show_title,count(*) aa,sum(c.price) bb";
 		sql += " from daily_log.tbl_mr_" + tableName + " a";
 		sql += " left join daily_config.tbl_trone_order b on a.trone_order_id = b.id ";
@@ -396,6 +410,7 @@ public class MrDao
 					MrReportModel model = new MrReportModel();
 					
 					model.setTitle1(rs.getString("show_title"));
+					model.setJoinId(rs.getString("join_id"));
 					model.setDataRows(rs.getInt(2));
 					model.setAmount(rs.getFloat(3));
 					model.setShowDataRows(rs.getInt(4));

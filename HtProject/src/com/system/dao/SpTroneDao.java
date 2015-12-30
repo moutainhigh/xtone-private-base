@@ -156,6 +156,45 @@ public class SpTroneDao
 		});
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<SpTroneModel> loadCpTroneList(int userId)
+	{
+		String sql = " SELECT c.id,c.`name`,c.`trone_type`,c.operator ";
+		sql += " FROM daily_config.`tbl_trone_order` a";
+		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` c ON b.`sp_trone_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_cp e ON a.`cp_id` = e.`id`";
+		sql += " WHERE e.`user_id` = " + userId;
+		sql += " GROUP BY c.id;";
+		
+		
+		return (List<SpTroneModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<SpTroneModel> list = new ArrayList<SpTroneModel>();
+				
+				while(rs.next())
+				{
+					SpTroneModel model = new SpTroneModel();
+					
+					model.setId(rs.getInt("id"));
+					//model.setSpId(rs.getInt("sp_id"));
+					//model.setSpName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setSpTroneName(StringUtil.getString(rs.getString("name"), ""));
+					model.setOperator(rs.getInt("operator"));
+					//model.setJieSuanLv(rs.getFloat("jiesuanlv"));
+					//model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
+					model.setTroneType(rs.getInt("trone_type"));
+					
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
+	}
 	
 	public SpTroneModel loadSpTroneById(int id)
 	{

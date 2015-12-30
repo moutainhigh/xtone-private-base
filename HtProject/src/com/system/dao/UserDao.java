@@ -82,7 +82,7 @@ public class UserDao
 	
 	public Map<String, Object> loadUser(int pageIndex,int groupId,String userName,String nickName)
 	{
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM  daily_config.`tbl_group_user` a LEFT JOIN  daily_config.tbl_user b ON a.`user_id` = b.`id` where 1=1 ";
+		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM  daily_config.`tbl_group_user` a LEFT JOIN  daily_config.tbl_user b ON a.`user_id` = b.`id` left join daily_config.tbl_user c on b.create_user = c.id where 1=1 ";
 		
 		String query = "";
 		
@@ -118,7 +118,7 @@ public class UserDao
 		
 		String order = " order by a.id desc ";
 		
-		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.* " : " a.*,b.`nick_name` group_name ")) + query + order + limit, new QueryCallBack()
+		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.*,c.`nick_name` create_user_name " : " a.*,b.`nick_name` create_user_name ")) + query + order + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -137,7 +137,7 @@ public class UserDao
 					model.setQq(StringUtil.getString(rs.getString("qq"),""));
 					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
 					model.setStatus(rs.getInt("status"));
-					model.setCreateUser(rs.getString("group_name"));
+					model.setCreateUser(rs.getString("create_user_name"));
 					
 					if(model.getId()>0)
 						list.add(model);

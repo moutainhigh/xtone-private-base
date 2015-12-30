@@ -1,17 +1,15 @@
 package com.system.util;
 
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import com.sun.org.apache.regexp.internal.recompile;
 
 
 public class StringUtil 
@@ -351,6 +349,18 @@ public class StringUtil
         return sbu.toString();  
     }  
     
+    public static String encodeUrl(String data,String charset)
+    {
+    	try
+    	{
+    		return URLEncoder.encode(data,charset);
+    	}
+    	catch(Exception ex)
+    	{
+    		
+    	}
+    	return data;
+    }
 	
 	public static void main(String[] args)
 	{

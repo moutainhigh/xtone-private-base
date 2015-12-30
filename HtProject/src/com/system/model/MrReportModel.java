@@ -4,11 +4,11 @@ public class MrReportModel
 {
 	private String title1;
 	private String title2;
+	private String joinId;
 	private int dataRows;
 	private float amount;
 	private int showDataRows;
 	private float showAmount;
-	
 	
 	public String getTitle1()
 	{
@@ -58,7 +58,14 @@ public class MrReportModel
 	{
 		this.showAmount = showAmount;
 	}
-	
-	
+	public String getJoinId()
+	{
+		return joinId;
+	}
+	public void setJoinId(String joinId)
+	{
+		this.joinId = joinId;
+	}
+		
 	
 }

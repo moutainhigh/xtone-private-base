@@ -42,4 +42,9 @@ public class SpTroneServer
 	{
 		return new SpTroneDao().loadSpTroneList(spId);
 	}
+	
+	public List<SpTroneModel> loadCpTroneList(int userId)
+	{
+		return new SpTroneDao().loadCpTroneList(userId);
+	}
 }	
