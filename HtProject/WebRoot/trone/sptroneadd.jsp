@@ -24,7 +24,37 @@
 <link href="../wel_data/gray.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../sysjs/jquery-1.7.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../sysjs/MapUtil.js"></script>
+<script type="text/javascript" src="../sysjs/pinyin.js"></script>
+<script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
+
+	var provinceList = new Array();
+	
+	<%
+	for(ProvinceModel proModel : provinceList)
+	{
+		%>
+		provinceList.push(new joSelOption(<%= proModel.getId() %>,1,'<%= proModel.getName() %>'));
+		<%
+	}
+	%>
+
+	var spList = new Array();
+	
+	<%
+	for(SpModel spModel : spList)
+	{
+		%>
+		spList.push(new joSelOption(<%= spModel.getId() %>,1,'<%= spModel.getShortName() %>'));
+		<%
+	}
+	%>
+	
+	function onDataSelect(joData) 
+	{
+		$("#sel_sp").val(joData.id);
+	}
 
 	function subForm() 
 	{
@@ -100,6 +130,47 @@
 			this.checked = !this.checked;
 		});
 	}
+	
+	function importProvince()
+	{
+		var tmpPro = prompt("请输入省份", "");
+		
+		if ( tmpPro == null || "" == provinces )
+			return;
+		
+		tmpPro = tmpPro.replace("，", ",");
+
+		var proNameList = tmpPro.split(",");
+		
+		var provinces = new Array();
+		
+		unAllCkb();
+		
+		for(var i=0; i<proNameList.length; i++)
+		{
+			for(var j=0; j<provinceList.length; j++)
+			{
+				if(provinceList[j].text==proNameList[i])
+				{
+					provinces.push(provinceList[j].id);
+					break;
+				}
+			}
+		}
+
+		$('[name=area[]]:checkbox').each(function() {
+			
+			for(k=0; k<provinces.length; k++)
+			{
+				if(provinces[k]==this.value)
+				{
+					this.checked = true;
+					break;
+				}
+			}
+		});
+		
+	}
 </script>
 <body>
 	<div class="main_content">
@@ -114,7 +185,7 @@
 				<form action="sptroneaction.jsp" method="post" id="addform">
 					<dd class="dd01_me">SP名称</dd>
 					<dd class="dd04_me">
-						<select name="sp_id_1" id="sel_sp" title="选择SP" style="width: 200px">
+						<select name="sp_id_1" id="sel_sp" title="选择SP" style="width: 200px" onclick="namePicker(this,spList,onDataSelect)">
 							<option value="-1">请选择SP名称</option>
 							<%
 								for (SpModel sp : spList)
@@ -199,6 +270,8 @@
 							onclick="unAllCkb()" style="padding-top: 10px;" value="全不选" /> <input
 							type="button" onclick="inverseCkb('area[]')"
 							style="padding-top: 10px;" value="反　选" />
+							<input
+							type="button" onclick="importProvince()" style="padding-top: 10px;" value="导　入" />
 					</div>
 
 					<br />

@@ -38,7 +38,24 @@
 <script type="text/javascript" src="../sysjs/jquery-1.7.js"></script>
 <script type="text/javascript" src="../sysjs/base.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../sysjs/MapUtil.js"></script>
+<script type="text/javascript" src="../sysjs/pinyin.js"></script>
+<script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
+	var spList = new Array();
+	<%
+	for(SpModel spModel : spList)
+	{
+		%>
+		spList.push(new joSelOption(<%= spModel.getId() %>,1,'<%= spModel.getShortName() %>'));
+		<%
+	}
+	%>
+	
+	function onDataSelect(joData) 
+	{
+		$("#sel_sp").val(joData.id);
+	}
 
 	function subForm() 
 	{
@@ -156,7 +173,7 @@
 					</table>
 					<dd class="dd01_me">SP名称</dd>
 					<dd class="dd04_me">
-						<select name="sp_id_1" id="sel_sp" title="选择SP" style="width: 200px">
+						<select name="sp_id_1" id="sel_sp" title="选择SP" style="width: 200px" onclick="namePicker(this,spList,onDataSelect)">
 							<option value="-1">请选择SP名称</option>
 							<%
 								for (SpModel sp : spList)

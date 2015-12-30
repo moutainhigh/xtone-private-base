@@ -29,8 +29,12 @@
 	pageEncoding="UTF-8"%>
 <%
 	int userId = ((UserModel)session.getAttribute("user")).getId();
+
+	int spTroneId = StringUtil.getInteger(request.getParameter("sp_trone"), -1);
+
+	List<SpTroneModel> spTroneList = new SpTroneServer().loadCpTroneList(userId);
 	
-	Map<String, Object> map =  new MrServer().getCpMrTodayShowData(userId);
+	Map<String, Object> map =  new MrServer().getCpMrTodayShowData(userId,spTroneId);
 	
 	int showDataRows = (Integer)map.get("show_data_rows");
 	
@@ -49,6 +53,27 @@
 <body>
 	<div class="main_content">
 		<div class="content" >
+			<form action="cpmrtoday.jsp"  method="get" style="margin-top: 10px">
+				<dl>
+					<dd class="dd01_me">业务名称</dd>
+					<dd class="dd04_me">
+						<select name="sp_trone" id="sel_sp_trone" style="width: 110px;">
+							<option value="-1">全部</option>
+							<%
+							for(SpTroneModel spTroneModel : spTroneList)
+							{
+								%>
+							<option value="<%= spTroneModel.getId() %>"><%= spTroneModel.getSpTroneName() %></option>	
+								<%
+							}
+							%>
+						</select>
+					</dd>
+					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
+						<input class="btn_match" name="search" value="查 询" type="submit" />
+					</dd>
+				</dl>
+			</form>
 		</div>
 		<table cellpadding="0" cellspacing="0">
 			<thead>

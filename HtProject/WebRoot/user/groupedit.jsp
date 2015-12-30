@@ -65,7 +65,7 @@
 		<div class="content" style="margin-top: 10px">
 			<dl>
 				<dd class="ddbtn" >
-				<label>增加组别</label>
+				<label>角色修改</label>
 				</dd>
 			</dl>
 			<br />	<br />

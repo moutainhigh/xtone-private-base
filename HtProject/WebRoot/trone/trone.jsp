@@ -61,6 +61,9 @@
 <link href="../wel_data/right.css" rel="stylesheet" type="text/css">
 <link href="../wel_data/gray.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../sysjs/jquery-1.7.js"></script>
+<script type="text/javascript" src="../sysjs/MapUtil.js"></script>
+<script type="text/javascript" src="../sysjs/pinyin.js"></script>
+<script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
 
 	function SpTroneObject(SpTroneId,SpId,name)
@@ -71,6 +74,16 @@
 		obj.name = name;
 		return obj;
 	}
+	
+	var spList = new Array();
+	<%
+	for(SpModel spModel : spList)
+	{
+		%>
+		spList.push(new joSelOption(<%= spModel.getId() %>,1,'<%= spModel.getShortName() %>'));
+		<%
+	}
+	%>
 
 	var menu1Arr = new Array();
 	<%
@@ -104,7 +117,6 @@
 	
 	function SpTroneChange()
 	{
-		console.log("change....");
 		var SpId = $("#sel_sp").val();
 		$("#sel_sp_trone_id").empty(); 
 		$("#sel_sp_trone_id").append("<option value='-1'>请选择</option>");
@@ -115,6 +127,12 @@
 				$("#sel_sp_trone_id").append("<option value='" + menu1Arr[i].SpTroneId + "'>" + menu1Arr[i].name + "</option>");
 			}
 		}
+	}
+	
+	function onSpDataSelect(joData)
+	{
+		$("#sel_sp").val(joData.id);
+		SpTroneChange();
 	}
 	
 </script>
@@ -129,7 +147,7 @@
 				<dl>
 					<dd class="dd01_me">SP</dd>
 					<dd class="dd04_me">
-						<select name="sp_id" id="sel_sp" title="选择SP">
+						<select name="sp_id" id="sel_sp" title="选择SP" onclick="namePicker(this,spList,onSpDataSelect)">
 							<option value="-1">全部</option>
 							<%
 							for(SpModel sp : spList)

@@ -79,7 +79,7 @@
 					<td>计费日期</td>
 					<td>游戏名</td>
 					<td>激活数</td>
-					<td>同步费用</td>
+					<td>收入</td>
 				</tr>
 			</thead>
 			<tbody>

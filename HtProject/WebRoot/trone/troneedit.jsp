@@ -41,7 +41,21 @@
 <link href="../wel_data/gray.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="../sysjs/jquery-1.7.js"></script>
 <script type="text/javascript" src="../sysjs/base.js"></script>
+<script type="text/javascript" src="../sysjs/MapUtil.js"></script>
+<script type="text/javascript" src="../sysjs/pinyin.js"></script>
+<script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
+
+	var spList = new Array();
+	<%
+	for(SpModel spModel : spList)
+	{
+		%>
+		spList.push(new joSelOption(<%= spModel.getId() %>,1,'<%= spModel.getShortName() %>'));
+		<%
+	}
+	%>
+
 	function joSpTrone(id,spId,troneName)
 	{
 		var obj = {};
@@ -165,6 +179,12 @@
 		document.getElementById("addform").submit();
 	}
 	
+	function onSpDataSelect(joData)
+	{
+		$("#sel_sp").val(joData.id);
+		spTroneChange();
+	}
+	
 	
 	//声明整数的正则表达式
 	function isNum(a)
@@ -188,7 +208,7 @@
 					<input type="hidden" value="<%= copy==1 ? -1 : model.getId() %>" name="id" />
 					<dd class="dd01_me">SP名称</dd>
 					<dd class="dd04_me">
-						<select name="sp_id" id="sel_sp" title="选择SP" style="width: 200px">
+						<select name="sp_id" id="sel_sp" title="选择SP" style="width: 200px" onclick="namePicker(this,spList,onSpDataSelect)">
 							<option value="-1">请选择SP名称</option>
 							<%
 								for (SpModel sp : spList)
@@ -206,7 +226,7 @@
 					<br />
 					<dd class="dd01_me">SP业务</dd>
 					<dd class="dd04_me">
-						<select name="sp_trone_id" id="sel_sp_trone" title="选择SP业务" style="width: 200px">
+						<select name="sp_trone_id" id="sel_sp_trone" title="选择SP业务" style="width: 200px" >
 							<option value="-1">请选择SP业务</option>
 						</select>
 					</dd>

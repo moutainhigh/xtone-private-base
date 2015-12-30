@@ -11,7 +11,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-    Map<String,Object> name = new AppServer().loadApp(1);
+    Map<String,Object> name = new AppServer().loadApp();
     int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	int appnameid = StringUtil.getInteger(request.getParameter("appname"), 0);
 	String appkey = StringUtil.getString(request.getParameter("appkey"), "");
