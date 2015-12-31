@@ -206,20 +206,16 @@ public class AnalyMrDailyServer
 	
 	public static void main(String[] args)
 	{
+		Logger log = Logger.getLogger(AnalyMrDailyServer.class);
+		
 		AnalyMrDailyServer amd = new AnalyMrDailyServer();
 		
-		Calendar ca = Calendar.getInstance();
-		ca.set(Calendar.DAY_OF_MONTH, 1);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		for(int i =0; i<28; i++)
-		{
-			String date = sdf.format(ca.getTime());
-			System.out.println("analy date:" + date);
-			amd.analyMrDailyWithDate(date,date);
-			amd.analyCpMrToSummer(date,date);
-			ca.add(Calendar.DAY_OF_MONTH, 1);
-		}
-		
+		log.info("start analy mr daily");
+		String startDate = "2015-12-24";
+		amd.analyMrDailyWithDate(startDate,startDate);
+		log.info("start analy cp mr daily");
+		amd.analyCpMrToSummer(startDate,startDate);
+		log.info("end analy mr daily");
 	}
 	
 	/*

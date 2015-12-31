@@ -93,7 +93,10 @@ public class UserDao
 		
 		if(!StringUtil.isNullOrEmpty(userName))
 		{
-			query += " AND name LIKE '%"+userName+"%' ";
+			if(groupId>0)
+				query += " AND b.name LIKE '%"+userName+"%' ";
+			else
+				query += " AND a.name LIKE '%"+userName+"%' ";
 		}
 		
 		if(!StringUtil.isNullOrEmpty(nickName))

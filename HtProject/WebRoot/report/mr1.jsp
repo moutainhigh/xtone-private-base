@@ -195,6 +195,23 @@
 		
 	});
 	
+	
+	var npSpTroneArray = new Array();
+	
+	<%
+	for(SpTroneModel spTroneModel : spTroneList)
+	{
+		%>
+		npSpTroneArray.push(new joSelOption(<%= spTroneModel.getId() %>,<%=spTroneModel.getSpId() %>,'<%= spTroneModel.getSpTroneName() %>'));	
+		<%
+	}
+	%>
+	
+	function npSpTroneChange(jodata)
+	{
+		$("#sel_sp_trone").val(jodata.id);
+	}
+	
 	function troneChange()
 	{
 		var spId = $("#sel_sp").val();
@@ -281,7 +298,7 @@
 					</dd>
 					<dd class="dd01_me">SP业务</dd>
 						<dd class="dd04_me">
-						<select name="sp_trone" id="sel_sp_trone" style="width: 110px;"></select>
+						<select name="sp_trone" id="sel_sp_trone" style="width: 110px;" onclick="namePicker(this,npSpTroneArray,npSpTroneChange)"></select>
 					</dd>
 					<dd class="dd01_me">数据类型</dd>
 						<dd class="dd04_me">

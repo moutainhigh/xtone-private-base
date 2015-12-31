@@ -47,20 +47,6 @@
 			return;
 		}
 		
-		if (!isNullOrEmpty($("#input_short_name").val())) 
-		{
-			var name = $("#input_short_name").val();
-			for(i=0; i<cpChannelArray.length; i++)
-			{
-				if(cpChannelArray[i].name==name)
-				{
-					alert("该SP简称已存在");
-					$("#input_short_name").focus();
-					return;
-				}
-			}
-		}
-		
 		document.getElementById("addform").submit();
 	}
 	
@@ -77,7 +63,7 @@
 			</dl>
 			<br />	<br />		
 			<dl>
-				<form action="action.jsp" method="post" id="addform">
+				<form action="action.jsp" method="get" id="addform">
 										
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">SP全称</dd>
