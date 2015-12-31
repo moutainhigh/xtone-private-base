@@ -158,6 +158,22 @@
 	}
 	%>
 	
+	var npSpTroneArray = new Array();
+	
+	<%
+	for(SpTroneModel spTroneModel : spTroneList)
+	{
+		%>
+		npSpTroneArray.push(new joSelOption(<%= spTroneModel.getId() %>,<%=spTroneModel.getSpId() %>,'<%= spTroneModel.getSpTroneName() %>'));	
+		<%
+	}
+	%>
+	
+	function npSpTroneChange(jodata)
+	{
+		$("#sel_sp_trone").val(jodata.id);
+	}
+	
 	$(function()
 	{
 		$("#sel_sort_type").val(<%= sortType %>);
@@ -262,7 +278,7 @@
 					</dd>
 					<dd class="dd01_me">SP业务</dd>
 						<dd class="dd04_me">
-						<select name="sp_trone" id="sel_sp_trone" ></select>
+						<select name="sp_trone" id="sel_sp_trone" onclick="namePicker(this,npSpTroneArray,npSpTroneChange)"></select>
 					</dd>
 				</dl>
 				<br /><br /><br />
