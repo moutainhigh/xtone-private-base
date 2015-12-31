@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.server.GroupServer"%>
 <%@page import="com.system.model.GroupModel"%>
 <%@page import="com.system.util.StringUtil"%>
@@ -23,11 +24,16 @@
 		response.sendRedirect("user.jsp");
 		return;
 	}
+	
 	String msg = "";
 	
 	if(StringUtil.getInteger(request.getParameter("msg"), -1)==1)
 		msg = "alert('修改成功');";
+		
 	List<Integer> userGroupList = userServer.loadUserGroup(id);
+	
+	String query = StringUtil.getString(request.getParameter("query"), "");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -69,7 +75,7 @@
 	
 	function goToMain()
 	{
-		window.location.href = "user.jsp";
+		window.location.href = "user.jsp?<%= Base64UTF.decode(query) %>";
 	}
 	
 </script>
@@ -83,22 +89,26 @@
 			</dl>
 			<br /> <br />
 			<dl>
-				<form action="action.jsp" method="post" id="addform">
+				<form action="action.jsp?query=<%= query %>" method="post" id="addform">
 					<input type="hidden" value="<%= id %>" name="id">
 					<input type="hidden" value="7" name="type">
+					<table style="text-align: left">
 					<%
+					int i=0;
+					out.println("<tr>");
 					for (GroupModel group : groupList)
 					{
-					%>
-					<dd class="dd01_me"><%=group.getName()%></dd>
-					<dd class="dd03_me">
-						<input type="checkbox" name="groupid" style="width: 25px;float:left" value="<%= group.getId() %>"  id="groupid_<%= group.getId() %>" >
-					</dd>
-					<br /><br />
-					<%
+						if(i%5==0)
+							out.print("</tr><tr>");
+						
+						out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
+						+ "\" value=\"" + group.getId() + "\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
+						
+						i++;
 					}
+					out.println("</tr>");
 					%>
-					
+					</table>
 					<dd class="dd00"></dd>
 					<dd class="dd00_me"></dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 10px">

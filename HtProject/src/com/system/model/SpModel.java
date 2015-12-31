@@ -15,6 +15,7 @@ public class SpModel
 	private String	qq;
 	private String	phone;
 	private String	mail;
+	private String commerceUserName;
 
 	public String getQq()
 	{
@@ -134,6 +135,16 @@ public class SpModel
 	public void setContractEndDate(String contractEndDate)
 	{
 		this.contractEndDate = contractEndDate;
+	}
+
+	public String getCommerceUserName()
+	{
+		return commerceUserName;
+	}
+
+	public void setCommerceUserName(String commerceUserName)
+	{
+		this.commerceUserName = commerceUserName;
 	}
 
 }

@@ -18,7 +18,7 @@ public class GroupDao
 	@SuppressWarnings("unchecked")
 	public List<GroupModel> loadAllGroup()
 	{
-		String sql = "select * from daily_config.tbl_group";
+		String sql = "select * from daily_config.tbl_group"+ " order by convert(name using gbk) asc ";
 		
 		return (List<GroupModel>)new JdbcControl().query(sql, new QueryCallBack()
 		{

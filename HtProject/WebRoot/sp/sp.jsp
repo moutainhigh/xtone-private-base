@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.constant.Constant"%>
 <%@page import="com.system.util.PageUtil"%>
@@ -25,6 +26,8 @@
 	params.put("shortname", shortName);
 	
 	String pageData = PageUtil.initPageQuery("sp.jsp",params,rowCount,pageIndex);
+	
+	String query = Base64UTF.encode(request.getQueryString());
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -77,6 +80,7 @@
 					<td>全称</td>
 					<td>简称</td>
 					<td>联系人</td>
+					<td>商务</td>
 					<td>QQ</td>
 					<td>电话</td>
 					<td>邮箱</td>
@@ -97,13 +101,14 @@
 					<td><%=model.getFullName()%></td>
 					<td><%=model.getShortName()%></td>
 					<td><%=model.getContactPerson()%></td>
+					<td><%=model.getCommerceUserName() %></td>
 					<td><%=model.getQq()%></td>
 					<td><%=model.getPhone() %></td>
 					<td><%=model.getMail() %></td>
 					<td><%=model.getContractStartDate() %></td>
 					<td><%=model.getContractEndDate() %></td>
 					<td>
-						<a href="spedit.jsp?id=<%= model.getId() %>&pageindex=<%=pageIndex%>&fullname=<%=fullName%>&shortname=<%=shortName%>">修改</a>
+						<a href="spedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 					</td>
 				</tr>
 				<%
@@ -112,7 +117,7 @@
 				
 			<tbody>
 				<tr>
-					<td colspan="11" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="12" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

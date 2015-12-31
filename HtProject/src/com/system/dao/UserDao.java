@@ -224,6 +224,37 @@ public class UserDao
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<UserModel> loadUserByGroupId(int groupId)
+	{
+		String sql = "SELECT b.* FROM daily_config.`tbl_group_user` a LEFT JOIN daily_config.tbl_user b ON a.`user_id` = b.`id` WHERE a.`group_id` = " + groupId  ;
+		
+		return (List<UserModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<UserModel> list = new ArrayList<UserModel>();
+				UserModel model = null;
+				while(rs.next())
+				{
+					model = new UserModel();
+					
+					model.setId(rs.getInt("id"));
+					model.setName(StringUtil.getString(rs.getString("name"),""));
+					model.setPassword(StringUtil.getString(rs.getString("pwd"),""));
+					model.setNickName(StringUtil.getString(rs.getString("nick_name"),""));
+					model.setMail(StringUtil.getString(rs.getString("mail"),""));
+					model.setQq(StringUtil.getString(rs.getString("qq"),""));
+					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
+					
+					list.add(model);
+				}
+				return list;
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<UserModel> loadActityUserList()
 	{
 		String sql = "select * from tbl_user where status = 1";

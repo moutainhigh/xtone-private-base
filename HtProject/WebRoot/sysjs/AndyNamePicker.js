@@ -241,6 +241,8 @@ function createShowDiv(parentObj,objId,jolist)
 	mydiv.style.backgroundColor="#F6F5F3";
 	mydiv.style.border = "solid 1px #D1CDC5";
 	mydiv.style.padding = "5px";
+	mydiv.style.lineHeight = "1.8em";
+	mydiv.style.fontSize = "14px";
 	document.body.appendChild(mydiv);
 	//下面显示
 	//mydiv.style.left =  getAbsoluteObjectLeft(parentObj) + "px";

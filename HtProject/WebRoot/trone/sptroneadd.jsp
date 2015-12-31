@@ -139,6 +139,10 @@
 			return;
 		
 		tmpPro = tmpPro.replace("，", ",");
+		tmpPro = tmpPro.replace(" ", ",");
+		tmpPro = tmpPro.replace("、", ",");
+		tmpPro = tmpPro.replace("|", ",");
+		tmpPro = tmpPro.replace("、", ",");
 
 		var proNameList = tmpPro.split(",");
 		
@@ -169,8 +173,8 @@
 				}
 			}
 		});
-		
 	}
+	
 </script>
 <body>
 	<div class="main_content">

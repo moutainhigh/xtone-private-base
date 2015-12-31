@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.model.SpModel"%>
 <%@page import="com.system.server.SpServer"%>
 <%@page import="com.system.util.StringUtil"%>
@@ -14,10 +15,11 @@
 	String address = StringUtil.getString(request.getParameter("address"), "");
 	String contractStartDate = StringUtil.getString(request.getParameter("contract_start_date"), StringUtil.getDefaultDate());
 	String contractEndDate = StringUtil.getString(request.getParameter("contract_end_date"), StringUtil.getDefaultDate());
-	String query = request.getQueryString();
+	int commerceUserId = StringUtil.getInteger(request.getParameter("commerce_user_id"), -1);
 	
+	String query = StringUtil.getString(request.getParameter("query"), "");
 	
-	
+	System.out.println("sp action query:" + query);
 	
 	SpModel model = new SpModel();
 	model.setId(id);
@@ -30,6 +32,7 @@
 	model.setAddress(address);
 	model.setContractStartDate(contractStartDate);
 	model.setContractEndDate(contractEndDate);
+	model.setCommerceUserId(commerceUserId);
 	
 	if(id>0)
 	{
@@ -40,6 +43,6 @@
 		new SpServer().addSp(model);
 	}
 	
-	response.sendRedirect("sp.jsp?"+query);
+	response.sendRedirect("sp.jsp?"+ Base64UTF.decode(query));
 	
 %>

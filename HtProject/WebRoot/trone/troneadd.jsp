@@ -172,7 +172,7 @@
 				<form action="troneaction.jsp" method="post" id="addform">
 					<dd class="dd01_me">SP名称</dd>
 					<dd class="dd04_me">
-						<select name="sp_id" id="sel_sp" title="选择SP" style="width: 200px">
+						<select name="sp_id" id="sel_sp" title="选择SP" style="width: 200px" onclick="namePicker(this,spList,onSpDataSelect)">
 							<option value="-1">请选择SP名称</option>
 							<%
 								for (SpModel sp : spList)
@@ -190,7 +190,7 @@
 					<br />
 					<dd class="dd01_me">SP业务</dd>
 					<dd class="dd04_me">
-						<select name="sp_trone_id" id="sel_sp_trone" title="选择SP业务" style="width: 200px" onclick="namePicker(this,spList,onSpDataSelect)">
+						<select name="sp_trone_id" id="sel_sp_trone" title="选择SP业务" style="width: 200px" >
 							<option value="-1">请选择SP业务</option>
 						</select>
 					</dd>

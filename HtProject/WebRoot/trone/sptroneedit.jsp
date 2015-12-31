@@ -159,6 +159,51 @@
 			this.checked = !this.checked;
 		});
 	}
+	
+	function importProvince()
+	{
+		var tmpPro = prompt("请输入省份", "");
+		
+		if ( tmpPro == null || "" == provinces )
+			return;
+		
+		tmpPro = tmpPro.replace("，", ",");
+		tmpPro = tmpPro.replace(" ", ",");
+		tmpPro = tmpPro.replace("、", ",");
+		tmpPro = tmpPro.replace("|", ",");
+		tmpPro = tmpPro.replace("、", ",");
+
+		var proNameList = tmpPro.split(",");
+		
+		var provinces = new Array();
+		
+		unAllCkb();
+		
+		for(var i=0; i<proNameList.length; i++)
+		{
+			for(var j=0; j<provinceList.length; j++)
+			{
+				if(provinceList[j].text==proNameList[i])
+				{
+					provinces.push(provinceList[j].id);
+					break;
+				}
+			}
+		}
+
+		$('[name=area[]]:checkbox').each(function() {
+			
+			for(k=0; k<provinces.length; k++)
+			{
+				if(provinces[k]==this.value)
+				{
+					this.checked = true;
+					break;
+				}
+			}
+		});
+	}
+	
 </script>
 <body>
 	<div class="main_content">
@@ -258,6 +303,8 @@
 							onclick="unAllCkb()" style="padding-top: 10px;" value="全不选" /> <input
 							type="button" onclick="inverseCkb('area[]')"
 							style="padding-top: 10px;" value="反　选" />
+							<input
+							type="button" onclick="importProvince()" style="padding-top: 10px;" value="导　入" />
 					</div>
 
 					<br />
