@@ -188,7 +188,7 @@ public class SpDao
 					model.setAddress(StringUtil.getString(rs.getString("address"), ""));
 					model.setContractStartDate(StringUtil.getString(rs.getString("contract_start_date"), ""));
 					model.setContractEndDate(StringUtil.getString(rs.getString("contract_end_date"), ""));
-					model.setUserId(rs.getInt("commerce_user_id"));
+					model.setCommerceUserId(rs.getInt("commerce_user_id"));
 					model.setCommerceUserName(StringUtil.getString(rs.getString("nick_name"), ""));
 					
 					list.add(model);
@@ -221,6 +221,7 @@ public class SpDao
 					model.setAddress(StringUtil.getString(rs.getString("address"), ""));
 					model.setContractStartDate(StringUtil.getString(rs.getString("contract_start_date"), ""));
 					model.setContractEndDate(StringUtil.getString(rs.getString("contract_end_date"), ""));
+					model.setCommerceUserId(rs.getInt("commerce_user_id"));
 					return model;
 				}
 				

@@ -101,7 +101,10 @@ public class UserDao
 		
 		if(!StringUtil.isNullOrEmpty(nickName))
 		{
-			query += " AND nick_name LIKE '%"+nickName+"%' ";
+			if(groupId>0)
+				query += " AND b.nick_name LIKE '%"+nickName+"%' ";
+			else
+				query += " AND a.nick_name LIKE '%"+nickName+"%' ";
 		}
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
@@ -140,7 +143,7 @@ public class UserDao
 					model.setQq(StringUtil.getString(rs.getString("qq"),""));
 					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
 					model.setStatus(rs.getInt("status"));
-					model.setCreateUser(rs.getString("create_user_name"));
+					model.setCreateUser(StringUtil.getString(rs.getString("create_user_name"),""));
 					
 					if(model.getId()>0)
 						list.add(model);
@@ -153,29 +156,48 @@ public class UserDao
 		return map;
 	}
 	
-	//
+	/**
+	 * LOAD指定的用户出来
+	 * @param pageIndex
+	 * @param groupId
+	 * @param userName
+	 * @param nickName
+	 * @param userId
+	 * @return
+	 */
 	public Map<String, Object> loadUser(int pageIndex,int groupId,String userName,String nickName,int userId)
 	{
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM  daily_config.`tbl_group_user` a LEFT JOIN  daily_config.tbl_user b ON a.`user_id` = b.`id` where 1=1 ";
+		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM  daily_config.`tbl_group_user` a LEFT JOIN  daily_config.tbl_user b ON a.`user_id` = b.`id` left join daily_config.tbl_user c on b.create_user = c.id where 1=1 ";
 		
 		String query = "";
 		
-		String sql2 = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM daily_config.tbl_user where 1=1 ";
+		String sql2 = "select " + Constant.CONSTANT_REPLACE_STRING + " FROM daily_config.tbl_user a LEFT JOIN daily_config.`tbl_user` b ON b.`id`=a.`create_user` where 1=1 ";
 		
 		if(groupId>0)
 			query += " and group_id =" + groupId;
 		
 		if(userId>0)
-			query += " and create_user = " + userId;
+		{
+			if(groupId>0)
+				query += " AND b.create_user = " + userId;
+			else
+				query += " AND a.create_user = " + userId;
+		}
 		
 		if(!StringUtil.isNullOrEmpty(userName))
 		{
-			query += " AND name LIKE '%"+userName+"%' ";
+			if(groupId>0)
+				query += " AND b.name LIKE '%"+userName+"%' ";
+			else
+				query += " AND a.name LIKE '%"+userName+"%' ";
 		}
 		
 		if(!StringUtil.isNullOrEmpty(nickName))
 		{
-			query += " AND nick_name LIKE '%"+nickName+"%' ";
+			if(groupId>0)
+				query += " AND b.nick_name LIKE '%"+nickName+"%' ";
+			else
+				query += " AND a.nick_name LIKE '%"+nickName+"%' ";
 		}
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
@@ -193,9 +215,9 @@ public class UserDao
 			}
 		}));
 		
-		String order = " order by id desc ";
+		String order = " order by a.id desc ";
 		
-		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.* " : " * ")) + query + order + limit, new QueryCallBack()
+		map.put("list", new JdbcControl().query((groupId>0 ? sql :sql2).replace(Constant.CONSTANT_REPLACE_STRING, (groupId>0 ? " a.group_id,b.*,c.`nick_name` create_user_name " : " a.*,b.`nick_name` create_user_name ")) + query + order + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -214,6 +236,7 @@ public class UserDao
 					model.setQq(StringUtil.getString(rs.getString("qq"),""));
 					model.setPhone(StringUtil.getString(rs.getString("phone"),""));
 					model.setStatus(rs.getInt("status"));
+					model.setCreateUser(StringUtil.getString(rs.getString("create_user_name"),""));
 					
 					if(model.getId()>0)
 						list.add(model);
@@ -351,7 +374,7 @@ public class UserDao
 	
 	public void addUser(UserModel model)
 	{
-		String sql = "insert into daily_config.tbl_user(name,pwd,nick_name,mail,qq,phone) value(?,?,?,?,?,?)";
+		String sql = "insert into daily_config.tbl_user(name,pwd,nick_name,mail,qq,phone,create_user) value(?,?,?,?,?,?,?)";
 		
 		Map<Integer, Object> param = new HashMap<Integer, Object>();
 		
@@ -361,6 +384,7 @@ public class UserDao
 		param.put(4, model.getMail());
 		param.put(5, model.getQq());
 		param.put(6, model.getPhone());
+		param.put(7, model.getCreateUserId());
 		
 		new JdbcControl().execute(sql, param);
 	}
