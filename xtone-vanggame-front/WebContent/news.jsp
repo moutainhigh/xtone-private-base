@@ -7,7 +7,8 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="org.demo.info.Content"%>
+<%@page import="org.vanggame.info.Content"%>
+<%@page import="org.vanggame.util.PageUtil"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,10 +20,65 @@
 	content="Bootstrap.">
 <meta name="keywords"
 	content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+<%
+	int pageIndex =1;
+	try{
+		String index = request.getParameter("pageindex");
+		pageIndex =Integer.parseInt(index);
+	}catch(Exception e){
+// 		System.out.println("第一页");
+// 		e.printStackTrace();
+	}
+	int count = 0;
+
+	Connection con = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	List<Content> list = new ArrayList<Content>();
+	try {
+		con = ConnectionService.getInstance().getConnectionForLocal();
+		String limit = " limit " + 6 * (pageIndex - 1) + "," + 6;
+		String sql = "SELECT id,`title`,`content`,`lastModifyTime`,`catalog` FROM `tbl_cms_contents` WHERE `catalog` LIKE '%news%' AND `status`=1 ORDER BY lastModifyTime DESC "
+				+ limit;
+		ps = con.prepareStatement(sql);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+			Content news = new Content();
+			news.setId(rs.getInt("id"));
+			news.setCatalog(rs.getString("catalog"));
+			news.setTitle(rs.getString("title"));
+			news.setContent(rs.getString("content"));
+			news.setLastModifyTime(rs.getLong("lastModifyTime"));
+			list.add(news);
+		}
+
+		sql = "SELECT count(*) count FROM `tbl_cms_contents` WHERE `catalog` LIKE '%news%' AND `status`=1 ";
+		ps = con.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while (rs.next()) {
+			int m = 1;
+			count = rs.getInt(m);
+		}
+
+	} catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		if (con != null) {
+			try {
+				con.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+%>
 <title>万家游戏-新闻动态</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/docs.min.css" rel="stylesheet">
-<!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script async="" id="gauges-tracker" data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script>
 <script async="" src="js/bootstrap/analytics.js"></script>
 <script src="js/bootstrap/ie-emulation-modes-warning.js"></script>
@@ -98,59 +154,7 @@
 	color: #cf1232;
 }
 </style>
-<%
-// 	String index = new String(request.getParameter("pageindex").trim());
-// 	int pageIndex = Integer.parseInt(index);
-	int pageIndex =1;
-	int count = 0;
 
-	Connection con = null;
-	PreparedStatement ps = null;
-	ResultSet rs = null;
-	System.out.println("news load...");
-	List<Content> list = new ArrayList<Content>();
-	try{
-		System.out.println("try load...");
-		//con = ConnConfigMain.getConnection();
-		con = ConnectionService.getInstance().getConnectionForLocal();
-		System.out.println("get Connection..");
-		String limit = " limit "+6*(pageIndex-1) + "," + 6;
-		String sql = "SELECT id,`title`,`content`,`lastModifyTime`,`catalog` FROM `tbl_cms_contents` WHERE `catalog` LIKE '%news%' AND `status`=1 ORDER BY lastModifyTime DESC "+limit;
-		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
-		
-		while(rs.next()){
-			Content news = new Content();
-			news.setId(rs.getInt("id"));
-			news.setCatalog(rs.getString("catalog"));
-			news.setTitle(rs.getString("title"));
-			news.setContent(rs.getString("content"));
-			news.setLastModifyTime(rs.getLong("lastModifyTime"));			
-			list.add(news);
-		}
-		
-		sql = "SELECT count(*) count FROM `tbl_cms_contents` WHERE `catalog` LIKE '%news%' AND `status`=1 ";
-		ps = con.prepareStatement(sql);
-		rs = ps.executeQuery();
-		while(rs.next()){
-			int m=1;
-			count = rs.getInt(m);
-		}
-		
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
-%>
 </head>
 <body class="bs-docs-home">
 	<header class="navbar navbar-static-top bs-docs-nav" id="top"
@@ -167,13 +171,13 @@
 				<a href="#"><img alt="logo" src="images/logo.png"></a>
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a id="index" href="index.html"><small class="nav-chinese">首页</small><br><small class="nav-english">HOME</small></a></li>
-					<li class="active"><a id="news" href="news.html"><small class="nav-chinese">新闻动态</small><br><small class="nav-english">NEWS</small></a></li>
-					<li><a id="partform" href="sjyx.html"><small class="nav-chinese">旗下产品</small><br><small class="nav-english">PORDUCTS</small></a></li>					
-					<li><a id="abouts" href="gsjs.html"><small class="nav-chinese">关于我们</small><br><small class="nav-english">VANGGAME</small></a></li>
+				<ul class="nav navbar-nav navbar-right ztgs">
+					<li><a id="index" href="index.jsp"><small class="nav-chinese">首页</small><br><small class="nav-english">HOME</small></a></li>
+					<li class="active"><a id="news" href="news.jsp"><small class="nav-chinese">新闻动态</small><br><small class="nav-english">NEWS</small></a></li>
+					<li><a id="partform" href="porducts-sjyx.html"><small class="nav-chinese">旗下产品</small><br><small class="nav-english">PORDUCTS</small></a></li>					
+					<li><a id="abouts" href="about-us-gsjs.html"><small class="nav-chinese">关于我们</small><br><small class="nav-english">VANGGAME</small></a></li>
 					<li><a id="cooperation" href="cooperation.html"><small class="nav-chinese">商务合作</small><br><small class="nav-english">COOPERATION</small></a></li>
-					<li><a id="join" href="shzp.html"><small class="nav-chinese">招贤纳士</small><br><small class="nav-english">JOIN&nbsp;US</small></a></li>
+					<li><a id="join" href="join-us-shzp.html"><small class="nav-chinese">招贤纳士</small><br><small class="nav-english">JOIN&nbsp;US</small></a></li>
 					
 				</ul>
 			</nav>
@@ -182,57 +186,64 @@
 	<div class="col-sm-12 col-sm-12 col-xs-12 nopadding"><img src="images/news/banner-news.png" class="bsimg"></div>
 	<div class="bs-docs-featurette" style="background: #f1f1f1">
 		<div class="container">
-			<div class="row">
+			<div class="row ztgs">
 				<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-					<a href="#"><img src="images/news/news.png"
-						class="bsimg tab"></a>
+					<a href="#"><img src="images/news/news.png" class="bsimg tab"></a>
 				</div>
-				<div class="col-md-12 col-sm-12 col-xs-12 content" style="margin-top: 25px;">
-					<% for(Content news : list){
-                    			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-                    			String timeStr = sdf.format(news.getLastModifyTime());%>
-					<div class="col-md-2 col-sm-12 col-xs-12">
-						<img src="images/news/title.png" class="bsimg">
-					</div>
-					<div class="col-md-10 col-sm-12 col-xs-12">                  	
+				<%
+						for (Content news : list) {
+							String content = news.getContent();
+							if (content.length() > 150) {
+								content = content.substring(0, 150) + "...";
+							}
+					%>
+				<div class="col-md-12 col-sm-12 col-xs-12 content">
+					<div class="col-md-12 col-sm-12 col-xs-12">
 						<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-						<div class="col-md-6 col-sm-6 col-xs-6 nopadding"><strong class="content-title"><%=news.getTitle()%></strong></div>
-						<div class="col-md-6 col-sm-6 col-xs-6 nopadding"><small class="content-time"><%=timeStr%></small></div>
+							<div class="col-md-9 col-sm-9 col-xs-9 nopadding">
+								<a href="news-content.jsp?pageindex=<%=pageIndex%>&id=<%=news.getId()%>"target="_blank"><strong class="content-title"><%=news.getTitle()%></strong></a>
+							</div>
+							<div class="col-md-3 col-sm-3 col-xs-3 nopadding">
+								<small class="content-time"><%=news.getTimeStr()%></small>
+							</div>
 						</div>
-						<%=news.getContent() %>						
+						<%=content%>
 					</div>
-					<div class="col-md-12 col-sm-12 col-xs-12"><a href="news-content.html" class="content-all">[阅读全文]</a></div>
-					<div class="col-md-12 col-sm-12 col-xs-12 nopadding"><hr style="margin: 0px;"></div>
-					<%} %>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<a
+							href="news-content.jsp?pageindex=<%=pageIndex%>&id=<%=news.getId()%>"
+							target="_blank" class="content-all">[阅读全文]</a>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+						<hr style="margin: 0px;">
+					</div>
+					
 				</div>
+				<%
+						}
+					%>
+				<div class="col-md-12 col-sm-12 col-xs-12"
+					style="margin-top: 10px;">
+					<p style="float: right">
+						<%
+							String result = PageUtil.initPageQuery("news.jsp", null, count, pageIndex);
+						%>
+						<%=result%>
+					</p>
+				</div>
+				<div class="col-md-12 col-sm-12 col-xs-12 bottom-hieght"></div>
 			</div>
-		</div>	
+		</div>
 	</div>
-	<div style="margin-bottom: 30px;"></div>
 	<footer class="bs-docs-footer" role="contentinfo">
-		<div class="container">
-		<div class="col-md-4 col-sm-6 col-xs-12">
-		<a href="#"><img alt="footlogo" src="images/footlogo.png"></a>
-		</div>
-		<div class="col-md-8 col-sm-6 col-xs-12">
-			<ul class="bs-docs-footer-links">
-			<!-- 			 style="border-right: #fff 1px solid;display: block;width: 80px;" -->
-				<li><a href="#">关于万家</a></li>
-				<li><a href="#">商务合作</a></li>
-				<li><a href="#">招贤纳士</a></li>
-				<li><a href="#">法律申明</a></li>
-			</ul>
-			<p>万家游戏版权所有Copyright2002-2015中国网络游戏版权保护联盟举报中心&nbsp;闽B2-20040096-20&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><img alt="" src="images/index/foot1.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><img alt="" src="images/index/foot2.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><img alt="" src="images/index/foot3.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#"><img alt="" src="images/index/foot4.png"></a></p>
-			<p>健康游戏忠告：抵制不良游戏&nbsp;拒绝盗版游戏&nbsp;注意自我保护&nbsp;谨防上当受骗&nbsp;适度游戏益脑&nbsp;沉迷游戏伤身&nbsp;合理安排时间&nbsp;享受健康生活</p>
-			</div>
-		</div>
+	<jsp:include page="footer.html"/>
 	</footer>
 	
-	<script	src="js/bootstrap/jquery.min.js"></script>
-	<script	src="js/bootstrap/bootstrap.min.js"></script>
-	<script	src="js/docs.min.js"></script>
-	<script	src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>
-	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
+	<script	src="/js/bootstrap/jquery.min.js"></script>
+	<script	src="/js/bootstrap/bootstrap.min.js"></script>
+	<script	src="/js/docs.min.js"></script>
+	<script	src="/js/bootstrap/ie10-viewport-bug-workaround.js"></script>
+<!-- 	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script> -->
 	<script type="text/javascript">
 $(function(){
 	$('.hot_list .hot_gamebox').hotlist();

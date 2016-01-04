@@ -3,6 +3,17 @@
  * Copyright 2014-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+.ztgs{
+	font-family:"微软雅黑";
+} 
+ 
+.content-size{
+	font-size: 19px;
+}
+.footer-fontsize{
+	font-size: 12px;
+}
+ 
 @
 -ms-viewport {
 	width: device-width
@@ -271,7 +282,8 @@ viewport {
  * details, see https://creativecommons.org/licenses/by/3.0/.
  */
 body {
-	position: relative
+	position: relative;
+	color:#000000;
 }
 
 .table code {
@@ -422,6 +434,7 @@ h2 code, h3 code, h4 code {
 	padding-bottom: 20px;
 	color: #99979c;
 	text-align: center;
+	font-family:"微软雅黑";
 	background-color: #2b2c30
 }
 
@@ -432,6 +445,9 @@ h2 code, h3 code, h4 code {
 .bs-docs-footer-links {
 	padding-left: 0;
 	margin-bottom: 0px;
+	text-align: center;
+	font-size: 14px;
+	font-family:"微软雅黑";
 }
 
 .bs-docs-footer-links li {
@@ -652,7 +668,7 @@ h2 code, h3 code, h4 code {
 /* 	padding-bottom: 40px; */
 	font-size: 16px;
 	line-height: 1.5;
-	background-color: #f1f1f1;
+/* 	background-color: #f1f1f1; */
 }
 
 .bs-docs-featurette+.bs-docs-footer {
@@ -1789,7 +1805,7 @@ h1[id] {
     opacity: 0.8;
 	background:#cf1132;
 	position: absolute; /*right:0px;*/
-	top: 272px;
+	top: 275px;
 	z-index: 1;
 	transition: all 1s ease-out;
 	-moz-transition: all 1s ease-out;
@@ -1896,4 +1912,129 @@ h1[id] {
 .tab{
 	bottom: 40px;
     position: relative;
+}
+.content-main{
+	font-size: 18px;
+}
+.content-title{
+	font-size: 15px;
+}
+
+.top-height{
+	margin-top: 30px;
+}
+
+.bottom-hieght{
+	padding-bottom: 50px;
+}
+
+.game-bg{
+	padding-bottom: 202px;
+    padding-top: 35px;
+    margin-top:20px;
+    background-repeat:no-repeat;
+    -webkit-background-size:100% 100%;
+    -moz-background-size:100% 100%;
+    background-size:100% 100%;
+}
+
+.game-btn-download{
+	float: right;
+}
+
+.game-btn-web{
+	padding-left: 20px;
+}
+
+.tablistbox {
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto;
+}
+
+.tablist {
+	width: 100%;
+	height: 540px;
+	margin:0;
+	padding:0
+}
+
+.tablist li {
+	opacity: 0.1;
+	transition: all .2s ease-out;
+	-moz-transition: all .2s ease-out;
+	-ms-transition: all .2s ease-out;
+	-o-transition: all .2s ease-out;
+	-webkit-transition: all .2s ease-out;
+	position: absolute;
+	z-index: 1;
+}
+
+.tablist .opc {
+	opacity: 1;
+	z-index: 2;
+}
+
+.tablist .tabpic1 {
+
+	list-style:none;
+}
+
+.tablist .tabpic2 {
+	list-style:none;
+}
+
+.tablist_smdian {
+	text-align: right;
+	position: absolute;
+	right: 20%;
+	bottom: 5%;
+	z-index: 2;
+}
+
+.tablist_smdian li {
+	list-style:none;
+	width: 14px;
+	height: 14px;
+	background: #FFFFFF;
+	opacity: 0.8;
+	margin-right: 9px;
+	border: #FFFFFF solid 2px;
+	border-radius: 8px;
+	float: left;
+	cursor: pointer;
+	transition: width .5s ease;
+	-moz-transition: width .5s ease;
+	-ms-transition: width .5s ease;
+	-o-transition: width .5s ease;
+	-webkit-
+}
+
+.tablist_smdian .tablist_active {
+	width: 63px;
+	background: #CF1232;
+}
+
+.artText{
+	padding: 0px 110px 0px 110px;
+}
+
+.my-carousel-indicators li {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 1px;
+	text-indent: -999px;
+	cursor: pointer;
+	background-color: #000\9;
+	border: none;
+	background-color: red;
+	border-radius: 10px
+}
+
+.my-carousel-indicators .active {
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	background-color: #fff
 }
