@@ -15,13 +15,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	int userId = ((UserModel)session.getAttribute("user")).getId();
 	int id = StringUtil.getInteger(request.getParameter("id"), -1);
-	List<GroupModel> groupList = new GroupServer().loadAllGroup();
+	List<GroupModel> groupList = new GroupServer().loadRightGroupByUserId(userId);
 	UserServer userServer = new UserServer();
 	UserModel model = new UserServer().getUserModelById(id);
 	if(model==null)
 	{
-		response.sendRedirect("user.jsp");
+		response.sendRedirect("user_priv.jsp");
 		return;
 	}
 	
@@ -75,7 +76,7 @@
 	
 	function goToMain()
 	{
-		window.location.href = "user.jsp?<%= Base64UTF.decode(query) %>";
+		window.location.href = "user_priv.jsp?<%= Base64UTF.decode(query) %>";
 	}
 	
 </script>
@@ -89,7 +90,7 @@
 			</dl>
 			<br /> <br />
 			<dl>
-				<form action="action.jsp?query=<%= query %>" method="post" id="addform">
+				<form action="user_priv_action.jsp?query=<%= query %>" method="post" id="addform">
 					<input type="hidden" value="<%= id %>" name="id">
 					<input type="hidden" value="7" name="type">
 					<table style="text-align: left">

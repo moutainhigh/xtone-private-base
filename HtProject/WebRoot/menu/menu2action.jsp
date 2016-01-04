@@ -17,9 +17,6 @@
 	String url = StringUtil.getString(request.getParameter("url"), "");
 	String actionUrl = StringUtil.getString(request.getParameter("action_url"), "");
 	int newShowRows = StringUtil.getInteger(request.getParameter("value"), -1);
-	System.out.println("menu2type:"+type);
-	System.out.println("menu2menu1id:"+menu1Id);
-	System.out.println("menu2newShowRows:"+newShowRows);
 	
 	Menu2Model model = new Menu2Model();
 	model.setId(id);
@@ -28,7 +25,9 @@
 	model.setRemark(remark);
 	model.setUrl(url);
 	model.setActionUrl(actionUrl);
-	if(type==3){
+	
+	if(type==3)
+	{
 		new Menu2Server().updateMenu2(mid, newShowRows);
 		out.println("OK");
 		return;

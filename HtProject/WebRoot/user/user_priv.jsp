@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="com.system.model.GroupModel"%>
 <%@page import="com.system.server.GroupServer"%>
@@ -23,7 +24,13 @@
 	
 	String nickName = StringUtil.getString(request.getParameter("nickname"), "");
 	
-	List<GroupModel> groupList = new GroupServer().loadAllGroup();
+	String query = Base64UTF.encode(request.getQueryString());
+	
+	//String nickName = new String(StringUtil.getString(request.getParameter("nickname"), "").getBytes("utf-8"),"utf-8");
+	
+	List<GroupModel> groupList = new GroupServer().loadRightGroupByUserId(userId);
+
+	//Map<String, Object> map =  new UserServer().loadUser(pageIndex, groupId);
 	
 	Map<String, Object> map =  new UserServer().loadUser(pageIndex, groupId,userName,nickName,userId);
 	
@@ -39,7 +46,7 @@
 	
 	params.put("nickname", nickName);
 	
-	String pageData = PageUtil.initPageQuery("user.jsp",params,rowCount,pageIndex);
+	String pageData = PageUtil.initPageQuery("user_priv.jsp",params,rowCount,pageIndex);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -55,7 +62,7 @@
 	{
 		if(confirm('真的要删除吗？'))
 		{
-			window.location.href = "action.jsp?type=6&id=" + id;	
+			window.location.href = "priv_user_action.jsp?type=6&id=" + id;	
 		}
 	}
 	
@@ -75,7 +82,7 @@
 			<dl>
 				<dd class="ddbtn" ><a href="useradd.jsp">增  加</a></dd>
 			</dl>
-			<form action="user.jsp"  method="post" style="margin-top: 10px">
+			<form action="user_priv.jsp"  method="get" style="margin-top: 10px">
 				<dl>
 					<dd class="dd01_me">角色</dd>
 					<dd class="dd04_me">
@@ -111,6 +118,7 @@
 					<td>序号</td>
 					<td>登录名</td>
 					<td>昵称</td>
+					<td>创建者</td>
 					<td>Mail</td>
 					<td>QQ</td>
 					<td>电话</td>
@@ -128,23 +136,22 @@
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getName()%></td>
 					<td><%=model.getNickName()%></td>
+					<td><%= model.getCreateUser() %></td>
 					<td><%=model.getMail()%></td>
 					<td><%= model.getQq() %></td>
 					<td><%= model.getPhone() %></td>
 					<td><%= model.getStatus()==1 ? "正常" : "停用" %></td>
 					<td>
-						<a href="useredit.jsp?id=<%= model.getId() %>">修改</a>
-						<a href="#" onclick="delUser(<%= model.getId() %>)">删除</a>
-						<a href="usergroup.jsp?id=<%= model.getId() %>">角色分配</a>
+						<a href="user_priv_edit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
+						<a href="user_priv_group.jsp?query=<%= query %>&id=<%= model.getId() %>">角色分配</a>
 					</td>
 				</tr>
 				<%
 					}
 				%>
-				
 			<tbody>
 				<tr>
-					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

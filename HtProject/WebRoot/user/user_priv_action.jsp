@@ -19,7 +19,7 @@
 	if(type==6)
 	{
 		new UserServer().delUser(userId);
-		response.sendRedirect("user.jsp");
+		response.sendRedirect("user_priv.jsp");
 		return;
 	}
 	
@@ -38,7 +38,7 @@
 		
 		new UserServer().updateUserGroup(userId, list);
 		
-		response.sendRedirect("usergroup.jsp?id=" + userId + "&msg=1&query=" + query);
+		response.sendRedirect("user_priv_group.jsp?id=" + userId + "&msg=1&query=" + query);
 		
 		return;
 	}
@@ -114,7 +114,7 @@
 		model.setCreateUserId(curUserId);
 		
 		new UserServer().addUser(model);
-		response.sendRedirect("user.jsp?" + Base64UTF.decode(query));
+		response.sendRedirect("user_priv.jsp?" + Base64UTF.decode(query));
 		return;
 	}
 	
@@ -131,7 +131,7 @@
 		
 		new UserServer().updateUser(model);
 		
-		response.sendRedirect("user.jsp?" + Base64UTF.decode(query));
+		response.sendRedirect("user_priv.jsp?" + Base64UTF.decode(query));
 		
 		return;
 	}

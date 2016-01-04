@@ -42,6 +42,79 @@ public class GroupDao
 		
 	}
 	
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<GroupModel> loadRightGroupByUserId(int userId)
+	{
+		
+		String sql = " SELECT b.`group_list` FROM daily_config.`tbl_group_user` a";
+		sql += " LEFT JOIN daily_config.`tbl_group_group` b ON a.`group_id` = b.`group_id`";
+		sql += " WHERE user_id = " + userId;
+		
+		JdbcControl control = new JdbcControl();
+		
+		final List<Integer> list = new ArrayList<Integer>();
+		
+		control.query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				while(rs.next())
+				{
+					for(String str : rs.getString("group_list").split(","))
+					{
+						int groupId = StringUtil.getInteger(str, 0);
+						if(groupId>0)
+						{
+							if(!list.contains(groupId))
+							{
+								list.add(groupId);
+							}
+						}
+					}
+				}
+				return null;
+			}
+		});
+		
+		if(list.isEmpty())
+			return new ArrayList<GroupModel>();
+		
+		String groups = "";
+		
+		for(Integer groupId : list)
+		{
+			groups +=  groupId + ",";
+		}
+		
+		groups = groups.substring(0,groups.length()-1);
+		
+		String sql2 = "select * from daily_config.tbl_group where id in ("+ groups +") order by convert(name using gbk) asc ";
+		
+		return (List<GroupModel>)new JdbcControl().query(sql2, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<GroupModel> list = new ArrayList<GroupModel>();
+				 
+				while(rs.next())
+				{
+					GroupModel model = new GroupModel();
+					model.setId(rs.getInt("id"));
+					model.setName(StringUtil.getString(rs.getString("name"),""));
+					model.setRemark(StringUtil.getString(rs.getString("remark"),""));
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
+		
+	}
+	
 	public Map<String, Object> loadGroup(int pageIndex)
 	{
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from daily_config.tbl_group";
