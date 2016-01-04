@@ -1,0 +1,13 @@
+10:58:26,10:12:23 /sp/szht_aidongman.ashx 
+	->({0}ms(0))Begin
+	->(0ms(+0))IN-LoadAPI
+	->(1243ms(+1243))OUT-LoadAPI
+	->(1247ms(+4))1 in locked
+	->(1253ms(+6))IN-StartPorcess
+	->(2184ms(+931))IN-ItemNotExisted
+	->(3141ms(+957))给定关键字不在字典中。
+	->(3142ms(+1))Done
+10:58:26,10:12:22 /sp/szht_aidongman.ashx 
+	->({0}ms(0))Begin
+	->(4430ms(+4430))给定关键字不在字典中。
+	->(4431ms(+1))Done
