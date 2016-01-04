@@ -1,0 +1,374 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using Shotgun.Library;
+
+namespace n8wan.Public.Logical
+{
+    public class CPPusher : Shotgun.Model.Logical.Logical
+    {
+
+        static object logFileLocker;
+        /// <summary>
+        /// 订单ID
+        /// </summary>
+        private string _linkID;
+
+        /// <summary>
+        /// 最后一次推送的连接内容
+        /// </summary>
+        private string _url;
+        private LightDataModel.tbl_trone_orderItem _config;
+        private LightDataModel.tbl_cp_push_urlItem _cp_push_url;
+        private LightDataModel.tbl_troneItem _trone;
+
+        static Random rnd;
+        object sync = new object();
+        /// <summary>
+        /// 根据TroneId，CPID 加载CP同步API配置
+        /// </summary>
+        /// <returns></returns>
+        public virtual bool LoadCPAPI()
+        {
+            var l = LightDataModel.tbl_trone_orderItem.GetQueries(dBase);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
+            if (CP_Id != -1)
+                l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.cp_id, this.CP_Id);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, 0);
+            var m = l.GetRowByFilters();
+            if (m == null)
+                return SetErrorMesage("CP_API Not Found!");
+            SetConfig(m);
+            return SetSuccess();
+        }
+
+        protected void SetConfig(LightDataModel.tbl_trone_orderItem m)
+        {
+            _config = m;
+            _cp_push_url = LightDataModel.tbl_cp_push_urlItem.GetRowById(dBase, m.push_url_id);
+            _trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
+        }
+
+        public Logical.ICPPushModel PushObject { get; set; }
+
+        public string LogFile { get; set; }
+
+        public virtual bool DoPush()
+        {
+            this._linkID = PushObject.GetValue(Logical.EPushField.LinkID);
+            this._url = null;
+
+            DateTime today = DateTime.Today;
+            if (_cp_push_url.lastDate.Date != DateTime.Today)
+            {//重置昨日数据，为今日新数据
+                _cp_push_url.lastDate = today;
+                _cp_push_url.amount = 0;
+                _config.amount = 0;
+            }
+            IHold_DataItem holdCfg;
+            if (_config.hold_is_Custom)
+                holdCfg = _config;
+            else
+                holdCfg = _cp_push_url;
+
+            if (IsCycHidde())
+            {//扣量处理
+                try
+                {
+                    PushObject.SetHidden(dBase, _config);
+                    dBase.SaveData(_config);
+                    dBase.SaveData(_cp_push_url);
+                }
+                catch (System.Data.Common.DbException ex)
+                {
+                    WriteLog(-1, string.Format("扣量数据保存失败{0}", ex.Message));
+                    return SetErrorMesage(ex.Message);
+                }
+                WriteLog(-2, "扣量");
+                return SetSuccess();
+            }
+
+            _cp_push_url.amount += _trone.price;
+            _config.amount += _trone.price;
+
+            string qs;
+
+            var ptrs = new Dictionary<string, string>();
+            ptrs.Add("mobile", PushObject.GetValue(Logical.EPushField.Mobile));
+            ptrs.Add("servicecode", PushObject.GetValue(Logical.EPushField.ServiceCode));
+            ptrs.Add("linkid", _linkID);
+            ptrs.Add("msg", PushObject.GetValue(Logical.EPushField.Msg));
+            //ptrs.Add("status", PushObject.GetValue(Logical.EPushField.Status));
+            ptrs.Add("port", PushObject.GetValue(Logical.EPushField.port));
+
+            ptrs.Add("price", (_trone.price * 100).ToString("0"));
+            ptrs.Add("cpparam", PushObject.GetValue(Logical.EPushField.cpParam));
+            qs = UrlEncode(ptrs);
+
+            try
+            {
+                var cpmr = PushObject.SetPushed(dBase, _config);
+
+                cpmr.syn_status = _cp_push_url.is_realtime ? 1 : 0;
+
+                dBase.SaveData(cpmr);
+                dBase.SaveData(_config);
+                dBase.SaveData(_cp_push_url);
+            }
+            catch (System.Data.Common.DbException ex)
+            {
+                WriteLog(-1, ex.Message);
+                return SetErrorMesage(ex.Message);
+            }
+            if (_cp_push_url.is_realtime)
+                SendQuery(qs);
+            return SetSuccess();
+        }
+
+        /// <summary>
+        /// 此次操作是否标记为扣量信息
+        /// </summary>
+        /// <returns></returns>
+        protected bool IsCycHidde()
+        {
+            if (_cp_push_url.cp_id == 34)
+                return true;//未知CP的，直接隐藏
+            if (!_cp_push_url.is_realtime)
+                return false;//非实时同步，不进行扣量操作 
+            if (IsWhite())
+            {
+                return false;
+            }
+            IHold_DataItem holdCfg = null;
+            if (_config.hold_is_Custom)
+                holdCfg = _config;
+            else
+                holdCfg = _cp_push_url;
+
+            if (holdCfg.hold_amount > 0)
+            {
+                if (holdCfg.amount >= holdCfg.hold_amount)
+                    return DateTime.Now.Millisecond > 10;//扣99%
+                else if ((holdCfg.amount / holdCfg.hold_amount) > 0.98m)//离满额只有2%时
+                    return DateTime.Now.Millisecond > 500;//扣50%
+            }
+
+
+            if (holdCfg.hold_percent <= 0)
+                return false;//不扣量
+            if (holdCfg.hold_percent >= 100)
+                return true;//全扣量
+
+            var t = math2.GCD(holdCfg.hold_percent, 100);
+
+            var cycHold = holdCfg.hold_percent / t;//扣量条数
+            var cycCount = 100 / t;//最小扣量周期
+
+
+            //var max = _config.CycCount - _config.LastCycCount; //未处理的周期量
+            var max = cycCount - holdCfg.hold_CycCount;
+            //var p = _config.CycHidden - _config.LastCycHidden;//当前周期未扣除的数量
+            var p = cycHold - holdCfg.hold_CycProc;//当前周期未扣除的数量
+
+
+            if (max <= 0)
+            {//跑完周期，需要重置
+                holdCfg.hold_CycCount = 0;
+                holdCfg.hold_CycProc = 0;
+                max = cycCount;
+                p = cycHold;
+            }
+            holdCfg.hold_CycCount++;
+            if (p <= 0)
+                return false;//已经扣完了
+            var r = (DateTime.Now.Millisecond % 100) * max;
+            var pre = p * 100;
+            var isHidden = r <= pre;
+            if (isHidden)
+                holdCfg.hold_CycProc++;
+            return isHidden;
+        }
+
+        /// <summary>
+        /// 白名单检查
+        /// </summary>
+        /// <returns></returns>
+        private bool IsWhite()
+        {
+            var mobile = PushObject.GetValue(EPushField.Mobile);
+            if (string.IsNullOrEmpty(mobile))
+                return false;
+            var q = LightDataModel.tbl_mobile_white_listItem.GetQueries(dBase);
+            q.Filter.AndFilters.Add(LightDataModel.tbl_mobile_white_listItem.Fields.mobile, mobile);
+
+            return q.ExecuteScalar(LightDataModel.tbl_mobile_white_listItem.identifyField) != null;
+
+        }
+
+        public string API_PushUrl { get { return _cp_push_url.url; } }
+
+        private void SendQuery(string qs)
+        {
+            if (string.IsNullOrEmpty(API_PushUrl))
+            {
+                WriteLog(-1, "No Push URL");
+                return;
+            }
+
+            if (qs.StartsWith("?"))
+                qs = qs.Substring(1);
+
+            if (API_PushUrl.Contains('?'))
+                this._url = API_PushUrl + "&" + qs;
+            else
+                this._url = API_PushUrl + "?" + qs;
+            System.Threading.ThreadPool.QueueUserWorkItem(SendData);
+        }
+
+        private void SendData(object s)
+        {
+
+#if DEBUG
+            var rnd = new Random();
+            System.Threading.Thread.Sleep(rnd.Next(1000) + 10000);
+#endif
+            if (this._url == null || this._url.StartsWith("#"))
+            {
+
+                WriteLog(0, "虚似推送");
+                return;
+            }
+
+            if (File.Exists(@"E:\localFlag.txt"))
+            {//本地测试不进行推送
+                WriteLog(0, "未推送 请删除E:\\localFlag.txt");
+                return;
+            }
+
+            System.Net.HttpWebRequest web = null;
+
+            try
+            {
+                web = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(_url);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(-1, "Push URL Error:" + ex.Message);
+                return;
+            }
+
+            System.Net.HttpWebResponse rsp = null;
+            web.Timeout = 1000;
+            web.AllowAutoRedirect = false;
+            web.AutomaticDecompression = System.Net.DecompressionMethods.GZip;
+
+            var stwc = new System.Diagnostics.Stopwatch();
+            stwc.Start();
+            string msg = null;
+            try
+            {
+                rsp = (System.Net.HttpWebResponse)web.GetResponse();
+            }
+            catch (System.Net.WebException ex)
+            {
+                rsp = (System.Net.HttpWebResponse)ex.Response;
+                msg = ex.Message;
+            }
+
+            if (rsp == null)
+            {
+                WriteLog(0, msg, stwc);
+                return;
+            }
+            var code = rsp.StatusCode;
+            try
+            {
+                using (var stm = rsp.GetResponseStream())
+                {
+                    using (var rd = new System.IO.StreamReader(stm))
+                        msg = rd.ReadLine();
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = ex.Message;
+            }
+            if (!string.IsNullOrEmpty(msg) && msg.Length > 512)
+                msg = msg.Substring(0, 510) + "...";
+
+            WriteLog((int)code, msg, stwc);
+        }
+
+        protected void WriteLog(int p, string msg)
+        {
+            if (string.IsNullOrEmpty(LogFile))
+                return;
+            var fi = new FileInfo(LogFile);
+            if (!fi.Directory.Exists)
+                fi.Directory.Create();
+            if (logFileLocker == null)
+                logFileLocker = new object();
+            lock (logFileLocker)
+            {
+                using (var stm = new StreamWriter(LogFile, true))
+                {
+                    stm.WriteLine("{0:HH:mm:ss} {1} {2} {3} {4}", DateTime.Now, this._linkID, this._url, p, msg);
+                }
+            }
+        }
+
+        protected void WriteLog(int p, string msg, System.Diagnostics.Stopwatch stwc)
+        {
+            WriteLog(p, string.Format("{0:0}ms - {1}", stwc.Elapsed.TotalMilliseconds, msg));
+        }
+
+        public static string UrlEncode(Dictionary<string, string> fields)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var kv in fields)
+            {
+                sb.AppendFormat("&{0}={1}",
+                    System.Web.HttpUtility.UrlEncode(kv.Key),
+                    System.Web.HttpUtility.UrlEncode(kv.Value));
+            }
+            sb.Remove(0, 1);
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 匹配的SP指令ID
+        /// </summary>
+        public int TroneId { get; set; }
+
+        /// <summary>
+        /// CP用户Id，-1表示，不指定,仅配对API_Config_Id
+        /// </summary>
+        public int CP_Id { get; set; }
+
+        /// <summary>
+        /// 取1W以内的随机数
+        /// </summary>
+        /// <returns></returns>
+        int GetRndInt()
+        {
+            if (rnd == null)
+                rnd = new Random();
+            return rnd.Next(10000);
+        }
+
+
+        #region 日志记录
+        public void WriteTrackLog(string msg)
+        {
+            if (TrackLog == null)
+                return;
+            TrackLog.AppendLine(msg);
+        }
+
+        public StringBuilder TrackLog { get; set; }
+        #endregion
+
+    }
+}
