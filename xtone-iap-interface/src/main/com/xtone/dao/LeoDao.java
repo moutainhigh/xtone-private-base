@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import org.common.util.ConnectionService;
+
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
 import com.xtone.iap.ReceiveFromMsg;
@@ -25,8 +27,8 @@ public class LeoDao {
 		
 		
 		try {
-			con = com.xtone.util.DBUtil.getConnection();
-			System.out.println("con"+con);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			System.out.println("con:"+con);
 			String sql = "SELECT * FROM `tbl_iap_leo_logs`";
 			ps = con.prepareStatement(sql);
 //			stmt = con.createStatement();
@@ -52,6 +54,16 @@ public class LeoDao {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally{
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 		
 	}
@@ -98,7 +110,7 @@ public class LeoDao {
 		PreparedStatement ps = null;
 		
 		try {
-			con = com.xtone.util.DBUtil.getConnection();
+			con = ConnectionService.getInstance().getConnectionForLocal();
 			ps = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
 			ps.setLong(1, time);
 			ps.setString(2, msg.getIp());
@@ -118,6 +130,16 @@ public class LeoDao {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+		}finally{
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 		return 0;
 		
@@ -147,7 +169,7 @@ public class LeoDao {
 		PreparedStatement ps = null;
 		
 		try {
-			con = com.xtone.util.DBUtil.getConnection();
+			con = ConnectionService.getInstance().getConnectionForLocal();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, appleMsg);
 			ps.setLong(2, time);
@@ -156,6 +178,16 @@ public class LeoDao {
 			return ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 		return false;
 	}
@@ -171,7 +203,7 @@ public class LeoDao {
 		PreparedStatement ps = null;
 		
 		try {
-			con = com.xtone.util.DBUtil.getConnection();
+			con = ConnectionService.getInstance().getConnectionForLocal();
 			ps = con.prepareStatement(sql);
 			ps.setString(1, result);
 			ps.setString(2, url);
@@ -181,6 +213,16 @@ public class LeoDao {
 			return ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
 		}
 		
 		return false;
