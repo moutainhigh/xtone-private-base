@@ -1,4 +1,6 @@
 
+<%@page import="com.system.server.GroupServer"%>
+<%@page import="com.system.model.GroupModel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.system.server.GroupRightServer"%>
 <%@page import="com.system.model.GroupRightModel"%>
@@ -12,15 +14,16 @@
 <%
 	int id = StringUtil.getInteger(request.getParameter("id"), -1);
 	int pageindex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
+	List<GroupModel> groupList = new GroupServer().loadAllGroup();
 	List<GroupRightModel> list = new GroupRightServer().loadGroup();
 	GroupRightModel model = new GroupRightServer().load(id);
 	String listStr = model.getGroupList();
 	String[] str = listStr.split(",");
-	List<String> list2 = new ArrayList<String>();
+	List<Integer> list2 = new ArrayList<Integer>();
 	for(int i=0;i<str.length;i++){
-		list2.add(new GroupRightServer().loadNameById(Integer.parseInt(str[i])));
+		list2.add(Integer.parseInt(str[i]));
 	}
-	model.setGroupList(StringUtil.stringListToString(list2));
+	// model.setGroupList(StringUtil.stringListToString(list2));
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -119,11 +122,32 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">授权角色</dd>
-					<dd class="dd03_me">
-						<input type="text" name="group_list" id="group_list"
-							style="width: 200px">
-					</dd>
+					<dd class="dd01_me">授权角色</dd><br />
+					<br />
+					<table style="text-align: left">
+					<%
+					int i=0;
+					out.println("<tr>");
+					for (GroupModel group : groupList)
+					{
+						if(i%5==0)
+							out.print("</tr><tr>");
+						for(Integer modelid : list2){
+							if(modelid==group.getId()){
+								out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
+								+ "\" value=\"" + group.getId() + "\" checked=\"true\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
+							}else{
+								out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
+								+ "\" value=\"" + group.getId() + "\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
+							}
+						}
+						
+						
+						i++;
+					}
+					out.println("</tr>");
+					%>
+					</table>
 
 					<br />
 					<br />

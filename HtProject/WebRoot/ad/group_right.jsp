@@ -31,8 +31,9 @@
 		for(int i=0;i<strArray.length;i++){
 			//DAO将strArray[i]中的值转化为name,并且拼接到字符串strlist上
 			//str = strArray[i];
-			strList += new GroupRightServer().loadNameById(StringUtil.getInteger(strArray[i], 0))+"	&nbsp;";
+			strList += new GroupRightServer().loadNameById(StringUtil.getInteger(strArray[i], 0))+"&nbsp;| ";
 		}
+		strList = strList.substring(0, strList.length()-2);
 		model.setGroupList(strList);
 		list2.add(model);
 	}
