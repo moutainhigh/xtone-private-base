@@ -100,18 +100,23 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">授权角色</dd><br />
 					<br />
+					<table style="text-align: left">
 					<%
+					int i=0;
+					out.println("<tr>");
 					for (GroupModel group : groupList)
 					{
-					%>
-					<dd class="dd01_me"><%=group.getName()%></dd>
-					<dd class="dd03_me">
-						<input type="checkbox" name="groupid" style="width: 25px;float:left" value="<%= group.getId() %>"  id="groupid_<%= group.getId() %>" >
-					</dd>
-					<br /><br />
-					<%
+						if(i%5==0)
+							out.print("</tr><tr>");
+						
+						out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
+						+ "\" value=\"" + group.getId() + "\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
+						
+						i++;
 					}
+					out.println("</tr>");
 					%>
+					</table>
 
 					<br />
 					<br />
