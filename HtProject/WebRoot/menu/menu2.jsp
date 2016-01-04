@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.model.Menu2Model"%>
 <%@page import="com.system.server.Menu2Server"%>
 <%@page import="com.system.model.Menu1Model"%>
@@ -39,6 +40,8 @@
 	params.put("menu_1_id", menu1Id + "");
 	
 	String pageData = PageUtil.initPageQuery("menu2.jsp",params,rowCount,pageIndex);
+	
+	String query = Base64UTF.encode(request.getQueryString());
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -193,7 +196,7 @@
 			<dl>
 				<dd class="ddbtn" ><a href="menu2add.jsp">增  加</a></dd>
 			</dl>
-			<form action="menu2.jsp"  method="post" style="margin-top: 10px">
+			<form action="menu2.jsp"  method="get" style="margin-top: 10px">
 				<dl>
 					<dd class="dd01_me">模块</dd>
 					<dd class="dd04_me">
@@ -251,7 +254,7 @@
 						<span id="span_<%= model.getId() %>"><%=model.getSort()%></span>
 					</td>
 					<td>
-						<a href="menu2edit.jsp?id=<%= model.getId() %>&pageindex=<%=pageIndex%>">修改</a>
+						<a href="menu2edit.jsp?query=<%= query %>&id=<%= model.getId() %>&pageindex=<%=pageIndex%>">修改</a>
 					</td>
 				</tr>
 				<%
@@ -259,7 +262,7 @@
 				%>
 			<tbody>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>
