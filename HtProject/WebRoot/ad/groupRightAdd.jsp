@@ -26,10 +26,18 @@
 <script type="text/javascript" src="../sysjs/base.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
+	function getProvinceCount(items)
+	{
+		var i = 0;
+		$('[name='+items+']:checkbox').each(function() {
+			if(this.checked)
+				i++;
+		});
+		return i;
+	}
     //声明整数的正则表达式
     function isNum(a)
 	{
-		//var reg=/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i;
 		var reg = /^[0-9]*[1-9][0-9]*$/i;
 		return reg.test(a);
 	}
@@ -37,21 +45,19 @@
 	{
 		
 		
-		if($("#appname").val()<0)
+		if($("#group").val()<0)
 		{
 			alert("请选择角色");
-			$("#appname").focus();
+			$("#group").focus();
 			return;
 		}
 		
-		/*if (isNullOrEmpty($("#group_list").val())) 
+		if(getProvinceCount('groupid')<=0)
 		{
-			alert("请输入授权角色");
-			$("#group_list").focus();
+			alert("请选择授权角色");
 			return;
-		}*/
+		}
 		
-		console.log($("#remark").val());
 		
 		if(isNullOrEmpty($("#remark").val()))
 		{

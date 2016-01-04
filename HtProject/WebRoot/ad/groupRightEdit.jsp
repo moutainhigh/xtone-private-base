@@ -36,6 +36,18 @@
 <script type="text/javascript" src="../sysjs/base.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
+	function getProvinceCount(items)
+	{
+		var i = 0;
+		$('[name='+items+']:checkbox').each(function() {
+			if(this.checked)
+				i++;
+		});
+		return i;
+	}
+	var groupArr = new Array();
+
+	<%for(int group : list2){%>groupArr.push(<%= group %>);<%}%>
     //声明整数的正则表达式
     function isNum(a)
 	{
@@ -54,6 +66,12 @@
     			$("#group").val("<%= model.getGroupId() %>");
     			$("#group_list").val("<%= model.getGroupList() %>");
     			$("#remark").val("<%= model.getRemark() %>");
+    			$("[name='groupid']").removeAttr("checked");
+    			
+    			for(i=0; i<groupArr.length; i++)
+    			{
+    				document.getElementById("groupid_" + groupArr[i]).checked = true;	
+    			}
     		}
 	
     
@@ -68,10 +86,9 @@
 			return;
 		}
 		
-		if (isNullOrEmpty($("#group_list").val())) 
+		if(getProvinceCount('groupid')<=0)
 		{
-			alert("请输入授权角色");
-			$("#group_list").focus();
+			alert("请选择授权角色");
 			return;
 		}
 		
@@ -132,15 +149,8 @@
 					{
 						if(i%5==0)
 							out.print("</tr><tr>");
-						for(Integer modelid : list2){
-							if(modelid==group.getId()){
-								out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
-								+ "\" value=\"" + group.getId() + "\" checked=\"true\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
-							}else{
-								out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
-								+ "\" value=\"" + group.getId() + "\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
-							}
-						}
+						out.print("<td style=\"text-align: left\"><input type=\"checkbox\" name=\"groupid\" id=\"groupid_" + group.getId() 
+						+ "\" value=\"" + group.getId() + "\"></input>&nbsp;&nbsp;" + group.getName() + "</td>");
 						
 						
 						i++;
