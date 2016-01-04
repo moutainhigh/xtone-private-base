@@ -1,0 +1,7 @@
+09:00:15 121201  -2 扣量
+09:00:25 121200 http://218.245.2.250:8888/sms_szht.php?p=1&mobile=18789892575&servicecode=&linkid=121200&msg=1&port=1066656832&price=100&cpparam= 0 未推送 请删除E:\localFlag.txt
+09:00:26 121202 http://218.245.2.250:8888/sms_szht.php?p=1&mobile=18789892575&servicecode=&linkid=121202&msg=1&port=1066656832&price=100&cpparam= 0 未推送 请删除E:\localFlag.txt
+09:00:28 111200 http://61.160.251.39:7081/pg2431.aspx?mobile=13668569529&servicecode=800000001307&linkid=111200&msg=gzhm501&port=300133&price=500&cpparam= 0 未推送 请删除E:\localFlag.txt
+09:00:28 61200 http://198.96.93.89:8888/smssync/845abb0d/mr.do?mobile=18748666678&servicecode=&linkid=61200&msg=1adc1&port=10660865&price=100&cpparam= 0 未推送 请删除E:\localFlag.txt
+09:00:28 131200 http://sdk.17wango.com/haotianSync?mobile=18734217234&servicecode=&linkid=131200&msg=LTHJSZHT05Y&port=300096&price=500&cpparam=03156346 0 未推送 请删除E:\localFlag.txt
+09:00:28 121203 http://218.245.2.250:8888/sms_szht.php?p=1&mobile=18789892575&servicecode=&linkid=121203&msg=1&port=1066656832&price=100&cpparam= 0 未推送 请删除E:\localFlag.txt

@@ -1,0 +1,5 @@
+E:\Website\Shotgun.Library\bin\Release\Shotgun.Library.dll
+E:\Website\Shotgun.Library\bin\Release\Shotgun.Library.pdb
+E:\Website\Shotgun.Library\obj\Release\Shotgun.Library.csprojResolveAssemblyReference.cache
+E:\Website\Shotgun.Library\obj\Release\Shotgun.Library.dll
+E:\Website\Shotgun.Library\obj\Release\Shotgun.Library.pdb
