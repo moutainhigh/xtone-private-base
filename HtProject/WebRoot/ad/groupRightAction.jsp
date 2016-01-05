@@ -1,4 +1,5 @@
 
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.util.Date"%>
 <%@page import="javax.xml.crypto.Data"%>
 <%@page import="com.system.server.GroupRightServer"%>
@@ -19,16 +20,13 @@
 	int type = StringUtil.getInteger(request.getParameter("type"), -1);
 	System.out.println(pageIndex+","+id+","+groupId+","+remark+","+type+","+groupList);
 	
-	//int type = StringUtil.getInteger(request.getParameter("type"), 0);
-	//String appname = StringUtil.getString(request.getParameter("app_name"), "");
-	//String appkey = StringUtil.getString(request.getParameter("app_key"), "");
-	//int hold_percent = StringUtil.getInteger(request.getParameter("hold_persent"), 0);
+	String query = StringUtil.getString(request.getParameter("query"), "");
+	
 	if(type>0){
 		new GroupRightServer().deleteGroup(id);
 		response.sendRedirect("group_right.jsp");
 		return;
 	}
-	
 	
 	GroupRightServer server = new GroupRightServer();
 	GroupRightModel model = new GroupRightModel();
@@ -79,6 +77,6 @@
 	
 	
 	
-	response.sendRedirect("group_right.jsp?pageindex="+pageIndex);
+	response.sendRedirect("group_right.jsp?" + Base64UTF.decode(query));
 	
 %>

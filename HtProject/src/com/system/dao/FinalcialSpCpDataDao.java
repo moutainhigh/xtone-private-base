@@ -68,14 +68,14 @@ public class FinalcialSpCpDataDao
 				String spShortName;
 				int spTroneId;
 				String spTroneName;
-				float spJieSuanLv;
+				double spJieSuanLv;
 				int dataRows;
-				float amount;
+				double amount;
 				int showDataRows;
-				float showAmount;
+				double showAmount;
 				int cpId;
 				String cpShortName;
-				float cpJieSuanLv;
+				double cpJieSuanLv;
 				
 				FinancialSpCpDataShowModel model = null;
 				FinancialSpCpDataShowModel.SpTroneModel spTroneModel = null;
@@ -86,14 +86,14 @@ public class FinalcialSpCpDataDao
 					spShortName = StringUtil.getString(rs.getString("sp_name"), "");
 					spTroneId = rs.getInt("sp_trone_id");
 					spTroneName = StringUtil.getString(rs.getString("sp_trone_name"), "");
-					spJieSuanLv = rs.getFloat("sp_jie_suan_lv");
+					spJieSuanLv = rs.getDouble("sp_jie_suan_lv");
 					dataRows = rs.getInt("data_rows");
-					amount = rs.getInt("amount");
+					amount = rs.getDouble("amount");
 					showDataRows = rs.getInt("show_data_rows");
 					showAmount = rs.getInt("show_amounts");
 					cpId = rs.getInt("cp_id");
 					cpShortName = StringUtil.getString(rs.getString("cp_name"), "");
-					cpJieSuanLv = rs.getFloat("cp_jie_suan_lv");
+					cpJieSuanLv = rs.getDouble("cp_jie_suan_lv");
 					
 					boolean existSp = false;
 					
