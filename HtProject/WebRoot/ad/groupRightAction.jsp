@@ -41,8 +41,9 @@
 		model.setId(id);
 		String[] stringList = groupList.split(",");
 		List<String> list = new ArrayList<String>();
-		for(int i=0;i<stringList.length;i++){
-			list.add(server.loadIdByName(stringList[i])+"");
+		String[] groups = request.getParameterValues("groupid");
+		for(String grString : groups){
+			list.add(grString);
 		}
 		model.setGroupList(StringUtil.stringListToString(list));
 		new GroupRightServer().updateGroup(model);
