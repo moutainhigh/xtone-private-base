@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.system.model.GroupRightModel"%>
 <%@page import="com.system.server.GroupRightServer"%>
@@ -19,6 +20,8 @@
     
 	Map<String,Object> map = new GroupRightServer().load(pageIndex, group);
 	//Map<String,Object> map = new AdAppServer().loadApp(pageIndex, appname, appkey);
+	
+	String query = Base64UTF.encode(request.getQueryString());
 	
 	List<GroupRightModel> list = (List<GroupRightModel>)map.get("list");
 	List<GroupRightModel> list2 = new ArrayList<GroupRightModel>();
@@ -114,8 +117,7 @@
 					<td><%=model.getRemark() %></td>
 					
 					<td>
-						<a href="groupRightEdit.jsp?id=<%= model.getId() %>
-						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">修改</a>
+						<a href="groupRightEdit.jsp?id=<%= model.getId() %>&query=<%= query %>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
 					</td>
 				</tr>
