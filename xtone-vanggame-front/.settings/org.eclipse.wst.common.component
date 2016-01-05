@@ -6,7 +6,7 @@
         <dependent-module archiveName="xtone-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/xtone-java-common/xtone-java-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <property name="context-root" value="xtone-web"/>
         <property name="java-output-path" value="/xtone-web/build/classes"/>
+        <property name="context-root" value="vanggame.xtonegame.com"/>
     </wb-module>
 </project-modules>

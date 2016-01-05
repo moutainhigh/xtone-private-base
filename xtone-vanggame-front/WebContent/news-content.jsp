@@ -114,6 +114,14 @@ color: #aaaaaa;
 	padding: 15px 100px 15px 100px;
 }
 
+@media ( min-width :768px){
+.content{
+	background: #fff;
+	margin-bottom: 30px;
+	padding: 15px 0px 15px 0px;
+}
+}
+
 .titleimg{
 	float: left;
     padding-top: 10px;
