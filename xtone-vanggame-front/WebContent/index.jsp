@@ -59,8 +59,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/docs.min.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script async="" id="gauges-tracker"
-	data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script>
+<!-- <script async="" id="gauges-tracker" -->
+<!-- 	data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script> -->
 <script async="" src="js/bootstrap/analytics.js"></script>
 <script src="js/bootstrap/ie-emulation-modes-warning.js"></script>
 
@@ -118,32 +118,22 @@
 	text-decoration: none
 }
 
+.logo-size {
+	width: 269px;
+	height: 93px;
+}
+
+.title {
+	margin-top: 80px;
+	margin-bottom: 9px;
+}
+
 .newsli {
 	border-bottom: #e1e1e0 solid 1px;
 	padding-top: 17px;
 	padding-bottom: 16px;
 	/* 	list-style-image: url("images/index/dian_1.png"); */
 	color: #cf1232;
-}
-
-@media ( min-width :768px) {
-	.newsli {
-		border-bottom: #e1e1e0 solid 1px;
-		padding-top: 11px;
-		padding-bottom: 11px;
-		/* 	list-style-image: url("images/index/dian_1.png"); */
-		color: #cf1232;
-	}
-}
-
-@media ( min-width :1201px) {
-	.newsli {
-		border-bottom: #e1e1e0 solid 1px;
-		padding-top: 17px;
-		padding-bottom: 16px;
-		/* 	list-style-image: url("images/index/dian_1.png"); */
-		color: #cf1232;
-	}
 }
 
 .newsli font {
@@ -155,15 +145,68 @@
 	color: #aaaaaa;
 }
 
+@media ( min-width :168px) {
+	.newsli {
+		padding-top: 5px;
+		padding-bottom: 18px;
+	}
+	.newsli font {
+		font-size: 12px;
+	}
+	.newsli em {
+		font-size: 12px;
+	}
+	.logo-size {
+		width: 174px;
+		height: 68px;
+		margin-top: 15px;
+	}
+	.title {
+		margin-top: 40px;
+	}
+}
+
+@media ( min-width :768px) {
+	.newsli {
+		padding-top: 11px;
+		padding-bottom: 11px;
+	}
+	.newsli font {
+		font-size: 15px;
+	}
+	.newsli em {
+		font-size: 15px;
+	}
+	.logo-size {
+		width: 269px;
+		height: 93px;
+		margin-top: 0px;
+	}
+	.title {
+		margin-top: 60px;
+	}
+}
+
+@media ( min-width :1201px) {
+	.newsli {
+		padding-top: 17px;
+		padding-bottom: 16px;
+	}
+	.newsli font {
+		font-size: 17px;
+	}
+	.newsli em {
+		font-size: 17px;
+	}
+	.title {
+		margin-top: 80px;
+	}
+}
+
 .links {
 	color: #aaaaaa;
 	text-decoration: none;
 	font-size: 15px;
-}
-
-.title {
-	margin-top: 80px;
-	margin-bottom: 9px;
 }
 
 #overlay {
@@ -201,7 +244,7 @@
 	/*     background: transparent url("images/index/vedio-start.png") no-repeat scroll 0% 0%; */
 }
 
-.videoPop .pop-close { 
+.videoPop .pop-close {
 	position: absolute;
 	top: 0px;
 	right: -420px;
@@ -236,7 +279,7 @@
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a href="#"><img alt="logo" src="images/logo.png"></a>
+				<a href="#"><img alt="logo" src="images/logo.png" class="logo-size"></a>
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">
