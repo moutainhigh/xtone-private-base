@@ -2011,6 +2011,38 @@ h1[id] {
 	background: #CF1232;
 }
 
+.game-top{
+	margin-top: 20px;	
+}
+
+.sjyx1{
+	width: 17.8%;
+	float: left;
+    position: relative;
+    min-height: 1px;
+}
+
+.sjyx2{
+	width: 48.4%;
+	float: left;
+    position: relative;
+    min-height: 1px;
+}
+
+.sjyx3{
+	width: 16.9%;
+	float: left;
+    position: relative;
+    min-height: 1px;
+}
+
+.wyyx1{
+	width: 66.2%;
+	float: left;
+    position: relative;
+    min-height: 1px;
+}
+
 .artText{
 	background: #fff;
 	padding: 15px 100px 15px 100px;
@@ -2030,7 +2062,12 @@ h1[id] {
 	padding: 30px;
 	background: white;
 }
-
+.tt20{
+	width: 20%;
+	float: left;
+    position: relative;
+    min-height: 1px;
+}
 @media ( min-width :168px) {
 	.artText {
 		background: #fff;
@@ -2048,6 +2085,12 @@ h1[id] {
 		padding: 10px;
 		background: white;
 	}
+	.tt20{
+		width: 100%;
+		float: left;
+    	position: relative;
+    	min-height: 1px;
+	}
 }
 
 @media ( min-width :520px) {
@@ -2059,6 +2102,9 @@ h1[id] {
 	}
 	.text-padding {
 		padding: 15px;
+	}
+	.tt20{
+		width: 100%;
 	}
 }
 
@@ -2075,6 +2121,9 @@ h1[id] {
 	.text-padding {
 		padding: 20px;
 	}
+	.tt20{
+		width: 50%;
+	}
 }
 
 @media ( min-width :1201px) {
@@ -2089,6 +2138,9 @@ h1[id] {
 	}
 	.text-padding {
 		padding: 30px;
+	}
+	.tt20{
+		width: 20%;
 	}
 }
 

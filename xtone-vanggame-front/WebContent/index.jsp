@@ -201,8 +201,8 @@
 	/*     background: transparent url("images/index/vedio-start.png") no-repeat scroll 0% 0%; */
 }
 
-.videoPop .pop-close { //
-	这个是关闭按钮的样式 position: absolute;
+.videoPop .pop-close { 
+	position: absolute;
 	top: 0px;
 	right: -420px;
 	width: 47px;
@@ -383,12 +383,9 @@
 		<div class="bs-docs-featurette">
 			<div class="container">
 				<div class="row">
-					<div class="title">
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/business_structure.png"></img>
-						</div>
-						<div class="col-md-6 col-sm-8 nopadding">
-							<p>&nbsp;
 						</div>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
@@ -397,17 +394,17 @@
 
 						<a
 							href="cooperation.html"> <img src="images/index/ad1.png"
-							alt="ad1" class="bsimg">
+							alt="商务合作1" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 						<a href="cooperation.html"> <img src="images/index/ad3.png"
-							alt="ad2" class="bsimg">
+							alt="商务合作2" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 						<a href="cooperation.html"> <img src="images/index/ad2.png"
-							alt="ad3" class="bsimg">
+							alt="商务合作3" class="bsimg">
 						</a>
 					</div>
 				</div>
@@ -416,7 +413,7 @@
 		<div class="bs-docs-featurette">
 			<div class="container">
 				<div class="row">
-					<div class="title">
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 col-xs-6 nopadding">
 							<img src="images/index/vangame_news.png"></img>
 						</div>
@@ -424,11 +421,9 @@
 							<a href="news.jsp" style="float: right;"><img
 								src="images/index/more.png"></img></a>
 						</div>
-						<div class="col-md-4 col-sm-0 col-xs-0 nopadding">
-							<p>&nbsp;
-						</div>
 					</div>
-					<div class="col-md-8 col-sm-12 nopadding ztgs"
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+					<div class="col-md-8 col-sm-12 col-xs-12 nopadding ztgs"
 						style="background-color: white;">
 						<ul class="" style="margin-right: 20px; margin-bottom: 0px;">
 							<%
@@ -442,7 +437,7 @@
  %>
 						</ul>
 					</div>
-					<div class="col-md-4 col-sm-12 video nopadding">
+					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
 						<a class="btn-video" href="javascript:openVideo();"><img
 							src="images/index/vedio-kddmx.png" class="bsimg"> </a>
 						<div id="overlay" style="display: none;"></div>
@@ -452,29 +447,25 @@
 						</div>
 
 					</div>
+					</div>
 				</div>
 			</div>
 		</div>
 		<div class="bs-docs-featurette bottom-hieght">
 			<div class="container">
 				<div class="row">
-					<div class="title">
-
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/links.png"></img>
 						</div>
-						<div class="col-md-6 col-sm-8 nopadding">
-							<p>&nbsp;
-						</div>
 					</div>
-					<div class="col-md-12 col-sm-12 nopadding ztgs"
+					<div class="col-md-12 col-sm-12 col-xs-12 nopadding ztgs"
 						style="background-color: #fafafa; padding: 22px;text-align: center;">
-						<a href="http://www.alllink.com.cn/" class="links" target="_blank">北京通联天地科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="http://www.xtonecomic.com/" class="links" target="_blank">北京讯宇创世科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="http://14643233.czvv.com/" class="links" target="_blank">北京游动天地科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="http://www.pvc123.com/b-pxtonewinnie/" class="links"
-							target="_blank">深圳市创世互动科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="http://www.m-time.com/" class="links">深圳市浩天投资有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="tt20"><a href="http://www.alllink.com.cn/" class="links" target="_blank">北京通联天地科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div class="tt20"><a href="http://www.xtonecomic.com/" class="links" target="_blank">北京讯宇创世科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div class="tt20"><a href="http://14643233.czvv.com/" class="links" target="_blank">北京游动天地科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+						<div class="tt20"><a href="http://www.pvc123.com/b-pxtonewinnie/" class="links"	target="_blank">深圳市创世互动科技有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp; </div>
+						<div class="tt20"><a href="http://www.m-time.com/" class="links">深圳市浩天投资有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>					
 					</div>
 					
 				</div>
@@ -512,7 +503,7 @@
 		function openPop(popID) {
 			closePop();
 
-			var iframe = "<div class='pop-close'></div><iframe marginWidth=0 marginHeight=0 src='http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=102089&iframe=iframe' frameBorder='0' width='900' scrolling='no' height='600' allowTransparency  ></iframe>";
+			var iframe = "<div class='pop-close'></div><iframe marginWidth=0 marginHeight=0 src=http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=102264&iframe=iframe frameBorder=0 width=900 scrolling=no height=600 allowTransparency></iframe>";
 			//<iframe marginWidth=0 marginHeight=0 src='http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=84293&iframe=iframe' frameBorder=0 width=900 scrolling=no height=600 allowTransparency></iframe>
 			//<iframe marginWidth=0 marginHeight=0 src='http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=99941&iframe=iframe' frameBorder='0' width='900' scrolling='no' height='600' allowTransparency  ></iframe>
 			//<iframe src="http://www.tudou.com/programs/view/html5embed.action?type=0&code=TH2_JYClSmY&lcode=&resourceId=88968501_06_05_99" allowtransparency="true" allowfullscreen="true" allowfullscreenInteractive="true" scrolling="no" border="0" frameborder="0" style="width:900px;height:600px;"></iframe>
