@@ -310,7 +310,7 @@
 					</div>
 
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-						<div class="col-md-4 col-sm-12 nopadding">
+						<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 							<div class="hot_game hot_list">
 
 								<div class="l hot_gamebox mb1">
@@ -333,7 +333,7 @@
 
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-12 nopadding">
+						<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 							<div class="hot_game hot_list">
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
@@ -354,7 +354,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-md-4 col-sm-12 nopadding">
+						<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 							<div class="hot_game hot_list">
 								<div class="hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
@@ -391,7 +391,7 @@
 							<p>&nbsp;
 						</div>
 					</div>
-					<div class="col-md-4 col-sm-12 col-xs-12 nopadding">
+					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 						<!-- 					<a href="http://expo.getbootstrap.com/2014/10/29/lyft/" -->
 						<!-- 						target="_blank" title="Lyft"> -->
 
@@ -400,12 +400,12 @@
 							alt="ad1" class="bsimg">
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-12 col-xs-12 nopadding">
+					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 						<a href="cooperation.html"> <img src="images/index/ad3.png"
 							alt="ad2" class="bsimg">
 						</a>
 					</div>
-					<div class="col-md-4 col-sm-12 col-xs-12 nopadding">
+					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
 						<a href="cooperation.html"> <img src="images/index/ad2.png"
 							alt="ad3" class="bsimg">
 						</a>
