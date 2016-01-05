@@ -99,7 +99,7 @@ public class FeeDao
 		
 		result.put("row", count);
 		
-		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows), sum(amount)"), new QueryCallBack()
+		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows), sum(amount),sum(show_amount) "), new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -108,6 +108,7 @@ public class FeeDao
 				{
 					result.put("data_rows", rs.getInt(1));
 					result.put("total_amount", rs.getFloat(2));
+					result.put("total_show_amount", rs.getFloat(3));
 				}
 				
 				return 0;

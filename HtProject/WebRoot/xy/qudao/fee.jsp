@@ -163,11 +163,11 @@
 				<tr>
 					<td>序号</td>
 					<td>计费日期</td>
-					<td class="or">游戏名</td>
-					<td>应用Key</td>
+					<td class="or">游戏</td>
 					<td class="or">渠道ID</td>
 					<td>计费条数</td>
 					<td class="or">计费金额</td>
+					<td>同步状态</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -182,16 +182,15 @@
 						<%=model.getFeeDate()%>
 						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getAmount()%>" />
 					</td>
-					<td class="or"><%=model.getAppName()%></td>
-					<td><%=model.getAppKey()%></td>
+					<td class="or"><%=model.getAppName() + "("+ model.getAppKey() +")"%></td>
 					<td class="or"><%=model.getChannelId()%></td>
 					<td>
 						<%=model.getDataRows()%>
 					</td>
-
 					<td class="or" >
 						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getAmount())%></span>
 					</td>
+					<td><%= model.getStatus()==1 ? "已同步":"未同步" %></td>
 				</tr>
 				<%
 					}
@@ -203,11 +202,11 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
 					<td>实际总数:<%= map.get("data_rows") %></td>
 					<td>
 						<span>总信息费:<label id="show_amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_amount")) %></label></span>
 					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>
