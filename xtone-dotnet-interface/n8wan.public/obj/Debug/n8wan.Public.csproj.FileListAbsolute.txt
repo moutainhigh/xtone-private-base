@@ -6,3 +6,11 @@ E:\Website\n8wan.public\bin\Debug\Shotgun.Library.pdb
 E:\Website\n8wan.public\obj\Debug\n8wan.Public.dll
 E:\Website\n8wan.public\obj\Debug\n8wan.Public.pdb
 E:\Website\n8wan.public\obj\Debug\n8wan.Public.csprojResolveAssemblyReference.cache
+E:\Website.git\xtone-dotnet-interface\n8wan.public\bin\Debug\n8wan.Public.dll
+E:\Website.git\xtone-dotnet-interface\n8wan.public\bin\Debug\n8wan.Public.pdb
+E:\Website.git\xtone-dotnet-interface\n8wan.public\bin\Debug\MySql.Data.dll
+E:\Website.git\xtone-dotnet-interface\n8wan.public\bin\Debug\Shotgun.Library.dll
+E:\Website.git\xtone-dotnet-interface\n8wan.public\bin\Debug\Shotgun.Library.pdb
+E:\Website.git\xtone-dotnet-interface\n8wan.public\obj\Debug\n8wan.Public.csprojResolveAssemblyReference.cache
+E:\Website.git\xtone-dotnet-interface\n8wan.public\obj\Debug\n8wan.Public.dll
+E:\Website.git\xtone-dotnet-interface\n8wan.public\obj\Debug\n8wan.Public.pdb
