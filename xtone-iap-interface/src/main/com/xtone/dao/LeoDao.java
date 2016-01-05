@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
 import com.system.database.JdbcControl;
@@ -18,6 +19,9 @@ import com.xtone.iap.ReceiveFromMsg;
 
 
 public class LeoDao {
+  
+  static private final Logger LOG = Logger.getLogger(LeoDao.class);
+  
 	public void findAll()
 	{
 		Connection con = null;
@@ -174,7 +178,6 @@ public class LeoDao {
 			ps.setString(1, appleMsg);
 			ps.setLong(2, time);
 			ps.setInt(3, id);
-			ps.clearParameters();
 			return ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -209,7 +212,6 @@ public class LeoDao {
 			ps.setString(2, url);
 			ps.setLong(3, time);
 			ps.setInt(4, id);
-			ps.clearParameters();
 			return ps.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -224,7 +226,6 @@ public class LeoDao {
 			}
 
 		}
-		
 		return false;
 	}
 	
