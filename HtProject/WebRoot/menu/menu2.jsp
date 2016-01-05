@@ -212,7 +212,7 @@
 							%>
 						</select>
 					</dd>
-					<dd class="dd01_me">菜单</dd>
+					<dd class="dd01_me">组别</dd>
 					<dd class="dd04_me">
 						<select name="menu_1_id" id="sel_menu_1_id" > </select>
 					</dd>
@@ -227,8 +227,8 @@
 				<tr>
 					<td>序号</td>
 					<td>模块名称</td>
+					<td>组别名称</td>
 					<td>菜单名称</td>
-					<td>子菜单名称</td>
 					<td>URL</td>
 					<td>备注</td>
 					<td>权重</td>
