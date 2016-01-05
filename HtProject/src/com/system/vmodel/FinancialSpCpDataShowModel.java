@@ -15,7 +15,7 @@ public class FinancialSpCpDataShowModel
 	{
 		public int spTroneId;
 		public String spTroneName;
-		public float spJieSuanLv;
+		public double spJieSuanLv;
 		public int spTroneRowSpan = 1;
 		
 		public List<CpModelData> list = new ArrayList<FinancialSpCpDataShowModel.SpTroneModel.CpModelData>();
@@ -23,12 +23,12 @@ public class FinancialSpCpDataShowModel
 		public class CpModelData
 		{
 			public int dataRows;
-			public float amount;
+			public double amount;
 			public int showDataRows;
-			public float showAmount;
+			public double showAmount;
 			public int cpId;
 			public String cpShortName;
-			public float cpJieSuanLv;
+			public double cpJieSuanLv;
 		}
 	}
 }
