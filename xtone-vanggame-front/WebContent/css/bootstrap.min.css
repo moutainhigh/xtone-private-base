@@ -7052,9 +7052,8 @@ button.close {
 
 .carousel-indicators li {
 	display: inline-block;
-	width: 20px;
-	height: 20px;
-	margin: 5px;
+	width: 10px;
+	height: 10px;
 	text-indent: -999px;
 	cursor: pointer;
 	background-color: #000\9;
@@ -7065,8 +7064,8 @@ button.close {
 }
 
 .carousel-indicators .active {
-	width: 20px;
-	height: 20px;
+	width: 10px;
+	height: 10px;
 /* 	margin: 0; */
 	
 	background-color: red;
