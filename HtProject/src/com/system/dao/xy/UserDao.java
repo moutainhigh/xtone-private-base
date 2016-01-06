@@ -211,6 +211,7 @@ public class UserDao
 		return result;
 	}
 	
+	//更新渠道CPA展示的数据
 	public boolean updateQdData(int id,int showDataRows)
 	{
 		String sql = "update game_log.tbl_xy_user_summer set show_data_rows = " + showDataRows + " where id = " + id;

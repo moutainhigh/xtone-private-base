@@ -394,9 +394,18 @@ public class FeeDao
 		return result;
 	}
 	
-	public boolean updateQdFee(int id,int showAmount)
+	//更新游戏CP(CPS)的展示金额
+	public boolean updateQdFee(int id,float showAmount)
 	{
 		String sql = "update game_log.tbl_xy_fee_summer set show_amount = " + showAmount + " where id = " + id;
+		return new JdbcGameControl().execute(sql);
+	}
+	
+	
+	//更新游戏渠道(CPS)的展示金额
+	public boolean updateChannelFee(int id,float showAmount)
+	{
+		String sql = "update game_log.tbl_xypay_summer set show_amount = " + showAmount + " where id = " + id;
 		return new JdbcGameControl().execute(sql);
 	}
 	
