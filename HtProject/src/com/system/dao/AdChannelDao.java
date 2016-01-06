@@ -261,8 +261,6 @@ public class AdChannelDao {
 	{
 		int id = new AdAppDao().loadIdByName(model.getAppname());
 		
-		System.out.println("add_appid:"+id);
-		
 		String sql = "insert into daily_config.`tbl_ad_channel`(appid,channel,hold_percent,name,scale,user_id) "
 				+ "value("+id+",'"+model.getChannel()+"',"+model.getHold_percent()+",'"
 				+model.getName()+"',"+model.getScale()+","+model.getUserid()+")";

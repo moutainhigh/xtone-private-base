@@ -105,7 +105,7 @@ public class FeeDao
 		
 		result.put("row", count);
 		
-		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows), sum(amount),sum(show_amount) "), new QueryCallBack()
+		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(c.data_rows), sum(a.amount),sum(a.show_amount) "), new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -121,7 +121,7 @@ public class FeeDao
 			}
 		});
 		
-		result.put("list",new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + limit, new QueryCallBack()
+		result.put("list",new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + orders + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -138,9 +138,11 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
-					model.setChannelId(rs.getString("channelid"));
+					model.setChannelId(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setAmount(rs.getFloat("amount"));
+					model.setShowAmount(rs.getFloat("show_amount"));
+					model.setStatus(rs.getInt("status"));
 					
 					list.add(model);
 				}

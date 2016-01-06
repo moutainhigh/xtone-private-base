@@ -407,7 +407,6 @@
 			</thead>
 			<tbody>		
 				<%
-					System.out.print("list size:" + list.size());
 					int index = 1;
 					for(MrReportModel model : list)
 					{

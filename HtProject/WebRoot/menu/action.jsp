@@ -17,8 +17,6 @@
 	{
 		int sid = StringUtil.getInteger(request.getParameter("mid"), -1);
 		int value = StringUtil.getInteger(request.getParameter("value"), 0);
-		System.out.println("id:"+sid);
-		System.out.println("value:"+value);
 		new Menu1Server().updateMenu1Model(sid, value);
 		out.println("OK");
 		return;

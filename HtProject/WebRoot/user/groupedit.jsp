@@ -12,7 +12,6 @@
 	int id = StringUtil.getInteger(request.getParameter("id"), -1);
 	GroupModel model = new GroupServer().loadGroupById(id);
 	String name = StringUtil.getString(request.getParameter("encodeStr"), "");
-	System.out.println("name:" + name);
 	//String encodeStr = URLEncoder.encode(name,"GBK"); 
 	String query = request.getQueryString();
 	

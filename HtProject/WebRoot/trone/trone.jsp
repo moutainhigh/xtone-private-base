@@ -28,8 +28,6 @@
 	
 	String troneName = StringUtil.getString(request.getParameter("trone_name"), "");
 	
-	System.out.println(orders+","+troneNum+","+troneName);
-
 	Map<String, Object> map =  new TroneServer().loadTrone(spId, pageIndex, spTroneId, orders, troneNum, troneName);
 		
 	List<TroneModel> list = (List<TroneModel>)map.get("list");

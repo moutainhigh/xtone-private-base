@@ -40,8 +40,6 @@
 	String appidstr = StringUtil.getString(request.getParameter("appnamestr"), "");
 	String channelidstr = StringUtil.getString(request.getParameter("channelidstr"), "");
 	
-	new CpAppServer().aaaa(startDate, endDate, appidstr,channelidstr);
-	
 	if(emp>0)
     {
 		if(id>0){
@@ -57,7 +55,6 @@
 	//String channel = channelid+"";
 	
 	scale = scale/100;
-	System.out.println("type:"+status);
 	
 	CpChannelModel model = new CpChannelModel();
 	//AdChannelModel model = new AdChannelModel();

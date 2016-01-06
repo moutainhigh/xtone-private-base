@@ -138,7 +138,6 @@ public class JdbcControl
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		System.out.println("why i am here");
 		try
 		{
 			conn = ConnConfigMain.getConnection();

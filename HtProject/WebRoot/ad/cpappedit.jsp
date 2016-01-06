@@ -61,7 +61,6 @@
 		
 		for(AdAppModel app : applist)
 		{
-			System.out.println("hold:"+app.getHold_percent());
 			%>
 			map.put(<%=app.getId()%>, <%=app.getHold_percent()%>);
 			<%

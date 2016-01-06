@@ -211,11 +211,8 @@ public class FinalcialSpCpDataDao
 		List<FinancialSpCpDataShowModel> list = new FinalcialSpCpDataDao().loadData("2015-10-01", "2015-11-30",1,2,0);
 		for(FinancialSpCpDataShowModel model : list)
 		{
-			System.out.println("SpName:" + model.spShortName + ";rowSpand:" + model.spRowSpan);
 			for(FinancialSpCpDataShowModel.SpTroneModel spTroneModel : model.list)
 			{
-				System.out.println("--SpTroneName:" + spTroneModel.spTroneName + ";SpJieSuanLv:" + spTroneModel.spJieSuanLv  + ";spTroneRowSpan:" + spTroneModel.spTroneRowSpan);
-				
 				for(FinancialSpCpDataShowModel.SpTroneModel.CpModelData cpModelData : spTroneModel.list)
 				{
 					System.out.println("----CpName:" + cpModelData.cpShortName + ";dataRows:" + cpModelData.dataRows + ";"

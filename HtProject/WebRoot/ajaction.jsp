@@ -18,8 +18,6 @@
 
 	int type = StringUtil.getInteger(request.getParameter("type"), -1);
 	
-	System.out.println("type:" + type);
-	
 	//取得SP业务对应的通道
 	if(type==1)
 	{
@@ -68,8 +66,6 @@
 	else if(type==3)
 	{
 		int spTroneId = StringUtil.getInteger(request.getParameter("sp_trone_id"), -1);
-		
-		System.out.println("spTroneId:" + spTroneId);
 		
 		if(spTroneId<=0)
 			return;

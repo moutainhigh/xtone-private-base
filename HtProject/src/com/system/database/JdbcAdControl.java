@@ -105,7 +105,6 @@ public class JdbcAdControl
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		System.out.println("why i am here");
 		try
 		{
 			conn = ConnAdMain.getConnection();

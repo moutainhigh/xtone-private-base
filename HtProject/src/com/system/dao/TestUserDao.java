@@ -30,7 +30,6 @@ public class TestUserDao {
 	 */
 	public Map<String, Object> loadUserData(String startDate,String endDate,
 			String appKey,String channelKey,int pageIndex){
-		System.out.println("load UserDAO...");
 		String sqlCount = " count(*) ";  
 		String query = " a.*,c.appname "; 
 		String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1)+","+Constant.PAGE_SIZE; 
@@ -104,7 +103,6 @@ public class TestUserDao {
 						return list;
 					}
 				}));
-		System.out.println("Load UserDAO Success!");
 		return map;
 	}
 	

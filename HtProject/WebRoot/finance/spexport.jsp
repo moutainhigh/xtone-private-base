@@ -36,7 +36,6 @@
 
 			String filePath = com.system.util.ConfigManager.getConfigData("EXCEL_DEMO")
 					+ (1 == 1 ? "SpDemo.xls" : "CpDemo.xls");
-			System.out.println("filePath:" + filePath);
 
 			if (request.getHeader("User-Agent").toUpperCase().indexOf("MSIE") > 0) {
 				fileName = URLEncoder.encode(fileName, "UTF-8");
