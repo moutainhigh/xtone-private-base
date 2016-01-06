@@ -224,8 +224,8 @@
 	left: 50%;
 	top: 50%;
 	z-index: 9999;
-	width: 527px;
-	height: 282px;
+	width: 1000px;
+	height: 1000px;
 	margin: -272px 0px 0px -439px;
 	/*     background: transparent url("images/index/vedio-start.png") no-repeat scroll 0% 0%; */
 }

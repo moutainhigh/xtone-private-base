@@ -58,6 +58,7 @@
 <title>万家游戏-首页</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/docs.min.css" rel="stylesheet">
+<link href="css/video-default.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script async="" id="gauges-tracker"
 	data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script>
@@ -283,6 +284,13 @@
 	</div>
 <a data-toggle="popover2">微信微信微信微信微信微信微信 微信微信微信微信微信微信微信 </a>
 	
+	<div class="videoUiWrapper thumbnail">
+  <video width="370" height="214" id="demo1">
+    <source src="pathtovideo/video.ogv" type="video/ogg">
+    <source src="pathtovideo/video.mp4" type="video/mp4">
+
+  </video>
+</div>
 		<footer
 			class="bs-docs-footer" role="contentinfo">
 			<div class="container nopadding">
@@ -308,7 +316,9 @@
 					<p class="ztgs">健康游戏忠告：抵制不良游戏&nbsp;拒绝盗版游戏&nbsp;注意自我保护&nbsp;谨防上当受骗&nbsp;适度游戏益脑&nbsp;沉迷游戏伤身&nbsp;合理安排时间&nbsp;享受健康生活</p>
 				</div>
 			</div>
-		</footer> <script src="js/bootstrap/jquery.min.js"></script> <script
+		</footer> 
+		<script src="js/jquery.video-ui.js"></script>
+		<script src="js/bootstrap/jquery.min.js"></script> <script
 			src="js/bootstrap/bootstrap.min.js"></script> <script
 			src="js/docs.min.js"></script> <script src="js/index.js"></script> <script
 			src="js/bootstrap/ie10-viewport-bug-workaround.js"></script> <script>
@@ -360,7 +370,10 @@
 	}
 </script>
 <script type="text/javascript">
-
+	$('#demo1').videoUI({
+	  'autoHide':false,
+	  'volumeMedia': 1
+	});
 </script>
 </body>
 </html>
