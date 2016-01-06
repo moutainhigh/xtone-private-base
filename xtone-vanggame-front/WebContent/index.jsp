@@ -118,10 +118,6 @@
 	text-decoration: none
 }
 
-.logo-size {
-	width: 269px;
-	height: 93px;
-}
 
 .title {
 	margin-top: 80px;
@@ -156,11 +152,6 @@
 	.newsli em {
 		font-size: 12px;
 	}
-	.logo-size {
-		width: 190px;
-		height: 68px;
-		margin-top: 15px;
-	}
 	.title {
 		margin-top: 40px;
 	}
@@ -176,12 +167,7 @@
 	}
 	.newsli em {
 		font-size: 15px;
-	}
-	.logo-size {
-		width: 269px;
-		height: 93px;
-		margin-top: 0px;
-	}
+	}	
 	.title {
 		margin-top: 60px;
 	}
@@ -279,7 +265,7 @@
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a href="#"><img alt="logo" src="images/logo.png" class="logo-size"></a>
+				<img alt="logo" src="images/logo.png" class="logo-size">
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">

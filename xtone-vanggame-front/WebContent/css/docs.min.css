@@ -2068,6 +2068,15 @@ h1[id] {
     position: relative;
     min-height: 1px;
 }
+.logo-size {
+	width: 269px;
+	height: 93px;
+}
+
+.logo-foot-size {
+	width: 251px;
+    height: 62px;
+}
 @media ( min-width :168px) {
 	.artText {
 		background: #fff;
@@ -2090,6 +2099,16 @@ h1[id] {
 		float: left;
     	position: relative;
     	min-height: 1px;
+	}
+	.logo-size {
+		width: 180px;
+		height: 63px;
+		margin-top: 22px;
+	}
+	
+	.logo-foot-size {
+		width: 170px;
+    	height: 40px;
 	}
 }
 
@@ -2123,6 +2142,15 @@ h1[id] {
 	}
 	.tt20{
 		width: 50%;
+	}
+	.logo-size {
+		width: 269px;
+		height: 93px;
+		margin-top: 0px;
+	}
+	.logo-foot-size {
+		width: 251px;
+    	height: 62px;
 	}
 }
 

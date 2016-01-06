@@ -19,10 +19,10 @@
 <meta name="keywords"
 	content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
 <%
-CheckLoad check = new CheckLoad();
-if(check.JudgeIsMoblie(request)){
-	out.print("<script type=\"text/javascript\">function checkload(){$('#content img').attr({style:\"width: 100%;\"});}</script>");
-}
+	CheckLoad check = new CheckLoad();
+	if(check.JudgeIsMoblie(request)){
+		out.print("<script type=\"text/javascript\">function checkload(){$('#content img').attr({style:\"width: 100%;\"});}</script>");
+	}
 	String idStr = request.getParameter("id");
 	String index = request.getParameter("pageindex");
 	int pageIndex=Integer.parseInt(index);
@@ -111,7 +111,7 @@ if(check.JudgeIsMoblie(request)){
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a href="#"><img alt="logo" src="images/logo.png"></a>
+				<img alt="logo" src="images/logo.png" class="logo-size">
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">
@@ -145,7 +145,9 @@ if(check.JudgeIsMoblie(request)){
 						<p class="" style="color: #8f8f8f;"><%=content.getTimeStr()%>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding" id="content">
+
 					<div class="col-md-12 col-sm-12 col-xs-12">
+
 						<%=content.getContent()%>
 					</div>
 					</div>
@@ -167,6 +169,7 @@ if(check.JudgeIsMoblie(request)){
 	<script	src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>
 	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
 	<script type="text/javascript">
+
 	$(function(){
 		$('.hot_list .hot_gamebox').hotlist();
 		apendDiv();
@@ -175,6 +178,7 @@ if(check.JudgeIsMoblie(request)){
 	function apendDiv(){
 		$('#content img').removeAttr("style"); 
 	}
+
 </script>
 </body>
 </html>
