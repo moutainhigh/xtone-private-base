@@ -24,6 +24,7 @@ namespace n8wan.Public.Logical
 
         /// <summary>
         /// url映射数据库字段(sql,url)
+        /// 注意，key统一用小写
         /// </summary>
         Dictionary<string, string> U2DMap;
 
@@ -539,6 +540,7 @@ namespace n8wan.Public.Logical
 
             //var fields = api.MrFidldMap.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             UrlFieldsMap(api.MrFidldMap);
+
             foreach (var kv in U2DMap)
             {
                 if (C_IVR_TIME.Equals(kv.Key, StringComparison.OrdinalIgnoreCase))
@@ -549,9 +551,14 @@ namespace n8wan.Public.Logical
             FillAreaInfo(_MrItem);
             if (string.IsNullOrEmpty(api.MrStatus))
                 return null;
-            var rx = Library.GetRegex(api.MrStatus);
+
+            if (!U2DMap.ContainsKey("status"))
+                return string.Format("\"status\" field not configured");
+
             if (_MrItem.status == null)
                 return string.Format("\"{0}\" null", U2DMap["status"]);
+
+            var rx = Library.GetRegex(api.MrStatus);
             if (!rx.IsMatch(_MrItem.status))
                 return string.Format("\"{0}\" \"{1}\" unaccpated", U2DMap["status"], _MrItem.status);
 
@@ -607,7 +614,7 @@ namespace n8wan.Public.Logical
                     case "servicecode": sql = "service_code"; break;
                     case "cpparam": sql = "cp_param"; break;
                 }
-                U2DMap[sql] = url;
+                U2DMap[sql.ToLower()] = url;
             }
         }
 

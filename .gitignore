@@ -2,3 +2,5 @@
 /xtone-s2s-interface/target
 /xtone-thirdpay-webhook/target
 /HtProject/WebRoot/WEB-INF/classes
+/xtone-interface-redirect/target
+/xtone-interface-redirect/WebRoot/WEB-INF/classes
