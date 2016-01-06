@@ -160,7 +160,6 @@
 						</select>
 					</dd>
 					
-					</dd>
 					<dd class="dd01_me">渠道名</dd>
 					<dd class="dd04_me">
 						<select name="channel" id="channel" style="width: 200px;" title="选择SP"></select>

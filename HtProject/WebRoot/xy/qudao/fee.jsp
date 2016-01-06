@@ -13,24 +13,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!--  -->	
+<!-- 渠道CPS分成管理 -->	
 	
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();
-	String defaultEndDate = StringUtil.getDefaultDate();
 
-	String appKey = StringUtil.getString(request.getParameter("appkey"),
-			"");
-	String channelKey = StringUtil
-			.getString(request.getParameter("channelkey"), "");
+	String defaultEndDate = StringUtil.getDefaultDate();
+	
+	String keyWord = StringUtil.getString(request.getParameter("keyword"),"");
+
 	String startDate = StringUtil
 			.getString(request.getParameter("startdate"), defaultStartDate);
+	
 	String endDate = StringUtil
 			.getString(request.getParameter("enddate"), defaultEndDate);
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new FeeServer().loadAppFee(startDate, endDate, appKey, channelKey, pageIndex);
+	Map<String, Object> map =  new FeeServer().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
 		
 	List<XyFeeModel> list = (List<XyFeeModel>)map.get("list");
 	
@@ -38,8 +38,7 @@
 	
 	Map<String,String> params = new HashMap<String,String>();
 	
-	params.put("appkey", appKey);
-	params.put("channelkey", channelKey);
+	params.put("keyword", keyWord);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
 	
