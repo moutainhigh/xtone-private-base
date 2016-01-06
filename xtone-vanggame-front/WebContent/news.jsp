@@ -183,7 +183,7 @@
 			</nav>
 		</div>
 	</header>
-	<div class="col-sm-12 col-sm-12 col-xs-12 nopadding"><img src="images/news/banner-news.png" class="bsimg"></div>
+	<div class="col-sm-12 col-sm-12 col-xs-12 nopadding"><img src="images/news/banner-news.jpg" class="bsimg"></div>
 	<div class="bs-docs-featurette" style="background: #f1f1f1">
 		<div class="container">
 			<div class="row ztgs">

@@ -304,13 +304,13 @@
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner">
 			<div class="item active" style="border: none;">
-				<img src="images/index/1900x540_1.png" alt="First slide">
+				<img src="images/index/1900x540_1.jpg" alt="First slide">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_2.png" alt="Second slide">
+				<img src="images/index/1900x540_2.jpg" alt="Second slide">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_3.png" alt="thrid slide">
+				<img src="images/index/1900x540_3.jpg" alt="thrid slide">
 			</div>
 			<!-- 		<div class="item" style="border: none;"> -->
 			<!--          <img src="images/index/1900x540_2.png" alt="Second slide"> -->
@@ -323,7 +323,7 @@
 		<!--       data-slide="next">&rsaquo;</a> -->
 	</div>
 	<div
-		style="background-image: url(images/index/index-bg.png); background-size: cover;">
+		style="background-image: url(images/index/index-bg.jpg); background-size: cover;">
 		<div class="bs-docs-featurette">
 			<div class="container">
 				<div class="row">
@@ -344,7 +344,7 @@
 
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_1.png" class="bsimg"></a>
+										src="images/index/350x290_1.jpg" class="bsimg"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《口袋大冒险》</h4>
 										<h4 class="hot_yt_right">Q版/ARPG</h4>
@@ -366,7 +366,7 @@
 							<div class="hot_game hot_list">
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_2.png" class="bsimg"></a>
+										src="images/index/350x290_2.jpg" class="bsimg"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《绝地大逃亡》</h4>
 										<h4 class="hot_yt_right">动作格斗</h4>
@@ -387,7 +387,7 @@
 							<div class="hot_game hot_list">
 								<div class="hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_3.png" class="bsimg"></a>
+										src="images/index/350x290_3.jpg" class="bsimg"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《神魔战歌》</h4>
 										<h4 class="hot_yt_right">卡牌/RPG</h4>
@@ -422,17 +422,17 @@
 						<!-- 						target="_blank" title="Lyft"> -->
 
 						<a
-							href="cooperation.html"> <img src="images/index/ad1.png"
+							href="cooperation.html"> <img src="images/index/ad1.jpg"
 							alt="商务合作1" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad3.png"
+						<a href="cooperation.html"> <img src="images/index/ad3.jpg"
 							alt="商务合作2" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad2.png"
+						<a href="cooperation.html"> <img src="images/index/ad2.jpg"
 							alt="商务合作3" class="bsimg">
 						</a>
 					</div>
@@ -468,7 +468,7 @@
 					</div>
 					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
 						<a class="btn-video" href="javascript:openVideo();"><img
-							src="images/index/vedio-kddmx.png" class="bsimg"> </a>
+							src="images/index/vedio-kddmx.jpg" class="bsimg"> </a>
 						<div id="overlay" style="display: none;"></div>
 						<div class="pop videoPop" id="pop-video" style="display: none;">
 							<div class="pop-close"></div>
