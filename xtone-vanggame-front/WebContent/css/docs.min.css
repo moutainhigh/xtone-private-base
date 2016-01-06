@@ -2071,7 +2071,7 @@ h1[id] {
 @media ( min-width :168px) {
 	.artText {
 		background: #fff;
-		padding: 15px 15px 15px 15px;
+		padding: 15px 5px 15px 5px;
 	}
 	.tab{
 		bottom: 15px;
