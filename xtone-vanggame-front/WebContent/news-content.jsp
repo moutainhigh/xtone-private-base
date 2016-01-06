@@ -1,3 +1,4 @@
+<%@page import="org.vanggame.util.CheckLoad"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -18,6 +19,10 @@
 <meta name="keywords"
 	content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
 <%
+	CheckLoad check = new CheckLoad();
+	if(check.JudgeIsMoblie(request)){
+		out.print("<script type=\"text/javascript\">function checkload(){$('#content img').attr({style:\"width: 100%;\"});}</script>");
+	}
 	String idStr = request.getParameter("id");
 	String index = request.getParameter("pageindex");
 	int pageIndex=Integer.parseInt(index);
@@ -108,20 +113,6 @@ color: #aaaaaa;
 	margin: 0;
 }
 
-.content{
-	background: #fff;
-	margin-bottom: 30px;
-	padding: 15px 100px 15px 100px;
-}
-
-@media ( min-width :768px){
-.content{
-	background: #fff;
-	margin-bottom: 30px;
-	padding: 15px 0px 15px 0px;
-}
-}
-
 .titleimg{
 	float: left;
     padding-top: 10px;
@@ -179,16 +170,16 @@ color: #aaaaaa;
 						class="bsimg tab"></a>
 				</div>
 				<div class="col-md-12 col-sm-12 col-xs-12 content-top">
-				<font size="4" color="#8a8a8a">您所在位置&nbsp;:&nbsp;<a style="color:#8a8a8a" href="news.jsp">新闻中心</a>&nbsp;>&nbsp;<a style="color:#8a8a8a" href="#">综合正文</a></font>
+				<font class="locate">您所在位置&nbsp;:&nbsp;<a class="locate" href="news.jsp">新闻中心</a>&nbsp;>&nbsp;<a class="locate" href="#">综合正文</a></font>
 				</div>
-				<div class="col-md-12 col-sm-12 col-xs-12 content">
+				<div class="col-md-12 col-sm-12 col-xs-12 artText">
 					<div class="col-md-12 col-sm-12 col-xs-12" align="center">
 						<strong style="font-size: 30px;"><%=content.getTitle()%></strong>
 					</div>
 					<div class="col-md-12 col-sm-12 col-xs-12" align="center">
 						<p class="" style="color: #8f8f8f;"><%=content.getTimeStr()%>
 					</div>
-					<div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 37px;">
+					<div class="col-md-12 col-sm-12 col-xs-12" style="padding-left: 37px;" id="content">
 						<%=content.getContent()%>
 					</div>
 <!-- 					<div class="col-md-12 col-sm-12 col-xs-12"> -->
@@ -235,7 +226,12 @@ color: #aaaaaa;
 	<script type="text/javascript">
 $(function(){
 	$('.hot_list .hot_gamebox').hotlist();
+	apendDiv();
+	checkload();
 })
+function apendDiv(){
+	$('#content img').removeAttr("style"); 
+}
 </script>
 </body>
 </html>
