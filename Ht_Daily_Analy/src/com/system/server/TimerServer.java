@@ -59,7 +59,7 @@ public class TimerServer
 		log.info("已经启动了定时任务...");
 	}
 
-	// 分析数据在早上六点进行分析
+	// 分析数据在早上一点进行分析
 	private void startAnalyDataTimer()
 	{
 		Calendar ca = Calendar.getInstance();
@@ -67,10 +67,10 @@ public class TimerServer
 		int curHour = ca.get(Calendar.HOUR_OF_DAY);
 
 		// 今天分析昨天的数据
-		if (curHour >= 6)
+		if (curHour >= 1)
 			ca.add(Calendar.DAY_OF_MONTH, 1);
 
-		ca.set(Calendar.HOUR_OF_DAY, 6);
+		ca.set(Calendar.HOUR_OF_DAY, 1);
 		ca.set(Calendar.MINUTE, 0);
 		ca.set(Calendar.SECOND, 0);
 
@@ -137,7 +137,7 @@ public class TimerServer
 		new TimerServer().startTimer();
 	}
 
-	// 零晨一点分析各种数据到数据汇总表
+	//零晨一点分析各种数据到数据汇总表
 	private class AnalyDataTimerTask extends TimerTask
 	{
 		@Override
@@ -149,7 +149,7 @@ public class TimerServer
 		}
 	}
 
-	// 中午12点把翔云渠道的数据更新出去，让渠道能看得到
+	// 中午12点把翔云渠道的数据更新出去，让渠道能看得到，也就是更新各种表的状态
 	private class AnalyDataTimerTask2 extends TimerTask
 	{
 		@Override
@@ -161,7 +161,7 @@ public class TimerServer
 		}
 	}
 
-	// 每隔一小时更新一下翔云渠道数据
+	//每隔一小时更新一下翔云渠道数据
 	private class AnalyDataTimerTask3 extends TimerTask
 	{
 		@Override

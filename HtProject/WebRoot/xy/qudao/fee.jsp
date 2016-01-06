@@ -89,7 +89,7 @@
 		
 		if(parseInt(newShowRows,10)>parseInt(oldShowRows,10))
 		{
-			alert("显示数据不能大于实际数据");
+			alert("展示数据不能大于实际数据");
 			return;
 		}
 		
@@ -102,7 +102,8 @@
 		
 		$.post("action.jsp", 
 		{
-			datarows : newShowRows,
+			showamount : newShowRows,
+			type : 2,
 			id :editId 
 		}, 
 		function(data) 
@@ -176,7 +177,7 @@
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td>
 						<%=model.getFeeDate()%>
-						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getAmount()%>" />
+						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getShowAmount() %>" />
 					</td>
 					<td class="or"><%=model.getAppName() + "("+ model.getAppKey() +")"%></td>
 					<td class="or"><%=model.getChannelId()%></td>
@@ -184,9 +185,10 @@
 						<%=model.getDataRows()%>
 					</td>
 					<td class="or" >
-						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getAmount())%></span>
+						<input type="hidden" id="ori_hid_<%= model.getId() %>" value="<%=model.getAmount()%>" />
+						<%= StringUtil.getDecimalFormat(model.getAmount()) %>
 					</td>
-					<td class="or" >
+					<td class="or" <%= model.getStatus()==0 ? "ondblclick='editShowData(" + model.getId() + ")'":"" %> >
 						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getShowAmount())%></span>
 					</td>
 					<td><%= model.getStatus()==1 ? "已同步":"未同步" %></td>

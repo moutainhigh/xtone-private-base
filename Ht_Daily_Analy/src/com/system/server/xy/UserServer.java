@@ -14,28 +14,17 @@ public class UserServer
 {
 	Logger log = Logger.getLogger(UserServer.class);
 	
-	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey,int pageIndex)
-	{
-		return new UserDao().loadUserData(startDate, endDate, appKey, channelKey,pageIndex);
-	}
-	
-	public List<XyUserModel> loadUserTodayData(String appKey,String channelKey)
-	{
-		String tableName = StringUtil.getMonthFormat();
-		String startDate = StringUtil.getDefaultDate();
-		return new UserDao().loadUserTodayData(tableName, startDate, appKey, channelKey);
-	}
-	
-	public Map<String, Object> loadQdUserData(String startDate,String endDate,int userId,int pageIndex)
-	{
-		return new UserDao().loadQdUserData(startDate, endDate, userId,pageIndex);
-	}
-	
 	public boolean updateQdData(int id,int showDataRows)
 	{
 		return new UserDao().updateQdData(id,showDataRows);
 	}
 	
+	/**
+	 * 分析当天数据到SUMMER，并分析
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
 	public boolean analyUserToSummer(String startDate,String endDate)
 	{
 		log.info("start analy user to summer ["+ startDate +"," + endDate + "]");
@@ -45,7 +34,12 @@ public class UserServer
 		//增加易正龙的数据了
 		dao.analyZyLDataToSummer(startDate, endDate);
 		
-		return dao.analyUserToSummer(StringUtil.getMonthFormat(startDate), startDate, endDate);
+		dao.analyUserToSummer(StringUtil.getMonthFormat(startDate), startDate, endDate);
+		
+		//更新 渠道的展示数据
+		dao.updateQdShowData(startDate, endDate);
+		
+		return true;
 	}
 	
 	public void startAnalyUser()
@@ -55,6 +49,7 @@ public class UserServer
 		log.info("finish analy user to summer");
 	}
 	
+	//更新渠道(CPA)扣量后的数据
 	public void updateQdUserData()
 	{
 		String startDate = StringUtil.getPreDayOfMonth();
@@ -62,14 +57,16 @@ public class UserServer
 		log.info("finish update Qd user data");
 	}
 	
+	//更新渠道(CPA)扣量后的数据
 	public void updateQdUserSummer(String startDate,String endDate)
 	{
 		log.info("start update qd user ["+ startDate +"," + endDate + "]");
 		UserDao dao = new UserDao();
-		dao.updateQdShowData(startDate, endDate);
+		//dao.updateQdShowData(startDate, endDate);
 		dao.updateQdShowDataStatus(startDate, endDate);
 	}
 	
+	//每隔一小时更新渠道(CPA实时)数据
 	public void analyQdShowDataWithHour()
 	{
 		Calendar ca = Calendar.getInstance();
