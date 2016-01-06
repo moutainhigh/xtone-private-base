@@ -157,7 +157,7 @@
 		font-size: 12px;
 	}
 	.logo-size {
-		width: 174px;
+		width: 190px;
 		height: 68px;
 		margin-top: 15px;
 	}
