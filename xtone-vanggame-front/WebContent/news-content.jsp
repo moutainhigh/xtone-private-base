@@ -59,7 +59,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/docs.min.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script async="" id="gauges-tracker" data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script>
+<!-- <script async="" id="gauges-tracker" data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script> -->
 <script async="" src="js/bootstrap/analytics.js"></script>
 <script src="js/bootstrap/ie-emulation-modes-warning.js"></script>
 <!--[if lt IE 9]><script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -111,7 +111,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<img alt="logo" src="images/logo.png" class="logo-size">
+				<a href="index.jsp"><img alt="logo" src="images/logo.png" class="logo-size"></a>
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">
@@ -167,11 +167,10 @@
 	<script	src="js/bootstrap/bootstrap.min.js"></script>
 	<script	src="js/docs.min.js"></script>
 	<script	src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>
-	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
+<!-- 	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script> -->
 	<script type="text/javascript">
 
 	$(function(){
-		$('.hot_list .hot_gamebox').hotlist();
 		apendDiv();
 		checkload();
 	})

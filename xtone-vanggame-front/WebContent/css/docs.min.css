@@ -8,7 +8,10 @@
 } 
  
 .content-size{
-	font-size: 19px;
+	font-size: 18px;
+}
+.title-size{
+	font-size: 21px;
 }
 .footer-fontsize{
 	font-size: 12px;
@@ -2110,6 +2113,9 @@ h1[id] {
 		width: 170px;
     	height: 40px;
 	}
+	.home-padding{
+		padding: 0px 10px 0px 10px;
+	}
 }
 
 @media ( min-width :520px) {
@@ -2151,6 +2157,9 @@ h1[id] {
 	.logo-foot-size {
 		width: 251px;
     	height: 62px;
+	}
+	.home-padding{
+		padding: 0px;
 	}
 }
 
