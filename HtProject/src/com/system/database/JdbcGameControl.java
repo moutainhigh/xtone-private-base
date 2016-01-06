@@ -101,6 +101,39 @@ public class JdbcGameControl
 		return false;
 	}
 	
+	public int insertWithGenKey(String sql,Map<Integer,Object> param)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			conn = ConnConfigMain.getConnection();
+			pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+			for(Integer key : param.keySet())
+			{
+				pstmt.setObject(key, param.get(key));
+			}
+			pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			if(rs.next())
+			{
+				return rs.getInt(1);
+			}
+		}
+		catch(Exception ex)
+		{
+			logger.error("execute sql [" + sql + "] error:" + ex.getMessage());
+		}
+		finally
+		{
+			free(rs,pstmt,conn);
+		}
+		
+		return -1;
+	}
+	
 	public boolean execute(String sql,Map<Integer,Object> param)
 	{
 		Connection conn = null;

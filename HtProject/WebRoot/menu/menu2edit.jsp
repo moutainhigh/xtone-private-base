@@ -20,7 +20,7 @@
 	List<MenuHeadModel> menuHeadList = new MenuHeadServer().loadMenuHeadList();	
 	List<Menu1Model> menu1List = new Menu1Server().loadMenu1List();
 	
-	
+	String query = StringUtil.getString(request.getParameter("query"), "");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -130,7 +130,7 @@
 			</dl>
 			<br />	<br />
 			<dl>
-				<form action="menu2action.jsp?pageindex=<%=pageIndex %>" method="post" id="addform">
+				<form action="menu2action.jsp?query=<%= query %>" method="post" id="addform">
 				<input type="hidden" value="0" name="type">
 				<input type="hidden" value="<%= menu2Model.getId() %>" name="id">
 				<dd class="dd01_me">模块</dd>

@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.server.Menu2Server"%>
 <%@page import="com.system.model.Menu2Model"%>
 <%@page import="com.system.model.Menu1Model"%>
@@ -17,6 +18,7 @@
 	String url = StringUtil.getString(request.getParameter("url"), "");
 	String actionUrl = StringUtil.getString(request.getParameter("action_url"), "");
 	int newShowRows = StringUtil.getInteger(request.getParameter("value"), -1);
+	String query = StringUtil.getString(request.getParameter("query"), "");
 	
 	Menu2Model model = new Menu2Model();
 	model.setId(id);
@@ -37,5 +39,5 @@
 	else
 		new Menu2Server().addMenu2(model);
 	
-	response.sendRedirect("menu2.jsp?pageindex="+pageIndex);
+	response.sendRedirect("menu2.jsp?" + Base64UTF.decode(query));
 %>

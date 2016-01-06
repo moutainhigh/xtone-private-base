@@ -13,24 +13,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!--  -->	
+<!-- 渠道CPS分成管理 -->	
 	
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();
-	String defaultEndDate = StringUtil.getDefaultDate();
 
-	String appKey = StringUtil.getString(request.getParameter("appkey"),
-			"");
-	String channelKey = StringUtil
-			.getString(request.getParameter("channelkey"), "");
+	String defaultEndDate = StringUtil.getDefaultDate();
+	
+	String keyWord = StringUtil.getString(request.getParameter("keyword"),"");
+
 	String startDate = StringUtil
 			.getString(request.getParameter("startdate"), defaultStartDate);
+	
 	String endDate = StringUtil
 			.getString(request.getParameter("enddate"), defaultEndDate);
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new FeeServer().loadAppFee(startDate, endDate, appKey, channelKey, pageIndex);
+	Map<String, Object> map =  new FeeServer().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
 		
 	List<XyFeeModel> list = (List<XyFeeModel>)map.get("list");
 	
@@ -38,8 +38,7 @@
 	
 	Map<String,String> params = new HashMap<String,String>();
 	
-	params.put("appkey", appKey);
-	params.put("channelkey", channelKey);
+	params.put("keyword", keyWord);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
 	
@@ -163,11 +162,11 @@
 				<tr>
 					<td>序号</td>
 					<td>计费日期</td>
-					<td class="or">游戏名</td>
-					<td>应用Key</td>
+					<td class="or">游戏</td>
 					<td class="or">渠道ID</td>
 					<td>计费条数</td>
 					<td class="or">计费金额</td>
+					<td>同步状态</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -182,16 +181,15 @@
 						<%=model.getFeeDate()%>
 						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getAmount()%>" />
 					</td>
-					<td class="or"><%=model.getAppName()%></td>
-					<td><%=model.getAppKey()%></td>
+					<td class="or"><%=model.getAppName() + "("+ model.getAppKey() +")"%></td>
 					<td class="or"><%=model.getChannelId()%></td>
 					<td>
 						<%=model.getDataRows()%>
 					</td>
-
 					<td class="or" >
 						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getAmount())%></span>
 					</td>
+					<td><%= model.getStatus()==1 ? "已同步":"未同步" %></td>
 				</tr>
 				<%
 					}
@@ -203,11 +201,11 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
 					<td>实际总数:<%= map.get("data_rows") %></td>
 					<td>
 						<span>总信息费:<label id="show_amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_amount")) %></label></span>
 					</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>

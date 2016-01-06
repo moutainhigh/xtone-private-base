@@ -19,8 +19,6 @@
 	
 	String query = StringUtil.getString(request.getParameter("query"), "");
 	
-	System.out.println("sp action query:" + query);
-	
 	SpModel model = new SpModel();
 	model.setId(id);
 	model.setFullName(fullName);

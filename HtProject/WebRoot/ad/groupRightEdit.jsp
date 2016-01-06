@@ -24,6 +24,8 @@
 		list2.add(Integer.parseInt(str[i]));
 	}
 	// model.setGroupList(StringUtil.stringListToString(list2));
+	
+	String query = StringUtil.getString(request.getParameter("query"), "");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -63,8 +65,7 @@
     		
     function resetForm()
     		{
-    			$("#group").val("<%= model.getGroupId() %>");
-    			$("#group_list").val("<%= model.getGroupList() %>");
+    			$("#group_id").val("<%= model.getGroupId() %>");
     			$("#remark").val("<%= model.getRemark() %>");
     			$("[name='groupid']").removeAttr("checked");
     			
@@ -77,15 +78,6 @@
     
 	function subForm() 
 	{
-		
-		
-		if($("#group").val()<0)
-		{
-			alert("请选择角色");
-			$("#group").focus();
-			return;
-		}
-		
 		if(getProvinceCount('groupid')<=0)
 		{
 			alert("请选择授权角色");
@@ -116,12 +108,12 @@
 			</dl>
 			<br />	<br />		
 			<dl>
-				<form action="groupRightAction.jsp?pageindex=<%=pageindex %>" method="post" id="addform">
+				<form action="groupRightAction.jsp?group=<%= model.getGroupId() %>&query=<%= query %>" method="post" id="addform">
 				<input type="hidden" value="<%= id %>" name="id" />
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">角色</dd>
 					<dd class="dd04_me">
-						<select name="group" id="group" style="width: 200px;" title="选择group">
+						<select name="group_id" id="group_id" style="width: 200px;" title="选择group" disabled="disabled">
 							<option value="-1">请选择角色名</option>
 							<%
 							
