@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.server.GroupServer"%>
 <%@page import="com.system.model.GroupModel"%>
 <%@page import="com.system.server.GroupRightServer"%>
@@ -12,7 +13,6 @@
 <%
 	List<GroupRightModel> list = new GroupRightServer().loadGroup();
 	List<GroupModel> groupList = new GroupServer().loadAllGroup();
-	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -81,7 +81,7 @@
 			</dl>
 			<br />	<br />		
 			<dl>
-				<form action="groupRightAction.jsp?pageindex=<%=pageIndex %>" method="post" id="addform">
+				<form action="groupRightAction.jsp" method="get" id="addform">
 				
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">角色</dd>

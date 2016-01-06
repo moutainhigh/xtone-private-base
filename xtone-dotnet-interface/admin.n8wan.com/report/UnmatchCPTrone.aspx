@@ -64,21 +64,25 @@
             <th>序号</th>
             <th>SP</th>
             <th>同步URL</th>
+            <th>通道名称</th>
             <th>端口</th>
             <th>指令</th>
+            <th>手机</th>
             <th>CPID</th>
             <th>时间</th>
             <th>操作</th>
         </tr>
         <asp:Repeater runat="server" ID="rpList">
             <ItemTemplate>
-                <tr>
+                <tr style="text-align:center">
                     <td>
                         <input type="checkbox" name="id" value="<%#Eval("id") %>" /><%#Eval("id") %></td>
-                    <td><%#Eval("sp_id") %></td>
-                    <td><a href="/sp/tbl_troneList.aspx?urlId=<%#Eval("sp_api_url_id") %>"><%#Eval("sp_api_url_id") %></a></td>
+                    <td><%#GetTB_SP((int) Eval("sp_id") ) %></td>
+                    <td><a href="/sp/tbl_troneList.aspx?urlId=<%#Eval("sp_api_url_id") %>"><%#GetTB((int) Eval("sp_api_url_id") ) %></a></td>
+                    <td><%#GetTB_TD((int) Eval("trone_id") ) %></td>
                     <td><%#Eval("ori_trone") %></td>
                     <td><%#Eval("ori_order") %></td>
+                    <td><%#Eval("mobile") %></td>
                     <td><%#Eval("cp_id") %></td>
                     <td><%#Eval("create_date") %></td>
                     <td><a href="../cp/tbl_trone_orderEditor.aspx?trone_id=<%#Eval(LightDataModel.tbl_mrItem.Fields.trone_id) %>">分配到CP</a>
