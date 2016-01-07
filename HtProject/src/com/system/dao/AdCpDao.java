@@ -40,8 +40,6 @@ public class AdCpDao {
 					}
 				});
 		
-		System.out.println("count:"+count);
-		
 		result.put("rows", count);
 		
 		new JdbcAdControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(show_new_user_rows) userrows,sum(show_amount) amounts,sum(extend_fee) extendfee "), new QueryCallBack()
@@ -71,15 +69,12 @@ public class AdCpDao {
 							model = new AdCpModel();
 							model.setId(rs.getInt("id"));
 							model.setAppname(rs.getString("appname"));
-							System.out.println("fee_date"+rs.getString("fee_date"));
 							model.setFeeDate(rs.getString("fee_date"));
 							model.setNewUserRows(rs.getInt("show_new_user_rows"));
 							model.setAmount(rs.getDouble("show_amount"));
 							model.setExtendFee(rs.getDouble("extend_fee"));
-							System.out.println("model"+model);
 							list.add(model);
 						}
-						System.out.println("list"+list);
 						
 						return list;
 					}
@@ -123,8 +118,6 @@ public class AdCpDao {
 					}
 				});
 		
-		System.out.println("count:"+count);
-		
 		result.put("rows", count);
 		
 		new JdbcAdControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(show_new_user_rows) userrows,sum(show_amount) amounts,sum(extend_fee) extendfee,sum(profit) profit "), new QueryCallBack()
@@ -144,8 +137,6 @@ public class AdCpDao {
 			}
 		});
 		
-		System.out.println("sql:"+sql);
-		
 		result.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " a.id,a.fee_date,b.appname,a.show_new_user_rows,a.show_amount,a.extend_fee ")+limit,
 				new QueryCallBack() {
 					
@@ -157,15 +148,12 @@ public class AdCpDao {
 							model = new AdCpModel();
 							model.setId(rs.getInt("id"));
 							model.setAppname(rs.getString("appname"));
-							System.out.println("fee_date"+rs.getString("fee_date"));
 							model.setFeeDate(rs.getString("fee_date"));
 							model.setNewUserRows(rs.getInt("show_new_user_rows"));
 							model.setAmount(rs.getDouble("show_amount"));
 							model.setExtendFee(rs.getDouble("extend_fee"));
-							System.out.println("model"+model);
 							list.add(model);
 						}
-						System.out.println("list"+list);
 						
 						return list;
 					}

@@ -11,7 +11,6 @@ public class XyCpsServer {
 	
 	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey,int pageIndex)
 	{
-		System.out.println("Load UserServer!");
 		return new XyUserDao().loadUserData(startDate, endDate, appKey, channelKey,pageIndex);
 	}
 	

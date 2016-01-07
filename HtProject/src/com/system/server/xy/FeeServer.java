@@ -54,9 +54,16 @@ public class FeeServer
 		dao.updateQdAmountStatus(startDate, endDate);
 	}
 	
-	public boolean updateQdFee(int id,int showAmount)
+	//更新游戏CP(CPS)的展示金额
+	public boolean updateQdFee(int id,float showAmount)
 	{
 		return new FeeDao().updateQdFee(id,showAmount);
+	}
+	
+	//更新游戏渠道(CPS)的展示金额
+	public boolean updateChannelFee(int id,float showAmount)
+	{
+		return new FeeDao().updateChannelFee(id, showAmount);
 	}
 	
 	public void updateQdFeeSummer()

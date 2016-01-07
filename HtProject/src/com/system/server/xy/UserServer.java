@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.system.dao.TestUserDao;
 import com.system.dao.xy.UserDao;
 import com.system.model.xy.XyUserModel;
 import com.system.util.StringUtil;
@@ -32,17 +31,10 @@ public class UserServer
 		return new UserDao().loadQdUserData(startDate, endDate, userId,pageIndex);
 	}
 	
+	//更新渠道CPA展示的数据
 	public boolean updateQdData(int id,int showDataRows)
 	{
 		return new UserDao().updateQdData(id,showDataRows);
-	}
-	/**
-	 * 该方法用于更新amount
-	 * test.userDAO
-	 */
-	public boolean updateQdData(int id,double showDataFee)
-	{
-		return new TestUserDao().updateQdData(id, showDataFee);
 	}
 	
 	public boolean analyUserToSummer(String startDate,String endDate)

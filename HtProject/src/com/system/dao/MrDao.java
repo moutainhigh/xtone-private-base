@@ -605,8 +605,6 @@ public class MrDao
 					break;
 		}
 		
-		System.out.println("queryParams:" + queryParams + ";joinId:" + joinId );
-		
 		String[] result = {queryParams,joinId};
 		return result;
 	}

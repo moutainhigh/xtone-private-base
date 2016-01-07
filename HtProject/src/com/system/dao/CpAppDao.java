@@ -215,7 +215,6 @@ public class CpAppDao {
 							model.setExtendFee(rs.getDouble("extend_fee"));
 							model.setProfit(rs.getDouble("profit"));
 							model.setStatus(rs.getInt("status"));
-							System.out.println("appid:"+model.getAppid());
 							return model;
 						}
 						

@@ -18,7 +18,6 @@
 	String groupList = StringUtil.getString(request.getParameter("group_list"), "");
 	String remark = StringUtil.getString(request.getParameter("remark"), "");
 	int type = StringUtil.getInteger(request.getParameter("type"), -1);
-	System.out.println(pageIndex+","+id+","+groupId+","+remark+","+type+","+groupList);
 	
 	String query = StringUtil.getString(request.getParameter("query"), "");
 	
@@ -63,13 +62,9 @@
 		
 		for(int i=0;i<stringList.length;i++){
 			list.add(server.loadIdByName(stringList[i])+""); 
-			System.out.println(i);
 		}
-		System.out.println(3);
 		for(String str :list){
-			System.out.println(str);
 		}*/
-		
 		
 		model.setGroupList(StringUtil.stringListToString(list));
 		new GroupRightServer().addGroupRight(model);

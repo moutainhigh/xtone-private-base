@@ -50,8 +50,6 @@ public class AppDao {
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
-							System.out.println("remark:"+rs.getString("remark"));
-							System.out.println("model :"+model.getRemark());
 							list.add(model);
 						}
 						
@@ -98,7 +96,6 @@ public class AppDao {
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
-				            System.out.println("ID:"+rs.getInt("id"));
 							list.add(model);
 						}
 						
@@ -228,7 +225,6 @@ public class AppDao {
 	
 	public boolean addApp(AppModel model)
 	{
-		System.out.println("AddRemark:"+model.getRemark());
 		String sql = "insert into daily_config.`tbl_xy_app`("
 				+ "appkey,appname,hold_percent,remark) value("
 				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()

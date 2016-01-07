@@ -245,8 +245,7 @@ public class MrSummerRecordDao
 		JdbcControl control = new JdbcControl();
 		final String sql1 = "UPDATE daily_log.`tbl_mr_summer` SET data_rows = " + model.getDataRows() + ",amount = " + model.getAmount() + " WHERE id = " + model.getMrSummerId();
 		final String sql2 = "UPDATE daily_log.`tbl_cp_mr_summer` SET data_rows = " + model.getShowDataRows() + ",amount = " + model.getShowAmount() + " WHERE id = " + model.getCpMrSummerId();
-		System.out.println(sql1);
-		System.out.println(sql2);
+		
 		control.getConnection(new ConnectionCallBack()
 		{
 			@Override
