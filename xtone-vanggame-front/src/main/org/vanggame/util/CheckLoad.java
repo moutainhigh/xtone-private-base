@@ -22,7 +22,6 @@ public class CheckLoad {
 				"Googlebot-Mobile" };
 		if (request.getHeader("User-Agent") != null) {
 			for (String mobileAgent : mobileAgents) {
-				System.out.println("agent:"+request.getHeader("User-Agent").toLowerCase().indexOf(mobileAgent));
 				if (request.getHeader("User-Agent").toLowerCase().indexOf(mobileAgent) >= 0) {
 					isMoblie = true;
 					break;

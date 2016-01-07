@@ -118,10 +118,6 @@
 	text-decoration: none
 }
 
-.logo-size {
-	width: 269px;
-	height: 93px;
-}
 
 .title {
 	margin-top: 80px;
@@ -156,11 +152,6 @@
 	.newsli em {
 		font-size: 12px;
 	}
-	.logo-size {
-		width: 190px;
-		height: 68px;
-		margin-top: 15px;
-	}
 	.title {
 		margin-top: 40px;
 	}
@@ -176,12 +167,7 @@
 	}
 	.newsli em {
 		font-size: 15px;
-	}
-	.logo-size {
-		width: 269px;
-		height: 93px;
-		margin-top: 0px;
-	}
+	}	
 	.title {
 		margin-top: 60px;
 	}
@@ -238,8 +224,8 @@
 	left: 50%;
 	top: 50%;
 	z-index: 9999;
-	width: 527px;
-	height: 282px;
+	width: 1000px;
+	height: 1000px;
 	margin: -272px 0px 0px -439px;
 	/*     background: transparent url("images/index/vedio-start.png") no-repeat scroll 0% 0%; */
 }
@@ -279,7 +265,7 @@
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a href="#"><img alt="logo" src="images/logo.png" class="logo-size"></a>
+				<a href="index.jsp"><img alt="logo" src="images/logo.png" class="logo-size"></a>
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">
@@ -318,13 +304,13 @@
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner">
 			<div class="item active" style="border: none;">
-				<img src="images/index/1900x540_1.png" alt="First slide">
+				<img src="images/index/1900x540_1.jpg" alt="First banner">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_2.png" alt="Second slide">
+				<img src="images/index/1900x540_2.jpg" alt="Second banner">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_3.png" alt="thrid slide">
+				<img src="images/index/1900x540_3.jpg" alt="Thrid banner">
 			</div>
 			<!-- 		<div class="item" style="border: none;"> -->
 			<!--          <img src="images/index/1900x540_2.png" alt="Second slide"> -->
@@ -337,16 +323,16 @@
 		<!--       data-slide="next">&rsaquo;</a> -->
 	</div>
 	<div
-		style="background-image: url(images/index/index-bg.png); background-size: cover;">
+		style="background-image: url(images/index/index-bg.jpg); background-size: cover;">
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 col-xs-6 nopadding">
 							<img src="images/index/hot_game.png" class=""></img>
 						</div>
 
-						<div class="col-md-9 col-sm-9 col-xs-6">
+						<div class="col-md-9 col-sm-9 col-xs-6 nopadding">
 							<a href="porducts-sjyx.html" style="float: right"><img
 								src="images/index/more.png"></img></a>
 						</div>
@@ -358,7 +344,7 @@
 
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_1.png" class="bsimg"></a>
+										src="images/index/350x290_1.jpg" class="bsimg" alt="First game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《口袋大冒险》</h4>
 										<h4 class="hot_yt_right">Q版/ARPG</h4>
@@ -380,7 +366,7 @@
 							<div class="hot_game hot_list">
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_2.png" class="bsimg"></a>
+										src="images/index/350x290_2.jpg" class="bsimg" alt="Second game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《绝地大逃亡》</h4>
 										<h4 class="hot_yt_right">动作格斗</h4>
@@ -401,7 +387,7 @@
 							<div class="hot_game hot_list">
 								<div class="hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_3.png" class="bsimg"></a>
+										src="images/index/350x290_3.jpg" class="bsimg" alt="Third game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《神魔战歌》</h4>
 										<h4 class="hot_yt_right">卡牌/RPG</h4>
@@ -425,7 +411,7 @@
 		</div>
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/business_structure.png"></img>
@@ -436,18 +422,18 @@
 						<!-- 						target="_blank" title="Lyft"> -->
 
 						<a
-							href="cooperation.html"> <img src="images/index/ad1.png"
-							alt="商务合作1" class="bsimg">
+							href="cooperation.html"> <img src="images/index/ad1.jpg"
+							alt="First cooperation" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad3.png"
-							alt="商务合作2" class="bsimg">
+						<a href="cooperation.html"> <img src="images/index/ad3.jpg"
+							alt="Second cooperation" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad2.png"
-							alt="商务合作3" class="bsimg">
+						<a href="cooperation.html"> <img src="images/index/ad2.jpg"
+							alt="Third cooperation" class="bsimg">
 						</a>
 					</div>
 				</div>
@@ -455,7 +441,7 @@
 		</div>
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 col-xs-6 nopadding">
 							<img src="images/index/vangame_news.png"></img>
@@ -482,7 +468,7 @@
 					</div>
 					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
 						<a class="btn-video" href="javascript:openVideo();"><img
-							src="images/index/vedio-kddmx.png" class="bsimg"> </a>
+							src="images/index/vedio-kddmx.jpg" class="bsimg"> </a>
 						<div id="overlay" style="display: none;"></div>
 						<div class="pop videoPop" id="pop-video" style="display: none;">
 							<div class="pop-close"></div>
@@ -496,7 +482,7 @@
 		</div>
 		<div class="bs-docs-featurette bottom-hieght">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/links.png"></img>
