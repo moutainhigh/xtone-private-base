@@ -2,7 +2,6 @@ package com.system.server;
 
 import java.util.Map;
 
-import com.sun.org.apache.regexp.internal.recompile;
 import com.system.dao.AppDao;
 import com.system.model.AppModel;
 
@@ -44,6 +43,11 @@ public class AppServer {
 	
 	public boolean addApp(AppModel model){
 		return new AppDao().addApp(model);
+	}
+	
+	public boolean updateAppLoginAccount(int appId,int userId)
+	{
+		return new AppDao().updateAppLoginAccount(appId, userId);
 	}
 	
 	

@@ -31,8 +31,6 @@
 	
 	int appid = StringUtil.getInteger(appidstr, 0);
 	
-	new CpAppServer().aaaa(startDate, endDate, appidnamestr,"");
-	
 	/* if(type<0)
 	{
 		type = 0;

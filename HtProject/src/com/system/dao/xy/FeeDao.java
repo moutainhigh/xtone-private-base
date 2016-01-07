@@ -328,18 +328,26 @@ public class FeeDao
 	 * @param pageIndex  用于分页
 	 * @return MAP结果集
 	 */
-	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,int pageIndex){
+	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,String keyWord,int pageIndex){
 		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.id,a.fee_date,b.appname,b.appkey,c.channelkey,c.data_rows,a.show_amount ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
-		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING +" FROM game_log.`tbl_xypay_summer` a "
-				+ " LEFT JOIN daily_config.tbl_xy_app b ON a.appkey = b.appkey "
-				+ "LEFT JOIN daily_config.tbl_xy_channel c ON a.`channelid` = c.channel "
-				+ "WHERE 1=1 AND STATUS = 1 "
-				+ "AND c.userid ="+userId
-				+ " AND a.`fee_date` >= '"+startDate+"' AND a.`fee_date` <= '"+endDate+"' "
-				+ "ORDER BY a.`fee_date`,c.`channel` ASC";
+		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING +" FROM game_log.tbl_xypay_summer a ";
+		
+		sql += " LEFT JOIN daily_config.tbl_xy_app b ON a.appkey = b.appkey ";
+		sql += " LEFT JOIN game_log.tbl_xy_user_summer c ON a.appkey = c.appkey";
+		sql += " AND a.channelid = c.channelkey AND a.fee_date = c.active_date ";
+		sql += " LEFT JOIN daily_config.tbl_xy_channel d ON c.channelkey = d.channel";
+		sql += " WHERE 1=1  AND d.settle_type = 2 AND a.`status` = 1 AND d.`userid` = " + userId;
+		sql += " AND a.fee_date >= '"+ startDate +"' AND a.fee_date <= '" + endDate + "'";
+		
+		if(!StringUtil.isNullOrEmpty(keyWord))
+		{
+			sql += " AND b.appname like '%"+ keyWord +"%' ";
+		}
+		
+		sql += " ORDER BY a.fee_date ASC,appname ASC,channelkey ASC ";
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -356,7 +364,7 @@ public class FeeDao
 		
 		result.put("rows", count);
 		
-		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows),sum(show_amount) "),
+		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(c.data_rows),sum(a.show_amount) "),
 				new QueryCallBack() {
 					
 					@Override

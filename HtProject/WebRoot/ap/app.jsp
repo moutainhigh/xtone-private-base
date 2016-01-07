@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.constant.Constant"%>
@@ -13,9 +14,8 @@
     int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
     String appname = StringUtil.getString(request.getParameter("appname"), "");
     String appkey = StringUtil.getString(request.getParameter("appkey"), "");
-    
+    String query = Base64UTF.encode(request.getQueryString());
 
-    
 	Map<String,Object> map = new AppServer().loadApp(pageIndex, appname, appkey);
 	
 	List<AppModel> list = (List<AppModel>)map.get("list");
@@ -79,6 +79,7 @@
 					<td>应用KEY</td>
 					<td>信息费扣量比</td>
 					<td>备注</td>
+					<td>帐号名</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -86,7 +87,6 @@
 				<%
 					int rowNum = 1;
 					for (AppModel model : list)
-					
 					{
 						
 				%>
@@ -96,13 +96,14 @@
 					<td><%=model.getAppkey()%></td>
 					<td><%=model.getHold_percent()%></td>
 					<td><%=model.getRemark()==null?"":model.getRemark()%></td>
+					<td><%= model.getUserName() %></td>
 					<td>
 						<%
 							String encodeStr = URLEncoder.encode(appname,"GBK"); 
 						%>
-						<a href="appedit.jsp?id=<%= model.getId() %>
-						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>&appkey=<%=appkey %>&appname=<%=appname%>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
+						<a href="appedit.jsp?id=<%= model.getId() %>&query=<%= query %>">修改</a>
+						<a href="appacount.jsp?id=<%= model.getId() %>&query=<%= query %>">用户分配</a>
 					</td>
 				</tr>
 				<%
