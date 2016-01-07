@@ -473,7 +473,7 @@
 					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
 
 						<a class="btn-video" href="javascript:openVideo();" id="pop-video-a"><img
-							src="images/index/vedio-kddmx.png" class="bsimg" > </a>
+							src="images/index/vedio-kddmx.jpg" class="bsimg" > </a>
 
 						<div id="overlay" style="display: none;"></div>
 						<div class="pop videoPop" id="pop-video" style="display: none;">
