@@ -284,38 +284,18 @@
 	</div>
 <a data-toggle="popover2">微信微信微信微信微信微信微信 微信微信微信微信微信微信微信 </a>
 	
-	<div class="videoUiWrapper thumbnail">
+
+  <div class="videoUiWrapper thumbnail">
   <video width="370" height="214" id="demo1">
     <source src="pathtovideo/video.ogv" type="video/ogg">
     <source src="pathtovideo/video.mp4" type="video/mp4">
-
+    Your browser does not support the video tag.
   </video>
-</div>
+</div> 
+
 		<footer
 			class="bs-docs-footer" role="contentinfo">
-			<div class="container nopadding">
-				<div class="col-md-3 col-sm-5 col-xs-12 nopadding">
-					<a href="#"><img alt="footlogo" src="images/footlogo.png"></a>
-				</div>
-				<div class="col-md-9 col-sm-7 col-xs-12 nopadding"
-					style="text-align: center;">
-					<ul class="bs-docs-footer-links">
-						<!-- 			 style="border-right: #fff 1px solid;display: block;width: 80px;" -->
-						<li><a href="gsjs.html">关于我们</a></li>
-						<li><a href="cooperation.html">商务合作</a></li>
-						<li><a href="shzp.html">招贤纳士</a></li>
-						<li><a href="flsm.html">法律声明</a></li>
-					</ul>
-					<p class="ztgs">
-						万家游戏版权所有Copyright2002-2015中国网络游戏版权保护联盟举报中心&nbsp;闽B2-20040096-20&nbsp;&nbsp;&nbsp;&nbsp;<a
-							href="#"><img alt="" src="images/index/foot1.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-							href="#"><img alt="" src="images/index/foot2.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-							href="#"><img alt="" src="images/index/foot3.png"></a>&nbsp;&nbsp;&nbsp;&nbsp;<a
-							href="#"><img alt="" src="images/index/foot4.png"></a>
-					</p>
-					<p class="ztgs">健康游戏忠告：抵制不良游戏&nbsp;拒绝盗版游戏&nbsp;注意自我保护&nbsp;谨防上当受骗&nbsp;适度游戏益脑&nbsp;沉迷游戏伤身&nbsp;合理安排时间&nbsp;享受健康生活</p>
-				</div>
-			</div>
+			<iframe  frameboder="0" scrolling="no" width="100%" height="auto" src="footer.html" ></iframe> 
 		</footer> 
 		<script src="js/jquery.video-ui.js"></script>
 		<script src="js/bootstrap/jquery.min.js"></script> <script
@@ -372,7 +352,8 @@
 <script type="text/javascript">
 	$('#demo1').videoUI({
 	  'autoHide':false,
-	  'volumeMedia': 1
+	  'volumeMedia': 1,
+		'playMedia':true
 	});
 </script>
 </body>
