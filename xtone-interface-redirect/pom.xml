@@ -22,10 +22,15 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.xtone.common</groupId>
+			<artifactId>xtone-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${final.name}</finalName>
-		<sourceDirectory>src</sourceDirectory>
+		<sourceDirectory>src/main</sourceDirectory>
 		<resources>
 			<resource>
 				<directory>src/main</directory>
