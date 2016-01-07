@@ -43,7 +43,7 @@
 		appname = appmodel.getAppname();
 	}
 	
-	Map<String,Object> map = new CpChannelServer().loadQdShow(pageIndex, userId, startDate, endDate);
+	Map<String,Object> map = new CpChannelServer().loadQdShow(pageIndex, userId, startDate, endDate,"","");
 //Map<String,Object> map = new CpChannelServer().loadCpChannel(pageIndex);
 
 //Map<String,Object> map = new CpAppServer().loadCpApp(pageIndex, appname, startDate, endDate);

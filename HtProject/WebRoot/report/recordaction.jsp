@@ -80,8 +80,6 @@
 		int mrSummerId = StringUtil.getInteger(request.getParameter("mrsummerid"), -1);
 		int cpMrSummerId = StringUtil.getInteger(request.getParameter("cpmrsummerid"), -1);
 		
-		System.out.println(dataRows + "-" + showDataRows);
-		
 		MrSummerRecordModel model = new MrSummerRecordModel();
 		
 		model.setDataRows(dataRows);

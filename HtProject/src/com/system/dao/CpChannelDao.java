@@ -219,7 +219,6 @@ public class CpChannelDao {
 							model.setChannel(rs.getString("channel"));
 							model.setChannelid(rs.getInt("channelid"));
 							model.setFeeDate(rs.getString("fee_date"));
-							System.out.println("feeDate:"+rs.getString("fee_date"));
 							model.setNewUserRows(rs.getInt("new_user_rows"));
 							model.setActiveRows(rs.getInt("active_rows"));
 							model.setAmount(rs.getDouble("amount"));
@@ -249,7 +248,6 @@ public class CpChannelDao {
 			    + " show_amount="+model.getShowAmount()+","
 			    + " scale="+model.getScale()+","
 			    + " status="+model.getStatus()+" WHERE id="+model.getId();
-		System.out.println("updateCPchannel:"+sql);
 		return new JdbcAdControl().execute(sql);
 	}
 	
@@ -283,8 +281,6 @@ public class CpChannelDao {
 		}
 		
 		sql +=  " order by a.fee_date asc ";
-		
-		System.out.println("SQL:"+sql);
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
 		

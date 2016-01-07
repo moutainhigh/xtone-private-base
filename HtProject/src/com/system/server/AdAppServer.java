@@ -30,8 +30,6 @@ public class AdAppServer {
 	
 	public int loadIdByName(String appname)
 	{
-		System.out.println(appname);
-		System.out.println("loadAppId ... ");
 		return new AdAppDao().loadIdByName(appname);
 	}
 	
@@ -42,7 +40,6 @@ public class AdAppServer {
 	
 	public boolean updataApp(AdAppModel model)
 	{
-		System.out.println("updata ...");
 		return new AdAppDao().updataApp(model);
 	}
 	

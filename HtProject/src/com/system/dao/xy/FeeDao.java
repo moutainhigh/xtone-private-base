@@ -65,27 +65,33 @@ public class FeeDao
 		return new JdbcGameControl().execute(sql);
 	}
 	
-	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,String channelKey, int pageIndex)
+	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex)
 	{
-		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.id,a.fee_date,b.appname,b.appkey,c.channelkey,c.data_rows,a.amount,a.show_amount,a.status ";
+		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xypay_summer a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
+		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xypay_summer a";
+		sql += " left join daily_config.tbl_xy_app b on a.appkey = b.appkey  ";
+		sql += " left join game_log.tbl_xy_user_summer c on a.appkey = c.appkey  ";
+		sql += " and a.channelid = c.channelkey and a.fee_date = c.active_date ";
+		sql += " left join daily_config.tbl_xy_channel d on c.channelkey = d.channel ";
+		sql += " where 1=1 ";
+		sql += " and d.settle_type = 2 ";
+		sql += " and a.fee_date >= '" + startDate + "' ";
+		sql += " and a.fee_date <= '" + endDate + "' ";
 		
-		sql += " and fee_date >= '" + startDate + "' and fee_date <= '" + endDate + "' ";
+		if(!StringUtil.isNullOrEmpty(keyWord))
+		{
+			sql += " and (b.appname like '%" + keyWord + "%' or b.appkey like '%" + keyWord + "%' or c.channelkey like '%" + keyWord + "%') ";
+		}
 		
-		if(!StringUtil.isNullOrEmpty(appKey))
-			sql += " and a.appkey like '%" + appKey + "%' ";
-		
-		if(!StringUtil.isNullOrEmpty(channelKey))
-			sql += " and a.channelid like '%" + channelKey + "%' ";
-		
-		sql += " order by fee_date,b.appname,a.channelid asc";
+		String orders = " order by a.fee_date asc,appname asc,channelkey asc ";
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
 		
-		int count = (Integer)new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, sqlCount), new QueryCallBack()
+		
+		int count = (Integer)new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " count(*) "), new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -99,7 +105,7 @@ public class FeeDao
 		
 		result.put("row", count);
 		
-		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows), sum(amount),sum(show_amount) "), new QueryCallBack()
+		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(c.data_rows), sum(a.amount),sum(a.show_amount) "), new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -115,7 +121,7 @@ public class FeeDao
 			}
 		});
 		
-		result.put("list",new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + limit, new QueryCallBack()
+		result.put("list",new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + orders + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -132,9 +138,11 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
-					model.setChannelId(rs.getString("channelid"));
+					model.setChannelId(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setAmount(rs.getFloat("amount"));
+					model.setShowAmount(rs.getFloat("show_amount"));
+					model.setStatus(rs.getInt("status"));
 					
 					list.add(model);
 				}
@@ -223,6 +231,14 @@ public class FeeDao
 		return result;
 	}
 	
+	/**
+	 * LOAD CP 自己应用的数据（应用 CPS 分成展示页面 ）
+	 * @param startDate
+	 * @param endDate
+	 * @param userId
+	 * @param pageIndex
+	 * @return
+	 */
 	public Map<String, Object> loadQdAppFee(String startDate,String endDate,int userId,int pageIndex)
 	{
 		String sqlCount = " count(*) ";
@@ -378,9 +394,18 @@ public class FeeDao
 		return result;
 	}
 	
-	public boolean updateQdFee(int id,int showAmount)
+	//更新游戏CP(CPS)的展示金额
+	public boolean updateQdFee(int id,float showAmount)
 	{
 		String sql = "update game_log.tbl_xy_fee_summer set show_amount = " + showAmount + " where id = " + id;
+		return new JdbcGameControl().execute(sql);
+	}
+	
+	
+	//更新游戏渠道(CPS)的展示金额
+	public boolean updateChannelFee(int id,float showAmount)
+	{
+		String sql = "update game_log.tbl_xypay_summer set show_amount = " + showAmount + " where id = " + id;
 		return new JdbcGameControl().execute(sql);
 	}
 	

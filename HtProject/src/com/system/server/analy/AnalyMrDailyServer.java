@@ -210,7 +210,6 @@ public class AnalyMrDailyServer
 		for(int i =0; i<28; i++)
 		{
 			String date = sdf.format(ca.getTime());
-			System.out.println("analy date:" + date);
 			amd.analyMrDailyWithDate(date,date);
 			amd.analyCpMrToSummer(date,date);
 			ca.add(Calendar.DAY_OF_MONTH, 1);

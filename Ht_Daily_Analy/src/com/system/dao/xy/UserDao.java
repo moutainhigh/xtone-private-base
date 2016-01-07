@@ -4,214 +4,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import com.system.constant.Constant;
 import com.system.database.ConnectionCallBack;
 import com.system.database.JdbcControl;
+import com.system.database.JdbcGameControl;
 import com.system.database.QueryCallBack;
-import com.system.model.xy.XyQdUserModel;
 import com.system.model.xy.XyUserModel;
-import com.system.util.StringUtil;
 
 public class UserDao
 {
-	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey, int pageIndex)
-	{
-		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
-		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
-		
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_user_summer a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
-		
-		sql += " and active_date >= '" + startDate + "' and active_date <= '" + endDate + "' ";
-		
-		if(!StringUtil.isNullOrEmpty(appKey))
-			sql += " and a.appkey like '%" + appKey + "%' ";
-		
-		if(!StringUtil.isNullOrEmpty(channelKey))
-			sql += " and a.channelkey like '%" + channelKey + "%' ";
-		
-		sql += " order by status,active_date,a.channelkey asc";
-		
-		final Map<String, Object> result = new HashMap<String, Object>();
-		
-		int count = (Integer)new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, sqlCount), new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				if(rs.next())
-					return rs.getInt(1);
-				
-				return 0;
-			}
-		});
-		
-		result.put("row", count);
-		
-		count = (Integer)new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows), sum(show_data_rows)"), new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				if(rs.next())
-				{
-					result.put("data_rows", rs.getInt(1));
-					result.put("show_data_rows", rs.getInt(2));
-				}
-				
-				return 0;
-			}
-		});
-		
-		result.put("list",new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + limit, new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				List<XyUserModel> list = new ArrayList<XyUserModel>();
-				
-				XyUserModel model = null;
-				
-				while(rs.next())
-				{
-					model = new XyUserModel();
-					
-					model.setId(rs.getInt("id"));
-					model.setActiveDate(rs.getString("active_date"));
-					model.setAppKey(rs.getString("appkey"));
-					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
-					model.setChannelKey(rs.getString("channelkey"));
-					model.setDataRows(rs.getInt("data_rows"));
-					model.setShowDataRows(rs.getInt("show_data_rows"));
-					model.setStatus(rs.getInt("status"));
-					
-					list.add(model);
-				}
-				
-				return list;
-			}
-		}));
-		
-		return result;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public List<XyUserModel>  loadUserTodayData(String tableName,String satrtDate,String appKey,String channelKey)
-	{
-		String query = " b.appname,b.appkey,a.channelkey,count(*) data_rows  ";
-		
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_user_" + tableName + " a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
-		
-		sql += " and addTime >= '" + satrtDate + " 00:00:00' and addTime <= '" + satrtDate + " 23:59:59' ";
-		
-		if(!StringUtil.isNullOrEmpty(appKey))
-			sql += " and a.appkey like '%" + appKey + "%' ";
-		
-		if(!StringUtil.isNullOrEmpty(channelKey))
-			sql += " and a.channelkey like '%" + channelKey + "%' ";
-		
-		sql += " group by a.appkey,a.channelkey order by b.appname asc";
-		
-		return (List<XyUserModel>)new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query), new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				List<XyUserModel> list = new ArrayList<XyUserModel>();
-				
-				XyUserModel model = null;
-				
-				while(rs.next())
-				{
-					model = new XyUserModel();
-					
-					model.setAppKey(rs.getString("appkey"));
-					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
-					model.setChannelKey(rs.getString("channelkey"));
-					model.setDataRows(rs.getInt("data_rows"));
-					
-					list.add(model);
-				}
-				
-				return list;
-			}
-		});
-	}
-	
-	public  Map<String, Object> loadQdUserData(String startDate,String endDate,int userId,int pageIndex)
-	{
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_user_summer a "
-				+ "left join daily_config.tbl_xy_app b on a.appkey = b.appkey "
-				+ "left join daily_config.tbl_xy_channel c on a.channelkey = c.channel "
-				+ "where 1=1 and status = 1 and c.userid = " + userId + " and a.active_date >= '" + startDate + "' "
-				+ "and a.active_date <= '" + endDate + "' order by a.active_date,c.channel asc";
-		 
-		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
-		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
-		
-		Map<String, Object> result = new HashMap<String, Object>();
-		
-		int count = (Integer)new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, sqlCount), new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				if(rs.next())
-					return rs.getInt(1);
-				
-				return 0;
-			}
-		});
-		
-		result.put("row", count);
-		
-		count = (Integer)new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(show_data_rows) "), new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				if(rs.next())
-					return rs.getInt(1);
-				
-				return 0;
-			}
-		});
-		
-		result.put("show_data_rows", count);
-		
-		result.put("list",new JdbcControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING,query) + limit, new QueryCallBack()
-		{
-			@Override
-			public Object onCallBack(ResultSet rs) throws SQLException
-			{
-				List<XyQdUserModel> list = new ArrayList<XyQdUserModel>();
-				
-				XyQdUserModel model = null;
-				
-				while(rs.next())
-				{
-					model = new XyQdUserModel();
-					
-					model.setId(rs.getInt("id"));
-					model.setActiveDate(rs.getString("active_date"));
-					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
-					model.setShowDataRows(rs.getInt("show_data_rows"));
-					
-					list.add(model);
-				}
-				
-				return list;
-			}
-		}));
-		
-		return result;
-	}
-	
+	//手动更新渠道(CPA)的同步数据
 	public boolean updateQdData(int id,int showDataRows)
 	{
 		String sql = "update game_log.tbl_xy_user_summer set show_data_rows = " + showDataRows + " where id = " + id;
@@ -230,6 +33,7 @@ public class UserDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	//将渠道的用户的数据分析进激活汇总表tbl_xy_user_summer
 	public boolean analyUserToSummer(String tableName,String startDate,String endDate)
 	{
 		String sql  = " INSERT INTO game_log.`tbl_xy_user_summer`(active_date,appkey,channelkey,data_rows) "
@@ -241,6 +45,7 @@ public class UserDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	//韦工接的一款游戏，硬拼上我们 tbl_xy_user_summer 这个系统
 	public boolean analyZyLDataToSummer(String startDate,String endDate)
 	{
 		String sql = "INSERT INTO game_log.`tbl_xy_user_summer`(active_date,appkey,channelkey,data_rows)"
@@ -252,6 +57,7 @@ public class UserDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	//更新渠道(CPA)扣量后的数据
 	public boolean updateQdShowData(String startDate,String endDate)
 	{
 		String sql = " UPDATE game_log.`tbl_xy_user_summer` a,daily_config.`tbl_xy_channel` b "
@@ -264,6 +70,7 @@ public class UserDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	//更新渠道(CPA)的数据展示状态
 	public boolean updateQdShowDataStatus(String startDate,String endDate)
 	{
 		String sql = "UPDATE game_log.`tbl_xy_user_summer` set status = 1 where active_date >= '" + startDate + "' "
@@ -272,6 +79,7 @@ public class UserDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	//查询渠道(CPA实时)
 	@SuppressWarnings("unchecked")
 	public List<XyUserModel> queryQdShowDataWithHour(String tableName,String startDate,int hour)
 	{
@@ -283,7 +91,7 @@ public class UserDao
 		sql += " and a.addTime >= '" + startDate + " " + hour + ":00:00' and a.addTime <= '" + startDate + " " + hour + ":59:59'";
 		sql += " group by appkey,channelkey";
 		
-		return (List<XyUserModel>)new JdbcControl().query(sql,new QueryCallBack()
+		return (List<XyUserModel>)new JdbcGameControl().query(sql,new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -305,6 +113,7 @@ public class UserDao
 		});
 	}
 	
+	//更新渠道(CPA实时)的数据
 	public void analyUserList(final List<XyUserModel> list,final String startDate)
 	{
 		new JdbcControl().getConnection(new ConnectionCallBack()
@@ -337,7 +146,5 @@ public class UserDao
 			}
 		});
 	}
-	
-	
 	
 }

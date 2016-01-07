@@ -18,8 +18,6 @@
 		remark = "";
 	}
 	
-	System.out.println("appname:"+appname);
-	
 	AppModel model = new AppModel();
 	model.setId(id);
 	model.setAppname(appname);

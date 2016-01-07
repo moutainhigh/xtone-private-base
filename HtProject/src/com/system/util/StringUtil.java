@@ -277,7 +277,6 @@ public class StringUtil
 		if(time.length()<=6){
 			return time;
 		}
-		System.out.println(time.length());
 		time = time.substring(2, time.length());
 		String[] list = null;
 		list = time.split("-");
