@@ -233,7 +233,7 @@
 .videoPop .pop-close {
 	position: absolute;
 	top: 0px;
-	right: -420px;
+	right: 53px;
 	width: 47px;
 	height: 47px;
 	cursor: pointer;
@@ -244,7 +244,7 @@
 .pop-close {
 	position: absolute;
 	top: 0px;
-	right: -420px;
+	right: 53px;
 	width: 47px;
 	height: 47px;
 	cursor: pointer;
