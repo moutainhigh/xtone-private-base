@@ -244,5 +244,19 @@
 	<script	src="js/docs.min.js"></script>
 	<script	src="js/bootstrap/ie10-viewport-bug-workaround.js"></script>
 <!-- 	<script>var _gauges=_gauges||[];!function(){var e=document.createElement("script");e.async=!0,e.id="gauges-tracker",e.setAttribute("data-site-id","4f0dc9fef5a1f55508000013"),e.src="//secure.gaug.es/track.js";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script> -->
+
+	<script type="text/javascript">
+$(function(){
+	$('.hot_list .hot_gamebox').hotlist();
+	function ishidden(){
+		var _this = $("#hide").parent();
+		if(_this.is(':hidden')){
+			_this.parent().show();
+			return;
+		}
+		_this.hide();
+	}
+})
+</script>
 </body>
 </html>

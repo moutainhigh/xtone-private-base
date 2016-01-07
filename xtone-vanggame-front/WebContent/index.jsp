@@ -1,3 +1,4 @@
+<%@page import="org.vanggame.util.CheckLoad"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page import="org.common.util.ConnectionService"%>
@@ -9,7 +10,10 @@
 <%@page import="org.vanggame.info.Content"%>
 <%
 	int count = 0;
-
+	CheckLoad check = new CheckLoad();
+	if(check.JudgeIsMoblie(request)){
+		out.print("<script type=\"text/javascript\">function updateVido(){$(\"#pop-video-a\").attr({href:\"http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=102264&iframe=iframe\",target:\"_blank\"});}</script>");
+	}
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -467,8 +471,10 @@
 						</ul>
 					</div>
 					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
-						<a class="btn-video" href="javascript:openVideo();"><img
-							src="images/index/vedio-kddmx.jpg" class="bsimg"> </a>
+
+						<a class="btn-video" href="javascript:openVideo();" id="pop-video-a"><img
+							src="images/index/vedio-kddmx.png" class="bsimg" > </a>
+
 						<div id="overlay" style="display: none;"></div>
 						<div class="pop videoPop" id="pop-video" style="display: none;">
 							<div class="pop-close"></div>
@@ -525,15 +531,15 @@
 	<script type="text/javascript">
 		$(function() {
 			$('.hot_list .hot_gamebox').hotlist();
-
+			updateVido();
 		})
 		function ishidden(){
 			var _this = $("#hide").parent();
-			if(_this.is(':hidden')){
-				_this.show();
+			if(_this.parent().is(':hidden')){
+				_this.parent().show();
 				return;
 			}
-			_this.hide();
+			_this.parent().hide();
 		}
 	</script>
 	<script type="text/javascript">
