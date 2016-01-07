@@ -88,7 +88,6 @@ public class UserDao
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setShowDataRows(rs.getInt("show_data_rows"));
 					model.setStatus(rs.getInt("status"));
-					System.out.println("model:"+model);
 					list.add(model);
 				}
 				
@@ -212,6 +211,7 @@ public class UserDao
 		return result;
 	}
 	
+	//更新渠道CPA展示的数据
 	public boolean updateQdData(int id,int showDataRows)
 	{
 		String sql = "update game_log.tbl_xy_user_summer set show_data_rows = " + showDataRows + " where id = " + id;
@@ -312,17 +312,14 @@ public class UserDao
 					rs = stmt.executeQuery(String.format(sql, startDate,model.getAppKey(),model.getChannelKey()));
 					if(rs.next())
 						id = rs.getInt(1);
-					System.out.println("id:" + id);
 					if(id>0)
 					{
 						String update = String.format(sqlUpdate, model.getDataRows(),model.getShowDataRows(),id);
-						System.out.println("update:" + update);
 						stmt.execute(update);
 					}
 					else
 					{
 						String insert = String.format(sqlInsert, startDate,model.getAppKey(),model.getChannelKey(),model.getDataRows(),model.getShowDataRows());
-						System.out.println("insert:" + insert);
 						stmt.execute(insert);
 					}
 				}

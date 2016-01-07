@@ -8,7 +8,10 @@
 } 
  
 .content-size{
-	font-size: 19px;
+	font-size: 18px;
+}
+.title-size{
+	font-size: 21px;
 }
 .footer-fontsize{
 	font-size: 12px;
@@ -389,7 +392,19 @@ h2 code, h3 code, h4 code {
 	padding-top: 55px;
 	padding-bottom:5px;
 }
-
+@media ( min-width :120px) {
+	.bs-docs-nav .navbar-nav>li>a {
+		padding-top: 15px;		
+	}
+	.navbar-nav>li>a>small {
+		font-size: 17px;		
+	}	
+}
+@media ( min-width :768px) {
+	.bs-docs-nav .navbar-brand, .bs-docs-nav .navbar-nav>li>a {
+		padding-top: 55px;
+	}
+}
 .bs-docs-nav .navbar-nav>.active>a, .bs-docs-nav .navbar-nav>.active>a:hover,
 	.bs-docs-nav .navbar-nav>li>a:hover {
 	color: #fff;
@@ -451,11 +466,12 @@ h2 code, h3 code, h4 code {
 }
 
 .bs-docs-footer-links li {
-	display: inline-block
+	display: inline-block;
+	margin-bottom: 5px;
 }
 
 .bs-docs-footer-links li+li {
-	margin-left: 15px
+	margin-left: 25px;
 }
 
 @media ( min-width :768px) {
@@ -2068,10 +2084,19 @@ h1[id] {
     position: relative;
     min-height: 1px;
 }
+.logo-size {
+	width: 269px;
+	height: 93px;
+}
+
+.logo-foot-size {
+	width: 251px;
+    height: 62px;
+}
 @media ( min-width :168px) {
 	.artText {
 		background: #fff;
-		padding: 15px 15px 15px 15px;
+		padding: 15px 5px 15px 5px;
 	}
 	.tab{
 		bottom: 15px;
@@ -2090,6 +2115,20 @@ h1[id] {
 		float: left;
     	position: relative;
     	min-height: 1px;
+	}
+	.logo-size {
+		width: 180px;
+		height: 63px;
+		margin-top: 22px;
+	}
+	
+	.logo-foot-size {
+		width: 170px;
+    	height: 40px;
+    	margin-bottom: 5px;
+	}
+	.home-padding{
+		padding: 0px 10px 0px 10px;
 	}
 }
 
@@ -2123,6 +2162,19 @@ h1[id] {
 	}
 	.tt20{
 		width: 50%;
+	}
+	.logo-size {
+		width: 269px;
+		height: 93px;
+		margin-top: 0px;
+	}
+	.logo-foot-size {
+		width: 251px;
+    	height: 62px;
+    	margin-bottom: 0px;
+	}
+	.home-padding{
+		padding: 0px;
 	}
 }
 

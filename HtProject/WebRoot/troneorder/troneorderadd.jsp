@@ -189,11 +189,15 @@
 			return;
 		}
 		
-		if ($("#input_order_trone_name").val() == "") {
+		
+		/*
+		if ($("#input_order_trone_name").val() == "") 
+		{
 			alert("请输入业务名称");
 			$("#input_order_trone_name").focus();
 			return;
 		}
+		*/
 		
 		document.getElementById("addform").submit();
 	}
@@ -293,16 +297,17 @@
 					<br />
 					<br />
 					<br />
+					<!--  
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">业务名称</dd>
 					<dd class="dd03_me">
 						<input type="text" name="order_trone_name" title="通道名称" id="input_order_trone_name"
 							style="width: 200px">
 					</dd>
-					
 					<br />
 					<br />
 					<br />
+					-->
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">扣量方式</dd>
 					<dd class="dd03_me">

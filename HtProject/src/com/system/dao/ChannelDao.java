@@ -200,8 +200,6 @@ public class ChannelDao {
 	{
 		int id = new AppDao().loadIdByName(model.getAppname());
 		
-		System.out.println("add_appid:"+id);
-		
 		String sql = "insert into daily_config.tbl_xy_channel(appid,channel,hold_percent,syn_type,remark) "
 				+ "value("+id+",'"+model.getChannel()+"',"+model.getHold_percent()+","
 				+ model.getSyn_type()+",'"+model.getRemark()+"')";

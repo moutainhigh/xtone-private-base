@@ -1,3 +1,4 @@
+<%@page import="org.vanggame.util.CheckLoad"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@page import="org.common.util.ConnectionService"%>
@@ -9,7 +10,10 @@
 <%@page import="org.vanggame.info.Content"%>
 <%
 	int count = 0;
-
+	CheckLoad check = new CheckLoad();
+	if(check.JudgeIsMoblie(request)){
+		out.print("<script type=\"text/javascript\">function updateVido(){$(\"#pop-video-a\").attr({href:\"http://www.wsview.com/yzplayerAction!play2.action?autoPlay=true&userVideoID=102264&iframe=iframe\",target:\"_blank\"});}</script>");
+	}
 	Connection con = null;
 	PreparedStatement ps = null;
 	ResultSet rs = null;
@@ -59,8 +63,8 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/docs.min.css" rel="stylesheet">
 <!--[if lt IE 9]><script src="../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script async="" id="gauges-tracker"
-	data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script>
+<!-- <script async="" id="gauges-tracker" -->
+<!-- 	data-site-id="4f0dc9fef5a1f55508000013" src="js/bootstrap/track.js"></script> -->
 <script async="" src="js/bootstrap/analytics.js"></script>
 <script src="js/bootstrap/ie-emulation-modes-warning.js"></script>
 
@@ -118,32 +122,18 @@
 	text-decoration: none
 }
 
+
+.title {
+	margin-top: 80px;
+	margin-bottom: 9px;
+}
+
 .newsli {
 	border-bottom: #e1e1e0 solid 1px;
 	padding-top: 17px;
 	padding-bottom: 16px;
 	/* 	list-style-image: url("images/index/dian_1.png"); */
 	color: #cf1232;
-}
-
-@media ( min-width :768px) {
-	.newsli {
-		border-bottom: #e1e1e0 solid 1px;
-		padding-top: 11px;
-		padding-bottom: 11px;
-		/* 	list-style-image: url("images/index/dian_1.png"); */
-		color: #cf1232;
-	}
-}
-
-@media ( min-width :1201px) {
-	.newsli {
-		border-bottom: #e1e1e0 solid 1px;
-		padding-top: 17px;
-		padding-bottom: 16px;
-		/* 	list-style-image: url("images/index/dian_1.png"); */
-		color: #cf1232;
-	}
 }
 
 .newsli font {
@@ -155,15 +145,58 @@
 	color: #aaaaaa;
 }
 
+@media ( min-width :168px) {
+	.newsli {
+		padding-top: 5px;
+		padding-bottom: 18px;
+	}
+	.newsli font {
+		font-size: 12px;
+	}
+	.newsli em {
+		font-size: 12px;
+	}
+	.title {
+		margin-top: 40px;
+	}
+}
+
+@media ( min-width :768px) {
+	.newsli {
+		padding-top: 11px;
+		padding-bottom: 11px;
+	}
+	.newsli font {
+		font-size: 15px;
+	}
+	.newsli em {
+		font-size: 15px;
+	}	
+	.title {
+		margin-top: 60px;
+	}
+}
+
+@media ( min-width :1201px) {
+	.newsli {
+		padding-top: 17px;
+		padding-bottom: 16px;
+	}
+	.newsli font {
+		font-size: 17px;
+	}
+	.newsli em {
+		font-size: 17px;
+	}
+	.title {
+		margin-top: 80px;
+	}
+}
+
 .links {
 	color: #aaaaaa;
 	text-decoration: none;
 	font-size: 15px;
-}
-
-.title {
-	margin-top: 80px;
-	margin-bottom: 9px;
 }
 
 #overlay {
@@ -195,16 +228,16 @@
 	left: 50%;
 	top: 50%;
 	z-index: 9999;
-	width: 527px;
-	height: 282px;
+	width: 1000px;
+	height: 1000px;
 	margin: -272px 0px 0px -439px;
 	/*     background: transparent url("images/index/vedio-start.png") no-repeat scroll 0% 0%; */
 }
 
-.videoPop .pop-close { 
+.videoPop .pop-close {
 	position: absolute;
 	top: 0px;
-	right: -420px;
+	right: 53px;
 	width: 47px;
 	height: 47px;
 	cursor: pointer;
@@ -215,7 +248,7 @@
 .pop-close {
 	position: absolute;
 	top: 0px;
-	right: -420px;
+	right: 53px;
 	width: 47px;
 	height: 47px;
 	cursor: pointer;
@@ -236,7 +269,7 @@
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a href="#"><img alt="logo" src="images/logo.png"></a>
+				<a href="index.jsp"><img alt="logo" src="images/logo.png" class="logo-size"></a>
 			</div>
 			<nav id="bs-navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right ztgs">
@@ -275,13 +308,13 @@
 		<!-- 轮播（Carousel）项目 -->
 		<div class="carousel-inner">
 			<div class="item active" style="border: none;">
-				<img src="images/index/1900x540_1.png" alt="First slide">
+				<img src="images/index/1900x540_1.jpg" alt="First banner">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_2.png" alt="Second slide">
+				<img src="images/index/1900x540_2.jpg" alt="Second banner">
 			</div>
 			<div class="item" style="border: none;">
-				<img src="images/index/1900x540_3.png" alt="thrid slide">
+				<img src="images/index/1900x540_3.jpg" alt="Thrid banner">
 			</div>
 			<!-- 		<div class="item" style="border: none;"> -->
 			<!--          <img src="images/index/1900x540_2.png" alt="Second slide"> -->
@@ -294,16 +327,16 @@
 		<!--       data-slide="next">&rsaquo;</a> -->
 	</div>
 	<div
-		style="background-image: url(images/index/index-bg.png); background-size: cover;">
+		style="background-image: url(images/index/index-bg.jpg); background-size: cover;">
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 col-xs-6 nopadding">
 							<img src="images/index/hot_game.png" class=""></img>
 						</div>
 
-						<div class="col-md-9 col-sm-9 col-xs-6">
+						<div class="col-md-9 col-sm-9 col-xs-6 nopadding">
 							<a href="porducts-sjyx.html" style="float: right"><img
 								src="images/index/more.png"></img></a>
 						</div>
@@ -315,7 +348,7 @@
 
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_1.png" class="bsimg"></a>
+										src="images/index/350x290_1.jpg" class="bsimg" alt="First game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《口袋大冒险》</h4>
 										<h4 class="hot_yt_right">Q版/ARPG</h4>
@@ -337,7 +370,7 @@
 							<div class="hot_game hot_list">
 								<div class="l hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_2.png" class="bsimg"></a>
+										src="images/index/350x290_2.jpg" class="bsimg" alt="Second game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《绝地大逃亡》</h4>
 										<h4 class="hot_yt_right">动作格斗</h4>
@@ -358,7 +391,7 @@
 							<div class="hot_game hot_list">
 								<div class="hot_gamebox mb1">
 									<a href="porducts-sjyx.html"><img
-										src="images/index/350x290_3.png" class="bsimg"></a>
+										src="images/index/350x290_3.jpg" class="bsimg" alt="Third game"></a>
 									<div class="hot_yt hot_yt_sw ztgs">
 										<h4 class="hot_yt_left">《神魔战歌》</h4>
 										<h4 class="hot_yt_right">卡牌/RPG</h4>
@@ -382,7 +415,7 @@
 		</div>
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/business_structure.png"></img>
@@ -393,18 +426,18 @@
 						<!-- 						target="_blank" title="Lyft"> -->
 
 						<a
-							href="cooperation.html"> <img src="images/index/ad1.png"
-							alt="商务合作1" class="bsimg">
+							href="cooperation.html"> <img src="images/index/ad1.jpg"
+							alt="First cooperation" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad3.png"
-							alt="商务合作2" class="bsimg">
+						<a href="cooperation.html"> <img src="images/index/ad3.jpg"
+							alt="Second cooperation" class="bsimg">
 						</a>
 					</div>
 					<div class="col-md-4 col-sm-4 col-xs-4 nopadding">
-						<a href="cooperation.html"> <img src="images/index/ad2.png"
-							alt="商务合作3" class="bsimg">
+						<a href="cooperation.html"> <img src="images/index/ad2.jpg"
+							alt="Third cooperation" class="bsimg">
 						</a>
 					</div>
 				</div>
@@ -412,7 +445,7 @@
 		</div>
 		<div class="bs-docs-featurette">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 col-xs-6 nopadding">
 							<img src="images/index/vangame_news.png"></img>
@@ -438,8 +471,10 @@
 						</ul>
 					</div>
 					<div class="col-md-4 col-sm-12 col-xs-12 video nopadding">
-						<a class="btn-video" href="javascript:openVideo();"><img
-							src="images/index/vedio-kddmx.png" class="bsimg"> </a>
+
+						<a class="btn-video" href="javascript:openVideo();" id="pop-video-a"><img
+							src="images/index/vedio-kddmx.png" class="bsimg" > </a>
+
 						<div id="overlay" style="display: none;"></div>
 						<div class="pop videoPop" id="pop-video" style="display: none;">
 							<div class="pop-close"></div>
@@ -453,7 +488,7 @@
 		</div>
 		<div class="bs-docs-featurette bottom-hieght">
 			<div class="container">
-				<div class="row">
+				<div class="row home-padding">
 					<div class="col-md-12 col-sm-12 col-xs-12 nopadding title">
 						<div class="col-md-3 col-sm-3 nopadding">
 							<img src="images/index/links.png"></img>
@@ -496,8 +531,16 @@
 	<script type="text/javascript">
 		$(function() {
 			$('.hot_list .hot_gamebox').hotlist();
-
+			updateVido();
 		})
+		function ishidden(){
+			var _this = $("#hide").parent();
+			if(_this.parent().is(':hidden')){
+				_this.parent().show();
+				return;
+			}
+			_this.parent().hide();
+		}
 	</script>
 	<script type="text/javascript">
 		function openPop(popID) {

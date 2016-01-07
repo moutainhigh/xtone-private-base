@@ -171,7 +171,6 @@ public class GroupRightDao {
 			    + " show_amount="+model.getShowAmount()+","
 			    + " scale="+model.getScale()+","
 			    + " status="+model.getStatus()+" WHERE id="+model.getId();
-		System.out.println("updateCPchannel:"+sql);
 		return new JdbcAdControl().execute(sql);
 	}
 	

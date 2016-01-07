@@ -216,8 +216,6 @@ public class TroneDao
 			wheres += " and b.name LIKE '%"+troneName+"%' ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
-		System.out.println("sql:"+sql+wheres+limit);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		JdbcControl control = new JdbcControl();

@@ -26,9 +26,9 @@ public class FeeServer
 		return dao.analyFeeToSummer(StringUtil.getMonthFormat(startDate), startDate, endDate);
 	}
 	
-	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,String channelKey, int pageIndex)
+	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex)
 	{
-		return new FeeDao().loadAppFee(startDate, endDate, appKey, channelKey, pageIndex);
+		return new FeeDao().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
 	}
 	
 	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex)
@@ -54,9 +54,16 @@ public class FeeServer
 		dao.updateQdAmountStatus(startDate, endDate);
 	}
 	
-	public boolean updateQdFee(int id,int showAmount)
+	//更新游戏CP(CPS)的展示金额
+	public boolean updateQdFee(int id,float showAmount)
 	{
 		return new FeeDao().updateQdFee(id,showAmount);
+	}
+	
+	//更新游戏渠道(CPS)的展示金额
+	public boolean updateChannelFee(int id,float showAmount)
+	{
+		return new FeeDao().updateChannelFee(id, showAmount);
 	}
 	
 	public void updateQdFeeSummer()

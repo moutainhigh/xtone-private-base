@@ -61,7 +61,6 @@ public class AdAppDao {
 	
 	public Map<String, Object> loadAppByPageindex2()
 	{
-		System.out.println( "   loadAppByPageindex.... ");
 		//String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING
@@ -244,7 +243,6 @@ public class AdAppDao {
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
-							System.out.println("rs:"+rs.getInt("id"));
 							return model;
 						}
 						

@@ -99,7 +99,6 @@ public class ApDAO
 			}
 		}));
 		
-		System.out.println("load success!");
 		return map;
 	}
 	
@@ -140,7 +139,6 @@ public class ApDAO
 				+ "','" + model.getMail() + "','" + model.getPhone() + "','"
 				+ model.getAddress() + "','" + model.getContractStartDate()
 				+ "','" + model.getContractEndDate() + "')";
-		System.out.println("addAp success!");
 		return new JdbcControl().execute(sql);
 	}
 
@@ -154,7 +152,6 @@ public class ApDAO
 				+ "',address='" + model.getAddress() + "',contract_start_date='"
 				+ model.getContractStartDate() + "',contract_end_date='"
 				+ model.getContractEndDate() + "' where id =" + model.getId();
-		System.out.println("updata success!");
 		return new JdbcControl().execute(sql);
 	}
 	

@@ -13,24 +13,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<!--  -->	
+<!-- 渠道CPS分成管理 -->	
 	
 <%
 	String defaultStartDate = StringUtil.getPreDayOfMonth();
-	String defaultEndDate = StringUtil.getDefaultDate();
 
-	String appKey = StringUtil.getString(request.getParameter("appkey"),
-			"");
-	String channelKey = StringUtil
-			.getString(request.getParameter("channelkey"), "");
+	String defaultEndDate = StringUtil.getDefaultDate();
+	
+	String keyWord = StringUtil.getString(request.getParameter("keyword"),"");
+
 	String startDate = StringUtil
 			.getString(request.getParameter("startdate"), defaultStartDate);
+	
 	String endDate = StringUtil
 			.getString(request.getParameter("enddate"), defaultEndDate);
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new FeeServer().loadAppFee(startDate, endDate, appKey, channelKey, pageIndex);
+	Map<String, Object> map =  new FeeServer().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
 		
 	List<XyFeeModel> list = (List<XyFeeModel>)map.get("list");
 	
@@ -38,8 +38,7 @@
 	
 	Map<String,String> params = new HashMap<String,String>();
 	
-	params.put("appkey", appKey);
-	params.put("channelkey", channelKey);
+	params.put("keyword", keyWord);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
 	
@@ -90,7 +89,7 @@
 		
 		if(parseInt(newShowRows,10)>parseInt(oldShowRows,10))
 		{
-			alert("显示数据不能大于实际数据");
+			alert("展示数据不能大于实际数据");
 			return;
 		}
 		
@@ -103,7 +102,8 @@
 		
 		$.post("action.jsp", 
 		{
-			datarows : newShowRows,
+			showamount : newShowRows,
+			type : 2,
 			id :editId 
 		}, 
 		function(data) 
@@ -144,13 +144,9 @@
 						<input name="enddate" type="text" value="<%=endDate%>" 
 							onclick="WdatePicker({isShowClear:false,readOnly:true})">
 					</dd>
-					<dd class="dd01_me">应用包KEY</dd>
+					<dd class="dd01_me">关键字</dd>
 					<dd class="dd03_me">
-						<input name="appkey" value="<%=appKey%>" type="text">
-					</dd>
-					<dd class="dd01_me">渠道ID</dd>
-					<dd class="dd03_me">
-						<input name="channelkey" value="<%=channelKey%>" type="text">
+						<input name="keyword" value="<%= keyWord %>" type="text">
 					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit">
@@ -165,8 +161,9 @@
 					<td>计费日期</td>
 					<td class="or">游戏</td>
 					<td class="or">渠道ID</td>
-					<td>计费条数</td>
+					<td>激活数</td>
 					<td class="or">计费金额</td>
+					<td class="or">同步金额</td>
 					<td>同步状态</td>
 				</tr>
 			</thead>
@@ -180,7 +177,7 @@
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td>
 						<%=model.getFeeDate()%>
-						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getAmount()%>" />
+						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getShowAmount() %>" />
 					</td>
 					<td class="or"><%=model.getAppName() + "("+ model.getAppKey() +")"%></td>
 					<td class="or"><%=model.getChannelId()%></td>
@@ -188,7 +185,11 @@
 						<%=model.getDataRows()%>
 					</td>
 					<td class="or" >
-						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getAmount())%></span>
+						<input type="hidden" id="ori_hid_<%= model.getId() %>" value="<%=model.getAmount()%>" />
+						<%= StringUtil.getDecimalFormat(model.getAmount()) %>
+					</td>
+					<td class="or" <%= model.getStatus()==0 ? "ondblclick='editShowData(" + model.getId() + ")'":"" %> >
+						<span id="span_<%= model.getId() %>"><%=StringUtil.getDecimalFormat(model.getShowAmount())%></span>
 					</td>
 					<td><%= model.getStatus()==1 ? "已同步":"未同步" %></td>
 				</tr>
@@ -202,14 +203,17 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td>实际总数:<%= map.get("data_rows") %></td>
+					<td>总激活数:<%= map.get("data_rows") %></td>
 					<td>
-						<span>总信息费:<label id="show_amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_amount")) %></label></span>
+						<span>总计费额:<label id="amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_amount")) %></label></span>
+					</td>
+					<td>
+						<span>总同步额:<label id="show_amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_show_amount")) %></label></span>
 					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>
