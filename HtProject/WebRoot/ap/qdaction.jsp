@@ -24,10 +24,15 @@
 	int typeId = StringUtil.getInteger(request.getParameter("Type_Id"), -1);
 	/*         用于返回当前页的数据参数        */
 	
+	int accountType = StringUtil.getInteger(request.getParameter("atype"), 1);
 	
-	if(remark.equals(""))
+	if(accountType==1)
 	{
-		remark = "";
+		int userId =  StringUtil.getInteger(request.getParameter("userid"), 0);
+		new ChannelServer().updateChannelAccount(id, userId);
+		String query = StringUtil.getString(request.getParameter("query"), "");
+		response.sendRedirect("channelacount.jsp?msg=1&id="+ id +"&query=" + query);
+		return;
 	}
 	
 	if(appid<0)

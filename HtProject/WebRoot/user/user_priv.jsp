@@ -118,7 +118,6 @@
 					<td>序号</td>
 					<td>登录名</td>
 					<td>昵称</td>
-					<td>创建者</td>
 					<td>Mail</td>
 					<td>QQ</td>
 					<td>电话</td>
@@ -136,7 +135,6 @@
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getName()%></td>
 					<td><%=model.getNickName()%></td>
-					<td><%= model.getCreateUser() %></td>
 					<td><%=model.getMail()%></td>
 					<td><%= model.getQq() %></td>
 					<td><%= model.getPhone() %></td>
@@ -151,7 +149,7 @@
 				%>
 			<tbody>
 				<tr>
-					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

@@ -1,4 +1,4 @@
-<%@page import="com.system.model.xy.XyUserModel"%>
+<%@page import="com.system.model.xy.XyUserCpsModel"%>
 <%@page import="com.system.constant.Constant"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="java.util.List"%>
@@ -25,18 +25,20 @@
   String endDate = StringUtil
 			.getString(request.getParameter("enddate"), defaultEndDate);
   
+  String keyWord = StringUtil.getString(request.getParameter("keyword"),"");
+  
   int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
   
-  Map<String,Object> map = new FeeServer().loadQdUserFee(startDate, endDate, userId, pageIndex);
+  Map<String,Object> map = new FeeServer().loadQdUserFee(startDate, endDate, userId,keyWord,pageIndex);
   
-  List<XyUserModel> list = (List<XyUserModel>)map.get("list");
+  List<XyUserCpsModel> list = (List<XyUserCpsModel>)map.get("list");
   
   int rowCount = (Integer)map.get("rows");
   
   Map<String,String> params = new HashMap<String,String>();
   
   params.put("startdate", startDate);
-  
+  params.put("keyword", keyWord);
   params.put("enddate", endDate);
   
   String pageData = PageUtil.initPageQuery("userfee.jsp",params,rowCount,pageIndex);
@@ -66,6 +68,10 @@
 						<input name="enddate" type="text" value="<%=endDate%>"
 							onclick="WdatePicker({isShowClear:false,readOnly:true})">
 					</dd>
+					<dd class="dd01_me">游戏名</dd>
+					<dd class="dd03_me">
+						<input name="keyword" value="<%= keyWord %>" type="text">
+					</dd>
 					<dd class="ddbtn" style="margin-left: 20px;">
 						<input class="btn_match" name="search" value="查 询" type="submit">
 					</dd>
@@ -85,12 +91,12 @@
 			<tbody>
 				<%
 					int rowNum =1;
-					for (XyUserModel model : list)
+					for (XyUserCpsModel model : list)
 					{
 				%>
 				<tr>
 					<td><%= (pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td><!-- 序号 -->
-					<td><%=model.getActiveDate()%></td>
+					<td><%=model.getFee_date() %></td>
 					<td class="or"><%=model.getAppName()%></td>
 					<td><%= model.getDataRows() %></td>
 					<td class="or"><%= StringUtil.getDecimalFormat((Double)model.getShowAmount()) %></td>

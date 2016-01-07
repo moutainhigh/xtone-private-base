@@ -391,7 +391,7 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">是否动态</dd>
+					<dd class="dd01_me">是否模糊</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="dynamic" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">是</label>

@@ -252,7 +252,7 @@ public class UserDao
 	@SuppressWarnings("unchecked")
 	public List<UserModel> loadUserByGroupId(int groupId)
 	{
-		String sql = "SELECT b.* FROM daily_config.`tbl_group_user` a LEFT JOIN daily_config.tbl_user b ON a.`user_id` = b.`id` WHERE a.`group_id` = " + groupId  ;
+		String sql = "SELECT b.* FROM daily_config.`tbl_group_user` a LEFT JOIN daily_config.tbl_user b ON a.`user_id` = b.`id` WHERE a.`group_id` = " + groupId + " order by b.name asc" ;
 		
 		return (List<UserModel>)new JdbcControl().query(sql, new QueryCallBack()
 		{

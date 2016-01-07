@@ -41,9 +41,9 @@ public class FeeServer
 		return new FeeDao().loadQdAppFee(startDate, endDate,userId,pageIndex);
 	}
 	
-	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,int pageIndex)
+	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,String keyWord,int pageIndex)
 	{
-		return new FeeDao().loadQdUserFee(startDate, endDate, userId, pageIndex);
+		return new FeeDao().loadQdUserFee(startDate, endDate, userId, keyWord,pageIndex);
 	}
 	
 	public void updateQdFeeSummer(String startDate,String endDate)

@@ -10,6 +10,7 @@ public class ChannelModel {
 	private String hold_percent; 
 	private int syn_type;
 	private int userid;
+	private String userName;
 	private String remark;
 	public int getId() {
 		return id;
@@ -70,6 +71,14 @@ public class ChannelModel {
 	}
 	public void setSettleType(int settleType) {
 		this.settleType = settleType;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 	
 }
