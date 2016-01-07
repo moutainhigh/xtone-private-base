@@ -247,6 +247,14 @@
 	<script type="text/javascript">
 $(function(){
 	$('.hot_list .hot_gamebox').hotlist();
+	function ishidden(){
+		var _this = $("#hide").parent();
+		if(_this.is(':hidden')){
+			_this.parent().show();
+			return;
+		}
+		_this.hide();
+	}
 })
 </script>
 </body>
