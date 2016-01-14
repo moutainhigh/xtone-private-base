@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.constant.Constant"%>
 <%@page import="com.system.util.PageUtil"%>
@@ -25,6 +26,8 @@
 	params.put("shortname", shortName);
 	
 	String pageData = PageUtil.initPageQuery("cp.jsp",params,rowCount,pageIndex);
+	
+	String query = Base64UTF.encode(request.getQueryString());
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -82,6 +85,7 @@
 					<td>邮箱</td>
 					<td>合同起始日</td>
 					<td>合同结束日</td>
+					<td>登录名</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -102,8 +106,10 @@
 					<td><%=model.getMail() %></td>
 					<td><%=model.getContractStartDate() %></td>
 					<td><%=model.getContractEndDate() %></td>
+					<td><%=model.getUserName() %></td>
 					<td>
 						<a href="cpedit.jsp?id=<%= model.getId() %>&pageindex=<%=pageIndex%>&fullname=<%=fullName%>&shortname=<%=shortName%>">修改</a>
+						<a href="cpaccount.jsp?id=<%= model.getId() %>&query=<%= query %>">用户分配</a>
 					</td>
 				</tr>
 				<%
@@ -112,7 +118,7 @@
 			</tbody>	
 			<tbody>
 				<tr>
-					<td colspan="11" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="12" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

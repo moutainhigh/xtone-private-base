@@ -184,6 +184,8 @@
 						<a href="channeledit.jsp?id=<%= model.getId() %>
 						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
+						<a href="channelaccount.jsp?id=<%= model.getId() %>
+						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">用户分配</a>
 					</td>
 				</tr>
 				<%
