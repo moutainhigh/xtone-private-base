@@ -80,7 +80,7 @@
 	<div class="main_content">
 		<div class="content" >
 			<dl>
-				<dd class="ddbtn" ><a href="useradd.jsp">增  加</a></dd>
+				<dd class="ddbtn" ><a href="user_priv_add.jsp">增  加</a></dd>
 			</dl>
 			<form action="user_priv.jsp"  method="get" style="margin-top: 10px">
 				<dl>

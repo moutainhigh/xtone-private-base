@@ -143,23 +143,23 @@ public class CpDao
 	
 	public Map<String, Object> loadCp(int pageIndex,String fullName,String shortName)
 	{
-		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from daily_config.tbl_cp where 1=1";
+		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from daily_config.tbl_cp a left join daily_config.tbl_user b on a.user_id = b.id where 1=1";
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		if(!StringUtil.isNullOrEmpty(fullName))
 		{
-			sql += " AND full_name LIKE '%"+fullName+"%' ";
+			sql += " AND a.full_name LIKE '%"+fullName+"%' ";
 		}
 		
 		if(!StringUtil.isNullOrEmpty(shortName))
 		{
-			sql += " AND short_name LIKE '%"+shortName+"%' ";
+			sql += " AND a.short_name LIKE '%"+shortName+"%' ";
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		sql += " order by convert(short_name using gbk) asc ";
+		sql += " order by convert(a.short_name using gbk) asc ";
 		
 		JdbcControl control = new JdbcControl();
 		map.put("rows",control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, "count(*)"), new QueryCallBack()
@@ -174,7 +174,7 @@ public class CpDao
 			}
 		}));
 		
-		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " * ") + limit, new QueryCallBack()
+		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " a.*,b.name,b.nick_name ") + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -195,6 +195,7 @@ public class CpDao
 					model.setAddress(StringUtil.getString(rs.getString("address"), ""));
 					model.setContractStartDate(StringUtil.getString(rs.getString("contract_start_date"), ""));
 					model.setContractEndDate(StringUtil.getString(rs.getString("contract_end_date"), ""));
+					model.setUserName(StringUtil.getString(rs.getString("nick_name"),""));
 					
 					list.add(model);
 				}
@@ -224,6 +225,7 @@ public class CpDao
 					model.setPhone(StringUtil.getString(rs.getString("phone"), ""));
 					model.setMail(StringUtil.getString(rs.getString("mail"), ""));
 					model.setAddress(StringUtil.getString(rs.getString("address"), ""));
+					model.setUserId(rs.getInt("user_id"));
 					model.setContractStartDate(StringUtil.getString(rs.getString("contract_start_date"), ""));
 					model.setContractEndDate(StringUtil.getString(rs.getString("contract_end_date"), ""));
 					return model;
@@ -258,5 +260,10 @@ public class CpDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	public boolean updateCpAccount(int cpId,int userId)
+	{
+		String sql = "update daily_config.tbl_cp set user_id = " + userId + " where id = " + cpId;
+		return new JdbcControl().execute(sql);
+	}
 	
 }
