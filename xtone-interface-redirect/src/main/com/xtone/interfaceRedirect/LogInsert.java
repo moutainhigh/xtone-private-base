@@ -10,6 +10,8 @@ import org.common.util.GenerateIdService;
 
 public class LogInsert implements Runnable {
   
+  private static final int LOG_ID=1;
+  
   private Long id ; 
   private String fromSource ; 
   private String userAgent ; 
@@ -72,9 +74,10 @@ public class LogInsert implements Runnable {
       Connection con = null;
       try{
         con = ConnectionService.getInstance().getConnectionForLocal();
-        ps = con.prepareStatement("insert into `click_catch_ghost_ads` (`id`,`fromSource`,`userAgent`,`toUrl`,`ip`) values (?,?,?,?,?)");
+        ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03,para04) values (?,?,?,?,?,?)");
         int m = 1;
         ps.setLong(m++, this.getId());
+        ps.setInt(m++, LOG_ID);
         ps.setString(m++, this.getFromSource());
         ps.setString(m++, this.getUserAgent());
         ps.setString(m++, this.getToUrl());
