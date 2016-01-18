@@ -66,7 +66,7 @@ function setRadioCheck(RadioName,value)
 
 function isNullOrEmpty(strVal) 
 {
-	if (strVal == '' || strVal == null || strVal == undefined) 
+	if (strVal == null || strVal == '' ||  strVal == undefined) 
 	{
 		return true;
 	} 
