@@ -1,4 +1,4 @@
-package com.xtone.interfaceRedirect;
+package com.x.interfaceRedirect;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +36,12 @@ public class Cg extends HttpServlet {
    *      response)
    */
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doRedirct(request, response);
+    try {
+      doRedirct(request, response);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -44,15 +49,22 @@ public class Cg extends HttpServlet {
    *      response)
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    doRedirct(request, response);
+    try {
+      doRedirct(request, response);
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
-  private void doRedirct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String targetUrl = "http://www.baidu.com";
+  private void doRedirct(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    String targetUrl = "http://vanggame.com";
     if (request.getHeader("user-agent") != null
         && (request.getHeader("user-agent").matches("(.*)iPhone(.*)") || request.getHeader("user-agent").matches(
             "(.*)iPod(.*)"))) {
-      targetUrl = "http://r.n8wan.com/";
+      targetUrl = CacheConfig.getInstance().getNameLoadingCache("apple");
+    }else{
+      targetUrl = CacheConfig.getInstance().getNameLoadingCache("android");
     }
     ThreadPool.mThreadPool.execute(new LogInsert(request.getParameter("f"), request.getHeader("user-agent"), targetUrl, request.getHeader("X-Real-IP")!=null?request.getHeader("X-Real-IP"):request.getRemoteAddr()));
     response.sendRedirect(targetUrl);

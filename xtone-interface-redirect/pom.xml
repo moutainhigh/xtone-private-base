@@ -23,6 +23,11 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.xtone.common</groupId>
 			<artifactId>xtone-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>

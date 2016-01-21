@@ -1,4 +1,4 @@
-package com.xtone.interfaceRedirect;
+package com.x.interfaceRedirect;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
