@@ -22,9 +22,7 @@ public class DaoConfig {
       int m = 1;
       ps.setString(m++, title);
       rs = ps.executeQuery();
-      LOG.debug("SQL:"+sql);
       while (rs.next()) {
-        LOG.debug("get record:"+rs.getString("targetUrl"));
         result = rs.getString("targetUrl");
       }
     } catch (Exception e) {

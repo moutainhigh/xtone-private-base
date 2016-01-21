@@ -20,7 +20,7 @@ public class CacheConfig {
   }
   static{
     cache = CacheBuilder.newBuilder().maximumSize(20)// 设置大小，条目数
-        .expireAfterWrite(5, TimeUnit.SECONDS)// 设置失效时间，创建时间
+        .expireAfterWrite(10, TimeUnit.SECONDS)// 设置失效时间，创建时间
         .expireAfterAccess(20, TimeUnit.HOURS) // 设置时效时间，最后一次被访问
         .removalListener(new RemovalListener<String, String>() { // 移除缓存的监听器
               public void onRemoval(RemovalNotification<String, String> notification) {
@@ -29,7 +29,6 @@ public class CacheConfig {
               @Override
               public String load(String name) throws Exception {
                 DaoConfig daoConfig = new DaoConfig();
-                LOG.debug("load work:"+name);
                 return daoConfig.getTargetUrlByTitle(name);
               }
             });
