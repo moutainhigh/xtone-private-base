@@ -13,6 +13,7 @@
 	float holdAmount = StringUtil.getFloat(request.getParameter("hold_amount"), 0);
 	String url = StringUtil.getString(request.getParameter("url"), "");
 	int cpId = StringUtil.getInteger(request.getParameter("cp_id"), 0);
+	int holdStartCount = StringUtil.getInteger(request.getParameter("hold_start_count"), 0);
 	
 	String query = StringUtil.getString(request.getParameter("query"),"");
 	
@@ -23,6 +24,7 @@
 	model.setUrl(url);
 	model.setHoldAmount(holdAmount);
 	model.setHoldPercent(holdPercent);
+	model.setHoldStartCount(holdStartCount);
 	model.setCpId(cpId);
 	
 	if(id>0)

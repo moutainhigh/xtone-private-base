@@ -17,12 +17,14 @@ public class SpTroneDao
 {
 	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,String spTroneName)
 	{
-		String query = " a.*,b.short_name,c.`name_cn` ";
+		String query = " a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name ";
 		
 		String sql = "SELECT " + Constant.CONSTANT_REPLACE_STRING;
 		sql += " FROM daily_config.`tbl_sp_trone` a";
 		sql += " LEFT JOIN daily_config.`tbl_sp` b ON a.`sp_id` = b.`id`";
-		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id` where 1=1 ";
+		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id` ";
+		sql += " LEFT JOIN daily_config.tbl_sp_trone_api d on a.trone_api_id = d.id";
+		sql += " where 1=1 ";
 		
 		if(spId>0)
 		{
@@ -71,6 +73,9 @@ public class SpTroneDao
 					model.setJieSuanLv(rs.getFloat("jiesuanlv"));
 					model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
 					model.setTroneType(rs.getInt("trone_type"));
+					model.setStatus(rs.getInt("status"));
+					model.setTroneApiId(rs.getInt("trone_api_id"));
+					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
 					
 					list.add(model);
 				}
@@ -85,10 +90,11 @@ public class SpTroneDao
 	@SuppressWarnings("unchecked")
 	public List<SpTroneModel> loadSpTroneList()
 	{
-		String sql = "SELECT  a.*,b.short_name,c.`name_cn`  ";
+		String sql = "SELECT  a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name   ";
 		sql += " FROM daily_config.`tbl_sp_trone` a";
 		sql += " LEFT JOIN daily_config.`tbl_sp` b ON a.`sp_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_sp_trone_api d on a.trone_api_id = d.id";
 		
 		
 		return (List<SpTroneModel>)new JdbcControl().query(sql, new QueryCallBack()
@@ -110,6 +116,9 @@ public class SpTroneDao
 					model.setJieSuanLv(rs.getFloat("jiesuanlv"));
 					model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
 					model.setTroneType(rs.getInt("trone_type"));
+					model.setStatus(rs.getInt("status"));
+					model.setTroneApiId(rs.getInt("trone_api_id"));
+					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
 					
 					list.add(model);
 				}
@@ -122,10 +131,11 @@ public class SpTroneDao
 	@SuppressWarnings("unchecked")
 	public List<SpTroneModel> loadSpTroneList(int spId)
 	{
-		String sql = "SELECT  a.*,b.short_name,c.`name_cn`  ";
+		String sql = "SELECT  a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name   ";
 		sql += " FROM daily_config.`tbl_sp_trone` a";
 		sql += " LEFT JOIN daily_config.`tbl_sp` b ON a.`sp_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_sp_trone_api d on a.trone_api_id = d.id";
 		sql += " where b.id =" + spId;
 		
 		return (List<SpTroneModel>)new JdbcControl().query(sql, new QueryCallBack()
@@ -147,6 +157,9 @@ public class SpTroneDao
 					model.setJieSuanLv(rs.getFloat("jiesuanlv"));
 					model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
 					model.setTroneType(rs.getInt("trone_type"));
+					model.setStatus(rs.getInt("status"));
+					model.setTroneApiId(rs.getInt("trone_api_id"));
+					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
 					
 					list.add(model);
 				}
@@ -198,10 +211,11 @@ public class SpTroneDao
 	
 	public SpTroneModel loadSpTroneById(int id)
 	{
-		String sql = "SELECT  a.*,b.short_name,c.`name_cn`  ";
+		String sql = "SELECT  a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name   ";
 		sql += " FROM daily_config.`tbl_sp_trone` a";
 		sql += " LEFT JOIN daily_config.`tbl_sp` b ON a.`sp_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_sp_trone_api d on a.trone_api_id = d.id";
 		sql += " WHERE a.id = " + id;
 		
 		return (SpTroneModel)new JdbcControl().query(sql, new QueryCallBack()
@@ -222,6 +236,9 @@ public class SpTroneDao
 					model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
 					model.setProvinces(StringUtil.getString(rs.getString("provinces"), ""));
 					model.setTroneType(rs.getInt("trone_type"));
+					model.setStatus(rs.getInt("status"));
+					model.setTroneApiId(rs.getInt("trone_api_id"));
+					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
 					
 					return model;
 				}
@@ -233,10 +250,10 @@ public class SpTroneDao
 	
 	public boolean addSpTrone(SpTroneModel model)
 	{
-		String sql = "insert into daily_config.tbl_sp_trone(sp_id,name,operator,jiesuanlv,provinces,create_date,trone_type) values("
+		String sql = "insert into daily_config.tbl_sp_trone(sp_id,name,operator,jiesuanlv,provinces,create_date,trone_type,trone_api_id,status) values("
 				+ model.getSpId() + ",'" + model.getSpTroneName() + "',"
 				+ model.getOperator() + "," + model.getJieSuanLv() + ",'"
-				+ model.getProvinces() + "',now()," + model.getTroneType() + ")";
+				+ model.getProvinces() + "',now()," + model.getTroneType() + ","+ model.getTroneApiId() +","+ model.getStatus() +")";
 		return new JdbcControl().execute(sql);
 	}
 	
@@ -246,7 +263,7 @@ public class SpTroneDao
 				+ model.getSpId() + " ,name = '" + model.getSpTroneName()
 				+ "',operator = " + model.getOperator() + ", jiesuanlv = "
 				+ model.getJieSuanLv() + ",provinces = '" + model.getProvinces()
-				+ "',trone_type = " + model.getTroneType() + " where id =" + model.getId();
+				+ "',trone_type = " + model.getTroneType() + ",trone_api_id = " + model.getTroneApiId() + ",status = " + model.getStatus() + " where id =" + model.getId();
 		
 		return new JdbcControl().execute(sql);
 	}

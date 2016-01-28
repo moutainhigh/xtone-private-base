@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.server.SpServer"%>
 <%@page import="com.system.model.SpModel"%>
 <%@page import="com.system.constant.Constant"%>
@@ -13,7 +14,7 @@
 <%
 	String spTroneName = StringUtil.getString(request.getParameter("sp_trone_name"), "");
 
-	String query = request.getQueryString();
+	String query = Base64UTF.encode(request.getQueryString());
 
 	int spId = StringUtil.getInteger(request.getParameter("sp_id"), -1);
 
@@ -118,6 +119,7 @@
 					<td>业务名称</td>
 					<td>类型</td>
 					<td>结算率</td>
+					<td>状态</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -134,7 +136,8 @@
 					<td><%=model.getSpTroneName()%></td>
 					<td><%= troneTypes[model.getTroneType()]%></td>
 					<td><%=model.getJieSuanLv()%></td>
-					<td><a href="sptroneedit.jsp?<%= query %>&id=<%= model.getId() %>">修改</a>
+					<td><%= model.getStatus()==1 ? "开启" : "关闭" %></td>
+					<td><a href="sptroneedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 						<a href="#" onclick="delSpTrone(<%=model.getId()%>)">删除</a></td>
 				</tr>
 				<%

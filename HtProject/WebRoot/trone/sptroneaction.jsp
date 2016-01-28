@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="com.system.server.SpTroneServer"%>
 <%@page import="com.system.model.SpTroneModel"%>
@@ -5,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String query = request.getQueryString();
+	String query = Base64UTF.decode(StringUtil.getString(request.getParameter("query"), ""));
 	query = PageUtil.queryFilter(query, "id");
 	int delId = StringUtil.getInteger(request.getParameter("did"), -1);
 	if(delId>0)
@@ -22,6 +23,8 @@
 	float jieSuanLv = StringUtil.getFloat(request.getParameter("jiesuanlv"), 0.0F);
 	String provinces = StringUtil.mergerStrings(request.getParameterValues("area[]"), ",");
 	int troneType = StringUtil.getInteger(request.getParameter("trone_type"), 0);
+	int troneApiId = StringUtil.getInteger(request.getParameter("sp_trone_api"), 0);
+	int status = StringUtil.getInteger(request.getParameter("status"), 0);
 	
 	SpTroneModel model = new SpTroneModel();
 	model.setSpId(spId);
@@ -31,6 +34,8 @@
 	model.setProvinces(provinces);
 	model.setId(id);
 	model.setTroneType(troneType);
+	model.setTroneApiId(troneApiId);
+	model.setStatus(status);
 	
 	if(id==-1)
 		new SpTroneServer().addSpTrone(model); 

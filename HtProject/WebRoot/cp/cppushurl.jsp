@@ -110,6 +110,7 @@
 					<td>CP</td>
 					<td>名字</td>
 					<td>URL</td>
+					<td>起扣条数</td>
 					<td>扣量百分比</td>
 					<td>当日最大同步金额</td>
 					<td>操作</td>
@@ -126,7 +127,7 @@
 					<td><%= model.getCpName() %></td>
 					<td><%= model.getName() %></td>
 					<td><%= model.getUrl()  %></td>
-					
+					<td><%= model.getHoldStartCount() %></td>
 					<td><%= model.getHoldPercent() %></td>
 					<td><%= model.getHoldAmount()  %></td>
 					<td>

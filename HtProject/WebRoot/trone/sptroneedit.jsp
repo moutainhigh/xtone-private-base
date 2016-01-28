@@ -1,3 +1,5 @@
+<%@page import="com.system.server.SpTroneApiServer"%>
+<%@page import="com.system.model.SpTroneApiModel"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="com.system.server.SpTroneServer"%>
 <%@page import="com.system.model.SpTroneModel"%>
@@ -17,7 +19,7 @@
 <%
 	int spTroneId = StringUtil.getInteger(request.getParameter("id"), -1);
 	SpTroneModel spTroneModel = new SpTroneServer().loadSpTroneById(spTroneId);
-	String query = request.getQueryString();
+	String query = StringUtil.getString(request.getParameter("query"), "");
 	query = PageUtil.queryFilter(query, "id");
 	if(spTroneModel==null)
 	{
@@ -26,6 +28,7 @@
 	}
 	List<SpModel> spList = new SpServer().loadSp();
 	List<ProvinceModel> provinceList = new ProvinceServer().loadProvince();
+	List<SpTroneApiModel> spTroneApiList = new SpTroneApiServer().loadSpTroneApi();
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -112,9 +115,11 @@
 		$("#sel_operator").val("<%= spTroneModel.getOperator() %>");
 		$("#input_sp_trone_name").val("<%= spTroneModel.getSpTroneName() %>");
 		$("#input_jiesuanlv").val("<%= spTroneModel.getJieSuanLv() %>");
+		$("#sel_sp_trone_api").val("<%= spTroneModel.getTroneApiId() %>");
 		var provinceIds = "<%= spTroneModel.getProvinces() %>";
 		var provinces = provinceIds.split(",");
 		setRadioCheck("trone_type",<%= spTroneModel.getTroneType() %>);
+		setRadioCheck("status",<%= spTroneModel.getStatus() %>);
 		unAllCkb();
 		$('[name=area[]]:checkbox').each(function() {
 			
@@ -177,7 +182,7 @@
 		
 		var provinces = new Array();
 		
-		unAllCkb();
+		//unAllCkb();
 		
 		for(var i=0; i<proNameList.length; i++)
 		{
@@ -209,7 +214,7 @@
 	<div class="main_content">
 		<div class="content" style="margin-top: 10px">
 			<dl>
-				<form action="sptroneaction.jsp?<%= query %>" method="post" id="addform">
+				<form action="sptroneaction.jsp?query=<%= query %>" method="post" id="addform">
 					<table>
 						<thead>
 							<td style="text-align: left">修改SP业务</td>
@@ -260,6 +265,35 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">结算率</dd>
+					<dd class="dd03_me">
+						<input type="text" name="jiesuanlv" title="结算率" id="input_jiesuanlv"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">业务API</dd>
+					<dd class="dd04_me">
+						<select name="sp_trone_api" id="sel_sp_trone_api" title="选择业务API" style="width: 200px">
+							<option value="-1">请选择业务API</option>
+							<%
+								for (SpTroneApiModel spTroneApiModel : spTroneApiList)
+								{
+							%>
+							<option value="<%=spTroneApiModel.getId()%>"><%= spTroneApiModel.getName() %></option>
+							<%
+								}
+							%>
+						</select>
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">业务类型</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="trone_type" style="width: 35px;float:left" value="0" checked="checked" >
@@ -274,10 +308,12 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">结算率</dd>
+					<dd class="dd01_me">状态</dd>
 					<dd class="dd03_me">
-						<input type="text" name="jiesuanlv" title="结算率" id="input_jiesuanlv"
-							style="width: 200px">
+						<input type="radio" name="status" style="width: 35px;float:left" value="1" >
+						<label style="font-size: 14px;float:left">开启</label>
+						<input type="radio" name="status" style="width: 35px;float:left" value="0" >
+						<label style="font-size: 14px;float:left">关闭</label>
 					</dd>
 
 					<br />

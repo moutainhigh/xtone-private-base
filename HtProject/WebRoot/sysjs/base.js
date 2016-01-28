@@ -81,7 +81,7 @@ function getAjaxValue(url,onSuccess)
 	$.ajax(
 	{
 		url: url,
-		type : "get",
+		type : "post",
 		async: true,
 		success:function(data)
 		{
