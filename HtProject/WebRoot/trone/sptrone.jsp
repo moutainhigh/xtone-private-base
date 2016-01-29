@@ -126,10 +126,11 @@
 			<tbody>
 				<%
 					int rowNum = 1;
+					String stopStyle = "class=\"StopStyle\"";
 					for (SpTroneModel model : list)
 					{
 				%>
-				<tr>
+				<tr <%= model.getStatus()==0 ? stopStyle : "" %>>
 					<td><%=(pageIndex - 1) * Constant.PAGE_SIZE + rowNum++%></td>
 					<td><%=model.getSpName()%></td>
 					<td><%=model.getOperatorName()%></td>

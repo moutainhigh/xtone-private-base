@@ -43,6 +43,11 @@ public class TroneServer
 		new TroneDao().addTrone(model);
 	}
 	
+	public int insertTrone(TroneModel model)
+	{
+		return new TroneDao().insertTrone(model);
+	}
+	
 	public void updateTrone(TroneModel model)
 	{
 		new TroneDao().updateTrone(model);

@@ -330,6 +330,27 @@ public class TroneDao
 		return new JdbcControl().execute(sql, map);
 	}
 	
+	public int insertTrone(TroneModel model)
+	{
+		String sql = "insert into daily_config.tbl_trone(sp_id,sp_api_url_id,trone_name,orders,trone_num,sp_trone_id,price,is_dynamic,match_price) values(?,?,?,?,?,?,?,?,?)";
+		
+		Map<Integer,Object> map = new HashMap<Integer, Object>();
+		
+		map.put(1,model.getSpId());
+		map.put(2,model.getSpApiUrlId());
+		map.put(3,model.getTroneName());
+		map.put(4,model.getOrders());
+		map.put(5,model.getTroneNum());
+		map.put(6,model.getSpTroneId());
+		map.put(7,model.getPrice());
+		map.put(8,model.getDynamic());
+		map.put(9,model.getMatchPrice());
+		
+		return new JdbcControl().insertWithGenKey(sql, map);
+	}
+	
+	
+	
 	public boolean updateTrone(TroneModel model)
 	{
 		String sql = "update daily_config.tbl_trone set sp_id = ?,sp_api_url_id = ?,trone_name = ?,orders = ?,trone_num = ?,sp_trone_id = ?,price = ?,is_dynamic = ?,match_price = ?,status = ? where id = ?";

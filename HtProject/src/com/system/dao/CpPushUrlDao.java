@@ -90,6 +90,8 @@ public class CpPushUrlDao
 					model.setHoldStartCount(rs.getInt("hold_start"));
 					model.setIsRealTime(rs.getInt("is_realtime"));
 					model.setCpName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setCurAmount(rs.getFloat("amount"));
+					model.setLastDate(StringUtil.getString(rs.getString("lastDate"), ""));
 					
 					list.add(model);
 				}

@@ -224,10 +224,11 @@
 			<tbody>
 				<%
 					int rowNum = 1;
+					String stopStyle = "class=\"StopStyle\"";
 					for (TroneOrderModel model : list)
 					{
 				%>
-				<tr>
+				<tr <%= model.getDisable() == 1 ? stopStyle : "" %>>
 					<td><%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getCpShortName()%></td>
 					<td><%=model.getSpShortName() %></td>
