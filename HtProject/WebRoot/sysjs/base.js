@@ -92,7 +92,7 @@ function getAjaxValue(url,onSuccess)
 
 function isPositiveInteger(value)
 {
-	 if((/^(\+|-)?\d+$/.test(value)) && value>0 )
+	 if((/^(\+|-)?\d+$/.test(value)) && value>=0 )
 		 return true;
 	 
 	 return false;

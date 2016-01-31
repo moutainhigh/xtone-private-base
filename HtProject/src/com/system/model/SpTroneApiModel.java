@@ -7,7 +7,7 @@ public class SpTroneApiModel
 	private int matchField;
 	private String matchKeyword;
 	private String apiFields;
-	private int loaclMatch;
+	private int locateMatch;
 	private float userDayLimit;
 	private float userMonthLimit;
 	private float dayLimit;
@@ -54,14 +54,6 @@ public class SpTroneApiModel
 	public void setApiFields(String apiFields)
 	{
 		this.apiFields = apiFields;
-	}
-	public int getLoaclMatch()
-	{
-		return loaclMatch;
-	}
-	public void setLoaclMatch(int loaclMatch)
-	{
-		this.loaclMatch = loaclMatch;
 	}
 	public float getUserDayLimit()
 	{
@@ -110,6 +102,14 @@ public class SpTroneApiModel
 	public void setCurMonthLimit(float curMonthLimit)
 	{
 		this.curMonthLimit = curMonthLimit;
+	}
+	public int getLocateMatch()
+	{
+		return locateMatch;
+	}
+	public void setLocateMatch(int locateMatch)
+	{
+		this.locateMatch = locateMatch;
 	}
 	
 }
