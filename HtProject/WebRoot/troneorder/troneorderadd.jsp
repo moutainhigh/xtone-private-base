@@ -191,7 +191,7 @@
 		for(i=0; i<cpTroneOrderArray.length; i++)
 		{
 			cpTroneOrder = cpTroneOrderArray[i]
-			divInnerHtml += "<span>"+ cpTroneOrder.cpShortName + "-" + cpTroneOrder.orderNum + "-" + (cpTroneOrder.disable==0 ? "启用" : "停用") +"</span>";	
+			divInnerHtml += "<span>"+ cpTroneOrder.cpShortName + "-" + cpTroneOrder.orderNum + "-" + (cpTroneOrder.disable==0 ? "启用" : "停用") +"</span><br />";	
 		}
 		
 		cpTroneListDiv.innerHTML = divInnerHtml;

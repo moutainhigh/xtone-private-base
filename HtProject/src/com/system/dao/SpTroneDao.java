@@ -17,7 +17,7 @@ public class SpTroneDao
 {
 	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,int userId,String spTroneName)
 	{
-		String query = " a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name,e.name commerce_name ";
+		String query = " a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name,e.nick_name commerce_name ";
 		
 		String sql = "SELECT " + Constant.CONSTANT_REPLACE_STRING;
 		sql += " FROM daily_config.`tbl_sp_trone` a";

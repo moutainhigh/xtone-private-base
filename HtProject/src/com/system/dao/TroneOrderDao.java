@@ -182,7 +182,7 @@ public class TroneOrderDao
 		});
 	}
 	
-	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex)
+	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex,String keyWord)
 	{
 		String query = " b.sp_trone_id,c.`name` sp_trone_name,a.*, b.price,d.id sp_id, b.`trone_name`,d.`short_name` sp_name,e.`short_name` cp_name ";
 		
@@ -203,6 +203,15 @@ public class TroneOrderDao
 			wheres += " and e.id = " + cpId;
 		if(status>=0)
 			wheres += " and a.disable = " + status;
+		
+		if(!StringUtil.isNullOrEmpty(keyWord))
+		{
+			wheres += " and (d.short_name like '%" + keyWord + "%' or d.full_name like '%" + keyWord 
+					+ "%' or e.short_name like '%" + keyWord + "%' or e.full_name like '%" + keyWord 
+					+ "%' or c.name like '%" + keyWord + "%' or b.orders like '%" + keyWord 
+					+ "%' or b.trone_name like '%" + keyWord + "%' or b.trone_num like '%" 
+					+ keyWord + "%' OR a.`order_num` LIKE '%"+ keyWord +"%')";
+		}
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		

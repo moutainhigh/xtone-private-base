@@ -45,6 +45,18 @@
 <script type="text/javascript" src="../sysjs/pinyin.js"></script>
 <script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
+
+	var provinceList = new Array();
+	
+	<%
+	for(ProvinceModel proModel : provinceList)
+	{
+		%>
+		provinceList.push(new joSelOption(<%= proModel.getId() %>,1,'<%= proModel.getName() %>'));
+		<%
+	}
+	%>
+
 	var spList = new Array();
 	<%
 	for(SpModel spModel : spList)

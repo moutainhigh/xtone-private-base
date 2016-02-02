@@ -29,8 +29,10 @@
 	int spTroneId = StringUtil.getInteger(request.getParameter("sp_trone_id"), -1);
 	
 	int status = StringUtil.getInteger(request.getParameter("trone_status"), -1);
+	
+	String	keyWord = StringUtil.getString(request.getParameter("keyword"), "");
 
-	Map<String, Object> map =  new TroneOrderServer().loadTroneOrder(spId, spTroneId, cpId,status,pageIndex);
+	Map<String, Object> map =  new TroneOrderServer().loadTroneOrder(spId, spTroneId, cpId,status,pageIndex,keyWord);
 		
 	List<TroneOrderModel> list = (List<TroneOrderModel>)map.get("list");
 	
@@ -49,6 +51,7 @@
 	params.put("cp_id", cpId + "");
 	params.put("sp_trone_id", spTroneId + "");
 	params.put("trone_status",status + "");
+	params.put("keyword",keyWord);
 	
 	String pageData = PageUtil.initPageQuery("troneorder.jsp",params,rowCount,pageIndex);
 	
@@ -197,6 +200,10 @@
 							<option value="0">启用</option>
 							<option value="1">停用</option>
 						</select>
+					</dd>
+					<dd class="dd01_me">关键字</dd>
+					<dd class="dd03_me">
+						<input type="text" name="keyword" id="sel_keyword" value="<%= keyWord %>" />
 					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查     询" type="submit" />
