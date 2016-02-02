@@ -15,15 +15,16 @@ import com.system.util.StringUtil;
 
 public class SpTroneDao
 {
-	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,String spTroneName)
+	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,int userId,String spTroneName)
 	{
-		String query = " a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name ";
+		String query = " a.*,b.short_name,c.`name_cn`,d.id trone_api_id,d.name trone_api_name,e.name commerce_name ";
 		
 		String sql = "SELECT " + Constant.CONSTANT_REPLACE_STRING;
 		sql += " FROM daily_config.`tbl_sp_trone` a";
 		sql += " LEFT JOIN daily_config.`tbl_sp` b ON a.`sp_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_operator` c ON a.operator = c.`id` ";
 		sql += " LEFT JOIN daily_config.tbl_sp_trone_api d on a.trone_api_id = d.id";
+		sql += " LEFT JOIN daily_config.tbl_user e on b.commerce_user_id = e.id";
 		sql += " where 1=1 ";
 		
 		if(spId>0)
@@ -31,9 +32,14 @@ public class SpTroneDao
 			sql +=  " and b.id =" + spId;
 		}
 		
+		if(userId>0)
+		{
+			sql  += " and e.id = " + userId;
+		}
+		
 		if(!StringUtil.isNullOrEmpty(spTroneName))
 		{
-			sql += " and name like '%" + spTroneName + "%' ";
+			sql += " and (a.name like '%" + spTroneName + "%' or e.name like '%" + spTroneName + "%' )";
 		}
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
@@ -75,6 +81,7 @@ public class SpTroneDao
 					model.setTroneType(rs.getInt("trone_type"));
 					model.setStatus(rs.getInt("status"));
 					model.setTroneApiId(rs.getInt("trone_api_id"));
+					model.setCommerceUserName(StringUtil.getString(rs.getString("commerce_name"),""));
 					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
 					
 					list.add(model);
@@ -178,6 +185,46 @@ public class SpTroneDao
 		sql += " LEFT JOIN daily_config.`tbl_sp_trone` c ON b.`sp_trone_id` = c.`id`";
 		sql += " LEFT JOIN daily_config.tbl_cp e ON a.`cp_id` = e.`id`";
 		sql += " WHERE e.`user_id` = " + userId;
+		sql += " GROUP BY c.id;";
+		
+		
+		return (List<SpTroneModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<SpTroneModel> list = new ArrayList<SpTroneModel>();
+				
+				while(rs.next())
+				{
+					SpTroneModel model = new SpTroneModel();
+					
+					model.setId(rs.getInt("id"));
+					//model.setSpId(rs.getInt("sp_id"));
+					//model.setSpName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setSpTroneName(StringUtil.getString(rs.getString("name"), ""));
+					model.setOperator(rs.getInt("operator"));
+					//model.setJieSuanLv(rs.getFloat("jiesuanlv"));
+					//model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
+					model.setTroneType(rs.getInt("trone_type"));
+					
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SpTroneModel> loadTroneListByCpid(int cpId)
+	{
+		String sql = " SELECT c.id,c.`name`,c.`trone_type`,c.operator";
+		sql += " FROM daily_config.`tbl_trone_order` a";
+		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` c ON b.`sp_trone_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.tbl_cp e ON a.`cp_id` = e.`id`";
+		sql += " WHERE e.`id` = " + cpId + " and c.trone_api_id > 0";
 		sql += " GROUP BY c.id;";
 		
 		

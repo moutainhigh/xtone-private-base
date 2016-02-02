@@ -42,4 +42,14 @@ public class TroneOrderServer
 	{
 		return new TroneOrderDao().loadTroneOrderListBySpTroneId(spTroneId);				
 	}
+	
+	public List<TroneOrderModel> loadTroneOrderListByTroneId(int troneId)
+	{
+		return new TroneOrderDao().loadTroneOrderListByTroneId(troneId);				
+	}
+	
+	public List<TroneOrderModel> loadTroneOrderListByCpSpTroneId(int cpId,int spTroneId,int status)
+	{
+		return new TroneOrderDao().loadTroneOrderListByCpSpTroneId(cpId, spTroneId, status);
+	}
 }

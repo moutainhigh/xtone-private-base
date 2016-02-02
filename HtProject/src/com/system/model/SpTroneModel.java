@@ -5,6 +5,7 @@ public class SpTroneModel
 	private int id;
 	private int spId;
 	private String spName;
+	private String commerceUserName;
 	private String spTroneName;
 	private int operator;
 	private String operatorName;
@@ -110,5 +111,13 @@ public class SpTroneModel
 	public void setTroneApiName(String troneApiName)
 	{
 		this.troneApiName = troneApiName;
+	}
+	public String getCommerceUserName()
+	{
+		return commerceUserName;
+	}
+	public void setCommerceUserName(String commerceUserName)
+	{
+		this.commerceUserName = commerceUserName;
 	}
 }
