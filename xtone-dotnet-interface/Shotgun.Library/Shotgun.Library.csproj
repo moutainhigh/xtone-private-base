@@ -91,6 +91,7 @@
     <Compile Include="Library\ExtensionLightData.cs" />
     <Compile Include="Library\ExtensionListitem.cs" />
     <Compile Include="Library\math2.cs" />
+    <Compile Include="Library\PinYinConverter.cs" />
     <Compile Include="Library\Static_Json.cs" />
     <Compile Include="Model\List\IDBQueries.cs" />
     <Compile Include="Security\AdminCookieEnCode.cs" />

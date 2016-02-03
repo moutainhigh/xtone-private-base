@@ -68,6 +68,10 @@ namespace LightDataModel
             /// 扣量周期，已经扣除量
             /// </summary>
             public const string hold_CycProc = "hold_CycProc";
+            /// <summary>
+            /// 已经推送条数
+            /// </summary>
+            public const string push_count = "push_count";
 
             #endregion
 
@@ -117,6 +121,10 @@ namespace LightDataModel
         /// 扣量周期，已经扣除量
         /// </summary>
         private int _hold_CycProc;
+        /// <summary>
+        /// 已经推送条数
+        /// </summary>
+        private int _push_count;
 
         #endregion
 
@@ -382,6 +390,27 @@ namespace LightDataModel
                 this._hold_CycProc = value;
             }
         }
+        /// <summary>
+        /// 已经推送条数
+        /// </summary>
+        public int push_count
+        {
+            get { return this._push_count; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.push_count);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.push_count);
+                else
+                    RemoveNullFlag(Fields.push_count);
+#endif
+
+                SetFieldHasUpdate(Fields.push_count, this._push_count, value);
+                this._push_count = value;
+            }
+        }
 
         #endregion
         #region 空值相关方法
@@ -400,6 +429,7 @@ namespace LightDataModel
 ,"is_realtime"
 ,"hold_CycCount"
 ,"hold_CycProc"
+,"push_count"
 };
         }
         public bool IsnameNull() { return IsNull(Fields.name); }
@@ -438,6 +468,9 @@ namespace LightDataModel
         public bool Ishold_CycProcNull() { return IsNull(Fields.hold_CycProc); }
 
         public void Sethold_CycProcNull() { SetNull(Fields.hold_CycProc); }
+        public bool Ispush_countNull() { return IsNull(Fields.push_count); }
+
+        public void Setpush_countNull() { SetNull(Fields.push_count); }
 
         #endregion
         #region 静态方法

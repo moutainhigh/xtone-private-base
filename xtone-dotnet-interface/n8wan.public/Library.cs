@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -180,6 +181,67 @@ namespace n8wan.Public
                 }
             }
             return strReturn;
+        }
+
+
+        /// <summary>
+        /// 下载远程代码
+        /// </summary>
+        /// <param name="url">目标网址</param>
+        /// <param name="postdata">post数据,NULL时为GET</param>
+        /// <param name="timeout">超时时间,单位为毫秒,默认:3秒</param>
+        /// <param name="encode">编码方式,默认utf8</param>
+        /// <returns></returns>
+        public static string DownloadHTML(string url, string postdata, int timeout, string encode)
+        {
+
+            Encoding ec = null;
+            if (string.IsNullOrEmpty(encode))
+                ec = ASCIIEncoding.UTF8;
+            else
+                ec = ASCIIEncoding.GetEncoding(encode);
+
+            System.Net.HttpWebRequest web = null;
+            web = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
+            System.Net.HttpWebResponse rsp = null;
+            web.Timeout = timeout < 1 ? 2888 : timeout;
+            web.AllowAutoRedirect = false;
+            web.AutomaticDecompression = System.Net.DecompressionMethods.GZip;
+            web.ServicePoint.UseNagleAlgorithm = false;
+
+            if (postdata != null)
+            {
+                web.ServicePoint.Expect100Continue = false;
+                web.Method = "POST";
+                var bin = ec.GetBytes(postdata);
+                using (var stm = web.GetRequestStream())
+                {
+                    stm.Write(bin, 0, bin.Length);
+                }
+            }
+
+            try
+            {
+                rsp = (System.Net.HttpWebResponse)web.GetResponse();
+            }
+            catch
+            {
+                return null;
+            }
+            try
+            {
+                using (var stm = rsp.GetResponseStream())
+                {
+                    using (var rd = new System.IO.StreamReader(stm, ec))
+                        return rd.ReadToEnd();
+                }
+            }
+            catch //(Exception ex)
+            {
+                //msg = ex.Message;
+            }
+            return null;
+
         }
 
     }

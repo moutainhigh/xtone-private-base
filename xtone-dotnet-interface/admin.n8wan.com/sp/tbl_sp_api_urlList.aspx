@@ -1,10 +1,18 @@
 ﻿<%@ Page Title="SP同步地址列表" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="tbl_sp_api_urlList.aspx.cs" Inherits="sp_tbl_sp_api_urlList" %>
-
+<script runat="server">
+    string urlPfx;
+    protected override void OnLoad(EventArgs e)
+    {
+        urlPfx = System.Configuration.ConfigurationManager.AppSettings["syncUrlPerfix"];
+        base.OnLoad(e);
+    }
+        
+</script>
 <asp:Content runat="server" ContentPlaceHolderID="head">
     <style type="text/css">
         .del { text-decoration: line-through; }
     </style>
-
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="body" runat="Server">
     <form method="get">
@@ -37,11 +45,11 @@
                 <td><%#Eval("id","{0}") %></td>
                 <td><%#GetSpName((int)Eval("sp_id")) %></td>
                 <td><%#Eval("name") %></td>
-                <td>http://120.26.217.63:2109<%#Eval("urlPath") %></td>
+                <td><%#urlPfx %><%#Eval("urlPath") %></td>
                 <td>
                     <a href="tbl_sp_api_urlEditor.aspx?id=<%#Eval("id") %>">编辑</a>
                     <a href="tbl_troneList.aspx?urlId=<%#Eval("id") %>">指令列表</a>
-                    <a href="del_sp_api_url.aspx?spid=<%#Eval("id") %>">删除</a>
+                   <%-- <a href="del_sp_api_url.aspx?spid=<%#Eval("id") %>">删除</a>--%>
                 </td>
             </tr>
         </ItemTemplate>

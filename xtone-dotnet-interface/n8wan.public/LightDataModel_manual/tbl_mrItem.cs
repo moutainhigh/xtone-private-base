@@ -6,7 +6,7 @@ using System.Text;
 namespace LightDataModel
 {
     /// <summary>
-    /// tbl_mr_201511数据模型
+    /// tbl_mr_201603数据模型
     /// </summary>
     public partial class tbl_mrItem : Shotgun.Model.Logical.DynamicDataItem
     {
@@ -125,9 +125,13 @@ namespace LightDataModel
             /// </summary>
             public const string ivr_time = "ivr_time";
             /// <summary>
-            /// ，0为默认通道，1为点播，2为包月,3为IVR
+            /// 0为默认通道，1为包月,2为IVR
             /// </summary>
             public const string trone_type = "trone_type";
+            /// <summary>
+            /// tbl_api_order_id
+            /// </summary>
+            public const string api_order_id = "api_order_id";
 
             #endregion
 
@@ -234,9 +238,13 @@ namespace LightDataModel
         /// </summary>
         private int _ivr_time;
         /// <summary>
-        /// ，0为默认通道，1为点播，2为包月,3为IVR
+        /// 0为默认通道，1为包月,2为IVR
         /// </summary>
         private int _trone_type;
+        /// <summary>
+        /// tbl_api_order_id
+        /// </summary>
+        private int _api_order_id;
 
         #endregion
 
@@ -795,7 +803,7 @@ namespace LightDataModel
             }
         }
         /// <summary>
-        /// ，0为默认通道，1为点播，2为包月,3为IVR
+        /// 0为默认通道，1为包月,2为IVR
         /// </summary>
         public int trone_type
         {
@@ -813,6 +821,27 @@ namespace LightDataModel
 
                 SetFieldHasUpdate(Fields.trone_type, this._trone_type, value);
                 this._trone_type = value;
+            }
+        }
+        /// <summary>
+        /// tbl_api_order_id
+        /// </summary>
+        public int api_order_id
+        {
+            get { return this._api_order_id; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.api_order_id);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.api_order_id);
+                else
+                    RemoveNullFlag(Fields.api_order_id);
+#endif
+
+                SetFieldHasUpdate(Fields.api_order_id, this._api_order_id, value);
+                this._api_order_id = value;
             }
         }
 
@@ -846,6 +875,7 @@ namespace LightDataModel
 ,"sp_id"
 ,"cp_id"
 ,"ivr_time"
+,"api_order_id"
 };
         }
         public bool IsimeiNull() { return IsNull(Fields.imei); }
@@ -923,6 +953,9 @@ namespace LightDataModel
         public bool Isivr_timeNull() { return IsNull(Fields.ivr_time); }
 
         public void Setivr_timeNull() { SetNull(Fields.ivr_time); }
+        public bool Isapi_order_idNull() { return IsNull(Fields.api_order_id); }
+
+        public void Setapi_order_idNull() { SetNull(Fields.api_order_id); }
 
         #endregion
 

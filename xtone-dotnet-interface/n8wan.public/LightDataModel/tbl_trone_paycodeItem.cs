@@ -24,8 +24,10 @@ namespace LightDataModel
             ///</summary>
             public const string PrimaryKey = "id";
 
-
-            public const string sp_trone_id = "sp_trone_id";
+            /// <summary>
+            /// 通道ID
+            /// </summary>
+            public const string trone_id = "trone_id";
 
             public const string price = "price";
             /// <summary>
@@ -43,8 +45,10 @@ namespace LightDataModel
 
         }
         #region 表字段变量定义
-
-        private int _sp_trone_id;
+        /// <summary>
+        /// 通道ID
+        /// </summary>
+        private int _trone_id;
 
         private int _price;
         /// <summary>
@@ -74,23 +78,25 @@ namespace LightDataModel
         }
 
         #region 表字段值存取
-
-        public int sp_trone_id
+        /// <summary>
+        /// 通道ID
+        /// </summary>
+        public int trone_id
         {
-            get { return this._sp_trone_id; }
+            get { return this._trone_id; }
             set
             {
 #if true && true
-                RemoveNullFlag(Fields.sp_trone_id);
+                RemoveNullFlag(Fields.trone_id);
 #elif !true
 			    if (value == null)
-                    SetNullFlag(Fields.sp_trone_id);
+                    SetNullFlag(Fields.trone_id);
                 else
-                    RemoveNullFlag(Fields.sp_trone_id);
+                    RemoveNullFlag(Fields.trone_id);
 #endif
 
-                SetFieldHasUpdate(Fields.sp_trone_id, this._sp_trone_id, value);
-                this._sp_trone_id = value;
+                SetFieldHasUpdate(Fields.trone_id, this._trone_id, value);
+                this._trone_id = value;
             }
         }
 
@@ -196,16 +202,16 @@ namespace LightDataModel
         protected override string[] GetNullableFields()
         {
             return new string[]{null
-			,"sp_trone_id"
+			,"trone_id"
 ,"price"
 ,"paycode"
 ,"appid"
 ,"channelid"
 };
         }
-        public bool Issp_trone_idNull() { return IsNull(Fields.sp_trone_id); }
+        public bool Istrone_idNull() { return IsNull(Fields.trone_id); }
 
-        public void Setsp_trone_idNull() { SetNull(Fields.sp_trone_id); }
+        public void Settrone_idNull() { SetNull(Fields.trone_id); }
         public bool IspriceNull() { return IsNull(Fields.price); }
 
         public void SetpriceNull() { SetNull(Fields.price); }

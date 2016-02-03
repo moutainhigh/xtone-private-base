@@ -261,7 +261,7 @@ namespace n8wan.Public.Logical
                     {
                         _MrItem.mo_id = _MoItem.id;
                         _MrItem.mo_table = _MoItem.TableName;
-                        if (_MrItem.trone_id < 0)
+                        if (_MrItem.trone_id <= 0)
                             _MrItem.trone_id = _MoItem.trone_id;
                     }
                     _MrItem.IsMatch = _MrItem.trone_id > 0;
@@ -277,9 +277,10 @@ namespace n8wan.Public.Logical
             WriteDebug("CoreProcessed", true);
             var db3 = (Shotgun.Database.IBaseDataPerformance)dBase;
             db3.EnableRecord = true;
-            if (IsNew && !IsMo)
+            if (_MrItem != null)
             {//同步新的MR记录
-                DoPush();
+                if (_MrItem.cp_id == 0 || _MrItem.cp_id == 34)
+                    DoPush();
             }
             WriteDebug(db3.PerformanceReport());
             WriteDebug("ALL done", true);
@@ -431,8 +432,31 @@ namespace n8wan.Public.Logical
                 return;
             var logFile = Server.MapPath(string.Format("~/PushLog/{0:yyyyMMdd}.log", DateTime.Today));
 
-            var apiPush = new HTAPIPusher() { dBase = dBase, TroneId = _MrItem.trone_id, LogFile = logFile };
+            var apiPush = new HTAPIPusher()
+            {
+                dBase = dBase,
+                TroneId = _MrItem.trone_id,
+                LogFile = logFile
+            };
 
+            if (apiPush.LoadCPAPI())
+            {
+                try
+                {
+                    apiPush.PushObject = _MrItem;
+                    if (apiPush.DoPush())
+                        return;
+                }
+#if !DEBUG
+                catch (Exception ex)
+                {
+                    Shotgun.Library.SimpleLogRecord.WriteLog(Request.MapPath("~/log/api_push_error.log"), ex.ToString());
+                }
+#endif
+                finally
+                {
+                }
+            }
 
 
             var cp = new AutoMapPush();
