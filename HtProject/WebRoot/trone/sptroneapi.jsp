@@ -72,6 +72,7 @@
 			<thead>
 				<tr>
 					<td>序号</td>
+					<td>ID</td>
 					<td>名称</td>
 					<td>匹配字段</td>
 					<td>匹配关键字</td>
@@ -94,6 +95,7 @@
 				%>
 				<tr>
 					<td><%=(pageIndex - 1) * Constant.PAGE_SIZE + rowNum++%></td>
+					<td><%= model.getId() %></td>
 					<td><%=model.getName() %></td>
 					<td><%= matchFiles[model.getMatchField()] %></td>
 					<td><%=model.getMatchKeyword()%></td>

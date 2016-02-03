@@ -68,7 +68,7 @@ public class SpTroneApiDao
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		sql += " order by convert(name using gbk) asc ";
+		sql += " order by id desc ";
 		
 		JdbcControl control = new JdbcControl();
 		
