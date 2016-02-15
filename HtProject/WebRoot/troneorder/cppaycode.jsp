@@ -134,6 +134,11 @@
 		window.location.href = "cppaycode.jsp?export=1&cp_id=<%= cpId %>&sp_trone_id=<%= spTroneId %>&status=<%= status %>";
 	}
 	
+	function refreshPayCode()
+	{
+		open("http://thread.n8wan.com/re.jsp");
+	}
+	
 </script>
 
 <body>
@@ -182,6 +187,9 @@
 					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" value="导    出"  onclick="exportPayCode()"  />
+					</dd>
+					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
+						<input class="btn_match" value="刷   新"  onclick="refreshPayCode()"  />
 					</dd>
 				</dl>
 			</form>
