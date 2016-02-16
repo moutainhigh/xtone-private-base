@@ -98,6 +98,8 @@ namespace n8wan.Public.Logical
 
             ptrs.Add("price", PushObject.GetValue(Logical.EPushField.price));
             ptrs.Add("cpparam", _apiOrder.ExtrData);
+            ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
+            ptrs.Add("paycode", _apiOrder.trone_order_id.ToString("100000"));
             string qs = UrlEncode(ptrs);
 
 

@@ -5,3 +5,6 @@
 /xtone-interface-redirect/target
 /xtone-interface-redirect/WebRoot/WEB-INF/classes
 /xtone-vanggame-front/target/m2e-wtp
+/xtone-dotnet-interface/admin.n8wan.com/log
+/xtone-dotnet-interface/admin.n8wan.com/Bin
+/xtone-dotnet-interface/n8wan.public/obj

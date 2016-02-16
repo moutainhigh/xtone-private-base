@@ -116,6 +116,7 @@ namespace LightDataModel
                 case EPushField.price: return this.price.ToString();
                 case EPushField.ServiceCode: return this.service_code;
                 case EPushField.Status: return this.status;
+                case EPushField.province: return this.province_id.ToString();
             }
             throw new NotImplementedException();
         }

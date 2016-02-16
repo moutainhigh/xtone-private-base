@@ -10,7 +10,10 @@ namespace n8wan.Public.Logical
     public class CPPusher : Shotgun.Model.Logical.Logical
     {
 
-        static object logFileLocker;
+        /// <summary>
+        /// 写日志时文件锁，防止并发处理出错
+        /// </summary>
+        static object logFileLocker = new object();
         /// <summary>
         /// 订单ID
         /// </summary>
@@ -132,7 +135,7 @@ namespace n8wan.Public.Logical
                 return true;//未知CP的，直接隐藏
             if (!_cp_push_url.is_realtime)
                 return false;//非实时同步，不进行扣量操作 
- 
+
             IHold_DataItem holdCfg = null;
             if (_config.hold_is_Custom)
                 holdCfg = _config;
@@ -225,6 +228,8 @@ namespace n8wan.Public.Logical
 
             ptrs.Add("price", (_trone.price * 100).ToString("0"));
             ptrs.Add("cpparam", PushObject.GetValue(Logical.EPushField.cpParam));
+            ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
+
             string qs = UrlEncode(ptrs);
 
 
@@ -325,8 +330,6 @@ namespace n8wan.Public.Logical
             var fi = new FileInfo(LogFile);
             if (!fi.Directory.Exists)
                 fi.Directory.Create();
-            if (logFileLocker == null)
-                logFileLocker = new object();
             lock (logFileLocker)
             {
                 using (var stm = new StreamWriter(LogFile, true))
