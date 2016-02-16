@@ -1,13 +1,15 @@
 package com.system.cache;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.system.dao.CpDataDao;
+import com.system.dao.LocateDao;
 import com.system.dao.SpDataDao;
-import com.system.model.CpModel;
-import com.system.model.CpTroneModel;
+import com.system.model.CityModel;
+import com.system.model.ProvinceModel;
 import com.system.model.SpTroneApiModel;
 import com.system.model.SpTroneModel;
 import com.system.model.TroneModel;
@@ -28,6 +30,24 @@ public class CacheConfigMgr
 		refreshSpTroneCache();
 		refreshTroneCache();
 		refreshSpTroneApiCache();
+		refreshPhoneLocateCache();
+		refreshProvinceCache();
+		refreshCityCache();
+	}
+	
+	public static void refreshAllTroneCache()
+	{
+		refreshTroneOrderCache();
+		refreshSpTroneCache();
+		refreshTroneCache();
+		refreshSpTroneApiCache();
+	}
+	
+	public static void refreshAllLocateCache()
+	{
+		refreshPhoneLocateCache();
+		refreshProvinceCache();
+		refreshCityCache();
 	}
 	
 	public static void refreshTroneOrderCache()
@@ -56,6 +76,27 @@ public class CacheConfigMgr
 		List<SpTroneApiModel> list = new SpDataDao().loadSpTroneApi();
 		SpDataCache.setSpTroneApiList(list);
 		logger.info("refreshSpTroneApiCache finish");
+	}
+	
+	public static void refreshPhoneLocateCache()
+	{
+		 Map<String,Integer> map = new LocateDao().loadPhoneLocateMap();
+		 LocateCache.setPhoneLocate(map);
+		 logger.info("refreshPhoneLocateCache finish");
+	}
+	
+	public static void refreshProvinceCache()
+	{
+		List<ProvinceModel> list = new LocateDao().loadProvinceList();
+		LocateCache.setProvince(list);
+		logger.info("refreshProvinceCache finish");
+	}
+	
+	public static void refreshCityCache()
+	{
+		List<CityModel> list = new LocateDao().loadCityList();
+		LocateCache.setCity(list);
+		logger.info("refreshCityCache finish");
 	}
 	
 	public static void init(){}

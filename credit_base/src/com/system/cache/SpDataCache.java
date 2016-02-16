@@ -135,5 +135,39 @@ public class SpDataCache
 		return null;
 	}
 	
+	/**
+	 * 通过通道ID取得业务对象
+	 * @param troneId
+	 * @return
+	 */
+	public static SpTroneModel loadSpTroneByTroneId(int troneId)
+	{
+		for(TroneModel model : _troneList)
+		{
+			if(model.getId()==troneId)
+			{
+				return loadSpTroneById(model.getSpTroneId());
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过ID取得业务对象
+	 * @param spTroneId
+	 * @return
+	 */
+	protected static SpTroneModel loadSpTroneById(int spTroneId)
+	{
+		for(SpTroneModel model : _spTroneList)
+		{
+			if(model.getId()==spTroneId)
+			{
+				return model;
+			}
+		}
+		
+		return null;
+	}
 	
 }

@@ -1,11 +1,15 @@
 package com.system.server;
 
 import com.system.cache.CpDataCache;
+import com.system.cache.LocateCache;
 import com.system.cache.SpDataCache;
 import com.system.constant.Constant;
 import com.system.model.ApiOrderModel;
 import com.system.model.BaseResponseModel;
+import com.system.model.ProvinceModel;
 import com.system.model.SpTroneApiModel;
+import com.system.model.SpTroneModel;
+import com.system.util.PhoneUtil;
 import com.system.util.StringUtil;
 
 import net.sf.json.JSONObject;
@@ -30,6 +34,8 @@ public class RequestServerV1
 		
 		SpTroneApiModel spTroneApiModel = SpDataCache.loadSpTroneApiByTroneId(troneId);
 		
+		SpTroneModel spTroneModel = SpDataCache.loadSpTroneByTroneId(troneId);
+		
 		if(spTroneApiModel==null)
 		{
 			saveRequest(model);
@@ -52,7 +58,7 @@ public class RequestServerV1
 		}
 		
 		//地区匹配
-		if(!isLocateMatch(spTroneApiModel.getLocateMatch(), model))
+		if(!isLocateMatch(spTroneApiModel.getLocateMatch(), model,spTroneModel))
 		{
 			response.setStatus(Constant.CP_BASE_PARAMS_AREA_NOT_MATCH);
 			model.setStatus(response.getStatus());
@@ -134,9 +140,73 @@ public class RequestServerV1
 		new RecordServer().udpateVisistModel(model);
 	}
 	
-	protected boolean isLocateMatch(int locateMatchType,ApiOrderModel model)
+	protected boolean isLocateMatch(int locateMatchType,ApiOrderModel model,SpTroneModel spTroneModel)
 	{
+		//在这里匹配地区
+		//地区匹配,默认0不匹配，1手机号匹配，2IP地区匹配，3手机和IP地区都必须匹配
+		switch(locateMatchType)
+		{
+			case 0:
+				break;
+				
+			case 1:
+				return isPhoneLocateMatch(model,spTroneModel);
+				
+			case 2:
+				break;
+				
+			case 3:
+				break;
+				
+			default:
+				break;
+		}
 		return true;
+	}
+	
+	protected boolean isPhoneLocateMatch(ApiOrderModel model,SpTroneModel spTroneModel)
+	{
+		if(StringUtil.isNullOrEmpty(model.getImsi()) && StringUtil.isNullOrEmpty(model.getMobile()))
+			return false;
+		
+		String phonePrefix = null;
+		
+		if(!StringUtil.isNullOrEmpty(model.getMobile()) && model.getMobile().length()>=7)
+		{
+			phonePrefix = model.getMobile().substring(0, 7);
+		}
+		else
+		{
+			phonePrefix = PhoneUtil.getFakePhonePreByImsi(model.getImsi());
+		}
+		
+		if(StringUtil.isNullOrEmpty(phonePrefix))
+			return false;
+		
+		int cityId = LocateCache.getCityIdByPhone(phonePrefix);
+		
+		if(cityId<0)
+			return false;
+		
+		ProvinceModel provinceModel = LocateCache.getProvinceByCityId(cityId);
+		
+		if(provinceModel==null)
+			return false;
+		
+		if(StringUtil.isNullOrEmpty(spTroneModel.getProvinces()))
+		{
+			return false;
+		}
+		
+		String[] strProvinces = spTroneModel.getProvinces().split(",");
+		
+		for(String province : strProvinces)
+		{
+			if(Integer.valueOf(province)==provinceModel.getId())
+				return true;
+		}
+		
+		return false;
 	}
 	
 	protected boolean isFieldFill(String[] apiFields,ApiOrderModel model)
