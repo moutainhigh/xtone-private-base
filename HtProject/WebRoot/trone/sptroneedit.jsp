@@ -184,12 +184,21 @@
 		if ( tmpPro == null || "" == provinces )
 			return;
 		
-		tmpPro = tmpPro.replace("，", ",");
-		tmpPro = tmpPro.replace(" ", ",");
-		tmpPro = tmpPro.replace("、", ",");
-		tmpPro = tmpPro.replace("|", ",");
-		tmpPro = tmpPro.replace("、", ",");
-
+		/*
+		tmpPro = tmpPro.replaceAll("，", ",");
+		tmpPro = tmpPro.replaceAll(" ", ",");
+		tmpPro = tmpPro.replaceAll("、", ",");
+		tmpPro = tmpPro.replaceAll("|", ",");
+		tmpPro = tmpPro.replaceAll("、", ",");
+		*/
+		
+		tmpPro = ReplaceAll(tmpPro," ", "");
+		tmpPro = ReplaceAll(tmpPro,"，", ",");
+		tmpPro = ReplaceAll(tmpPro," ", ",");
+		tmpPro = ReplaceAll(tmpPro,"、", ",");
+		tmpPro = ReplaceAll(tmpPro,"|", ",");
+		tmpPro = ReplaceAll(tmpPro,"、", ",");
+		
 		var proNameList = tmpPro.split(",");
 		
 		var provinces = new Array();

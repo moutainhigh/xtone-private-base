@@ -98,5 +98,19 @@ function isPositiveInteger(value)
 	 return false;
 }
 
+String.prototype.replaceAll = function(s1,s2)
+{ 
+	return this.replace(new RegExp(s1,"gm"),s2); 
+}
+
+function ReplaceAll(str, sptr, sptr1)
+{
+    while (str.indexOf(sptr) >= 0)
+    {
+       str = str.replace(sptr, sptr1);
+    }
+    return str;
+}
+
 
 
