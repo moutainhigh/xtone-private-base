@@ -1,8 +1,0 @@
-E:\Website\n8wan.public\bin\Release\n8wan.Public.dll
-E:\Website\n8wan.public\bin\Release\n8wan.Public.pdb
-E:\Website\n8wan.public\bin\Release\Shotgun.Library.dll
-E:\Website\n8wan.public\bin\Release\Shotgun.Library.pdb
-E:\Website\n8wan.public\obj\Release\n8wan.Public.dll
-E:\Website\n8wan.public\obj\Release\n8wan.Public.pdb
-E:\Website\n8wan.public\obj\Release\n8wan.Public.csprojResolveAssemblyReference.cache
-E:\Website\n8wan.public\bin\Release\MySql.Data.dll

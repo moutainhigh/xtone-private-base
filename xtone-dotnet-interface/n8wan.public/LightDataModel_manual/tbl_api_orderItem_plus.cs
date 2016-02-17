@@ -7,7 +7,7 @@ namespace LightDataModel
 {
     partial class tbl_api_orderItem
     {
-        public const string FIX_TABLE_NAME = "tbl_mo_";
+        public const string FIX_TABLE_NAME = "tbl_api_order_";
         public const string SCHEMA = "daily_log";
         public tbl_api_orderItem()
         {

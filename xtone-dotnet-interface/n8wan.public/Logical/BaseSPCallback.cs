@@ -24,6 +24,7 @@ namespace n8wan.Public.Logical
 
         /// <summary>
         /// url映射数据库字段(sql,url)
+        /// 注意，key统一用小写
         /// </summary>
         Dictionary<string, string> U2DMap;
 
@@ -260,7 +261,7 @@ namespace n8wan.Public.Logical
                     {
                         _MrItem.mo_id = _MoItem.id;
                         _MrItem.mo_table = _MoItem.TableName;
-                        if (_MrItem.trone_id < 0)
+                        if (_MrItem.trone_id <= 0)
                             _MrItem.trone_id = _MoItem.trone_id;
                     }
                     _MrItem.IsMatch = _MrItem.trone_id > 0;
@@ -276,9 +277,10 @@ namespace n8wan.Public.Logical
             WriteDebug("CoreProcessed", true);
             var db3 = (Shotgun.Database.IBaseDataPerformance)dBase;
             db3.EnableRecord = true;
-            if (IsNew && !IsMo)
+            if (_MrItem != null)
             {//同步新的MR记录
-                DoPush();
+                if (_MrItem.cp_id == 0 || _MrItem.cp_id == 34)
+                    DoPush();
             }
             WriteDebug(db3.PerformanceReport());
             WriteDebug("ALL done", true);
@@ -430,8 +432,31 @@ namespace n8wan.Public.Logical
                 return;
             var logFile = Server.MapPath(string.Format("~/PushLog/{0:yyyyMMdd}.log", DateTime.Today));
 
-            var apiPush = new HTAPIPusher() { dBase = dBase, TroneId = _MrItem.trone_id, LogFile = logFile };
+            var apiPush = new HTAPIPusher()
+            {
+                dBase = dBase,
+                TroneId = _MrItem.trone_id,
+                LogFile = logFile
+            };
 
+            if (apiPush.LoadCPAPI())
+            {
+                try
+                {
+                    apiPush.PushObject = _MrItem;
+                    if (apiPush.DoPush())
+                        return;
+                }
+#if !DEBUG
+                catch (Exception ex)
+                {
+                    Shotgun.Library.SimpleLogRecord.WriteLog(Request.MapPath("~/log/api_push_error.log"), ex.ToString());
+                }
+#endif
+                finally
+                {
+                }
+            }
 
 
             var cp = new AutoMapPush();
@@ -539,6 +564,7 @@ namespace n8wan.Public.Logical
 
             //var fields = api.MrFidldMap.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             UrlFieldsMap(api.MrFidldMap);
+
             foreach (var kv in U2DMap)
             {
                 if (C_IVR_TIME.Equals(kv.Key, StringComparison.OrdinalIgnoreCase))
@@ -549,9 +575,14 @@ namespace n8wan.Public.Logical
             FillAreaInfo(_MrItem);
             if (string.IsNullOrEmpty(api.MrStatus))
                 return null;
-            var rx = Library.GetRegex(api.MrStatus);
+
+            if (!U2DMap.ContainsKey("status"))
+                return string.Format("\"status\" field not configured");
+
             if (_MrItem.status == null)
                 return string.Format("\"{0}\" null", U2DMap["status"]);
+
+            var rx = Library.GetRegex(api.MrStatus);
             if (!rx.IsMatch(_MrItem.status))
                 return string.Format("\"{0}\" \"{1}\" unaccpated", U2DMap["status"], _MrItem.status);
 
@@ -607,7 +638,7 @@ namespace n8wan.Public.Logical
                     case "servicecode": sql = "service_code"; break;
                     case "cpparam": sql = "cp_param"; break;
                 }
-                U2DMap[sql] = url;
+                U2DMap[sql.ToLower()] = url;
             }
         }
 

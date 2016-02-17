@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 using Shotgun.Database;
 using Shotgun.Library;
 using LightDataModel;
-
+using System.Text.RegularExpressions;
 public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
 {
     tbl_sp_api_urlItem Row;
@@ -52,12 +52,8 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
         }
         var dt = l.GetDataList();
         ddlSp_id.DataSource = dt;
-        ddlSp_id.DataBind();
-
 
     }
-
-
 
     private void LoadDefault()
     {
@@ -82,18 +78,64 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
         txtMoCheck.Text = Row.MoCheck;
         txtMoLink.Text = Row.MoLink;
         txtMrLink.Text = Row.MrLink;
-        txtMoToMr.Text = Row.MoToMr;
-        txtMoFieldMap.Text = Row.MoFieldMap;
-        txtMrFidldMap.Text = Row.MrFidldMap;
-        txtMoStatus.Text = Row.MoStatus;
+        DataToChkbox(Row.MoToMr);
+
+        DataToTextBox(true, Row.MrFidldMap);
+        DataToTextBox(false, Row.MoFieldMap);
+
+        //txtMoFieldMap_IMSI.Text = Row.MoFieldMap;
+        //txtMrFidldMap.Text = Row.MrFidldMap;
+        // txtMoStatus.Text = Row.MoStatus;
         txtMrStatus.Text = Row.MrStatus;
         txtMsgOutput.Text = Row.MsgOutput;
-        txtMrPrice.Text = Row.MrPrice;
-        txtMoPrice.Text = Row.MoPrice;
+        txtMr_price.Text = Row.MrPrice;
+        txtMo_price.Text = Row.MoPrice;
         txtName.Text = Row.name;
         this.chkDisable.Checked = Row.Disable;
 
 
+    }
+
+    private void DataToChkbox(string chkName)
+    {
+        if (string.IsNullOrEmpty(chkName))
+            return;
+
+        var fields = chkName.ToLower().Split(new char[] { ',' });
+        foreach (var f in fields)
+        {
+            var fName = f;
+            switch (f)
+            {
+                case "port": fName = "ori_trone"; break;
+                case "msg": fName = "ori_trone"; break;
+            }
+            var chkBox = (CheckBox)chkCpy_price.Parent.FindControl("chkCpy_" + f);
+            if (chkBox == null)
+                continue;
+            chkBox.Checked = true;
+        }
+    }
+
+    private void DataToTextBox(bool IsMr, string Data)
+    {
+        if (string.IsNullOrEmpty(Data))
+            return;
+        var ars = Data.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+        foreach (var ar in ars)
+        {
+            var fs = ar.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
+            string uf, sf;
+            uf = fs[0];
+            sf = (fs.Length == 1) ? fs[0] : fs[1];
+            var tBox = FindTextBox(IsMr, sf);
+            if (tBox == null)
+            {
+                //Response.Write(uf);
+                continue;
+            }
+            tBox.Text = uf;
+        }
     }
 
     private string SaveData()
@@ -105,23 +147,22 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
             Row.sp_id = int.Parse(ddlSp_id.SelectedValue);
         }
 
-
-
         Row.virtual_page = txtvirtual_page.Text;
         Row.phy_file = chkphy_file.Checked;
         Row.MoCheck = txtMoCheck.Text;
         Row.MoLink = txtMoLink.Text;
         Row.MrLink = txtMrLink.Text;
-        Row.MoToMr = txtMoToMr.Text;
-        Row.MoFieldMap = txtMoFieldMap.Text;
-        Row.MrFidldMap = txtMrFidldMap.Text;
-        Row.MoStatus = txtMoStatus.Text;
+        Row.MoToMr = chkToData();
+
+        Row.MoFieldMap = GetMaps(false);
+        Row.MrFidldMap = GetMaps(true);
+        //Row.MoStatus = txtMoStatus.Text;
         Row.MrStatus = txtMrStatus.Text;
         Row.MsgOutput = txtMsgOutput.Text;
         Row.Disable = chkDisable.Checked;
         Row.name = txtName.Text;
-        Row.MoPrice = txtMoPrice.Text;
-        Row.MrPrice = txtMrPrice.Text;
+        Row.MoPrice = txtMo_price.Text;
+        Row.MrPrice = txtMr_price.Text;
         if (!string.IsNullOrEmpty(Row.MoCheck))
         {
             if (string.IsNullOrEmpty(Row.MoLink))
@@ -167,6 +208,42 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
         return null;
     }
 
+    private string chkToData()
+    {
+        var sb = new System.Text.StringBuilder();
+        if (chkCpy_mobile.Checked)
+            sb.Append(",mobile");
+        if (chkCpy_ori_order.Checked)
+            sb.Append(",ori_order");
+        if (chkCpy_ori_trone.Checked)
+            sb.Append(",ori_trone");
+        if (chkCpy_price.Checked)
+            sb.Append(",price");
+        if (sb.Length < 3)
+            return null;
+
+        sb.Remove(0, 1);
+        return sb.ToString();
+
+    }
+
+    private string GetMaps(bool isMr)
+    {
+        string[] SZ = { "IMSI", "IMEI", "Mobile", "MMC", "Ori_Trone", "Ori_Order", "CP_Param", "Service_Code", "Status", "Ivr_Time" };
+        var maps = string.Empty;
+        foreach (var f in SZ)
+        {
+            var tBox = FindTextBox(isMr, f);
+            if (tBox == null || string.IsNullOrEmpty(tBox.Text))
+                continue;
+            maps += "," + tBox.Text + ":" + f;
+        }
+
+        if (string.IsNullOrEmpty(maps))
+            return null;
+        return maps.Substring(1);
+    }
+
     private bool NameExisted()
     {
         var l = tbl_sp_api_urlItem.GetQueries(dBase);
@@ -175,5 +252,17 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
         if (Row.id > 0)
             l.Filter.AndFilters.Add(tbl_sp_api_urlItem.Fields.id, Row.id, Shotgun.Model.Filter.EM_DataFiler_Operator.Not_Equal);
         return l.ExecuteScalar(tbl_sp_api_urlItem.Fields.sp_id) != null;
+    }
+
+    public TextBox FindTextBox(bool isMr, string id)
+    {
+        id = id.ToLower();
+        switch (id)
+        {
+            case "port": id = "ori_trone"; break;
+            case "msg": id = "ori_order"; break;
+            case "servicecode": id = "service_code"; break;
+        }
+        return (TextBox)txtMsgOutput.Parent.FindControl(string.Format("txt{0}_{1}", isMr ? "MrFieldMap" : "MoFieldMap", id));
     }
 }
