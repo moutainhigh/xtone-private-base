@@ -138,44 +138,20 @@
 	{
 		var tmpPro = prompt("请输入省份", "");
 		
-		if ( tmpPro == null || "" == provinces )
+		if ( tmpPro == null || "" == tmpPro )
 			return;
-		
-		tmpPro = tmpPro.replace("，", ",");
-		tmpPro = tmpPro.replace(" ", ",");
-		tmpPro = tmpPro.replace("、", ",");
-		tmpPro = tmpPro.replace("|", ",");
-		tmpPro = tmpPro.replace("、", ",");
 
-		var proNameList = tmpPro.split(",");
-		
-		var provinces = new Array();
-		
-		//unAllCkb();
-		
-		for(var i=0; i<proNameList.length; i++)
+		$('[name=area[]]:checkbox').each(function() 
 		{
-			for(var j=0; j<provinceList.length; j++)
+			if(tmpPro.indexOf(this.title) != -1)
 			{
-				if(provinceList[j].text==proNameList[i])
-				{
-					provinces.push(provinceList[j].id);
-					break;
-				}
-			}
-		}
-
-		$('[name=area[]]:checkbox').each(function() {
-			
-			for(k=0; k<provinces.length; k++)
-			{
-				if(provinces[k]==this.value)
-				{
-					this.checked = true;
-					break;
-				}
+				this.checked = true;
+				tmpPro = tmpPro.replace(this.title, "");
 			}
 		});
+		
+		if(tmpPro!="")
+			alert(tmpPro);
 	}
 	
 </script>
@@ -297,7 +273,7 @@
 							{
 						%>
 						<dd class="dd01"><%=province.getName()%>
-							<input style="" type="checkbox" class="chpro" name="area[]"
+							<input style="" type="checkbox" title="<%= province.getName() %>" class="chpro" name="area[]"
 								value="<%=province.getId()%>">
 						</dd>
 						<%

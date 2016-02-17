@@ -15,6 +15,7 @@ public class ApiOrderModel
 	private int lac;
 	private int cid;
 	private String extrData;
+	private String extraParams;
 	private String sdkVersion;
 	private String packageName;
 	private String spLinkId;
@@ -209,5 +210,13 @@ public class ApiOrderModel
 	public void setTroneId(int troneId)
 	{
 		this.troneId = troneId;
+	}
+	public String getExtraParams()
+	{
+		return extraParams;
+	}
+	public void setExtraParams(String extraParams)
+	{
+		this.extraParams = extraParams;
 	}
 }

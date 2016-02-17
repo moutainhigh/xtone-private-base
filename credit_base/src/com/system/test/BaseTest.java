@@ -30,6 +30,7 @@ public class BaseTest
 		model.setSpExField("");
 		model.setSpLinkId("");
 		model.setStatus(1);
+		model.setExtraParams("NI SHOU NI");
 		
 		
 		CacheConfigMgr.init();

@@ -165,7 +165,7 @@ public class RequestServerV1
 	}
 	
 	/**
-	 * 这个函数只用于处理这种情况：只用于识别得了号码的用户，并且是不符合的地区才返回FALSE，其它情况一律返回TRUE
+	 * 这个函数只用于处理这种情况：只用于识别得了号码的用户，并且是不符合地区的才返回FALSE，其它情况一律返回TRUE
 	 * @param model
 	 * @param spTroneModel
 	 * @return
