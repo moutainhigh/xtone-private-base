@@ -64,6 +64,7 @@
     <Compile Include="LightDataModel\tbl_sp_troneItem.cs" />
     <Compile Include="LightDataModel\tbl_sp_trone_apiItem.cs" />
     <Compile Include="LightDataModel\tbl_tmp_mrItem.cs" />
+    <Compile Include="LightDataModel\tbl_trone_orderItem.cs" />
     <Compile Include="LightDataModel\tbl_trone_paycodeItem.cs" />
     <Compile Include="LightDataModel\tbl_zyl_detailItem.cs" />
     <Compile Include="LightDataModel_manual\DynamicDataItem.cs" />
@@ -83,7 +84,6 @@
     <Compile Include="LightDataModel\tbl_spItem.cs" />
     <Compile Include="LightDataModel\tbl_sp_api_urlItem.cs" />
     <Compile Include="LightDataModel\tbl_troneItem.cs" />
-    <Compile Include="LightDataModel\tbl_trone_orderItem.cs" />
     <Compile Include="LightDataModel\tbl_userItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_mrItem_plus.cs" />
     <Compile Include="LightDataModel_manual\tbl_phone_locateItem.cs" />

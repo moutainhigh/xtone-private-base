@@ -26,6 +26,7 @@ namespace n8wan.Public.Logical
 
         static Random rnd;
         object sync = new object();
+
         /// <summary>
         /// 根据TroneId，CPID 加载CP同步API配置
         /// </summary>
@@ -36,7 +37,7 @@ namespace n8wan.Public.Logical
             l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
             if (CP_Id != -1)
                 l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.cp_id, this.CP_Id);
-            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, 0);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, false);
             var m = l.GetRowByFilters();
             if (m == null)
                 return SetErrorMesage("CP_API Not Found!");
@@ -44,6 +45,10 @@ namespace n8wan.Public.Logical
             return SetSuccess();
         }
 
+        /// <summary>
+        /// 设置渠道通道信息,同步信息,SP通道信息
+        /// </summary>
+        /// <param name="m"></param>
         protected void SetConfig(LightDataModel.tbl_trone_orderItem m)
         {
             _config = m;
@@ -61,17 +66,21 @@ namespace n8wan.Public.Logical
             this._url = null;
 
             DateTime today = DateTime.Today;
-            if (_cp_push_url.lastDate.Date != DateTime.Today)
-            {//重置昨日数据，为今日新数据
-                _cp_push_url.lastDate = today;
-                _cp_push_url.amount = 0;
-                _config.amount = 0;
-            }
+
+
             IHold_DataItem holdCfg;
             if (_config.hold_is_Custom)
                 holdCfg = _config;
             else
                 holdCfg = _cp_push_url;
+
+            if (holdCfg.lastDate != DateTime.Today)
+            {//重置昨日数据，为今日新数据
+                holdCfg.lastDate = today;
+                holdCfg.amount = 0;
+                holdCfg.push_count = 0;
+            }
+
 
             if (IsCycHidde())
             {//扣量处理
@@ -89,23 +98,9 @@ namespace n8wan.Public.Logical
                 WriteLog(-2, "扣量");
                 return SetSuccess();
             }
-
-            _cp_push_url.amount += _trone.price;
-            _config.amount += _trone.price;
-
-            string qs;
-
-            var ptrs = new Dictionary<string, string>();
-            ptrs.Add("mobile", PushObject.GetValue(Logical.EPushField.Mobile));
-            ptrs.Add("servicecode", PushObject.GetValue(Logical.EPushField.ServiceCode));
-            ptrs.Add("linkid", _linkID);
-            ptrs.Add("msg", PushObject.GetValue(Logical.EPushField.Msg));
-            //ptrs.Add("status", PushObject.GetValue(Logical.EPushField.Status));
-            ptrs.Add("port", PushObject.GetValue(Logical.EPushField.port));
-
-            ptrs.Add("price", (_trone.price * 100).ToString("0"));
-            ptrs.Add("cpparam", PushObject.GetValue(Logical.EPushField.cpParam));
-            qs = UrlEncode(ptrs);
+            holdCfg.push_count++;
+            holdCfg.amount += _trone.price;
+            holdCfg.amount += _trone.price;
 
             try
             {
@@ -123,7 +118,7 @@ namespace n8wan.Public.Logical
                 return SetErrorMesage(ex.Message);
             }
             if (_cp_push_url.is_realtime)
-                SendQuery(qs);
+                SendQuery();
             return SetSuccess();
         }
 
@@ -137,15 +132,18 @@ namespace n8wan.Public.Logical
                 return true;//未知CP的，直接隐藏
             if (!_cp_push_url.is_realtime)
                 return false;//非实时同步，不进行扣量操作 
-            if (IsWhite())
-            {
-                return false;
-            }
+ 
             IHold_DataItem holdCfg = null;
             if (_config.hold_is_Custom)
                 holdCfg = _config;
             else
                 holdCfg = _cp_push_url;
+
+            if (holdCfg.push_count < holdCfg.hold_start)
+                return false;
+
+            if (IsWhite())
+                return false;
 
             if (holdCfg.hold_amount > 0)
             {
@@ -209,7 +207,7 @@ namespace n8wan.Public.Logical
 
         public string API_PushUrl { get { return _cp_push_url.url; } }
 
-        private void SendQuery(string qs)
+        protected virtual void SendQuery()
         {
             if (string.IsNullOrEmpty(API_PushUrl))
             {
@@ -217,14 +215,33 @@ namespace n8wan.Public.Logical
                 return;
             }
 
-            if (qs.StartsWith("?"))
-                qs = qs.Substring(1);
+            var ptrs = new Dictionary<string, string>();
+            ptrs.Add("mobile", PushObject.GetValue(Logical.EPushField.Mobile));
+            ptrs.Add("servicecode", PushObject.GetValue(Logical.EPushField.ServiceCode));
+            ptrs.Add("linkid", _linkID);
+            ptrs.Add("msg", PushObject.GetValue(Logical.EPushField.Msg));
+            //ptrs.Add("status", PushObject.GetValue(Logical.EPushField.Status));
+            ptrs.Add("port", PushObject.GetValue(Logical.EPushField.port));
 
+            ptrs.Add("price", (_trone.price * 100).ToString("0"));
+            ptrs.Add("cpparam", PushObject.GetValue(Logical.EPushField.cpParam));
+            string qs = UrlEncode(ptrs);
+
+
+            string url;
             if (API_PushUrl.Contains('?'))
-                this._url = API_PushUrl + "&" + qs;
+                url = API_PushUrl + "&" + qs;
             else
-                this._url = API_PushUrl + "?" + qs;
+                url = API_PushUrl + "?" + qs;
+
+            asyncSendData(url);
+        }
+
+        protected void asyncSendData(string url)
+        {
+            this._url = url;
             System.Threading.ThreadPool.QueueUserWorkItem(SendData);
+
         }
 
         private void SendData(object s)

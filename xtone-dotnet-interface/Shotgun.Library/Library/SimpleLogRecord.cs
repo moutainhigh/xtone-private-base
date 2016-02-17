@@ -14,8 +14,8 @@ namespace Shotgun.Library
         /// <param name="msg"></param>
         public static void WriteLog(string logFile, string msg)
         {
-            if (string.IsNullOrEmpty(logFile))
-                return;
+            if (logFile == null)
+                logFile = string.Empty;
             FileInfo fi;
             if (logFile.Length > 2 && logFile.Substring(1, 1) == ":")
             {

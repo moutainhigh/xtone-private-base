@@ -79,9 +79,17 @@ namespace LightDataModel
             /// </summary>
             public const string hold_CycProc = "hold_CycProc";
             /// <summary>
+            /// 已经推送条数
+            /// </summary>
+            public const string push_count = "push_count";
+            /// <summary>
             /// 是否采用同步URL的扣量设置,0:是;1:否
             /// </summary>
             public const string hold_is_Custom = "hold_is_Custom";
+
+            public const string hold_start = "hold_start";
+
+            public const string lastDate = "lastDate";
 
             #endregion
 
@@ -142,9 +150,17 @@ namespace LightDataModel
         /// </summary>
         private int _hold_CycProc;
         /// <summary>
+        /// 已经推送条数
+        /// </summary>
+        private int _push_count;
+        /// <summary>
         /// 是否采用同步URL的扣量设置,0:是;1:否
         /// </summary>
         private bool _hold_is_Custom;
+
+        private int _hold_start;
+
+        private DateTime _lastDate;
 
         #endregion
 
@@ -455,6 +471,27 @@ namespace LightDataModel
             }
         }
         /// <summary>
+        /// 已经推送条数
+        /// </summary>
+        public int push_count
+        {
+            get { return this._push_count; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.push_count);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.push_count);
+                else
+                    RemoveNullFlag(Fields.push_count);
+#endif
+
+                SetFieldHasUpdate(Fields.push_count, this._push_count, value);
+                this._push_count = value;
+            }
+        }
+        /// <summary>
         /// 是否采用同步URL的扣量设置,0:是;1:否
         /// </summary>
         public bool hold_is_Custom
@@ -476,6 +513,44 @@ namespace LightDataModel
             }
         }
 
+        public int hold_start
+        {
+            get { return this._hold_start; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.hold_start);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.hold_start);
+                else
+                    RemoveNullFlag(Fields.hold_start);
+#endif
+
+                SetFieldHasUpdate(Fields.hold_start, this._hold_start, value);
+                this._hold_start = value;
+            }
+        }
+
+        public DateTime lastDate
+        {
+            get { return this._lastDate; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.lastDate);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.lastDate);
+                else
+                    RemoveNullFlag(Fields.lastDate);
+#endif
+
+                SetFieldHasUpdate(Fields.lastDate, this._lastDate, value);
+                this._lastDate = value;
+            }
+        }
+
         #endregion
         #region 空值相关方法
         protected override string[] GetNullableFields()
@@ -491,7 +566,10 @@ namespace LightDataModel
 ,"is_unknow"
 ,"hold_CycCount"
 ,"hold_CycProc"
+,"push_count"
 ,"hold_is_Custom"
+,"hold_start"
+,"lastDate"
 };
         }
         public bool Isorder_numNull() { return IsNull(Fields.order_num); }
@@ -524,9 +602,18 @@ namespace LightDataModel
         public bool Ishold_CycProcNull() { return IsNull(Fields.hold_CycProc); }
 
         public void Sethold_CycProcNull() { SetNull(Fields.hold_CycProc); }
+        public bool Ispush_countNull() { return IsNull(Fields.push_count); }
+
+        public void Setpush_countNull() { SetNull(Fields.push_count); }
         public bool Ishold_is_CustomNull() { return IsNull(Fields.hold_is_Custom); }
 
         public void Sethold_is_CustomNull() { SetNull(Fields.hold_is_Custom); }
+        public bool Ishold_startNull() { return IsNull(Fields.hold_start); }
+
+        public void Sethold_startNull() { SetNull(Fields.hold_start); }
+        public bool IslastDateNull() { return IsNull(Fields.lastDate); }
+
+        public void SetlastDateNull() { SetNull(Fields.lastDate); }
 
         #endregion
         #region 静态方法

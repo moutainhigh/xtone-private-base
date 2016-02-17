@@ -43,7 +43,7 @@
         <hr />
         <ul>
             <li><a href="/config/tbl_mobile_white_list.aspx">同步白名单</a></li>
-            <li><a href="imsi2area.aspx">IMSI转地区</a></li>
+            <li><a href="/imsi2area.aspx">IMSI转地区</a></li>
         </ul>
 
         <%--        <hr />

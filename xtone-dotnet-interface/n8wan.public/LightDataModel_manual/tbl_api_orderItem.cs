@@ -6,7 +6,7 @@ using System.Text;
 namespace LightDataModel
 {
     /// <summary>
-    /// tbl_api_order_201511数据模型
+    /// tbl_api_order_201601数据模型
     /// </summary>
     public partial class tbl_api_orderItem : Shotgun.Model.Logical.DynamicDataItem
     {
@@ -24,31 +24,57 @@ namespace LightDataModel
             ///</summary>
             public const string PrimaryKey = "id";
 
-
-            public const string cp_id = "cp_id";
             /// <summary>
-            /// daily_config.tbl_trone.id,具体的计费通道,金额
+            /// trone_order_id
             /// </summary>
-            public const string trone_id = "trone_id";
+            public const string trone_order_id = "trone_order_id";
 
+            public const string api_id = "api_id";
+            /// <summary>
+            /// IMSI
+            /// </summary>
             public const string imsi = "imsi";
-
+            /// <summary>
+            /// IMEI
+            /// </summary>
             public const string imei = "imei";
-
+            /// <summary>
+            /// 手机号
+            /// </summary>
             public const string mobile = "mobile";
-
+            /// <summary>
+            /// 区域码
+            /// </summary>
             public const string lac = "lac";
-
+            /// <summary>
+            /// 基站编号
+            /// </summary>
             public const string cid = "cid";
-
+            /// <summary>
+            /// CP透参
+            /// </summary>
             public const string ExtrData = "ExtrData";
+
+            public const string sdkversion = "sdkversion";
+
+            public const string packagename = "packagename";
+
+            public const string ip = "ip";
+
+            public const string clientip = "clientip";
+
+            public const string nettype = "nettype";
             /// <summary>
             /// sp产生的订单号，通常在二次http或回传时匹配使用
             /// </summary>
             public const string sp_linkid = "sp_linkid";
-
+            /// <summary>
+            /// 存储除了LINKID之外的信息
+            /// </summary>
             public const string sp_exField = "sp_exField";
-
+            /// <summary>
+            /// 验证码
+            /// </summary>
             public const string cp_verifyCode = "cp_verifyCode";
             /// <summary>
             /// 首次请求的时间
@@ -71,9 +97,9 @@ namespace LightDataModel
             /// </summary>
             public const string api_exdata = "api_exdata";
             /// <summary>
-            /// 0:API反回成功 1:验证码下发成功 2:屏蔽地区 3:操作超时 4:取指令失败
+            /// 后面再确认
             /// </summary>
-            public const string state = "state";
+            public const string status = "status";
             /// <summary>
             /// 是否直接扣量
             /// </summary>
@@ -83,31 +109,57 @@ namespace LightDataModel
 
         }
         #region 表字段变量定义
-
-        private int _cp_id;
         /// <summary>
-        /// daily_config.tbl_trone.id,具体的计费通道,金额
+        /// trone_order_id
         /// </summary>
-        private int _trone_id;
+        private int _trone_order_id;
 
+        private int _api_id;
+        /// <summary>
+        /// IMSI
+        /// </summary>
         private string _imsi;
-
+        /// <summary>
+        /// IMEI
+        /// </summary>
         private string _imei;
-
+        /// <summary>
+        /// 手机号
+        /// </summary>
         private string _mobile;
-
+        /// <summary>
+        /// 区域码
+        /// </summary>
         private int _lac;
-
+        /// <summary>
+        /// 基站编号
+        /// </summary>
         private int _cid;
-
+        /// <summary>
+        /// CP透参
+        /// </summary>
         private string _ExtrData;
+
+        private string _sdkversion;
+
+        private string _packagename;
+
+        private string _ip;
+
+        private string _clientip;
+
+        private string _nettype;
         /// <summary>
         /// sp产生的订单号，通常在二次http或回传时匹配使用
         /// </summary>
         private string _sp_linkid;
-
+        /// <summary>
+        /// 存储除了LINKID之外的信息
+        /// </summary>
         private string _sp_exField;
-
+        /// <summary>
+        /// 验证码
+        /// </summary>
         private string _cp_verifyCode;
         /// <summary>
         /// 首次请求的时间
@@ -130,9 +182,9 @@ namespace LightDataModel
         /// </summary>
         private string _api_exdata;
         /// <summary>
-        /// 0:API反回成功 1:验证码下发成功 2:屏蔽地区 3:操作超时 4:取指令失败
+        /// 后面再确认
         /// </summary>
-        private string _state;
+        private int _status;
         /// <summary>
         /// 是否直接扣量
         /// </summary>
@@ -152,47 +204,49 @@ namespace LightDataModel
         }
 
         #region 表字段值存取
-
-        public int cp_id
+        /// <summary>
+        /// trone_order_id
+        /// </summary>
+        public int trone_order_id
         {
-            get { return this._cp_id; }
+            get { return this._trone_order_id; }
             set
             {
 #if true && true
-                RemoveNullFlag(Fields.cp_id);
+                RemoveNullFlag(Fields.trone_order_id);
 #elif !true
 			    if (value == null)
-                    SetNullFlag(Fields.cp_id);
+                    SetNullFlag(Fields.trone_order_id);
                 else
-                    RemoveNullFlag(Fields.cp_id);
+                    RemoveNullFlag(Fields.trone_order_id);
 #endif
 
-                SetFieldHasUpdate(Fields.cp_id, this._cp_id, value);
-                this._cp_id = value;
+                SetFieldHasUpdate(Fields.trone_order_id, this._trone_order_id, value);
+                this._trone_order_id = value;
+            }
+        }
+
+        public int api_id
+        {
+            get { return this._api_id; }
+            set
+            {
+#if true && true
+                RemoveNullFlag(Fields.api_id);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.api_id);
+                else
+                    RemoveNullFlag(Fields.api_id);
+#endif
+
+                SetFieldHasUpdate(Fields.api_id, this._api_id, value);
+                this._api_id = value;
             }
         }
         /// <summary>
-        /// daily_config.tbl_trone.id,具体的计费通道,金额
+        /// IMSI
         /// </summary>
-        public int trone_id
-        {
-            get { return this._trone_id; }
-            set
-            {
-#if true && true
-                RemoveNullFlag(Fields.trone_id);
-#elif !true
-			    if (value == null)
-                    SetNullFlag(Fields.trone_id);
-                else
-                    RemoveNullFlag(Fields.trone_id);
-#endif
-
-                SetFieldHasUpdate(Fields.trone_id, this._trone_id, value);
-                this._trone_id = value;
-            }
-        }
-
         public string imsi
         {
             get { return this._imsi; }
@@ -211,7 +265,9 @@ namespace LightDataModel
                 this._imsi = value;
             }
         }
-
+        /// <summary>
+        /// IMEI
+        /// </summary>
         public string imei
         {
             get { return this._imei; }
@@ -230,7 +286,9 @@ namespace LightDataModel
                 this._imei = value;
             }
         }
-
+        /// <summary>
+        /// 手机号
+        /// </summary>
         public string mobile
         {
             get { return this._mobile; }
@@ -249,7 +307,9 @@ namespace LightDataModel
                 this._mobile = value;
             }
         }
-
+        /// <summary>
+        /// 区域码
+        /// </summary>
         public int lac
         {
             get { return this._lac; }
@@ -268,7 +328,9 @@ namespace LightDataModel
                 this._lac = value;
             }
         }
-
+        /// <summary>
+        /// 基站编号
+        /// </summary>
         public int cid
         {
             get { return this._cid; }
@@ -287,7 +349,9 @@ namespace LightDataModel
                 this._cid = value;
             }
         }
-
+        /// <summary>
+        /// CP透参
+        /// </summary>
         public string ExtrData
         {
             get { return this._ExtrData; }
@@ -304,6 +368,101 @@ namespace LightDataModel
 
                 SetFieldHasUpdate(Fields.ExtrData, this._ExtrData, value);
                 this._ExtrData = value;
+            }
+        }
+
+        public string sdkversion
+        {
+            get { return this._sdkversion; }
+            set
+            {
+#if false && true
+				RemoveNullFlag(Fields.sdkversion);
+#elif !false
+                if (value == null)
+                    SetNullFlag(Fields.sdkversion);
+                else
+                    RemoveNullFlag(Fields.sdkversion);
+#endif
+
+                SetFieldHasUpdate(Fields.sdkversion, this._sdkversion, value);
+                this._sdkversion = value;
+            }
+        }
+
+        public string packagename
+        {
+            get { return this._packagename; }
+            set
+            {
+#if false && true
+				RemoveNullFlag(Fields.packagename);
+#elif !false
+                if (value == null)
+                    SetNullFlag(Fields.packagename);
+                else
+                    RemoveNullFlag(Fields.packagename);
+#endif
+
+                SetFieldHasUpdate(Fields.packagename, this._packagename, value);
+                this._packagename = value;
+            }
+        }
+
+        public string ip
+        {
+            get { return this._ip; }
+            set
+            {
+#if false && true
+				RemoveNullFlag(Fields.ip);
+#elif !false
+                if (value == null)
+                    SetNullFlag(Fields.ip);
+                else
+                    RemoveNullFlag(Fields.ip);
+#endif
+
+                SetFieldHasUpdate(Fields.ip, this._ip, value);
+                this._ip = value;
+            }
+        }
+
+        public string clientip
+        {
+            get { return this._clientip; }
+            set
+            {
+#if false && true
+				RemoveNullFlag(Fields.clientip);
+#elif !false
+                if (value == null)
+                    SetNullFlag(Fields.clientip);
+                else
+                    RemoveNullFlag(Fields.clientip);
+#endif
+
+                SetFieldHasUpdate(Fields.clientip, this._clientip, value);
+                this._clientip = value;
+            }
+        }
+
+        public string nettype
+        {
+            get { return this._nettype; }
+            set
+            {
+#if false && true
+				RemoveNullFlag(Fields.nettype);
+#elif !false
+                if (value == null)
+                    SetNullFlag(Fields.nettype);
+                else
+                    RemoveNullFlag(Fields.nettype);
+#endif
+
+                SetFieldHasUpdate(Fields.nettype, this._nettype, value);
+                this._nettype = value;
             }
         }
         /// <summary>
@@ -327,7 +486,9 @@ namespace LightDataModel
                 this._sp_linkid = value;
             }
         }
-
+        /// <summary>
+        /// 存储除了LINKID之外的信息
+        /// </summary>
         public string sp_exField
         {
             get { return this._sp_exField; }
@@ -346,7 +507,9 @@ namespace LightDataModel
                 this._sp_exField = value;
             }
         }
-
+        /// <summary>
+        /// 验证码
+        /// </summary>
         public string cp_verifyCode
         {
             get { return this._cp_verifyCode; }
@@ -471,24 +634,24 @@ namespace LightDataModel
             }
         }
         /// <summary>
-        /// 0:API反回成功 1:验证码下发成功 2:屏蔽地区 3:操作超时 4:取指令失败
+        /// 后面再确认
         /// </summary>
-        public string state
+        public int status
         {
-            get { return this._state; }
+            get { return this._status; }
             set
             {
-#if false && true
-				RemoveNullFlag(Fields.state);
-#elif !false
-                if (value == null)
-                    SetNullFlag(Fields.state);
+#if true && true
+                RemoveNullFlag(Fields.status);
+#elif !true
+			    if (value == null)
+                    SetNullFlag(Fields.status);
                 else
-                    RemoveNullFlag(Fields.state);
+                    RemoveNullFlag(Fields.status);
 #endif
 
-                SetFieldHasUpdate(Fields.state, this._state, value);
-                this._state = value;
+                SetFieldHasUpdate(Fields.status, this._status, value);
+                this._status = value;
             }
         }
         /// <summary>
@@ -518,14 +681,19 @@ namespace LightDataModel
         protected override string[] GetNullableFields()
         {
             return new string[]{null
-			,"cp_id"
-,"trone_id"
+			,"trone_order_id"
+,"api_id"
 ,"imsi"
 ,"imei"
 ,"mobile"
 ,"lac"
 ,"cid"
 ,"ExtrData"
+,"sdkversion"
+,"packagename"
+,"ip"
+,"clientip"
+,"nettype"
 ,"sp_linkid"
 ,"sp_exField"
 ,"cp_verifyCode"
@@ -534,16 +702,16 @@ namespace LightDataModel
 ,"port"
 ,"msg"
 ,"api_exdata"
-,"state"
+,"status"
 ,"is_hidden"
 };
         }
-        public bool Iscp_idNull() { return IsNull(Fields.cp_id); }
+        public bool Istrone_order_idNull() { return IsNull(Fields.trone_order_id); }
 
-        public void Setcp_idNull() { SetNull(Fields.cp_id); }
-        public bool Istrone_idNull() { return IsNull(Fields.trone_id); }
+        public void Settrone_order_idNull() { SetNull(Fields.trone_order_id); }
+        public bool Isapi_idNull() { return IsNull(Fields.api_id); }
 
-        public void Settrone_idNull() { SetNull(Fields.trone_id); }
+        public void Setapi_idNull() { SetNull(Fields.api_id); }
         public bool IsimsiNull() { return IsNull(Fields.imsi); }
 
         public void SetimsiNull() { SetNull(Fields.imsi); }
@@ -562,6 +730,21 @@ namespace LightDataModel
         public bool IsExtrDataNull() { return IsNull(Fields.ExtrData); }
 
         public void SetExtrDataNull() { SetNull(Fields.ExtrData); }
+        public bool IssdkversionNull() { return IsNull(Fields.sdkversion); }
+
+        public void SetsdkversionNull() { SetNull(Fields.sdkversion); }
+        public bool IspackagenameNull() { return IsNull(Fields.packagename); }
+
+        public void SetpackagenameNull() { SetNull(Fields.packagename); }
+        public bool IsipNull() { return IsNull(Fields.ip); }
+
+        public void SetipNull() { SetNull(Fields.ip); }
+        public bool IsclientipNull() { return IsNull(Fields.clientip); }
+
+        public void SetclientipNull() { SetNull(Fields.clientip); }
+        public bool IsnettypeNull() { return IsNull(Fields.nettype); }
+
+        public void SetnettypeNull() { SetNull(Fields.nettype); }
         public bool Issp_linkidNull() { return IsNull(Fields.sp_linkid); }
 
         public void Setsp_linkidNull() { SetNull(Fields.sp_linkid); }
@@ -586,9 +769,9 @@ namespace LightDataModel
         public bool Isapi_exdataNull() { return IsNull(Fields.api_exdata); }
 
         public void Setapi_exdataNull() { SetNull(Fields.api_exdata); }
-        public bool IsstateNull() { return IsNull(Fields.state); }
+        public bool IsstatusNull() { return IsNull(Fields.status); }
 
-        public void SetstateNull() { SetNull(Fields.state); }
+        public void SetstatusNull() { SetNull(Fields.status); }
         public bool Isis_hiddenNull() { return IsNull(Fields.is_hidden); }
 
         public void Setis_hiddenNull() { SetNull(Fields.is_hidden); }
