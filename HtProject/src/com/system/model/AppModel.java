@@ -8,6 +8,7 @@ public class AppModel {
 	private int user_id;
 	private String remark;
 	private String userName;
+	private int appType;
 	
 	public int getId() {
 		return id;
@@ -52,6 +53,14 @@ public class AppModel {
 	public void setUserName(String userName)
 	{
 		this.userName = userName;
+	}
+	public int getAppType()
+	{
+		return appType;
+	}
+	public void setAppType(int appType)
+	{
+		this.appType = appType;
 	}
 	
 }

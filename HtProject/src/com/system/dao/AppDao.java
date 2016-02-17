@@ -106,7 +106,7 @@ public class AppDao {
 		return result;
 	}
 	
-	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey)
+	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey,int appType)
 	{
 		String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
@@ -121,6 +121,11 @@ public class AppDao {
 		if(!StringUtil.isNullOrEmpty(appkey))
 		{
 			sql += " AND appkey LIKE '%"+appkey+"%' ";
+		}
+		
+		if(appType>0)
+		{
+			sql += " And app_type = " + appType;
 		}
 		
 		sql +=" ORDER BY a.id ASC ";
@@ -155,6 +160,7 @@ public class AppDao {
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
 							model.setUserName(StringUtil.getString(rs.getString("nick_name"), ""));
+							model.setAppType(rs.getInt("app_type"));
 							list.add(model);
 						}
 						
