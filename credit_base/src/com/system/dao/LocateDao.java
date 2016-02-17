@@ -55,6 +55,7 @@ public class LocateDao
 					model.setId(rs.getInt("id"));
 					model.setProvinceId(rs.getInt("province_id"));
 					model.setName(StringUtil.getString(rs.getString("name"), ""));
+					list.add(model);
 				}
 				return list;
 			}

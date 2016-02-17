@@ -44,6 +44,7 @@ public class SpDataDao
 					model.setTroneType(rs.getInt("trone_type"));
 					model.setStatus(rs.getInt("status"));
 					model.setSpTroneApiId(rs.getInt("trone_api_id"));
+					model.setProvinces(StringUtil.getString(rs.getString("provinces"), ""));
 					
 					list.add(model);
 				}

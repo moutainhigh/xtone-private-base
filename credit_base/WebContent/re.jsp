@@ -12,5 +12,5 @@
 	
 	out.print("恭喜，贺喜，刷新成功！[" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "]");
 	
-	CacheConfigMgr.refreshAllCache();
+	CacheConfigMgr.refreshAllTroneCache();
 %>

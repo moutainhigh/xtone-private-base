@@ -10,7 +10,7 @@ public class BaseTest
 	{
 		ApiOrderModel model = new ApiOrderModel();
 		model.setApiExdata("");
-		model.setTroneOrderId(1502);
+		model.setTroneOrderId(1616);
 		model.setCid(1);
 		model.setClientIp("201.161.24.82");
 		model.setCpVerifyCode("");

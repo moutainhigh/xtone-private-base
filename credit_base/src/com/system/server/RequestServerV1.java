@@ -164,10 +164,16 @@ public class RequestServerV1
 		return true;
 	}
 	
+	/**
+	 * 这个函数只用于处理这种情况：只用于识别得了号码的用户，并且是不符合的地区才返回FALSE，其它情况一律返回TRUE
+	 * @param model
+	 * @param spTroneModel
+	 * @return
+	 */
 	protected boolean isPhoneLocateMatch(ApiOrderModel model,SpTroneModel spTroneModel)
 	{
 		if(StringUtil.isNullOrEmpty(model.getImsi()) && StringUtil.isNullOrEmpty(model.getMobile()))
-			return false;
+			return true;
 		
 		String phonePrefix = null;
 		
@@ -181,21 +187,21 @@ public class RequestServerV1
 		}
 		
 		if(StringUtil.isNullOrEmpty(phonePrefix))
-			return false;
+			return true;
 		
 		int cityId = LocateCache.getCityIdByPhone(phonePrefix);
 		
 		if(cityId<0)
-			return false;
+			return true;
 		
 		ProvinceModel provinceModel = LocateCache.getProvinceByCityId(cityId);
 		
 		if(provinceModel==null)
-			return false;
+			return true;
 		
 		if(StringUtil.isNullOrEmpty(spTroneModel.getProvinces()))
 		{
-			return false;
+			return true;
 		}
 		
 		String[] strProvinces = spTroneModel.getProvinces().split(",");
