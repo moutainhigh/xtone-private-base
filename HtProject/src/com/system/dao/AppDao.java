@@ -204,6 +204,7 @@ public class AppDao {
 							model.setId(rs.getInt("id"));
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
+							model.setAppType(rs.getInt("app_type"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
 							model.setUser_id(rs.getInt("user_id"));
@@ -221,6 +222,7 @@ public class AppDao {
 				+ "appkey='"+model.getAppkey()+"',"
 				+ " appname='"+model.getAppname()+"',"
 			    + " hold_percent="+model.getHold_percent()+","
+			    + " app_type="+model.getAppType()+","
 			    + " remark='"+model.getRemark()+"' WHERE id="+model.getId();
 		return new JdbcControl().execute(sql);
 	}

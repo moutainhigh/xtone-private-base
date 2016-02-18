@@ -19,6 +19,7 @@
 
 	String appKey = StringUtil.getString(request.getParameter("appkey"),
 			"");
+	int appType = StringUtil.getInteger(request.getParameter("app_type"), 0);
 	String startDate = StringUtil
 			.getString(request.getParameter("startdate"), defaultStartDate);
 	String endDate = StringUtil
@@ -26,7 +27,7 @@
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new FeeServer().loadAppFee(startDate, endDate, appKey, pageIndex);
+	Map<String, Object> map =  new FeeServer().loadAppFee(startDate, endDate, appKey, pageIndex, appType);
 		
 	List<XyFeeModel> list = (List<XyFeeModel>)map.get("list");
 	
@@ -37,6 +38,7 @@
 	params.put("appkey", appKey);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
+	params.put("app_type", appType+"");
 	
 	String pageData = PageUtil.initPageQuery("fee2.jsp",params,rowCount,pageIndex);
 	
@@ -52,6 +54,10 @@
 <script type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 
+	$(function()
+	{
+		$("#sel_app_type").val("<%= appType %>");
+	});
 	//声明整数的正则表达式
 	function isNum(a)
 	{
@@ -144,6 +150,14 @@
 					<dd class="dd03_me">
 						<input name="appkey" value="<%=appKey%>" type="text">
 					</dd>
+					<dd class="dd01_me">应用类型</dd>
+					<dd class="dd04_me">
+						<select name="app_type" id="sel_app_type" style="width: 150px;" title="应用类型">
+							<option value="-1">应用类型</option>
+							<option value="1">自营应用</option>
+							<option value="2">第三方应用</option>
+						</select>
+					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit">
 					</dd>
@@ -157,6 +171,7 @@
 					<td>计费日期</td>
 					<td>游戏名</td>
 					<td>应用Key</td>
+					<td>应用类型</td>
 					<td>计费金额</td>
 					<td>同步金额</td>
 					<td>状态</td>
@@ -176,6 +191,7 @@
 					</td>
 					<td><%=model.getAppName()%></td>
 					<td><%=model.getAppKey()%></td>
+					<td><%= model.getAppType()==1 ? "自营" : "第三方" %></td>
 					<td>
 						<%=model.getAmount()%>
 						<input type="hidden" id="ori_hid_<%= model.getId() %>" value="<%=model.getAmount()%>" />
@@ -195,6 +211,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 					<td>实际信息费:<%= StringUtil.getDecimalFormat((Float)map.get("amounts")) %></td>
 					<td>
 						<span>同步总信息费:<label id="show_amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("show_amounts")) %></label></span>
@@ -202,7 +219,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

@@ -65,9 +65,9 @@ public class FeeDao
 		return new JdbcGameControl().execute(sql);
 	}
 	
-	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex)
+	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex , int appType)
 	{
-		String query = " a.id,a.fee_date,b.appname,b.appkey,c.channelkey,c.data_rows,a.amount,a.show_amount,a.status ";
+		String query = " a.id,a.fee_date,b.appname,b.appkey,b.app_type,c.channelkey,c.data_rows,a.amount,a.show_amount,a.status ";
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
@@ -86,6 +86,9 @@ public class FeeDao
 			sql += " and (b.appname like '%" + keyWord + "%' or b.appkey like '%" + keyWord + "%' or c.channelkey like '%" + keyWord + "%') ";
 		}
 		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
+			
 		String orders = " order by a.fee_date asc,appname asc,channelkey asc ";
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
@@ -138,6 +141,7 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setChannelId(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setAmount(rs.getFloat("amount"));
@@ -154,10 +158,10 @@ public class FeeDao
 		return result;
 	}
 	
-	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex)
+	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex,int appType)
 	{
 		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.*,b.appname,b.app_type ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_fee_summer a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
@@ -166,6 +170,9 @@ public class FeeDao
 		
 		if(!StringUtil.isNullOrEmpty(appKey))
 			sql += " and a.appkey like '%" + appKey + "%' ";
+		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
 		
 		sql += " order by fee_date,b.appname asc";
 		
@@ -217,6 +224,7 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setAmount(rs.getFloat("amount"));
 					model.setShowAmount(rs.getFloat("show_amount"));
 					model.setStatus(rs.getInt("status"));

@@ -29,6 +29,7 @@ public class AppServer {
 	
 	public AppModel loadAppById(int id)
 	{
+		AppModel model = new AppDao().loadAppById(id);
 		return new AppDao().loadAppById(id);
 	}
 	

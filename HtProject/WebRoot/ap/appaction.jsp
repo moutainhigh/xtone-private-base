@@ -12,6 +12,7 @@
 	int hold_percent = StringUtil.getInteger(request.getParameter("hold_persent"), 0);
 	String remark = StringUtil.getString(request.getParameter("remark"), "");
 	String query = StringUtil.getString(request.getParameter("query"), "");
+	int appType = StringUtil.getInteger(request.getParameter("app_type"), 1);
 	
 	AppModel model = new AppModel();
 	model.setId(id);
@@ -19,6 +20,7 @@
 	model.setAppkey(appkey);
 	model.setHold_percent(hold_percent);
 	model.setRemark(remark);
+	model.setAppType(appType);
 	
 	int type = StringUtil.getInteger(request.getParameter("type"), -1);
 	

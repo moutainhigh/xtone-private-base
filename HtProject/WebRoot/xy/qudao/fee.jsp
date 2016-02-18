@@ -21,6 +21,8 @@
 	String defaultEndDate = StringUtil.getDefaultDate();
 	
 	String keyWord = StringUtil.getString(request.getParameter("keyword"),"");
+	
+	int appType = StringUtil.getInteger(request.getParameter("app_type"), 0);
 
 	String startDate = StringUtil
 			.getString(request.getParameter("startdate"), defaultStartDate);
@@ -30,7 +32,7 @@
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new FeeServer().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
+	Map<String, Object> map =  new FeeServer().loadChannelAppFee(startDate, endDate, keyWord, pageIndex, appType);
 		
 	List<XyFeeModel> list = (List<XyFeeModel>)map.get("list");
 	
@@ -41,6 +43,7 @@
 	params.put("keyword", keyWord);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
+	params.put("app_type", appType+"");
 	
 	String pageData = PageUtil.initPageQuery("fee.jsp",params,rowCount,pageIndex);
 	
@@ -56,6 +59,10 @@
 <script type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
 
+	$(function()
+	{
+		$("#sel_app_type").val("<%= appType %>");
+	});
 	//声明整数的正则表达式
 	function isNum(a)
 	{
@@ -148,6 +155,14 @@
 					<dd class="dd03_me">
 						<input name="keyword" value="<%= keyWord %>" type="text">
 					</dd>
+					<dd class="dd01_me">应用类型</dd>
+					<dd class="dd04_me">
+						<select name="app_type" id="sel_app_type" style="width: 150px;" title="应用类型">
+							<option value="-1">应用类型</option>
+							<option value="1">自营应用</option>
+							<option value="2">第三方应用</option>
+						</select>
+					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit">
 					</dd>
@@ -161,6 +176,7 @@
 					<td>计费日期</td>
 					<td class="or">游戏</td>
 					<td class="or">渠道ID</td>
+					<td>应用类型</td>
 					<td>激活数</td>
 					<td class="or">计费金额</td>
 					<td class="or">同步金额</td>
@@ -181,6 +197,7 @@
 					</td>
 					<td class="or"><%=model.getAppName() + "("+ model.getAppKey() +")"%></td>
 					<td class="or"><%=model.getChannelId()%></td>
+					<td><%= model.getAppType()==1 ? "自营" : "第三方" %></td>
 					<td>
 						<%=model.getDataRows()%>
 					</td>
@@ -203,6 +220,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 					<td>总激活数:<%= map.get("data_rows") %></td>
 					<td>
 						<span>总计费额:<label id="amount_label"><%= StringUtil.getDecimalFormat((Float)map.get("total_amount")) %></label></span>
@@ -213,7 +231,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>
