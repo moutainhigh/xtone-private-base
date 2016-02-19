@@ -5,12 +5,16 @@ public class SpTroneModel
 	private int id;
 	private int spId;
 	private String spName;
+	private String commerceUserName;
 	private String spTroneName;
 	private int operator;
 	private String operatorName;
 	private float jieSuanLv;
 	private String provinces;
+	private int troneApiId;
+	private String troneApiName;
 	private int troneType;
+	private int status;
 	
 	public int getTroneType()
 	{
@@ -83,5 +87,37 @@ public class SpTroneModel
 	public void setProvinces(String provinces)
 	{
 		this.provinces = provinces;
+	}
+	public int getTroneApiId()
+	{
+		return troneApiId;
+	}
+	public void setTroneApiId(int troneApiId)
+	{
+		this.troneApiId = troneApiId;
+	}
+	public int getStatus()
+	{
+		return status;
+	}
+	public void setStatus(int status)
+	{
+		this.status = status;
+	}
+	public String getTroneApiName()
+	{
+		return troneApiName;
+	}
+	public void setTroneApiName(String troneApiName)
+	{
+		this.troneApiName = troneApiName;
+	}
+	public String getCommerceUserName()
+	{
+		return commerceUserName;
+	}
+	public void setCommerceUserName(String commerceUserName)
+	{
+		this.commerceUserName = commerceUserName;
 	}
 }

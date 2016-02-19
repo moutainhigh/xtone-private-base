@@ -14,16 +14,16 @@ public class UserServer
 {
 	Logger log = Logger.getLogger(UserServer.class);
 	
-	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey,int pageIndex)
+	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey,int pageIndex ,int appType)
 	{
-		return new UserDao().loadUserData(startDate, endDate, appKey, channelKey,pageIndex);
+		return new UserDao().loadUserData(startDate, endDate, appKey, channelKey,pageIndex,appType);
 	}
 	
-	public List<XyUserModel> loadUserTodayData(String appKey,String channelKey)
+	public List<XyUserModel> loadUserTodayData(String appKey,String channelKey,int appType)
 	{
 		String tableName = StringUtil.getMonthFormat();
 		String startDate = StringUtil.getDefaultDate();
-		return new UserDao().loadUserTodayData(tableName, startDate, appKey, channelKey);
+		return new UserDao().loadUserTodayData(tableName, startDate, appKey, channelKey, appType);
 	}
 	
 	public Map<String, Object> loadQdUserData(String startDate,String endDate,int userId,int pageIndex)

@@ -110,8 +110,11 @@
 					<td>CP</td>
 					<td>名字</td>
 					<td>URL</td>
+					<td>起扣条数</td>
 					<td>扣量百分比</td>
 					<td>当日最大同步金额</td>
+					<td>最后同步日期</td>
+					<td>已同步金额</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -126,9 +129,11 @@
 					<td><%= model.getCpName() %></td>
 					<td><%= model.getName() %></td>
 					<td><%= model.getUrl()  %></td>
-					
+					<td><%= model.getHoldStartCount() %></td>
 					<td><%= model.getHoldPercent() %></td>
 					<td><%= model.getHoldAmount()  %></td>
+					<td><%= model.getLastDate() %></td>
+					<td><%= model.getCurAmount() %></td>
 					<td>
 						<a href="cppushurledit.jsp?id=<%= model.getId() %>&query=<%= query %>">修改</a>
 					</td>
@@ -139,7 +144,7 @@
 			</tbody>	
 			<tbody>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="10" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

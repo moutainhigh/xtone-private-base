@@ -28,7 +28,6 @@
 	String pageData = PageUtil.initPageQuery("cp.jsp",params,rowCount,pageIndex);
 	
 	String query = Base64UTF.encode(request.getQueryString());
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

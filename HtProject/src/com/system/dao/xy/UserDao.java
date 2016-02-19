@@ -18,10 +18,10 @@ import com.system.util.StringUtil;
 
 public class UserDao
 {
-	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey, int pageIndex)
+	public Map<String, Object> loadUserData(String startDate,String endDate,String appKey,String channelKey, int pageIndex , int appType)
 	{
 		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.*,b.appname,b.app_type ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_user_summer a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
@@ -33,6 +33,9 @@ public class UserDao
 		
 		if(!StringUtil.isNullOrEmpty(channelKey))
 			sql += " and a.channelkey like '%" + channelKey + "%' ";
+		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
 		
 		sql += " order by status,active_date,a.channelkey asc";
 		
@@ -84,6 +87,7 @@ public class UserDao
 					model.setActiveDate(rs.getString("active_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setChannelKey(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setShowDataRows(rs.getInt("show_data_rows"));
@@ -99,9 +103,9 @@ public class UserDao
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<XyUserModel>  loadUserTodayData(String tableName,String satrtDate,String appKey,String channelKey)
+	public List<XyUserModel>  loadUserTodayData(String tableName,String satrtDate,String appKey,String channelKey,int appType)
 	{
-		String query = " b.appname,b.appkey,a.channelkey,count(*) data_rows  ";
+		String query = " b.appname,b.appkey,b.app_type,a.channelkey,count(*) data_rows  ";
 		
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_user_" + tableName + " a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
 		
@@ -112,6 +116,9 @@ public class UserDao
 		
 		if(!StringUtil.isNullOrEmpty(channelKey))
 			sql += " and a.channelkey like '%" + channelKey + "%' ";
+		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
 		
 		sql += " group by a.appkey,a.channelkey order by b.appname asc";
 		
@@ -130,6 +137,7 @@ public class UserDao
 					
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setChannelKey(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					

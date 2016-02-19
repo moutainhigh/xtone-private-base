@@ -1,3 +1,5 @@
+<%@page import="com.system.server.TronePayCodeServer"%>
+<%@page import="com.system.model.TronePayCodeModel"%>
 <%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="com.system.model.TroneModel"%>
@@ -31,6 +33,10 @@
 	List<SpModel> spList = new SpServer().loadSp();
 	List<SpTroneModel> spTroneList = new SpTroneServer().loadSpTroneList();
 	List<SpApiUrlModel> spApiUrlList = new SpApiUrlServer().loadSpApiUrl();
+	
+	//把tbl_trone_paycode的数据找出来
+	TronePayCodeModel tronePayCodeModel = new TronePayCodeServer().getTronePayCode(model.getId());
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -56,22 +62,23 @@
 	}
 	%>
 
-	function joSpTrone(id,spId,troneName)
+	function joSpTrone(id,spId,troneName,spTroneApiId)
 	{
 		var obj = {};
 		obj.id = id;
 		obj.spId = spId;
 		obj.troneName = troneName;
+		obj.spTroneApiId = spTroneApiId;
 		return obj;
 	}
 	
 	var spTroneList = new Array();
-	<%for(SpTroneModel spTrone : spTroneList){%>spTroneList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%= spTrone.getSpName() + "-" +spTrone.getSpTroneName() %>'));<%}%>
+	<%for(SpTroneModel spTrone : spTroneList){%>spTroneList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%= spTrone.getSpName() + "-" +spTrone.getSpTroneName() %>',<%= spTrone.getTroneApiId() %>));<%}%>
 
 	var spApiUrlList = new Array();
 	<%for(SpApiUrlModel  spTrone : spApiUrlList){%>spApiUrlList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%=spTrone.getName() %>'));<%}%>
 	
-	function spTroneChange()
+	function spChange()
 	{
 		var spId = $("#sel_sp").val();
 		$("#sel_sp_trone").empty();
@@ -93,19 +100,40 @@
 				$("#sel_api_url").append("<option value='" + spApiUrlList[i].id + "'>" + spApiUrlList[i].troneName + "</option>");
 			}
 		}
+		
+		showOrHideApiArea(false);
+	}
+	
+	function spTroneChange()
+	{
+		var spTroneId = $("#sel_sp_trone").val();
+		showOrHideApiArea(false);
+		for(i=0; i<spTroneList.length; i++)
+		{
+			if(spTroneList[i].id==spTroneId)
+			{
+				spTroneList[i]
+				if(spTroneList[i].spTroneApiId>0)
+				{
+					showOrHideApiArea(true);	
+				}
+				break;
+			}
+		}
 	}
 	
 	$(function()
 	{
 		//SP的二级联动
-		$("#sel_sp").change(spTroneChange);
+		$("#sel_sp").change(spChange);
+		$("#sel_sp_trone").change(spTroneChange);
 		resetForm();
 	});
 	
 	function resetForm()
 	{
 		$("#sel_sp").val("<%= model.getSpId() %>");
-		spTroneChange();
+		spChange();
 		$("#sel_sp_trone").val("<%= model.getSpTroneId() %>");
 		$("#sel_api_url").val("<%= model.getSpApiUrlId() %>");
 		$("#input_trone_name").val("<%= model.getTroneName() %>");
@@ -116,6 +144,16 @@
 		document.getElementById("chk_status").checked = <%= model.getStatus()==1 ? "true" : "false" %>;
 		setRadioCheck("dynamic",<%= model.getDynamic() %>);
 		setRadioCheck("match_price",<%= model.getMatchPrice() %>);
+		
+		
+		$("#hid_exist_pay_code").val("<%= tronePayCodeModel==null ? 0 : 1 %>");
+		$("#hid_trone_pay_code_id").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getId() : "" %>");
+		
+		$("#input_paycode").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getPayCode() : "" %>");
+		$("#input_app_id").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getAppId() : "" %>");
+		$("#input_channel_id").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getChannelId() : "" %>");
+		
+		showOrHideApiArea(<%= tronePayCodeModel==null ? false : true %>);
 	}
 	
 	function subForm() 
@@ -173,7 +211,22 @@
 			$("#input_price").focus();
 			return;
 		}
-
+		
+		var existPayCode = document.getElementById("hid_exist_pay_code").value;
+		
+		if(existPayCode==1)
+		{
+			var payCode = $("#input_paycode").val();
+			var appId = $("#input_app_id").val();
+			var channelId = $("#input_channel_id").val();
+			
+			if(isNullOrEmpty(payCode)&&isNullOrEmpty(appId)&&isNullOrEmpty(channelId))
+			{
+				alert("兄弟，PayCode、AppId、ChannelId 总得有一个吧？");
+				return;	
+			}
+		}
+		
 		//alert(document.getElementById("dynamic").value + "---" + document.getElementById("match_price").value);
 		
 		document.getElementById("addform").submit();
@@ -182,7 +235,7 @@
 	function onSpDataSelect(joData)
 	{
 		$("#sel_sp").val(joData.id);
-		spTroneChange();
+		spChange();
 	}
 	
 	
@@ -193,6 +246,12 @@
 		return reg.test(a);
 	}
 
+	function showOrHideApiArea(isShow)
+	{
+		document.getElementById("div_sp_trone_api").style.display = isShow ? "block" : "none";
+		document.getElementById("hid_exist_pay_code").value = isShow ? 1 : 0 ;
+	}
+	
 </script>
 <body>
 	<div class="main_content">
@@ -314,10 +373,40 @@
 						<input type="radio" name="match_price" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">是</label>
 					</dd>
+					
+					<div style="clear: both;padding-bottom: 25px"></div>
+					
+					<div  id="div_sp_trone_api" >
+						<input type="hidden" value="1" id="hid_exist_pay_code" name="exist_pay_code" />
+						<input type="hidden" value="1" id="hid_trone_pay_code_id" name="trone_pay_code_id" />
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">PayCode</dd>
+						<dd class="dd03_me">
+							<input type="text" name="paycode" id="input_paycode"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;padding-bottom: 25px"></div>
+						
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">AppId</dd>
+						<dd class="dd03_me">
+							<input type="text" name="appid" id="input_app_id"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;padding-bottom: 25px"></div>
+						
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">ChannelId</dd>
+						<dd class="dd03_me">
+							<input type="text" name="channelid" id="input_channel_id"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;"></div>
+					</div>
 
-					<br />
-					<br />
-					<br />
 					<dd class="dd00"></dd>
 					<dd class="dd00_me"></dd>
 					<dd class="ddbtn" style="margin-left: 100px; margin-top: 10px">

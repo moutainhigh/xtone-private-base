@@ -99,6 +99,51 @@ public class TroneOrderDao
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<TroneOrderModel> loadTroneOrderListByTroneId(int troneId)
+	{
+		String sql = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price from daily_config.tbl_trone_order a "
+				+ " left join daily_config.tbl_cp b on a.cp_id = b.id "
+				+ " left join daily_config.tbl_trone c on a.trone_id = c.id "
+				+ " LEFT JOIN daily_config.`tbl_sp_trone` d ON c.`sp_trone_id` = d.id "
+				+ " WHERE b.id <> 34 and c.id = "
+				+ troneId + "  order by b.short_name asc";
+		
+		return (List<TroneOrderModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<TroneOrderModel> list = new ArrayList<TroneOrderModel>();
+				
+				while(rs.next())
+				{
+					TroneOrderModel model = new TroneOrderModel();
+					
+					model.setId(rs.getInt("id"));
+					model.setTroneId(rs.getInt("trone_id"));
+					model.setOrderNum(StringUtil.getString(rs.getString("order_num"), ""));
+					model.setCpId(rs.getInt("cp_id"));
+					model.setCpShortName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setOrderTroneName(StringUtil.getString(rs.getString("order_trone_name"), ""));
+					model.setDynamic(rs.getInt("is_dynamic"));
+					model.setPushUrlId(rs.getInt("push_url_id"));
+					model.setDisable(rs.getInt("disable"));
+					model.setIsUnKnow(rs.getInt("is_unknow"));
+					model.setSpId(rs.getInt("sp_id"));
+					model.setHoldPercent(rs.getInt("hold_percent"));
+					model.setTroneName(StringUtil.getString(rs.getString("trone_name"), ""));
+					model.setPrice(rs.getFloat("price"));
+					
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<TroneOrderModel> loadTroneOrderList()
 	{
 		String sql  = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price from daily_config.tbl_trone_order a left join daily_config.tbl_cp b on a.cp_id = b.id left join daily_config.tbl_trone c on a.trone_id = c.id  order by b.short_name asc";
@@ -137,9 +182,9 @@ public class TroneOrderDao
 		});
 	}
 	
-	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex)
+	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex,String keyWord)
 	{
-		String query = " b.sp_trone_id,c.`name` sp_trone_name,a.*, d.id sp_id, b.`trone_name`,d.`short_name` sp_name,e.`short_name` cp_name ";
+		String query = " b.sp_trone_id,c.`name` sp_trone_name,a.*, b.price,d.id sp_id, b.`trone_name`,d.`short_name` sp_name,e.`short_name` cp_name ";
 		
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING ;
 		sql += " FROM daily_config.`tbl_trone_order` a";
@@ -158,6 +203,15 @@ public class TroneOrderDao
 			wheres += " and e.id = " + cpId;
 		if(status>=0)
 			wheres += " and a.disable = " + status;
+		
+		if(!StringUtil.isNullOrEmpty(keyWord))
+		{
+			wheres += " and (d.short_name like '%" + keyWord + "%' or d.full_name like '%" + keyWord 
+					+ "%' or e.short_name like '%" + keyWord + "%' or e.full_name like '%" + keyWord 
+					+ "%' or c.name like '%" + keyWord + "%' or b.orders like '%" + keyWord 
+					+ "%' or b.trone_name like '%" + keyWord + "%' or b.trone_num like '%" 
+					+ keyWord + "%' OR a.`order_num` LIKE '%"+ keyWord +"%')";
+		}
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
@@ -206,6 +260,7 @@ public class TroneOrderDao
 					model.setHoldAmount(rs.getFloat("hold_amount"));
 					model.setIsHoldCustom(rs.getInt("hold_is_Custom"));
 					model.setSpTroneId(rs.getInt("sp_trone_id"));
+					model.setPrice(rs.getFloat("price"));
 					
 					list.add(model);
 				}
@@ -287,6 +342,65 @@ public class TroneOrderDao
 				+ model.getIsHoldCustom() + " where id = " + model.getId();
 		
 		return new JdbcControl().execute(sql);
+	}
+	
+	//不要问我为什么这样处理这个状态，得问邓先生！
+	@SuppressWarnings("unchecked")
+	public List<TroneOrderModel> loadTroneOrderListByCpSpTroneId(int cpId,int spTroneId,int status)
+	{
+		String sql = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price,d.status,d.name sp_trone_name from daily_config.tbl_trone_order a "
+				+ " left join daily_config.tbl_cp b on a.cp_id = b.id "
+				+ " left join daily_config.tbl_trone c on a.trone_id = c.id "
+				+ " LEFT JOIN daily_config.`tbl_sp_trone` d ON c.`sp_trone_id` = d.id "
+				+ " WHERE b.id = "+ cpId + " and d.trone_api_id > 0 ";
+		
+				if(status>-1)
+				{
+					sql += " and c.status = " + status + " and  a.disable = " +  (status==0 ? 1 : 0) ;
+				}
+		
+				if(spTroneId>0)
+				{
+					sql += " and d.id = " + spTroneId;
+				}
+				
+				sql += " order by b.short_name asc";
+		
+		return (List<TroneOrderModel>)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				List<TroneOrderModel> list = new ArrayList<TroneOrderModel>();
+				
+				while(rs.next())
+				{
+					TroneOrderModel model = new TroneOrderModel();
+					
+					model.setId(rs.getInt("id"));
+					model.setTroneId(rs.getInt("trone_id"));
+					model.setOrderNum(StringUtil.getString(rs.getString("order_num"), ""));
+					model.setCpId(rs.getInt("cp_id"));
+					model.setCpShortName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setOrderTroneName(StringUtil.getString(rs.getString("order_trone_name"), ""));
+					model.setDynamic(rs.getInt("is_dynamic"));
+					model.setPushUrlId(rs.getInt("push_url_id"));
+					model.setDisable(rs.getInt("disable"));
+					model.setIsUnKnow(rs.getInt("is_unknow"));
+					model.setSpId(rs.getInt("sp_id"));
+					model.setHoldPercent(rs.getInt("hold_percent"));
+					model.setTroneName(StringUtil.getString(rs.getString("trone_name"), ""));
+					model.setSpTroneName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
+					model.setPrice(rs.getFloat("price"));
+					model.setSpTroneStatus(rs.getInt("status"));
+					
+					list.add(model);
+				}
+				
+				return list;
+			}
+		});
 	}
 	
 	

@@ -90,6 +90,8 @@ public class CpPushUrlDao
 					model.setHoldStartCount(rs.getInt("hold_start"));
 					model.setIsRealTime(rs.getInt("is_realtime"));
 					model.setCpName(StringUtil.getString(rs.getString("short_name"), ""));
+					model.setCurAmount(rs.getFloat("amount"));
+					model.setLastDate(StringUtil.getString(rs.getString("lastDate"), ""));
 					
 					list.add(model);
 				}
@@ -134,15 +136,15 @@ public class CpPushUrlDao
 	
 	public boolean addCpPushUrl(CpPushUrlModel model)
 	{
-		String sql = "insert into daily_config.tbl_cp_push_url(name,ref_count,url,cp_id,hold_percent,hold_amount) values('"+ model.getName() 
-		+"',"+ model.getRefCount() +",'"+ model.getUrl() +"',"+ model.getCpId() +","+ model.getHoldPercent() +","+ model.getHoldAmount() +")";
+		String sql = "insert into daily_config.tbl_cp_push_url(name,ref_count,url,cp_id,hold_percent,hold_amount,hold_start) values('"+ model.getName() 
+		+"',"+ model.getRefCount() +",'"+ model.getUrl() +"',"+ model.getCpId() +","+ model.getHoldPercent() +","+ model.getHoldAmount() +","+ model.getHoldStartCount() +")";
 		
 		return new JdbcControl().execute(sql);
 	}
 	
 	public boolean updateCpPushUrl(CpPushUrlModel model)
 	{
-		String sql = "update daily_config.tbl_cp_push_url set name = '"+ model.getName() +"',ref_count=" + model.getRefCount() + ",url='" + model.getUrl() + "',cp_id=" + model.getCpId() + ",hold_percent=" + model.getHoldPercent() + ",hold_amount=" + model.getHoldAmount() + " where id=" + model.getId();
+		String sql = "update daily_config.tbl_cp_push_url set name = '"+ model.getName() +"',ref_count=" + model.getRefCount() + ",url='" + model.getUrl() + "',cp_id=" + model.getCpId() + ",hold_percent=" + model.getHoldPercent() + ",hold_amount=" + model.getHoldAmount() + ",hold_start=" + model.getHoldStartCount() + " where id=" + model.getId();
 		
 		return new JdbcControl().execute(sql);
 	}

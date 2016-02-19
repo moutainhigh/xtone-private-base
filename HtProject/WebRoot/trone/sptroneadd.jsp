@@ -1,3 +1,5 @@
+<%@page import="com.system.server.SpTroneApiServer"%>
+<%@page import="com.system.model.SpTroneApiModel"%>
 <%@page import="com.system.model.ProvinceModel"%>
 <%@page import="com.system.server.ProvinceServer"%>
 <%@page import="java.net.URLEncoder"%>
@@ -14,6 +16,7 @@
 <%
 	List<SpModel> spList = new SpServer().loadSp();
 	List<ProvinceModel> provinceList = new ProvinceServer().loadProvince();
+	List<SpTroneApiModel> spTroneApiList = new SpTroneApiServer().loadSpTroneApi();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -135,44 +138,20 @@
 	{
 		var tmpPro = prompt("请输入省份", "");
 		
-		if ( tmpPro == null || "" == provinces )
+		if ( tmpPro == null || "" == tmpPro )
 			return;
-		
-		tmpPro = tmpPro.replace("，", ",");
-		tmpPro = tmpPro.replace(" ", ",");
-		tmpPro = tmpPro.replace("、", ",");
-		tmpPro = tmpPro.replace("|", ",");
-		tmpPro = tmpPro.replace("、", ",");
 
-		var proNameList = tmpPro.split(",");
-		
-		var provinces = new Array();
-		
-		unAllCkb();
-		
-		for(var i=0; i<proNameList.length; i++)
+		$('[name=area[]]:checkbox').each(function() 
 		{
-			for(var j=0; j<provinceList.length; j++)
+			if(tmpPro.indexOf(this.title) != -1)
 			{
-				if(provinceList[j].text==proNameList[i])
-				{
-					provinces.push(provinceList[j].id);
-					break;
-				}
-			}
-		}
-
-		$('[name=area[]]:checkbox').each(function() {
-			
-			for(k=0; k<provinces.length; k++)
-			{
-				if(provinces[k]==this.value)
-				{
-					this.checked = true;
-					break;
-				}
+				this.checked = true;
+				tmpPro = tmpPro.replace(this.title, "");
 			}
 		});
+		
+		if(tmpPro!="")
+			alert(tmpPro);
 	}
 	
 </script>
@@ -241,6 +220,25 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">业务API</dd>
+					<dd class="dd04_me">
+						<select name="sp_trone_api" id="sel_sp_trone_api" title="选择业务API" style="width: 200px">
+							<option value="-1">请选择业务API</option>
+							<%
+								for (SpTroneApiModel spTroneApiModel : spTroneApiList)
+								{
+							%>
+							<option value="<%=spTroneApiModel.getId()%>"><%= spTroneApiModel.getName() %></option>
+							<%
+								}
+							%>
+						</select>
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">业务类型</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="trone_type" style="width: 35px;float:left" value="0" checked="checked" >
@@ -249,6 +247,18 @@
 						<label style="font-size: 14px;float:left">包月</label>
 						<input type="radio" name="trone_type" style="width: 35px;float:left" value="2" >
 						<label style="font-size: 14px;float:left">IVR</label>
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">状态</dd>
+					<dd class="dd03_me">
+						<input type="radio" name="status" style="width: 35px;float:left" value="1" checked="checked" >
+						<label style="font-size: 14px;float:left">开启</label>
+						<input type="radio" name="status" style="width: 35px;float:left" value="0" >
+						<label style="font-size: 14px;float:left">关闭</label>
 					</dd>
 
 					<br />
@@ -263,7 +273,7 @@
 							{
 						%>
 						<dd class="dd01"><%=province.getName()%>
-							<input style="" type="checkbox" class="chpro" name="area[]"
+							<input style="" type="checkbox" title="<%= province.getName() %>" class="chpro" name="area[]"
 								value="<%=province.getId()%>">
 						</dd>
 						<%

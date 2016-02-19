@@ -135,7 +135,7 @@ public class SpDao
 		return map;
 	}
 	
-	public Map<String, Object> loadSp(int pageIndex,String fullName,String shortName)
+	public Map<String, Object> loadSp(int pageIndex,String fullName,String shortName,int commerceUserId)
 	{
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from daily_config.tbl_sp a left join daily_config.tbl_user b on a.commerce_user_id = b.id where 1=1 ";
 		
@@ -149,6 +149,11 @@ public class SpDao
 		if(!StringUtil.isNullOrEmpty(shortName))
 		{
 			sql += " AND short_name LIKE '%"+shortName+"%' ";
+		}
+		
+		if(commerceUserId>0)
+		{
+			sql += " AND a.commerce_user_id = " + commerceUserId;
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();

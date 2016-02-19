@@ -137,6 +137,15 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
+					<dd class="dd01_me" style="width:120px">起扣条数</dd>
+					<dd class="dd03_me">
+						<input type="text" name="hold_start_count" id="input_hold_start_count" value="0" style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
 					<dd class="dd01_me" style="width:120px">当日最大同步金额</dd>
 					<dd class="dd03_me">
 						<input type="text" name="hold_amount" id="input_hold_amount" value="0" style="width: 200px">

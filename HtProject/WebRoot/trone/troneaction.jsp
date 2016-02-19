@@ -1,3 +1,5 @@
+<%@page import="com.system.server.TronePayCodeServer"%>
+<%@page import="com.system.model.TronePayCodeModel"%>
 <%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="com.system.model.TroneModel"%>
@@ -44,10 +46,57 @@
 	
 	model.setId(id);
 	
+	
 	if(id==-1)
-		new TroneServer().addTrone(model); 
-	else 
+	{
+		int troneId = new TroneServer().insertTrone(model);
+		
+		//
+		int existPayCode = StringUtil.getInteger(request.getParameter("exist_pay_code"), 0);
+		if(existPayCode==1)
+		{
+			String payCode = StringUtil.getString(request.getParameter("paycode"), "");
+			String appId = StringUtil.getString(request.getParameter("appid"), "");
+			String channelId = StringUtil.getString(request.getParameter("channelid"), "");
+			
+			TronePayCodeModel tronePayCodeModel = new TronePayCodeModel();
+			
+			tronePayCodeModel.setTroneId(troneId);
+			tronePayCodeModel.setAppId(appId);
+			tronePayCodeModel.setChannelId(channelId);
+			tronePayCodeModel.setPayCode(payCode);
+			
+			new TronePayCodeServer().addTronePayCode(tronePayCodeModel);
+		}
+	}
+	else
+	{
 		new TroneServer().updateTrone(model);
+		
+		int existPayCode = StringUtil.getInteger(request.getParameter("exist_pay_code"), 0);
+		
+		int tronePayCodeId = StringUtil.getInteger(request.getParameter("trone_pay_code_id"), -1);
+		
+		if(existPayCode==1)
+		{
+			String payCode = StringUtil.getString(request.getParameter("paycode"), "");
+			String appId = StringUtil.getString(request.getParameter("appid"), "");
+			String channelId = StringUtil.getString(request.getParameter("channelid"), "");
+			
+			TronePayCodeModel tronePayCodeModel = new TronePayCodeModel();
+			
+			tronePayCodeModel.setId(tronePayCodeId);
+			tronePayCodeModel.setTroneId(model.getId());
+			tronePayCodeModel.setAppId(appId);
+			tronePayCodeModel.setChannelId(channelId);
+			tronePayCodeModel.setPayCode(payCode);
+			
+			if(tronePayCodeId>0)
+				new TronePayCodeServer().updateTronePayCode(tronePayCodeModel);
+			else
+				new TronePayCodeServer().addTronePayCode(tronePayCodeModel);
+		}
+	}
 	
 	response.sendRedirect("trone.jsp?" + Base64UTF.decode(query));
 %>

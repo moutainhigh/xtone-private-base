@@ -17,9 +17,9 @@ public class AppServer {
 		return new AppDao().loadAppByPageindex();
 	}
 	
-	public Map<String, Object> loadApp(int pageindex,String appname,String appkey)
+	public Map<String, Object> loadApp(int pageindex,String appname,String appkey,int appType)
 	{
-		return new AppDao().loadAppByPageindex(pageindex, appname, appkey);
+		return new AppDao().loadAppByPageindex(pageindex, appname, appkey,appType);
 	}
 	
 	public int loadIdByName(String appname)
@@ -29,6 +29,7 @@ public class AppServer {
 	
 	public AppModel loadAppById(int id)
 	{
+		AppModel model = new AppDao().loadAppById(id);
 		return new AppDao().loadAppById(id);
 	}
 	

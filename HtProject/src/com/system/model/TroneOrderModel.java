@@ -21,6 +21,7 @@ public class TroneOrderModel
 	private float holdAmount;
 	private int isHoldCustom;
 	private float price;
+	private int spTroneStatus;
 	
 	public float getPrice()
 	{
@@ -174,7 +175,13 @@ public class TroneOrderModel
 	{
 		this.troneName = troneName;
 	}
-	
-	
+	public int getSpTroneStatus()
+	{
+		return spTroneStatus;
+	}
+	public void setSpTroneStatus(int spTroneStatus)
+	{
+		this.spTroneStatus = spTroneStatus;
+	}
 	
 }

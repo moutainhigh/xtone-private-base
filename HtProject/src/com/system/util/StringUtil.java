@@ -360,20 +360,65 @@ public class StringUtil
     	}
     	return data;
     }
+    
+    public static String concatStrings(String[] oriSources,int[] values,String splitor)
+    {
+    	if(oriSources==null || oriSources==null || values==null || (values.length > oriSources.length))
+    	{
+    		return "";
+    	}
+    	
+    	String result = "";
+    	
+    	try
+    	{
+    		for(int value : values)
+        	{
+        		result += oriSources[value] + splitor;
+        	}
+        	
+        	if(result.length()>1)
+        		result = result.substring(0, result.length()-1);
+    	}
+    	catch(Exception ex){}
+    	
+    	return result;
+    }
+    
+    public static String concatStrings(String[] oriSources,String[] values,String splitor)
+    {
+    	if(oriSources==null || oriSources==null || values==null || (values.length > oriSources.length))
+    	{
+    		return "";
+    	}
+    	
+    	String result = "";
+    	
+    	try
+    	{
+    		for(String value : values)
+        	{
+        		result += oriSources[getInteger(value, 0)] + splitor;
+        	}
+        	
+        	if(result.length()>1)
+        		result = result.substring(0, result.length()-1);
+    	}
+    	catch(Exception ex){}
+    	
+    	return result;
+    }
 	
 	public static void main(String[] args)
 	{
-		///List<String> list = new ArrayList<String>();
-		//list.add("1");
-		//list.add("4");
-		//list.add("5");
-		//list.add("2");
-		//System.out.println(StringUtil.stringListToString(list));
-		//StringUtil.letterToNum("A");
-		//System.out.println(getMonthEndDate());
-		//System.out.println(StringUtil.dateTimeToDateTime("2015-12-01"));
+//		String[] oriSources = {"A","b","C"};
+//		int[] values = {1,1,0};
+//		System.out.println(concatStrings(oriSources, values, "|"));
 		
-		System.out.println(StringUtil.stringToAscii("G"));
+		int ss[]=null,m=0 ;//= {1,2,3,4,5,6};
+		
+		System.out.println(ss);
+		System.out.println(m);
 	}
 	
 }

@@ -1,3 +1,6 @@
+<%@page import="com.system.server.UserServer"%>
+<%@page import="com.system.model.UserModel"%>
+<%@page import="com.system.util.ConfigManager"%>
 <%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.constant.Constant"%>
@@ -13,12 +16,18 @@
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	String fullName = StringUtil.getString(request.getParameter("fullname"), "");
 	String shortName = StringUtil.getString(request.getParameter("shortname"), "");
+	
+	int commerceUserId = StringUtil.getInteger(request.getParameter("commerce_user_id"), -1);
 
-	Map<String, Object> map =  new SpServer().loadSp(pageIndex, fullName, shortName);
+	Map<String, Object> map =  new SpServer().loadSp(pageIndex, fullName, shortName,commerceUserId);
 		
 	List<SpModel> list = (List<SpModel>)map.get("list");
 	
 	int rowCount = (Integer)map.get("rows");
+	
+	int spCommerceId = StringUtil.getInteger(ConfigManager.getConfigData("SP_COMMERCE_GROUP_ID"),-1);
+	
+	List<UserModel> userList = new UserServer().loadUserByGroupId(spCommerceId);
 	
 	Map<String,String> params = new HashMap<String,String>();
 	
@@ -48,6 +57,11 @@
 		}
 	}
 	
+	$(function()
+	{
+		$("#sel_commerce_user_id").val(<%= commerceUserId %>);
+	});
+	
 </script>
 
 <body>
@@ -65,6 +79,20 @@
 					<dd class="dd03_me">
 						<input name="shortname" id="input_shortname" value="<%=shortName %>" type="text" style="width: 150px">
 					</dd>
+					<dd class="dd01_me">商务人员</dd>
+						<dd class="dd04_me">
+							<select name="commerce_user_id" id="sel_commerce_user_id">
+								<option value="-1">请选择</option>
+								<%
+								for(UserModel model : userList)
+								{
+									%>
+								<option value="<%= model.getId() %>"><%= model.getNickName() %></option>	
+									<%
+								}
+								%>
+							</select>
+						</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit" >
 					</dd>
