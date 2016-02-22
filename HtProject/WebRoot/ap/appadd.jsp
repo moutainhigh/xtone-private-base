@@ -94,9 +94,9 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">应用类型</dd>
 					<dd class="dd03_me">
-						<input type="radio" name="app_type" style="width: 35px;float:left" value="0" checked="checked" >
+						<input type="radio" name="app_type" style="width: 35px;float:left" value="1" checked="checked" >
 						<label style="font-size: 14px;float:left">自营</label>
-						<input type="radio" name="app_type" style="width: 35px;float:left" value="1" >
+						<input type="radio" name="app_type" style="width: 35px;float:left" value="2" >
 						<label style="font-size: 14px;float:left">第三方</label>
 					</dd>
 

@@ -236,9 +236,9 @@ public class AppDao {
 	public boolean addApp(AppModel model)
 	{
 		String sql = "insert into daily_config.`tbl_xy_app`("
-				+ "appkey,appname,hold_percent,remark) value("
+				+ "appkey,appname,hold_percent,remark,app_type) value("
 				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()
-				+ ",'"+model.getRemark()+"')";
+				+ ",'"+model.getRemark()+"',"+model.getAppType()+")";
 		
 		return new JdbcControl().execute(sql);
 	}
