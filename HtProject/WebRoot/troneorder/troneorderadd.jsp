@@ -385,7 +385,7 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">扣量百分比</dd>
 					<dd class="dd03_me">
-						<input type="text" name="hold_percent" title="通道名称" id="input_hold_percent" value="0"
+						<input type="text" name="hold_percent" id="input_hold_percent" value="0"
 							style="width: 200px">
 					</dd>
 					
@@ -395,7 +395,17 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">每天总限额</dd>
 					<dd class="dd03_me">
-						<input type="text" name="hold_amount" title="通道名称" id="input_hold_amount" value="0"
+						<input type="text" name="hold_amount"  id="input_hold_amount" value="0"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">起扣数</dd>
+					<dd class="dd03_me">
+						<input type="text" name="hold_account"  id="input_hold_account" value="0"
 							style="width: 200px">
 					</dd>
 					

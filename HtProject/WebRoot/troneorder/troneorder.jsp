@@ -224,6 +224,7 @@
 					<td>扣量设置</td>
 					<td>扣量比</td>
 					<td>同步金额</td>
+					<td>起扣数</td>
 					<td>模糊</td>
 					<td>启用</td>
 					<td>操作</td>
@@ -247,6 +248,7 @@
 					<td><%=model.getIsHoldCustom()==0 ? "URL" : "当前" %></td>
 					<td><%=model.getHoldPercent() %></td>
 					<td><%=model.getHoldAmount() %></td>
+					<td><%=model.getHoldAcount()%></td>
 					<td><%=model.getDynamic()==1 ? "是" : "否" %></td>
 					<td><%=model.getDisable() ==0 ? "是" : "否" %></td>
 					<td>

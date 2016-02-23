@@ -98,7 +98,7 @@
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">Msg</label>
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="2" >
-						<label style="font-size: 14px;float:left">CP透参</label>
+						<label style="font-size: 14px;float:left">SP透参</label>
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="3" >
 						<label style="font-size: 14px;float:left">特殊指令</label>
 					</dd>
@@ -121,7 +121,7 @@
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_0" value="0">IMEI &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_1" value="1">IMSI &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_2" value="2">手机号码 &nbsp;
-						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_3" value="3">IP &nbsp;
+						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_3" value="3">服务器IP &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_4" value="4">包名 &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_5" value="5">Android版本 &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_6" value="6">网络类型 &nbsp;

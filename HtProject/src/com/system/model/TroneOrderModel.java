@@ -22,6 +22,7 @@ public class TroneOrderModel
 	private int isHoldCustom;
 	private float price;
 	private int spTroneStatus;
+	private int holdAcount;
 	
 	public float getPrice()
 	{
@@ -182,6 +183,14 @@ public class TroneOrderModel
 	public void setSpTroneStatus(int spTroneStatus)
 	{
 		this.spTroneStatus = spTroneStatus;
+	}
+	public int getHoldAcount()
+	{
+		return holdAcount;
+	}
+	public void setHoldAcount(int holdAcount)
+	{
+		this.holdAcount = holdAcount;
 	}
 	
 }

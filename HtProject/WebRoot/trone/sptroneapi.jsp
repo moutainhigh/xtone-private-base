@@ -30,7 +30,7 @@
 	
 	String pageData = PageUtil.initPageQuery("sptroneapi.jsp", null, rowCount, pageIndex);
 	
-	String[] matchFiles = {"LinkId","Msg","CP透参","特殊指令"};
+	String[] matchFiles = {"LinkId","Msg","SP透参","特殊指令"};
 	String[] locateMatchs = {"不需匹配","手机号匹配","IP地区匹配","手机号和IP地区匹配"};
 	String[] apiFields = {"IMEI","IMSI","手机号","访问IP","包名","Android版本","网络类型","客户端IP"};
 	
