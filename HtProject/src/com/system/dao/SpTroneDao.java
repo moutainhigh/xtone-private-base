@@ -44,7 +44,9 @@ public class SpTroneDao
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
-		String orders = " order by  convert(b.short_name using gbk),convert(a.name using gbk) asc ";
+		//String orders = " order by  convert(b.short_name using gbk),convert(a.name using gbk) asc ";
+		
+		String orders = " order by  a.id desc ";
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
