@@ -63,38 +63,40 @@ namespace LightDataModel
 
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
             st.Start();
-            var dBase = new DBDriver().CreateDBase();
-            var q = GetQueries(dBase);
-            q.Filter.AndFilters.Add(tbl_phone_locateItem.identifyField, minId, Shotgun.Model.Filter.EM_DataFiler_Operator.More);
-
-            q.SortKey.Add(tbl_phone_locateItem.identifyField, Shotgun.Model.Filter.EM_SortKeyWord.asc);
-            q.PageSize = 2000;
-
-            var count = q.TotalCount;
-            var pageCount = count / q.PageSize + ((count % q.PageSize) > 0 ? 1 : 0);
-            bool iDone = true;
-            for (int p = 1; p <= pageCount; p++)
+            using (var dBase = new DBDriver().CreateDBase())
             {
-                q.CurrentPage = p;
-                try
+                var q = GetQueries(dBase);
+                q.Filter.AndFilters.Add(tbl_phone_locateItem.identifyField, minId, Shotgun.Model.Filter.EM_DataFiler_Operator.More);
+
+                q.SortKey.Add(tbl_phone_locateItem.identifyField, Shotgun.Model.Filter.EM_SortKeyWord.asc);
+                q.PageSize = 2000;
+
+                var count = q.TotalCount;
+                var pageCount = count / q.PageSize + ((count % q.PageSize) > 0 ? 1 : 0);
+                bool iDone = true;
+                for (int p = 1; p <= pageCount; p++)
                 {
-                    var itmes = q.GetDataList();
-                    itmes.ForEach(e => phones[int.Parse(e.phone)] = e);
+                    q.CurrentPage = p;
+                    try
+                    {
+                        var itmes = q.GetDataList();
+                        itmes.ForEach(e => phones[int.Parse(e.phone)] = e);
+                    }
+                    catch (System.Data.DataException)
+                    {
+                        iDone = false;
+                        break;
+                    }
                 }
-                catch (System.Data.DataException)
-                {
-                    iDone = false;
-                    break;
-                }
+                cacheStatus = iDone ? 2 : 0;
+                st.Stop();
+                Shotgun.Library.SimpleLogRecord.WriteLog("load_cache",
+                    string.Format("threadId:{0} tbl_phone_locateItem cache Elapsed {1:#,###}ms ,count {2}",
+                        System.Threading.Thread.CurrentThread.ManagedThreadId,
+                        st.ElapsedMilliseconds,
+                       phones.Count)
+                    );
             }
-            cacheStatus = iDone ? 2 : 0;
-            st.Stop();
-            Shotgun.Library.SimpleLogRecord.WriteLog("load_cache",
-                string.Format("threadId:{0} tbl_phone_locateItem cache Elapsed {1:#,###}ms ,count {2}",
-                    System.Threading.Thread.CurrentThread.ManagedThreadId,
-                    st.ElapsedMilliseconds,
-                   phones.Count)
-                );
         }
 
 

@@ -103,7 +103,6 @@ namespace n8wan.Public.Logical
             }
             holdCfg.push_count++;
             holdCfg.amount += _trone.price;
-            holdCfg.amount += _trone.price;
 
             try
             {

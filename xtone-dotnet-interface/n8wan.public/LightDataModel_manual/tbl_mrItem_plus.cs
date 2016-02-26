@@ -140,27 +140,27 @@ namespace LightDataModel
 
         public tbl_cp_mrItem CopyToCP()
         {
-            var cpmr = new tbl_cp_mrItem();
+            tbl_cp_mrItem cpmr = new tbl_cp_mrItem();
+            if (!this.IsimeiNull()) cpmr.imei = this.imei;
+            if (!this.IsimsiNull()) cpmr.imsi = this.imsi;
+            if (!this.IsmobileNull()) cpmr.mobile = this.mobile;
+            if (!this.IsmccNull()) cpmr.mcc = this.mcc;
+            if (!this.Isprovince_idNull()) cpmr.province_id = this.province_id;
+            if (!this.Iscity_idNull()) cpmr.city_id = this.city_id;
+            if (!this.Istrone_order_idNull()) cpmr.trone_order_id = this.trone_order_id;
+            if (!this.Isori_troneNull()) cpmr.ori_trone = this.ori_trone;
+            if (!this.Isori_orderNull()) cpmr.ori_order = this.ori_order;
+            if (!this.IslinkidNull()) cpmr.linkid = this.linkid;
+            if (!this.Iscp_paramNull()) cpmr.cp_param = this.cp_param;
+            if (!this.Isservice_codeNull()) cpmr.service_code = this.service_code;
+            if (!this.IspriceNull()) cpmr.price = this.price;
+            if (!this.IsipNull()) cpmr.ip = this.ip;
+            if (!this.Ismr_dateNull()) cpmr.mr_date = this.mr_date;
+            if (!this.Isivr_timeNull()) cpmr.ivr_time = this.ivr_time;
 
-            cpmr.imei = this.imei;
-            cpmr.imsi = this.imsi;
-            cpmr.mobile = this.mobile;
-            cpmr.mcc = this.mcc;
-            cpmr.province_id = this.province_id;
-            cpmr.city_id = this.city_id;
-            cpmr.trone_order_id = this.trone_order_id;
-            cpmr.ori_trone = this.ori_trone;
-            cpmr.ori_order = this.ori_order;
-            cpmr.linkid = this.linkid;
-            cpmr.cp_param = this.cp_param;
-            cpmr.service_code = this.service_code;
-            cpmr.price = this.price;
-            cpmr.ip = this.ip;
             cpmr.mr_table = this.TableName;
             cpmr.mr_id = this.id;
-            cpmr.mr_date = this.mr_date;
             cpmr.trone_type = this.trone_type;
-            cpmr.ivr_time = this.ivr_time;
             return cpmr;
         }
     }

@@ -14,8 +14,8 @@ public class mingtiandongli_phy : gzzyPublic.SPCallback.AutoMapCallback
     {
         switch (Field.ToLower())
         {
-            case "linkid":
-                return _linkId;
+            //case "linkid":
+            //    return _linkId;
             case "mobile":
                 var m = Request["mobile"];
                 if (string.IsNullOrEmpty(m))
@@ -26,7 +26,7 @@ public class mingtiandongli_phy : gzzyPublic.SPCallback.AutoMapCallback
             case "cpparams":
                 return _cpp;
         }
-        return base.GetParamValue(Field);
+        return base.GetParamValue(Field);//super.GetParamValue
     }
 
 
@@ -35,9 +35,10 @@ public class mingtiandongli_phy : gzzyPublic.SPCallback.AutoMapCallback
         var channelNum = Request["channelNum"];
         var appId = Request["appId"];
         var cpp = Request["cpparams"];
-        var price = Request["price"];
         if (string.IsNullOrEmpty(channelNum) || string.IsNullOrEmpty(cpp))
             return false;
+
+        var price = int.Parse(Request["price"]) / 100;
 
         var i = cpp.LastIndexOf('#');
         if (i != -1)
@@ -47,11 +48,19 @@ public class mingtiandongli_phy : gzzyPublic.SPCallback.AutoMapCallback
         }
         else
         {
-            int p = int.Parse(price) / 100;
             _cpp = cpp;
-            _msg = "A01" + channelNum + appId + p.ToString();
         }
-        _linkId = string.Format("{0}{1}{2}{3}", channelNum, appId, _cpp, price);
+
+        _msg = channelNum + appId + price.ToString("00");
+        if (!string.IsNullOrEmpty(cpp))
+        {
+            if (cpp.Length < 4)
+                _msg += cpp;
+            else
+                _msg += cpp.Substring(0, 4);
+        }
+
+        _linkId = string.Format("{0}{1}{2:00}{3}", channelNum, appId, price, _cpp);
 
         return true;
 

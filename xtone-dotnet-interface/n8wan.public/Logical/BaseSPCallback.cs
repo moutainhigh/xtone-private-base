@@ -89,7 +89,6 @@ namespace n8wan.Public.Logical
                 {
                     dblog.sp_api_url_id = api.id;
                     dblog.linkid = GetLinkId();
-                    dBase.SaveData(dblog);
                 }
 #endif
                 if (FastLinkCheck())
@@ -121,7 +120,20 @@ namespace n8wan.Public.Logical
                 WriteDebug(ex.Message);
                 throw;
             }
-            finally { FlushDebug(); }
+            finally
+            {
+#if DB_LOG_RECORD
+                try
+                {
+                    if (dblog != null)
+                        dBase.SaveData(dblog);
+                }
+                catch (System.Data.Common.DbException)
+                {
+                }
+#endif
+                FlushDebug();
+            }
 
         }
 
@@ -323,17 +335,6 @@ namespace n8wan.Public.Logical
                 Request.InputStream.Seek(0, System.IO.SeekOrigin.Begin);
                 dblog.data = Request.ContentEncoding.GetString(bin);
             }
-
-            try
-            {
-                dBase.SaveData(dblog);
-            }
-            catch (System.Data.Common.DbException ex)
-            {
-                //Response.Write(ex.Message);
-                dblog = null;
-            }
-
         }
 #endif
 
@@ -692,19 +693,20 @@ namespace n8wan.Public.Logical
         /// <returns></returns>
         public static bool FillToneId(Shotgun.Database.IBaseDataClass2 dBase, Logical.ISMS_DataItem m)
         {
-            var csl = LightDataModel.tbl_troneItem.GetQueries(dBase);
-            csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.sp_api_url_id, m.sp_api_url_id);
-            csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.trone_num, m.ori_trone);
-            csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.status, 1);
+            //var csl = LightDataModel.tbl_troneItem.GetQueries(dBase);
+            //csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.sp_api_url_id, m.sp_api_url_id);
+            //csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.trone_num, m.ori_trone);
+            //csl.Filter.AndFilters.Add(LightDataModel.tbl_troneItem.Fields.status, 1);
 
-            csl.Fields = new string[] { LightDataModel.tbl_troneItem.Fields.id,LightDataModel.tbl_troneItem.Fields.trone_num,
-                LightDataModel.tbl_troneItem.Fields.orders,LightDataModel.tbl_troneItem.Fields.is_dynamic,LightDataModel.tbl_troneItem.Fields.price,
-                LightDataModel.tbl_troneItem.Fields.match_price,LightDataModel.tbl_troneItem.Fields.sp_trone_id};
+            //csl.Fields = new string[] { LightDataModel.tbl_troneItem.Fields.id,LightDataModel.tbl_troneItem.Fields.trone_num,
+            //    LightDataModel.tbl_troneItem.Fields.orders,LightDataModel.tbl_troneItem.Fields.is_dynamic,LightDataModel.tbl_troneItem.Fields.price,
+            //    LightDataModel.tbl_troneItem.Fields.match_price,LightDataModel.tbl_troneItem.Fields.sp_trone_id};
 
-            csl.PageSize = int.MaxValue;
+            //csl.PageSize = int.MaxValue;
 
-            var cmds = csl.GetDataList();
-            if (cmds.Count == 0)
+            //var cmds = csl.GetDataList();
+            var cmds = LightDataModel.tbl_troneItem.QueryTronesByPort(dBase, m.sp_api_url_id, m.ori_trone);
+            if (cmds == null && cmds.Count() == 0)
                 return false;//没有可用通道
             var mMsg = m.ori_order;
             if (mMsg == null)
@@ -920,18 +922,21 @@ namespace n8wan.Public.Logical
             if (!mc.Success)
                 return false;
 
-            var l = LightDataModel.tbl_sp_api_urlItem.GetQueries(dBase);
-            int id;
+            //var l = LightDataModel.tbl_sp_api_urlItem.GetQueries(dBase);
+            //l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.Disable, false);
             if (Regex.IsMatch(mc.Groups[1].Value, "^\\d+$"))//指定了ID作为目录
             {
-                id = int.Parse(mc.Groups[1].Value);
-                l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.id, id);
+                int id = int.Parse(mc.Groups[1].Value);
+                api = LightDataModel.tbl_sp_api_urlItem.QueryById(dBase, id);
+                //l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.id, id);
             }
             else
-                l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.virtual_page, mc.Groups[2].Value);
+            {
+                //l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.virtual_page, mc.Groups[2].Value);
+                api = LightDataModel.tbl_sp_api_urlItem.QueryByVirtualPage(dBase, mc.Groups[2].Value);
+            }
 
-            l.Filter.AndFilters.Add(LightDataModel.tbl_sp_api_urlItem.Fields.Disable, false);
-            api = l.GetRowByFilters();
+            //api = l.GetRowByFilters();
             return api != null;
         }
 
