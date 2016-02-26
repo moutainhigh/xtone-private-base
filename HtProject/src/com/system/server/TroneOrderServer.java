@@ -18,9 +18,9 @@ public class TroneOrderServer
 		return new TroneOrderDao().loadTroneOrderList();
 	}
 	
-	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex)
+	public Map<String, Object> loadTroneOrder(int spId,int spTroneId,int cpId, int status,int pageIndex,String keyWord)
 	{
-		return new TroneOrderDao().loadTroneOrder(spId, spTroneId, cpId, status ,pageIndex);
+		return new TroneOrderDao().loadTroneOrder(spId, spTroneId, cpId, status ,pageIndex,keyWord);
 	}
 	
 	public boolean addTroneOrder(TroneOrderModel model)
@@ -41,5 +41,15 @@ public class TroneOrderServer
 	public List<TroneOrderModel> loadTroneOrderListBySpTroneId(int spTroneId)
 	{
 		return new TroneOrderDao().loadTroneOrderListBySpTroneId(spTroneId);				
+	}
+	
+	public List<TroneOrderModel> loadTroneOrderListByTroneId(int troneId)
+	{
+		return new TroneOrderDao().loadTroneOrderListByTroneId(troneId);				
+	}
+	
+	public List<TroneOrderModel> loadTroneOrderListByCpSpTroneId(int cpId,int spTroneId,int status)
+	{
+		return new TroneOrderDao().loadTroneOrderListByCpSpTroneId(cpId, spTroneId, status);
 	}
 }

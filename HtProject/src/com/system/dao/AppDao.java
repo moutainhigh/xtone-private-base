@@ -106,7 +106,7 @@ public class AppDao {
 		return result;
 	}
 	
-	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey)
+	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey,int appType)
 	{
 		String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
@@ -121,6 +121,11 @@ public class AppDao {
 		if(!StringUtil.isNullOrEmpty(appkey))
 		{
 			sql += " AND appkey LIKE '%"+appkey+"%' ";
+		}
+		
+		if(appType>0)
+		{
+			sql += " And app_type = " + appType;
 		}
 		
 		sql +=" ORDER BY a.id ASC ";
@@ -155,6 +160,7 @@ public class AppDao {
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
 							model.setUserName(StringUtil.getString(rs.getString("nick_name"), ""));
+							model.setAppType(rs.getInt("app_type"));
 							list.add(model);
 						}
 						
@@ -198,6 +204,7 @@ public class AppDao {
 							model.setId(rs.getInt("id"));
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
+							model.setAppType(rs.getInt("app_type"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
 							model.setUser_id(rs.getInt("user_id"));
@@ -215,6 +222,7 @@ public class AppDao {
 				+ "appkey='"+model.getAppkey()+"',"
 				+ " appname='"+model.getAppname()+"',"
 			    + " hold_percent="+model.getHold_percent()+","
+			    + " app_type="+model.getAppType()+","
 			    + " remark='"+model.getRemark()+"' WHERE id="+model.getId();
 		return new JdbcControl().execute(sql);
 	}
@@ -228,9 +236,9 @@ public class AppDao {
 	public boolean addApp(AppModel model)
 	{
 		String sql = "insert into daily_config.`tbl_xy_app`("
-				+ "appkey,appname,hold_percent,remark) value("
+				+ "appkey,appname,hold_percent,remark,app_type) value("
 				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()
-				+ ",'"+model.getRemark()+"')";
+				+ ",'"+model.getRemark()+"',"+model.getAppType()+")";
 		
 		return new JdbcControl().execute(sql);
 	}

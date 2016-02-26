@@ -34,9 +34,13 @@
 		
 		List<TroneModel> list = new TroneServer().loadTrone(spTroneId);
 		
+		TroneModel troneModel = null;
+		
 		for(int i=0; i<list.size(); i++)
 		{
-			returnValue += listName + ".push(new joBaseSelectOption(" + list.get(i).getId() + ",'"+ list.get(i).getTroneName() + "-" + list.get(i).getPrice() +"'));";
+			troneModel = list.get(i);
+			returnValue += listName + ".push(new joBaseSelectOption(" + troneModel.getId() + ",'"+ troneModel.getTroneName() 
+				+ "-" + troneModel.getOrders() + "-" + troneModel.getPrice() +"-"+ (troneModel.getStatus()==1 ? "启用":"停用") +"'));";
 		}
 		
 		out.println(returnValue);
@@ -81,12 +85,25 @@
 		
 		out.println(returnValue);
 	}
-	
-	
-	
-	
-	
-	
+	//取得该通道已经分配给那些CP，一并列出来
+	else if(type==4)
+	{
+		int troneId = StringUtil.getInteger(request.getParameter("troneid"), -1);
+		
+		if(troneId<=0)
+			return;
+		
+		String returnValue = "";
+		
+		List<TroneOrderModel> list = new TroneOrderServer().loadTroneOrderListByTroneId(troneId);
+		
+		for(int i=0; i<list.size(); i++)
+		{
+			returnValue += "cpTroneOrderArray.push(JSON.parse('" + JSONObject.fromObject(list.get(i)) +"'));";
+		}
+		
+		out.println(returnValue);
+	}
 	
 	
 	

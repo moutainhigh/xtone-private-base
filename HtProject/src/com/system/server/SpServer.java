@@ -23,9 +23,9 @@ public class SpServer
 		return new SpDao().loadSp(pageIndex);
 	}
 	
-	public Map<String, Object> loadSp(int pageIndex,String fullName,String shortName)
+	public Map<String, Object> loadSp(int pageIndex,String fullName,String shortName,int commerceUserId)
 	{
-		return new SpDao().loadSp(pageIndex, fullName, shortName);
+		return new SpDao().loadSp(pageIndex, fullName, shortName,commerceUserId);
 	}
 	
 	public SpModel loadSpById(int id)

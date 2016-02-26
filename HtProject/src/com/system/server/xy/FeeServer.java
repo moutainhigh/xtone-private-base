@@ -26,14 +26,14 @@ public class FeeServer
 		return dao.analyFeeToSummer(StringUtil.getMonthFormat(startDate), startDate, endDate);
 	}
 	
-	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex)
+	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex , int appType)
 	{
-		return new FeeDao().loadChannelAppFee(startDate, endDate, keyWord, pageIndex);
+		return new FeeDao().loadChannelAppFee(startDate, endDate, keyWord, pageIndex, appType);
 	}
 	
-	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex)
+	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex,int apptype)
 	{
-		return new FeeDao().loadAppFee(startDate, endDate, appKey, pageIndex);
+		return new FeeDao().loadAppFee(startDate, endDate, appKey, pageIndex, apptype);
 	}
 	
 	public Map<String, Object> loadQdAppFee(String startDate,String endDate,int userId,int pageIndex)

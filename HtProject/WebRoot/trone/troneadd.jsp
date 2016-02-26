@@ -28,6 +28,7 @@
 <script type="text/javascript" src="../sysjs/MapUtil.js"></script>
 <script type="text/javascript" src="../sysjs/pinyin.js"></script>
 <script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
+<script type="text/javascript" src="../sysjs/base.js"></script>
 <script type="text/javascript">
 
 	var spList = new Array();
@@ -40,22 +41,23 @@
 	}
 	%>
 
-	function joSpTrone(id,spId,troneName)
+	function joSpTrone(id,spId,troneName,spTroneApiId)
 	{
 		var obj = {};
 		obj.id = id;
 		obj.spId = spId;
 		obj.troneName = troneName;
+		obj.spTroneApiId = spTroneApiId;
 		return obj;
 	}
 	
 	var spTroneList = new Array();
-	<%for(SpTroneModel spTrone : spTroneList){%>spTroneList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%= spTrone.getSpName() + "-" +spTrone.getSpTroneName() %>'));<%}%>
+	<%for(SpTroneModel spTrone : spTroneList){%>spTroneList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%= spTrone.getSpName() + "-" +spTrone.getSpTroneName() %>',<%= spTrone.getTroneApiId() %>));<%}%>
 
 	var spApiUrlList = new Array();
 	<%for(SpApiUrlModel spTrone : spApiUrlList){%>spApiUrlList.push(new joSpTrone(<%= spTrone.getId() %>,<%= spTrone.getSpId() %>,'<%=spTrone.getName() %>'));<%}%>
 	
-	function spTroneChange()
+	function spChange()
 	{
 		var spId = $("#sel_sp").val();
 		$("#sel_sp_trone").empty();
@@ -77,13 +79,39 @@
 				$("#sel_api_url").append("<option value='" + spApiUrlList[i].id + "'>" + spApiUrlList[i].troneName + "</option>");
 			}
 		}
+		
+		showOrHideApiArea(false);
+	}
+	
+	function spTroneChange()
+	{
+		var spTroneId = $("#sel_sp_trone").val();
+		showOrHideApiArea(false);
+		for(i=0; i<spTroneList.length; i++)
+		{
+			if(spTroneList[i].id==spTroneId)
+			{
+				spTroneList[i]
+				if(spTroneList[i].spTroneApiId>0)
+				{
+					showOrHideApiArea(true);	
+				}
+				break;
+			}
+		}
+	}
+	
+	function showOrHideApiArea(isShow)
+	{
+		document.getElementById("div_sp_trone_api").style.display = isShow ? "block" : "none";
+		document.getElementById("hid_exist_pay_code").value = isShow ? 1 : 0 ;
 	}
 	
 	$(function()
 	{
 		//SP的二级联动
-		$("#sel_sp").change(spTroneChange);
-		//spTroneChange();
+		$("#sel_sp").change(spChange);
+		$("#sel_sp_trone").change(spTroneChange);
 	});
 	
 	function subForm() 
@@ -141,6 +169,21 @@
 			$("#input_price").focus();
 			return;
 		}
+		
+		var existPayCode = document.getElementById("hid_exist_pay_code").value;
+		
+		if(existPayCode==1)
+		{
+			var payCode = $("#input_paycode").val();
+			var appId = $("#input_app_id").val();
+			var channelId = $("#input_channel_id").val();
+			
+			if(isNullOrEmpty(payCode)&&isNullOrEmpty(appId)&&isNullOrEmpty(channelId))
+			{
+				alert("兄弟，PayCode、AppId、ChannelId 总得有一个吧？");
+				return;	
+			}
+		}
 
 		document.getElementById("addform").submit();
 	}
@@ -148,7 +191,7 @@
 	function onSpDataSelect(joData)
 	{
 		$("#sel_sp").val(joData.id);
-		spTroneChange();
+		spChange();
 	}
 	
 	//声明整数的正则表达式
@@ -278,10 +321,39 @@
 						<input type="radio" name="match_price" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">是</label>
 					</dd>
+					
+					<div style="clear: both;padding-bottom: 25px"></div>
+					
+					<div  id="div_sp_trone_api" style="display: none" >
+						<input type="hidden" value="1" id="hid_exist_pay_code" name="exist_pay_code" />
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">PayCode</dd>
+						<dd class="dd03_me">
+							<input type="text" name="paycode" id="input_paycode"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;padding-bottom: 25px"></div>
+						
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">AppId</dd>
+						<dd class="dd03_me">
+							<input type="text" name="appid" id="input_app_id"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;padding-bottom: 25px"></div>
+						
+						<dd class="dd00_me"></dd>
+						<dd class="dd01_me">ChannelId</dd>
+						<dd class="dd03_me">
+							<input type="text" name="channelid" id="input_channel_id"
+								style="width: 200px">
+						</dd>
+						
+						<div style="clear: both;"></div>
+					</div>
 
-					<br />
-					<br />
-					<br />
 					<dd class="dd00"></dd>
 					<dd class="dd00_me"></dd>
 					<dd class="ddbtn" style="margin-left: 100px; margin-top: 10px">
@@ -293,7 +365,6 @@
 				</form>
 			</dl>
 		</div>
-
 	</div>
 </body>
 </html>

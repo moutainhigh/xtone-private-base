@@ -1,3 +1,7 @@
+<%@page import="com.system.util.ConfigManager"%>
+<%@page import="com.system.server.UserServer"%>
+<%@page import="com.system.model.UserModel"%>
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.server.SpServer"%>
 <%@page import="com.system.model.SpModel"%>
 <%@page import="com.system.constant.Constant"%>
@@ -13,13 +17,15 @@
 <%
 	String spTroneName = StringUtil.getString(request.getParameter("sp_trone_name"), "");
 
-	String query = request.getQueryString();
+	String query = Base64UTF.encode(request.getQueryString());
 
 	int spId = StringUtil.getInteger(request.getParameter("sp_id"), -1);
 
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 	
-	Map<String, Object> map = new SpTroneServer().loadSpTroneList(pageIndex,spId,spTroneName);
+	int commerceUserId = StringUtil.getInteger(request.getParameter("commerce_user_id"), -1);
+	
+	Map<String, Object> map = new SpTroneServer().loadSpTroneList(pageIndex,spId,commerceUserId,spTroneName);
 	
 	List<SpModel> spList = new SpServer().loadSp();
 
@@ -27,9 +33,17 @@
 
 	int rowCount = (Integer) map.get("rows");
 	
-	String pageData = PageUtil.initPageQuery("sptrone.jsp", null, rowCount, pageIndex);
+	Map<String,String> params = new HashMap<String,String>();
+	
+	params.put("commerce_user_id", commerceUserId + "");
+	
+	String pageData = PageUtil.initPageQuery("sptrone.jsp", params, rowCount, pageIndex);
 	
 	String[] troneTypes = {"点播","包月","IVR"};
+	
+	int spCommerceId = StringUtil.getInteger(ConfigManager.getConfigData("SP_COMMERCE_GROUP_ID"),-1);
+	
+	List<UserModel> userList = new UserServer().loadUserByGroupId(spCommerceId);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -71,6 +85,7 @@
 	$(function()
 	{
 		$("#sel_sp").val(<%= spId %>);
+		$("#sel_commerce_user_id").val(<%= commerceUserId %>);
 	});
 	
 </script>
@@ -97,6 +112,20 @@
 								%>
 							</select>
 						</dd>
+						<dd class="dd01_me">商务人员</dd>
+						<dd class="dd04_me">
+							<select name="commerce_user_id" id="sel_commerce_user_id">
+								<option value="-1">请选择</option>
+								<%
+								for(UserModel model : userList)
+								{
+									%>
+								<option value="<%= model.getId() %>"><%= model.getNickName() %></option>	
+									<%
+								}
+								%>
+							</select>
+						</dd>							
 						<dd class="dd01_me">业务</dd>
 						<dd class="dd03_me">
 							<input name="sp_trone_name" id="input_sp_trone_name" value="<%= spTroneName %>"
@@ -116,25 +145,30 @@
 					<td>SP名称</td>
 					<td>运营商</td>
 					<td>业务名称</td>
+					<td>商务人员</td>
 					<td>类型</td>
 					<td>结算率</td>
+					<td>状态</td>
 					<td>操作</td>
 				</tr>
 			</thead>
 			<tbody>
 				<%
 					int rowNum = 1;
+					String stopStyle = "class=\"StopStyle\"";
 					for (SpTroneModel model : list)
 					{
 				%>
-				<tr>
+				<tr <%= model.getStatus()==0 ? stopStyle : "" %>>
 					<td><%=(pageIndex - 1) * Constant.PAGE_SIZE + rowNum++%></td>
 					<td><%=model.getSpName()%></td>
 					<td><%=model.getOperatorName()%></td>
 					<td><%=model.getSpTroneName()%></td>
+					<td><%= model.getCommerceUserName() %></td>
 					<td><%= troneTypes[model.getTroneType()]%></td>
 					<td><%=model.getJieSuanLv()%></td>
-					<td><a href="sptroneedit.jsp?<%= query %>&id=<%= model.getId() %>">修改</a>
+					<td><%= model.getStatus()==1 ? "开启" : "关闭" %></td>
+					<td><a href="sptroneedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 						<a href="#" onclick="delSpTrone(<%=model.getId()%>)">删除</a></td>
 				</tr>
 				<%
