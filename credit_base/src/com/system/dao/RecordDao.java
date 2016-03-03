@@ -1,9 +1,12 @@
 package com.system.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.system.database.JdbcControl;
+import com.system.database.QueryCallBack;
 import com.system.model.ApiOrderModel;
 import com.system.util.StringUtil;
 
@@ -80,6 +83,65 @@ public class RecordDao
 		new JdbcControl().execute(sql, params);
 		
 	}
+	
+	public void updateVeryCode(ApiOrderModel model,String tableName)
+	{
+		String sql = "update daily_log.tbl_api_order_" + tableName + " set cp_verifyCode = ?,SecondDate = now(), status = ?  where id = ? ";
+		
+		Map<Integer,Object> params = new HashMap<>();
+		
+		params.put(1,model.getCpVerifyCode());
+		params.put(2, model.getStatus());
+		params.put(3, model.getId());
+		
+		new JdbcControl().execute(sql, params);
+	}
+	
+	public ApiOrderModel getApiOrderById(String month,String id)
+	{
+		String sql = "select * from daily_log.tbl_api_order_" + month +" where id = " + id;
+		
+		return (ApiOrderModel)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				if(rs.next())
+				{
+					ApiOrderModel model = new ApiOrderModel();
+					model.setId(rs.getInt("id"));
+					model.setTroneId(rs.getInt("trone_id"));
+					model.setTroneOrderId(rs.getInt("trone_order_id"));
+					model.setApiOrderId(rs.getInt("api_id"));
+					model.setImei(StringUtil.getString(rs.getString("imsi"), ""));
+					model.setImsi(StringUtil.getString(rs.getString("imei"), ""));
+					model.setMobile(StringUtil.getString(rs.getString("mobile"), ""));
+					model.setLac(rs.getInt("lac"));
+					model.setCid(rs.getInt("cid"));
+					model.setExtrData(StringUtil.getString(rs.getString("ExtrData"), ""));
+					model.setSdkVersion(StringUtil.getString(rs.getString("sdkversion"), ""));
+					model.setPackageName(StringUtil.getString(rs.getString("packagename"), ""));
+					model.setIp(StringUtil.getString(rs.getString("ip"), ""));
+					model.setClientIp(StringUtil.getString(rs.getString("clientip"), ""));
+					model.setNetType(StringUtil.getString(rs.getString("nettype"), ""));
+					model.setSpLinkId(StringUtil.getString(rs.getString("sp_linkid"), ""));
+					model.setSpExField(StringUtil.getString(rs.getString("sp_exField"), ""));
+					model.setCpVerifyCode(StringUtil.getString(rs.getString("cp_verifyCode"), ""));
+					model.setPort(StringUtil.getString(rs.getString("port"), ""));
+					model.setMsg(StringUtil.getString(rs.getString("msg"), ""));
+					model.setApiExdata(StringUtil.getString(rs.getString("api_exdata"), ""));
+					model.setStatus(rs.getInt("status"));
+					model.setExtraParams(StringUtil.getString(rs.getString("extra_param"), ""));
+					model.setIsHidden(rs.getInt("is_hidden"));
+					
+					return model;
+				}
+				
+				return null;
+			}
+		});
+	}
+	
 	
 	public static void main(String[] args)
 	{

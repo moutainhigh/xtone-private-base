@@ -23,6 +23,9 @@ public class CpDataCache
 	 */
 	public static int getTroneIdByTroneOrderId(int troneOrderId)
 	{
+		if(troneOrderId<=0)
+			return -1;
+		
 		for(TroneOrderModel model : _troneOrderList)
 		{
 			if(model.getId()==troneOrderId)
