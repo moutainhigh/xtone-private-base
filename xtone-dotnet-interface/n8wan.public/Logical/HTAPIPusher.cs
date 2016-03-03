@@ -100,6 +100,7 @@ namespace n8wan.Public.Logical
             ptrs.Add("cpparam", _apiOrder.ExtrData);
             ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
             ptrs.Add("paycode", _apiOrder.trone_order_id.ToString("100000"));
+
             string qs = UrlEncode(ptrs);
 
 
@@ -109,10 +110,9 @@ namespace n8wan.Public.Logical
             else
                 url = API_PushUrl + "?" + qs;
 
-            asyncSendData(url);
+            asyncSendData(url, null);
 
         }
-
 
 
     }

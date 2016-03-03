@@ -20,11 +20,18 @@ namespace n8wan.Public.Logical
             var r = q.GetRowByFilters();
             if (r == null)
                 return null;
-
-            var md5 = Shotgun.Library.Static.StrId(password);
-            if (!r.pwd.ToUpper().Contains(md5))
+            if (pType == "md5")
             {
-                return null;
+                if (!r.pwd.Equals(password, StringComparison.OrdinalIgnoreCase))
+                    return null;
+            }
+            else
+            {
+                var md5 = Shotgun.Library.Static.StrId(password);
+                if (!r.pwd.ToUpper().Contains(md5))
+                {
+                    return null;
+                }
             }
             return string.Format("{0}|{1}|{1}", r.id, r.name, r.group_list);
         }

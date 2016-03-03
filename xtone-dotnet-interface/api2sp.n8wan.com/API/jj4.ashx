@@ -66,7 +66,7 @@ public class jj3 : sdk_Request.Logical.APIRequestGet
             case "006083523009": price = "1800"; break;
             case "006083523010": price = "10"; break;
             default:
-                SetError(sdk_Request.Logical.API_ERROR.TRONE_FEE_NOT_FOUND, "计费点配置错误,PayCode:" + PayModel.paycode);
+                SetError(sdk_Request.Logical.API_ERROR.INNER_CONFIG_ERROR, "计费点配置错误,PayCode:" + PayModel.paycode);
                 return null;
         }
         string cpparam = "eapi" + OrderInfo.id.ToString("000000000");

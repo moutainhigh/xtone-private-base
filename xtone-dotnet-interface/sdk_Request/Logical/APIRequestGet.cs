@@ -16,21 +16,23 @@ namespace sdk_Request.Logical
     public abstract class APIRequestGet : Shotgun.PagePlus.SimpleHttpHandler<Shotgun.Database.MySqlDBClass>, Shotgun.Model.Logical.ILogical
     {
         private sdk_Request.Model.APIRquestModel _aqm;
-        /// <summary>
-        /// sp通道业务
-        /// </summary>
-        private LightDataModel.tbl_sp_troneItem _trone;
+        ///// <summary>
+        ///// sp通道业务
+        ///// </summary>
+        //private LightDataModel.tbl_sp_troneItem _trone;
         private string _errMsg;
         private API_ERROR _errCode;
         private LightDataModel.tbl_trone_paycodeItem _paymodel;
         private StringBuilder _sbLog;
+
+        private int Step = 0;
 
         /// <summary>
         ///写日志的文件锁对像
         /// </summary>
         private static object logLocker = new object();
 
-        public override void BeginProcess()
+        public sealed override void BeginProcess()
         {
             Response.ContentType = "text/plain";
             //var ticks = new System.Diagnostics.Stopwatch();
@@ -42,9 +44,21 @@ namespace sdk_Request.Logical
             }
 
             Model.SP_RESULT result = null;
+            String step = Request["step"];
+            Func<Model.SP_RESULT> func = null;
+            if (step == null || step != "2")
+            {
+                func = GetSpCmd;
+            }
+            else
+            {
+                func = GetSpCmdStep2;
+                Step = 2;
+            }
+
             try
             {
-                result = GetSpCmd();
+                result = func();
             }
             catch (WebException webex)
             {
@@ -71,14 +85,32 @@ namespace sdk_Request.Logical
                     Response.Write("{}");
                     return;
                 }
-                _aqm.status = result.status;// == API_ERROR.OK ? API_ERROR.OK : API_ERROR.UNKONW_ERROR;
+                ResultStatusMap(result);
                 var json = new Model.APIResponseModel(result, _aqm);
+                _aqm.status = ResultStatusMap(result);
 
                 Response.Write(json.ToJson());
             }
             FlushLog();
 
 
+        }
+
+        /// <summary>
+        /// 错误码映射
+        /// </summary>
+        /// <param name="json"></param>
+        private API_ERROR ResultStatusMap(SP_RESULT rlt)
+        {
+            if (rlt == null || Step < 2)
+                return rlt.status;
+
+            if (rlt.status == API_ERROR.STEP2_OK || (int)rlt.status > 2000)
+                return rlt.status;
+            if (rlt.status == API_ERROR.OK)
+                rlt.status = API_ERROR.STEP2_OK;
+
+            return rlt.status += 1000;
         }
 
         //protected virtual Model.SP_RESULT GetSpCmd()
@@ -119,9 +151,7 @@ namespace sdk_Request.Logical
         {
             if (!InitOrder())
                 return SetError("初始化错误");
-
             return true;
-
         }
 
         /// <summary>
@@ -145,6 +175,7 @@ namespace sdk_Request.Logical
                 _paymodel = l.GetRowByFilters();
                 if (_paymodel == null)
                 {
+                    //throw new Exception("paycode 获取失败，请检查paycode是否有配置");
                     WriteLog("paycode 获取失败，请检查paycode是否有配置");
                     //WriteLog(l.LastSqlExecute);
                 }
@@ -152,6 +183,15 @@ namespace sdk_Request.Logical
             }
         }
 
+        /// <summary>
+        /// 渠道的第二次请求
+        /// </summary>
+        /// <returns></returns>
+        protected virtual Model.SP_RESULT GetSpCmdStep2()
+        {
+            SetError(API_ERROR.INNER_CONFIG_ERROR, "请重写“GetSpCmdStep2”");
+            return null;
+        }
 
         private bool InitOrder()
         {
@@ -226,7 +266,7 @@ namespace sdk_Request.Logical
         }
         public bool SetError(string Msg)
         {
-            SetError(API_ERROR.UNKONW_ERROR, Msg);
+            SetError(API_ERROR.INNER_ERROR, Msg);
             return false;
         }
         protected bool SetError(API_ERROR Error, string msg)
@@ -238,7 +278,10 @@ namespace sdk_Request.Logical
 
         private void WriteError()
         {
-            var sp = new Model.APIResponseModel(new Model.SP_RESULT() { status = _errCode, description = _errMsg }, _aqm);
+            var rlt = new Model.SP_RESULT() { status = _errCode, description = _errMsg };
+            var sp = new Model.APIResponseModel(rlt, _aqm);
+            _aqm.status = ResultStatusMap(rlt);
+
             Response.Write(sp.ToJson());
         }
 

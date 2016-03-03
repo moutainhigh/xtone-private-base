@@ -11,21 +11,21 @@ namespace sdk_Request.Logical
     /// </summary>
     public enum API_ERROR
     {
-        CONFIG_ERROR = -2,
-        UNKONW_ERROR = 1010,
+        /// <summary>
+        /// 前端系统错误(不在此系统使用)
+        /// </summary>
+        FAWAD_SYSTEM_ERROR = 1010,
+        /// <summary>
+        /// 第一步操作返回成功
+        /// </summary>
         OK = 1011,
-        TRONE_NOT_FOUND,
-        TRONE_FEE_NOT_FOUND,
+        STEP2_OK=1013,
         /// <summary>
-        /// 必须字段为空
+        /// 内部错误，通常指内部(对接)程序出错了
         /// </summary>
-        FIELD_MISS,
+        INNER_ERROR = 1020,
         /// <summary>
-        /// 内部错误，通常指内容程序出错了
-        /// </summary>
-        INNER_ERROR,
-        /// <summary>
-        /// API 配置错误
+        /// 内部错误，通常指程序没按要求对接
         /// </summary>
         INNER_CONFIG_ERROR,
         /// <summary>
@@ -44,7 +44,5 @@ namespace sdk_Request.Logical
         /// 未知格式数据（可能是SP服务出错或SP变更了输出格式)
         /// </summary>
         UNKONW_RESULT
-        
-
     }
 }

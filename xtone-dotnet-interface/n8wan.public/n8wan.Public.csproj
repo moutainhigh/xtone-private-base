@@ -104,6 +104,7 @@
     <Compile Include="Logical\AsyncSendPush.cs" />
     <Compile Include="Logical\AutoMapPush.cs" />
     <Compile Include="Logical\BaseSPCallback_Log.cs" />
+    <Compile Include="Logical\ClearCacheHttpHandler.cs" />
     <Compile Include="Logical\CPPusher.cs" />
     <Compile Include="Logical\HTAPIPusher.cs" />
     <Compile Include="Logical\IHold_DataItem.cs" />

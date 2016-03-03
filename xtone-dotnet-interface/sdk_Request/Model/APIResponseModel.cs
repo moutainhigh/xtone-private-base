@@ -25,7 +25,13 @@ namespace sdk_Request.Model
             this.Request = request;
             if (cmd == null)
                 return;
-            request.status = (cmd.status == Logical.API_ERROR.OK) ? Logical.API_ERROR.OK : Logical.API_ERROR.UNKONW_ERROR;
+
+            if (request == null)
+                return;
+            if (cmd == null)
+                request.status = Logical.API_ERROR.INNER_ERROR;
+            else
+                request.status = cmd.status;
         }
 
         [DataMember]
@@ -43,7 +49,7 @@ namespace sdk_Request.Model
 
         public string ToJson()
         {
-           return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this);
         }
 
     }

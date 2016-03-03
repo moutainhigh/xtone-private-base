@@ -4,6 +4,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "api2sp.n8wan.com", "api2sp.n8wan.com\", "{EBF6A030-9733-44CB-AAD9-803A287401FE}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{f091ab23-b01e-48ae-b5cd-00d583ea42ca}|sdk_Request.dll;{638EE824-4BD3-4EC8-9C9D-129437F20187}|n8wan.Public.dll;{C357D039-E3B2-4F1C-BCB3-D8895D133AE0}|Shotgun.Library.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/api2sp.n8wan.com"
 		Debug.AspNetCompiler.PhysicalPath = "api2sp.n8wan.com\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\api2sp.n8wan.com\"

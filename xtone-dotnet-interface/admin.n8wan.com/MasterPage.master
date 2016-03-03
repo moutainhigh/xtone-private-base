@@ -9,6 +9,11 @@
     <link href="/css/base.css" rel="stylesheet" />
     <link href="/css/manage.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server" />
+    <script type="text/javascript">
+        if (top != this) {
+            document.write(" <link href=\"/css/embed.css\" rel=\"stylesheet\" />");
+        }
+    </script>
 </head>
 <body>
     <div class="bn">

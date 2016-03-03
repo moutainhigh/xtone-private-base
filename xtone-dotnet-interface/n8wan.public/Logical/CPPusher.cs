@@ -23,12 +23,17 @@ namespace n8wan.Public.Logical
         /// 最后一次推送的连接内容
         /// </summary>
         private string _url;
+        /// <summary>
+        /// 采用POST同步的数据
+        /// </summary>
+        private string _postdata;
         private LightDataModel.tbl_trone_orderItem _config;
         private LightDataModel.tbl_cp_push_urlItem _cp_push_url;
         private LightDataModel.tbl_troneItem _trone;
 
         static Random rnd;
         object sync = new object();
+
 
         /// <summary>
         /// 根据TroneId，CPID 加载CP同步API配置
@@ -238,16 +243,21 @@ namespace n8wan.Public.Logical
             else
                 url = API_PushUrl + "?" + qs;
 
-            asyncSendData(url);
+            asyncSendData(url, null);
         }
 
-        protected void asyncSendData(string url)
+        protected void asyncSendData(string url, string postData)
         {
             this._url = url;
+            this._postdata = postData;
             System.Threading.ThreadPool.QueueUserWorkItem(SendData);
 
         }
 
+        /// <summary>
+        /// 真实的同步动作
+        /// </summary>
+        /// <param name="s"></param>
         private void SendData(object s)
         {
 
@@ -284,18 +294,48 @@ namespace n8wan.Public.Logical
             web.Timeout = 1000;
             web.AllowAutoRedirect = false;
             web.AutomaticDecompression = System.Net.DecompressionMethods.GZip;
+            web.ServicePoint.Expect100Continue = false;
+
 
             var stwc = new System.Diagnostics.Stopwatch();
             stwc.Start();
             string msg = null;
-            try
-            {
-                rsp = (System.Net.HttpWebResponse)web.GetResponse();
+
+            if (!String.IsNullOrEmpty(_postdata))
+            {//采用用POST提交时
+                web.Method = System.Net.WebRequestMethods.Http.Post;
+                byte[] bin = ASCIIEncoding.UTF8.GetBytes(_postdata);
+                web.ContentType = "Content-Type: application/x-www-form-urlencoded; charset=UTF-8";
+                web.ContentLength = bin.Length;
+                Stream stm = null;
+                try
+                {
+                    stm = web.GetRequestStream();
+                    stm.Write(bin, 0, bin.Length);
+                    stm.Flush();
+                }
+                catch (System.Net.WebException ex)
+                {
+                    rsp = (System.Net.HttpWebResponse)ex.Response;
+                    msg = ex.Message;
+                }
+                finally
+                {
+                    if (stm != null)
+                        stm.Dispose();
+                }
             }
-            catch (System.Net.WebException ex)
-            {
-                rsp = (System.Net.HttpWebResponse)ex.Response;
-                msg = ex.Message;
+            if (msg == null)
+            {//写入数据无错误时
+                try
+                {
+                    rsp = (System.Net.HttpWebResponse)web.GetResponse();
+                }
+                catch (System.Net.WebException ex)
+                {
+                    rsp = (System.Net.HttpWebResponse)ex.Response;
+                    msg = ex.Message;
+                }
             }
 
             if (rsp == null)

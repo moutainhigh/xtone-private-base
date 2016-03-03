@@ -74,6 +74,15 @@ namespace sdk_Request.Model
         public string msg { get; set; }
     }
 
+    /// <summary>
+    /// 一次短信，带反馈URL，代码要求：发送短信后，在XX秒后，访问指定URL
+    /// </summary>
+    public class SP_SMS_Feedback_Result : SP_SMS_Result
+    {
+        public String FeedBack { get; set; }
+        public int Interval { get; set; }
+    }
+
     ///// <summary>
     ///// 验证码模式，第一步
     ///// </summary>

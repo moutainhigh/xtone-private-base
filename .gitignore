@@ -8,3 +8,11 @@
 /xtone-dotnet-interface/admin.n8wan.com/log
 /xtone-dotnet-interface/admin.n8wan.com/Bin
 /xtone-dotnet-interface/n8wan.public/obj
+/xtone-dotnet-interface/n8wan.public/bin
+/xtone-dotnet-interface/Shotgun.Library/obj
+/xtone-dotnet-interface/Shotgun.Library/bin
+/xtone-dotnet-interface/spcallback.n8wan.com/Bin
+/xtone-dotnet-interface/*.suo
+/xtone-dotnet-interface/n8wan.public/*.scc
+/xtone-dotnet-interface/api2sp.n8wan.com/splog
+/xtone-dotnet-interface/packages
