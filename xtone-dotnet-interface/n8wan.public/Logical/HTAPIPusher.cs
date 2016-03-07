@@ -105,6 +105,7 @@ namespace n8wan.Public.Logical
             ptrs.Add("cpparam", _apiOrder.ExtrData);
             ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
             ptrs.Add("paycode", _apiOrder.trone_order_id.ToString("100000"));
+            ptrs.Add("ordernum", string.Format("{0:yyyyMM}{1}", _apiOrder.FirstDate, _apiOrder.id));
 
             string qs = UrlEncode(ptrs);
 

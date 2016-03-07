@@ -33,7 +33,7 @@ namespace sdk_Request.Logical
         /// </summary>
         GET_CMD_FAIL =1022,
         /// <summary>
-        /// 网关超时
+        /// 网关超时，一般是与SP通迅时出错了
         /// </summary>
         GATEWAY_TIMEOUT=1023,
         /// <summary>
@@ -45,11 +45,11 @@ namespace sdk_Request.Logical
         /// </summary>
         UNKONW_RESULT=1025,
         /// <summary>
-        /// 验证码错误
+        /// 验证码错误（SP验证结查转换）
         /// </summary>
         VERIFY_CODE_ERROR=1026,
         /// <summary>
-        /// SP黑名单用户
+        /// SP黑名单用户（SP验证结查转换）
         /// </summary>
         BLACK_USER=1027
     }
