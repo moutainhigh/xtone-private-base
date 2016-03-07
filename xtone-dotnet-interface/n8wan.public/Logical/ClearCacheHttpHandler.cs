@@ -5,7 +5,7 @@ using System.Text;
 
 namespace n8wan.Public.Logical
 {
-    public class ClearCacheHandler:System.Web.IHttpHandler
+    public class ClearCacheHandler : System.Web.IHttpHandler
     {
         public bool IsReusable
         {
@@ -14,7 +14,7 @@ namespace n8wan.Public.Logical
 
         public void ProcessRequest(System.Web.HttpContext context)
         {
-            StaticCache<LightDataModel.tbl_api_orderItem, string>.ClearAllCache();
+            StaticCache.ClearAllCache();
             context.Response.Write("清除成功");
         }
     }

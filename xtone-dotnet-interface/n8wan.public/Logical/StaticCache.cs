@@ -13,15 +13,58 @@ namespace n8wan.Public.Logical
         AllLoad
     }
 
+    public abstract class StaticCache
+    {
+        static List<StaticCache> _allCache;
+
+        public static void ClearAllCache()
+        {
+            if (_allCache == null)
+                return;
+            var all = _allCache.ToArray();
+
+            foreach (var c in all)
+            {
+                c.ClearCache();
+            }
+        }
+
+        public abstract void ClearCache();
+
+        protected void Add(StaticCache sc)
+        {
+            if (sc == null)
+                return;
+            if (_allCache == null)
+                _allCache = new List<StaticCache>();
+            if (_allCache.Contains(sc))
+                return;
+            _allCache.Add(sc);
+        }
+
+        protected static StaticCache[] GetAllCache()
+        {
+            if (_allCache == null)
+                return null;
+            return _allCache.ToArray();
+        }
+
+        internal void Remove(StaticCache staticCache)
+        {
+            if (_allCache == null)
+                return;
+            _allCache.Remove(staticCache);
+        }
+    }
+
     /// <summary>
     /// 静态变量缓存-带过期时间
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <typeparam name="IDX"></typeparam>
-    public class StaticCache<T, IDX> where T : Shotgun.Model.Logical.LightDataModel, new()
+    public class StaticCache<T, IDX> : StaticCache where T : Shotgun.Model.Logical.LightDataModel, new()
     {
         Dictionary<IDX, T> _data;
-        static List<StaticCache<T, IDX>> _allCache;
 
         /// <summary>
         /// 数据加载状态
@@ -99,10 +142,7 @@ namespace n8wan.Public.Logical
             q.dBase = CreatDBase();
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
             st.Start();
-            if (_allCache == null)
-                _allCache = new List<StaticCache<T, IDX>>();
-            if (!_allCache.Contains(this))
-                _allCache.Add(this);
+            base.Add(this);
             try
             {
                 var RowCount = q.TotalCount;
@@ -148,8 +188,6 @@ namespace n8wan.Public.Logical
             if (DateTime.Now > _expired)
             {
                 ClearCache();
-                _satus = Static_Cache_Staus.Idel;
-                WriteLog(false, 0, 0);
                 LoadFreshData();
                 return null;
             }
@@ -241,24 +279,12 @@ namespace n8wan.Public.Logical
         /// <summary>
         /// 清除缓存数据
         /// </summary>
-        public void ClearCache()
+        public override void ClearCache()
         {
             _data = null;
-            if (_allCache == null)
-                return;
-            _allCache.Remove(this);
-        }
-
-        public static void ClearAllCache()
-        {
-            if (_allCache == null)
-                return;
-            StaticCache<T, IDX>[] all = _allCache.ToArray();
-
-            foreach (var c in all)
-            {
-                c.ClearCache();
-            }
+            _satus = Static_Cache_Staus.Idel;
+            base.Remove(this);
+            WriteLog(false, 0, 0);
         }
     }
 }

@@ -105,12 +105,16 @@ namespace sdk_Request.Logical
             if (rlt == null || Step < 2)
                 return rlt.status;
 
-            if (rlt.status == API_ERROR.STEP2_OK || (int)rlt.status > 2000)
+            if (rlt.status == API_ERROR.STEP2_OK)
                 return rlt.status;
-            if (rlt.status == API_ERROR.OK)
-                rlt.status = API_ERROR.STEP2_OK;
 
-            return rlt.status += 1000;
+            if (rlt.status == API_ERROR.OK)
+                return API_ERROR.STEP2_OK;
+
+            if ((int)rlt.status >= 2000)
+                return rlt.status;
+
+            return rlt.status + 1000;
         }
 
         //protected virtual Model.SP_RESULT GetSpCmd()

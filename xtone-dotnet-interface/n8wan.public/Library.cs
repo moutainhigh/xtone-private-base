@@ -270,5 +270,15 @@ namespace n8wan.Public
 
         }
 
+        static string syncUrlFix;
+        public static string syncUrlPerfix()
+        {
+            if (syncUrlFix != null)
+                return syncUrlFix;
+            syncUrlFix = System.Configuration.ConfigurationManager.AppSettings["syncUrlPerfix"];
+            if (syncUrlFix == null)
+                syncUrlFix = string.Empty;
+            return syncUrlFix;
+        }
     }
 }

@@ -3,7 +3,9 @@
 using System;
 using System.Web;
 using System.Runtime.Serialization;
-
+/// <summary>
+/// 简易 一次 HTTP模式接入
+/// </summary>
 public class jj6 : sdk_Request.Logical.APIRequestGet
 {
     [DataContract]
@@ -52,10 +54,6 @@ public class jj6 : sdk_Request.Logical.APIRequestGet
         public string extData;// ""  
     }
 
-    /// <summary>
-    /// 简易一次HTTP模式接入
-    /// </summary>
-    /// <returns></returns>
     protected override sdk_Request.Model.SP_RESULT GetSpCmd()
     {
         const string url = "http://sms.ejamad.com/interfaceAction";
@@ -72,6 +70,9 @@ public class jj6 : sdk_Request.Logical.APIRequestGet
             if (data.Length == 2)
                 data += ",\"feeName\":\"" + extrs[1] + "\"";
         }
+        if (!string.IsNullOrEmpty(OrderInfo.mobile))
+            data += ",\"mobile\":\"" + OrderInfo.mobile + "\"";
+
         data += "},\"version\":\"1.0.0\"}";
 
         var html = PostHTML(url, data);

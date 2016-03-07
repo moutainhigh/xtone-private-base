@@ -41,8 +41,10 @@ namespace n8wan.Public.Logical
         /// <returns></returns>
         public virtual bool LoadCPAPI()
         {
+            if (Trone == null)
+                return false;
             var l = LightDataModel.tbl_trone_orderItem.GetQueries(dBase);
-            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, Trone.id);
             if (CP_Id != -1)
                 l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.cp_id, this.CP_Id);
             l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, false);
@@ -61,12 +63,18 @@ namespace n8wan.Public.Logical
         {
             _config = m;
             _cp_push_url = LightDataModel.tbl_cp_push_urlItem.GetRowById(dBase, m.push_url_id);
-            _trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
+            if (_trone == null || _trone.id != m.trone_id)
+                _trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
         }
 
         public Logical.ICPPushModel PushObject { get; set; }
 
         public string LogFile { get; set; }
+
+        /// <summary>
+        /// 匹配的SP指令ID
+        /// </summary>
+        public LightDataModel.tbl_troneItem Trone { get { return _trone; } set { _trone = value; } }
 
         public virtual bool DoPush()
         {
@@ -396,10 +404,8 @@ namespace n8wan.Public.Logical
             return sb.ToString();
         }
 
-        /// <summary>
-        /// 匹配的SP指令ID
-        /// </summary>
-        public int TroneId { get; set; }
+
+        //public int TroneId { get; set; }
 
         /// <summary>
         /// CP用户Id，-1表示，不指定,仅配对API_Config_Id

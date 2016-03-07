@@ -19,7 +19,7 @@ namespace sdk_Request.Logical
         /// 第一步操作返回成功
         /// </summary>
         OK = 1011,
-        STEP2_OK=1013,
+        STEP2_OK = 1013,
         /// <summary>
         /// 内部错误，通常指内部(对接)程序出错了
         /// </summary>
@@ -27,22 +27,30 @@ namespace sdk_Request.Logical
         /// <summary>
         /// 内部错误，通常指程序没按要求对接
         /// </summary>
-        INNER_CONFIG_ERROR,
+        INNER_CONFIG_ERROR=1021,
         /// <summary>
         /// 取指令失败
         /// </summary>
-        GET_CMD_FAIL,
+        GET_CMD_FAIL =1022,
         /// <summary>
         /// 网关超时
         /// </summary>
-        GATEWAY_TIMEOUT,
+        GATEWAY_TIMEOUT=1023,
         /// <summary>
         /// 计费点错误（通道指没有该金额）
         /// </summary>
-        ERROR_PAY_POINT,
+        ERROR_PAY_POINT=1024,
         /// <summary>
         /// 未知格式数据（可能是SP服务出错或SP变更了输出格式)
         /// </summary>
-        UNKONW_RESULT
+        UNKONW_RESULT=1025,
+        /// <summary>
+        /// 验证码错误
+        /// </summary>
+        VERIFY_CODE_ERROR=1026,
+        /// <summary>
+        /// SP黑名单用户
+        /// </summary>
+        BLACK_USER=1027
     }
 }

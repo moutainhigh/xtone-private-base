@@ -4,7 +4,9 @@ using System;
 using System.Web;
 using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
-
+/// <summary>
+/// 广州瑶品 - 沃+
+/// </summary>
 public class jj9 : sdk_Request.Logical.APIRequestGet
 {
     [DataContract]
@@ -49,6 +51,7 @@ public class jj9 : sdk_Request.Logical.APIRequestGet
     protected override sdk_Request.Model.SP_RESULT GetSpCmdStep2()
     {
 
+        //var html = "";
         string url = "http://182.92.149.179/open_gate/web_game_callback.php?pid="
             + PayModel.appid
             + "&verifycode=" + OrderInfo.cpVerifyCode
@@ -76,10 +79,18 @@ public class jj9 : sdk_Request.Logical.APIRequestGet
             return null;
         }
 
+
         if (rlt.resultCode != 200000)
         {
-            SetError(sdk_Request.Logical.API_ERROR.GET_CMD_FAIL, rlt.resultMsg);
-            return null;
+            switch (rlt.resultCode)
+            {
+                case 910009:
+                    SetError(sdk_Request.Logical.API_ERROR.VERIFY_CODE_ERROR, rlt.resultMsg);
+                    return null;
+                default:
+                    SetError(sdk_Request.Logical.API_ERROR.GET_CMD_FAIL, rlt.resultMsg);
+                    return null;
+            }
         }
         return rlt;
     }
