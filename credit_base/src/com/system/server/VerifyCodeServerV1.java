@@ -1,5 +1,6 @@
 package com.system.server;
 
+import com.system.cache.DataHandleCache;
 import com.system.constant.Constant;
 import com.system.model.ApiOrderModel;
 import com.system.model.BaseResponseModel;
@@ -25,10 +26,21 @@ public class VerifyCodeServerV1
 		String tableName = transParams.substring(0,6);
 		
 		String apiId = transParams.substring(6); 
-				
+		
+		boolean isExistInCache = DataHandleCache.isExistVerifyCode(transParams);
+		
+		if(isExistInCache)
+		{
+			return StringUtil.getJsonFormObject(response);
+		}
+		else
+		{
+			DataHandleCache.addVerifyCode(transParams);
+		}
+		
 		ApiOrderModel apiOrderModel = new RecordServer().getApiOrderById(tableName, apiId);
 		
-		if(apiOrderModel==null)
+		if(apiOrderModel==null || !StringUtil.isNullOrEmpty(apiOrderModel.getCpVerifyCode()))
 		{
 			return StringUtil.getJsonFormObject(response);
 		}
@@ -53,6 +65,9 @@ public class VerifyCodeServerV1
 		{
 			ex.printStackTrace();
 		}
+		
+		//返回之前先把请求从缓存里删除
+		DataHandleCache.removeVerifyCode(transParams);
 		
 		if(resultModel!=null)
 		{
@@ -81,8 +96,4 @@ public class VerifyCodeServerV1
 		new RecordServer().updateVeryCode(model,tableName);
 	}
 	
-	public static void main(String[] args)
-	{
-		System.out.println("201601124".substring(6));
-	}
 }
