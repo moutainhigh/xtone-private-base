@@ -16,3 +16,6 @@
 /xtone-dotnet-interface/n8wan.public/*.scc
 /xtone-dotnet-interface/api2sp.n8wan.com/splog
 /xtone-dotnet-interface/packages
+/x-out-ad-server/WebRoot/WEB-INF/classes
+/x-out-ad-server-db/WebRoot/WEB-INF/classes
+/HtProject/target
