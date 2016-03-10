@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+* { font-size:12px; font-family:"\9ED1\4F53",Verdana,"黑体", Arial, Helvetica, sans-serif;}
+body,p,a,img,ul,li,h1,h3,h2,h4,h5,h6,form,select,input,div { margin:0px; padding:0px;}
+.clear { width:0px; padding:0px; height:0px; margin:0px; font-size:0px; line-height:0px; clear:both;}
+ul li { list-style:none;}
+ul li { height:22px; line-height:22px; font-size:12px;}
+a { text-decoration:none; color:#060808; font-size:12px;}
+a:hover { text-decoration:underline;}
+
+p { text-indent:2em;}
+p.none { text-indent:0;}
+img { border:none;}
