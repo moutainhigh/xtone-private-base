@@ -18,4 +18,10 @@ public class MrDetailServer
 		String table = StringUtil.getMonthFormat(date);
 		return new MrDetailDataDao().loadDetailDataBySummer(table,date,spId,cpId,spTroneId,troneId,type,joinId);
 	}
+	
+	public List<DetailDataVo> loadDetailDataByCondition(String startDate,String endDate,int spId,int cpId,int spTroneId,int synType)
+	{
+		String table = StringUtil.getMonthFormat(startDate);
+		return new MrDetailDataDao().loadDetailDataByCondition(table, startDate, endDate, spId, cpId, spTroneId, synType);
+	}
 }

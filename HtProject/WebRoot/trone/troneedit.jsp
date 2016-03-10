@@ -102,6 +102,7 @@
 		}
 		
 		showOrHideApiArea(false);
+		console.log("here spChange");
 	}
 	
 	function spTroneChange()
@@ -120,6 +121,7 @@
 				break;
 			}
 		}
+		console.log("here spTroneChange");
 	}
 	
 	$(function()
@@ -145,7 +147,6 @@
 		setRadioCheck("dynamic",<%= model.getDynamic() %>);
 		setRadioCheck("match_price",<%= model.getMatchPrice() %>);
 		
-		
 		$("#hid_exist_pay_code").val("<%= tronePayCodeModel==null ? 0 : 1 %>");
 		$("#hid_trone_pay_code_id").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getId() : "" %>");
 		
@@ -154,6 +155,8 @@
 		$("#input_channel_id").val("<%= tronePayCodeModel != null ? tronePayCodeModel.getChannelId() : "" %>");
 		
 		showOrHideApiArea(<%= tronePayCodeModel==null ? false : true %>);
+		
+		spTroneChange();
 	}
 	
 	function subForm() 

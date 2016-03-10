@@ -221,7 +221,7 @@ public class SpTroneDao
 	@SuppressWarnings("unchecked")
 	public List<SpTroneModel> loadTroneListByCpid(int cpId)
 	{
-		String sql = " SELECT c.id,c.`name`,c.`trone_type`,c.operator";
+		String sql = " SELECT c.id,c.`name`,c.`trone_type`,c.operator,c.provinces ";
 		sql += " FROM daily_config.`tbl_trone_order` a";
 		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_sp_trone` c ON b.`sp_trone_id` = c.`id`";
@@ -249,6 +249,7 @@ public class SpTroneDao
 					//model.setJieSuanLv(rs.getFloat("jiesuanlv"));
 					//model.setOperatorName(StringUtil.getString(rs.getString("name_cn"), ""));
 					model.setTroneType(rs.getInt("trone_type"));
+					model.setProvinces(StringUtil.getString(rs.getString("provinces"), ""));
 					
 					list.add(model);
 				}

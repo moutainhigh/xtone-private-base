@@ -3,7 +3,10 @@ package com.system.server;
 import java.util.List;
 import java.util.Map;
 
+import com.system.dao.ProvinceDao;
 import com.system.dao.TroneOrderDao;
+import com.system.model.ProvinceModel;
+import com.system.model.SpTroneModel;
 import com.system.model.TroneOrderModel;
 
 public class TroneOrderServer
@@ -50,6 +53,35 @@ public class TroneOrderServer
 	
 	public List<TroneOrderModel> loadTroneOrderListByCpSpTroneId(int cpId,int spTroneId,int status)
 	{
-		return new TroneOrderDao().loadTroneOrderListByCpSpTroneId(cpId, spTroneId, status);
+		List<TroneOrderModel> list =new TroneOrderDao().loadTroneOrderListByCpSpTroneId(cpId, spTroneId, status);
+		
+		List<ProvinceModel> proList = new ProvinceDao().loadProvinceList();
+		
+		for(TroneOrderModel model : list)
+		{
+			String proStrList = "";
+			
+			String[] pros = model.getProvince() .split(",");
+			
+			if(pros==null || pros.length<0)
+				continue;
+			
+			for(String proId : pros)
+			{
+				for(ProvinceModel province : proList)
+				{
+					if(proId.equals(province.getId() + ""))
+						proStrList += province.getName() + ",";
+				}
+			}
+			
+			if(proStrList.length()>0)
+				proStrList = proStrList.substring(0, proStrList.length()-1);
+			
+			model.setProvinceList(proStrList);
+		}
+		
+		return list;
+		
 	}
 }

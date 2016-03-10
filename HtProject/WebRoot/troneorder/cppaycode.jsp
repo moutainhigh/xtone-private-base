@@ -74,14 +74,15 @@
 		
 		sbData.append(cpName + "\r\n");
 		
-		sbData.append("PayCode\t业务名称\t价格\t状态\r\n");
+		sbData.append("PayCode\t业务名称\t价格\t状态\t省份\r\n");
 		
 		TroneOrderModel orderModel = null;
 		
 		for(int i=0; i<list.size(); i++)
 		{
 			orderModel = list.get(i);
-			sbData.append((orderModel.getId() + 100000) + "\t" + orderModel.getSpTroneName() + "\t" + orderModel.getPrice() + "\t" + ((orderModel.getDisable() ==0 || orderModel.getSpTroneStatus() == 1) ? "启用" : "停用") + "\r\n");
+			sbData.append((orderModel.getId() + 100000) + "\t" + orderModel.getSpTroneName() + "\t" + orderModel.getPrice() 
+			+ "\t" + ((orderModel.getDisable() ==0 || orderModel.getSpTroneStatus() == 1) ? "启用" : "停用") + "\t" + orderModel.getProvinceList() + "\r\n");
 		}
         
         out.clear();
