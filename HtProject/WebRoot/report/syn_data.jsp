@@ -1,3 +1,4 @@
+<%@page import="com.system.util.ConfigManager"%>
 <%@page import="com.system.vo.DetailDataVo"%>
 <%@page import="com.system.server.MrDetailServer"%>
 <%@page import="com.system.server.SpTroneServer"%>
@@ -33,6 +34,9 @@
 	List<SpTroneModel> spTroneList = new SpTroneServer().loadSpTroneList();
 	
 	List<DetailDataVo> list =  (isLoadData > 0) ? (new MrDetailServer().loadDetailDataByCondition(startDate, endDate, spId, cpId, spTroneId, synType)) : new ArrayList<DetailDataVo>();
+	
+	String synUrl = ConfigManager.getConfigData("SYN_DATA_URL", "http://h1.n8wan.com:2109/pushagain.ashx");
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -156,12 +160,16 @@
 				ids += objs[i].id + ",";
 			}
 		}
+		
 		if(ids!="")
 		{
-			ids = ids.substring(1, ids.length-1);
-			document.getElementById("hid_data").value = ids;
-			document.getElementById("hid_month").value = '<%= StringUtil.getMonthFormat(startDate)  %>';
-			document.getElementById("deng_form").submit();
+			if(confirm("如果选择未同步的数据同步过去，会影响扣量数据，是否继续？"))
+			{
+				ids = ids.substring(0, ids.length-1);
+				document.getElementById("hid_data").value = ids;
+				document.getElementById("hid_month").value = '<%= StringUtil.getMonthFormat(startDate)  %>';
+				document.getElementById("deng_form").submit();
+			}
 		}
 		else
 		{
@@ -287,7 +295,7 @@
 			</tbody>
 		</table>
 	</div>
-	<form action="http://www.baidu.com/" id="deng_form" >
+	<form action="<%= synUrl %>" id="deng_form" >
 		<input type="hidden" value="" id="hid_month" name="month" />
 		<input type="hidden" value="" id="hid_data" name="data" />
 	</form>
