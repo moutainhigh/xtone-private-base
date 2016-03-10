@@ -1,4 +1,4 @@
-package com.thirdpay.domain;
+package com.thirdpay.test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,60 +17,16 @@ public class LogInsert implements Runnable {
   private String userAgent ; 
   private String toUrl ; 
   private String ip ; 
-  private String nochannel;
-  private String money;
-  private String commodity;
-  private String orderid;
-  
-  
-  public String getNochannel() {
-	return nochannel;
-}
 
-public void setNochannel(String nochannel) {
-	this.nochannel = nochannel;
-}
+  public LogInsert(String fromSource, String userAgent, String toUrl, String ip) {
+    super();
+    this.fromSource = fromSource;
+    this.userAgent = userAgent;
+    this.toUrl = toUrl;
+    this.ip = ip;
+  }
 
-public String getMoney() {
-	return money;
-}
-
-public void setMoney(String money) {
-	this.money = money;
-}
-
-public String getCommodity() {
-	return commodity;
-}
-
-public void setCommodity(String commodity) {
-	this.commodity = commodity;
-}
-
-public String getOrderid() {
-	return orderid;
-}
-
-public void setOrderid(String orderid) {
-	this.orderid = orderid;
-}
-
-
-
-  public LogInsert(String fromSource, String userAgent, String toUrl, String ip, String nochannel, String money,
-		String commodity, String orderid) {
-	super();
-	this.fromSource = fromSource;
-	this.userAgent = userAgent;
-	this.toUrl = toUrl;
-	this.ip = ip;
-	this.nochannel = nochannel;
-	this.money = money;
-	this.commodity = commodity;
-	this.orderid = orderid;
-}
-
-public Long getId() {
+  public Long getId() {
     return id;
   }
 
@@ -112,13 +68,13 @@ public Long getId() {
 
   @Override
   public void run() {
-    setId(GenerateIdService.getInstance().generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1));
+    setId(GenerateIdService.getInstance().generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id")), "clicks", 1));
     if(this.id > 0){
       PreparedStatement ps = null;
       Connection con = null;
       try{
         con = ConnectionService.getInstance().getConnectionForLocal();
-        ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,) values (?,?,?,?,?,?,?,?,?,?)");
+        ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03,para04) values (?,?,?,?,?,?)");
         int m = 1;
         ps.setLong(m++, this.getId());
         ps.setInt(m++, LOG_ID);
@@ -126,12 +82,6 @@ public Long getId() {
         ps.setString(m++, this.getUserAgent());
         ps.setString(m++, this.getToUrl());
         ps.setString(m++, this.getIp());
-        ps.setString(m++, this.getNochannel());
-        ps.setString(m++, this.getMoney());
-        ps.setString(m++, this.getCommodity());
-        ps.setString(m++, this.getOrderid());
-        
-        
         ps.executeUpdate();
       }catch(Exception e){
         // TODO Auto-generated catch block
