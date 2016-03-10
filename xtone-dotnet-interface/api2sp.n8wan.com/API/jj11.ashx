@@ -5,7 +5,7 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 
 /// <summary>
-/// 易简 - 验证码模式
+/// 易简- 验证码模式
 /// </summary>
 public class jj11 : sdk_Request.Logical.APIRequestGet
 {
