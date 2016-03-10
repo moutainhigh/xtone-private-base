@@ -30,7 +30,19 @@ public class jj9 : sdk_Request.Logical.APIRequestGet
 
     protected override sdk_Request.Model.SP_RESULT GetSpCmd()
     {
-        OrderInfo.apiExdata = "0245" + OrderInfo.id.ToString();
+        switch (PayModel.appid)
+        {
+            case "SHAG":
+                OrderInfo.apiExdata = "0247" + OrderInfo.id.ToString();
+                break;
+            case "GZFT":
+                OrderInfo.apiExdata = "0245" + OrderInfo.id.ToString();
+                break;
+            default:
+                SetError(sdk_Request.Logical.API_ERROR.ERROR_PAY_POINT, "未知APPID：" + PayModel.appid);
+                return null;
+        }
+
         string url = string.Format("http://182.92.149.179/open_gate/web_game_fee.php?pid="
             + PayModel.appid
             + "&money=" + PayModel.paycode

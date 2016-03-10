@@ -21,3 +21,4 @@ E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Release\Newtonsoft.Json.xm
 E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Release\sdk_Request.csprojResolveAssemblyReference.cache
 E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Release\sdk_Request.dll
 E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Release\sdk_Request.pdb
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Release\MySql.Data.dll

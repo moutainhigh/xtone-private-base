@@ -200,17 +200,20 @@ namespace sdk_Request.Logical
         private bool InitOrder()
         {
 #if DEBUG
-            _aqm = new Model.APIRquestModel()
+            if (Request.HttpMethod.Equals("GET"))
             {
-                cid = 123,
-                imei = "866568022922909",
-                imsi = "460023192787105",
-                price = 1000,
-                lac = 456,
-                mobile = "13570830935",
-
-            };
-#else
+                _aqm = new Model.APIRquestModel()
+                {
+                    cid = 123,
+                    imei = "866568022922909",
+                    imsi = "460023192787105",
+                    price = 1000,
+                    lac = 456,
+                    mobile = "13570830935",
+                };
+                return true;
+            }
+#endif
             if (Request.TotalBytes < 10)
                 return false;
 
@@ -221,7 +224,7 @@ namespace sdk_Request.Logical
 
             _aqm = Shotgun.Library.Static.JsonParser<sdk_Request.Model.APIRquestModel>(Request.InputStream);
 
-#endif
+
             return true;
         }
 
