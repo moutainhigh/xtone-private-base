@@ -112,7 +112,7 @@ public class AlipayCountServlet extends HttpServlet {
 
 			for (int i = 0; i < value.length; i++) {
 				// System.out.println(value[i]);
-				payInfo = key + "=" + value[i] + ";";
+				payInfo += key + "=" + value[i] + ";";
 
 				// logger.info(value[i]);
 
