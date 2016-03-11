@@ -42,6 +42,7 @@ public class VerifyCodeServerV1
 		
 		if(apiOrderModel==null || !StringUtil.isNullOrEmpty(apiOrderModel.getCpVerifyCode()))
 		{
+			DataHandleCache.removeVerifyCode(transParams);
 			return StringUtil.getJsonFormObject(response);
 		}
 		
