@@ -21,7 +21,9 @@ namespace n8wan.Public.Logical
         /// <returns></returns>
         public override bool LoadCPAPI()
         {
-            tbl_sp_trone_apiItem m = tbl_sp_trone_apiItem.GetRowByTroneId(dBase, TroneId);
+            if (Trone == null)
+                return false;
+            tbl_sp_trone_apiItem m = tbl_sp_trone_apiItem.GetRowByTroneId(dBase, Trone.id);
             if (m == null)
                 return false;
             _apiMatchAPI = m;
@@ -53,7 +55,9 @@ namespace n8wan.Public.Logical
                         string.Format("{0},{1}", PushObject.GetValue(EPushField.port), this.PushObject.GetValue(EPushField.Msg)));
                     break;
             }
-            l.Filter.AndFilters.Add(tbl_api_orderItem.Fields.status, 1011);
+            l.Filter.AndFilters.Add(tbl_api_orderItem.Fields.api_id, _apiMatchAPI.id);
+            l.Filter.AndFilters.Add(tbl_api_orderItem.Fields.trone_id, Trone.id);
+            l.Filter.AndFilters.Add(tbl_api_orderItem.Fields.status, new int[] { 1011, 2013, 1013 });
 
             _apiOrder = l.GetRowByFilters();//查到订单号
             if (_apiOrder == null)
@@ -88,6 +92,7 @@ namespace n8wan.Public.Logical
                 return;
             }
 
+
             var ptrs = new Dictionary<string, string>();
             ptrs.Add("mobile", PushObject.GetValue(Logical.EPushField.Mobile));
             ptrs.Add("servicecode", PushObject.GetValue(Logical.EPushField.ServiceCode));
@@ -96,8 +101,12 @@ namespace n8wan.Public.Logical
             //ptrs.Add("status", PushObject.GetValue(Logical.EPushField.Status));
             ptrs.Add("port", PushObject.GetValue(Logical.EPushField.port));
 
-            ptrs.Add("price", PushObject.GetValue(Logical.EPushField.price));
+            ptrs.Add("price", (Trone.price * 100).ToString("0"));
             ptrs.Add("cpparam", _apiOrder.ExtrData);
+            ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
+            ptrs.Add("paycode", _apiOrder.trone_order_id.ToString("100000"));
+            ptrs.Add("ordernum", string.Format("{0:yyyyMM}{1}", _apiOrder.FirstDate, _apiOrder.id));
+
             string qs = UrlEncode(ptrs);
 
 
@@ -107,10 +116,9 @@ namespace n8wan.Public.Logical
             else
                 url = API_PushUrl + "?" + qs;
 
-            asyncSendData(url);
+            asyncSendData(url, null);
 
         }
-
 
 
     }

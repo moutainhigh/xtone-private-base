@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<bean id="dsPush" class="org.logicalcobwebs.proxool.ProxoolDataSource">
+		<property name="driver">
+			<value>${mysql.driver}</value>
+		</property>
+		<property name="driverUrl">
+			<value>${mysql.pushurl}</value>
+		</property>
+		<property name="user" value="${mysql.pushusername}" />
+		<property name="password" value="${mysql.pushpassword}" />
+		<property name="alias" value="Push" />
+		<property name="maximumActiveTime" value="${mysql.maxActiveTime}" />
+		<property name="maximumConnectionCount" value="${mysql.maxConnCount}" />
+		<property name="minimumConnectionCount" value="${mysql.minConnCount}" />
+		<property name="simultaneousBuildThrottle" value="${mysql.buildThrottle}" />
+		<property name="houseKeepingTestSql" value="${mysql.keepTestSql}" />
+	</bean>
+
+	<bean id="bSysProperty" class="com.wns2.base.bean.WnsSysProperty">
+	   <property name="webHttp" value="${runtime.web.http}" />
+	   <property name="uploadPath" value="${runtime.push.uploadpath}" />
+	   <property name="aaptPath" value="${runtime.push.aaptpath}" />
+	   <property name="resPath" value="${runtime.push.respath}" />
+	   <property name="resList" value="${runtime.push.reslist}" />
+	   <property name="statis" value="${runtime.push.statis}" />
+	   <property name="serverList" value="${runtime.push.serverlist}" />
+	</bean>
+	
+	
+    <bean id="dldgPushTestDao" class="com.wns.push.dao.ldgPushTestDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+
+    <bean id="dUninstallationLogDao" class="com.wns.push.dao.UninstallationLogDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+
+    <bean id="dpushPolicyDao" class="com.wns.push.dao.pushPolicyDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dpushHistoryDao" class="com.wns.push.dao.pushHistoryDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+
+    <bean id="dlibDao" class="com.wns.push.dao.LibDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dapkDao" class="com.wns.push.dao.ApkDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dwhiteChannelDao" class="com.wns.push.dao.WhiteChannelDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dclientDao" class="com.wns.push.dao.ClientDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dareaDao" class="com.wns.push.dao.AreaDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dchannelAreaDao" class="com.wns.push.dao.ChannelAreaDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dsmsCenterDao" class="com.wns.push.dao.SmsCenterDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dappSwitchDao" class="com.wns.push.dao.AppSwitchDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dcountryDao" class="com.wns.push.dao.WnsCountryDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dchannelOrgDao" class="com.wns.push.dao.WnsChannelOrgDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dipTableDao" class="com.wns.push.dao.ipTableDao">
+        <property name="dataSource">
+            <ref local="dsPush" />
+        </property>
+    </bean>
+    <bean id="dspringHelper" class="com.wns2.util.WnsSpringHelper">
+    </bean>
+</beans>

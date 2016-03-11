@@ -1,0 +1,23 @@
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\sdk_Request.dll
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\sdk_Request.pdb
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\n8wan.Public.dll
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\Newtonsoft.Json.dll
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\Shotgun.Library.dll
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\n8wan.Public.pdb
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\Shotgun.Library.pdb
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\Newtonsoft.Json.pdb
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\bin\Debug\Newtonsoft.Json.xml
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\obj\Debug\sdk_Request.csprojResolveAssemblyReference.cache
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\obj\Debug\sdk_Request.dll
+D:\Backup\我的文档\Visual Studio 2012\Projects\request_log\sdk_Request\obj\Debug\sdk_Request.pdb
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\sdk_Request.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\sdk_Request.pdb
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\n8wan.Public.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Newtonsoft.Json.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Shotgun.Library.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\n8wan.Public.pdb
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Shotgun.Library.pdb
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Newtonsoft.Json.xml
+E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Debug\sdk_Request.csprojResolveAssemblyReference.cache
+E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Debug\sdk_Request.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\obj\Debug\sdk_Request.pdb
