@@ -14,4 +14,19 @@ public class RecordServer
 	{
 		new RecordDao().updateRecord(model);
 	}
+	
+	public ApiOrderModel getApiOrderById(String month,String id)
+	{
+		return new RecordDao().getApiOrderById(month, id);
+	}
+	
+	public void updateVeryCode(ApiOrderModel model,String tableName)
+	{
+		new RecordDao().updateVeryCode(model,tableName);
+	}
+	
+	public void udpateSecondVisitModel(ApiOrderModel model)
+	{
+		new RecordDao().updateRecord(model);
+	}
 }

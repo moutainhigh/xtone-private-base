@@ -55,8 +55,6 @@ public class ServiceUtil
 
 			conn.connect();
 			
-			System.out.println(postData);
-			
 			if(!StringUtil.isNullOrEmpty(postData))
 			{
 				os = conn.getOutputStream();

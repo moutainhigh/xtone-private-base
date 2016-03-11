@@ -42,7 +42,7 @@ public class TronePayCodeDao
 	
 	public TronePayCodeModel getTronePayCode(int tronePayCodeId)
 	{
-		String sql = "select * from daily_config.tbl_trone_paycode where id = " + tronePayCodeId +" or trone_id = " + tronePayCodeId;
+		String sql = "select * from daily_config.tbl_trone_paycode where trone_id = " + tronePayCodeId;
 		return (TronePayCodeModel)new JdbcControl().query(sql, new QueryCallBack()
 		{
 			@Override

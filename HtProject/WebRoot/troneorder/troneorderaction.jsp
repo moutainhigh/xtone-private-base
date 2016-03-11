@@ -16,6 +16,7 @@
 	float holdAmount = StringUtil.getFloat(request.getParameter("hold_amount"), 0);
 	int holdIsCustom = StringUtil.getInteger(request.getParameter("hold_custom"), 0);
 	String orderNum = StringUtil.getString(request.getParameter("order_num"),"");
+	int holdAccount = StringUtil.getInteger(request.getParameter("hold_account"), 0);
 	
 	String query = StringUtil.getString(request.getParameter("query"), "");
 	
@@ -31,6 +32,7 @@
 	model.setHoldAmount(holdAmount);
 	model.setIsHoldCustom(holdIsCustom);
 	model.setOrderNum(orderNum);
+	model.setHoldAcount(holdAccount);
 	
 	if(id<=0)
 	{

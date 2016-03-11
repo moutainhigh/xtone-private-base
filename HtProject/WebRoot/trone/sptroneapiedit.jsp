@@ -130,7 +130,7 @@
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">Msg</label>
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="2" >
-						<label style="font-size: 14px;float:left">CP透参</label>
+						<label style="font-size: 14px;float:left">SP透参</label>
 						<input type="radio" name="match_field" style="width: 35px;float:left" value="3" >
 						<label style="font-size: 14px;float:left">特殊指令</label>
 					</dd>

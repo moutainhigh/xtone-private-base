@@ -9,6 +9,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import com.system.cache.CacheConfigMgr;
+import com.system.server.TimerServer;
 
 public class LoadCacheServlet implements Servlet
 {
@@ -38,6 +39,7 @@ public class LoadCacheServlet implements Servlet
 	public void init(ServletConfig arg0) throws ServletException
 	{
 		CacheConfigMgr.init();
+		new TimerServer().startRefreshCache();
 	}
 
 	@Override
