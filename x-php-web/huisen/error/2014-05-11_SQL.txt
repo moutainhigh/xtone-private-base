@@ -1,0 +1,363 @@
+错误SQL语句：
+UPDATE cases SET title='荟森数码',type='',tName='移动互联',sign='荟森数码网站开发',introduce='荟森数码拥有国内较早从事手机网游研发、运营、发行的管理团队，凭借敏锐的市场嗅觉，深厚的行业积累享誉业内，所运营的手机游戏覆盖IOS、Android 、Windows phone等主流手机平台，致力于为广大游戏玩家打造丰富精彩的手机游戏运营平台，成为国内领先的手机游戏运营商和发行商。',siteUrl='http://www.128digital.com',orderSort='0',status='1',createTime='2014-05-11 15:00:58'  WHERE id=1
+客户IP:127.0.0.1
+时间 :2014-05-11 15:00:58
+
+错误SQL语句：
+UPDATE cases SET title='荟森数码',type='',tName='移动互联',sign='荟森数码网站开发',introduce='荟森数码拥有国内较早从事手机网游研发、运营、发行的管理团队，凭借敏锐的市场嗅觉，深厚的行业积累享誉业内，所运营的手机游戏覆盖IOS、Android 、Windows phone等主流手机平台，致力于为广大游戏玩家打造丰富精彩的手机游戏运营平台，成为国内领先的手机游戏运营商和发行商。',siteUrl='http://www.128digital.com',orderSort='0',status='1',createTime='2014-05-11 15:02:56'  WHERE id=1
+客户IP:127.0.0.1
+时间 :2014-05-11 15:02:56
+
+错误SQL语句：
+INSERT INTO cases (type,tName,title,icon,imgUrl,introduce,sign,siteUrl,status,createTime) VALUES ('1','网站开发',荟森数码','./uploads/icon/2014051115080383.png','./uploads/showImg/2014051115080419.png|./uploads/showImg/2014051115080441.png','荟森数码拥有国内较早从事手机网游研发、运营、发行的管理团队，凭借敏锐的市场嗅觉，深厚的行业积累享誉业内，所运营的手机游戏覆盖IOS、Android 、Windows phone等主流手机平台，致力于为广大游戏玩家打造丰富精彩的手机游戏运营平台，成为国内领先的手机游戏运营商和发行商。','荟森数码网站开发','http://www.128digital.com','1','2014-05-11 15:08:03')
+客户IP:127.0.0.1
+时间 :2014-05-11 15:08:04
+
+错误SQL语句：
+SELECT * FROM cases   LIMIT 0,
+客户IP:127.0.0.1
+时间 :2014-05-11 15:33:55
+
+错误SQL语句：
+SELECT * FROM cases   LIMIT 0,
+客户IP:127.0.0.1
+时间 :2014-05-11 15:46:41
+
+错误SQL语句：
+SELECT * FROM cases   LIMIT 0,
+客户IP:127.0.0.1
+时间 :2014-05-11 15:47:21
+
+错误SQL语句：
+SELECT * FROM cases   LIMIT 0,
+客户IP:127.0.0.1
+时间 :2014-05-11 15:47:59
+
+错误SQL语句：
+SELECT * FROM cases   LIMIT 0,
+客户IP:127.0.0.1
+时间 :2014-05-11 15:48:43
+
+错误SQL语句：
+SELECT * FROM cases  Where order by id desc  LIMIT 0,20
+客户IP:127.0.0.1
+时间 :2014-05-11 16:03:12
+
+错误SQL语句：
+SELECT * FROM newsType  
+客户IP:127.0.0.1
+时间 :2014-05-11 17:44:20
+
+错误SQL语句：
+SELECT * FROM news  Where  id>0 order by nid desc  LIMIT 0,20
+客户IP:127.0.0.1
+时间 :2014-05-11 17:44:20
+
+错误SQL语句：
+SELECT * FROM news  Where  id>0 order by nid desc  LIMIT 0,20
+客户IP:127.0.0.1
+时间 :2014-05-11 17:46:32
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,createTime) VALUES ('新闻资讯标题','新闻资讯标题','1','新闻','新闻资讯标题新闻资讯标题新闻资讯标题','1','2014-05-11 17:56:47')
+客户IP:127.0.0.1
+时间 :2014-05-11 17:56:47
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,createTime) VALUES ('新闻资讯标题','1','新闻','新闻资讯内容新闻资讯内容新闻资讯内容新闻资讯内容新闻资讯内容','1','2014-05-11 17:58:26')
+客户IP:127.0.0.1
+时间 :2014-05-11 17:58:26
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,ncreateTime) VALUES ('“网游十强”全力搏手游','2','资讯','<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp;&nbsp;智能手机和移动互联网的迅速普及，使手机游戏迎来黄金发展期。近日，国内老牌网游企业巨人网络首次公布了巨人移动2014年手游战略，并宣布十余款手游产品将于年内推出。此次战略发布宣告巨人网络手游布局正式完成。在业界看来，至此，以腾讯、网易、畅游、盛大、巨人等为首的国内“网游十强”已全部进军手游市场，手游正成为国内游戏厂商全力争抢的新战场。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　手机游戏近年来在国内呈现蓬勃发展态势。统计显示，今年第一季度，中国移动网络游戏市场实际销售收入再创历史新高，达到约44.1亿元，环比增长39.9%。有机构预测，2014年中国移动游戏市场规模将达到30亿美元，中国有望在短期内超越美国。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　在国内资本市场，手游概念近年来也屡屡上演“财富神话”，多家上市公司争相宣布巨资并购手游企业，希望通过收购策略来分享手游业务的高成长高收益。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="/js/manage/kindeditor/attached/image/20140511/20140511080452_82633.jpg" alt="" />
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp;&nbsp;
+	<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+		&nbsp; &nbsp; &nbsp;&nbsp;和传统PC网游动辄上亿投资、三四年开发周期相比，手游的崛起为游戏企业提供了新的增长动力，各大游戏巨头也对手游寄予厚望。盛大游戏曾表示，公司未来游戏收入的一半将来自手游。巨人网络总裁纪学锋日前表示，公司的根本在端游，增长在页游，爆发在手游。
+	</p>
+	<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+		　　研究机构IDC预计，未来五年，中国游戏市场将进入稳步发展期，游戏市场销售收入及游戏市场新增用户的增速会逐年放缓，但是手机游戏将成为游戏产业竞争主战场之一。PC游戏企业将持续通过资本运作及资源整合等方式加速布局手机游戏市场，自主研发及代理新品移动游戏产品将不断推陈出新，市场竞争不断加剧。
+	</p>
+</p>','1','2014-05-11 16:06:06')
+客户IP:113.66.5.199
+时间 :2014-05-11 16:06:06
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,ncreateTime) VALUES ('网游十强全力搏手游','2','资讯','<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	&nbsp; &nbsp; &nbsp; &nbsp;智能手机和移动互联网的迅速普及，使手机游戏迎来黄金发展期。近日，国内老牌网游企业巨人网络首次公布了巨人移动2014年手游战略，并宣布十余款手游产品将于年内推出。此次战略发布宣告巨人网络手游布局正式完成。在业界看来，至此，以腾讯、网易、畅游、盛大、巨人等为首的国内网游十强已全部进军手游市场，手游正成为国内游戏厂商全力争抢的新战场。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	<img src="/js/manage/kindeditor/attached/image/20140511/20140511081804_55802.jpg" alt="" />
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　手机游戏近年来在国内呈现蓬勃发展态势。统计显示，今年第一季度，中国移动网络游戏市场实际销售收入再创历史新高，达到约44.1亿元，环比增长39.9%。有机构预测，2014年中国移动游戏市场规模将达到30亿美元，中国有望在短期内超越美国。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　在国内资本市场，手游概念近年来也屡屡上演财富神话，多家上市公司争相宣布巨资并购手游企业，希望通过收购策略来分享手游业务的高成长高收益。
+</p>','1','2014-05-11 16:18:08')
+客户IP:113.66.5.199
+时间 :2014-05-11 16:18:08
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,ncreateTime) VALUES ('“网游十强”全力搏手游','2','资讯','<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	智能手机和移动互联网的迅速普及，使手机游戏迎来黄金发展期。近日，国内老牌网游企业<span><a href="http://stock.finance.sina.com.cn/usstock/quotes/GA.html" target="_blank">巨人网络</a></span><span>(<span>11.72</span>,&nbsp;<span>0.02</span>,&nbsp;<span>0.17%</span>)</span>首次公布了巨人移动2014年手游战略，并宣布十余款手游产品将于年内推出。此次战略发布宣告巨人网络手游布局正式完成。在业界看来，至此，以<span><a href="http://stock.finance.sina.com.cn/hkstock/quotes/00700.html" target="_blank">腾讯</a></span><span>(<span>503.5</span>,&nbsp;<span>24.70</span>,&nbsp;<span>5.16%</span>,&nbsp;<a href="http://stock.finance.sina.com.cn/hkstock/quotes/00700.html" target="_blank">实时行情</a>)</span>、<span><a href="http://stock.finance.sina.com.cn/usstock/quotes/NTES.html" target="_blank">网易</a></span><span>(<span>67.15</span>,&nbsp;<span>-0.48</span>,&nbsp;<span>-0.71%</span>)</span>、<span><a href="http://stock.finance.sina.com.cn/usstock/quotes/CYOU.html" target="_blank">畅游</a></span><span>(<span>25.25</span>,&nbsp;<span>0.16</span>,<span>0.64%</span>)</span>、盛大、巨人等为首的国内“网游十强”已全部进军手游市场，手游正成为国内游戏厂商全力争抢的新战场。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	<img src="/js/manage/kindeditor/attached/image/20140511/20140511082134_56878.jpg" alt="" />
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　手机游戏近年来在国内呈现蓬勃发展态势。统计显示，今年第一季度，中国移动网络游戏市场实际销售收入再创历史新高，达到约44.1亿元，环比增长39.9%。有机构预测，2014年中国移动游戏市场规模将达到30亿美元，中国有望在短期内超越美国。
+</p>
+<p style="font-size:14px;color:#333333;font-family:'Microsoft Yahei', 'Helvetica Neue', 'Luxi Sans', 'DejaVu Sans', Tahoma, 'Hiragino Sans GB', 宋体;background-color:#FFFFFF;">
+	　　在国内资本市场，手游概念近年来也屡屡上演“财富神话”，多家上市公司争相宣布巨资并购手游企业，希望通过收购策略来分享手游业务的高成长高收益。
+</p>','1','2014-05-11 16:21:37')
+客户IP:113.66.5.199
+时间 :2014-05-11 16:21:37
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,ncreateTime) VALUES ('﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%','2','资讯','<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。
+</p>','1','2014-05-11 21:47:35')
+客户IP:112.91.181.28
+时间 :2014-05-11 21:47:35
+
+错误SQL语句：
+INSERT INTO news (ntitle,ntype,ntName,ncontent,nstatus,ncreateTime) VALUES ('﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%','1','新闻','<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。
+</p>','1','2014-05-11 21:48:16')
+客户IP:112.91.181.28
+时间 :2014-05-11 21:48:16
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。
+</p>',nstatus='1',ncreateTime='2014-05-11 21:48:59' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:48:59
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。
+</p>',nstatus='1',ncreateTime='2014-05-11 21:49:25' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:49:25
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<span style="color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。</span>',nstatus='1',ncreateTime='2014-05-11 21:50:05' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:50:05
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<span style="color:#333333;font-family:NSimSun;font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">
+<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。</span>
+</p>
+</span>',nstatus='1',ncreateTime='2014-05-11 21:52:11' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:52:11
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<span style="color:#333333;font-family:NSimSun;font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">
+<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:Microsoft YaHei;">根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:Microsoft YaHei;">报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:Microsoft YaHei;">基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:Microsoft YaHei;">至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:Microsoft YaHei;">不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。</span>
+</p>
+</span>',nstatus='1',ncreateTime='2014-05-11 21:54:21' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:54:21
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<span style="color:#333333;font-family:NSimSun;font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">
+<div style="margin:0px;padding:0px;border:0px;vertical-align:baseline;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img src="http://www.199it.com/wp-content/uploads/2014/05/1031437481.jpg" alt="今年中国手游市场或达30亿美元  明年可超美国" style="width:auto;" />
+</div>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。</span>
+</p>
+</span>',nstatus='1',ncreateTime='2014-05-11 21:55:07' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:55:07
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<span style="color:#333333;font-family:NSimSun;font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。</span>
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<span style="font-family:SimSun;">不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。</span>
+</p>
+</span>',nstatus='1',ncreateTime='2014-05-11 21:55:41' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 21:55:41
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移动游戏市场将在明年实现对美国的超越。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	报告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;color:#333333;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。
+</p>',nstatus='1',ncreateTime='2014-05-11 22:31:50' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 22:31:50
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ Superdata：预计2014年中国手机游戏市场达30亿美元 ARPPU增幅超20%',ntype='2',ntName='资讯',ncontent='<p>
+	<span style="font-family:'Microsoft YaHei';font-size:16px;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="font-family:FangSong_GB2312;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>根据市场研究机构Superdata最新发布的数据，中国移动游戏玩家今年的支出将有望达到30亿美元。若按这种速度发展下去，中国移</strong></span><span style="font-family:FangSong_GB2312;color:#333333;"><strong></strong></span><span style="font-family:FangSong_GB2312;color:#333333;"><strong>动游戏市场将在明年实现对美国的超越。&nbsp;</strong></span></span></span>
+</p>
+<p>
+	<br />
+</p>
+<p>
+	<span style="font-family:'Microsoft YaHei';font-size:16px;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="font-family:FangSong_GB2312;color:#333333;"><strong>报</strong></span></span><span style="line-height:1.5;font-family:FangSong_GB2312;font-size:16px;color:#333333;"><strong>告称，美国的移动游戏市场正在显现饱和迹象。与此同时，自去年以来，中国的付费用户平均收入(ARPPU)以及付费转化率的增幅均超过20%。&nbsp;</strong></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><span style="color:#333333;"></span><br />
+</span>
+</p>
+<p>
+	<span style="line-height:1.5;font-family:'Microsoft YaHei';font-size:16px;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="font-family:FangSong_GB2312;color:#666666;"><strong><span style="color:#333333;">基于这一情况，不少游戏公司欲打入中国市场分得一杯羹，例如微软已经宣布公司旗下家庭游戏主机Xbox One进入中国，主打移动游戏的英国</span><span style="color:#333333;"><span style="color:#333333;"></span><span style="background-color:#000000;color:#333333;"></span></span><span style="color:#333333;">游戏开发商King也与腾讯签订协议，后者将获得《Candy Crush Saga》在华代理权，并将其命名为《糖果传奇》。&nbsp;</span></strong></span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><br />
+</span>
+</p>
+<p>
+	<span style="line-height:1.5;font-family:'Microsoft YaHei';font-size:16px;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="font-family:FangSong_GB2312;color:#333333;"><strong>至于ARPU方面，2014年第一季度，美国移动游戏玩家这一数据将实现同比增长11%，至21.60美元。中国游戏玩家这一数据将实现同比增长21%，至32.46美元。&nbsp;</strong></span></span>
+</p>
+<p>
+	<span style="line-height:1.5;"><br />
+</span>
+</p>
+<p>
+	<span style="line-height:1.5;font-family:'Microsoft YaHei';font-size:16px;"><span style="font-family:FangSong_GB2312;color:#333333;"><strong>&nbsp;&nbsp;&nbsp;&nbsp;</strong></span><span style="font-family:FangSong_GB2312;color:#333333;"><strong>不过，最令美国游戏开发者心痛的是，移动游戏市场的消费增长不大，但市场推广成本却上涨了37%，这也导致盈利水平进一步拉低。相比美国，中国的游戏市场推广成本虽然持续增长，但目前总体合理，其远远低于每户平均收入(ARPU)，这也意味着在中国运营移动游戏产业的压力较小。</strong></span></span>
+</p>',nstatus='1',ncreateTime='2014-05-11 22:34:53' WHERE nid=8
+客户IP:112.91.181.28
+时间 :2014-05-11 22:34:53
+

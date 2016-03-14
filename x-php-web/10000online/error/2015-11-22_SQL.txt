@@ -1,0 +1,2465 @@
+数据库不可用：
+
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:50
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:189.15.219.10
+时间 :2015-11-22 00:04:52
+
+数据库不可用：
+
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:46
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:181.130.81.63
+时间 :2015-11-22 00:08:48
+
+数据库不可用：
+
+客户IP:62.210.148.246
+时间 :2015-11-22 00:12:47
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  and id>0 order by id desc  LIMIT 0,12
+客户IP:62.210.148.246
+时间 :2015-11-22 00:12:52
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:62.210.148.246
+时间 :2015-11-22 00:12:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:62.210.148.246
+时间 :2015-11-22 00:12:52
+
+数据库不可用：
+
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:02
+
+错误SQL语句：
+SELECT * FROM news  Where nid='37'
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:04
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:04
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'37' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:04
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'37' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:04
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.65.103
+时间 :2015-11-22 00:29:04
+
+数据库不可用：
+
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:11
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:207.46.13.120
+时间 :2015-11-22 01:12:13
+
+数据库不可用：
+
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:54
+
+错误SQL语句：
+SELECT * FROM news  Where nid='42'
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:56
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:56
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'42' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:56
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'42' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:56
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.73.184
+时间 :2015-11-22 01:14:56
+
+数据库不可用：
+
+客户IP:220.181.108.157
+时间 :2015-11-22 01:50:30
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  AND gType='7' and id>0 order by id desc  LIMIT 0,12
+客户IP:220.181.108.157
+时间 :2015-11-22 01:50:35
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:220.181.108.157
+时间 :2015-11-22 01:50:35
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:220.181.108.157
+时间 :2015-11-22 01:50:35
+
+数据库不可用：
+
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:163.172.7.229
+时间 :2015-11-22 02:53:54
+
+数据库不可用：
+
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:40
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.5
+时间 :2015-11-22 02:57:42
+
+数据库不可用：
+
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:26
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.32
+时间 :2015-11-22 02:58:28
+
+数据库不可用：
+
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:21
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:23
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:23
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:23
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:23
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.73.192
+时间 :2015-11-22 03:43:23
+
+数据库不可用：
+
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:21
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:23
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:23
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:23
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:23
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.73.184
+时间 :2015-11-22 03:49:23
+
+数据库不可用：
+
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:08
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.14
+时间 :2015-11-22 03:57:10
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:41
+
+错误SQL语句：
+SELECT * FROM news  Where nid='26'
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:43
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:43
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'26' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:43
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'26' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:43
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 04:03:43
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:32
+
+错误SQL语句：
+SELECT * FROM news  Where nid='22'
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:34
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:34
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'22' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:34
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'22' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:34
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 04:18:34
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:23
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:25
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:25
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:25
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:25
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 05:06:25
+
+数据库不可用：
+
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:32
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:35
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:35
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:35
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:35
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.187
+时间 :2015-11-22 05:15:35
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 06:00:55
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 06:00:57
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:151.80.31.119
+时间 :2015-11-22 06:00:57
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='10'
+客户IP:151.80.31.119
+时间 :2015-11-22 06:00:57
+
+数据库不可用：
+
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:19
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:66.249.79.98
+时间 :2015-11-22 07:33:21
+
+数据库不可用：
+
+客户IP:220.181.108.78
+时间 :2015-11-22 07:56:27
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:220.181.108.78
+时间 :2015-11-22 07:56:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:220.181.108.78
+时间 :2015-11-22 07:56:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='30'
+客户IP:220.181.108.78
+时间 :2015-11-22 07:56:30
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:13
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:15
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:15
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:15
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:15
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 07:59:15
+
+数据库不可用：
+
+客户IP:66.249.79.187
+时间 :2015-11-22 08:02:29
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where  status=1 and id>0 order by id desc  LIMIT 0,5
+客户IP:66.249.79.187
+时间 :2015-11-22 08:02:33
+
+数据库不可用：
+
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:41
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:187.65.63.94
+时间 :2015-11-22 08:05:43
+
+数据库不可用：
+
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:37
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:39
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:39
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:39
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:201.33.197.233
+时间 :2015-11-22 08:54:40
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 09:33:27
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  AND gType='12' and id>0 order by id desc  LIMIT 0,12
+客户IP:151.80.31.119
+时间 :2015-11-22 09:33:31
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:151.80.31.119
+时间 :2015-11-22 09:33:31
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:151.80.31.119
+时间 :2015-11-22 09:33:31
+
+数据库不可用：
+
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:46
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.140
+时间 :2015-11-22 10:18:48
+
+数据库不可用：
+
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:44
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.154
+时间 :2015-11-22 10:20:46
+
+数据库不可用：
+
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.27
+时间 :2015-11-22 10:52:32
+
+数据库不可用：
+
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:32
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.24
+时间 :2015-11-22 10:53:33
+
+数据库不可用：
+
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:15
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  AND gType='10' and id>0 order by id desc  LIMIT 0,12
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:19
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:19
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:19
+
+数据库不可用：
+
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:26
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  AND gType='8' and id>0 order by id desc  LIMIT 0,12
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:30
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:30
+
+数据库不可用：
+
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:34
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:36
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:36
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:36
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:36
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:69.30.234.2
+时间 :2015-11-22 11:38:36
+
+数据库不可用：
+
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:50
+
+错误SQL语句：
+SELECT * FROM news  Where nid='69'
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:52
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:52
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'69' and nstatus=1 order by nid desc limit 1
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:52
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'69' and nstatus=1 order by nid asc limit 1
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:220.181.108.148
+时间 :2015-11-22 11:41:52
+
+数据库不可用：
+
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:30
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:32
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.30
+时间 :2015-11-22 11:58:33
+
+数据库不可用：
+
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:32
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.28
+时间 :2015-11-22 11:59:34
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:46
+
+错误SQL语句：
+SELECT * FROM news  Where nid='73'
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:48
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:48
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'73' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:48
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'73' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:48
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 12:15:48
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:03
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:05
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:05
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:05
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:05
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 12:50:05
+
+数据库不可用：
+
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:26
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:123.125.71.109
+时间 :2015-11-22 13:03:28
+
+数据库不可用：
+
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:25
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:27
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:28
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:40.77.167.48
+时间 :2015-11-22 13:27:28
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:14
+
+错误SQL语句：
+SELECT * FROM news  Where nid='9'
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:16
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:16
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'9' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:16
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'9' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:16
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 13:45:16
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:42
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:44
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:44
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:44
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:44
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 14:50:44
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 14:54:08
+
+数据库不可用：
+
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:10
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:12
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:12
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:12
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:12
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.187
+时间 :2015-11-22 15:00:12
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:33
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:35
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:35
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:35
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:35
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 16:16:35
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 16:26:00
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 16:26:02
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:151.80.31.119
+时间 :2015-11-22 16:26:02
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='22'
+客户IP:151.80.31.119
+时间 :2015-11-22 16:26:02
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:02
+
+错误SQL语句：
+SELECT * FROM news  Where nid='45'
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:04
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:04
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'45' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:04
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'45' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:04
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 16:47:04
+
+数据库不可用：
+
+客户IP:68.180.229.221
+时间 :2015-11-22 17:59:48
+
+错误SQL语句：
+SELECT * FROM games  Where  status=1  AND gType='4' and id>0 order by id desc  LIMIT 0,12
+客户IP:68.180.229.221
+时间 :2015-11-22 17:59:52
+
+错误SQL语句：
+SELECT * FROM gType  Where gt_status=1 
+客户IP:68.180.229.221
+时间 :2015-11-22 17:59:52
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by id desc  LIMIT 3
+客户IP:68.180.229.221
+时间 :2015-11-22 17:59:52
+
+数据库不可用：
+
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:24
+
+错误SQL语句：
+SELECT * FROM news  Where nid='31'
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:26
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:26
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'31' and nstatus=1 order by nid desc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:26
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'31' and nstatus=1 order by nid asc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:26
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:42.156.138.69
+时间 :2015-11-22 18:07:26
+
+数据库不可用：
+
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:57
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:42.120.160.69
+时间 :2015-11-22 18:45:59
+
+数据库不可用：
+
+客户IP:42.156.138.69
+时间 :2015-11-22 18:46:01
+
+数据库不可用：
+
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:03
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:42.156.138.69
+时间 :2015-11-22 18:46:03
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:42.156.138.69
+时间 :2015-11-22 18:46:03
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='28'
+客户IP:42.156.138.69
+时间 :2015-11-22 18:46:03
+
+错误SQL语句：
+SELECT * FROM news  Where nid='76'
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:05
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:05
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'76' and nstatus=1 order by nid desc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:05
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'76' and nstatus=1 order by nid asc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:05
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:42.156.137.69
+时间 :2015-11-22 18:46:05
+
+数据库不可用：
+
+客户IP:42.120.161.69
+时间 :2015-11-22 18:46:17
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:42.120.161.69
+时间 :2015-11-22 18:46:19
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:42.120.161.69
+时间 :2015-11-22 18:46:19
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='64'
+客户IP:42.120.161.69
+时间 :2015-11-22 18:46:19
+
+数据库不可用：
+
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:29
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:183.60.243.240
+时间 :2015-11-22 18:56:31
+
+数据库不可用：
+
+客户IP:66.249.79.180
+时间 :2015-11-22 19:03:58
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.79.180
+时间 :2015-11-22 19:04:00
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.180
+时间 :2015-11-22 19:04:00
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 19:04:00
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.180
+时间 :2015-11-22 19:04:00
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.180
+时间 :2015-11-22 19:04:00
+
+数据库不可用：
+
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:57
+
+错误SQL语句：
+SELECT * FROM news  Where nid='78'
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:59
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:59
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'78' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:59
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'78' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:59
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.79.187
+时间 :2015-11-22 19:06:59
+
+数据库不可用：
+
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:23
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.25
+时间 :2015-11-22 19:53:25
+
+数据库不可用：
+
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:10
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by orderSort,id desc  LIMIT 6
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isHome=1 order by orderSort,id desc  LIMIT 3
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 and ntype=3 order by nid desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 and isBanner=1 order by orderSort desc  LIMIT 5
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM JoinUs  Where status=1 order by id desc  LIMIT 5
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=5 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=4 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=7 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=8 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=10 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+错误SQL语句：
+SELECT * FROM games  Where gType=12 and status=1 order by orderSort,id desc  LIMIT 7
+客户IP:180.76.15.135
+时间 :2015-11-22 19:54:12
+
+数据库不可用：
+
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:05
+
+错误SQL语句：
+SELECT * FROM news  Where nid='60'
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:07
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:07
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'60' and nstatus=1 order by nid desc limit 1
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:07
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'60' and nstatus=1 order by nid asc limit 1
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:07
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:111.206.36.133
+时间 :2015-11-22 20:09:07
+
+数据库不可用：
+
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:18
+
+错误SQL语句：
+SELECT * FROM news  Where nid='63'
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:20
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:20
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'63' and nstatus=1 order by nid desc limit 1
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:20
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'63' and nstatus=1 order by nid asc limit 1
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:20
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:220.181.108.84
+时间 :2015-11-22 22:09:20
+
+数据库不可用：
+
+客户IP:151.80.31.119
+时间 :2015-11-22 22:54:29
+
+错误SQL语句：
+SELECT nid,ntitle,ntName,ncreateTime FROM news  Where nstatus=1 order by nid desc  LIMIT 6
+客户IP:151.80.31.119
+时间 :2015-11-22 22:54:31
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 3
+客户IP:151.80.31.119
+时间 :2015-11-22 22:54:31
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 AND id='35'
+客户IP:151.80.31.119
+时间 :2015-11-22 22:54:31
+
+数据库不可用：
+
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:04
+
+错误SQL语句：
+SELECT * FROM news  Where nid='60'
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:06
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:06
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'60' and nstatus=1 order by nid desc limit 1
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:06
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'60' and nstatus=1 order by nid asc limit 1
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:06
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:111.206.36.133
+时间 :2015-11-22 23:13:06
+
+数据库不可用：
+
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:19
+
+错误SQL语句：
+SELECT * FROM news  Where nid='74'
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:21
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:21
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'74' and nstatus=1 order by nid desc limit 1
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:21
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'74' and nstatus=1 order by nid asc limit 1
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:21
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:66.249.67.191
+时间 :2015-11-22 23:59:21
+
