@@ -112,7 +112,7 @@ public Long getId() {
 
   @Override
   public void run() {
-    setId(GenerateIdService.getInstance().generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id")), "clicks", 1));
+    setId(GenerateIdService.getInstance().generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1));
     if(this.id > 0){
       PreparedStatement ps = null;
       Connection con = null;

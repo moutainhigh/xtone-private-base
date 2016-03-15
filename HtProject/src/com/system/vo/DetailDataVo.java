@@ -2,6 +2,7 @@ package com.system.vo;
 
 public class DetailDataVo
 {
+	private int id;
 	private String imei;
 	private String imsi;
 	private String mobile;
@@ -13,6 +14,33 @@ public class DetailDataVo
 	private String cpName;
 	private int synFlag;
 	private String createDate;
+	private String order;
+	private String troneNum;
+	
+	public int getId()
+	{
+		return id;
+	}
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	public String getOrder()
+	{
+		return order;
+	}
+	public void setOrder(String order)
+	{
+		this.order = order;
+	}
+	public String getTroneNum()
+	{
+		return troneNum;
+	}
+	public void setTroneNum(String troneNum)
+	{
+		this.troneNum = troneNum;
+	}
 	
 	public String getImei()
 	{

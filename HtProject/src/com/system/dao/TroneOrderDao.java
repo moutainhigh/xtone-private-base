@@ -89,6 +89,7 @@ public class TroneOrderDao
 					model.setHoldPercent(rs.getInt("hold_percent"));
 					model.setTroneName(StringUtil.getString(rs.getString("trone_name"), ""));
 					model.setPrice(rs.getFloat("price"));
+					model.setHoldAcount(rs.getInt("hold_start"));
 					
 					list.add(model);
 				}
@@ -134,6 +135,7 @@ public class TroneOrderDao
 					model.setHoldPercent(rs.getInt("hold_percent"));
 					model.setTroneName(StringUtil.getString(rs.getString("trone_name"), ""));
 					model.setPrice(rs.getFloat("price"));
+					model.setHoldAcount(rs.getInt("hold_start"));
 					
 					list.add(model);
 				}
@@ -261,7 +263,7 @@ public class TroneOrderDao
 					model.setIsHoldCustom(rs.getInt("hold_is_Custom"));
 					model.setSpTroneId(rs.getInt("sp_trone_id"));
 					model.setPrice(rs.getFloat("price"));
-					
+					model.setHoldAcount(rs.getInt("hold_start"));
 					list.add(model);
 				}
 				return list;
@@ -308,6 +310,7 @@ public class TroneOrderDao
 					model.setHoldAmount(rs.getFloat("hold_amount"));
 					model.setIsHoldCustom(rs.getInt("hold_is_Custom"));
 					model.setSpTroneId(rs.getInt("sp_trone_id"));
+					model.setHoldAcount(rs.getInt("hold_start"));
 					
 					return model;
 				}
@@ -319,12 +322,13 @@ public class TroneOrderDao
 	public boolean addTroneOrder(TroneOrderModel model)
 	{
 		
-		String sql = "insert into daily_config.tbl_trone_order(trone_id,order_num,cp_id,order_trone_name,is_dynamic,push_url_id,disable,is_unknow,hold_percent,hold_amount,hold_is_custom) values(" + model.getTroneId() + ",'"
+		String sql = "insert into daily_config.tbl_trone_order(trone_id,order_num,cp_id,order_trone_name,is_dynamic,push_url_id,disable,is_unknow,hold_percent,hold_amount,hold_is_custom,hold_start) values(" + model.getTroneId() + ",'"
 				+ model.getOrderNum() + "'," + model.getCpId() + ",'"
 				+ model.getOrderTroneName() + "'," + model.getDynamic() + ","
 				+ model.getPushUrlId() + "," + model.getDisable() + ","
 				+ model.getIsUnKnow() + "," + model.getHoldPercent() + ","
-				+ model.getHoldAmount() + "," + model.getIsHoldCustom() + ")";
+				+ model.getHoldAmount() + "," + model.getIsHoldCustom() + ","
+				+ model.getHoldAcount() + ")";
 
 		return new JdbcControl().execute(sql);
 		
@@ -339,7 +343,7 @@ public class TroneOrderDao
 				+ model.getPushUrlId() + ",disable=" + model.getDisable()
 				+ ",is_unknow=" + model.getIsUnKnow() + ",hold_percent="
 				+ model.getHoldPercent() + ",hold_amount=" + model.getHoldAmount() + ",hold_is_custom="
-				+ model.getIsHoldCustom() + " where id = " + model.getId();
+				+ model.getIsHoldCustom() + ",hold_start = " + model.getHoldAcount() + " where id = " + model.getId();
 		
 		return new JdbcControl().execute(sql);
 	}
@@ -348,7 +352,7 @@ public class TroneOrderDao
 	@SuppressWarnings("unchecked")
 	public List<TroneOrderModel> loadTroneOrderListByCpSpTroneId(int cpId,int spTroneId,int status)
 	{
-		String sql = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price,d.status,d.name sp_trone_name from daily_config.tbl_trone_order a "
+		String sql = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price,d.status,d.name sp_trone_name,d.provinces  from daily_config.tbl_trone_order a "
 				+ " left join daily_config.tbl_cp b on a.cp_id = b.id "
 				+ " left join daily_config.tbl_trone c on a.trone_id = c.id "
 				+ " LEFT JOIN daily_config.`tbl_sp_trone` d ON c.`sp_trone_id` = d.id "
@@ -394,6 +398,8 @@ public class TroneOrderDao
 					model.setSpTroneName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
 					model.setPrice(rs.getFloat("price"));
 					model.setSpTroneStatus(rs.getInt("status"));
+					model.setHoldAcount(rs.getInt("hold_start"));
+					model.setProvince(StringUtil.getString(rs.getString("provinces"), ""));
 					
 					list.add(model);
 				}

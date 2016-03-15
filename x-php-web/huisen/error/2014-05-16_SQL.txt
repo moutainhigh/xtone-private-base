@@ -1,0 +1,5 @@
+错误SQL语句：
+INSERT INTO cases (type,tName,title,icon,imgUrl,introduce,sign,siteUrl,status,createTime) VALUES ('5','电商运营','猫人官方旗舰店','./uploads/icon/2014051611583871.png','./uploads/showImg/2014051611583825.jpg|./uploads/showImg/2014051611583822.jpg|./uploads/showImg/201405161158387.jpg','猫人（国际）香港股份有限公司成立于1998年，经过十多年的裂变式发展，目前已成长为一个成熟的专注于研发、生产及销售性感时尚内衣的现代化大型品牌运营集团。'猫人' 作为中国时尚内衣的领导品牌，以雄厚的品牌实力与广泛的品牌美誉度成就品牌价值逾30亿元。公司旗下现有"Miiow Classic"、"Miiow Secret"、"Miiow Sexyzone"、"Miiow Kids"、"Miiow Sparkpie"等多个子品牌，分别面向不同层次的目标消费人群。','猫人官方旗舰店的电商运营案例','http://maorenwh.tmall.com/shop/view_shop.htm','1','2014-05-16 11:58:38')
+客户IP:113.66.113.121
+时间 :2014-05-16 11:58:38
+

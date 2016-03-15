@@ -1,0 +1,10 @@
+错误SQL语句：
+UPDATE product SET showImg=./uploads/showImg/2014032300383456.jpg WHERE proId=3
+客户IP:127.0.0.1
+时间 :2014-03-23 13:09:51
+
+错误SQL语句：
+UPDATE product SET showImg=./uploads/showImg/2014032300383456.jpg WHERE proId=3
+客户IP:127.0.0.1
+时间 :2014-03-23 13:11:07
+

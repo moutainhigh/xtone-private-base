@@ -45,7 +45,7 @@ public class thirdpayCountServlet extends HttpServlet {
 		//	doRedirct(request, response);
 		String xx_notifyData = request.getParameter("xx_notifyData");
 		
-		logger.info(xx_notifyData); //打印自定义的传值 如appkey
+	//	logger.info(xx_notifyData); //打印自定义的传值 如appkey
 		
 		response.getWriter().append("success");
 		
@@ -94,12 +94,12 @@ public class thirdpayCountServlet extends HttpServlet {
 			String key = entry.getKey();
 			String []value = map.get(key);
 			
-//			System.out.println(key);
-			logger.info(key);
+			System.out.println("key="+key);
+//			logger.info(key);
 			
 			for (int i = 0; i < value.length; i++) {
-//				System.out.println(value[i]);
-				logger.info(value[i]);
+				System.out.println(value[i]);
+//				logger.info(value[i]);
 				
 			}
 			

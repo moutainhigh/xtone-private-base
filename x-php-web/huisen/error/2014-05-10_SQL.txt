@@ -1,0 +1,20 @@
+数据库不可用：
+
+客户IP:127.0.0.1
+时间 :2014-05-10 13:35:09
+
+错误SQL语句：
+INSERT INTO cases (pTypeId,title,icon,imgUrl,introduce,status,createTime) VALUES ('','荟森数码','./uploads/icon/2014051020432933.png','./uploads/showImg/2014051020432926.png|./uploads/showImg/2014051020432919.png','荟森数码拥有国内较早从事手机网游研发、运营、发行的管理团队，凭借敏锐的市场嗅觉，深厚的行业积累享誉业内，所运营的手机游戏覆盖IOS、Android 、Windows phone等主流手机平台，致力于为广大游戏玩家打造丰富精彩的手机游戏运营平台，成为国内领先的手机游戏运营商和发行商。','1','2014-05-10 20:43:29')
+客户IP:127.0.0.1
+时间 :2014-05-10 20:43:29
+
+错误SQL语句：
+SELECT * FROM case  Where id=1
+客户IP:127.0.0.1
+时间 :2014-05-10 21:57:15
+
+错误SQL语句：
+SELECT * FROM case  Where id='1'
+客户IP:127.0.0.1
+时间 :2014-05-10 21:58:14
+

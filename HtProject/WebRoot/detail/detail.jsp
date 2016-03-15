@@ -20,6 +20,8 @@
 	
 	List<DetailDataVo> list = null;
 	
+	String unMatchKeys = "";
+	
 	if(!StringUtil.isNullOrEmpty(keyWord))
 	{
 		String[] keys = keyWord.split("\r\n");
@@ -31,14 +33,42 @@
 			data += "'" + key + "',";
 		}
 		
+		unMatchKeys = data;
+		
 		data = data.substring(0,data.length()-1);
 		
 		if(keys.length<=100)
 			list = new MrDetailServer().loadDetailDataByPhoneMsg(data, month,chkType);
+		
+		System.out.println(unMatchKeys);
+		
+		for(DetailDataVo vo : list)
+		{
+			if(chkType==1)
+			{
+				unMatchKeys = unMatchKeys.replaceAll("'" + vo.getMobile() + "'" + ",", "");
+			}
+			else if(chkType==2)
+			{
+				unMatchKeys = unMatchKeys.replaceAll("'" + vo.getImei() + "'" + ",", "");
+			}
+			else if(chkType==3)
+			{
+				unMatchKeys = unMatchKeys.replaceAll("'" + vo.getImsi() + "'" + ",", "");
+			}
+		}
+		
+		if(!StringUtil.isNullOrEmpty(unMatchKeys))
+		{
+			unMatchKeys = unMatchKeys.replace("'", "");
+			unMatchKeys = unMatchKeys.substring(0,unMatchKeys.length()-1);
+		}
 	}
 	
 	if(list==null)
 		list = new ArrayList<DetailDataVo>();
+	
+	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -83,6 +113,7 @@
 				</dl>
 			</form>
 		</div>
+		<%= StringUtil.isNullOrEmpty(unMatchKeys) ? "" : "未匹配关键字：" + unMatchKeys %>
 		<table cellpadding="0" cellspacing="0">
 			<thead>
 				<tr>
@@ -98,7 +129,6 @@
 					<td>价格</td>
 					<td>CP</td>
 					<td>同步</td>
-					
 				</tr>
 			</thead>
 			<tbody>		

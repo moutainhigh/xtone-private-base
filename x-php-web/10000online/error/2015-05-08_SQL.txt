@@ -1,0 +1,5 @@
+错误SQL语句：
+INSERT INTO games (gTitle,gClass,gType,typename,downloadCount,apkSize,provider,introduce,orderSort,isBanner,isHome,status,icon,bigBannerUrl,apkLink,screenshot,createTime) VALUES ('阿狸农场','2','7','养成类','0','60.6M','','阿狸农场是一款模拟经营类手游，阿狸农场以国内着名动漫角色阿狸为主角，其独创的经营玩法，让玩家在虚拟与现实间穿越，收获双重游戏体验；游戏中玩家将与阿狸全程互动，种植收获，驯养动物，烹饪美味，与其他玩家进行社交贸易，逐步成长为大农场主，建造属于自己的梦之城堡！','0','0','0','1','resources/uploadlogo/2015050811250185.jpg','','http://gproxy1.sm.cn/t/10/26/nc-209-1.3.2-UC-71-3.5.3.1-20150402125427945-X_1717370_1724379f41bb.apk?cc=3420842237&vh=eaa017bd6dd8c8fcd216b457cde7a873&sf=63523161','resources/uploadimg/2015050811250169.jpg|resources/uploadimg/2015050811250163.jpg|resources/uploadimg/2015050811250186.jpg|resources/uploadimg/2015050811250121.jpg|resources/uploadimg/2015050811250112.jpg','2015-05-08 11:25:01')
+客户IP:116.21.203.52
+时间 :2015-05-08 11:25:01
+

@@ -5,6 +5,7 @@ import net.sf.json.JSONObject;
 public class BaseResponseModel
 {
 	private int status;
+	private String orderNum;
 	private JSONObject resultJson;
 	
 	public int getStatus()
@@ -22,6 +23,14 @@ public class BaseResponseModel
 	public void setResultJson(JSONObject resultJson)
 	{
 		this.resultJson = resultJson;
+	}
+	public String getOrderNum()
+	{
+		return orderNum;
+	}
+	public void setOrderNum(String orderNum)
+	{
+		this.orderNum = orderNum;
 	}
 	
 }

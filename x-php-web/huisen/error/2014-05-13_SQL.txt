@@ -1,0 +1,119 @@
+错误SQL语句：
+UPDATE news SET ntitle='MO9张臣：从改变移动游戏支付方式提升用户付费',ntype='2',ntName='资讯',ncontent='<span style="font-family:FangSong_GB2312;font-size:16px;color:#000000;"><span style="color:#000000;font-size:18px;">&nbsp; &nbsp; &lt;font style='font-family:黑体'&gt;</span><span style="color:#000000;font-size:18px;">DoNews游戏5月6日消息（见习记者 赵玥）MO9的联合创始人张臣在GMIC的GGS全球移动游戏上发表了“支付助力移动游戏新突破”的主题演讲。张臣在演讲中，从移动游戏支付的重要性、所遇瓶颈及解决方法三方面分享了自己的观点。&lt;/font&gt;</span></span><br />
+<span style="font-size:18px;"></span><br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">以下是张臣的演讲实录及DoNews归纳的概要：</span><br />
+<span style="color:#000000;font-size:18px;"></span><br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">从三方面分享移动游戏的支付问题</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;大家下午好，上午和很多嘉宾做了很多分享，大多从游戏的运营以及游戏的研发以及广告平台的角度看待移动游戏的发展。今天我想从另外一个角度，从支付的角度和大家分享一下我们对于移动游戏行业发展的看法。对于这个主题，我今天想从三个角度去解释一下这个主题，第一块，我想强调一下，在移动游戏当中支付的重要性，这块在之前很多的论坛都和朋友们交流，都做过强调，但是还是有很多的游戏开发商和运营商在这方面还是没有得到足够的重视。第二块，在移动游戏支付方面遇到了什么样的瓶颈，这块的问题今天也会在主题当中和大家分享一下。第三块，怎么样解决这些问题，帮助移动游戏能够更好的把流量变现。说到移动游戏的发展，其实我们看到有很多非常出色的游戏，他们在研发，在运营方面都取得了非常好的成功，但是往往在临门一角，支付环节的时候不是足够重视，导致了他的付费转化率等等，流量变现的地方遇到了一些瓶颈，其实支付这个环节在整个移动游戏行业看似好像不属于行业，但是对于移动游戏行业来说尤得显得重要。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">移动游戏支付的重要性：可将活跃和注册用户转化为付费用户</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;我们看到整个游戏的发展，端游也好，页游也好，今天发展的手游这个行业，大家知道在PC平台有非常多的支付方式，包括人们在支付的过程当中也可以提供非常便捷的方式完成支付，把你的活跃用户或者注册用户转为付费用户，但是在移动游戏端和PC端可能有非常大的区别，因为移动的终端只有这么大的终端，不能够满足所有的支付渠道都放在移动终端上面，在这种情况下面，可能有大量的付费的游戏用户被我们的游戏运营商或者开发商挡在了门外，是因为支付瓶颈的问题。我们可以看到，举一些简单的例子，一款手机游戏，这个游戏当中提供了比较主流的，比如说第三方支付，网银支付甚至是一些话费卡充值，这样一些方式，但是我们有没有考虑过，一个人比较喜欢网银，插USB网银的支付方式，手机没有USB口怎么插，能说这些人没有游戏付费冲动的需求吗？怎么样快速有效的转化需求，可能是我们在手机游戏这块更加需要重视和注意支付的问题。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">移动游戏支付的瓶颈：支付体验差导致用户付费冲动流失</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;强调完在手游这方面的重要性，我接下来讲一下在手游端支付这块遇到了什么样的瓶颈，说到手游端支付瓶颈，我们要来谈一下，作为手游的开发商或者运营商，我们在支付有哪些需求和关注点，我相信做每个手游开发和运营的团队，非常关心转化率怎么样，这是他们非常看重的指标，不管游戏做得多成功，流量也好，游戏活跃用户也好，都希望转成付费用户变成现金。从目前的支付方式来看，大部分的支付方式都是从传统的PC端移植到手机端，本身不是手机上原生态的支付方式，有各种各样的优化提高这样的付费转化率，但是这个转化率并不是说没有提升的空间，其实如果基于手机或者游戏端，更加好的捕捉付费用户的付费需求，我们是完全有可能进一步提高我们的付费用户的转化率。如果说一个好的支付方式有好的付费转化率，我们又要关心一个问题，我们的支付渠道成本是不是合理，如果我的转化率非常好，我的支付渠道的成本又非常高，我们利润非常好，因为支付环节承担了这么多的支付渠道成本，在行业里面也是不完全合理的一件事情。除了支付渠道的一些手续费之后，应该承担起风险控制和坏账的成本的作用，因为毕竟的专业事情交给专业的行业团队去做，游戏公司把它的研发产品运营做好，把所谓风险控制和支付领域的这块一些专业性工作交给支付公司去做，我觉得这个可能是行业内大家在移动互联发展下一起掘金的比较好的方式。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">问题的解决方法：通过新的支付方式提高用户支付体验</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;这是手机游戏比较关心的问题，这块跟大家交流一下这块的内容，付费转化率，大家说做手游用户体验，做支付也一样，我们也会看支付体验这个概念，说到支付体验，我们很多时候有PC端，包括移动端，很多的支付方式，无一例外会发现，移动端之后，哪怕多一个环节的信息输入，都会让我们游戏付费用户冲动消费的捕捉就会降低，我们看到银行卡和身份证，每增加一个信息的输入都会降低我们的转化率。对于我们来说，可能更多的就是希望在前端能够把支付体验做到更便捷。MO9来看一下，如果点了MO9，先玩后付的方式就是跳转出来的页面，游戏SDK或者API对接里面，新用户收入到手机号，就可以完成支付了，这个是MO9给它的，把用户冲动消费捕捉进来了，极大的提高手游付费转化率的问题。很多商户关心我们的收费问题，其实对于一种预先给予先玩后付，收取10%，最重要的月消费额度是无穷的，消费当中提升他的额度。在这里强调一点，如果用户用不完怎么办，对于MO9来说承担坏账的控制，帮手游运营商开发商承担他们对风险控制的问题，这也是为什么收取10%的原因。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">我们在后端做了大量的风险控制跟信用评级的工作，帮助我们的用户ARPU值不断提升。我介绍一下MO9合作历程，91平台、360、UC都在使用MO9先玩后付的方式。我们跟很多支付方式都有这样的合作，不仅在CP，移动支付不仅仅在手机上玩儿，可以在线上、线下、PC、平板电脑端，都称之为移动支付，一个手机号加上你的PIN码，都叫做移动支付，已经跟你的手机号绑定了，输入PIN码就可以完成支付。我们有差不多500万的用户，这个用户非常迅速的提升，我们希望这样的付费用户能够为手游行业带来更多的付费转化率和交易额的提升。这里分享两个数据，第一个是给我们的反馈信息，3%的手游拉到5%，另外一款月流水能提升它的20%到30%的增量，而这个增量是完全被之前挡在门外的付费用户帮他们给抓进来，这块都是流水的提升。这些也是来自客户的声音，因为时间关系，今天内容分享到此，非常希望MO9在移动互联发展大潮下和我们这些手游的同行同仁们一起成长为大家在手游行业掘金，助上我们一把力，最后祝大家都能够在手游行业当中取得更大的发展。谢谢！（完）</span><br />',nstatus='1',ncreateTime='2014-05-13 00:00:58' WHERE nid=9
+客户IP:112.91.181.28
+时间 :2014-05-13 00:00:58
+
+错误SQL语句：
+UPDATE news SET ntitle='MO9张臣：从改变移动游戏支付方式提升用户付费',ntype='2',ntName='资讯',ncontent='<p>
+	<span style="font-family:FangSong_GB2312;font-size:16px;color:#000000;"><span style="color:#000000;font-size:18px;">&nbsp; &nbsp; <span style="font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';font-size:16px;line-height:31.200000762939453px;background-color:#FFFFFF;">近日，手机游戏下载平台当乐网对外发布了一份当乐社区用户的调研报告，从多维度对10年来手机游戏用户的行为习惯进行了摸底。从数据来看，当乐在玩家游戏频度、消费水平、游戏类型等方面已成为中重度用户的高密度聚集地，是中重度手游产品研发、发行企业最理想的合作伙伴。</span></span></span>
+</p>
+<p>
+	<span style="font-family:FangSong_GB2312;font-size:16px;color:#000000;"><span style="color:#000000;font-size:18px;"><br />
+</span></span>
+</p>
+<p>
+	<span style="font-family:FangSong_GB2312;font-size:16px;color:#000000;"><span style="color:#000000;font-size:18px;">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#000000;font-size:18px;">DoNews游戏5月6日消息（见习记者 赵玥）MO9的联合创始人张臣在GMIC的GGS全球移动游戏上发表了“支付助力移动游戏新突破”的主题演讲。张臣在演讲中，从移动游戏支付的重要性、所遇瓶颈及解决方法三方面分享了自己的观点。</span></span>
+</p>
+<span style="font-size:18px;"></span><br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">以下是张臣的演讲实录及DoNews归纳的概要：</span><br />
+<span style="color:#000000;font-size:18px;"></span><br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">从三方面分享移动游戏的支付问题</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;大家下午好，上午和很多嘉宾做了很多分享，大多从游戏的运营以及游戏的研发以及广告平台的角度看待移动游戏的发展。今天我想从另外一个角度，从支付的角度和大家分享一下我们对于移动游戏行业发展的看法。对于这个主题，我今天想从三个角度去解释一下这个主题，第一块，我想强调一下，在移动游戏当中支付的重要性，这块在之前很多的论坛都和朋友们交流，都做过强调，但是还是有很多的游戏开发商和运营商在这方面还是没有得到足够的重视。第二块，在移动游戏支付方面遇到了什么样的瓶颈，这块的问题今天也会在主题当中和大家分享一下。第三块，怎么样解决这些问题，帮助移动游戏能够更好的把流量变现。说到移动游戏的发展，其实我们看到有很多非常出色的游戏，他们在研发，在运营方面都取得了非常好的成功，但是往往在临门一角，支付环节的时候不是足够重视，导致了他的付费转化率等等，流量变现的地方遇到了一些瓶颈，其实支付这个环节在整个移动游戏行业看似好像不属于行业，但是对于移动游戏行业来说尤得显得重要。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">移动游戏支付的重要性：可将活跃和注册用户转化为付费用户</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;我们看到整个游戏的发展，端游也好，页游也好，今天发展的手游这个行业，大家知道在PC平台有非常多的支付方式，包括人们在支付的过程当中也可以提供非常便捷的方式完成支付，把你的活跃用户或者注册用户转为付费用户，但是在移动游戏端和PC端可能有非常大的区别，因为移动的终端只有这么大的终端，不能够满足所有的支付渠道都放在移动终端上面，在这种情况下面，可能有大量的付费的游戏用户被我们的游戏运营商或者开发商挡在了门外，是因为支付瓶颈的问题。我们可以看到，举一些简单的例子，一款手机游戏，这个游戏当中提供了比较主流的，比如说第三方支付，网银支付甚至是一些话费卡充值，这样一些方式，但是我们有没有考虑过，一个人比较喜欢网银，插USB网银的支付方式，手机没有USB口怎么插，能说这些人没有游戏付费冲动的需求吗？怎么样快速有效的转化需求，可能是我们在手机游戏这块更加需要重视和注意支付的问题。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">移动游戏支付的瓶颈：支付体验差导致用户付费冲动流失</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;强调完在手游这方面的重要性，我接下来讲一下在手游端支付这块遇到了什么样的瓶颈，说到手游端支付瓶颈，我们要来谈一下，作为手游的开发商或者运营商，我们在支付有哪些需求和关注点，我相信做每个手游开发和运营的团队，非常关心转化率怎么样，这是他们非常看重的指标，不管游戏做得多成功，流量也好，游戏活跃用户也好，都希望转成付费用户变成现金。从目前的支付方式来看，大部分的支付方式都是从传统的PC端移植到手机端，本身不是手机上原生态的支付方式，有各种各样的优化提高这样的付费转化率，但是这个转化率并不是说没有提升的空间，其实如果基于手机或者游戏端，更加好的捕捉付费用户的付费需求，我们是完全有可能进一步提高我们的付费用户的转化率。如果说一个好的支付方式有好的付费转化率，我们又要关心一个问题，我们的支付渠道成本是不是合理，如果我的转化率非常好，我的支付渠道的成本又非常高，我们利润非常好，因为支付环节承担了这么多的支付渠道成本，在行业里面也是不完全合理的一件事情。除了支付渠道的一些手续费之后，应该承担起风险控制和坏账的成本的作用，因为毕竟的专业事情交给专业的行业团队去做，游戏公司把它的研发产品运营做好，把所谓风险控制和支付领域的这块一些专业性工作交给支付公司去做，我觉得这个可能是行业内大家在移动互联发展下一起掘金的比较好的方式。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">问题的解决方法：通过新的支付方式提高用户支付体验</span><br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">&nbsp;&nbsp;&nbsp;&nbsp;这是手机游戏比较关心的问题，这块跟大家交流一下这块的内容，付费转化率，大家说做手游用户体验，做支付也一样，我们也会看支付体验这个概念，说到支付体验，我们很多时候有PC端，包括移动端，很多的支付方式，无一例外会发现，移动端之后，哪怕多一个环节的信息输入，都会让我们游戏付费用户冲动消费的捕捉就会降低，我们看到银行卡和身份证，每增加一个信息的输入都会降低我们的转化率。对于我们来说，可能更多的就是希望在前端能够把支付体验做到更便捷。MO9来看一下，如果点了MO9，先玩后付的方式就是跳转出来的页面，游戏SDK或者API对接里面，新用户收入到手机号，就可以完成支付了，这个是MO9给它的，把用户冲动消费捕捉进来了，极大的提高手游付费转化率的问题。很多商户关心我们的收费问题，其实对于一种预先给予先玩后付，收取10%，最重要的月消费额度是无穷的，消费当中提升他的额度。在这里强调一点，如果用户用不完怎么办，对于MO9来说承担坏账的控制，帮手游运营商开发商承担他们对风险控制的问题，这也是为什么收取10%的原因。</span><br />
+<br />
+<br />
+<span style="font-family:FangSong_GB2312;font-size:18px;color:#000000;">我们在后端做了大量的风险控制跟信用评级的工作，帮助我们的用户ARPU值不断提升。我介绍一下MO9合作历程，91平台、360、UC都在使用MO9先玩后付的方式。我们跟很多支付方式都有这样的合作，不仅在CP，移动支付不仅仅在手机上玩儿，可以在线上、线下、PC、平板电脑端，都称之为移动支付，一个手机号加上你的PIN码，都叫做移动支付，已经跟你的手机号绑定了，输入PIN码就可以完成支付。我们有差不多500万的用户，这个用户非常迅速的提升，我们希望这样的付费用户能够为手游行业带来更多的付费转化率和交易额的提升。这里分享两个数据，第一个是给我们的反馈信息，3%的手游拉到5%，另外一款月流水能提升它的20%到30%的增量，而这个增量是完全被之前挡在门外的付费用户帮他们给抓进来，这块都是流水的提升。这些也是来自客户的声音，因为时间关系，今天内容分享到此，非常希望MO9在移动互联发展大潮下和我们这些手游的同行同仁们一起成长为大家在手游行业掘金，助上我们一把力，最后祝大家都能够在手游行业当中取得更大的发展。谢谢！（完）</span><br />',nstatus='1',ncreateTime='2014-05-13 00:11:48' WHERE nid=9
+客户IP:112.91.181.28
+时间 :2014-05-13 00:11:48
+
+错误SQL语句：
+UPDATE news SET ntitle='﻿ 当乐网：手机游戏用户调研报告 男性爱交友女性爱花钱',ntype='2',ntName='资讯',ncontent='<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	近日，手机游戏下载平台当乐网对外发布了一份当乐社区用户的调研报告，从多维度对10年来手机游戏用户的行为习惯进行了摸底。从数据来看，当乐在玩家游戏频度、消费水平、游戏类型等方面已成为中重度用户的高密度聚集地，是中重度手游产品研发、发行企业最理想的合作伙伴。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	当乐公布的调研数据显示，手机网游男女玩家比例并不均衡，92%为男性玩家，仅有8%为女性玩家。这与端游、页游的玩家情况十分类似，男性仍然是中重度手机游戏产品的主要受众群体。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-1" src="http://www.199it.com/wp-content/uploads/2014/05/201405050924171.jpg" alt="" width="432" height="304" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	从年龄来看，19-25岁人群是手机游戏行业的主力军，占比45%，接近五成。其次为26-30岁群体，在手机游戏行业玩家中占据27%%的比例。13-18岁的玩家群体也占了不小一部分，达到15%，这部分群体是新生游戏玩家，他们将在几年之后成为主力。31岁以上的玩家占到了13%，这部分为当乐老用户，在塞班时代开始接触手机游戏，这部分玩家对于游戏极为挑剔，但付费能力极强。从整体来看，中国手机游戏玩家年轻化的特点较为明显。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-2" src="http://www.199it.com/wp-content/uploads/2014/05/201405050924411.jpg" alt="" width="488" height="327" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	在付费能力方面，当乐的女性玩家要高于男性玩家。在付费1-100元的玩家中，男女玩家都达到28%的比例，在500-1000元的玩家中，女性玩家以11%的比例超过男性玩家。女性玩家虽然在整体数量上低于男性玩家，但付费能力却并不比男性玩家差，可见当乐的女性玩家付费能力很强。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-3" src="http://www.199it.com/wp-content/uploads/2014/05/201405050924521.jpg" alt="" width="540" height="324" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	数据显示，当乐聚集了大批中重度手游玩家，62%的用户“每天必须玩”手机游戏，“有空就玩一会儿游戏”的玩家占34%，而“等车等位”等利用手机游戏小钱碎片时间的用户仅占4%。而另外一份报告显示，在当乐47%的用户每天玩游戏1-3小时，22.7%的玩家经常会一直玩到手机没电，11.3%的玩家，除了睡觉吃饭就一直在玩游戏。这再次说明当乐重度玩家居多，是中重度手游产品发行的最佳渠道平台。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-4" src="http://www.199it.com/wp-content/uploads/2014/05/201405050925191.jpg" alt="" width="507" height="328" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	比起仅仅具备休闲功能的休闲小游戏来，具有社交功能的网游逐步占据市场重心。有56%的玩家希望在游戏中结交朋友，有“社交”需求的玩家已经占据50%。手游CP可将游戏产品中的“社交”功能进一步放大，CP可以通过线上游戏内部的聊天系统以及线下当乐社区的公会、专区，让用户与用户之间，用户与CP之间加深沟通，增加用户粘性。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-5" src="http://www.199it.com/wp-content/uploads/2014/05/201405050925281.jpg" alt="" width="466" height="269" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	市场上主流重度手游产品以角色扮演类居多。而当乐68%的玩家偏爱角色扮演类的游戏，远远超过包括音乐类、射击类、体育竞技类在内的其他类型游戏产品，其次是卡牌类与策略类游戏。大部分受欢迎的网游玩法都是角色扮演，对于CP来说，开发产品时除了创新性玩法，也应该考虑玩家的游戏习惯，单纯追求另类的玩法会面临较大的风险。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-6" src="http://www.199it.com/wp-content/uploads/2014/05/201405050925401.jpg" alt="" width="521" height="323" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	无论是男性玩家还是女性玩家，对于游戏画面都有较高的要求，72%的男性玩家和79%的女性玩家都选择了“精致华丽的游戏画面”为玩游戏的首要条件。另外，“玩的人多”再次印证了玩家对游戏“社交”功能的需求，52%的男女玩家都希望自己选择人气高的游戏，这样在玩游戏的同时也可以“结交志趣相投”的朋友。
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	<img title="当乐调研显示：手游男玩家爱交友 女玩家爱花钱-7" src="http://www.199it.com/wp-content/uploads/2014/05/201405050925511.jpg" alt="" width="494" height="297" style="width:auto;height:auto;" />
+</p>
+<p style="font-size:1.3em;vertical-align:baseline;text-indent:2em;font-family:微软雅黑, Tahoma, Verdana, 宋体, 'Microsoft Yahei';background-color:#FFFFFF;">
+	2014年，是当乐网成立的第10年。经过10年的沉淀与积累，当乐用户偏于中重度的特点逐渐清晰：70%以上玩家为学生及白领，他们每天在游戏中投入大量精力，且付费能力强，对于重度手游产品有较高的要求，同时，对周围玩家有较强的影响力。这些用户成为手游开发商、发行商最希望挖掘的“金矿”，也成为一款游戏获得最终成功的关键力量。
+</p>',nstatus='1',ncreateTime='2014-05-13 00:14:04' WHERE nid=10
+客户IP:112.91.181.28
+时间 :2014-05-13 00:14:04
+

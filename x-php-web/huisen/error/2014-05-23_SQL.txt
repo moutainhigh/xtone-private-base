@@ -1,0 +1,20 @@
+错误SQL语句：
+SELECT nid FROM cases  Where id<'5' order by id desc limit 1
+客户IP:58.254.168.47
+时间 :2014-05-23 00:22:59
+
+错误SQL语句：
+SELECT nid FROM cases  Where id>'5' order by id asc limit 1
+客户IP:58.254.168.47
+时间 :2014-05-23 00:22:59
+
+错误SQL语句：
+SELECT nid FROM cases  Where id<'5' order by id desc limit 1
+客户IP:58.254.168.47
+时间 :2014-05-23 00:23:02
+
+错误SQL语句：
+SELECT nid FROM cases  Where id>'5' order by id asc limit 1
+客户IP:58.254.168.47
+时间 :2014-05-23 00:23:02
+

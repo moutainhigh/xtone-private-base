@@ -214,6 +214,7 @@ public class TroneDao
 		
 		if(!StringUtil.isNullOrEmpty(troneName))
 			wheres += " and b.name LIKE '%"+troneName+"%' ";
+		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -231,7 +232,7 @@ public class TroneDao
 			}
 		}));
 		
-		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + wheres + limit, new QueryCallBack()
+		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + wheres + " order by a.id desc " + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
