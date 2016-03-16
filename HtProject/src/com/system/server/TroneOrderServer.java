@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.system.dao.ProvinceDao;
 import com.system.dao.TroneOrderDao;
+import com.system.model.CpSpTroneSynModel;
 import com.system.model.ProvinceModel;
-import com.system.model.SpTroneModel;
 import com.system.model.TroneOrderModel;
 
 public class TroneOrderServer
@@ -83,5 +83,10 @@ public class TroneOrderServer
 		
 		return list;
 		
+	}
+	
+	public CpSpTroneSynModel loadCpSpTroneSynModelById(int id)
+	{
+		return new TroneOrderDao().loadCpSpTroneSynModelById(id);
 	}
 }
