@@ -54,4 +54,16 @@ public class MrServer
 	{
 		return new MrDao().getCpMrShowData(startDate, endDate, userId,spTroneId);
 	}
+	
+	/**
+	 * 更新MR汇总表里面的上游结算率
+	 * @param spTroneId
+	 * @param rate
+	 * @param startDate
+	 * @param endDate
+	 */
+	public void updateMrRate(int spTroneId,float rate,String startDate,String endDate)
+	{
+		new MrDao().updateMrRate(spTroneId, rate, startDate, endDate);
+	}
 }
