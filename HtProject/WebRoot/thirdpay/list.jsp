@@ -309,7 +309,6 @@
 					<td></td>
 					<td></td>
 					<td>总金额：<%= dataRows %></td>
-					<td>总订单号(条)：<%= dataRows - showDataRows  %> </td>
 				</tr>
 			</tbody>
 		</table>
