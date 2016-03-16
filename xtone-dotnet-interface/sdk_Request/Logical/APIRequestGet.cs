@@ -207,7 +207,7 @@ namespace sdk_Request.Logical
                     cid = 123,
                     imei = "866568022922909",
                     imsi = "460023192787105",
-                    price = 1000,
+                    //price = 1000,
                     lac = 456,
                     mobile = "13570830935",
                 };

@@ -8,6 +8,9 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+import com.database.Dao.tbl_cp_push_urlDao;
+import com.database.Dao.tbl_mobile_white_listDao;
+import com.database.Dao.tbl_troneDao;
 import com.database.Interface.IDatabase;
 import com.database.Interface.IHold_DataItem;
 import com.database.LightModel.tbl_cp_mrItem;
@@ -31,7 +34,7 @@ public abstract class BasePusher {
 	/** 加载渠道指令集 */
 	public abstract boolean LoadCPAPI(int troneId);
 
-	public boolean DoPush() {
+	public boolean doPush() {
 
 		Calendar currentDate = new GregorianCalendar();
 		currentDate.set(Calendar.HOUR_OF_DAY, 0);
@@ -45,27 +48,28 @@ public abstract class BasePusher {
 		else
 			holdCfg = _cp_push_url;
 
-		if (holdCfg.get_lastDate().getTime() != today.getTime()) {// 重置昨日数据，为今日新数据
-			holdCfg.set_lastDate(today);
-			holdCfg.set_amount(new BigDecimal(0));
-			holdCfg.set_push_count(0);
-		}
-
-		if (isCycHidde()) {// 扣量处理
-			try {
-				_push.SetHidden(_dbase, _config);
-				_dbase.saveData(_config);
-				_dbase.saveData(_cp_push_url);
-			} catch (DBRuntimeException ex) {
-				WriteLog(-1, String.format("扣量数据保存失败{0}", ex.getMessage()));
-				return SetError(ex.getMessage());
+		synchronized (holdCfg) {// 以扣量条件，锁定处理,不同条，可以并行处理
+			if (holdCfg.get_lastDate().getTime() != today.getTime()) {// 重置昨日数据，为今日新数据
+				holdCfg.set_lastDate(today);
+				holdCfg.set_amount(new BigDecimal(0));
+				holdCfg.set_push_count(0);
 			}
-			WriteLog(-2, "扣量");
-			return SetSuccess();
-		}
-		holdCfg.set_push_count(holdCfg.get_push_count());
-		holdCfg.set_amount(holdCfg.get_amount().add(_trone.get_price()));
 
+			if (isCycHidde()) {// 扣量处理
+				try {
+					_push.SetHidden(_dbase, _config);
+					_dbase.saveData(_config);
+					_dbase.saveData(_cp_push_url);
+				} catch (DBRuntimeException ex) {
+					WriteLog(-1, String.format("扣量数据保存失败{0}", ex.getMessage()));
+					return SetError(ex.getMessage());
+				}
+				WriteLog(-2, "扣量");
+				return SetSuccess();
+			}
+			holdCfg.set_push_count(holdCfg.get_push_count());
+			holdCfg.set_amount(holdCfg.get_amount().add(_trone.get_price()));
+		}
 		try {
 			tbl_cp_mrItem cpmr = _push.SetPushed(_dbase, _config);
 
@@ -79,6 +83,7 @@ public abstract class BasePusher {
 			WriteLog(-1, ex.getMessage());
 			return SetError(ex.getMessage());
 		}
+
 		if (_cp_push_url.get_is_realtime())
 			SendQuery();
 		return SetSuccess();
@@ -100,15 +105,19 @@ public abstract class BasePusher {
 	 */
 	protected void SetConfig(tbl_trone_orderItem m) {
 		_config = m;
-		_cp_push_url = new tbl_cp_push_urlItem();
-		String sql = "select * from  tbl_cp_push_url where id=" + m.get_push_url_id();
-		_dbase.sqlToModel(_cp_push_url, sql);
+
+		_cp_push_url = tbl_cp_push_urlDao.queryById(_dbase, m.get_push_url_id());
+
+		// new tbl_cp_push_urlItem();
+		// String sql = "select * from tbl_cp_push_url where id=" +
+		// m.get_push_url_id();
+		// _dbase.sqlToModel(_cp_push_url, sql);
 
 		if (_trone != null && _trone.get_id() == m.get_trone_id())
 			return;
-		_trone = new tbl_troneItem();
-		sql = "select * from tbl_trone where id=" + m.get_trone_id();
-		_dbase.sqlToModel(_trone, sql);
+
+		_trone = tbl_troneDao.queryById(_dbase, m.get_trone_id());
+
 	}
 
 	public void setTrone(tbl_troneItem value) {
@@ -147,17 +156,19 @@ public abstract class BasePusher {
 		asyncSendQuery(_cp_push_url.get_url(), ptrs);
 	}
 
-	protected  void asyncSendQuery(String pfxUrl, HashMap<String, String> data) {
+	protected void asyncSendQuery(String pfxUrl, HashMap<String, String> data) {
 		new Thread(new HttpSendData(pfxUrl, data)).start();
 	}
 
 	/** 白名单检查 */
 	protected boolean isWhite() {
 		String mobile = _push.GetValue(EPushField.Mobile);
-		if (Funcs.isNullOrEmpty(mobile))
-			return false;
-		String sql = "select id from tbl_mobile_white_list where mobile='" + _dbase.sqlEncode(mobile) + "'";
-		return _dbase.executeScalar(sql) != null;
+		return tbl_mobile_white_listDao.isWhite(_dbase, mobile);
+		// if (Funcs.isNullOrEmpty(mobile))
+		// return false;
+		// String sql = "select id from tbl_mobile_white_list where mobile='" +
+		// _dbase.sqlEncode(mobile) + "'";
+		// return _dbase.executeScalar(sql) != null;
 	}
 
 	/** 此次操作是否标记为扣量信息 */

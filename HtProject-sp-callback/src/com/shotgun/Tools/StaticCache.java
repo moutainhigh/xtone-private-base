@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class StaticCache{
     static ArrayList<StaticCache> _allCache;
 
-   public enum Static_Cache_Staus
+   public enum Static_Cache_Status
     {
         Idel,
         Loading,

@@ -43,7 +43,6 @@ public class MysqlDatabase implements com.database.Interface.IDatabase, Closeabl
 		_basicDataSource.setMaxActive(32);
 		_basicDataSource.setMinIdle(4);
 		_basicDataSource.setMaxWait(2000);
-
 		return _basicDataSource;
 
 	}

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.database.Dao.tbl_trone_orderDao;
 import com.database.LightModel.tbl_trone_orderItem;
 import com.dianfu.Interface.ICPPushModel.EPushField;
 import com.shotgun.Tools.Funcs;
@@ -27,21 +28,24 @@ public class CPTronePusher extends BasePusher {
 			trondId = getTrone().get_id();
 		}
 
-		String sql = "select * from tbl_trone_order where disable=0 and trone_id=" + Integer.toString(trondId);
-
-		_allCfg = super.getDBase().sqlToModels(new tbl_trone_orderItem(), sql);
+		// String sql = "select * from tbl_trone_order where disable=0 and
+		// trone_id=" + Integer.toString(trondId);
+		// _allCfg = super.getDBase().sqlToModels(new tbl_trone_orderItem(),
+		// sql);
+		_allCfg = tbl_trone_orderDao.queryByTroneId(getDBase(), trondId);
 
 		if (_allCfg == null || _allCfg.size() == 0) {
-			tbl_trone_orderItem m = CreateDefaultTrone();
+			tbl_trone_orderItem m = createDefaultTrone();
 			_allCfg = new ArrayList<tbl_trone_orderItem>();
 			_allCfg.add(m);
 		}
+
 		// base.SetConfig(_allCfg[0]);
 		return super.SetSuccess();
 
 	}
 
-	private tbl_trone_orderItem CreateDefaultTrone() {
+	private tbl_trone_orderItem createDefaultTrone() {
 		tbl_trone_orderItem ret = new tbl_trone_orderItem();
 		ret.set_cp_id(34); // 未知CP的ID
 		ret.set_create_date(new Date());
@@ -53,12 +57,12 @@ public class CPTronePusher extends BasePusher {
 		ret.set_push_url_id(47); // 未知CP推送URL
 		ret.set_trone_id(getTrone().get_id());
 		getDBase().saveData(ret);
+		tbl_trone_orderDao.refreshCache();
 		return ret;
 	}
 
-
 	@Override
-	public boolean DoPush() {
+	public boolean doPush() {
 		boolean isRecord = false;
 		tbl_trone_orderItem defCfg = null;
 		if (getPushObject().get_cp_id() > 0 && getPushObject().get_cp_id() != 34)
@@ -70,7 +74,7 @@ public class CPTronePusher extends BasePusher {
 				defCfg = m;
 				continue;
 			}
-			if (!IsMatch(m))
+			if (!isMatch(m))
 				continue;
 			if (isRecord) {
 				super.WriteLog(-3, "配置有冲突：cfgId:" + Integer.toString(m.get_id()));
@@ -78,19 +82,19 @@ public class CPTronePusher extends BasePusher {
 			}
 			isRecord = true;
 			SetConfig(m);
-			super.DoPush();
+			super.doPush();
 		}
 		if (isRecord)
 			return true;
 		if (getPushObject().get_cp_id() == 34)
 			return true;
 		if (defCfg == null)
-			defCfg = CreateDefaultTrone();
+			defCfg = createDefaultTrone();
 		SetConfig(defCfg);
-		return super.DoPush();
+		return super.doPush();
 	}
 
-	private boolean IsMatch(tbl_trone_orderItem m) {
+	private boolean isMatch(tbl_trone_orderItem m) {
 		String spMsg = getPushObject().GetValue(EPushField.Msg);
 		if (spMsg == null)
 			spMsg = "";

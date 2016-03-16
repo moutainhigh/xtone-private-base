@@ -2,6 +2,7 @@ package com.dianfu.logical;
 
 import java.util.HashMap;
 
+import com.database.Dao.tbl_trone_orderDao;
 import com.database.LightModel.tbl_api_orderItem;
 import com.database.LightModel.tbl_mrItem;
 import com.database.LightModel.tbl_sp_trone_apiItem;
@@ -27,7 +28,7 @@ public class APITronePusher extends BasePusher {
 	}
 
 	@Override
-	public boolean DoPush() {
+	public boolean doPush() {
 		if (_apiMatchAPI == null)
 			return SetError("请先调用LoadCPAPI");
 
@@ -39,7 +40,7 @@ public class APITronePusher extends BasePusher {
 		if (Funcs.isNullOrEmpty(tbl_api_orderItem.pfxSchame))
 			sql += tbl_api_orderItem.pfxSchame + ".";
 		sql += apiOrder.TableName();
-		sql += " where status=1011 and trone_id=" + Integer.toString(getTrone().get_id());
+		sql += " where status in(1011,1013,2023) and trone_id=" + Integer.toString(getTrone().get_id());
 
 		switch (_apiMatchAPI.get_match_field()) {
 		case 0: // splinkid
@@ -63,10 +64,15 @@ public class APITronePusher extends BasePusher {
 			return SetError("未匹配API订单号");
 		}
 
-		tbl_trone_orderItem cpTrone = new tbl_trone_orderItem();
-		sql = "select * from tbl_trone_order where disable=0 and  id= " + apiOrder.get_trone_order_id();
-
-		if (!getDBase().sqlToModel(cpTrone, sql)) {
+		tbl_trone_orderItem cpTrone = tbl_trone_orderDao.queryById(getDBase(), apiOrder.get_trone_order_id());
+		// tbl_trone_orderItem cpTrone = new tbl_trone_orderItem();
+		// sql = "select * from tbl_trone_order where disable=0 and id= " +
+		// apiOrder.get_trone_order_id();
+		//
+		// if (!getDBase().sqlToModel(cpTrone, sql)) {
+		// return SetError("上量通道(CP业务)已经关闭");
+		// }
+		if (cpTrone == null || cpTrone.get_disable()) {
 			return SetError("上量通道(CP业务)已经关闭");
 		}
 
@@ -75,7 +81,7 @@ public class APITronePusher extends BasePusher {
 			((tbl_mrItem) getPushObject()).set_api_order_id(apiOrder.get_id());
 		}
 		_apiOrder = apiOrder;
-		return super.DoPush();
+		return super.doPush();
 	}
 
 	@Override

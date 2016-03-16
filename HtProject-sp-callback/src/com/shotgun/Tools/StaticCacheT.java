@@ -1,6 +1,5 @@
 package com.shotgun.Tools;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -20,11 +19,11 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 
 	/** 数据失效时间 */
 	private long _exprieTime;
-	private Static_Cache_Staus _satus;
+	private Static_Cache_Status _status;
 
 	public StaticCacheT(T m, String IdxField) {
 		setExpired(15);
-		_satus = Static_Cache_Staus.Idel;
+		_status = Static_Cache_Status.Idel;
 		this._idField = m.IdentifyField();
 		this._tabName = m.TableName();
 		if (Funcs.isNullOrEmpty(IdxField))
@@ -37,7 +36,7 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 	@Override
 	public void clearCache() {
 		_data = null;
-		_satus = Static_Cache_Staus.Idel;
+		_status = Static_Cache_Status.Idel;
 		super.remove(this);
 		WriteLog(false, 0, 0);
 	}
@@ -56,11 +55,34 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 		return new MysqlDatabase();
 	}
 
+	/**
+	 * 取得当前缓存状态 ，不会激发加载或过期清除
+	 * 
+	 * @return
+	 */
+	public Static_Cache_Status getStatus() {
+		return _status;
+	}
+
+	/**
+	 * 取得当前缓存状态
+	 * 
+	 * @param iStart
+	 *            如果处于未加载状态，是否启动加载
+	 * @return
+	 */
+	public Static_Cache_Status getStatus(boolean iStart) {
+		if (iStart && _status == Static_Cache_Status.Idel) {
+			loadFreshData();
+		}
+		return _status;
+	}
+
 	private void loadFreshData() {
 		synchronized (this) {
-			if (_satus != Static_Cache_Staus.Idel)
+			if (_status != Static_Cache_Status.Idel)
 				return;
-			_satus = Static_Cache_Staus.Loading;
+			_status = Static_Cache_Status.Loading;
 		}
 		Runnable fun = new Runnable() {
 			@Override
@@ -112,11 +134,11 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 			this._exprieTime = System.currentTimeMillis() + this.getExpired() * 60 * 1000;
 			_exprieTime += (_exprieTime % 10) * 30 * 1000;// 人为5分钟随机误差
 
-			this._satus = Static_Cache_Staus.AllLoad;
+			this._status = Static_Cache_Status.AllLoad;
 
 		} catch (DBRuntimeException ex) {
 			// WriteLog(ex.Message);
-			_satus = Static_Cache_Staus.Idel;
+			_status = Static_Cache_Status.Idel;
 			this._exprieTime = System.currentTimeMillis() + this.getExpired() * 60 * 1000;
 		} finally {
 			if (dBase != null)
@@ -133,7 +155,7 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 			loadFreshData();
 			return null;
 		}
-		if (_satus != Static_Cache_Staus.AllLoad)
+		if (_status != Static_Cache_Status.AllLoad)
 			return null;
 		if (System.currentTimeMillis() > this._exprieTime) {
 			clearCache();
@@ -148,7 +170,7 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 		HashMap<IDX, T> tData = getUnexpriedData();
 		if (tData == null)
 			return null;
-		if (iFull && _satus != Static_Cache_Staus.AllLoad)
+		if (iFull && _status != Static_Cache_Status.AllLoad)
 			return null;
 		return tData.values();
 	}
@@ -175,7 +197,7 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 		if (data == null)
 			return;
 		HashMap<IDX, T> dt = getUnexpriedData();
-		if (dt == null || _satus != Static_Cache_Staus.AllLoad)
+		if (dt == null || _status != Static_Cache_Status.AllLoad)
 			return;
 		dt.put((IDX) data.GetValueByName(this._indexField), data);
 		WriteLog(true, 0, 1);
@@ -227,6 +249,6 @@ public class StaticCacheT<T extends com.database.Logical.LightDataModel, IDX> ex
 	}
 
 	void WriteLog(String msg) {
-		System.out.format("%s %s", _tabName, msg);
+		System.out.format("%s %s\n", _tabName, msg);
 	}
 }

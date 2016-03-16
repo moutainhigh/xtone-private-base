@@ -16,7 +16,7 @@ public class tbl_sp_api_urlDao {
 
 	public static tbl_sp_api_urlItem queryById(IDatabase dBase, int id) {
 		tbl_sp_api_urlItem m = cache.getDataByIdx(id);
-		if (m == null)
+		if (m != null)
 			return m;
 		String sql = String.format("select * from tbl_sp_api_url where id=%d", id);
 		m = new tbl_sp_api_urlItem();

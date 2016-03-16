@@ -68,13 +68,16 @@ public class SPCallbackProces {
 		Matcher m = rx.matcher(url);
 		if (!m.find())
 			return false;
-		//String sql;
+		// String sql;
 
 		tbl_sp_api_urlItem item;
-		if (!Funcs.isNullOrEmpty(m.group(2)))
+		if (!Funcs.isNullOrEmpty(m.group(2))) {
 			item = tbl_sp_api_urlDao.queryById(_dBase, Integer.parseInt(m.group(2)));
-		else
+			// System.out.println(item);
+		} else {
 			item = tbl_sp_api_urlDao.queryByVirtualpage(_dBase, m.group(3));
+			// System.out.println(m.group(3));
+		}
 		// sql = "select * from tbl_sp_api_url where virtual_page='" +
 		// _dBase.sqlEncode(m.group(3)) + "'";
 		// System.out.println(sql);
@@ -203,7 +206,7 @@ public class SPCallbackProces {
 		bp.setPushObject(_mr);
 		bp.setTrone(_lastTrone);
 		if (bp.LoadCPAPI(0)) {
-			if (bp.DoPush()) {
+			if (bp.doPush()) {
 				return;// AP匹配成功，并推送 成功
 			}
 		}
@@ -213,7 +216,7 @@ public class SPCallbackProces {
 		bp.setPushObject(_mr);
 		bp.setTrone(_lastTrone);
 		if (bp.LoadCPAPI(0)) {
-			bp.DoPush();
+			bp.doPush();
 		}
 	}
 
@@ -407,9 +410,10 @@ public class SPCallbackProces {
 			return;
 
 		tbl_cityItem city = tbl_phone_locateDao.queryCityInfoByPhone(_dBase, m);
+		if (city == null)
+			return;
 		sms.set_city_id(city.get_id());
-		sms.set_city_id(city.get_province_id());
-
+		sms.set_province_id(city.get_province_id());
 	}
 
 	public ErrCode getErrCode() {
