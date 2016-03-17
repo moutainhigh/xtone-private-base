@@ -69,6 +69,8 @@ public class RequestServerV1
 		//先把基本数据写入数据库
 		saveRequest(model);
 		
+		response.setOrderNum(StringUtil.getMonthFormat() +  model.getId());
+		
 		//转到我们自己服务器去请求
 		String result = NetServer.sendBaseApiOrder(model);
 		

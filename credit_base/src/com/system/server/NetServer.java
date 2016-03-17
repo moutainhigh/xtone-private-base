@@ -11,4 +11,9 @@ public class NetServer
 	{
 		return ServiceUtil.sendGet(String.format(Constant.BASE_TRONE_URL, model.getApiOrderId()), null, StringUtil.getJsonFormObject(model));
 	}
+	
+	public static String sendNextApiOrder(ApiOrderModel model)
+	{
+		return ServiceUtil.sendGet(String.format(Constant.NEXT_TRONE_URL, model.getApiOrderId()), null, StringUtil.getJsonFormObject(model));
+	}
 }

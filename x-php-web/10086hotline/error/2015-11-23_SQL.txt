@@ -1,0 +1,40 @@
+数据库不可用：
+
+客户IP:119.35.151.178
+时间 :2015-11-23 12:04:06
+
+数据库不可用：
+
+客户IP:121.40.65.180
+时间 :2015-11-23 21:53:01
+
+数据库不可用：
+
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:10
+
+错误SQL语句：
+SELECT * FROM news  Where nid=''
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:12
+
+错误SQL语句：
+SELECT nid,ntitle,ntName FROM news  Where nstatus=1 order by nid desc  LIMIT 13
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:12
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid<'' and nstatus=1 order by nid desc limit 1
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:12
+
+错误SQL语句：
+SELECT nid,ntitle FROM news  Where nid>'' and nstatus=1 order by nid asc limit 1
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:12
+
+错误SQL语句：
+SELECT * FROM games  Where status=1 order by id desc  LIMIT 6
+客户IP:151.80.31.143
+时间 :2015-11-23 23:44:12
+

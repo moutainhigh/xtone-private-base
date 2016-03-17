@@ -22,6 +22,9 @@ public class TroneOrderModel
 	private int isHoldCustom;
 	private float price;
 	private int spTroneStatus;
+	private int holdAcount;
+	private String provinceList;
+	private String province;
 	
 	public float getPrice()
 	{
@@ -182,6 +185,30 @@ public class TroneOrderModel
 	public void setSpTroneStatus(int spTroneStatus)
 	{
 		this.spTroneStatus = spTroneStatus;
+	}
+	public int getHoldAcount()
+	{
+		return holdAcount;
+	}
+	public void setHoldAcount(int holdAcount)
+	{
+		this.holdAcount = holdAcount;
+	}
+	public String getProvinceList()
+	{
+		return provinceList;
+	}
+	public void setProvinceList(String provinceList)
+	{
+		this.provinceList = provinceList;
+	}
+	public String getProvince()
+	{
+		return province;
+	}
+	public void setProvince(String province)
+	{
+		this.province = province;
 	}
 	
 }

@@ -9,6 +9,11 @@
     <link href="/css/base.css" rel="stylesheet" />
     <link href="/css/manage.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server" />
+    <script type="text/javascript">
+        if (top != this) {
+            document.write(" <link href=\"/css/embed.css\" rel=\"stylesheet\" />");
+        }
+    </script>
 </head>
 <body>
     <div class="bn">
@@ -44,6 +49,8 @@
         <ul>
             <li><a href="/config/tbl_mobile_white_list.aspx">同步白名单</a></li>
             <li><a href="/imsi2area.aspx">IMSI转地区</a></li>
+            <li><a href="/passport/clearcache.ashx" target="_blank">清除本地缓存</a></li>
+            <li><a href="<%#n8wan.Public.Library.syncUrlPerfix() %>/clearcache.ashx" target="_blank">清除同步缓存</a></li>
         </ul>
 
         <%--        <hr />

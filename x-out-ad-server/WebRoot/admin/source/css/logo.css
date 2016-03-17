@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+.login_box{ background:#ffffff}
+.box{ width:570px; margin:0px auto;}
+.box_img1 {background:#ffffff; height:200px; overflow:hidden;display:block; }
+.box_img2 { background:#ffffff }
+.box_img3 { background:#ffffff}
+.box_img4 {background:#ffffff; height:180px; overflow:hidden;display:block; }
+.box_img5 { background:#ffffff}
+.box_img6 { background:#ffffff ;height:57px; overflow:hidden;display:block;}
+.box_img7 { background:#438945; height:150px; overflow:hidden;display:block;}
+.box_img8 { background:#ffffff; height:117px; overflow:hidden;display:block; text-align:center; padding-top:15px}
+.box_img9 { background:#ffffff; height:128px; overflow:hidden;display:block;}
+.box_img10 { background:#ffffff; height:128px; overflow:hidden;display:block;}
+.logo_ul{ padding-left:106px;}
+
+#logo_title{font-size:24px;  height:40px; overflow:hidden;display:block; color:#FFFFFF; padding-top:11px;_padding-top:8px;}
+.logo_ul li{width:216px; height:28px; margin-bottom:11px;_margin-bottom:8px; }
+.input_logo{display:block; height:28px; line-height:28px; border:0px solid #ff0000;width:176px; padding-left:40px; background:url(../images/logo/input_mix.jpg) no-repeat;font-size:14px;}
+.logo_li01{  background-position:0px 0px;}
+.logo_li02{  background-position:-226px 0px;}
+.logo_li03{  background-position:-452px 0px;font-size:20px;}
+.logo_ul li.logo_ul_border { border:1px solid #00B7EE;}
+.logo_p { text-indent:0;  margin-left:106px;}
+.logo_p span{ float:left; display:block; width:110px; height:50px; cursor:pointer; border:1px solid #E5E5E5;}
+.logo_p strong{ display:block; padding-left:126px; font-weight:normal;font-size:12px; padding-top:16px;_padding-top:18px;}
+.logo_p strong a{color:#ffffff;}
+p.logo_submit{text-indent:0; text-align:center; padding-top:8px;}
+p.logo_submit a{text-indent:0; text-align:center; padding-top:8px; padding-bottom:8px; padding-left:16px; padding-right:16px; background:#438945; font-size:24px; color:#FFFFFF;}
+.logo_changeword { text-indent:0; text-align:center; padding-top:66px;}
+.logo_changeword a{ color:#ffffff; text-decoration:underline;}
+
+.logo_modify_box {width:436px; margin:0px auto;}
+.logo_copy{ font-size:12px; color:#535F75; text-align:center; padding-top:18px;}
+.modify_logo_input { width:176px; height:28px; line-height:28px; border:0px solid #ff0000;}

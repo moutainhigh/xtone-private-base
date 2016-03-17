@@ -1,0 +1,30 @@
+错误SQL语句：
+SELECT * FROM news  Where nid='4'"'
+客户IP:46.148.30.69
+时间 :2014-12-29 23:20:10
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'4'"' order by nid desc limit 1
+客户IP:46.148.30.69
+时间 :2014-12-29 23:20:10
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'4'"' order by nid asc limit 1
+客户IP:46.148.30.69
+时间 :2014-12-29 23:20:10
+
+错误SQL语句：
+SELECT * FROM cases  Where id='9'"'
+客户IP:91.233.89.230
+时间 :2014-12-29 23:20:53
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'9'"' order by id desc limit 1
+客户IP:91.233.89.230
+时间 :2014-12-29 23:20:53
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'9'"' order by id asc limit 1
+客户IP:91.233.89.230
+时间 :2014-12-29 23:20:53
+

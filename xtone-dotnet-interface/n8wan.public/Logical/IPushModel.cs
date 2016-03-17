@@ -31,7 +31,8 @@ namespace n8wan.Public.Logical
         /// <summary>
         /// 透参信息
         /// </summary>
-        cpParam
+        cpParam,
+        province
     }
 
     /// <summary>

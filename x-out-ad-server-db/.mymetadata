@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="hlpadsdb"
+  id="myeclipse.1425806895319"
+  context-root="/hlpadsdb"
+  j2ee-spec="5.0"
+  archive="hlpadsdb.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

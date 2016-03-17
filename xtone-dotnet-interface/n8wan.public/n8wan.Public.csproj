@@ -42,6 +42,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -71,6 +72,7 @@
     <Compile Include="LightDataModel_manual\tbl_api_orderItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_api_orderItem_plus.cs" />
     <Compile Include="LightDataModel_manual\tbl_cityItem.cs" />
+    <Compile Include="LightDataModel_manual\tbl_cityItemPlus.cs" />
     <Compile Include="LightDataModel_manual\tbl_cpItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_cp_mrItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_cp_mrItem_plus.cs" />
@@ -90,8 +92,11 @@
     <Compile Include="LightDataModel_manual\tbl_provinceItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_request_logItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_request_logItem_plus.cs" />
+    <Compile Include="LightDataModel_manual\tbl_sp_api_urlItemPlus.cs" />
     <Compile Include="LightDataModel_manual\tbl_sp_trone_apiItem.cs" />
+    <Compile Include="LightDataModel_manual\tbl_troneItemPlus.cs" />
     <Compile Include="LightDataModel_manual\tbl_trone_orderItem.cs" />
+    <Compile Include="LightDataModel_manual\tbl_trone_paycodeItemPlus.cs" />
     <Compile Include="LightDataModel_manual\tbl_xypayItem.cs" />
     <Compile Include="LightDataModel_manual\tbl_xypayItem_plus.cs" />
     <Compile Include="LightDataModel_manual\tbl_xy_userItem.cs" />
@@ -100,12 +105,14 @@
     <Compile Include="Logical\AsyncSendPush.cs" />
     <Compile Include="Logical\AutoMapPush.cs" />
     <Compile Include="Logical\BaseSPCallback_Log.cs" />
+    <Compile Include="Logical\ClearCacheHttpHandler.cs" />
     <Compile Include="Logical\CPPusher.cs" />
     <Compile Include="Logical\HTAPIPusher.cs" />
     <Compile Include="Logical\IHold_DataItem.cs" />
     <Compile Include="Logical\IPushModel.cs" />
     <Compile Include="Logical\ISMS_DataItem.cs" />
     <Compile Include="Logical\MMBaseSync.cs" />
+    <Compile Include="Logical\StaticCache.cs" />
     <Compile Include="Logical\old_sp_callback_map.cs" />
     <Compile Include="Logical\AppUserFixSync.cs" />
     <Compile Include="Logical\UserLoginProc.cs" />

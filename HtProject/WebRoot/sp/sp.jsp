@@ -33,6 +33,7 @@
 	
 	params.put("fullname", fullName);
 	params.put("shortname", shortName);
+	params.put("commerce_user_id", commerceUserId + "");
 	
 	String pageData = PageUtil.initPageQuery("sp.jsp",params,rowCount,pageIndex);
 	

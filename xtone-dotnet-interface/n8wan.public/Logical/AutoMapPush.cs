@@ -14,8 +14,10 @@ namespace n8wan.Public.Logical
 
         public override bool LoadCPAPI()
         {
+            if (Trone == null)
+                return false;
             var l = LightDataModel.tbl_trone_orderItem.GetQueries(dBase);
-            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, Trone.id);
             l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, 0);
             l.PageSize = int.MaxValue;
             _allCfg = l.GetDataList();
@@ -80,7 +82,7 @@ namespace n8wan.Public.Logical
             ret.order_num = "*";
             ret.order_trone_name = "未分配指令";
             ret.push_url_id = 47; //未知CP推送URL
-            ret.trone_id = TroneId;
+            ret.trone_id = Trone.id;
             dBase.SaveData(ret);
             return ret;
         }

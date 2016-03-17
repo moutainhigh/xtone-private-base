@@ -10,7 +10,10 @@ namespace n8wan.Public.Logical
     public class CPPusher : Shotgun.Model.Logical.Logical
     {
 
-        static object logFileLocker;
+        /// <summary>
+        /// 写日志时文件锁，防止并发处理出错
+        /// </summary>
+        static object logFileLocker = new object();
         /// <summary>
         /// 订单ID
         /// </summary>
@@ -20,6 +23,10 @@ namespace n8wan.Public.Logical
         /// 最后一次推送的连接内容
         /// </summary>
         private string _url;
+        /// <summary>
+        /// 采用POST同步的数据
+        /// </summary>
+        private string _postdata;
         private LightDataModel.tbl_trone_orderItem _config;
         private LightDataModel.tbl_cp_push_urlItem _cp_push_url;
         private LightDataModel.tbl_troneItem _trone;
@@ -27,14 +34,17 @@ namespace n8wan.Public.Logical
         static Random rnd;
         object sync = new object();
 
+
         /// <summary>
         /// 根据TroneId，CPID 加载CP同步API配置
         /// </summary>
         /// <returns></returns>
         public virtual bool LoadCPAPI()
         {
+            if (Trone == null)
+                return false;
             var l = LightDataModel.tbl_trone_orderItem.GetQueries(dBase);
-            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, Trone.id);
             if (CP_Id != -1)
                 l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.cp_id, this.CP_Id);
             l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, false);
@@ -53,12 +63,18 @@ namespace n8wan.Public.Logical
         {
             _config = m;
             _cp_push_url = LightDataModel.tbl_cp_push_urlItem.GetRowById(dBase, m.push_url_id);
-            _trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
+            if (_trone == null || _trone.id != m.trone_id)
+                _trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
         }
 
         public Logical.ICPPushModel PushObject { get; set; }
 
         public string LogFile { get; set; }
+
+        /// <summary>
+        /// 匹配的SP指令ID
+        /// </summary>
+        public LightDataModel.tbl_troneItem Trone { get { return _trone; } set { _trone = value; } }
 
         public virtual bool DoPush()
         {
@@ -100,7 +116,6 @@ namespace n8wan.Public.Logical
             }
             holdCfg.push_count++;
             holdCfg.amount += _trone.price;
-            holdCfg.amount += _trone.price;
 
             try
             {
@@ -132,7 +147,7 @@ namespace n8wan.Public.Logical
                 return true;//未知CP的，直接隐藏
             if (!_cp_push_url.is_realtime)
                 return false;//非实时同步，不进行扣量操作 
- 
+
             IHold_DataItem holdCfg = null;
             if (_config.hold_is_Custom)
                 holdCfg = _config;
@@ -225,6 +240,8 @@ namespace n8wan.Public.Logical
 
             ptrs.Add("price", (_trone.price * 100).ToString("0"));
             ptrs.Add("cpparam", PushObject.GetValue(Logical.EPushField.cpParam));
+            ptrs.Add("provinceId", PushObject.GetValue(EPushField.province));
+
             string qs = UrlEncode(ptrs);
 
 
@@ -234,16 +251,21 @@ namespace n8wan.Public.Logical
             else
                 url = API_PushUrl + "?" + qs;
 
-            asyncSendData(url);
+            asyncSendData(url, null);
         }
 
-        protected void asyncSendData(string url)
+        protected void asyncSendData(string url, string postData)
         {
             this._url = url;
+            this._postdata = postData;
             System.Threading.ThreadPool.QueueUserWorkItem(SendData);
 
         }
 
+        /// <summary>
+        /// 真实的同步动作
+        /// </summary>
+        /// <param name="s"></param>
         private void SendData(object s)
         {
 
@@ -280,18 +302,48 @@ namespace n8wan.Public.Logical
             web.Timeout = 1000;
             web.AllowAutoRedirect = false;
             web.AutomaticDecompression = System.Net.DecompressionMethods.GZip;
+            web.ServicePoint.Expect100Continue = false;
+
 
             var stwc = new System.Diagnostics.Stopwatch();
             stwc.Start();
             string msg = null;
-            try
-            {
-                rsp = (System.Net.HttpWebResponse)web.GetResponse();
+
+            if (!String.IsNullOrEmpty(_postdata))
+            {//采用用POST提交时
+                web.Method = System.Net.WebRequestMethods.Http.Post;
+                byte[] bin = ASCIIEncoding.UTF8.GetBytes(_postdata);
+                web.ContentType = "Content-Type: application/x-www-form-urlencoded; charset=UTF-8";
+                web.ContentLength = bin.Length;
+                Stream stm = null;
+                try
+                {
+                    stm = web.GetRequestStream();
+                    stm.Write(bin, 0, bin.Length);
+                    stm.Flush();
+                }
+                catch (System.Net.WebException ex)
+                {
+                    rsp = (System.Net.HttpWebResponse)ex.Response;
+                    msg = ex.Message;
+                }
+                finally
+                {
+                    if (stm != null)
+                        stm.Dispose();
+                }
             }
-            catch (System.Net.WebException ex)
-            {
-                rsp = (System.Net.HttpWebResponse)ex.Response;
-                msg = ex.Message;
+            if (msg == null)
+            {//写入数据无错误时
+                try
+                {
+                    rsp = (System.Net.HttpWebResponse)web.GetResponse();
+                }
+                catch (System.Net.WebException ex)
+                {
+                    rsp = (System.Net.HttpWebResponse)ex.Response;
+                    msg = ex.Message;
+                }
             }
 
             if (rsp == null)
@@ -325,8 +377,6 @@ namespace n8wan.Public.Logical
             var fi = new FileInfo(LogFile);
             if (!fi.Directory.Exists)
                 fi.Directory.Create();
-            if (logFileLocker == null)
-                logFileLocker = new object();
             lock (logFileLocker)
             {
                 using (var stm = new StreamWriter(LogFile, true))
@@ -354,10 +404,8 @@ namespace n8wan.Public.Logical
             return sb.ToString();
         }
 
-        /// <summary>
-        /// 匹配的SP指令ID
-        /// </summary>
-        public int TroneId { get; set; }
+
+        //public int TroneId { get; set; }
 
         /// <summary>
         /// CP用户Id，-1表示，不指定,仅配对API_Config_Id

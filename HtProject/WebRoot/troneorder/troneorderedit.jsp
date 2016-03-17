@@ -149,10 +149,12 @@
 		eval(data);
 		$("#sel_trone").empty();
 		$("#sel_trone").append("<option value='-1'>请选择</option>");
+		
 		for(i=0; i<troneArray.length; i++)
 		{
 			$("#sel_trone").append("<option value='" + troneArray[i].id + "'>" + troneArray[i].name + "</option>");
 		}
+		
 		if(isFirstLoad)
 		{
 			$("#sel_trone").val("<%=model.getTroneId() %>");
@@ -236,6 +238,7 @@
 		$("#input_order_num").val("<%= model.getOrderNum() %>");
 		$("#input_hold_percent").val("<%= model.getHoldPercent() %>");
 		$("#input_hold_amount").val("<%= model.getHoldAmount() %>");
+		$("#input_hold_account").val("<%= model.getHoldAcount() %>");
 		
 		setRadioCheck("dynamic",<%= model.getDynamic() %>);
 		setRadioCheck("status",<%= model.getDisable() %>);
@@ -436,6 +439,16 @@
 					<dd class="dd01_me">每天总限额</dd>
 					<dd class="dd03_me">
 						<input type="text" name="hold_amount" title="通道名称" id="input_hold_amount" value="0"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">起扣数</dd>
+					<dd class="dd03_me">
+						<input type="text" name="hold_account"  id="input_hold_account" value="0"
 							style="width: 200px">
 					</dd>
 					

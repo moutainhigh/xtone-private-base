@@ -197,6 +197,25 @@
 			alert(tmpPro);
 	}
 	
+	function exportProvince()
+	{
+		var exportData = "";
+		
+		$('[name=area[]]:checkbox').each(function() 
+		{
+			if(this.checked)
+			{
+				exportData += this.title + ",";	
+			}
+		});
+		
+		if(""!=exportData)
+		{
+			exportData = exportData.substring(0, exportData.length -1);
+			prompt("已选择省份", exportData);	
+		}
+	}
+	
 </script>
 <body>
 	<div class="main_content">
@@ -329,6 +348,9 @@
 							style="padding-top: 10px;" value="反　选" />
 							<input
 							type="button" onclick="importProvince()" style="padding-top: 10px;" value="导　入" />
+							
+							<input
+							type="button" onclick="exportProvince()" style="padding-top: 10px;" value="导　出" />
 					</div>
 
 					<br />

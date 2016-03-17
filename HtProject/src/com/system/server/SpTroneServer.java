@@ -3,7 +3,9 @@ package com.system.server;
 import java.util.List;
 import java.util.Map;
 
+import com.system.dao.ProvinceDao;
 import com.system.dao.SpTroneDao;
+import com.system.model.ProvinceModel;
 import com.system.model.SpTroneModel;
 
 public class SpTroneServer
@@ -50,6 +52,8 @@ public class SpTroneServer
 	
 	public List<SpTroneModel> loadTroneListByCpid(int cpId)
 	{
-		return new SpTroneDao().loadTroneListByCpid(cpId);
+		List<SpTroneModel> list = new SpTroneDao().loadTroneListByCpid(cpId);
+		
+		return list;
 	}
 }	

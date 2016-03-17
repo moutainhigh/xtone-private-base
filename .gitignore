@@ -5,3 +5,31 @@
 /xtone-interface-redirect/target
 /xtone-interface-redirect/WebRoot/WEB-INF/classes
 /xtone-vanggame-front/target/m2e-wtp
+/xtone-dotnet-interface/admin.n8wan.com/log
+/xtone-dotnet-interface/admin.n8wan.com/Bin
+/xtone-dotnet-interface/n8wan.public/obj
+/xtone-dotnet-interface/n8wan.public/bin
+/xtone-dotnet-interface/Shotgun.Library/obj
+/xtone-dotnet-interface/Shotgun.Library/bin
+/xtone-dotnet-interface/spcallback.n8wan.com/Bin
+/xtone-dotnet-interface/*.suo
+/xtone-dotnet-interface/n8wan.public/*.scc
+/xtone-dotnet-interface/api2sp.n8wan.com/splog
+/xtone-dotnet-interface/packages
+/x-out-ad-server/WebRoot/WEB-INF/classes
+/x-out-ad-server-db/WebRoot/WEB-INF/classes
+/HtProject/target
+/popobird/bin
+
+#java below
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
