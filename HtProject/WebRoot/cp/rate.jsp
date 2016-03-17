@@ -1,98 +1,42 @@
-<%@page import="com.system.util.PinYinUtil"%>
-<%@page import="java.util.LinkedHashMap"%>
-<%@page import="com.system.server.CpServer"%>
-<%@page import="com.system.model.CpModel"%>
-<%@page import="com.system.model.CpJieSuanLvModel"%>
-<%@page import="com.system.server.CpJieSuanLvServer"%>
-<%@page import="com.system.server.SpServer"%>
-<%@page import="com.system.model.SpModel"%>
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.constant.Constant"%>
+<%@page import="com.system.model.CpSpTroneRateModel"%>
+<%@page import="java.util.List"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="java.util.HashMap"%>
-<%@page import="com.system.model.SpTroneModel"%>
-<%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.system.server.SpTroneServer"%>
-<%@page import="com.system.util.StringUtil"%>
+<%@page import="com.system.server.CpSpTroneRateServer"%>
+<%@page import="com.system.util.PinYinUtil"%>
+<%@ page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	int refresh = StringUtil.getInteger(request.getParameter("refresh"), -1);
+
+	if(refresh==1)
+	{
+		new CpSpTroneRateServer().syncUnAddCpSpTroneRate();
+	}
+
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	String spname = StringUtil.getString(request.getParameter("sp_trone_name"), "");
+	String keyWord = StringUtil.getString(request.getParameter("keyword"), "");
 	
-	String cpname = StringUtil.getString(request.getParameter("cp_name"), "");
-
-	int spId = StringUtil.getInteger(request.getParameter("nameid"), -1);
-	
-	int cpId = StringUtil.getInteger(request.getParameter("cp_nameid"), -1);
-
-	Map<String, Object> map =  new CpJieSuanLvServer().loadJieSuanLv(cpId, spId, pageIndex);
-		
-	List<CpJieSuanLvModel> list = (List<CpJieSuanLvModel>)map.get("list");
-	
-	List<SpModel> spList = new SpServer().loadSp();
-	/****************   SP  ********************/
-	Map<Integer,String> aToG = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> hToL = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> mToT = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> wToZ = new LinkedHashMap<Integer,String>();
-	PinYinUtil util = new PinYinUtil();
-	String str = "";
-	int temp;
-	for(SpModel model : spList){
-		str = util.getPinYinHeadChar(model.getShortName().substring(0,1));
-		temp = StringUtil.getInteger(StringUtil.stringToAscii(str), 0);
-		
-		if(temp>64&&temp<=71){
-			aToG.put(model.getId(), model.getShortName());
-		}else if(temp>71&&temp<=76){
-			hToL.put(model.getId(), model.getShortName());
-		}else if(temp>76&&temp<=84){
-			mToT.put(model.getId(), model.getShortName());
-		}else if(temp>84&&temp<=90){
-			wToZ.put(model.getId(), model.getShortName());
-		}
-	}
-	/****************   SP  ********************/
-	
-	
-	List<CpModel> cpList = new CpServer().loadCp();
-	/****************   CP  ********************/
-	Map<Integer,String> aToG2 = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> hToL2 = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> mToT2 = new LinkedHashMap<Integer,String>();
-	Map<Integer,String> wToZ2 = new LinkedHashMap<Integer,String>();
-	util = new PinYinUtil();
-	str = "";
-	for(CpModel model : cpList){
-		str = util.getPinYinHeadChar(model.getShortName().substring(0,1));
-		temp = StringUtil.getInteger(StringUtil.stringToAscii(str), 0);
-		
-		if(temp>64&&temp<=71){
-			aToG2.put(model.getId(), model.getShortName());
-		}else if(temp>71&&temp<=76){
-			hToL2.put(model.getId(), model.getShortName());
-		}else if(temp>76&&temp<=84){
-			mToT2.put(model.getId(), model.getShortName());
-		}else if(temp>84&&temp<=90){
-			wToZ2.put(model.getId(), model.getShortName());
-		}
-	}
-	/****************   CP  ********************/
-	
+	Map<String, Object> map = new CpSpTroneRateServer().loadCpSpTroneRate(keyWord, pageIndex); 
 	
 	int rowCount = (Integer)map.get("rows");
+	
+	List<CpSpTroneRateModel> list = (List<CpSpTroneRateModel>)map.get("list");
 	
 	Map<String, String> params = new HashMap<String,String>();
 	
 	params = new HashMap<String,String>();
-	params.put("sp_trone_name", spname);
-	params.put("cp_name", cpname);
-	params.put("nameid", spId + "");
-	params.put("cp_nameid", cpId + "");
 	
-	String pageData = PageUtil.initPageQuery("jiesuan.jsp",params,rowCount,pageIndex);
+	params.put("keyword", keyWord);
+	
+	String pageData = PageUtil.initPageQuery("rate.jsp",params,rowCount,pageIndex);
+	
+	String query = Base64UTF.encode(request.getQueryString());
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -114,19 +58,6 @@
 			window.location.href = "troneaction.jsp?did=" + id;	
 		}
 	}
-	
-	$(function()
-	{
-		$("#nameid").val(<%= spId %>);
-		$("#cp_nameid").val(<%= cpId %>);
-	});
-	
-	//声明整数的正则表达式
-	function isNum(a)
-	{
-		var reg=/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i;
-		return reg.test(a);
-	}
 
 	function editShowData(editId)
 	{
@@ -143,11 +74,11 @@
 	
 	function updateShowData(editId)
 	{
-		var newShowRows = $("#myput_" + editId).val();
+		var newShowRows = parseFloat($("#myput_" + editId).val());
 		
-		if (isNum(newShowRows))
+		if(isNaN(newShowRows) || newShowRows>=1 || newShowRows<=0)
 		{
-			alert("输入数据不正确");
+			alert("请输入介于0和1之间的数据");
 			return;
 		}
 		
@@ -156,10 +87,10 @@
 	
 	function updateDbData(editId,newShowRows)
 	{
-		$.post("jiesuanaction.jsp", 
+		$.post("rateaction.jsp", 
 		{
 			type : 1,
-			value : newShowRows,
+			rate : newShowRows,
 			id :editId 
 		}, 
 		function(data) 
@@ -183,94 +114,6 @@
 		$("#span_" + editId).html($("#hid_" + editId).val());
 	}
 	
-	function SP()
-	{
-		var obj = $("#SPtrone");
-		
-		var ss = obj.parent().find('.search_form_suggest');
-		
-		//点击本身显示隐藏
-        
-		if(obj.hasClass('boxSearchHover') )
-        {
-        	obj.removeClass('boxSearchHover');
-        	obj.children('.btn_search').removeClass('btn_search_current');
-        	obj.parent().find('#sp_search_form_suggest').hide();
-        }
-        else
-        {
-        	obj.addClass('boxSearchHover');
-        	obj.children('.btn_search').addClass('btn_search_current');
-        	obj.parent().find('#sp_search_form_suggest').show();
-        }
-		obj.next().find('.clr_after a').on('click',function(){
-            
-        	$('#sp_trone_name').val($(this).text());
-        	//alert($(this).find('.nameid').val());
-        	$('#nameid').val($(this).find('.nameid').val());
-        	obj.removeClass('boxSearchHover');
-        	obj.children('.btn_search').removeClass('btn_search_current');
-        	obj.parent().find('#sp_search_form_suggest').hide();
-        	obj.find('span.key_word b').text($(this).text());
-        	spChange();
-          });
-        //event.stopPropagation();
-        obj.next().find('.search_city_result a').click(function(){
-          
-        	obj.find('span.key_word b').text($(this).text());
-        });
-	}
-	
-	function CP(){
-		var obj = $("#CPtrone");
-		
-		var ss = obj.parent().find('.search_form_suggest');
-		
-		//点击本身显示隐藏
-        
-		if(obj.hasClass('boxSearchHover') )
-        {
-        	obj.removeClass('boxSearchHover');
-        	obj.children('.btn_search').removeClass('btn_search_current');
-        	obj.parent().find('#cp_search_form_suggest').hide();
-        }
-        else
-        {
-        	obj.addClass('boxSearchHover');
-        	obj.children('.btn_search').addClass('btn_search_current');
-        	obj.parent().find('#cp_search_form_suggest').show();
-        }
-		obj.next().find('.clr_after a').on('click',function(){
-            
-        	$('#cp_name').val($(this).text());
-        	//alert($(this).find('.nameid').val());
-        	$('#cp_nameid').val($(this).find('.nameid').val());
-        	obj.removeClass('boxSearchHover');
-        	obj.children('.btn_search').removeClass('btn_search_current');
-        	obj.parent().find('#cp_search_form_suggest').hide();
-        	obj.find('span.key_word b').text($(this).text());
-
-          });
-        //event.stopPropagation();
-        obj.next().find('.search_city_result a').click(function(){
-          
-        	obj.find('span.key_word b').text($(this).text());
-		
-        });
-	}
-	
-	function subForm() 
-	{
-		if (isNullOrEmpty($("#cp_name").val())) 
-		{
-			$("#cp_nameid").val(-1);
-		}
-		if (isNullOrEmpty($("#sp_trone_name").val())) 
-		{
-			$("#nameid").val(-1);
-		}
-		document.getElementById("addform").submit();
-	}
 	
 </script>
 
@@ -278,140 +121,14 @@
 	<div class="main_content">
 		<div class="content" >
 			<dl>
-				<dd class="ddbtn" ><a href="jiesuanadd.jsp">增  加</a></dd>
+				<dd class="ddbtn" ><a href="rate.jsp?refresh=1">导  入</a></dd>
 			</dl>
-			<form action="jiesuan.jsp"  method="post" style="margin-top: 10px" id="addform">
+			<form action="rate.jsp"  method="post" style="margin-top: 10px" id="addform">
 				<dl>
-				<dd class="dd01_me">CP</dd>		
-						<dd class="dd03_me" id="CPtrone">
-							<input name="cp_name"  value="<%=cpname %>" id="cp_name"
-								type="text" style="width: 150px" class="boxSearch" autocomplete="off" onclick="CP()">
-							<input type="hidden" id="cp_nameid" name="cp_nameid" >
-						</dd>				
-						<dd class="dd04_me">
-							<div class="search_form_suggest" id="cp_search_form_suggest" style="display:none;top:74px;left:34px;">
-								 <div class="thLeft thPadT5 tab_select">
-						            <dl class="clrfix">
-						              <dt>ABCDEFG</dt>
-						              	<dd class="clr_after">
-						              	<%
-						              		for(Map.Entry entry : aToG2.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-							             </dd>
-						              </dl>
-						             <dl class="clrfix">
-						              <dt>HIJKL</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : hToL2.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            <dl class="clrfix">
-						              <dt>MNOPQRST</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : mToT2.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            <dl class="clrfix">
-						              <dt>WSYZ</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : wToZ2.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            </div>
-							</div>
-						</dd>
-					<dd class="dd01_me"s >SP</dd>		
-						<dd class="dd03_me" id="SPtrone">
-							<input name="sp_trone_name2"  value="<%=spname %>" id="sp_trone_name"
-								type="text" style="width: 150px" class="boxSearch" autocomplete="off" onclick="SP()" >
-							<input type="hidden" id="nameid" name="nameid" >
-						</dd>				
-						<dd class="dd04_me">
-							<div class="search_form_suggest" id="sp_search_form_suggest" style="display:none;top:74px;left:295px;">
-								 <div class="thLeft thPadT5 tab_select">
-						            <dl class="clrfix">
-						              <dt>ABCDEFG</dt>
-						              	<dd class="clr_after">
-						              	<%
-						              		for(Map.Entry entry : aToG.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-							             </dd>
-						              </dl>
-						             <dl class="clrfix">
-						              <dt>HIJKL</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : hToL.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            <dl class="clrfix">
-						              <dt>MNOPQRST</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : mToT.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            <dl class="clrfix">
-						              <dt>WSYZ</dt>
-						              <dd class="clr_after">
-						                <%
-						              		for(Map.Entry entry : wToZ.entrySet()){
-						              	%>
-							                <a href="#"><%=entry.getValue().toString() %><input type="hidden" value="<%=entry.getKey() %>" class="nameid"></a>
-							                
-							             <%
-						              		}
-							             %>
-						              </dd>
-						            </dl>
-						            </div>
-							</div>
-						</dd>
+					<dd class="dd01_me">关键字</dd>
+						<dd class="dd03_me"><input type="text" name="keyword" value="<%= keyWord %>"  /></dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
-						<input class="btn_match" name="search" value="查     询" onclick="subForm()" />
+						<input class="btn_match" type="submit" name="search" value="查     询"  />
 					</dd>
 				</dl>
 			</form>
@@ -430,29 +147,27 @@
 			<tbody>
 				<%
 					int rowNum = 1;
-					for (CpJieSuanLvModel model : list)
+					for (CpSpTroneRateModel model : list)
 					{
 				%>
 				<tr>
 					<td>
 						<%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %>
-						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getJieSuanLv() %>" />
+						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getRate() %>" />
 					</td>
 					<td><%=model.getCpName()%></td>
 					<td><%=model.getSpName()%></td>
 					<td><%=model.getSpTroneName()%></td>
 					<td ondblclick="editShowData('<%= model.getId() %>')">
-						<span id="span_<%= model.getId() %>"><%= model.getJieSuanLv() %></span>
+						<span id="span_<%= model.getId() %>"><%= model.getRate() %></span>
 					</td>
 					<td>
-						<a href="jiesuanedit.jsp?id=<%= model.getId() %>">修改</a>
-						<a href="#" onclick="delTrone(<%= model.getId() %>)">删除</a>
+						<a href="#" href="ratesingle.jsp?query=<%= query %>&id=<%= model.getId() %>">列表</a>
 					</td>
 				</tr>
 				<%
 					}
 				%>
-				
 			<tbody>
 				<tr>
 					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>

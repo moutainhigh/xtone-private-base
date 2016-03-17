@@ -1,3 +1,4 @@
+<%@page import="com.system.server.CpSpTroneRateServer"%>
 <%@page import="com.system.server.CpJieSuanLvServer"%>
 <%@page import="com.system.util.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,8 +9,8 @@
 	if(type==1)
 	{
 		int id = StringUtil.getInteger(request.getParameter("id"), -1);
-		float value = StringUtil.getFloat(request.getParameter("value"), 0);
-		new CpJieSuanLvServer().updateJieSuandLv(id, value);
+		float rate = StringUtil.getFloat(request.getParameter("rate"), 0);
+		new CpSpTroneRateServer().updateCpSpTroneRate(id, rate);
 		out.println("OK");
 	}
 
