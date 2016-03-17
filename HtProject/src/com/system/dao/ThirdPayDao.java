@@ -28,7 +28,6 @@ public class ThirdPayDao
 		}
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-		
 //		String query = "";
 //		
 //		if(dataType>-1)
