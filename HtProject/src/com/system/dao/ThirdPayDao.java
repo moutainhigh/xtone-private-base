@@ -26,7 +26,6 @@ public class ThirdPayDao
 		}else if(dataType == 2){
 			payType = "wechatpay";
 		}
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 //		String query = "";
