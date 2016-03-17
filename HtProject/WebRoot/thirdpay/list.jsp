@@ -1,29 +1,10 @@
 <%@page import="com.system.model.ThirdPayModel"%>
 <%@page import="com.system.server.ThridPayServer"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.system.server.SpTroneServer"%>
-<%@page import="com.system.model.SpTroneModel"%>
-<%@page import="com.system.server.CityServer"%>
-<%@page import="com.system.model.CityModel"%>
-<%@page import="com.system.server.ProvinceServer"%>
-<%@page import="com.system.model.ProvinceModel"%>
-<%@page import="com.system.server.TroneOrderServer"%>
-<%@page import="com.system.model.TroneOrderModel"%>
-<%@page import="com.system.server.TroneServer"%>
-<%@page import="com.system.model.TroneModel"%>
-<%@page import="com.system.model.CpModel"%>
-<%@page import="com.system.server.CpServer"%>
-<%@page import="com.system.server.SpServer"%>
-<%@page import="com.system.model.SpModel"%>
-<%@page import="com.system.server.MrServer"%>
-<%@page import="com.system.model.MrReportModel"%>
-<%@page import="com.system.constant.Constant"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.util.PageUtil"%>
 <%@page import="java.util.Map"%>
-<%@page import="com.system.server.xy.UserServer"%>
-<%@page import="com.system.model.xy.XyUserModel"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="com.system.util.StringUtil"%>
@@ -42,17 +23,6 @@
 
 	Map<String, Object> map =  new ThridPayServer().getThridPayData(startDate, endDate, dataType);
 	
-	List<SpModel> spList = new SpServer().loadSp();
-	List<CpModel> cpList = new CpServer().loadCp();
-	List<TroneModel> troneList = new TroneServer().loadTroneList();
-	//List<TroneOrderModel> troneOrderList = new TroneOrderServer().loadTroneOrderList();
-	
-	List<TroneOrderModel> troneOrderList = new ArrayList();
-	
-	List<ProvinceModel> provinceList = new ProvinceServer().loadProvince();
-	List<CityModel> cityList = new CityServer().loadCityList();
-	List<SpTroneModel> spTroneList = new SpTroneServer().loadSpTroneList();
-		
 	List<ThirdPayModel> list = (List<ThirdPayModel>)map.get("list");
 	
 	int dataRows = (Integer)map.get("datarows");
@@ -78,164 +48,8 @@
 <script type="text/javascript" src="../sysjs/pinyin.js"></script>
 <script type="text/javascript" src="../sysjs/AndyNamePicker.js"></script>
 <script type="text/javascript">
-
-	var spList = new Array();
-	<%
-	for(SpModel spModel : spList)
-	{
-		%>
-		spList.push(new joSelOption(<%= spModel.getId() %>,1,'<%= spModel.getShortName() %>'));
-		<%
-	}
-	%>
-	
-	var cpList = new Array();
-	<%
-	for(CpModel cpModel : cpList)
-	{
-		%>
-		cpList.push(new joSelOption(<%= cpModel.getId() %>,1,'<%= cpModel.getShortName() %>'));
-		<%
-	}
-	%>
-	
-	function onSpDataSelect(joData)
-	{
-		$("#sel_sp").val(joData.id);
-		troneChange();
-	}
-	
-	function onCpDataSelect(joData)
-	{
-		$("#sel_cp").val(joData.id);
-		troneOrderChange();
-	}
-
-	function joCity(id,provinceId,name)
-	{
-		var obj = {};
-		obj.id = id;
-		obj.provinceId = provinceId;
-		obj.name = name;
-		return obj;
-	}
-	
-	function joTrone(id,spId,troneName)
-	{
-		var obj = {};
-		obj.id = id;
-		obj.spId = spId;
-		obj.troneName = troneName;
-		return obj;
-	}
-	
-	function joTroneOrder(id,cpId,troneOrderName)
-	{
-		var obj = {};
-		obj.id = id;
-		obj.cpId = cpId;
-		obj.troneOrderName = troneOrderName;
-		return obj;
-	}
-
-	var cityList = new Array();
-	<%for(CityModel city : cityList){%>
-	cityList.push(new joCity(<%= city.getId() %>,<%= city.getProvinceId() %>,'<%= city.getName() %>'));<%}%>
-		
-	var troneList = new Array();
-	<%for(TroneModel trone : troneList){%>
-	troneList.push(new joTrone(<%= trone.getId() %>,<%= trone.getSpId() %>,'<%= trone.getSpShortName() + "-" +trone.getTroneName() %>'));<%}%>
-	
-	var troneOrderList = new Array();
-	<%for(TroneOrderModel troneOrder : troneOrderList){%>
-	troneOrderList.push(new joTroneOrder(<%= troneOrder.getId() %>,<%= troneOrder.getCpId() %>,'<%= troneOrder.getCpShortName() + "-" +troneOrder.getOrderTroneName() %>'));<%}%>
-	
-	var spTroneArray = new Array();
-	<%
-	for(SpTroneModel spTroneModel : spTroneList)
-	{
-		%>
-	spTroneArray.push(new joBaseObject(<%= spTroneModel.getId() %>,<%=spTroneModel.getSpId() %>,'<%= spTroneModel.getSpTroneName() %>'));	
-		<%
-	}
-	%>
-	
-	$(function()
-	{
-		
-		//$("#sel_data_type").val(<%= dataType %>);
-		
-	});
 	
 	
-	var npSpTroneArray = new Array();
-	
-	<%
-	for(SpTroneModel spTroneModel : spTroneList)
-	{
-		%>
-		npSpTroneArray.push(new joSelOption(<%= spTroneModel.getId() %>,<%=spTroneModel.getSpId() %>,'<%= spTroneModel.getSpTroneName() %>'));	
-		<%
-	}
-	%>
-	
-	function npSpTroneChange(jodata)
-	{
-		$("#sel_sp_trone").val(jodata.id);
-	}
-	
-	function troneChange()
-	{
-		var spId = $("#sel_sp").val();
-		
-		$("#sel_sp_trone").empty(); 
-		$("#sel_sp_trone").append("<option value='-1'>全部</option>");
-		for(i=0; i<spTroneArray.length; i++)
-		{
-			if(spTroneArray[i].pid==spId || spId=="-1")
-			{
-				$("#sel_sp_trone").append("<option value='" + spTroneArray[i].id + "'>" + spTroneArray[i].name + "</option>");
-			}
-		}
-		
-		$("#sel_trone").empty(); 
-		$("#sel_trone").append("<option value='-1'>全部</option>");
-		for(i=0; i<troneList.length; i++)
-		{
-			if(troneList[i].spId==spId || spId=="-1")
-			{
-				$("#sel_trone").append("<option value='" + troneList[i].id + "'>" + troneList[i].troneName + "</option>");
-			}
-		}
-	}
-	
-	function troneOrderChange()
-	{
-		var cpId = $("#sel_cp").val();
-		$("#sel_trone_order").empty(); 
-		$("#sel_trone_order").append("<option value='-1'>全部</option>");
-		for(i=0; i<troneOrderList.length; i++)
-		{
-			if(troneOrderList[i].cpId==cpId || cpId=="-1")
-			{
-				$("#sel_trone_order").append("<option value='" + troneOrderList[i].id + "'>" + troneOrderList[i].troneOrderName + "</option>");
-			}
-		}
-	}
-	
-	function provinceChange()
-	{
-		var provinceId = $("#sel_province").val();
-		$("#sel_city").empty(); 
-		$("#sel_city").append("<option value='-1'>全部</option>");
-		for(i=0; i<cityList.length; i++)
-		{
-			if(cityList[i].provinceId==provinceId || provinceId=="-1")
-			{
-				$("#sel_city").append("<option value='" + cityList[i].id + "'>" + cityList[i].name + "</option>");
-			}
-		}
-	}
 	
 	
 </script>
@@ -304,13 +118,6 @@
 						<%
 					}
 				%>
-			<tbody>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>总金额：<%= dataRows %></td>
-				</tr>
-			</tbody>
 		</table>
 	</div>
 	
