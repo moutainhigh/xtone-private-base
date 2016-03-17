@@ -446,7 +446,7 @@ namespace Shotgun.Model.List
             finally
             {
 
-                cmd.Cancel();//可快速关闭reader
+                //cmd.Cancel();//可快速关闭reader
                 if (reader != null)
                     reader.Dispose();
                 cmd.Dispose();

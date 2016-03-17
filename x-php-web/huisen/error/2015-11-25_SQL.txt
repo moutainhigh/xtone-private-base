@@ -1,0 +1,1765 @@
+数据库不可用：
+
+客户IP:180.76.15.146
+时间 :2015-11-25 00:12:25
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.146
+时间 :2015-11-25 00:12:27
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.146
+时间 :2015-11-25 00:12:27
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.146
+时间 :2015-11-25 00:12:27
+
+数据库不可用：
+
+客户IP:180.76.15.10
+时间 :2015-11-25 00:14:09
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.10
+时间 :2015-11-25 00:14:11
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.10
+时间 :2015-11-25 00:14:11
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.10
+时间 :2015-11-25 00:14:11
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 00:29:14
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 00:30:31
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:33:39
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:33:47
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=4 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:33:49
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:33:51
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=4 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:33:53
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:34:12
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=5 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.107
+时间 :2015-11-25 01:34:14
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:34:36
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:39
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:42
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:44
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:46
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:34:46
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=3 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:48
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:51
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.82
+时间 :2015-11-25 01:34:54
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:34:55
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:35:00
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:35:05
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:35:06
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=4 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:35:08
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:35:09
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=3 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.82
+时间 :2015-11-25 01:35:11
+
+数据库不可用：
+
+客户IP:157.55.39.190
+时间 :2015-11-25 01:35:14
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:35:18
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=6 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:35:20
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:35:42
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:35:44
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:35:53
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:02
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:36:05
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:36:07
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:07
+
+数据库不可用：
+
+客户IP:157.55.39.190
+时间 :2015-11-25 01:36:10
+
+数据库不可用：
+
+客户IP:157.55.39.190
+时间 :2015-11-25 01:36:17
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:20
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:22
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:31
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=2 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:33
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:36:34
+
+数据库不可用：
+
+客户IP:157.55.39.191
+时间 :2015-11-25 01:36:35
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:36:38
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:36:38
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:207.46.13.107
+时间 :2015-11-25 01:36:40
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:36:53
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:37:06
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:37:07
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=5 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.107
+时间 :2015-11-25 01:37:08
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:37:10
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:10
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:207.46.13.107
+时间 :2015-11-25 01:37:12
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=6 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:12
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:13
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:19
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:19
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:21
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:21
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:21
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:22
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:37:25
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:32
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:37
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:39
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:42
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:37:44
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:37:47
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:37:49
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:37:52
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:57
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=2 order by orderSort desc, id desc  LIMIT 40
+客户IP:157.55.39.208
+时间 :2015-11-25 01:37:59
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:38:04
+
+数据库不可用：
+
+客户IP:157.55.39.191
+时间 :2015-11-25 01:38:33
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:38:45
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:38:45
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:38:47
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:38:49
+
+数据库不可用：
+
+客户IP:157.55.39.208
+时间 :2015-11-25 01:38:59
+
+数据库不可用：
+
+客户IP:157.55.39.190
+时间 :2015-11-25 01:39:06
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:39:32
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:207.46.13.82
+时间 :2015-11-25 01:39:34
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:39:34
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:207.46.13.82
+时间 :2015-11-25 01:39:34
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:39:37
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:39:50
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:40:30
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:207.46.13.82
+时间 :2015-11-25 01:40:32
+
+数据库不可用：
+
+客户IP:157.55.39.222
+时间 :2015-11-25 01:40:42
+
+数据库不可用：
+
+客户IP:207.46.13.107
+时间 :2015-11-25 01:40:48
+
+数据库不可用：
+
+客户IP:207.46.13.82
+时间 :2015-11-25 01:41:28
+
+数据库不可用：
+
+客户IP:68.180.229.89
+时间 :2015-11-25 02:52:33
+
+错误SQL语句：
+SELECT * FROM cases  Where id='33'
+客户IP:68.180.229.89
+时间 :2015-11-25 02:52:35
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'33' order by id desc limit 1
+客户IP:68.180.229.89
+时间 :2015-11-25 02:52:35
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'33' order by id asc limit 1
+客户IP:68.180.229.89
+时间 :2015-11-25 02:52:35
+
+数据库不可用：
+
+客户IP:123.125.68.163
+时间 :2015-11-25 02:56:05
+
+错误SQL语句：
+SELECT * FROM news  Where nid='53'
+客户IP:123.125.68.163
+时间 :2015-11-25 02:56:07
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'53' order by nid desc limit 1
+客户IP:123.125.68.163
+时间 :2015-11-25 02:56:07
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'53' order by nid asc limit 1
+客户IP:123.125.68.163
+时间 :2015-11-25 02:56:07
+
+数据库不可用：
+
+客户IP:151.80.31.137
+时间 :2015-11-25 03:37:25
+
+错误SQL语句：
+SELECT * FROM news  Where nid='47'
+客户IP:151.80.31.137
+时间 :2015-11-25 03:37:27
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'47' order by nid desc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 03:37:27
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'47' order by nid asc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 03:37:27
+
+数据库不可用：
+
+客户IP:68.180.229.89
+时间 :2015-11-25 04:38:56
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:68.180.229.89
+时间 :2015-11-25 04:38:58
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:68.180.229.89
+时间 :2015-11-25 04:38:58
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:68.180.229.89
+时间 :2015-11-25 04:38:58
+
+数据库不可用：
+
+客户IP:180.76.15.136
+时间 :2015-11-25 05:00:20
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.136
+时间 :2015-11-25 05:00:22
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.136
+时间 :2015-11-25 05:00:22
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.136
+时间 :2015-11-25 05:00:22
+
+数据库不可用：
+
+客户IP:180.76.15.141
+时间 :2015-11-25 05:00:58
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.141
+时间 :2015-11-25 05:01:00
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.141
+时间 :2015-11-25 05:01:00
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.141
+时间 :2015-11-25 05:01:00
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 05:02:49
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 05:02:51
+
+数据库不可用：
+
+客户IP:151.80.31.137
+时间 :2015-11-25 05:49:35
+
+错误SQL语句：
+SELECT * FROM cases  Where id='27'
+客户IP:151.80.31.137
+时间 :2015-11-25 05:49:37
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'27' order by id desc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 05:49:37
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'27' order by id asc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 05:49:37
+
+数据库不可用：
+
+客户IP:182.118.21.208
+时间 :2015-11-25 06:41:09
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:182.118.21.208
+时间 :2015-11-25 06:41:12
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:182.118.21.208
+时间 :2015-11-25 06:41:12
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:182.118.21.208
+时间 :2015-11-25 06:41:12
+
+数据库不可用：
+
+客户IP:220.181.108.78
+时间 :2015-11-25 07:27:18
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.78
+时间 :2015-11-25 07:27:20
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.78
+时间 :2015-11-25 07:27:20
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.78
+时间 :2015-11-25 07:27:20
+
+数据库不可用：
+
+客户IP:123.125.71.22
+时间 :2015-11-25 07:28:12
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.22
+时间 :2015-11-25 07:28:14
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.22
+时间 :2015-11-25 07:28:14
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.22
+时间 :2015-11-25 07:28:14
+
+数据库不可用：
+
+客户IP:203.208.60.42
+时间 :2015-11-25 08:12:44
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:203.208.60.42
+时间 :2015-11-25 08:12:46
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:203.208.60.42
+时间 :2015-11-25 08:12:46
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:203.208.60.42
+时间 :2015-11-25 08:12:46
+
+数据库不可用：
+
+客户IP:123.125.71.116
+时间 :2015-11-25 08:20:10
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.116
+时间 :2015-11-25 08:20:13
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.116
+时间 :2015-11-25 08:20:13
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.116
+时间 :2015-11-25 08:20:13
+
+数据库不可用：
+
+客户IP:220.181.108.84
+时间 :2015-11-25 08:33:34
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.84
+时间 :2015-11-25 08:33:36
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.84
+时间 :2015-11-25 08:33:36
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.84
+时间 :2015-11-25 08:33:36
+
+数据库不可用：
+
+客户IP:183.60.243.242
+时间 :2015-11-25 08:34:33
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:183.60.243.242
+时间 :2015-11-25 08:34:35
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:183.60.243.242
+时间 :2015-11-25 08:34:35
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:183.60.243.242
+时间 :2015-11-25 08:34:35
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 09:03:45
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:61.177.139.221
+时间 :2015-11-25 09:03:47
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:61.177.139.221
+时间 :2015-11-25 09:03:47
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:61.177.139.221
+时间 :2015-11-25 09:03:47
+
+数据库不可用：
+
+客户IP:123.125.71.90
+时间 :2015-11-25 09:20:42
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.90
+时间 :2015-11-25 09:20:44
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.90
+时间 :2015-11-25 09:20:44
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.90
+时间 :2015-11-25 09:20:44
+
+数据库不可用：
+
+客户IP:220.181.108.102
+时间 :2015-11-25 09:33:34
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.102
+时间 :2015-11-25 09:33:36
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.102
+时间 :2015-11-25 09:33:36
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.102
+时间 :2015-11-25 09:33:36
+
+数据库不可用：
+
+客户IP:123.125.71.83
+时间 :2015-11-25 10:20:57
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.83
+时间 :2015-11-25 10:20:59
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.83
+时间 :2015-11-25 10:20:59
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.83
+时间 :2015-11-25 10:20:59
+
+数据库不可用：
+
+客户IP:220.181.108.144
+时间 :2015-11-25 10:27:24
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.144
+时间 :2015-11-25 10:27:26
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.144
+时间 :2015-11-25 10:27:26
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.144
+时间 :2015-11-25 10:27:26
+
+数据库不可用：
+
+客户IP:123.125.67.147
+时间 :2015-11-25 10:28:04
+
+错误SQL语句：
+SELECT * FROM news  Where nid='53'
+客户IP:123.125.67.147
+时间 :2015-11-25 10:28:06
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'53' order by nid desc limit 1
+客户IP:123.125.67.147
+时间 :2015-11-25 10:28:06
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'53' order by nid asc limit 1
+客户IP:123.125.67.147
+时间 :2015-11-25 10:28:06
+
+数据库不可用：
+
+客户IP:58.62.148.161
+时间 :2015-11-25 10:44:48
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:58.62.148.161
+时间 :2015-11-25 10:44:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:58.62.148.161
+时间 :2015-11-25 10:44:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:58.62.148.161
+时间 :2015-11-25 10:44:50
+
+数据库不可用：
+
+客户IP:123.125.71.85
+时间 :2015-11-25 11:20:48
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.85
+时间 :2015-11-25 11:20:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.85
+时间 :2015-11-25 11:20:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.85
+时间 :2015-11-25 11:20:50
+
+数据库不可用：
+
+客户IP:220.181.108.177
+时间 :2015-11-25 11:33:26
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.177
+时间 :2015-11-25 11:33:29
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.177
+时间 :2015-11-25 11:33:29
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.177
+时间 :2015-11-25 11:33:29
+
+数据库不可用：
+
+客户IP:123.125.71.86
+时间 :2015-11-25 12:21:16
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.86
+时间 :2015-11-25 12:21:18
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.86
+时间 :2015-11-25 12:21:18
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.86
+时间 :2015-11-25 12:21:18
+
+数据库不可用：
+
+客户IP:220.181.108.157
+时间 :2015-11-25 12:31:21
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.157
+时间 :2015-11-25 12:31:23
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.157
+时间 :2015-11-25 12:31:23
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.157
+时间 :2015-11-25 12:31:23
+
+数据库不可用：
+
+客户IP:180.76.15.13
+时间 :2015-11-25 12:44:12
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.13
+时间 :2015-11-25 12:44:14
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.13
+时间 :2015-11-25 12:44:14
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.13
+时间 :2015-11-25 12:44:14
+
+数据库不可用：
+
+客户IP:180.76.15.22
+时间 :2015-11-25 12:44:56
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.22
+时间 :2015-11-25 12:44:58
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.22
+时间 :2015-11-25 12:44:58
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.22
+时间 :2015-11-25 12:44:58
+
+数据库不可用：
+
+客户IP:203.208.60.34
+时间 :2015-11-25 13:01:24
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:203.208.60.34
+时间 :2015-11-25 13:01:26
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:203.208.60.34
+时间 :2015-11-25 13:01:26
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:203.208.60.34
+时间 :2015-11-25 13:01:26
+
+数据库不可用：
+
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:33
+
+错误SQL语句：
+SELECT * FROM news  Where nid='20'
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:35
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'20' order by nid desc limit 1
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:35
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'20' order by nid asc limit 1
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:35
+
+数据库不可用：
+
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:38
+
+数据库不可用：
+
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:44
+
+错误SQL语句：
+SELECT * FROM cases  Where id='3'
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:46
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'3' order by id desc limit 1
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:46
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'3' order by id asc limit 1
+客户IP:69.30.210.242
+时间 :2015-11-25 13:17:46
+
+数据库不可用：
+
+客户IP:123.125.71.109
+时间 :2015-11-25 13:21:57
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.109
+时间 :2015-11-25 13:21:59
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.109
+时间 :2015-11-25 13:21:59
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.109
+时间 :2015-11-25 13:21:59
+
+数据库不可用：
+
+客户IP:220.181.108.154
+时间 :2015-11-25 13:33:23
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.154
+时间 :2015-11-25 13:33:25
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.154
+时间 :2015-11-25 13:33:25
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.154
+时间 :2015-11-25 13:33:25
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 14:04:41
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 14:04:54
+
+数据库不可用：
+
+客户IP:68.180.229.89
+时间 :2015-11-25 14:08:27
+
+数据库不可用：
+
+客户IP:123.125.71.84
+时间 :2015-11-25 14:21:31
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.84
+时间 :2015-11-25 14:21:33
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.84
+时间 :2015-11-25 14:21:33
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.84
+时间 :2015-11-25 14:21:33
+
+数据库不可用：
+
+客户IP:220.181.108.145
+时间 :2015-11-25 14:33:18
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.145
+时间 :2015-11-25 14:33:20
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.145
+时间 :2015-11-25 14:33:20
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.145
+时间 :2015-11-25 14:33:20
+
+数据库不可用：
+
+客户IP:123.125.71.79
+时间 :2015-11-25 15:21:02
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.79
+时间 :2015-11-25 15:21:04
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.79
+时间 :2015-11-25 15:21:04
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.79
+时间 :2015-11-25 15:21:04
+
+数据库不可用：
+
+客户IP:220.181.108.187
+时间 :2015-11-25 15:32:48
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.187
+时间 :2015-11-25 15:32:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.187
+时间 :2015-11-25 15:32:50
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.187
+时间 :2015-11-25 15:32:50
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 16:48:14
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 16:48:24
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 16:51:34
+
+数据库不可用：
+
+客户IP:68.180.230.187
+时间 :2015-11-25 17:18:51
+
+错误SQL语句：
+SELECT * FROM news  Where nid='49'
+客户IP:68.180.230.187
+时间 :2015-11-25 17:18:53
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'49' order by nid desc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 17:18:53
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'49' order by nid asc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 17:18:53
+
+数据库不可用：
+
+客户IP:220.181.108.159
+时间 :2015-11-25 18:08:03
+
+错误SQL语句：
+SELECT * FROM news  Where nid='50'
+客户IP:220.181.108.159
+时间 :2015-11-25 18:08:05
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'50' order by nid desc limit 1
+客户IP:220.181.108.159
+时间 :2015-11-25 18:08:05
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'50' order by nid asc limit 1
+客户IP:220.181.108.159
+时间 :2015-11-25 18:08:05
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 18:16:19
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=3 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 18:16:22
+
+数据库不可用：
+
+客户IP:68.180.230.187
+时间 :2015-11-25 18:43:57
+
+错误SQL语句：
+SELECT * FROM news  Where nid='50'
+客户IP:68.180.230.187
+时间 :2015-11-25 18:43:59
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'50' order by nid desc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 18:43:59
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'50' order by nid asc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 18:43:59
+
+数据库不可用：
+
+客户IP:42.156.138.69
+时间 :2015-11-25 18:54:50
+
+错误SQL语句：
+SELECT * FROM news  Where nid='54'
+客户IP:42.156.138.69
+时间 :2015-11-25 18:54:52
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'54' order by nid desc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-25 18:54:52
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'54' order by nid asc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-25 18:54:52
+
+数据库不可用：
+
+客户IP:42.156.137.69
+时间 :2015-11-25 18:54:53
+
+错误SQL语句：
+SELECT * FROM cases  Where id='41'
+客户IP:42.156.137.69
+时间 :2015-11-25 18:54:55
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'41' order by id desc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-25 18:54:55
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'41' order by id asc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-25 18:54:55
+
+数据库不可用：
+
+客户IP:42.120.161.69
+时间 :2015-11-25 18:54:57
+
+错误SQL语句：
+SELECT * FROM cases  Where id='4'
+客户IP:42.120.161.69
+时间 :2015-11-25 18:54:59
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'4' order by id desc limit 1
+客户IP:42.120.161.69
+时间 :2015-11-25 18:54:59
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'4' order by id asc limit 1
+客户IP:42.120.161.69
+时间 :2015-11-25 18:54:59
+
+数据库不可用：
+
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:00
+
+错误SQL语句：
+SELECT * FROM cases  Where id='33'
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:02
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'33' order by id desc limit 1
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:02
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'33' order by id asc limit 1
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:02
+
+数据库不可用：
+
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:04
+
+数据库不可用：
+
+客户IP:42.120.160.69
+时间 :2015-11-25 18:55:05
+
+错误SQL语句：
+SELECT * FROM cases  Where id='46'
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:06
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'46' order by id desc limit 1
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:06
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'46' order by id asc limit 1
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:06
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:42.120.160.69
+时间 :2015-11-25 18:55:07
+
+数据库不可用：
+
+客户IP:42.156.138.69
+时间 :2015-11-25 18:55:09
+
+数据库不可用：
+
+客户IP:42.156.137.69
+时间 :2015-11-25 18:55:11
+
+错误SQL语句：
+SELECT * FROM news  Where nid='53'
+客户IP:42.156.138.69
+时间 :2015-11-25 18:55:11
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'53' order by nid desc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-25 18:55:11
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'53' order by nid asc limit 1
+客户IP:42.156.138.69
+时间 :2015-11-25 18:55:11
+
+错误SQL语句：
+SELECT * FROM news  Where nid='15'
+客户IP:42.156.137.69
+时间 :2015-11-25 18:55:13
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'15' order by nid desc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-25 18:55:13
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'15' order by nid asc limit 1
+客户IP:42.156.137.69
+时间 :2015-11-25 18:55:13
+
+数据库不可用：
+
+客户IP:42.120.161.69
+时间 :2015-11-25 18:55:15
+
+错误SQL语句：
+SELECT * FROM cases  Where id='37'
+客户IP:42.120.161.69
+时间 :2015-11-25 18:55:17
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'37' order by id desc limit 1
+客户IP:42.120.161.69
+时间 :2015-11-25 18:55:17
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'37' order by id asc limit 1
+客户IP:42.120.161.69
+时间 :2015-11-25 18:55:17
+
+数据库不可用：
+
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:18
+
+数据库不可用：
+
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:19
+
+错误SQL语句：
+SELECT * FROM cases  Where id='38'
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:20
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'38' order by id desc limit 1
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:20
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'38' order by id asc limit 1
+客户IP:42.156.139.69
+时间 :2015-11-25 18:55:20
+
+错误SQL语句：
+SELECT * FROM news  Where nid='2'
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:21
+
+错误SQL语句：
+SELECT nid FROM news  Where nid<'2' order by nid desc limit 1
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:21
+
+错误SQL语句：
+SELECT nid FROM news  Where nid>'2' order by nid asc limit 1
+客户IP:42.156.136.69
+时间 :2015-11-25 18:55:21
+
+数据库不可用：
+
+客户IP:68.180.230.187
+时间 :2015-11-25 19:11:01
+
+错误SQL语句：
+SELECT * FROM cases  Where id='41'
+客户IP:68.180.230.187
+时间 :2015-11-25 19:11:03
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'41' order by id desc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 19:11:03
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'41' order by id asc limit 1
+客户IP:68.180.230.187
+时间 :2015-11-25 19:11:03
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 20:00:12
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=6 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 20:00:14
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 20:10:52
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=4 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 20:10:54
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 20:11:01
+
+数据库不可用：
+
+客户IP:151.80.31.137
+时间 :2015-11-25 20:38:48
+
+数据库不可用：
+
+客户IP:151.80.31.137
+时间 :2015-11-25 20:46:37
+
+错误SQL语句：
+SELECT * FROM cases  Where id='16'
+客户IP:151.80.31.137
+时间 :2015-11-25 20:46:39
+
+错误SQL语句：
+SELECT id FROM cases  Where id<'16' order by id desc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 20:46:39
+
+错误SQL语句：
+SELECT id FROM cases  Where id>'16' order by id asc limit 1
+客户IP:151.80.31.137
+时间 :2015-11-25 20:46:39
+
+数据库不可用：
+
+客户IP:180.76.15.29
+时间 :2015-11-25 20:48:29
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.29
+时间 :2015-11-25 20:48:31
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.29
+时间 :2015-11-25 20:48:31
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.29
+时间 :2015-11-25 20:48:31
+
+数据库不可用：
+
+客户IP:180.76.15.149
+时间 :2015-11-25 20:49:21
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:180.76.15.149
+时间 :2015-11-25 20:49:23
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:180.76.15.149
+时间 :2015-11-25 20:49:23
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:180.76.15.149
+时间 :2015-11-25 20:49:23
+
+数据库不可用：
+
+客户IP:220.181.108.155
+时间 :2015-11-25 20:50:09
+
+数据库不可用：
+
+客户IP:68.180.230.187
+时间 :2015-11-25 20:54:04
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:68.180.230.187
+时间 :2015-11-25 20:54:06
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 21:30:22
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=2 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 21:30:24
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 21:31:07
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=5 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 21:31:09
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 21:37:44
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 and type=1 order by orderSort desc, id desc  LIMIT 40
+客户IP:61.177.139.221
+时间 :2015-11-25 21:37:46
+
+数据库不可用：
+
+客户IP:220.181.108.179
+时间 :2015-11-25 22:26:31
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.179
+时间 :2015-11-25 22:26:33
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.179
+时间 :2015-11-25 22:26:33
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.179
+时间 :2015-11-25 22:26:33
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 22:35:01
+
+数据库不可用：
+
+客户IP:61.177.139.221
+时间 :2015-11-25 22:35:09
+
+数据库不可用：
+
+客户IP:123.125.71.82
+时间 :2015-11-25 23:20:07
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:123.125.71.82
+时间 :2015-11-25 23:20:09
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:123.125.71.82
+时间 :2015-11-25 23:20:09
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:123.125.71.82
+时间 :2015-11-25 23:20:09
+
+数据库不可用：
+
+客户IP:220.181.108.176
+时间 :2015-11-25 23:31:36
+
+错误SQL语句：
+SELECT * FROM cases  Where status=1 order by orderSort desc, id desc  LIMIT 15
+客户IP:220.181.108.176
+时间 :2015-11-25 23:31:38
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=1 order by nid desc  LIMIT 8
+客户IP:220.181.108.176
+时间 :2015-11-25 23:31:38
+
+错误SQL语句：
+SELECT * FROM news  Where nstatus=1 and ntype=2 order by nid desc  LIMIT 8
+客户IP:220.181.108.176
+时间 :2015-11-25 23:31:38
+

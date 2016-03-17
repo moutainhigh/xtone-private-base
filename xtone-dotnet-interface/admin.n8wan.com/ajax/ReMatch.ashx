@@ -11,23 +11,26 @@ public class ReMatch : Shotgun.PagePlus.SimpleHttpHandler<Shotgun.Database.MySql
         int id = int.Parse(Request["id"]);
 
         var m = LightDataModel.tbl_mrItem.GetRowById(dBase, id);
+        LightDataModel.tbl_troneItem trone = null;
         if (!m.IsMatch)
         {
-
-            if (!n8wan.Public.Logical.BaseSPCallback.FillToneId(dBase, m))
+            trone = n8wan.Public.Logical.BaseSPCallback.FillToneId(dBase, m);
+            if (trone == null)
             {
                 Ajax.message = "匹对失败";
                 return;
             }
             //m.trone_id = tid;
-            //m.IsMatch = true;
+            m.IsMatch = true;
             dBase.SaveData(m);
         }
+        else
+            trone = LightDataModel.tbl_troneItem.GetRowById(dBase, m.trone_id);
 
         var apiPush = new n8wan.Public.Logical.HTAPIPusher()
         {
             dBase = dBase,
-            TroneId = m.trone_id,
+            Trone = trone,
             LogFile = Server.MapPath(string.Format("~/PushLog/{0:yyyyMMdd}.log", DateTime.Today))
         };
         if (apiPush.LoadCPAPI())
@@ -42,7 +45,7 @@ public class ReMatch : Shotgun.PagePlus.SimpleHttpHandler<Shotgun.Database.MySql
 
         var cp = new n8wan.Public.Logical.AutoMapPush();
         cp.dBase = dBase;
-        cp.TroneId = m.trone_id;
+        cp.Trone = trone;
         //cp.UnionUserId = -1;
         cp.LogFile = Server.MapPath(string.Format("~/PushLog/{0:yyyyMMdd}.log", DateTime.Today));
 
