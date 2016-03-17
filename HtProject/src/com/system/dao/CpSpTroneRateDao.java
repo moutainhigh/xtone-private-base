@@ -114,7 +114,10 @@ public class CpSpTroneRateDao
 	
 	public void addCpSpTroneRate(CpSpTroneRateModel model)
 	{
-		String sql = "";
+		String sql = "insert into daily_config.tbl_cp_trone_rate(cp_id,sp_trone_id,rate) values(?,?,?)";
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		map.put(1, model.getCpId());
+		
 	}
 	
 	public void updateCpSpTroneRate(CpSpTroneRateModel model)
