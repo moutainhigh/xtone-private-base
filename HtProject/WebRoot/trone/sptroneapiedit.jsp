@@ -95,7 +95,7 @@
 		var files = apiFildes.split(",");
 		for(i=0; i<files.length; i++)
 		{
-			document.getElementById("api_fields_" + i).checked = true;	
+			document.getElementById("api_fields_" + files[i]).checked = true;	
 		}
 	});
 	

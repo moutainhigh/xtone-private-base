@@ -93,7 +93,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -201,7 +201,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -404,7 +404,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -512,7 +512,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
