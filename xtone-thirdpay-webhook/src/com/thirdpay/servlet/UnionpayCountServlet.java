@@ -92,7 +92,7 @@ public class UnionpayCountServlet extends HttpServlet {
 	}
 
 	public static String getPayInfo(HttpServletRequest request) {
-		String payInfo ="";
+		String payInfo = null;
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
 

@@ -17,8 +17,8 @@ public class ThirdPayDao
 {
 	public Map<String, Object> getThirdPayData(String startDate, String endDate,int dataType)
 	{
-		//åˆ¤æ–­æ•°å€¼
-		String payType=""; //å‚æ•°ä¸ºæ”¯ä»˜ç±»å‹
+		//ÅĞ¶ÏÊıÖµ
+		String payType=""; //²ÎÊıÎªÖ§¸¶ÀàĞÍ
 		if(dataType == 0){
 			payType = "alipay";
 		}else if(dataType == 1){
@@ -45,7 +45,7 @@ public class ThirdPayDao
 		if(!StringUtil.isNullOrEmpty(endDate))
 			sql += " and id<=UNIX_TIMESTAMP('"+endDate+"')*1000*1000000 ";
 		
-		sql+="order by id desc";  //å€’å™æ’åº
+		sql+="order by id desc";  //µ¹ĞğÅÅĞò
 		
 //		String sql = "select a.show_title,aa,bb,cc,dd from (";
 //		sql += " select  " + joinId + " join_id," + queryParams + " show_title,sum(a.data_rows) aa,sum(a.amount) bb";
