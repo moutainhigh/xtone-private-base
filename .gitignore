@@ -19,4 +19,17 @@
 /x-out-ad-server/WebRoot/WEB-INF/classes
 /x-out-ad-server-db/WebRoot/WEB-INF/classes
 /HtProject/target
-/HtProject-sp-callback/target
+/popobird/bin
+
+#java below
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*

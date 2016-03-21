@@ -103,7 +103,7 @@ var doSave = function(pager) {
 
 var uploadnotifyApp = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'notifyfileToUpload',
 		dataType : 'json', //or json xml whatever you like~
@@ -125,7 +125,7 @@ var uploadnotifyApp = function() {
 var uploadImage = function() { 
 	alert("uploadImage=>");
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'imageToUpload',
 		dataType : 'json', //or json xml whatever you like~
@@ -144,7 +144,7 @@ var uploadImage = function() {
 
 var uploadnotifyApp2 = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'notifyfileToUpload2',
 		dataType : 'json', //or json xml whatever you like~
@@ -166,7 +166,7 @@ var uploadnotifyApp2 = function() {
 var uploadImage2 = function() { 
 	alert("uploadImage=>");
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'imageToUpload2',
 		dataType : 'json', //or json xml whatever you like~
@@ -186,7 +186,7 @@ var uploadImage2 = function() {
 
 var uploadnotifyApp3 = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'notifyfileToUpload3',
 		dataType : 'json', //or json xml whatever you like~
@@ -208,7 +208,7 @@ var uploadnotifyApp3 = function() {
 var uploadImage3 = function() { 
 	alert("uploadImage=>");
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'imageToUpload3',
 		dataType : 'json', //or json xml whatever you like~
@@ -228,7 +228,7 @@ var uploadImage3 = function() {
 
 var uploadnotifyApp4 = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'notifyfileToUpload4',
 		dataType : 'json', //or json xml whatever you like~
@@ -250,7 +250,7 @@ var uploadnotifyApp4 = function() {
 var uploadImage4 = function() { 
 	alert("uploadImage=>");
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'imageToUpload4',
 		dataType : 'json', //or json xml whatever you like~

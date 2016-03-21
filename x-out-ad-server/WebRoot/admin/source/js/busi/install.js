@@ -37,7 +37,7 @@ var initVariable = function()
 var uploadInstallApp = function() { 
 	alert("ui1");
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'fileInstallToUpload',
 		dataType : 'json', //or json xml whatever you like~

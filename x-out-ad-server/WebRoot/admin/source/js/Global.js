@@ -1,3 +1,5 @@
+//var SERVER_URL="http://121.40.138.91:8080/hlpads";
+var SERVER_URL="http://localhost:8080/hlpads";
 var SERVERURL="/hlpads/adminmanager/";
 var PAGESIZE=20;
 var REQUEST_SUCESS = "1";// 处理正常
