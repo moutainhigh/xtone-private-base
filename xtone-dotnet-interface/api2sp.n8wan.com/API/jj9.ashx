@@ -99,6 +99,12 @@ public class jj9 : sdk_Request.Logical.APIRequestGet
                 case 910009:
                     SetError(sdk_Request.Logical.API_ERROR.VERIFY_CODE_ERROR, rlt.resultMsg);
                     return null;
+                case 110401:
+                    SetError(sdk_Request.Logical.API_ERROR.AREA_CLOSE, rlt.resultMsg);
+                    return null;
+                case 110201:
+                    SetError(sdk_Request.Logical.API_ERROR.BLACK_USER, rlt.resultMsg);
+                    return null;
                 default:
                     SetError(sdk_Request.Logical.API_ERROR.GET_CMD_FAIL, rlt.resultMsg);
                     return null;
