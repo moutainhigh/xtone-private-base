@@ -109,7 +109,7 @@ public class jj6 : sdk_Request.Logical.APIRequestGet
             {
                 port2 = item.sendNumber2,
                 msg2 = item.sendCmd2,
-                interval = item.secondConfirm
+                interval = 5
             };
         }
         sms.port = item.sendNumber;

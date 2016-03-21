@@ -164,6 +164,24 @@ namespace LightDataModel
 
         //}
 
+        /// <summary>
+        /// 一些特殊的ID的含义描述
+        /// </summary>
+        /// <param name="errTroneId"></param>
+        /// <returns></returns>
+        public static string GetTroneErrMsg(int errTroneId)
+        {
+            switch (errTroneId)
+            {
+                case -1: return "没有匹配端口";
+                case -2: return "没有匹配指令";
+                case -3: return "发现同步状态";
+                case 0: return "未指定";
+            }
+            if (errTroneId > 0)
+                return "匹配成功";
+            return string.Format("未知状态({0})", errTroneId.ToString());
+        }
 
     }
 }

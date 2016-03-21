@@ -19,6 +19,7 @@ namespace n8wan.Public.Logical
         /// <summary>
         /// 取得原始同步串
         /// </summary>
+        [Obsolete("已经不支持")]
         OrgQueryString,
         /// <summary>
         /// 端口号
@@ -32,7 +33,11 @@ namespace n8wan.Public.Logical
         /// 透参信息
         /// </summary>
         cpParam,
-        province
+        province,
+        /// <summary>
+        /// API订单号
+        /// </summary>
+        ApiOrderId
     }
 
     /// <summary>
@@ -61,6 +66,10 @@ namespace n8wan.Public.Logical
         void SetHidden(Shotgun.Database.IBaseDataClass2 dBase, tbl_trone_orderItem tCfg);
 
         int cp_id { get; }
+
+        int trone_order_id { get; }
+
+        int syn_flag { get; }
 
     }
 }

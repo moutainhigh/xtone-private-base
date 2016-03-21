@@ -38,7 +38,13 @@ namespace n8wan.Public.Logical
             bool isRecord = false;
             tbl_trone_orderItem defCfg = null;
             if (PushObject.cp_id > 0 && PushObject.cp_id != 34)
-                return true;
+            {
+                defCfg = tbl_trone_orderItem.GetRowById(dBase, PushObject.trone_order_id);
+                if (defCfg==null)
+                    return SetErrorMesage("已经绑定的渠道业务信息丢失");
+                base.SetConfig(defCfg);
+                return base.DoPush();
+            }
             foreach (var m in _allCfg)
             {
                 if (m.is_unknow)

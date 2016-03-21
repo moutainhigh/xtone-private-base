@@ -5,7 +5,7 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 
 /// <summary>
-/// 易简 - 验证码模式
+/// 易简- 验证码模式
 /// </summary>
 public class jj11 : sdk_Request.Logical.APIRequestGet
 {
@@ -32,7 +32,12 @@ public class jj11 : sdk_Request.Logical.APIRequestGet
         data += "},\"version\":\"1.0.0\"}";
 
 
-        var html = PostHTML(url, data);
+        var html = PostHTML(url, data, 10 * 1000, "utf-8");
+        if (string.IsNullOrEmpty(html))
+        {
+            SetError(sdk_Request.Logical.API_ERROR.GATEWAY_TIMEOUT);
+            return null;
+        }
         var jObj = JObject.Parse(html);
         var jVal = jObj["status"];
         if (jVal == null || jVal.Value<int>() != 0)
@@ -68,7 +73,7 @@ public class jj11 : sdk_Request.Logical.APIRequestGet
             + "\",\"sendStatus\":\"0\",\"serviceType\":\"3219\",\"VCode\":\"" + OrderInfo.cpVerifyCode
             + "\",\"sequence\":\"" + OrderInfo.spLinkId
             + "\",\"money\":" + PayModel.paycode + "},\"version\":\"1.0.0\"}";
-        var html = PostHTML(url, data);
+        var html = PostHTML(url, data, 10 * 1000, "utf-8");
         if (string.IsNullOrEmpty(html))
         {
             SetError(sdk_Request.Logical.API_ERROR.GATEWAY_TIMEOUT);

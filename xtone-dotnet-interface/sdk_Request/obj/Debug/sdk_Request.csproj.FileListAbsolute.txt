@@ -15,6 +15,7 @@ E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\sdk_Request.pdb
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\n8wan.Public.dll
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Newtonsoft.Json.dll
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Shotgun.Library.dll
+E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\MySql.Data.dll
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\n8wan.Public.pdb
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Shotgun.Library.pdb
 E:\Website.git\xtone-dotnet-interface\sdk_Request\bin\Debug\Newtonsoft.Json.xml
