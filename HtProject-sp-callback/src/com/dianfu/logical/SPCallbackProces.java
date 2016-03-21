@@ -170,6 +170,10 @@ public class SPCallbackProces {
 		{// MR 数据，未配置状态检查时，进行“状态”关键字检查，以防万一
 			if (checkStatusKeyword(_lastSpDataModel.Request)) {
 				sms.set_trone_id(-3);// SP传入数据中 存在“状态”关键字，但接收数据时没有配置
+			} else {
+				if (sms.get_trone_id() <= 0) {
+					troneMatch(sms);
+				}
 			}
 		} else {
 			if (sms.get_trone_id() <= 0) {
@@ -279,7 +283,7 @@ public class SPCallbackProces {
 					break;
 				}
 			} else {// 精确指令
-				if (mMsg.equals(cMsg)) {
+				if (mMsg.equalsIgnoreCase(cMsg)) {
 					trone = cmd;
 					break;
 				}

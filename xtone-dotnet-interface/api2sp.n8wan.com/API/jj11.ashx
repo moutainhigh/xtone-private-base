@@ -33,6 +33,11 @@ public class jj11 : sdk_Request.Logical.APIRequestGet
 
 
         var html = PostHTML(url, data, 10 * 1000, "utf-8");
+        if (string.IsNullOrEmpty(html))
+        {
+            SetError(sdk_Request.Logical.API_ERROR.GATEWAY_TIMEOUT);
+            return null;
+        }
         var jObj = JObject.Parse(html);
         var jVal = jObj["status"];
         if (jVal == null || jVal.Value<int>() != 0)

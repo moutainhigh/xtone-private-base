@@ -42,6 +42,8 @@ public class MysqlDatabase implements com.database.Interface.IDatabase, Closeabl
 		_basicDataSource.setInitialSize(1);
 		_basicDataSource.setMaxActive(32);
 		_basicDataSource.setMinIdle(4);
+		_basicDataSource.setRemoveAbandoned(true);
+		_basicDataSource.setRemoveAbandonedTimeout(1 * 60 * 60); // 1小时
 		_basicDataSource.setMaxWait(2000);
 		return _basicDataSource;
 
@@ -269,6 +271,7 @@ public class MysqlDatabase implements com.database.Interface.IDatabase, Closeabl
 		PreparedStatement stm = null;
 		ResultSet rs = null;
 		try {
+			_lastSql = sql;
 			stm = this.conn().prepareStatement(sql);
 			rs = stm.executeQuery();
 			return func.OnReslut(rs);

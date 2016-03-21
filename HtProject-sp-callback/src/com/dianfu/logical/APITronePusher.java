@@ -17,10 +17,17 @@ public class APITronePusher extends BasePusher {
 
 	@Override
 	public boolean LoadCPAPI(int troneId) {
-		tbl_sp_trone_apiItem m = null;
+
 		// tbl_sp_trone_apiItem.GetRowByTroneId(dBase, TroneId);
+		if (troneId == 0) {
+			if (super.getTrone() != null)
+				troneId = getTrone().get_id();
+			else
+				return SetError("Trone为空时，troneId 不能为0");
+		}
 		String sql = "select * from tbl_sp_trone_api where id in ( select trone_api_id from tbl_sp_trone where id in(select sp_trone_id from tbl_trone where id="
 				+ Integer.toString(troneId) + ")) limit 1 ";
+		tbl_sp_trone_apiItem m = new tbl_sp_trone_apiItem();
 		if (!getDBase().sqlToModel(m, sql))
 			return SetError("未关联API");
 		_apiMatchAPI = m;
@@ -37,7 +44,7 @@ public class APITronePusher extends BasePusher {
 
 		tbl_api_orderItem apiOrder = new tbl_api_orderItem();
 		String sql = "select * from ";
-		if (Funcs.isNullOrEmpty(tbl_api_orderItem.pfxSchame))
+		if (!Funcs.isNullOrEmpty(tbl_api_orderItem.pfxSchame))
 			sql += tbl_api_orderItem.pfxSchame + ".";
 		sql += apiOrder.TableName();
 		sql += " where status in(1011,1013,2023) and trone_id=" + Integer.toString(getTrone().get_id());

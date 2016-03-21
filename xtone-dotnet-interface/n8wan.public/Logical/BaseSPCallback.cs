@@ -388,7 +388,7 @@ namespace n8wan.Public.Logical
         /// 填充手机号归属地信息
         /// </summary>
         /// <param name="m"></param>
-        protected void FillAreaInfo(LightDataModel.tbl_mrItem m)
+        protected virtual void FillAreaInfo(LightDataModel.tbl_mrItem m)
         {
             var num = m.mobile;
             m.city_id = 416;

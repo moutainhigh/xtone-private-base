@@ -113,6 +113,7 @@
     <Compile Include="Logical\IHold_DataItem.cs" />
     <Compile Include="Logical\IPushModel.cs" />
     <Compile Include="Logical\ISMS_DataItem.cs" />
+    <Compile Include="Logical\MiGopBaseSync.cs" />
     <Compile Include="Logical\MMBaseSync.cs" />
     <Compile Include="Logical\AgainPusher.cs" />
     <Compile Include="Logical\StaticCache.cs" />

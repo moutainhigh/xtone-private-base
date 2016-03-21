@@ -49,7 +49,7 @@ public abstract class BasePusher {
 			holdCfg = _cp_push_url;
 
 		synchronized (holdCfg) {// 以扣量条件，锁定处理,不同条，可以并行处理
-			if (holdCfg.get_lastDate().getTime() != today.getTime()) {// 重置昨日数据，为今日新数据
+			if (Math.abs(holdCfg.get_lastDate().getTime() - today.getTime()) > 10000) {// 重置昨日数据，为今日新数据
 				holdCfg.set_lastDate(today);
 				holdCfg.set_amount(new BigDecimal(0));
 				holdCfg.set_push_count(0);
@@ -67,7 +67,7 @@ public abstract class BasePusher {
 				WriteLog(-2, "扣量");
 				return SetSuccess();
 			}
-			holdCfg.set_push_count(holdCfg.get_push_count());
+			holdCfg.set_push_count(holdCfg.get_push_count() + 1);
 			holdCfg.set_amount(holdCfg.get_amount().add(_trone.get_price()));
 		}
 		try {
