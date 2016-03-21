@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 /// <summary>
-/// 广州百容的联通广东省网
+/// 广州百容 - 联通广东省网
 /// </summary>
 public class jj13 : sdk_Request.Logical.APIRequestGet
 {
