@@ -10,6 +10,11 @@
 	</properties>
 	<dependencies>
 		<dependency>
+			<groupId>org.xtone.common</groupId>
+			<artifactId>xtone-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
 			<groupId>axmlprinter2</groupId>
 			<artifactId>axmlprinter2</artifactId>
 			<version>1.0</version>

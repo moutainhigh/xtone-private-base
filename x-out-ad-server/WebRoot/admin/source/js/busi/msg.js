@@ -93,7 +93,7 @@ var doSave = function(pager) {
 
 var uploadApp = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'fileToUpload',
 		dataType : 'json', //or json xml whatever you like~
@@ -113,7 +113,7 @@ var uploadApp = function() {
 
 var uploadImage = function() { 
 	$.ajaxFileUpload({
-		url : "http://121.40.138.91:8080/hlpads/upload",   //submit to UploadFileServlet
+		url : SERVER_URL+"/upload",   //submit to UploadFileServlet
 		secureuri : false,
 		fileElementId : 'imageToUpload',
 		dataType : 'json', //or json xml whatever you like~

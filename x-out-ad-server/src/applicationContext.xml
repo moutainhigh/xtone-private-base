@@ -73,7 +73,7 @@
 		<property name="poolConfig" ref="redisPoolConfig" />
 	</bean>
 	<bean id="redisClient" class="com.wns2.factory.WnsRedisFactory">
-		<property name="redisConnFactory"  ref="redisConnectionFactory" />
+		<property name="redisConnFactory" ref="redisConnectionFactory" />
 	</bean>
 
 	<import resource="conf/pushDao.xml" />
@@ -84,24 +84,35 @@
 
 
 	<!-- 要调用的工作类 -->
-	<bean id="statisJob"
-		class="com.wns.push.statis.WnsStatisJob"></bean> <bean
-		id="statisTask"
+	<bean id="statisJob" class="com.wns.push.statis.WnsStatisJob"></bean>
+	<bean id="statisTask"
 		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject"> <ref bean="statisJob" /> </property>
-		<property name="targetMethod"> <value>work</value> </property> </bean>
-
-		<bean id="doStatis"
-		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail"> <ref bean="statisTask" /> </property>
-		<property name="cronExpression"> <value>0 12 0 ? * SUN-SAT</value>
-		</property> </bean> <bean id="startQuertz" lazy-init="false"
-		autowire="no"
-		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers"> <list> <ref bean="doStatis" /> </list>
-		</property> 
+		<property name="targetObject">
+			<ref bean="statisJob" />
+		</property>
+		<property name="targetMethod">
+			<value>work</value>
+		</property>
 	</bean>
 
-	<!-- 总管理类结束   -->
+	<bean id="doStatis"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="statisTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 12 0 ? * SUN-SAT</value>
+		</property>
+	</bean>
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="doStatis" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 总管理类结束 -->
 
 </beans>
