@@ -305,5 +305,8 @@ public class RequestServerV1
 		return true;
 	}
 	
-	
+	public static void main(String[] args)
+	{
+		
+	}
 }
