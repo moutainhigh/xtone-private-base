@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.constant.Constant"%>
 <%@page import="com.system.model.CpSpTroneRateModel"%>
@@ -36,8 +37,13 @@
 	
 	String pageData = PageUtil.initPageQuery("rate.jsp",params,rowCount,pageIndex);
 	
-	String query = Base64UTF.encode(request.getQueryString());
+	String query = request.getQueryString();
 	
+	System.out.println("query:" + query);
+	
+	query = Base64UTF.encode(query);
+	
+	System.out.println("query:" + query);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -114,7 +120,6 @@
 		$("#span_" + editId).html($("#hid_" + editId).val());
 	}
 	
-	
 </script>
 
 <body>
@@ -123,7 +128,7 @@
 			<dl>
 				<dd class="ddbtn" ><a href="rate.jsp?refresh=1">导  入</a></dd>
 			</dl>
-			<form action="rate.jsp"  method="post" style="margin-top: 10px" id="addform">
+			<form action="rate.jsp"  method="get" style="margin-top: 10px" id="addform">
 				<dl>
 					<dd class="dd01_me">关键字</dd>
 						<dd class="dd03_me"><input type="text" name="keyword" value="<%= keyWord %>"  /></dd>
@@ -147,8 +152,10 @@
 			<tbody>
 				<%
 					int rowNum = 1;
+					String title = "";
 					for (CpSpTroneRateModel model : list)
 					{
+						title = model.getCpName() + "-" + model.getSpName() + "-" + model.getSpTroneName();
 				%>
 				<tr>
 					<td>
@@ -162,7 +169,7 @@
 						<span id="span_<%= model.getId() %>"><%= model.getRate() %></span>
 					</td>
 					<td>
-						<a href="#" href="ratesingle.jsp?query=<%= query %>&id=<%= model.getId() %>">列表</a>
+						<a href="ratelist.jsp?query=<%= query %>&id=<%= model.getId() %>&title=<%= URLEncoder.encode(title,"utf-8") %>&rate=<%= model.getRate() %>">列表</a>
 					</td>
 				</tr>
 				<%

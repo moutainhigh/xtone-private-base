@@ -12,7 +12,6 @@ public class CpSpTroneRateServer
 		return new CpSpTroneRateDao().loadCpSpTroneRate(keyWord, pageIndex);
 	}
 	
-	
 	public CpSpTroneRateModel loadCpSpTroneRateById(int id)
 	{
 		return new CpSpTroneRateDao().loadCpSpTroneRateById(id);

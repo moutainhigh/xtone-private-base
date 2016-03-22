@@ -66,4 +66,18 @@ public class MrServer
 	{
 		new MrDao().updateMrRate(spTroneId, rate, startDate, endDate);
 	}
+	
+	
+	/**
+	 * 更新CP MR汇总表里面的下游结算率
+	 * @param cpId
+	 * @param spTroneId
+	 * @param rate
+	 * @param startDate
+	 * @param endDate
+	 */
+	public void updateCpMrRate(int cpId,int spTroneId,float rate,String startDate,String endDate)
+	{
+		new MrDao().updateCpMrRate(cpId,spTroneId, rate, startDate, endDate);
+	}
 }
