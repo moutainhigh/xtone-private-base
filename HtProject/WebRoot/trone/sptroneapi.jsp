@@ -99,7 +99,7 @@
 					<td><%=model.getName() %></td>
 					<td><%= matchFiles[model.getMatchField()] %></td>
 					<td><%=model.getMatchKeyword()%></td>
-					<td><%= StringUtil.concatStrings(apiFields, model.getApiFields().split(","), "|") %></td>
+					<td><%= StringUtil.isNullOrEmpty(model.getApiFields()) ? "" : StringUtil.concatStrings(apiFields, model.getApiFields().split(","), "|") %></td>
 					<td><%= locateMatchs[model.getLocateMatch()] %></td>
 					<td><%= model.getDayLimit() %></td>
 					<td><%= model.getMonthLimit() %></td>

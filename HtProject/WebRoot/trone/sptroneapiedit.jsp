@@ -92,10 +92,14 @@
 		setRadioCheck("match_field",<%= model.getMatchField() %>);
 		setRadioCheck("locate_match",<%= model.getLocateMatch() %>);
 		var apiFildes = "<%= model.getApiFields() %>";
-		var files = apiFildes.split(",");
-		for(i=0; i<files.length; i++)
+		
+		if(apiFildes!="")
 		{
-			document.getElementById("api_fields_" + i).checked = true;	
+			var files = apiFildes.split(",");
+			for(i=0; i<files.length; i++)
+			{
+				document.getElementById("api_fields_" + files[i]).checked = true;	
+			}
 		}
 	});
 	

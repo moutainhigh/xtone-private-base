@@ -79,18 +79,12 @@
 			return;
 		}
 		
-		var jiesuanlv = $("#input_jiesuanlv").val();
+		var rate = parseFloat($("#input_jiesuanlv").val());
 		
-		if (jiesuanlv == "") {
-			alert("请输入结算率");
-			$("#input_jesuanlv").focus();
-			return;
-		}
-		
-		if (isNum(jiesuanlv))
+		if(isNaN(rate) || rate>=1 || rate<=0)
 		{
-			alert("结算率不正确");
-			$("#input_jesuanlv").focus();
+			alert("结算率只能介于0和1之间");
+			$("#input_jiesuanlv").focus();
 			return;
 		}
 		

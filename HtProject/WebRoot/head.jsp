@@ -57,7 +57,7 @@
 <body>
 	<div class="header" style="background-color: #F7F7F7">
 		<div class="logo" style="float: left">
-			<img src="head_data/logo.png" alt="">
+			<img src="head_data/logo.png" style="margin-left: -20px;margin-top: 8px" alt="">
 		</div>
 		<div
 			style="float: right;height: 100%;line-height: 70px;text-align: center;font-size: 14px;">
