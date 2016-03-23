@@ -318,6 +318,13 @@ public class SpTroneDao
 		return new JdbcControl().execute(sql);
 	}
 	
+	public boolean updateSpTroneRate(int id,float rate)
+	{
+		String sql = "update daily_config.tbl_sp_trone set jiesuanlv = " + rate + " where id = " + id;
+		
+		return new JdbcControl().execute(sql);				
+	}
+	
 	public boolean delSpTrone(int id)
 	{
 		String sql = "delete from daily_config.tbl_sp_trone where id =" + id;

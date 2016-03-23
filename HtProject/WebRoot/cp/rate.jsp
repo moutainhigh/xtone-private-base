@@ -39,11 +39,7 @@
 	
 	String query = request.getQueryString();
 	
-	System.out.println("query:" + query);
-	
 	query = Base64UTF.encode(query);
-	
-	System.out.println("query:" + query);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

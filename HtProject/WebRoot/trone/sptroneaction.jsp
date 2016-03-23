@@ -26,6 +26,15 @@
 	int troneApiId = StringUtil.getInteger(request.getParameter("sp_trone_api"), 0);
 	int status = StringUtil.getInteger(request.getParameter("status"), 0);
 	
+	int type = StringUtil.getInteger(request.getParameter("type"), -1);
+	
+	//更新SP业务默认结算率
+	if(type==1)
+	{
+		out.println(new SpTroneServer().updateSpTroneRate(id, jieSuanLv) ? "OK" : "NO");
+		return;
+	}
+	
 	SpTroneModel model = new SpTroneModel();
 	model.setSpId(spId);
 	model.setOperator(operator);

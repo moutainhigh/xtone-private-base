@@ -3,9 +3,7 @@ package com.system.server;
 import java.util.List;
 import java.util.Map;
 
-import com.system.dao.ProvinceDao;
 import com.system.dao.SpTroneDao;
-import com.system.model.ProvinceModel;
 import com.system.model.SpTroneModel;
 
 public class SpTroneServer
@@ -55,5 +53,10 @@ public class SpTroneServer
 		List<SpTroneModel> list = new SpTroneDao().loadTroneListByCpid(cpId);
 		
 		return list;
+	}
+	
+	public boolean updateSpTroneRate(int id,float rate)
+	{
+		return new SpTroneDao().updateSpTroneRate(id, rate);
 	}
 }	
