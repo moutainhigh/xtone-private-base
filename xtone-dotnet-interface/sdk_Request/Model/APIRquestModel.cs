@@ -97,6 +97,7 @@ namespace sdk_Request.Model
         /// <summary>
         /// 预留的SP需求字段，可根据业务要求渠道进行传参
         /// </summary>
+        [DataMember]
         public String extraParams;
     }
 
