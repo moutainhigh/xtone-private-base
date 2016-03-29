@@ -13,6 +13,7 @@
 		out.print("<script>close();</script>");
 		return;
 	}
+	String orderNum = new SimpleDateFormat("yyyyMMddHHmmsss").format(new Date());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -37,12 +38,12 @@
 	function subForm()
 	{
 		var mobile = $('#input_mobile').val();
-		var msg = "<%= model.getOrder() %>";
+		var msg = $('#input_order').val();
 		var troneNum = "<%= model.getTroneNum() %>";
 		var linkid = $("#input_linkid").val();
 		var cpParams = $("#input_cpparams").val();
 		
-		var url = "<%= model.getCpUrl() %>?mobile=" + mobile + "&msg=" + msg + "&port=" + troneNum + "&linkid=" + linkid + "&cpparam=" + cpParams;
+		var url = "<%= model.getCpUrl() %>?mobile=" + mobile + "&msg=" + msg + "&port=" + troneNum + "&linkid=" + linkid + "&cpparam=" + cpParams + "<%= model.getTroneOrderId() > 0 ? "&paycode=" + (100000+id) + "&ordernum=" + orderNum : "" %>";
 		
 		open(url);
 	}
@@ -80,12 +81,31 @@
 						<input type="text" value="<%= model.getSpTroneName() %>" readonly="readonly" style="width: 200px;color: #ccc" >
 					</dd>
 					
+					<div style="display: <%= model.getTroneOrderId() > 0 ? "block" : "none" %>">
+					<br />
+					<br />
+					<br />
+					<dd class="dd01_me">PayCode</dd>
+					<dd class="dd03_me">
+						<input type="text" value="<%= 100000 + id %>" readonly="readonly"  style="width: 200px;color: #ccc" >
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd01_me">订单号</dd>
+					<dd class="dd03_me">
+						<input type="text" value="<%= orderNum %>" readonly="readonly" style="width: 200px;color: #ccc" >
+					</dd>
+					
+					</div>
+					
 					<br />
 					<br />
 					<br />
 					<dd class="dd01_me">指令</dd>
 					<dd class="dd03_me">
-						<input type="text" value="<%= model.getOrder() %>" style="width: 200px;" >
+						<input type="text" id="input_order" value="<%= model.getOrder() %>" style="width: 200px;" >
 					</dd>
 					
 					<br />

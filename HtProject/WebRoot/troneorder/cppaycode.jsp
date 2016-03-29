@@ -1,3 +1,4 @@
+<%@page import="com.system.util.ConfigManager"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.Date"%>
@@ -137,7 +138,7 @@
 	
 	function refreshPayCode()
 	{
-		open("http://thread.n8wan.com/re.jsp");
+		open("<%= ConfigManager.getConfigData("REFRESH_PAY_CODE_URL", "http://thread.n8wan.com/re.jsp") %>");
 	}
 	
 </script>
