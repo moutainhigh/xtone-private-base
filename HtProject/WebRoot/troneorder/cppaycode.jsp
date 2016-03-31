@@ -218,7 +218,7 @@
 					<td><%= model.getId() + 100000 %></td>
 					<td><%= model.getSpTroneName() %></td>
 					<td><%= model.getPrice() %></td>
-					<td><%= (model.getDisable() ==0 || model.getSpTroneStatus() == 1) ? "启用" : "停用" %></td>
+					<td><%= (model.getDisable()==0 && model.getSpTroneStatus()==1)  ? "启用" : "停用" %></td>
 				</tr>
 				<%
 					}
