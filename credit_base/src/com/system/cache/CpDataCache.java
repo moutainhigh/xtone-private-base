@@ -35,4 +35,16 @@ public class CpDataCache
 		}
 		return -1;
 	}
+	
+	public static StringBuffer loadTroneOrderList()
+	{
+		StringBuffer sb = new StringBuffer();
+		
+		for(TroneOrderModel model : _troneOrderList)
+		{
+			sb.append(model.getId() + 100000 + "\r\n");
+		}
+		
+		return sb;
+	}
 }

@@ -14,6 +14,11 @@ import com.system.util.StringUtil;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 用户请求处理类
+ * @author Andy.Chen
+ *
+ */
 public class RequestServerV1
 {
 	public String handlCpQuery(ApiOrderModel model)
@@ -21,6 +26,11 @@ public class RequestServerV1
 		BaseResponseModel response = new BaseResponseModel();
 		response.setStatus(Constant.CP_CP_TRONE_NOT_EXIST);
 		model.setStatus(response.getStatus());
+		
+		if(model.getTroneOrderId()<0)
+		{
+			return StringUtil.getJsonFormObject(response);
+		}
 		
 		int troneId = CpDataCache.getTroneIdByTroneOrderId(model.getTroneOrderId());
 		
@@ -46,7 +56,9 @@ public class RequestServerV1
 		
 		String[] apiFields = spTroneApiModel.getApiFiles().split(",");
 		
-		if(apiFields!=null && apiFields.length>=0)
+		//如果限制条件为空，那么直接过，如果不空，就需要进行验证
+		if (!StringUtil.isNullOrEmpty(spTroneApiModel.getApiFiles())
+				&& apiFields != null && apiFields.length >= 0)
 		{
 			if(!isFieldFill(apiFields,model))
 			{

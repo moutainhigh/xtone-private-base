@@ -83,6 +83,8 @@ public class CpDataDao
 		String sql  = "select a.*,b.short_name,c.sp_id,c.trone_name,c.price,c.sp_trone_id from daily_config.tbl_trone_order a "
 				+ " left join daily_config.tbl_cp b on a.cp_id = b.id "
 				+ " left join daily_config.tbl_trone c on a.trone_id = c.id "
+				+ " LEFT JOIN daily_config.`tbl_sp_trone` d ON c.`sp_trone_id` = d.`id`"
+				+ " WHERE a.`disable` = 0 AND d.`status` = 1 "
 				+ " order by b.id,c.sp_id asc";
 		
 		return (List<TroneOrderModel>)new JdbcControl().query(sql, new QueryCallBack()
