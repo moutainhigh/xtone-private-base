@@ -27,8 +27,13 @@ public class RequestServerV1
 		response.setStatus(Constant.CP_CP_TRONE_NOT_EXIST);
 		model.setStatus(response.getStatus());
 		
+		JSONObject joresult = new JSONObject();
+		
+		response.setResultJson(joresult);
+		
 		if(model.getTroneOrderId()<0)
 		{
+			joresult.accumulate("ERROR_RESULT", "没有这个业务");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -37,6 +42,7 @@ public class RequestServerV1
 		if(troneId<0)
 		{
 			saveRequest(model);
+			joresult.accumulate("ERROR_RESULT", "没有这个业务");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -49,6 +55,7 @@ public class RequestServerV1
 		if(spTroneApiModel==null)
 		{
 			saveRequest(model);
+			joresult.accumulate("ERROR_RESULT", "没有这个业务的API");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -60,7 +67,7 @@ public class RequestServerV1
 		if (!StringUtil.isNullOrEmpty(spTroneApiModel.getApiFiles())
 				&& apiFields != null && apiFields.length >= 0)
 		{
-			if(!isFieldFill(apiFields,model))
+			if(!isFieldFill(apiFields,model,joresult))
 			{
 				response.setStatus(Constant.CP_BASE_PARAMS_ERROR);
 				model.setStatus(response.getStatus());
@@ -75,6 +82,7 @@ public class RequestServerV1
 			response.setStatus(Constant.CP_BASE_PARAMS_AREA_NOT_MATCH);
 			model.setStatus(response.getStatus());
 			saveRequest(model);
+			joresult.accumulate("ERROR_RESULT", "地区匹配失败");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -113,6 +121,7 @@ public class RequestServerV1
 			response.setStatus(Constant.CP_SP_TRONE_ERROR);
 			model.setStatus(response.getStatus());
 			updateRequest(model);
+			joresult.accumulate("ERROR_RESULT", "取指令通道失败");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -229,7 +238,7 @@ public class RequestServerV1
 		return false;
 	}
 	
-	protected boolean isFieldFill(String[] apiFields,ApiOrderModel model)
+	protected boolean isFieldFill(String[] apiFields,ApiOrderModel model,JSONObject jo)
 	{
 		int fieldId = 0;
 		
@@ -241,11 +250,11 @@ public class RequestServerV1
 				return false;
 			
 			//API必须参数,0=IMEI,1=IMSI,2=PHONE,3=IP,4=PACKAGENAME,5=ANDROIDVERSION,6=NETTYPE,7=CLIENTIP,8=LAC,9=CID
-			
 			if(fieldId==0)
 			{
 				if(StringUtil.isNullOrEmpty(model.getImei()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少IMEI");
 					return false;
 				}
 			}
@@ -253,6 +262,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getImsi()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少IMSI");
 					return false;
 				}
 			}
@@ -260,6 +270,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getMobile()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少手机号");
 					return false;
 				}
 			}
@@ -267,6 +278,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getIp()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少IP");
 					return false;
 				}
 			}
@@ -274,6 +286,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getPackageName()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少包名");
 					return false;
 				}
 			}
@@ -281,6 +294,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getSdkVersion()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少SDK版本");
 					return false;
 				}
 			}
@@ -288,6 +302,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getNetType()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少网络类型");
 					return false;
 				}
 			}
@@ -295,6 +310,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getClientIp()))
 				{
+					jo.accumulate("ERROR_RESULT", "缺少客户端IP");
 					return false;
 				}
 			}
@@ -302,6 +318,7 @@ public class RequestServerV1
 			{
 				if(model.getLac()<=0)
 				{
+					jo.accumulate("ERROR_RESULT", "缺少LAC");
 					return false;
 				}
 			}
@@ -309,6 +326,7 @@ public class RequestServerV1
 			{
 				if(model.getCid()<=0)
 				{
+					jo.accumulate("ERROR_RESULT", "缺少CID");
 					return false;
 				}
 			}
