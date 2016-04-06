@@ -10,7 +10,23 @@
     pageEncoding="UTF-8"%>
 <%
 	
-	out.print("恭喜，贺喜，刷新成功！[" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + "]");
+	String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
 	
-	CacheConfigMgr.refreshAllTroneCache();
+	int type = StringUtil.getInteger(request.getParameter("type"), 1);
+	
+	if(type==1)
+	{
+		out.print(date + ":刷新通道数据成功！");
+		CacheConfigMgr.refreshAllTroneCache();
+	}
+	else if(type==2)
+	{
+		out.print(date + ":刷新通道日月限数据成功！");
+		CacheConfigMgr.refreshDayMonthLimitCache();
+	}
+	else if(type==3)
+	{
+		out.print(date + ":刷新所有缓存数据成功！");
+		CacheConfigMgr.refreshDayMonthLimitCache();
+	}
 %>

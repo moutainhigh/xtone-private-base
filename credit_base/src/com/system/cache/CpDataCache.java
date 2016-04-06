@@ -3,17 +3,30 @@ package com.system.cache;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.system.model.CpTroneModel;
 import com.system.model.TroneOrderModel;
 
+/**
+ * 所有与CP相关的数据都存储在这个缓存
+ * @author Andy.Chen
+ *
+ */
 public class CpDataCache
 {
 	//private static Logger logger = Logger.getLogger(CpDataCache.class);
 	
 	private static List<TroneOrderModel> _troneOrderList = new ArrayList<>();
 	
+	private static List<CpTroneModel> _cpTroneList = new ArrayList<>();
+	
 	protected static void setTroneOrder(List<TroneOrderModel> troneOrderList)
 	{
 		_troneOrderList = troneOrderList;
+	}
+	
+	protected static void setCpTroneList(List<CpTroneModel> cpTroneList)
+	{
+		_cpTroneList = cpTroneList;
 	}
 	
 	/**
@@ -36,14 +49,65 @@ public class CpDataCache
 		return -1;
 	}
 	
+	/**
+	 * 根据troneOrderId取得TroneOrderModel
+	 * @param troneOrderId
+	 * @return
+	 */
+	public static TroneOrderModel getTroneOrderModelById(int troneOrderId)
+	{
+		if(troneOrderId<=0)
+			return null;
+		
+		for(TroneOrderModel model : _troneOrderList)
+		{
+			if(model.getId()==troneOrderId)
+			{
+				return model;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * 根据TroneOrderId/PayCode取得CP业务带有日月限的MODEL
+	 * @param troneOrderId
+	 * @return
+	 */
+	public static CpTroneModel getCpTroneByTroneOrderId(int troneOrderId)
+	{
+		TroneOrderModel model = getTroneOrderModelById(troneOrderId);
+		
+		if(model==null)
+			return null;
+		
+		for(CpTroneModel cpTroneModel : _cpTroneList)
+		{
+			if (cpTroneModel.getCpId() == model.getCpId()
+					&& cpTroneModel.getSpTroneId() == model.getSpTroneId())
+				return cpTroneModel;
+		}
+		
+		return null;
+	}
+	
 	public static StringBuffer loadTroneOrderList()
 	{
 		StringBuffer sb = new StringBuffer();
 		
+		sb.append("<table border='1'><tr>");
+		int i=1;
+		
 		for(TroneOrderModel model : _troneOrderList)
 		{
-			sb.append(model.getId() + 100000 + "\r\n");
+			sb.append("<td>" + (model.getId() + 100000) + "</td>");
+			
+			if(i%15==0)
+				sb.append("</tr><tr>");
+			i++;
 		}
+		
+		sb.append("</tr></table>");
 		
 		return sb;
 	}
