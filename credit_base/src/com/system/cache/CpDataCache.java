@@ -91,6 +91,29 @@ public class CpDataCache
 		return null;
 	}
 	
+	public static StringBuffer loadCpSpTroneList()
+	{
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("<table border='1'><tr>");
+		
+		int i=1;
+		
+		for(CpTroneModel model : _cpTroneList)
+		{
+			sb.append("<td>" + (model.getCpId() + "-" + model.getSpTroneId() 
+			+ "-" + model.getDayLimit() + "-" + model.getMonthLimit()) + "</td>");
+			
+			if(i%10==0)
+				sb.append("</tr><tr>");
+			i++;
+		}
+		
+		sb.append("</tr></table>");
+		
+		return sb;
+	}
+	
 	public static StringBuffer loadTroneOrderList()
 	{
 		StringBuffer sb = new StringBuffer();

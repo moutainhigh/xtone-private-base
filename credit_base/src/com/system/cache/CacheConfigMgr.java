@@ -12,6 +12,7 @@ import com.system.dao.DayMonthLimitDao;
 import com.system.dao.LocateDao;
 import com.system.dao.SpDataDao;
 import com.system.model.CityModel;
+import com.system.model.CpTroneModel;
 import com.system.model.ProvinceModel;
 import com.system.model.SpTroneApiModel;
 import com.system.model.SpTroneModel;
@@ -36,6 +37,7 @@ public class CacheConfigMgr
 		refreshPhoneLocateCache();
 		refreshProvinceCache();
 		refreshCityCache();
+		refreshCpSpTroneCache();
 		refreshDayMonthLimitCache();
 	}
 	
@@ -45,6 +47,7 @@ public class CacheConfigMgr
 		refreshSpTroneCache();
 		refreshTroneCache();
 		refreshSpTroneApiCache();
+		refreshCpSpTroneCache();
 	}
 	
 	public static void refreshAllLocateCache()
@@ -52,6 +55,13 @@ public class CacheConfigMgr
 		refreshPhoneLocateCache();
 		refreshProvinceCache();
 		refreshCityCache();
+	}
+	
+	public static void refreshCpSpTroneCache()
+	{
+		List<CpTroneModel> list = new CpDataDao().loadCpTrone();
+		CpDataCache.setCpTroneList(list);
+		logger.info("refreshCpSpTroneCache finish");
 	}
 	
 	public static void refreshTroneOrderCache()

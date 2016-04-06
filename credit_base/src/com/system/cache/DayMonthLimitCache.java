@@ -53,7 +53,7 @@ public class DayMonthLimitCache
 		cpSpTroneDayMoney = cpSpTroneDayMoney==null ? money : cpSpTroneDayMoney + money;
 		
 		spTroneMonthLimit.put(spTroneMonthKey, spTroneMonthMoney);
-		spTroneDayLimit.put(spTroneMonthKey, spTroneDayMoney);
+		spTroneDayLimit.put(spTroneDayKey, spTroneDayMoney);
 		cpSpTroneMonthLimit.put(cpSpTroneMonthKey,cpSpTroneMonthMoney);
 		cpSpTroneDayLimit.put(cpSpTroneDayKey,cpSpTroneDayMoney);
 	}
@@ -140,7 +140,7 @@ public class DayMonthLimitCache
 			i++;
 		}
 		
-		sb.append("</tr><tr><td colspan='5'>SP业务当前月限</td></tr><tr>");
+		sb.append("</tr><tr><td colspan='5'>CP业务当前月限</td></tr><tr>");
 		
 		i= 1;
 		

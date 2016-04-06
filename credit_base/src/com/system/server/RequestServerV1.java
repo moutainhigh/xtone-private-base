@@ -103,7 +103,7 @@ public class RequestServerV1
 		//只有双方都有数据的时候才开始判断有没有超日月限
 		if(spTroneModel.getDayLimit() > 0 && spTroneCurDayMoney > 0)
 		{
-			if(spTroneModel.getDayLimit() >= spTroneCurDayMoney)
+			if(spTroneCurDayMoney >= spTroneModel.getDayLimit())
 			{
 				model.setStatus(Constant.SP_TRONE_DAY_OVER_LIMIT);
 				response.setStatus(Constant.SP_TRONE_DAY_OVER_LIMIT);
@@ -115,7 +115,7 @@ public class RequestServerV1
 		
 		if(spTroneModel.getMonthLimit() > 0 && spTroneCurMonthMoney > 0)
 		{
-			if(spTroneModel.getMonthLimit() >= spTroneCurMonthMoney)
+			if(spTroneCurMonthMoney >= spTroneModel.getMonthLimit())
 			{
 				model.setStatus(Constant.SP_TRONE_MONTH_OVER_LIMIT);
 				response.setStatus(Constant.SP_TRONE_MONTH_OVER_LIMIT);
@@ -131,7 +131,7 @@ public class RequestServerV1
 		{
 			if(cpTroneModel.getDayLimit() > 0 && cpSpTroneCurDayMoney > 0)
 			{
-				if(cpTroneModel.getDayLimit() >= cpSpTroneCurDayMoney)
+				if(cpSpTroneCurDayMoney >= cpTroneModel.getDayLimit())
 				{
 					model.setStatus(Constant.CP_SP_TRONE_DAY_OVER_LIMIT);
 					response.setStatus(Constant.CP_SP_TRONE_DAY_OVER_LIMIT);
@@ -143,7 +143,7 @@ public class RequestServerV1
 			
 			if(cpTroneModel.getMonthLimit() > 0 && cpSpTroneCurMonthMoney > 0)
 			{
-				if(cpTroneModel.getMonthLimit() >= cpSpTroneCurMonthMoney)
+				if(cpSpTroneCurMonthMoney >= cpTroneModel.getMonthLimit())
 				{
 					model.setStatus(Constant.CP_SP_TRONE_MONTH_OVER_LIMIT);
 					response.setStatus(Constant.CP_SP_TRONE_MONTH_OVER_LIMIT);

@@ -19,6 +19,10 @@
 	{
 		out.println(DayMonthLimitCache.loadDayMonthLimit());
 	}
+	else if(type==3)
+	{
+		out.println(CpDataCache.loadCpSpTroneList());
+	}
 	else
 	{
 		out.print("Hi~");

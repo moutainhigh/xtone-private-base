@@ -10,9 +10,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	int spTroneId = StringUtil.getInteger("sptroneid", -1);
-	int cpId = StringUtil.getInteger("cpid", -1);
-	Float money = StringUtil.getFloat("money", 0.0F);
+	int spTroneId = StringUtil.getInteger(request.getParameter("sptroneid"), -1);
+	int cpId = StringUtil.getInteger(request.getParameter("cpid"), -1);
+	Float money = StringUtil.getFloat(request.getParameter("money"), 0.0F);
 	String curDate = StringUtil.getDefaultDate();
 	String curMonth = StringUtil.getMonthFormat();
 	
