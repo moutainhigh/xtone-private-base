@@ -22,6 +22,8 @@
 	model.setClientIp(StringUtil.getString(request.getParameter("clientip"), request.getRemoteAddr()));
 	model.setLac(StringUtil.getInteger(request.getParameter("lac"), 0));
 	model.setCid(StringUtil.getInteger(request.getParameter("cid"), 0));
+	model.setIccid(StringUtil.getString(request.getParameter("iccid"), ""));
+	model.setUserAgent(StringUtil.getString(request.getParameter("useragent"), ""));
 	model.setExtraParams(StringUtil.getString(request.getParameter("extra_params"), ""));
 	
 	//还原基础数据

@@ -398,6 +398,22 @@ public class RequestServerV1
 					return false;
 				}
 			}
+			else if(fieldId==10)
+			{
+				if(StringUtil.isNullOrEmpty(model.getIccid()))
+				{
+					jo.accumulate("description", "缺少ICCID");
+					return false;
+				}
+			}
+			else if(fieldId==11)
+			{
+				if(StringUtil.isNullOrEmpty(model.getUserAgent()))
+				{
+					jo.accumulate("description", "缺少UserAgent");
+					return false;
+				}
+			}
 		}
 		
 		return true;

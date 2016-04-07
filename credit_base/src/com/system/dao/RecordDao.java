@@ -33,7 +33,7 @@ public class RecordDao
 		String sql = "insert into daily_log.tbl_api_order_" + StringUtil.getMonthFormat() + " (trone_order_id,api_id,imsi,imei,mobile,lac,"
 				+ "cid,ExtrData,sdkversion,packagename,ip,clientip,nettype,"
 				+ "sp_linkid,sp_exField,cp_verifyCode,FirstDate,port,"
-				+ "msg,api_exdata,status,is_hidden,trone_id,extra_param) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?)";
+				+ "msg,api_exdata,status,is_hidden,trone_id,extra_param,iccid,user_agent) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,now(),?,?,?,?,?,?,?,?,?)";
 		
 		Map<Integer, Object> params = new HashMap<>();
 		
@@ -60,6 +60,8 @@ public class RecordDao
 		params.put(21, model.getIsHidden());
 		params.put(22, model.getTroneId());
 		params.put(23, model.getExtraParams());
+		params.put(24, model.getIccid());
+		params.put(25, model.getUserAgent());
 		
 		model.setId(new JdbcControl().insertWithGenKey(sql, params));
 	}
@@ -133,6 +135,8 @@ public class RecordDao
 					model.setStatus(rs.getInt("status"));
 					model.setExtraParams(StringUtil.getString(rs.getString("extra_param"), ""));
 					model.setIsHidden(rs.getInt("is_hidden"));
+					model.setIccid(StringUtil.getString(rs.getString("iccid"), ""));
+					model.setUserAgent(StringUtil.getString(rs.getString("user_agent"), ""));
 					
 					return model;
 				}
