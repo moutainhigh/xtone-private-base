@@ -38,10 +38,10 @@
 	function subForm()
 	{
 		var mobile = $('#input_mobile').val();
-		var msg = $('#input_order').val();
+		var msg = encodeURI($('#input_order').val());
 		var troneNum = "<%= model.getTroneNum() %>";
 		var linkid = $("#input_linkid").val();
-		var cpParams = $("#input_cpparams").val();
+		var cpParams = encodeURI($("#input_cpparams").val());
 		
 		var url = "<%= model.getCpUrl() %>?mobile=" + mobile + "&msg=" + msg + "&port=" + troneNum + "&linkid=" + linkid + "&cpparam=" + cpParams + "<%= model.getTroneOrderId() > 0 ? "&paycode=" + (100000+id) + "&ordernum=" + orderNum : "" %>";
 		

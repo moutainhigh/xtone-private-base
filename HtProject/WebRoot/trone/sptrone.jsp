@@ -204,6 +204,10 @@
 					<td>商务人员</td>
 					<td>类型</td>
 					<td>结算率</td>
+					<td>日限</td>
+					<td>月限</td>
+					<td>用户日限</td>
+					<td>用户月限</td>
 					<td>状态</td>
 					<td>操作</td>
 				</tr>
@@ -227,6 +231,10 @@
 					<td ondblclick="editShowData('<%= model.getId() %>')">
 						<span id="span_<%= model.getId() %>"><%= model.getJieSuanLv() %></span>
 					</td>
+					<td><%= model.getDayLimit() %></td>
+					<td><%= model.getMonthLimit() %></td>
+					<td><%= model.getUserDayLimit() %></td>
+					<td><%= model.getUserMonthLimit() %></td>
 					<td><%= model.getStatus()==1 ? "开启" : "关闭" %></td>
 					<td><a href="sptroneedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 						<a href="#" onclick="delSpTrone(<%=model.getId()%>)">删除</a></td>
@@ -237,7 +245,7 @@
 			
 			<tbody>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%=pageData%></td>
+					<td colspan="13" class="tfooter" style="text-align: center;"><%=pageData%></td>
 				</tr>
 			</tbody>
 		</table>

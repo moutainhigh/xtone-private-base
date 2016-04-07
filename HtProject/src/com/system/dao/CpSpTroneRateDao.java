@@ -68,7 +68,8 @@ public class CpSpTroneRateDao
 					model.setSpName(StringUtil.getString(rs.getString("sp_name"), ""));
 					model.setCpName(StringUtil.getString(rs.getString("cp_name"), ""));
 					model.setSpTroneName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
-					
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
 					list.add(model);
 				}
 				
@@ -104,6 +105,8 @@ public class CpSpTroneRateDao
 					model.setSpName(StringUtil.getString(rs.getString("sp_name"), ""));
 					model.setCpName(StringUtil.getString(rs.getString("cp_name"), ""));
 					model.setSpTroneName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
 					
 					return model;
 				}
@@ -131,6 +134,19 @@ public class CpSpTroneRateDao
 		Map<Integer, Object> map = new HashMap<Integer, Object>();
 		map.put(1, model.getCpId());
 		map.put(2, model.getSpTroneId());
+		map.put(3, model.getRate());
+		map.put(4, model.getId());
+		
+		new JdbcControl().execute(sql,map);
+	}
+	
+	public void updateCpSpTroneLimit(CpSpTroneRateModel model)
+	{
+		String sql = "update daily_config.tbl_cp_trone_rate set day_limit = ? , month_limit = ? , rate = ? where id = ?";
+		
+		Map<Integer, Object> map = new HashMap<Integer, Object>();
+		map.put(1, model.getDayLimit());
+		map.put(2, model.getMonthLimit());
 		map.put(3, model.getRate());
 		map.put(4, model.getId());
 		

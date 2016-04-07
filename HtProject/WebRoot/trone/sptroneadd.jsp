@@ -88,6 +88,38 @@
 			return;
 		}
 		
+		var limit = parseFloat($("#input_day_limit").val());
+		if (isNaN(limit) || limit < 0)
+		{
+			alert("请输入正确的日限");
+			$("#input_day_limit").focus();
+			return;
+		}
+		
+		limit = parseFloat($("#input_month_limit").val());
+		if (isNaN(limit) || limit < 0)
+		{
+			alert("请输入正确的月限");
+			$("#input_month_limit").focus();
+			return;
+		}
+		
+		limit = parseFloat($("#input_user_day_limit").val());
+		if (isNaN(limit) || limit < 0)
+		{
+			alert("请输入正确的用户日限");
+			$("#input_user_day_limit").focus();
+			return;
+		}
+		
+		limit = parseFloat($("#input_user_month_limit").val());
+		if (isNaN(limit) || limit < 0) 
+		{
+			alert("请输入正确的用户月限");
+			$("#input_user_month_limit").focus();
+			return;
+		}
+		
 		if(getProvinceCount('area[]')<=0)
 		{
 			alert("请选择省份");
@@ -253,6 +285,46 @@
 						<label style="font-size: 14px;float:left">开启</label>
 						<input type="radio" name="status" style="width: 35px;float:left" value="0" >
 						<label style="font-size: 14px;float:left">关闭</label>
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">通道日限</dd>
+					<dd class="dd03_me">
+						<input type="text" name="day_limit" value="0" id="input_day_limit"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">通道月限</dd>
+					<dd class="dd03_me">
+						<input type="text" name="month_limit" value="0" id="input_month_limit"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">用户日限</dd>
+					<dd class="dd03_me">
+						<input type="text" name="user_day_limit" value="0" id="input_user_day_limit"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">用户月限</dd>
+					<dd class="dd03_me">
+						<input type="text" name="user_month_limit"  value="0" id="input_user_month_limit"
+							style="width: 200px">
 					</dd>
 
 					<br />

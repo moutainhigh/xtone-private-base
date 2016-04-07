@@ -85,6 +85,10 @@ public class SpTroneDao
 					model.setTroneApiId(rs.getInt("trone_api_id"));
 					model.setCommerceUserName(StringUtil.getString(rs.getString("commerce_name"),""));
 					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
+					model.setUserDayLimit(rs.getFloat("user_day_limit"));
+					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					list.add(model);
 				}
@@ -128,6 +132,10 @@ public class SpTroneDao
 					model.setStatus(rs.getInt("status"));
 					model.setTroneApiId(rs.getInt("trone_api_id"));
 					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
+					model.setUserDayLimit(rs.getFloat("user_day_limit"));
+					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					list.add(model);
 				}
@@ -169,6 +177,10 @@ public class SpTroneDao
 					model.setStatus(rs.getInt("status"));
 					model.setTroneApiId(rs.getInt("trone_api_id"));
 					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
+					model.setUserDayLimit(rs.getFloat("user_day_limit"));
+					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					list.add(model);
 				}
@@ -289,6 +301,10 @@ public class SpTroneDao
 					model.setStatus(rs.getInt("status"));
 					model.setTroneApiId(rs.getInt("trone_api_id"));
 					model.setTroneApiName(StringUtil.getString(rs.getString("trone_api_name"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
+					model.setUserDayLimit(rs.getFloat("user_day_limit"));
+					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					return model;
 				}
@@ -300,10 +316,11 @@ public class SpTroneDao
 	
 	public boolean addSpTrone(SpTroneModel model)
 	{
-		String sql = "insert into daily_config.tbl_sp_trone(sp_id,name,operator,jiesuanlv,provinces,create_date,trone_type,trone_api_id,status) values("
+		String sql = "insert into daily_config.tbl_sp_trone(sp_id,name,operator,jiesuanlv,provinces,create_date,trone_type,trone_api_id,status,day_limit,month_limit,user_day_limit,user_month_limit) values("
 				+ model.getSpId() + ",'" + model.getSpTroneName() + "',"
 				+ model.getOperator() + "," + model.getJieSuanLv() + ",'"
-				+ model.getProvinces() + "',now()," + model.getTroneType() + ","+ model.getTroneApiId() +","+ model.getStatus() +")";
+				+ model.getProvinces() + "',now()," + model.getTroneType() + ","+ model.getTroneApiId() +","+ model.getStatus() +"," + model.getDayLimit() + "," 
+				+ model.getMonthLimit() + "," + model.getUserDayLimit()  + "," +  model.getUserMonthLimit() + ")";
 		return new JdbcControl().execute(sql);
 	}
 	
@@ -313,7 +330,9 @@ public class SpTroneDao
 				+ model.getSpId() + " ,name = '" + model.getSpTroneName()
 				+ "',operator = " + model.getOperator() + ", jiesuanlv = "
 				+ model.getJieSuanLv() + ",provinces = '" + model.getProvinces()
-				+ "',trone_type = " + model.getTroneType() + ",trone_api_id = " + model.getTroneApiId() + ",status = " + model.getStatus() + " where id =" + model.getId();
+				+ "',trone_type = " + model.getTroneType() + ",trone_api_id = " 
+				+ model.getTroneApiId() + ",status = " + model.getStatus() + ",day_limit=" + model.getDayLimit() + ",month_limit=" + model.getMonthLimit() + ",user_day_limit=" 
+				+ model.getUserDayLimit() + ",user_month_limit=" + model.getUserMonthLimit() + " where id =" + model.getId();
 		
 		return new JdbcControl().execute(sql);
 	}
