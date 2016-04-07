@@ -25,8 +25,6 @@ import com.thirdpay.test.LogInsert;
  */
 @WebServlet("/UnionpayCountServlet")
 public class UnionpayCountServlet extends HttpServlet {
-//	private static final long serialVersionUID = 1L;
-//	private static Logger logger = Logger.getLogger(UnionpayCountServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -43,8 +41,7 @@ public class UnionpayCountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		requestPostData(request);
-		response.getWriter().append("success");
+		requestPostData(request,response);
 	}
 
 	/**
@@ -63,12 +60,12 @@ public class UnionpayCountServlet extends HttpServlet {
 	 * @param request
 	 * @return
 	 */
-	public static String requestPostData(HttpServletRequest request) {
+	public static String requestPostData(HttpServletRequest request,HttpServletResponse response) {
 
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
 
-		int price = Integer.parseInt(request.getParameter("txnAmt")); //商品价格
+		int price = Integer.parseInt(request.getParameter("txnAmt")); // 商品价格
 		String payChannel = json.getString("platform");// 支付通道
 		String ip = request.getHeader("X-Real-IP") != null ? request.getHeader("X-Real-IP") : request.getRemoteAddr();// 来源ip
 		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
@@ -87,12 +84,24 @@ public class UnionpayCountServlet extends HttpServlet {
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
 
+		try {
+			response.getWriter().append(response.getStatus()+"");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "";
 
 	}
 
+	/**
+	 * 得到支付所有数据
+	 * @param request
+	 * @return
+	 */
 	public static String getPayInfo(HttpServletRequest request) {
-		String payInfo = null;
+		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
 
@@ -107,9 +116,8 @@ public class UnionpayCountServlet extends HttpServlet {
 			// logger.info(key);
 
 			for (int i = 0; i < value.length; i++) {
-				//System.out.println(value[i]);
+				// System.out.println(value[i]);
 				payInfo += key + "=" + value[i] + ";";
-
 				// logger.info(value[i]);
 
 			}

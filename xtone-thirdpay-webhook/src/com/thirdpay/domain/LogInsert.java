@@ -8,6 +8,7 @@ import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
+
 public class LogInsert implements Runnable {
   
   private static final int LOG_ID=1;

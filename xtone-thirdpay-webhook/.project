@@ -3,6 +3,7 @@
 	<name>thirdpay-webhook</name>
 	<comment></comment>
 	<projects>
+		<project>xtone-java-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
