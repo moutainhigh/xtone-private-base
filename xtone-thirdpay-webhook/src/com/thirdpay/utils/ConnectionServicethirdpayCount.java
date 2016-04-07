@@ -1,4 +1,4 @@
-package com.thirdpay.test;
+package com.thirdpay.utils;
 
 
 import java.sql.Connection;
@@ -11,32 +11,22 @@ import org.common.util.ConfigManager;
 
 /**
  */
-public class ConnectionServiceConfig {
+public class ConnectionServicethirdpayCount {
 
 	private static final String DB_PREFIX="thirdpayCount";
-  private static ConnectionServiceConfig instance = new ConnectionServiceConfig();
-	private ConnectionServiceConfig(){
+  private static ConnectionServicethirdpayCount instance = new ConnectionServicethirdpayCount();
+	private ConnectionServicethirdpayCount(){
 	}
-	public static ConnectionServiceConfig getInstance(){
+	public static ConnectionServicethirdpayCount getInstance(){
 		return instance;
 	}
 	
 	//private final static Logger logger = Logger.getLogger(ConnectionService.class);
-	private DataSource ds_islocal =setupDataSource(DB_PREFIX, 5, 10, 5, 2);
-
-	
-//	public synchronized Connection getConnectionForAccount() {
-//		try {
-//			return ds_isaccount.getConnection();
-//		} catch (SQLException ex) {
-//			ex.printStackTrace();
-//		}
-//		return null;
-//	}
+	private DataSource ds_isthird =setupDataSource(DB_PREFIX, 5, 10, 5, 2);
 
 	public synchronized Connection getConnectionForLocal() {
 		try {
-			return ds_islocal.getConnection();
+			return ds_isthird.getConnection();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

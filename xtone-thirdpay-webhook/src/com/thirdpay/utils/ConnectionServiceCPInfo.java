@@ -1,4 +1,4 @@
-package com.thirdpay.test;
+package com.thirdpay.utils;
 
 
 import java.sql.Connection;
@@ -11,13 +11,13 @@ import org.common.util.ConfigManager;
 
 /**
  */
-public class ConnectionServiceConfig {
+public class ConnectionServiceCPInfo {
 
-	private static final String DB_PREFIX="thirdpayCount";
-  private static ConnectionServiceConfig instance = new ConnectionServiceConfig();
-	private ConnectionServiceConfig(){
+	private static final String DB_PREFIX="CPInfo";
+  private static ConnectionServiceCPInfo instance = new ConnectionServiceCPInfo();
+	private ConnectionServiceCPInfo(){
 	}
-	public static ConnectionServiceConfig getInstance(){
+	public static ConnectionServiceCPInfo getInstance(){
 		return instance;
 	}
 	

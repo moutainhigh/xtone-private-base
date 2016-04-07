@@ -17,97 +17,81 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.common.util.ThreadPool;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.LogInsert;
-
 
 /**
  * Servlet implementation class thirdpayCountServlet
  */
+
 @WebServlet("/thirdpayCountServlet")
 public class thirdpayCountServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private static Logger logger = Logger.getLogger(thirdpayCountServlet.class);  
-//	private String clickToUrl;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public thirdpayCountServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	// private static Logger logger =
+	// Logger.getLogger(ThirdpayCountServlet.class);
 
+	// private String clickToUrl;
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		//	doRedirct(request, response);
-		String xx_notifyData = request.getParameter("xx_notifyData");
-		
-	//	logger.info(xx_notifyData); //打印自定义的传值 如appkey
-		
-		response.getWriter().append("success");
-		
-	//	logger.info("第三方支付测试");  
-		requestPostData(request);
-		
+	public thirdpayCountServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String xx_notifyData = request.getParameter("xx_notifyData");
+
+		if (xx_notifyData != null) {
+
+			JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
+			String releaseChannel = json.getString("channel");// 发行通道ID，一般从payInfo中解析出
+			String appKey = json.getString("appkey"); // CP方ID，一般从payInfo中解析出
+			String payChannel = json.getString("platform"); // 支付通道channel
+
+			System.out.println("channel = " + releaseChannel + "\n" + " , appKey = " + appKey + "\n" + " , platform = "
+					+ payChannel);
+
+			if (payChannel.equals("unionpay")) {
+				System.out.println("调用银联支付回调统计");
+				UnionpayCountServlet.requestPostData(request, response);
+
+			} else if (payChannel.equals("alipay")) {
+				System.out.println("调用支付宝支付回调统计");
+				AlipayCountServlet.requestPostData(request, response);
+			} else if (payChannel.equals("wechat")) {
+				System.out.println("调用微信支付回调统计");
+				WechatpayCountServlet.requestPostData(request, response);
+			} else if (payChannel.equals("baidu")) {
+				System.out.println("调用百度支付回调统计");
+				// AlipayCountServlet.requestPostData(request,response);
+			}
+
+		} else {
+
+			System.out.println("找不到channel,appkey,platform");
+
+		}
+
+		// response.getWriter().append("success");
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
-		
+
 	}
 
-	private void doRedirct(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	    String targetUrl = "http://m.baidu.com";
-//	    String targetUrl = clickToUrl;
-	    String nochannel = request.getParameter("nochannel");
-	    String money = request.getParameter("money");
-	    String commodity = request.getParameter("commodity");
-	    String orderid = request.getParameter("nochannel");
-	    if (request.getHeader("user-agent") != null && (request.getHeader("user-agent").matches("(.*)iPhone(.*)") || request.getHeader("user-agent").matches(
-	            "(.*)iPod(.*)"))) {
-	      targetUrl = "http://r.n8wan.com/";
-	    }
-	    
-	    
-	    ThreadPool.mThreadPool.execute(new LogInsert(request.getParameter("f"), request.getHeader("user-agent"), targetUrl, "ip地址","","","",""));response.sendRedirect(targetUrl);
-		
-		
-	  }
-	
-	public static String requestPostData(HttpServletRequest request)
-	{
-		
-		Map<String, String[]> map = request.getParameterMap();
-		
-		Iterator<Entry<String, String[]>> iterator =  map.entrySet().iterator();		
-		while (iterator.hasNext()) {
-			Map.Entry<java.lang.String, java.lang.String[]> entry = (Map.Entry<java.lang.String, java.lang.String[]>) iterator
-					.next();
-			
-			String key = entry.getKey();
-			String []value = map.get(key);
-			
-			System.out.println("key="+key);
-//			logger.info(key);
-			
-			for (int i = 0; i < value.length; i++) {
-				System.out.println(value[i]);
-//				logger.info(value[i]);
-				
-			}
-			
-			
-		}
-		
-		
-		
-		return "";
-	}
 }

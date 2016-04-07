@@ -8,6 +8,8 @@ import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
+
+
 public class PayInfoBean implements Runnable {
 	private Long id;
 	private int price; // 价格，单位人民币，分
@@ -146,8 +148,7 @@ public class PayInfoBean implements Runnable {
 			Connection con = null;
 			try {
 				con = ConnectionService.getInstance().getConnectionForLocal();
-				ps = con.prepareStatement(
-						"insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,testStatus) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+				ps = con.prepareStatement("insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,testStatus) values (?,?,?,?,?,?,?,?,?,?,?,?)");
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getPrice());
@@ -162,20 +163,6 @@ public class PayInfoBean implements Runnable {
 				ps.setString(m++, this.getOwnOrderId());
 				ps.setInt(m++, this.getTestStatus());
 				ps.executeUpdate();
-
-				// ps.setLong(m++, 1457338709586018418l);
-				// ps.setInt(m++, 1);
-				// ps.setString(m++, "channel");
-				// ps.setString(m++, "0");
-				// ps.setString(m++, "0");
-				// ps.setString(m++, "0");
-				// ps.setString(m++, "key");
-				// ps.setString(m++, "ordler");
-				// ps.setString(m++, "0");
-				// ps.setString(m++, "0");
-				// ps.setString(m++, "0");
-				// ps.setInt(m++, 1);
-				// ps.executeUpdate();
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -34,18 +30,31 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
 
 /**
- * Servlet implementation class AlipayCountServlet
+ *微信网关支付回调给商户的参数
+ * 	    state	订单充值状态	1.充值成功 2.充值失败
+		customerid	商户ID	商户注册的时候，网关自动分配的商户ID
+		sd51no	订单在网关的订单号	该订单在网关系统的订单号
+		sdcustomno	商户订单号	该订单在商户系统的流水号
+		ordermoney	订单实际金额	商户订单实际金额 单位：（元）
+		cardno	支付类型	固定值32为（微信）  36为（手机QQ）
+		mark	支付备注	固定值APP,不可修改为其他值，否则会导致验签失败
+		sign	md5签名字符串	发送给商户的签名字符串
+		resign	md5二次签名字符串	发送给商户的签名字符串
+		des	支付备注	描述订单支付成功或失败的系统备注
  */
-@WebServlet("/AlipayCountServlet")
-public class AlipayCountServlet extends HttpServlet {
+
+/**
+ * Servlet implementation class WechatpayCountServlet
+ */
+@WebServlet("/WechatpayCountServlet")
+public class WechatpayCountServlet extends HttpServlet {
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AlipayCountServlet() {
+	public WechatpayCountServlet() {
 		super();
 		// TODO Auto-generated constructor stub
-
 	}
 
 	/**
@@ -72,45 +81,58 @@ public class AlipayCountServlet extends HttpServlet {
 	 * 
 	 * @param request
 	 * @return
+	 * @throws IOException
 	 */
-	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
+	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		String state = ""; // 订单充值状态 1.充值成功 2.充值失败
+		String payChannel = "";// 支付通道channel
+		String appKey = "";// CP方ID，一般从payInfo中解析出
+		String releaseChannel = "";// 发行通道ID，一般从payInfo中解析出
 
-		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
-		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
+		String xx_notifyDataError = request.getParameter("xx_notifyData");
+		if (xx_notifyDataError != null) {
+			// 打印出数据xx_notifyData =
+			// {"channel":"bl","appkey":"cblappkey","platform":"wechat"}?state=1
+			String notifyData[] = xx_notifyDataError.split("\\?"); // 分割
+			// System.out.println(notifyData[0]);
+			String xx_notifyData = notifyData[0]; // 得到json数据
+			JSONObject json = JSON.parseObject(xx_notifyData);
+			// 注释notifyData[1] = state = 1
+			state = (notifyData[1].split("="))[1]; // state = 1 //再分割
+			payChannel = json.getString("platform");
+			releaseChannel = json.getString("channel");
+			appKey = json.getString("appkey");
+		}
 
-		int price = (int) ((Float.parseFloat(request.getParameter("price"))) * 100); // 支付宝转换单位:元→分
-		String payChannel = json.getString("platform");// 支付通道channel
+		// 得到回调参数
+
+		String payChannelOrderId = request.getParameter("sd51no");// 订单在网关的订单号
+																	// 该订单在网关系统的订单号
+
+		String ordermoney = request.getParameter("ordermoney");// 订单实际金额
+																// 商户订单实际金额
+																// 单位：（元）
+		int price = (int) ((Float.parseFloat(ordermoney)) * 100); // 支付宝转换单位:元→分
+
+		String cardno = request.getParameter("cardno");// 支付类型 固定值32为（微信）
+														// 36为（手机QQ）
+
 		String ip = request.getHeader("X-Real-IP") != null ? request.getHeader("X-Real-IP") : request.getRemoteAddr();// 来源ip
 		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
-
-		String releaseChannel = json.getString("channel");// 发行通道ID，一般从payInfo中解析出
-		String appKey = json.getString("appkey");// CP方ID，一般从payInfo中解析出
-		String payChannelOrderId = request.getParameter("out_trade_no");// 支付通道的订单号，一般从payInfo中解析出
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
 		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
+
 		int testStatus = 1;// 是否是测试信息
 
-		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
-				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip);
+		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
+		response.getWriter().append("<result>1</result>");
 
-		// wait_buyer_pay是创建订单成功的时候发送的
-		// trade_success是交易支付成功的时候发送的
-		String trade_status = request.getParameter("trade_status"); // 支付状态
+		System.out.println("支付状态 state = " + state + "\n" + "订单号sd51no = " + payChannelOrderId + "\n" + "价格price = "
+				+ price + "\n" + "支付平台platform = " + payChannel);
 
-		if (trade_status.equals("TRADE_SUCCESS")) {
-			// 数据库写入操作
-			ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-					payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
-		}
-
-		try {
-			response.getWriter().append("success"); // 返回success
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return "";
 	}
 
@@ -164,6 +186,7 @@ public class AlipayCountServlet extends HttpServlet {
 	 * @return
 	 */
 	public static String getPayInfo(HttpServletRequest request) {
+
 		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
@@ -171,16 +194,16 @@ public class AlipayCountServlet extends HttpServlet {
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<String,String[]> entry = (Map.Entry<String, String[]>) iterator
-					.next();
+			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey(); // key为参数名称
 			String[] value = map.get(key); // value为参数值
 
 			// logger.info(key);
+			// System.out.println(key);
 
 			for (int i = 0; i < value.length; i++) {
-//				 System.out.println(value[i]);
+				// System.out.println(value[i]);
 
 				payInfo += key + "=" + value[i] + ";";
 
