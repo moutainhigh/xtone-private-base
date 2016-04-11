@@ -5,7 +5,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
-        body { font: 14px/2em arial,'微软雅黑';  white-space:pre; margin:2em;}
+        body {
+            font: 14px/2em arial,'微软雅黑';
+            white-space: pre;
+            margin: 2em;
+        }
     </style>
     <script type="text/javascript">
         $(document).ready(checkproc);
@@ -16,10 +20,10 @@
                 clearInterval(hTime);
             $.get({
                 url: "pushagain.ashx",
-                cache:false,
+                cache: false,
                 success: function (html) {
                     $("body").html(html)
-                    if (html.indexOf("\n") != -1) {
+                    if (html.indexOf("\n") == -1) {
                         hTime = setInterval(checkproc, 1280);
                     }
                 },
@@ -28,5 +32,6 @@
         }
     </script>
 </head>
-<body></body>
+<body>
+</body>
 </html>

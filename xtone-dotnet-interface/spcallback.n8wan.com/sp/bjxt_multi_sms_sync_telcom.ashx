@@ -1,12 +1,9 @@
-﻿<%@ WebHandler Language="C#" Class="tlkj_by" %>
+﻿<%@ WebHandler Language="C#" Class="bjxt_multi_sms_sync_telcom" %>
 
 using System;
 using System.Web;
 
-/// <summary>
-/// 通联科技 - 包月（一次同步多条数据）
-/// </summary>
-public class tlkj_by : n8wan.Public.Logical.BaseSPCallback
+public class bjxt_multi_sms_sync_telcom : n8wan.Public.Logical.BaseSPCallback
 {
     System.Xml.XmlElement root;
     System.Xml.XmlElement _curEl;
@@ -24,40 +21,24 @@ public class tlkj_by : n8wan.Public.Logical.BaseSPCallback
             xml.Load(Request.InputStream);
         }
         catch { return false; }
-
         root = xml.DocumentElement;
-        System.Xml.XmlNode node = root.SelectSingleNode("message_type");
-        if (node == null)
-            message_type = root.InnerText;
+
+        message_type = root.Name;
+        if (string.IsNullOrEmpty(message_type))
+            return false;
         sb = new System.Text.StringBuilder();
         return base.OnInit();
     }
-    
-    protected override void WriteError(string msg)
-    {
-        if (sb == null)
-        {
-            base.WriteError(msg);
-            return;
-        }
-        sb.AppendLine(msg);
-    }
 
-    protected override void WriteSuccess()
-    {
-        if (sb == null)
-        {
-            base.WriteSuccess();
-            return;
-        }
-        sb.AppendLine("OK");
-    }
 
     protected override void StartPorcess()
     {
+        System.Xml.XmlNodeList els = null;
+        if (IsMo)
+            els = root.SelectNodes("mo");
+        else
+            els = root.SelectNodes("message");
 
-        System.Xml.XmlNodeList els;
-        els = root.SelectNodes("data/message");
         foreach (var node in els)
         {
             Reset();
@@ -69,17 +50,35 @@ public class tlkj_by : n8wan.Public.Logical.BaseSPCallback
 
     }
 
+    protected override void WriteError(string msg)
+    {
+        if (sb == null)
+        {
+            base.WriteError(msg);
+            return;
+        }
+        sb.AppendLine(msg);
+    }
+    protected override void WriteSuccess()
+    {
+        if (sb == null)
+        {
+            base.WriteSuccess();
+            return;
+        }
+        sb.AppendLine("OK");
+    }
+
     public override string GetParamValue(string Field)
     {
-        if ("message_type".Equals(Field, StringComparison.OrdinalIgnoreCase))
+         if ("message_type".Equals(Field, StringComparison.OrdinalIgnoreCase))
             return message_type;
-
-        if (_curEl == null)
+       if (_curEl == null)
             return null;
-
         var node = _curEl.SelectSingleNode(Field);
         if (node == null)
             return base.GetParamValue(Field);
+
         return node.InnerText;
     }
 

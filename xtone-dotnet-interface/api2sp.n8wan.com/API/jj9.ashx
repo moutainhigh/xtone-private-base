@@ -30,13 +30,16 @@ public class jj9 : sdk_Request.Logical.APIRequestGet
 
     protected override sdk_Request.Model.SP_RESULT GetSpCmd()
     {
-        switch (PayModel.appid)
+        switch (PayModel.channelid)
         {
-            case "SHAG":
+            case "3192"://桌球消消
                 OrderInfo.apiExdata = "0247" + OrderInfo.id.ToString();
                 break;
-            case "GZFT":
+            case "3312"://方块摆摆消
                 OrderInfo.apiExdata = "0245" + OrderInfo.id.ToString();
+                break;
+            case "3399": //消灭彩塘
+                OrderInfo.apiExdata = "0265" + OrderInfo.id.ToString();
                 break;
             default:
                 SetError(sdk_Request.Logical.API_ERROR.ERROR_PAY_POINT, "未知APPID：" + PayModel.appid);

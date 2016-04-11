@@ -17,6 +17,8 @@ namespace n8wan.Public.Logical
     {
         static List<StaticCache> _allCache;
 
+        static Timer timerChecker = null;
+
         public static void ClearAllCache()
         {
             if (_allCache == null)
@@ -31,16 +33,50 @@ namespace n8wan.Public.Logical
 
         public abstract void ClearCache();
 
+
         protected void Add(StaticCache sc)
         {
             if (sc == null)
                 return;
             if (_allCache == null)
                 _allCache = new List<StaticCache>();
-            if (_allCache.Contains(sc))
-                return;
-            _allCache.Add(sc);
+
+            lock (_allCache)
+            {
+                if (timerChecker == null)
+                    timerChecker = new Timer(CheckAction, null, 6 * 1000, 120 * 1000);
+
+                if (_allCache.Contains(sc))
+                    return;
+                _allCache.Add(sc);
+            }
         }
+
+        private static void CheckAction(object state)
+        {
+
+            var cs = GetAllCache();
+            if (cs == null || cs.Length == 0)
+                return;
+            foreach (var c in cs)
+            {
+                if (c.IsExpired())
+                {
+                    c.ClearCache();
+                }
+            }
+            lock (_allCache)
+            {
+                if (_allCache.Count == 0)
+                {
+                    timerChecker.Dispose();
+                    timerChecker = null;
+                }
+            }
+
+        }
+
+        protected abstract bool IsExpired();
 
         protected static StaticCache[] GetAllCache()
         {
@@ -80,7 +116,10 @@ namespace n8wan.Public.Logical
         /// 缓存内存主索引，默认使用数据库主键
         /// </summary>
         private string _indexField;
-
+        /// <summary>
+        /// 数据失效时通知外部代码进行数据处理
+        /// </summary>
+        private Action<IEnumerable<T>> _onExpired;
 
         public StaticCache()
             : this(null)
@@ -114,8 +153,7 @@ namespace n8wan.Public.Logical
 
         private void LoadFreshData()
         {
-
-            if (_satus != Static_Cache_Staus.Idel)
+            if (_satus != Static_Cache_Staus.Idel || IsManualLoad)
                 return;
             lock (this)
             {
@@ -134,12 +172,12 @@ namespace n8wan.Public.Logical
             else if (_data.Count > 0)
                 minId = _data.Values.Min(e => (int)e[_idField]);
 
-            var q = new Shotgun.Model.List.LightDataQueries<T>(_tabName, _idField);
+            var q = new Shotgun.Model.List.LightDataQueries<T>(_tabName, _idField, null, new T().Schema);
             if (minId > 0)
                 q.Filter.AndFilters.Add(_idField, minId, Shotgun.Model.Filter.EM_DataFiler_Operator.More);
             q.SortKey.Add(_idField, Shotgun.Model.Filter.EM_SortKeyWord.asc);
             q.PageSize = 1000;
-            q.dBase = CreatDBase();
+            q.dBase = CreateDBase();
             System.Diagnostics.Stopwatch st = new System.Diagnostics.Stopwatch();
             st.Start();
             base.Add(this);
@@ -176,15 +214,13 @@ namespace n8wan.Public.Logical
         /// <summary>
         /// 检查数据是否过期，如果过期激发重新加载，并丢弃过期数据
         /// </summary>
-        private Dictionary<IDX, T> CheckExpried()
+        private Dictionary<IDX, T> CheckExpired()
         {
             if (_data == null)
             {
                 LoadFreshData();
                 return null;
             }
-            if (_satus != Static_Cache_Staus.AllLoad)
-                return null;
             if (DateTime.Now > _expired)
             {
                 ClearCache();
@@ -197,7 +233,7 @@ namespace n8wan.Public.Logical
 
         public IEnumerable<T> GetCacheData(bool iFull)
         {
-            var tData = CheckExpried();
+            var tData = CheckExpired();
             if (tData == null)
                 return null;
             if (iFull && _satus != Static_Cache_Staus.AllLoad)
@@ -214,7 +250,7 @@ namespace n8wan.Public.Logical
         {
             if (_data == null)
                 return null;
-            var tData = CheckExpried();
+            var tData = CheckExpired();
 
             if (tData == null || !tData.ContainsKey(idx))
                 return null;
@@ -229,7 +265,7 @@ namespace n8wan.Public.Logical
         /// <returns></returns>
         public T FindFirstData(Func<T, bool> func)
         {
-            var tData = CheckExpried();
+            var tData = CheckExpired();
             if (tData == null)
                 return null;
             try
@@ -243,7 +279,7 @@ namespace n8wan.Public.Logical
 
         }
 
-        private Shotgun.Database.IBaseDataClass2 CreatDBase()
+        private Shotgun.Database.IBaseDataClass2 CreateDBase()
         {
             return new Shotgun.Database.DBDriver().CreateDBase();
         }
@@ -257,9 +293,24 @@ namespace n8wan.Public.Logical
         {
             if (data == null)
                 return;
-            var dt = CheckExpried();
-            if (dt == null || _satus != Static_Cache_Staus.AllLoad)
-                return;
+            Dictionary<IDX, T> dt;
+            if (_satus == Static_Cache_Staus.Idel)
+            {
+                dt = this._data;
+                if (dt == null)
+                {
+                    dt = this._data = new Dictionary<IDX, T>();
+                    this._expired = DateTime.Now.Add(this.Expired);
+                }
+            }
+            else
+            {
+                dt = CheckExpired();
+                if (dt == null || _satus != Static_Cache_Staus.AllLoad)
+                    return;
+            }
+            base.Add(this);
+
             dt[(IDX)data[this._indexField]] = data;
             WriteLog(true, 0, 1);
         }
@@ -279,12 +330,57 @@ namespace n8wan.Public.Logical
         /// <summary>
         /// 清除缓存数据
         /// </summary>
+        [STAThread]
         public override void ClearCache()
         {
+            OnExpired();
             _data = null;
             _satus = Static_Cache_Staus.Idel;
             base.Remove(this);
             WriteLog(false, 0, 0);
+        }
+
+        private void OnExpired()
+        {
+            if (_onExpired == null)
+                return;
+
+            try
+            {
+                _onExpired(_data.Values);
+            }
+#if !DEBUG
+            catch(Exception ex)
+            {
+                WriteLog(ex.ToString());
+            }
+#endif
+            finally { }
+        }
+
+        public void SetExpriedProc(Action<IEnumerable<T>> func)
+        {
+            _onExpired = func;
+        }
+
+        /// <summary>
+        /// 是否以手动方式加载代码（不会自动执行LoadData）
+        /// </summary>
+        public bool IsManualLoad { get; set; }
+
+        /// <summary>
+        /// 检查数据是否过期，不会激发重新加载操作
+        /// </summary>
+        /// <returns></returns>
+        protected override bool IsExpired()
+        {
+            if (_data == null)
+                return true;
+
+            if (DateTime.Now > _expired)
+                return true;
+
+            return false;
         }
     }
 }
