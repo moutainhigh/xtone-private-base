@@ -8,6 +8,7 @@ public class CpSpTroneSynModel
 	private String order;
 	private String troneNum;
 	private String cpUrl;
+	private int troneOrderId;
 	private float price;
 	
 	public String getCpName()
@@ -65,6 +66,14 @@ public class CpSpTroneSynModel
 	public void setPrice(float price)
 	{
 		this.price = price;
+	}
+	public int getTroneOrderId()
+	{
+		return troneOrderId;
+	}
+	public void setTroneOrderId(int troneOrderId)
+	{
+		this.troneOrderId = troneOrderId;
 	} 
 	
 	

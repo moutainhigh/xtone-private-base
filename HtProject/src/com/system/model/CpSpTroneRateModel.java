@@ -10,6 +10,8 @@ public class CpSpTroneRateModel
 	private int spTroneId;
 	private String spTroneName;
 	private float rate;
+	private float dayLimit;
+	private float monthLimit;
 	
 	public int getId()
 	{
@@ -74,6 +76,22 @@ public class CpSpTroneRateModel
 	public void setRate(float rate)
 	{
 		this.rate = rate;
+	}
+	public float getDayLimit()
+	{
+		return dayLimit;
+	}
+	public void setDayLimit(float dayLimit)
+	{
+		this.dayLimit = dayLimit;
+	}
+	public float getMonthLimit()
+	{
+		return monthLimit;
+	}
+	public void setMonthLimit(float monthLimit)
+	{
+		this.monthLimit = monthLimit;
 	}
 	
 	

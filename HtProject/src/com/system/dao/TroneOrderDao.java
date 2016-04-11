@@ -412,7 +412,7 @@ public class TroneOrderDao
 	
 	public CpSpTroneSynModel loadCpSpTroneSynModelById(int id)
 	{
-		String sql = "SELECT a.`order_num`,b.`trone_num`,c.url,f.`short_name` cp_name,e.`short_name` sp_name,d.`name` sp_trone_name,b.`price`";
+		String sql = "SELECT a.`order_num`,b.`trone_num`,c.url,f.`short_name` cp_name,e.`short_name` sp_name,d.`name` sp_trone_name,b.`price`,d.`trone_api_id`";
 		sql += " FROM daily_config.`tbl_trone_order` a";
 		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
 		sql += " LEFT JOIN daily_config.`tbl_cp_push_url` c ON a.`push_url_id` = c.`id`";
@@ -436,6 +436,7 @@ public class TroneOrderDao
 					model.setTroneNum(StringUtil.getString(rs.getString("trone_num"), ""));
 					model.setPrice(rs.getFloat("price"));
 					model.setCpUrl(StringUtil.getString(rs.getString("url"),""));
+					model.setTroneOrderId(rs.getInt("trone_api_id"));
 					return model;
 				}
 				return null;

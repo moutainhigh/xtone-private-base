@@ -1,3 +1,4 @@
+<%@page import="com.system.model.CpSpTroneRateModel"%>
 <%@page import="com.system.model.SingleCpSpTroneRateModel"%>
 <%@page import="com.system.server.SingleCpSpTroneRateServer"%>
 <%@page import="com.system.util.Base64UTF"%>
@@ -17,6 +18,8 @@
 	String endDate = StringUtil.getString(request.getParameter("enddate"), "");
 	float rate = StringUtil.getFloat(request.getParameter("rate"),0.0F);
 	String remark = StringUtil.getString(request.getParameter("remark"), "");
+	float dayLimit = StringUtil.getFloat(request.getParameter("day_limit"), 0F);
+	float monthLimit = StringUtil.getFloat(request.getParameter("month_limit"), 0F);
 	
 	SingleCpSpTroneRateModel model = new SingleCpSpTroneRateModel();
 	
@@ -54,5 +57,18 @@
 		new SingleCpSpTroneRateServer().delSingleRate(id);
 		
 		response.sendRedirect("ratelist.jsp?" + Base64UTF.decode(query2));
+	}
+	else if(type==6) //更新CP业务的日月限
+	{
+		CpSpTroneRateModel tModel = new CpSpTroneRateModel();
+		
+		tModel.setId(id);
+		tModel.setDayLimit(dayLimit);
+		tModel.setMonthLimit(monthLimit);
+		tModel.setRate(rate);
+		
+		new CpSpTroneRateServer().updateCpSpTroneLimit(tModel);
+		
+		response.sendRedirect("rate.jsp" + "?" + Base64UTF.decode(query));
 	}
 %>

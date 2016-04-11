@@ -27,6 +27,11 @@ public class CpSpTroneRateServer
 		new CpSpTroneRateDao().updateCpSpTroneRate(model);
 	}
 	
+	public void updateCpSpTroneLimit(CpSpTroneRateModel model)
+	{
+		new CpSpTroneRateDao().updateCpSpTroneLimit(model);
+	}
+	
 	public void updateCpSpTroneRate(int id,float rate)
 	{
 		new CpSpTroneRateDao().updateCpSpTroneRate(id, rate);

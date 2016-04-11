@@ -39,11 +39,7 @@
 	
 	String query = request.getQueryString();
 	
-	System.out.println("query:" + query);
-	
 	query = Base64UTF.encode(query);
-	
-	System.out.println("query:" + query);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -145,6 +141,8 @@
 					<td>CP名称</td>
 					<td>SP名称</td>
 					<td>SP业务名称</td>
+					<td>日限</td>
+					<td>月限</td>
 					<td>结算率</td>
 					<td>操作</td>
 				</tr>
@@ -165,10 +163,13 @@
 					<td><%=model.getCpName()%></td>
 					<td><%=model.getSpName()%></td>
 					<td><%=model.getSpTroneName()%></td>
+					<td><%= model.getDayLimit() %></td>
+					<td><%= model.getMonthLimit() %></td>
 					<td ondblclick="editShowData('<%= model.getId() %>')">
 						<span id="span_<%= model.getId() %>"><%= model.getRate() %></span>
 					</td>
 					<td>
+						<a href="rateedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 						<a href="ratelist.jsp?query=<%= query %>&id=<%= model.getId() %>&title=<%= URLEncoder.encode(title,"utf-8") %>&rate=<%= model.getRate() %>">列表</a>
 					</td>
 				</tr>

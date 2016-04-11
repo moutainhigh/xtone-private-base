@@ -18,10 +18,18 @@
 	model.setPackageName(StringUtil.getString(request.getParameter("package"), ""));
 	model.setSdkVersion(StringUtil.getString(request.getParameter("androidversion"),""));
 	model.setNetType(StringUtil.getString(request.getParameter("nettype"), ""));
-	model.setIp(StringUtil.getString(request.getHeader("X-Real-IP"), "127.0.0.1"));
+	model.setIp(StringUtil.getString(request.getHeader("X-Real-IP"), ""));
+	
+	if(StringUtil.isNullOrEmpty(model.getIp()))
+	{
+		model.setIp(request.getRemoteAddr());
+	}
+	
 	model.setClientIp(StringUtil.getString(request.getParameter("clientip"), request.getRemoteAddr()));
 	model.setLac(StringUtil.getInteger(request.getParameter("lac"), 0));
 	model.setCid(StringUtil.getInteger(request.getParameter("cid"), 0));
+	model.setIccid(StringUtil.getString(request.getParameter("iccid"), ""));
+	model.setUserAgent(StringUtil.getString(request.getParameter("useragent"), ""));
 	model.setExtraParams(StringUtil.getString(request.getParameter("extra_params"), ""));
 	
 	//还原基础数据

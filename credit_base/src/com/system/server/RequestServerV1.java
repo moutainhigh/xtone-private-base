@@ -1,19 +1,27 @@
 package com.system.server;
 
 import com.system.cache.CpDataCache;
+import com.system.cache.DayMonthLimitCache;
 import com.system.cache.LocateCache;
 import com.system.cache.SpDataCache;
 import com.system.constant.Constant;
 import com.system.model.ApiOrderModel;
 import com.system.model.BaseResponseModel;
+import com.system.model.CpTroneModel;
 import com.system.model.ProvinceModel;
 import com.system.model.SpTroneApiModel;
 import com.system.model.SpTroneModel;
+import com.system.model.TroneOrderModel;
 import com.system.util.PhoneUtil;
 import com.system.util.StringUtil;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 用户请求处理类
+ * @author Andy.Chen
+ *
+ */
 public class RequestServerV1
 {
 	public String handlCpQuery(ApiOrderModel model)
@@ -22,11 +30,24 @@ public class RequestServerV1
 		response.setStatus(Constant.CP_CP_TRONE_NOT_EXIST);
 		model.setStatus(response.getStatus());
 		
-		int troneId = CpDataCache.getTroneIdByTroneOrderId(model.getTroneOrderId());
+		JSONObject joresult = new JSONObject();
+		
+		response.setResultJson(joresult);
+		
+		if(model.getTroneOrderId()<0)
+		{
+			joresult.accumulate("description", "没有这个业务");
+			return StringUtil.getJsonFormObject(response);
+		}
+		
+		TroneOrderModel troneOrderModel = CpDataCache.getTroneOrderModelById(model.getTroneOrderId());
+		
+		int troneId = troneOrderModel==null ? -1 : troneOrderModel.getTroneId();
 		
 		if(troneId<0)
 		{
 			saveRequest(model);
+			joresult.accumulate("description", "没有这个业务");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -39,6 +60,7 @@ public class RequestServerV1
 		if(spTroneApiModel==null)
 		{
 			saveRequest(model);
+			joresult.accumulate("description", "没有这个业务的API");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -46,9 +68,11 @@ public class RequestServerV1
 		
 		String[] apiFields = spTroneApiModel.getApiFiles().split(",");
 		
-		if(apiFields!=null && apiFields.length>=0)
+		//如果限制条件为空，那么直接过，如果不空，就需要进行验证
+		if (!StringUtil.isNullOrEmpty(spTroneApiModel.getApiFiles())
+				&& apiFields != null && apiFields.length >= 0)
 		{
-			if(!isFieldFill(apiFields,model))
+			if(!isFieldFill(apiFields,model,joresult))
 			{
 				response.setStatus(Constant.CP_BASE_PARAMS_ERROR);
 				model.setStatus(response.getStatus());
@@ -63,7 +87,71 @@ public class RequestServerV1
 			response.setStatus(Constant.CP_BASE_PARAMS_AREA_NOT_MATCH);
 			model.setStatus(response.getStatus());
 			saveRequest(model);
+			joresult.accumulate("description", "地区匹配失败");
 			return StringUtil.getJsonFormObject(response);
+		}
+		
+		//开始日月限判断
+		String curDate = StringUtil.getDefaultDate();
+		String curMonth = StringUtil.getMonthFormat();
+		
+		float spTroneCurDayMoney = DayMonthLimitCache.getCurSpTroneDayLimit(troneOrderModel.getSpTroneId(), curDate);
+		float spTroneCurMonthMoney = DayMonthLimitCache.getCurSpTroneMonthLimit(troneOrderModel.getSpTroneId(), curMonth);
+		float cpSpTroneCurDayMoney = DayMonthLimitCache.getCurCpSpTroneDayLimit(troneOrderModel.getCpId(), troneOrderModel.getSpTroneId(), curDate);
+		float cpSpTroneCurMonthMoney = DayMonthLimitCache.getCurCpSpTroneMonthLimit(troneOrderModel.getCpId(), troneOrderModel.getSpTroneId(), curMonth);
+		
+		//只有双方都有数据的时候才开始判断有没有超日月限
+		if(spTroneModel.getDayLimit() > 0 && spTroneCurDayMoney > 0)
+		{
+			if(spTroneCurDayMoney >= spTroneModel.getDayLimit())
+			{
+				model.setStatus(Constant.SP_TRONE_DAY_OVER_LIMIT);
+				response.setStatus(Constant.SP_TRONE_DAY_OVER_LIMIT);
+				saveRequest(model);
+				joresult.accumulate("description", "SP业务超日限");
+				return StringUtil.getJsonFormObject(response);
+			}
+		}
+		
+		if(spTroneModel.getMonthLimit() > 0 && spTroneCurMonthMoney > 0)
+		{
+			if(spTroneCurMonthMoney >= spTroneModel.getMonthLimit())
+			{
+				model.setStatus(Constant.SP_TRONE_MONTH_OVER_LIMIT);
+				response.setStatus(Constant.SP_TRONE_MONTH_OVER_LIMIT);
+				saveRequest(model);
+				joresult.accumulate("description", "SP业务超月限");
+				return StringUtil.getJsonFormObject(response);
+			}
+		}
+		
+		CpTroneModel cpTroneModel = CpDataCache.getCpTroneByTroneOrderId(troneOrderModel.getId());
+		
+		if(cpTroneModel!=null)
+		{
+			if(cpTroneModel.getDayLimit() > 0 && cpSpTroneCurDayMoney > 0)
+			{
+				if(cpSpTroneCurDayMoney >= cpTroneModel.getDayLimit())
+				{
+					model.setStatus(Constant.CP_SP_TRONE_DAY_OVER_LIMIT);
+					response.setStatus(Constant.CP_SP_TRONE_DAY_OVER_LIMIT);
+					saveRequest(model);
+					joresult.accumulate("description", "CP业务超日限");
+					return StringUtil.getJsonFormObject(response);
+				}
+			}
+			
+			if(cpTroneModel.getMonthLimit() > 0 && cpSpTroneCurMonthMoney > 0)
+			{
+				if(cpSpTroneCurMonthMoney >= cpTroneModel.getMonthLimit())
+				{
+					model.setStatus(Constant.CP_SP_TRONE_MONTH_OVER_LIMIT);
+					response.setStatus(Constant.CP_SP_TRONE_MONTH_OVER_LIMIT);
+					saveRequest(model);
+					joresult.accumulate("description", "CP业务超月限");
+					return StringUtil.getJsonFormObject(response);
+				}
+			}
 		}
 		
 		//先把基本数据写入数据库
@@ -101,6 +189,7 @@ public class RequestServerV1
 			response.setStatus(Constant.CP_SP_TRONE_ERROR);
 			model.setStatus(response.getStatus());
 			updateRequest(model);
+			joresult.accumulate("description", "取指令通道失败");
 			return StringUtil.getJsonFormObject(response);
 		}
 		
@@ -217,7 +306,7 @@ public class RequestServerV1
 		return false;
 	}
 	
-	protected boolean isFieldFill(String[] apiFields,ApiOrderModel model)
+	protected boolean isFieldFill(String[] apiFields,ApiOrderModel model,JSONObject jo)
 	{
 		int fieldId = 0;
 		
@@ -229,11 +318,11 @@ public class RequestServerV1
 				return false;
 			
 			//API必须参数,0=IMEI,1=IMSI,2=PHONE,3=IP,4=PACKAGENAME,5=ANDROIDVERSION,6=NETTYPE,7=CLIENTIP,8=LAC,9=CID
-			
 			if(fieldId==0)
 			{
 				if(StringUtil.isNullOrEmpty(model.getImei()))
 				{
+					jo.accumulate("description", "缺少IMEI");
 					return false;
 				}
 			}
@@ -241,6 +330,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getImsi()))
 				{
+					jo.accumulate("description", "缺少IMSI");
 					return false;
 				}
 			}
@@ -248,6 +338,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getMobile()))
 				{
+					jo.accumulate("description", "缺少手机号");
 					return false;
 				}
 			}
@@ -255,6 +346,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getIp()))
 				{
+					jo.accumulate("description", "缺少IP");
 					return false;
 				}
 			}
@@ -262,6 +354,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getPackageName()))
 				{
+					jo.accumulate("description", "缺少包名");
 					return false;
 				}
 			}
@@ -269,6 +362,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getSdkVersion()))
 				{
+					jo.accumulate("description", "缺少SDK版本");
 					return false;
 				}
 			}
@@ -276,6 +370,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getNetType()))
 				{
+					jo.accumulate("description", "缺少网络类型");
 					return false;
 				}
 			}
@@ -283,6 +378,7 @@ public class RequestServerV1
 			{
 				if(StringUtil.isNullOrEmpty(model.getClientIp()))
 				{
+					jo.accumulate("description", "缺少客户端IP");
 					return false;
 				}
 			}
@@ -290,6 +386,7 @@ public class RequestServerV1
 			{
 				if(model.getLac()<=0)
 				{
+					jo.accumulate("description", "缺少LAC");
 					return false;
 				}
 			}
@@ -297,6 +394,23 @@ public class RequestServerV1
 			{
 				if(model.getCid()<=0)
 				{
+					jo.accumulate("description", "缺少CID");
+					return false;
+				}
+			}
+			else if(fieldId==10)
+			{
+				if(StringUtil.isNullOrEmpty(model.getIccid()))
+				{
+					jo.accumulate("description", "缺少ICCID");
+					return false;
+				}
+			}
+			else if(fieldId==11)
+			{
+				if(StringUtil.isNullOrEmpty(model.getUserAgent()))
+				{
+					jo.accumulate("description", "缺少UserAgent");
 					return false;
 				}
 			}
