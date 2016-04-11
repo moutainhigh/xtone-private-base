@@ -5,6 +5,8 @@ public class CpTroneModel
 	private int id;
 	private int cpId;
 	private int spTroneId;
+	private float dayLimit;
+	private float monthLimit;
 	private int status;
 	
 	public int getId()
@@ -38,5 +40,21 @@ public class CpTroneModel
 	public void setStatus(int status)
 	{
 		this.status = status;
+	}
+	public float getDayLimit()
+	{
+		return dayLimit;
+	}
+	public void setDayLimit(float dayLimit)
+	{
+		this.dayLimit = dayLimit;
+	}
+	public float getMonthLimit()
+	{
+		return monthLimit;
+	}
+	public void setMonthLimit(float monthLimit)
+	{
+		this.monthLimit = monthLimit;
 	}
 }

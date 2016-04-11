@@ -18,10 +18,6 @@
 	int matchFiles = StringUtil.getInteger(request.getParameter("match_field"), 0);
 	String matchKeyWord = StringUtil.getString(request.getParameter("match_keyword"), "");
 	
-	float dayLimit = StringUtil.getFloat(request.getParameter("day_limit"), 0);
-	float monthLimit = StringUtil.getFloat(request.getParameter("month_limit"), 0);
-	float userDayLimit = StringUtil.getFloat(request.getParameter("user_day_limit"), 0);
-	float userMonthLimit = StringUtil.getFloat(request.getParameter("user_month_limit"), 0);
 	
 	SpTroneApiModel model = new SpTroneApiModel();
 	
@@ -31,10 +27,6 @@
 	model.setLocateMatch(locateMatch);
 	model.setMatchField(matchFiles);
 	model.setMatchKeyword(matchKeyWord);
-	model.setDayLimit(dayLimit);
-	model.setMonthLimit(monthLimit);
-	model.setUserDayLimit(userDayLimit);
-	model.setUserMonthLimit(userMonthLimit);
 	
 	if(id>0)
 	{

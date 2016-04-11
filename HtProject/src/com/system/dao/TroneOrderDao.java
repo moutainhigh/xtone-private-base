@@ -10,6 +10,7 @@ import java.util.Map;
 import com.system.constant.Constant;
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
+import com.system.model.CpSpTroneSynModel;
 import com.system.model.TroneOrderModel;
 import com.system.util.StringUtil;
 
@@ -409,6 +410,39 @@ public class TroneOrderDao
 		});
 	}
 	
-	
+	public CpSpTroneSynModel loadCpSpTroneSynModelById(int id)
+	{
+		String sql = "SELECT a.`order_num`,b.`trone_num`,c.url,f.`short_name` cp_name,e.`short_name` sp_name,d.`name` sp_trone_name,b.`price`,d.`trone_api_id`";
+		sql += " FROM daily_config.`tbl_trone_order` a";
+		sql += " LEFT JOIN daily_config.`tbl_trone` b ON a.`trone_id` = b.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_cp_push_url` c ON a.`push_url_id` = c.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp_trone` d ON b.`sp_trone_id` = d.`id`";
+		sql += " LEFT JOIN daily_config.`tbl_sp` e ON d.`sp_id` = e.`id`";
+		sql += " LEFT JOIN daily_config.tbl_cp f ON a.`cp_id` = f.`id`";
+		sql += " WHERE a.id = " + id;
+		
+		return (CpSpTroneSynModel)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				if(rs.next())
+				{
+					CpSpTroneSynModel model = new CpSpTroneSynModel();
+					model.setCpName(StringUtil.getString(rs.getString("cp_name"), ""));
+					model.setSpName(StringUtil.getString(rs.getString("sp_name"), ""));
+					model.setSpTroneName(StringUtil.getString(rs.getString("sp_trone_name"), ""));
+					model.setOrder(StringUtil.getString(rs.getString("order_num"), ""));
+					model.setTroneNum(StringUtil.getString(rs.getString("trone_num"), ""));
+					model.setPrice(rs.getFloat("price"));
+					model.setCpUrl(StringUtil.getString(rs.getString("url"),""));
+					model.setTroneOrderId(rs.getInt("trone_api_id"));
+					return model;
+				}
+				return null;
+			}
+		});
+		
+	}
 	
 }

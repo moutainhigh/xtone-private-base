@@ -3,7 +3,9 @@ package com.system.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.system.database.JdbcControl;
 import com.system.database.QueryCallBack;
@@ -45,6 +47,10 @@ public class SpDataDao
 					model.setStatus(rs.getInt("status"));
 					model.setSpTroneApiId(rs.getInt("trone_api_id"));
 					model.setProvinces(StringUtil.getString(rs.getString("provinces"), ""));
+					model.setDayLimit(rs.getFloat("day_limit"));
+					model.setMonthLimit(rs.getFloat("month_limit"));
+					model.setUserDayLimit(rs.getFloat("user_day_limit"));
+					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					list.add(model);
 				}
@@ -123,4 +129,12 @@ public class SpDataDao
 		});
 	}
 	
+	public static void main(String[] args)
+	{
+		Map<String,Float> map = new HashMap<>();
+		
+		Float aa =  map.get("AAA");
+		
+		System.out.println(aa + 1.14);
+	}
 }

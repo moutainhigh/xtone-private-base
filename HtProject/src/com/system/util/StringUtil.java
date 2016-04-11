@@ -415,10 +415,10 @@ public class StringUtil
 //		int[] values = {1,1,0};
 //		System.out.println(concatStrings(oriSources, values, "|"));
 		
-		int ss[]=null,m=0 ;//= {1,2,3,4,5,6};
+		String[] s = "".split(",");
+		System.out.println(s.length);
 		
-		System.out.println(ss);
-		System.out.println(m);
+		
 	}
 	
 }

@@ -13,6 +13,10 @@ public class SpTroneModel
 	private int troneType;
 	private int spTroneApiId;
 	private int status;
+	private float dayLimit;
+	private float monthLimit;
+	private float userDayLimit;
+	private float userMonthLimit;
 	
 	public int getTroneType()
 	{
@@ -101,5 +105,37 @@ public class SpTroneModel
 	public void setSpTroneApiId(int spTroneApiId)
 	{
 		this.spTroneApiId = spTroneApiId;
+	}
+	public float getDayLimit()
+	{
+		return dayLimit;
+	}
+	public void setDayLimit(float dayLimit)
+	{
+		this.dayLimit = dayLimit;
+	}
+	public float getMonthLimit()
+	{
+		return monthLimit;
+	}
+	public void setMonthLimit(float monthLimit)
+	{
+		this.monthLimit = monthLimit;
+	}
+	public float getUserDayLimit()
+	{
+		return userDayLimit;
+	}
+	public void setUserDayLimit(float userDayLimit)
+	{
+		this.userDayLimit = userDayLimit;
+	}
+	public float getUserMonthLimit()
+	{
+		return userMonthLimit;
+	}
+	public void setUserMonthLimit(float userMonthLimit)
+	{
+		this.userMonthLimit = userMonthLimit;
 	}
 }

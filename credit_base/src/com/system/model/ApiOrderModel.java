@@ -14,6 +14,8 @@ public class ApiOrderModel
 	private String netType;
 	private int lac;
 	private int cid;
+	private String iccid;
+	private String userAgent;
 	private String extrData;
 	private String extraParams;
 	private String sdkVersion;
@@ -218,5 +220,21 @@ public class ApiOrderModel
 	public void setExtraParams(String extraParams)
 	{
 		this.extraParams = extraParams;
+	}
+	public String getIccid()
+	{
+		return iccid;
+	}
+	public void setIccid(String iccid)
+	{
+		this.iccid = iccid;
+	}
+	public String getUserAgent()
+	{
+		return userAgent;
+	}
+	public void setUserAgent(String userAgent)
+	{
+		this.userAgent = userAgent;
 	}
 }

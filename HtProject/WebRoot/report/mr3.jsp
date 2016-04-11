@@ -64,8 +64,8 @@
 	
 	int dataRows = (Integer)map.get("datarows");
 	int showDataRows = (Integer)map.get("showdatarows");
-	float amount = (Float)map.get("amount");
-	float showAmount = (Float)map.get("showamount");
+	double amount = (Double)map.get("amount");
+	double showAmount = (Double)map.get("showamount");
 	
 	String[] titles = {"日期","周数","月份","SP","CP","通道","CP业务","省份","城市","SP业务"};
 	
@@ -343,9 +343,9 @@
 					<td><%= model.getDataRows() %></td>
 					<td><%= model.getDataRows() - model.getShowDataRows()  %></td>
 					<td><%= model.getShowDataRows() %></td>
-					<td><%= model.getAmount() %></td>
-					<td><%= model.getAmount() - model.getShowAmount() %></td>
-					<td><%= model.getShowAmount() %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getAmount()) %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getAmount() - model.getShowAmount()) %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getShowAmount()) %></td>
 					<td><%= StringUtil.getPercent(model.getDataRows() - model.getShowDataRows(), model.getDataRows()) %></td>
 				</tr>
 						<%

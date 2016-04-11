@@ -1,14 +1,18 @@
 package com.system.cache;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.system.dao.CpDataDao;
+import com.system.dao.DayMonthLimitDao;
 import com.system.dao.LocateDao;
 import com.system.dao.SpDataDao;
 import com.system.model.CityModel;
+import com.system.model.CpTroneModel;
 import com.system.model.ProvinceModel;
 import com.system.model.SpTroneApiModel;
 import com.system.model.SpTroneModel;
@@ -33,6 +37,8 @@ public class CacheConfigMgr
 		refreshPhoneLocateCache();
 		refreshProvinceCache();
 		refreshCityCache();
+		refreshCpSpTroneCache();
+		refreshDayMonthLimitCache();
 	}
 	
 	public static void refreshAllTroneCache()
@@ -41,6 +47,7 @@ public class CacheConfigMgr
 		refreshSpTroneCache();
 		refreshTroneCache();
 		refreshSpTroneApiCache();
+		refreshCpSpTroneCache();
 	}
 	
 	public static void refreshAllLocateCache()
@@ -48,6 +55,13 @@ public class CacheConfigMgr
 		refreshPhoneLocateCache();
 		refreshProvinceCache();
 		refreshCityCache();
+	}
+	
+	public static void refreshCpSpTroneCache()
+	{
+		List<CpTroneModel> list = new CpDataDao().loadCpTrone();
+		CpDataCache.setCpTroneList(list);
+		logger.info("refreshCpSpTroneCache finish");
 	}
 	
 	public static void refreshTroneOrderCache()
@@ -97,6 +111,20 @@ public class CacheConfigMgr
 		List<CityModel> list = new LocateDao().loadCityList();
 		LocateCache.setCity(list);
 		logger.info("refreshCityCache finish");
+	}
+	
+	public static void refreshDayMonthLimitCache()
+	{
+		Calendar ca = Calendar.getInstance();
+		ca.add(Calendar.MONTH, -2);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String startDate = sdf.format(ca.getTime());
+		DayMonthLimitDao dao = new DayMonthLimitDao();
+		DayMonthLimitCache.setCpSpTroneDayLimit(dao.loadCpTroneDayLimit(startDate));
+		DayMonthLimitCache.setCpSpTroneMonthLimit(dao.loadCpTroneMonthLimit(startDate));
+		DayMonthLimitCache.setSpTroneMonthLimit(dao.loadSpTroneMonthMap(startDate));
+		DayMonthLimitCache.setSpTroneDayLimit(dao.loadSpTroneDayLimit(startDate));
+		logger.info("refreshDayMonthLimitCache finish");
 	}
 	
 	public static void init(){}

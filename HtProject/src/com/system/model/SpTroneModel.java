@@ -16,6 +16,11 @@ public class SpTroneModel
 	private int troneType;
 	private int status;
 	
+	private float dayLimit;
+	private float monthLimit;
+	private float userDayLimit;
+	private float userMonthLimit;
+	
 	public int getTroneType()
 	{
 		return troneType;
@@ -119,5 +124,37 @@ public class SpTroneModel
 	public void setCommerceUserName(String commerceUserName)
 	{
 		this.commerceUserName = commerceUserName;
+	}
+	public float getDayLimit()
+	{
+		return dayLimit;
+	}
+	public void setDayLimit(float dayLimit)
+	{
+		this.dayLimit = dayLimit;
+	}
+	public float getMonthLimit()
+	{
+		return monthLimit;
+	}
+	public void setMonthLimit(float monthLimit)
+	{
+		this.monthLimit = monthLimit;
+	}
+	public float getUserDayLimit()
+	{
+		return userDayLimit;
+	}
+	public void setUserDayLimit(float userDayLimit)
+	{
+		this.userDayLimit = userDayLimit;
+	}
+	public float getUserMonthLimit()
+	{
+		return userMonthLimit;
+	}
+	public void setUserMonthLimit(float userMonthLimit)
+	{
+		this.userMonthLimit = userMonthLimit;
 	}
 }

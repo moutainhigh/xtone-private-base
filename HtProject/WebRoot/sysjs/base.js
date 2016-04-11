@@ -85,7 +85,7 @@ function getAjaxValue(url,onSuccess)
 		async: true,
 		success:function(data)
 		{
-			onSuccess(data);
+			onSuccess(data.trim());
 		}
 	}); 
 }
