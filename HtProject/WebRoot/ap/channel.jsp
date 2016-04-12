@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.model.AppModel"%>
 <%@page import="com.system.server.AppServer"%>
 <%@page import="java.util.HashMap"%>
@@ -141,6 +142,7 @@
 					<td>扣量比</td>
 					<td>备注</td>
 					<td>同步类型</td>
+					<td>帐号名</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -160,10 +162,12 @@
 					<td><%=model.getHold_percent()%></td>
 					<td><%=model.getRemark()==null?"":model.getRemark()%></td>
 					<td><%=model.getSyn_type()==1?"隔天":"实时"%></td>
+					<td><%= model.getUserName() %></td>
 					<td>
 						<a href="channeledit.jsp?id=<%= model.getId() %>
 						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>&appname=<%=appnameid%>&appkey=<%=appkey%>&channel=<%=channel%>&type_id=<%=type%>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
+						<a href="channelacount.jsp?id=<%= model.getId() %>&query=<%=  Base64UTF.encode(request.getQueryString()) %>">用户分配</a>
 					</td>
 				</tr>
 				<%

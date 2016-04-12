@@ -6,7 +6,7 @@ using System.Web;
 /// <summary>
 /// 明天动力，同步接入（使用深圳创世互动的外壳对接）
 /// </summary>
-public class mingtiandongli_ii_phy : gzzyPublic.SPCallback.AutoMapCallback
+public class mingtiandongli_ii_phy : n8wan.Public.Logical.BaseSPCallback
 {
     /// <summary>
     /// 经过处理的参数信息
@@ -17,8 +17,8 @@ public class mingtiandongli_ii_phy : gzzyPublic.SPCallback.AutoMapCallback
     {
         switch (Field.ToLower())
         {
-            case "linkid":
-                return _linkId;
+            //case "linkid":
+            //    return _linkId;
             case "mobile":
                 var m = Request["mobile"];
                 if (string.IsNullOrEmpty(m))
@@ -29,7 +29,7 @@ public class mingtiandongli_ii_phy : gzzyPublic.SPCallback.AutoMapCallback
             case "cpparams":
                 return _cpp;
         }
-        return base.GetParamValue(Field);
+        return base.GetParamValue(Field);//super.GetParamValue
     }
 
 

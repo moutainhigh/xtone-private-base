@@ -1,3 +1,4 @@
+<%@page import="com.system.model.UserModel"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.system.server.SpTroneServer"%>
 <%@page import="com.system.model.SpTroneModel"%>
@@ -57,8 +58,8 @@
 	
 	int dataRows = (Integer)map.get("datarows");
 	int showDataRows = (Integer)map.get("showdatarows");
-	float amount = (Float)map.get("amount");
-	float showAmount = (Float)map.get("showamount");
+	double amount = (Double)map.get("amount");
+	double showAmount = (Double)map.get("showamount");
 	
 	String[] titles = {"日期","周数","月份","SP","CP","通道","CP业务","省份","城市","SP业务","小时"};
 	
@@ -385,9 +386,9 @@
 					<td><%= model.getDataRows() %></td>
 					<td><%= model.getDataRows() - model.getShowDataRows()  %></td>
 					<td><%= model.getShowDataRows() %></td>
-					<td><%= model.getAmount() %></td>
-					<td><%= model.getAmount() - model.getShowAmount() %></td>
-					<td><%= model.getShowAmount() %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getAmount()) %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getAmount() - model.getShowAmount()) %></td>
+					<td><%= StringUtil.getDecimalFormat(model.getShowAmount()) %></td>
 					<td><%= StringUtil.getPercent(model.getDataRows() - model.getShowDataRows(), model.getDataRows()) %></td>
 				</tr>
 						<%
@@ -400,9 +401,9 @@
 					<td>总数据量(条)：<%= dataRows %></td>
 					<td>总失败量(条)：<%= dataRows - showDataRows  %> </td>
 					<td>总推送量(条)：<%= showDataRows %></td>
-					<td>总金额(元)：<%= amount %></td>
-					<td>总失败金额(元 )：<%= amount - showAmount %></td>
-					<td>总推送金额(元)：<%= showAmount %></td>
+					<td>总金额(元)：<%= StringUtil.getDecimalFormat(amount) %></td>
+					<td>总失败金额(元 )：<%= StringUtil.getDecimalFormat(amount - showAmount) %></td>
+					<td>总推送金额(元)：<%= StringUtil.getDecimalFormat(showAmount) %></td>
 					<td>总失败率：<%= StringUtil.getPercent(dataRows - showDataRows, dataRows) %></td>
 				</tr>
 			</tbody>

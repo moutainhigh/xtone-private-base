@@ -65,9 +65,9 @@ public class FeeDao
 		return new JdbcGameControl().execute(sql);
 	}
 	
-	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex)
+	public Map<String, Object> loadChannelAppFee(String startDate,String endDate,String keyWord, int pageIndex , int appType)
 	{
-		String query = " a.id,a.fee_date,b.appname,b.appkey,c.channelkey,c.data_rows,a.amount,a.show_amount,a.status ";
+		String query = " a.id,a.fee_date,b.appname,b.appkey,b.app_type,c.channelkey,c.data_rows,a.amount,a.show_amount,a.status ";
 		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
@@ -86,6 +86,9 @@ public class FeeDao
 			sql += " and (b.appname like '%" + keyWord + "%' or b.appkey like '%" + keyWord + "%' or c.channelkey like '%" + keyWord + "%') ";
 		}
 		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
+			
 		String orders = " order by a.fee_date asc,appname asc,channelkey asc ";
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
@@ -138,6 +141,7 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setChannelId(rs.getString("channelkey"));
 					model.setDataRows(rs.getInt("data_rows"));
 					model.setAmount(rs.getFloat("amount"));
@@ -154,10 +158,10 @@ public class FeeDao
 		return result;
 	}
 	
-	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex)
+	public Map<String, Object> loadAppFee(String startDate,String endDate,String appKey,int pageIndex,int appType)
 	{
 		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.*,b.appname,b.app_type ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "select " + Constant.CONSTANT_REPLACE_STRING + " from game_log.tbl_xy_fee_summer a left join daily_config.tbl_xy_app b on a.appkey = b.appkey where 1=1 ";
@@ -166,6 +170,9 @@ public class FeeDao
 		
 		if(!StringUtil.isNullOrEmpty(appKey))
 			sql += " and a.appkey like '%" + appKey + "%' ";
+		
+		if(appType>0)
+			sql += " and b.app_type="+appType+" ";
 		
 		sql += " order by fee_date,b.appname asc";
 		
@@ -217,6 +224,7 @@ public class FeeDao
 					model.setFeeDate(rs.getString("fee_date"));
 					model.setAppKey(rs.getString("appkey"));
 					model.setAppName(StringUtil.getString(rs.getString("appname"),""));
+					model.setAppType(rs.getInt("app_type"));
 					model.setAmount(rs.getFloat("amount"));
 					model.setShowAmount(rs.getFloat("show_amount"));
 					model.setStatus(rs.getInt("status"));
@@ -328,18 +336,26 @@ public class FeeDao
 	 * @param pageIndex  用于分页
 	 * @return MAP结果集
 	 */
-	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,int pageIndex){
+	public Map<String, Object> loadQdUserFee(String startDate,String endDate,int userId,String keyWord,int pageIndex){
 		String sqlCount = " count(*) ";
-		String query = " a.*,b.appname ";
+		String query = " a.id,a.fee_date,b.appname,b.appkey,c.channelkey,c.data_rows,a.show_amount ";
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
-		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING +" FROM game_log.`tbl_xypay_summer` a "
-				+ " LEFT JOIN daily_config.tbl_xy_app b ON a.appkey = b.appkey "
-				+ "LEFT JOIN daily_config.tbl_xy_channel c ON a.`channelid` = c.channel "
-				+ "WHERE 1=1 AND STATUS = 1 "
-				+ "AND c.userid ="+userId
-				+ " AND a.`fee_date` >= '"+startDate+"' AND a.`fee_date` <= '"+endDate+"' "
-				+ "ORDER BY a.`fee_date`,c.`channel` ASC";
+		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING +" FROM game_log.tbl_xypay_summer a ";
+		
+		sql += " LEFT JOIN daily_config.tbl_xy_app b ON a.appkey = b.appkey ";
+		sql += " LEFT JOIN game_log.tbl_xy_user_summer c ON a.appkey = c.appkey";
+		sql += " AND a.channelid = c.channelkey AND a.fee_date = c.active_date ";
+		sql += " LEFT JOIN daily_config.tbl_xy_channel d ON c.channelkey = d.channel";
+		sql += " WHERE 1=1  AND d.settle_type = 2 AND a.`status` = 1 AND d.`userid` = " + userId;
+		sql += " AND a.fee_date >= '"+ startDate +"' AND a.fee_date <= '" + endDate + "'";
+		
+		if(!StringUtil.isNullOrEmpty(keyWord))
+		{
+			sql += " AND b.appname like '%"+ keyWord +"%' ";
+		}
+		
+		sql += " ORDER BY a.fee_date ASC,appname ASC,channelkey ASC ";
 		
 		final Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -356,7 +372,7 @@ public class FeeDao
 		
 		result.put("rows", count);
 		
-		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(data_rows),sum(show_amount) "),
+		new JdbcGameControl().query(sql.replace(Constant.CONSTANT_REPLACE_STRING, " sum(c.data_rows),sum(a.show_amount) "),
 				new QueryCallBack() {
 					
 					@Override

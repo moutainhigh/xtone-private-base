@@ -136,6 +136,7 @@
 	
 	function spTroneChange()
 	{
+		troneChange();
 		var spTroneId =  $("#sel_sp_trone").val();
 		getAjaxValue("../ajaction.jsp?type=1&sptroneid=" + spTroneId + "&arrname=troneArray",onSpTroneChange);
 	}
@@ -148,10 +149,12 @@
 		eval(data);
 		$("#sel_trone").empty();
 		$("#sel_trone").append("<option value='-1'>请选择</option>");
+		
 		for(i=0; i<troneArray.length; i++)
 		{
 			$("#sel_trone").append("<option value='" + troneArray[i].id + "'>" + troneArray[i].name + "</option>");
 		}
+		
 		if(isFirstLoad)
 		{
 			$("#sel_trone").val("<%=model.getTroneId() %>");
@@ -160,6 +163,65 @@
 		
 	}
 	
+	var cpTroneOrderArray = new Array();
+	
+	function troneChange()
+	{
+		var troneId =  $("#sel_trone").val();
+		getAjaxValue("../ajaction.jsp?type=4&troneid=" + troneId,onTroneChange);
+	}
+	
+	function onTroneChange(data)
+	{
+		cpTroneOrderArray.length = 0;
+		
+		eval(data);
+		
+		var cpTroneListDiv = document.getElementById("div_cp_trone_list");
+		
+		if(cpTroneListDiv!=null)
+			cpTroneListDiv.style.display = "none";
+		
+		if(cpTroneOrderArray.length==0)
+			return;
+		
+		if(cpTroneListDiv==null)
+		{
+			var parentObj = document.getElementById("sel_trone");
+			
+			mydiv = document.createElement("div"); 
+			
+			mydiv.setAttribute("id","div_cp_trone_list"); 
+			mydiv.style.position = "absolute";
+			mydiv.style.backgroundColor="#F6F5F3";
+			mydiv.style.border = "solid 1px #D1CDC5";
+			mydiv.style.padding = "5px";
+			mydiv.style.lineHeight = "1.5em";
+			mydiv.style.fontSize = "14px";
+			document.body.appendChild(mydiv);
+			//右边显示
+			mydiv.style.left =  (getAbsoluteObjectLeft(parentObj) + parentObj.offsetWidth + 2) + "px";
+			mydiv.style.top = (getAbsoluteObjectTop(parentObj) - parentObj.offsetHeight) +  "px";
+			
+			cpTroneListDiv = mydiv;
+		}
+		
+		cpTroneListDiv.innerHTML = "";
+		
+		var divInnerHtml = "";
+		
+		var cpTroneOrder = null;
+		
+		for(i=0; i<cpTroneOrderArray.length; i++)
+		{
+			cpTroneOrder = cpTroneOrderArray[i]
+			divInnerHtml += "<span>"+ cpTroneOrder.cpShortName + "-" + cpTroneOrder.orderNum + "-" + (cpTroneOrder.disable==0 ? "启用" : "停用") +"</span>";	
+		}
+		
+		cpTroneListDiv.innerHTML = divInnerHtml;
+		
+		cpTroneListDiv.style.display = "block";
+	}
 	
 	$(function()
 	{
@@ -176,6 +238,7 @@
 		$("#input_order_num").val("<%= model.getOrderNum() %>");
 		$("#input_hold_percent").val("<%= model.getHoldPercent() %>");
 		$("#input_hold_amount").val("<%= model.getHoldAmount() %>");
+		$("#input_hold_account").val("<%= model.getHoldAcount() %>");
 		
 		setRadioCheck("dynamic",<%= model.getDynamic() %>);
 		setRadioCheck("status",<%= model.getDisable() %>);
@@ -185,6 +248,10 @@
 		$("#sel_sp").change(spChange);
 		
 		$("#sel_sp_trone").change(spTroneChange);
+		
+		$("#sel_trone").change(troneChange);
+		
+		troneChange();
 	});
 	
 	function subForm() 
@@ -379,6 +446,16 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">起扣数</dd>
+					<dd class="dd03_me">
+						<input type="text" name="hold_account"  id="input_hold_account" value="0"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">状态</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="status" style="width: 35px;float:left" value="0" checked="checked" >
@@ -391,7 +468,7 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">是否动态</dd>
+					<dd class="dd01_me">是否模糊</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="dynamic" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">是</label>

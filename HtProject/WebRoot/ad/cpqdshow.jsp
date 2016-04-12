@@ -66,7 +66,7 @@
 	params.put("enddate", endDate);
 	params.put("channel", channelid+"");
 
-	String pageData = PageUtil.initPageQuery("cpchannel.jsp",params,rowCount,pageIndex);
+	String pageData = PageUtil.initPageQuery("cpqdshow.jsp",params,rowCount,pageIndex);
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

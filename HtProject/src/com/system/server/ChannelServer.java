@@ -40,4 +40,9 @@ public class ChannelServer {
 	{
 		return new ChannelDao().deletChannel(id);
 	}
+	
+	public boolean updateChannelAccount(int channelId,int userId)
+	{
+		return new ChannelDao().updateChannelAccount(channelId, userId);
+	}
 }

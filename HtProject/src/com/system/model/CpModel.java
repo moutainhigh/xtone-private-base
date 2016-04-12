@@ -4,6 +4,7 @@ public class CpModel
 {
 	private int id;
 	private int userId;
+	private String userName;
 	private String fullName;
 	private String shortName;
 	private String contactPerson;
@@ -16,7 +17,6 @@ public class CpModel
 	private String qq;
 	private String phone;
 	private String mail;
-	
 	
 	public String getQq()
 	{
@@ -129,6 +129,14 @@ public class CpModel
 	public void setContactPerson(String contactPerson)
 	{
 		this.contactPerson = contactPerson;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
 	}
 	
 	

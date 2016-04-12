@@ -198,7 +198,7 @@ public class AdAppDao {
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
-							model.setCreateName(rs.getString("nick_name"));
+							model.setCreateName(StringUtil.getString(rs.getString("nick_name"),""));
 							list.add(model);
 						}
 						
@@ -243,6 +243,7 @@ public class AdAppDao {
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
+							model.setUser_id(rs.getInt("user_id"));
 							return model;
 						}
 						
@@ -257,6 +258,12 @@ public class AdAppDao {
 				+ "appkey='"+model.getAppkey()+"',"
 				+ " appname='"+model.getAppname()+"',"
 			    + " hold_percent="+model.getHold_percent()+" WHERE id="+model.getId();
+		return new JdbcControl().execute(sql);
+	}
+	
+	public boolean updateAdAppAccount(int id,int userId)
+	{
+		String sql = "update daily_config.tbl_ad_app set user_id = " + userId + " where id = " + id;
 		return new JdbcControl().execute(sql);
 	}
 	

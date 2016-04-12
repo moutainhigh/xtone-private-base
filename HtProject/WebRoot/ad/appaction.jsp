@@ -14,7 +14,17 @@
 	int hold_percent = StringUtil.getInteger(request.getParameter("hold_persent"), 0);
 	int userid = StringUtil.getInteger(request.getParameter("userid"), -1);
 	
+	int accountType = StringUtil.getInteger(request.getParameter("accounttype"), -1);
+	String query = StringUtil.getString(request.getParameter("query"), "");
 	
+	//修改改用户帐号
+	if(accountType==1)
+	{
+		int userId =  StringUtil.getInteger(request.getParameter("userid"), 0);
+		new AdAppServer().updateAdAppAccount(id, userId);
+		response.sendRedirect("appacount.jsp?msg=1&id="+ id +"&query=" + query);
+		return;
+	}
 	
 	AdAppModel model = new AdAppModel();
 	model.setId(id);

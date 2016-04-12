@@ -106,12 +106,12 @@ public class AppDao {
 		return result;
 	}
 	
-	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey)
+	public Map<String, Object> loadAppByPageindex(int pageIndex,String appname,String appkey,int appType)
 	{
 		String limit = " limit "+Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		String sql = "SELECT "+Constant.CONSTANT_REPLACE_STRING
-				+ " FROM daily_config.`tbl_xy_app` WHERE 1=1 ";
+				+ " FROM daily_config.`tbl_xy_app` a left join daily_config.tbl_user b on a.user_id = b.id WHERE 1=1 ";
 		
 		if(!StringUtil.isNullOrEmpty(appname))
 		{
@@ -123,7 +123,12 @@ public class AppDao {
 			sql += " AND appkey LIKE '%"+appkey+"%' ";
 		}
 		
-		sql +=" ORDER BY id ASC ";
+		if(appType>0)
+		{
+			sql += " And app_type = " + appType;
+		}
+		
+		sql +=" ORDER BY a.id ASC ";
 		
 		Map<String, Object> result = new HashMap<String, Object>();
 		
@@ -149,11 +154,13 @@ public class AppDao {
 						AppModel model = null;
 						while (rs.next()) {
 							model = new AppModel();
-							model.setId(rs.getInt("id"));
+							model.setId(rs.getInt("a.id"));
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
+							model.setUserName(StringUtil.getString(rs.getString("nick_name"), ""));
+							model.setAppType(rs.getInt("app_type"));
 							list.add(model);
 						}
 						
@@ -197,8 +204,10 @@ public class AppDao {
 							model.setId(rs.getInt("id"));
 							model.setAppkey(rs.getString("appkey"));
 							model.setAppname(rs.getString("appname"));
+							model.setAppType(rs.getInt("app_type"));
 							model.setHold_percent(rs.getInt("hold_percent"));
 							model.setRemark(rs.getString("remark"));
+							model.setUser_id(rs.getInt("user_id"));
 							return model;
 						}
 						
@@ -213,6 +222,7 @@ public class AppDao {
 				+ "appkey='"+model.getAppkey()+"',"
 				+ " appname='"+model.getAppname()+"',"
 			    + " hold_percent="+model.getHold_percent()+","
+			    + " app_type="+model.getAppType()+","
 			    + " remark='"+model.getRemark()+"' WHERE id="+model.getId();
 		return new JdbcControl().execute(sql);
 	}
@@ -226,13 +236,18 @@ public class AppDao {
 	public boolean addApp(AppModel model)
 	{
 		String sql = "insert into daily_config.`tbl_xy_app`("
-				+ "appkey,appname,hold_percent,remark) value("
+				+ "appkey,appname,hold_percent,remark,app_type) value("
 				+ "'"+model.getAppkey()+"','"+model.getAppname()+"',"+model.getHold_percent()
-				+ ",'"+model.getRemark()+"')";
+				+ ",'"+model.getRemark()+"',"+model.getAppType()+")";
 		
 		return new JdbcControl().execute(sql);
 	}
 	
-	
+	public boolean updateAppLoginAccount(int appId,int userId)
+	{
+		String sql = "update daily_config.tbl_xy_app set user_id = " + userId + " where id = " + appId;
+		
+		return new JdbcControl().execute(sql);
+	}
 	
 }

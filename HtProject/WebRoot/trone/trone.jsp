@@ -196,10 +196,11 @@
 			<tbody>
 				<%
 					int rowNum = 1;
+					String stopStyle = "class=\"StopStyle\"";
 					for (TroneModel model : list)
 					{
 				%>
-				<tr>
+				<tr <%= model.getStatus()==0 ? stopStyle : "" %>>
 					<td><%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getSpShortName()%></td>
 					<td><%=model.getSpTroneName()%></td>

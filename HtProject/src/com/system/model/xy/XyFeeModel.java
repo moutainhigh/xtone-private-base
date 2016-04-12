@@ -5,6 +5,7 @@ public class XyFeeModel
 	private int id;
 	private String appKey;
 	private String appName;
+	private int appType;
 	private String channelId;
 	private int dataRows;
 	private float amount;
@@ -84,4 +85,11 @@ public class XyFeeModel
 	{
 		this.status = status;
 	}
+	public int getAppType() {
+		return appType;
+	}
+	public void setAppType(int appType) {
+		this.appType = appType;
+	}
+	
 }

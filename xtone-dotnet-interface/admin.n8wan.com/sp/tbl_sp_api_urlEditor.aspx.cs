@@ -52,8 +52,6 @@ public partial class tbl_sp_api_url_Editor : Shotgun.PagePlus.ShotgunPage
         }
         var dt = l.GetDataList();
         ddlSp_id.DataSource = dt;
-        ddlSp_id.DataBind();
-
 
     }
 

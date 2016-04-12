@@ -1,0 +1,26 @@
+@charset "utf-8";
+.section_head {
+	background: url("../images/bg-comment-head.png") repeat-x scroll center
+		bottom #E4E4E4;
+	border: 1px solid #D8D8D8;
+	height: 40px;
+	line-height: 40px;
+	margin: 0;
+	padding: 0 15px;
+	color: #ffffff;
+}
+.section_entry {
+	-moz-border-bottom-colors: none;
+	-moz-border-image: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	background: none repeat scroll 0 0 #FFFFFF;
+	border-color: #D8D8D8;
+	border-style: solid;
+	border-width: 0 1px 1px;
+	color: #555555;
+	font-size: 14px;
+	line-height: 20px;
+	/*margin-bottom: 5px;*/
+}

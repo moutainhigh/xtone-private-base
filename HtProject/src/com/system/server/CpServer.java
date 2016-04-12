@@ -43,4 +43,9 @@ public class CpServer
 		return new CpDao().updateCp(model);
 	}
 	
+	public boolean updateCpAccount(int cpId,int userId)
+	{
+		return new CpDao().updateCpAccount(cpId, userId);
+	}
+	
 }

@@ -19,6 +19,7 @@
 
 	String appKey = StringUtil.getString(request.getParameter("appkey"),
 			"");
+	int appType = StringUtil.getInteger(request.getParameter("app_type"), 0);
 	String channelKey = StringUtil
 			.getString(request.getParameter("channelkey"), "");
 	String startDate = StringUtil
@@ -28,7 +29,7 @@
 	
 	int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
 
-	Map<String, Object> map =  new UserServer().loadUserData(startDate,endDate, appKey, channelKey,pageIndex);
+	Map<String, Object> map =  new UserServer().loadUserData(startDate,endDate, appKey, channelKey,pageIndex,appType);
 		
 	List<XyUserModel> list = (List<XyUserModel>)map.get("list");
 	
@@ -40,6 +41,7 @@
 	params.put("channelkey", channelKey);
 	params.put("startdate", startDate);
 	params.put("enddate", endDate);
+	params.put("app_type", appType+"");
 	
 	String pageData = PageUtil.initPageQuery("user.jsp",params,rowCount,pageIndex);
 	
@@ -54,7 +56,11 @@
 <script type="text/javascript" src="../../sysjs/jquery-1.7.js"></script>
 <script type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-
+	
+	$(function()
+	{
+		$("#sel_app_type").val("<%= appType %>");
+	});
 	//声明整数的正则表达式
 	function isNum(a)
 	{
@@ -151,6 +157,14 @@
 					<dd class="dd03_me">
 						<input name="channelkey" value="<%=channelKey%>" type="text">
 					</dd>
+					<dd class="dd01_me">应用类型</dd>
+					<dd class="dd04_me">
+						<select name="app_type" id="sel_app_type" style="width: 150px;" title="应用类型">
+							<option value="-1">应用类型</option>
+							<option value="1">自营应用</option>
+							<option value="2">第三方应用</option>
+						</select>
+					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit">
 					</dd>
@@ -165,6 +179,7 @@
 					<td class="or">游戏名</td>
 					<td>应用Key</td>
 					<td class="or">渠道ID</td>
+					<td>应用类型</td>
 					<td>实际条数</td>
 					<td class="or">同步条数</td>
 					<td class="dd00">状态</td>
@@ -185,6 +200,7 @@
 					<td class="or"><%=model.getAppName()%></td>
 					<td><%=model.getAppKey()%></td>
 					<td class="or"><%=model.getChannelKey()%></td>
+					<td><%= model.getAppType()==1 ? "自营" : "第三方" %></td>
 					<td>
 						<%=model.getDataRows()%>
 						<input type="hidden" id="ori_hid_<%= model.getId() %>" value="<%=model.getDataRows()%>" />
@@ -206,6 +222,7 @@
 					<td></td>
 					<td></td>
 					<td></td>
+					<td></td>
 					<td>实际总数:<%= map.get("data_rows") %></td>
 					<td>
 						<span>同步总数:<label id="show_data_rows_label"><%= map.get("show_data_rows") %></label></span>
@@ -213,7 +230,7 @@
 					<td></td>
 				</tr>
 				<tr>
-					<td colspan="8" class="tfooter" style="text-align: center;"><%= pageData %></td>
+					<td colspan="9" class="tfooter" style="text-align: center;"><%= pageData %></td>
 				</tr>
 			</tbody>
 		</table>

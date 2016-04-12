@@ -93,7 +93,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -201,7 +201,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -404,7 +404,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -512,7 +512,7 @@ public class MrDao
 			{
 				List<MrReportModel> list = new ArrayList<MrReportModel>();
 				int dataRows=0,showDataRows = 0;
-				float amount=0,showAmount = 0;
+				double amount=0,showAmount = 0;
 				while(rs.next())
 				{
 					MrReportModel model = new MrReportModel();
@@ -668,6 +668,45 @@ public class MrDao
 		String[] result = {queryParams,joinId};
 		return result;
 	}
+	
+	/**
+	 * 更新MR汇总表里面的上游结算率
+	 * @param spTroneId
+	 * @param rate
+	 * @param startDate
+	 * @param endDate
+	 */
+	public void updateMrRate(int spTroneId,float rate,String startDate,String endDate)
+	{
+		String sql = "UPDATE daily_log.`tbl_mr_summer` a,daily_config.`tbl_trone` b,daily_config.`tbl_sp_trone` c ";
+		sql += " SET a.sp_trone_rate = " + rate;
+		sql += " WHERE a.`trone_id` = b.`id` ";
+		sql += " AND b.`sp_trone_id` = c.id";
+		sql += " AND a.`mr_date` >= '" + startDate + "'";
+		sql += " AND a.`mr_date` <= '" + endDate + "'";
+		sql += " AND c.id = " + spTroneId;
+		
+		new JdbcControl().execute(sql);
+	}
+	
+	public void updateCpMrRate(int cpId,int spTroneId,float rate,String startDate,String endDate)
+	{
+		String sql = " UPDATE daily_log.`tbl_cp_mr_summer` a,daily_config.`tbl_trone` b,";
+		
+		sql += " daily_config.`tbl_trone_order` c,daily_config.`tbl_sp_trone` d,daily_config.`tbl_cp` e";
+		sql += " SET a.`rate` = " + rate;
+		sql += " WHERE a.`trone_order_id` = c.`id`";
+		sql += " AND c.`trone_id` = b.`id`";
+		sql += " AND b.`sp_trone_id` = d.`id`";
+		sql += " AND c.`cp_id` = e.`id`";
+		sql += " AND a.`mr_date` >= '" + startDate + "'";
+		sql += " AND a.`mr_date` <= '" + endDate + "'";
+		sql += " AND e.id = " + cpId;
+		sql += " AND d.id = " + spTroneId;
+		
+		new JdbcControl().execute(sql);
+	}
+	
 	
 	public static void main(String[] args)
 	{

@@ -1,12 +1,15 @@
 package com.system.model;
 
 public class AppModel {
-	int id;
-	String appkey;
-	String appname;
-	int hold_percent;
-	int user_id;
-	String remark;
+	private int id;
+	private String appkey;
+	private String appname;
+	private int hold_percent;
+	private int user_id;
+	private String remark;
+	private String userName;
+	private int appType;
+	
 	public int getId() {
 		return id;
 	}
@@ -42,6 +45,22 @@ public class AppModel {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	public String getUserName()
+	{
+		return userName;
+	}
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+	public int getAppType()
+	{
+		return appType;
+	}
+	public void setAppType(int appType)
+	{
+		this.appType = appType;
 	}
 	
 }

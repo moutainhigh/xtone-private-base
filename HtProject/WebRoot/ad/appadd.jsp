@@ -90,7 +90,7 @@
 						<input type="text" name="app_key" id="input_app_key"
 							style="width: 200px">
 					</dd>
-
+					
 					<br />
 					<br />
 					<br />
@@ -100,8 +100,6 @@
 						<input type="text" name="hold_persent" id="input_hold_persent"
 							style="width: 200px">
 					</dd>
-					
-					
 
 					<br />
 					<br />

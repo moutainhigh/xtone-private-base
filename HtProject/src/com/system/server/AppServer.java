@@ -2,7 +2,6 @@ package com.system.server;
 
 import java.util.Map;
 
-import com.sun.org.apache.regexp.internal.recompile;
 import com.system.dao.AppDao;
 import com.system.model.AppModel;
 
@@ -18,9 +17,9 @@ public class AppServer {
 		return new AppDao().loadAppByPageindex();
 	}
 	
-	public Map<String, Object> loadApp(int pageindex,String appname,String appkey)
+	public Map<String, Object> loadApp(int pageindex,String appname,String appkey,int appType)
 	{
-		return new AppDao().loadAppByPageindex(pageindex, appname, appkey);
+		return new AppDao().loadAppByPageindex(pageindex, appname, appkey,appType);
 	}
 	
 	public int loadIdByName(String appname)
@@ -30,6 +29,7 @@ public class AppServer {
 	
 	public AppModel loadAppById(int id)
 	{
+		AppModel model = new AppDao().loadAppById(id);
 		return new AppDao().loadAppById(id);
 	}
 	
@@ -44,6 +44,11 @@ public class AppServer {
 	
 	public boolean addApp(AppModel model){
 		return new AppDao().addApp(model);
+	}
+	
+	public boolean updateAppLoginAccount(int appId,int userId)
+	{
+		return new AppDao().updateAppLoginAccount(appId, userId);
 	}
 	
 	

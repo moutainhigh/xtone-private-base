@@ -122,6 +122,7 @@
 	
 	function spTroneChange()
 	{
+		troneChange();
 		var spTroneId =  $("#sel_sp_trone").val();
 		getAjaxValue("../ajaction.jsp?type=1&sptroneid=" + spTroneId + "&arrname=troneArray",onSpTroneChange);
 	}
@@ -138,6 +139,65 @@
 		}
 	}
 	
+	var cpTroneOrderArray = new Array();
+	
+	function troneChange()
+	{
+		var troneId =  $("#sel_trone").val();
+		getAjaxValue("../ajaction.jsp?type=4&troneid=" + troneId,onTroneChange);
+	}
+	
+	function onTroneChange(data)
+	{
+		cpTroneOrderArray.length = 0;
+		
+		eval(data);
+		
+		var cpTroneListDiv = document.getElementById("div_cp_trone_list");
+		
+		if(cpTroneListDiv!=null)
+			cpTroneListDiv.style.display = "none";
+		
+		if(cpTroneOrderArray.length==0)
+			return;
+		
+		if(cpTroneListDiv==null)
+		{
+			var parentObj = document.getElementById("sel_trone");
+			
+			mydiv = document.createElement("div"); 
+			
+			mydiv.setAttribute("id","div_cp_trone_list"); 
+			mydiv.style.position = "absolute";
+			mydiv.style.backgroundColor="#F6F5F3";
+			mydiv.style.border = "solid 1px #D1CDC5";
+			mydiv.style.padding = "5px";
+			mydiv.style.lineHeight = "1.5em";
+			mydiv.style.fontSize = "14px";
+			document.body.appendChild(mydiv);
+			//右边显示
+			mydiv.style.left =  (getAbsoluteObjectLeft(parentObj) + parentObj.offsetWidth + 2) + "px";
+			mydiv.style.top = (getAbsoluteObjectTop(parentObj) - parentObj.offsetHeight) +  "px";
+			
+			cpTroneListDiv = mydiv;
+		}
+		
+		cpTroneListDiv.innerHTML = "";
+		
+		var divInnerHtml = "";
+		
+		var cpTroneOrder = null;
+		
+		for(i=0; i<cpTroneOrderArray.length; i++)
+		{
+			cpTroneOrder = cpTroneOrderArray[i]
+			divInnerHtml += "<span>"+ cpTroneOrder.cpShortName + "-" + cpTroneOrder.orderNum + "-" + (cpTroneOrder.disable==0 ? "启用" : "停用") +"</span><br />";	
+		}
+		
+		cpTroneListDiv.innerHTML = divInnerHtml;
+		
+		cpTroneListDiv.style.display = "block";
+	}
 	
 	$(function()
 	{
@@ -147,6 +207,8 @@
 		$("#sel_sp_trone").change(spTroneChange);
 		
 		$("#sel_cp").change(cpChange);
+		
+		$("#sel_trone").change(troneChange);
 	});
 	
 	function subForm() 
@@ -323,7 +385,7 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">扣量百分比</dd>
 					<dd class="dd03_me">
-						<input type="text" name="hold_percent" title="通道名称" id="input_hold_percent" value="0"
+						<input type="text" name="hold_percent" id="input_hold_percent" value="0"
 							style="width: 200px">
 					</dd>
 					
@@ -333,7 +395,17 @@
 					<dd class="dd00_me"></dd>
 					<dd class="dd01_me">每天总限额</dd>
 					<dd class="dd03_me">
-						<input type="text" name="hold_amount" title="通道名称" id="input_hold_amount" value="0"
+						<input type="text" name="hold_amount"  id="input_hold_amount" value="0"
+							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">起扣数</dd>
+					<dd class="dd03_me">
+						<input type="text" name="hold_account"  id="input_hold_account" value="0"
 							style="width: 200px">
 					</dd>
 					
@@ -353,7 +425,7 @@
 					<br />
 					<br />
 					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">是否动态</dd>
+					<dd class="dd01_me">是否模糊</dd>
 					<dd class="dd03_me">
 						<input type="radio" name="dynamic" style="width: 35px;float:left" value="1" >
 						<label style="font-size: 14px;float:left">是</label>

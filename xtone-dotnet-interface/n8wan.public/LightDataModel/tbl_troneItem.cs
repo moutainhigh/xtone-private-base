@@ -442,20 +442,6 @@ namespace LightDataModel
         {
             return new Shotgun.Model.List.LightDataQueries<tbl_troneItem>(tableName, identifyField);
         }
-        /// <summary>
-        /// 根据主键查找指定的行,返回指定字段
-        /// </summary>
-        /// <param name="dBase"></param>
-        /// <param name="id">主键值</param>
-        /// <param name="fields">返回字段</param>
-        /// <returns></returns>
-        public static tbl_troneItem GetRowById(Shotgun.Database.IBaseDataClass2 dBase, int id, string[] fields)
-        {
-            var q = GetQueries(dBase);
-            q.Fields = fields;
-            q.Filter.AndFilters.Add(identifyField, id);
-            return q.GetRowByFilters();
-        }
 
         /// <summary>
         /// 根据主键查找指定的行,返回所有字段

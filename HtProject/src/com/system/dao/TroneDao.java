@@ -214,6 +214,7 @@ public class TroneDao
 		
 		if(!StringUtil.isNullOrEmpty(troneName))
 			wheres += " and b.name LIKE '%"+troneName+"%' ";
+		
 		String limit = " limit "  + Constant.PAGE_SIZE*(pageIndex-1) + "," + Constant.PAGE_SIZE;
 		
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -231,7 +232,7 @@ public class TroneDao
 			}
 		}));
 		
-		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + wheres + limit, new QueryCallBack()
+		map.put("list", control.query(sql.replace(Constant.CONSTANT_REPLACE_STRING, query) + wheres + " order by a.id desc " + limit, new QueryCallBack()
 		{
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
@@ -329,6 +330,27 @@ public class TroneDao
 		
 		return new JdbcControl().execute(sql, map);
 	}
+	
+	public int insertTrone(TroneModel model)
+	{
+		String sql = "insert into daily_config.tbl_trone(sp_id,sp_api_url_id,trone_name,orders,trone_num,sp_trone_id,price,is_dynamic,match_price) values(?,?,?,?,?,?,?,?,?)";
+		
+		Map<Integer,Object> map = new HashMap<Integer, Object>();
+		
+		map.put(1,model.getSpId());
+		map.put(2,model.getSpApiUrlId());
+		map.put(3,model.getTroneName());
+		map.put(4,model.getOrders());
+		map.put(5,model.getTroneNum());
+		map.put(6,model.getSpTroneId());
+		map.put(7,model.getPrice());
+		map.put(8,model.getDynamic());
+		map.put(9,model.getMatchPrice());
+		
+		return new JdbcControl().insertWithGenKey(sql, map);
+	}
+	
+	
 	
 	public boolean updateTrone(TroneModel model)
 	{

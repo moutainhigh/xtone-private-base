@@ -45,6 +45,7 @@
 	{
 		$("#input_app_name").val("<%= model.getAppname() %>");
 		$("#input_app_key").val("<%= model.getAppkey() %>");
+		setRadioCheck("app_type",<%= model.getAppType() %>);
 		$("#input_hold_persent").val("<%= model.getHold_percent() %>");
 		$("#input_remark").val("<%= model.getRemark() %>");
 		
@@ -117,6 +118,18 @@
 					<dd class="dd03_me">
 						<input type="text" name="app_key" id="input_app_key"
 							style="width: 200px">
+					</dd>
+					
+					<br />
+					<br />
+					<br />
+					<dd class="dd00_me"></dd>
+					<dd class="dd01_me">应用类型</dd>
+					<dd class="dd03_me">
+						<input type="radio" name="app_type" style="width: 35px;float:left" value="1" checked="checked" >
+						<label style="font-size: 14px;float:left">自营</label>
+						<input type="radio" name="app_type" style="width: 35px;float:left" value="2" checked="checked">
+						<label style="font-size: 14px;float:left">第三方</label>
 					</dd>
 
 					<br />

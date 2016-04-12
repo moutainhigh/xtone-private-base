@@ -16,6 +16,17 @@
 	String contractEndDate = StringUtil.getString(request.getParameter("contract_end_date"), StringUtil.getDefaultDate());
 	String query = request.getQueryString();
 	
+	
+	int accountType =StringUtil.getInteger(request.getParameter("accounttype"), -1);
+	
+	if(accountType==1)
+	{
+		int userId =  StringUtil.getInteger(request.getParameter("userid"), 0);
+		new CpServer().updateCpAccount(id, userId);
+		response.sendRedirect("cpaccount.jsp?msg=1&id="+ id +"&query=" + StringUtil.getString(request.getParameter("query"), ""));
+		return;
+	}
+	
 	CpModel model = new CpModel();
 	model.setId(id);
 	model.setFullName(fullName);
@@ -27,6 +38,9 @@
 	model.setAddress(address);
 	model.setContractStartDate(contractStartDate);
 	model.setContractEndDate(contractEndDate);
+	
+	
+	
 	
 	if(id>0)
 	{

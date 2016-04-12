@@ -11,7 +11,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-    Map<String,Object> name = new AdAppServer().loadApp(1);
+    Map<String,Object> name = new AdAppServer().loadApp();
 	List<AdAppModel> applist = (List<AdAppModel>)name.get("list");
 	Map<String,Object> channel = new AdChannelServer().loadAdChannelName();
 	List<AdChannelModel> qdlist = (List<AdChannelModel>)channel.get("list");

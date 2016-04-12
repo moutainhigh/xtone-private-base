@@ -14,8 +14,10 @@ namespace n8wan.Public.Logical
 
         public override bool LoadCPAPI()
         {
+            if (Trone == null)
+                return false;
             var l = LightDataModel.tbl_trone_orderItem.GetQueries(dBase);
-            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, TroneId);
+            l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.trone_id, Trone.id);
             l.Filter.AndFilters.Add(LightDataModel.tbl_trone_orderItem.Fields.disable, 0);
             l.PageSize = int.MaxValue;
             _allCfg = l.GetDataList();
@@ -36,7 +38,13 @@ namespace n8wan.Public.Logical
             bool isRecord = false;
             tbl_trone_orderItem defCfg = null;
             if (PushObject.cp_id > 0 && PushObject.cp_id != 34)
-                return true;
+            {
+                defCfg = tbl_trone_orderItem.GetRowById(dBase, PushObject.trone_order_id);
+                if (defCfg==null)
+                    return SetErrorMesage("已经绑定的渠道业务信息丢失");
+                base.SetConfig(defCfg);
+                return base.DoPush();
+            }
             foreach (var m in _allCfg)
             {
                 if (m.is_unknow)
@@ -80,7 +88,7 @@ namespace n8wan.Public.Logical
             ret.order_num = "*";
             ret.order_trone_name = "未分配指令";
             ret.push_url_id = 47; //未知CP推送URL
-            ret.trone_id = TroneId;
+            ret.trone_id = Trone.id;
             dBase.SaveData(ret);
             return ret;
         }

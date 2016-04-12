@@ -80,7 +80,7 @@ public class ChannelDao {
 	{
 		String sqlcount = " count(*) ";
 		String sql = "select "+Constant.CONSTANT_REPLACE_STRING+"from "
-				+ "daily_config.tbl_xy_channel a LEFT JOIN daily_config.`tbl_xy_app` b ON a.`appid` = b.id"
+				+ "daily_config.tbl_xy_channel a LEFT JOIN daily_config.`tbl_xy_app` b ON a.`appid` = b.id left join daily_config.tbl_user c on a.userid = c.id "
 				+ " WHERE 1=1 ";
 		
 		if(appid>0)
@@ -143,6 +143,7 @@ public class ChannelDao {
 							model.setRemark(rs.getString("remark"));
 							model.setAppname(rs.getString("appname"));
 							model.setAppkey(rs.getString("appkey"));
+							model.setUserName(StringUtil.getString(rs.getString("nick_name"),""));
 							list.add(model);
 						}
 						
@@ -175,6 +176,7 @@ public class ChannelDao {
 							model.setHold_percent(rs.getString("hold_percent"));
 							model.setRemark(rs.getString("remark"));
 							model.setSyn_type(rs.getShort("syn_type"));
+							model.setUserid(rs.getInt("userid"));
 							return model;
 						}
 						return null;
@@ -209,6 +211,12 @@ public class ChannelDao {
 	public boolean deletChannel(int id)
 	{
 		String sql = "DELETE FROM daily_config.tbl_xy_channel WHERE id="+id;
+		return new JdbcControl().execute(sql);
+	}
+	
+	public boolean updateChannelAccount(int channelId,int userId)
+	{
+		String sql = "update daily_config.tbl_xy_channel set userid = " + userId + "  where id = " + channelId;
 		return new JdbcControl().execute(sql);
 	}
 	

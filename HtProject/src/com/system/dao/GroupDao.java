@@ -61,9 +61,12 @@ public class GroupDao
 			@Override
 			public Object onCallBack(ResultSet rs) throws SQLException
 			{
+				String groupList = "";
 				while(rs.next())
 				{
-					for(String str : rs.getString("group_list").split(","))
+					groupList = rs.getString("group_list");
+					if(!StringUtil.isNullOrEmpty(groupList))
+					for(String str : groupList.split(","))
 					{
 						int groupId = StringUtil.getInteger(str, 0);
 						if(groupId>0)

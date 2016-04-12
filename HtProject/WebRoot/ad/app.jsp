@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="com.system.model.UserModel"%>
 <%@page import="com.system.model.AdAppModel"%>
 <%@page import="com.system.server.AdAppServer"%>
@@ -31,6 +32,9 @@
 	params.put("appkey", appkey);
 	
 	String pageData = PageUtil.initPageQuery("app.jsp",params,rowCount,pageIndex); 
+	
+	
+	String query = Base64UTF.encode(request.getQueryString());
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -103,6 +107,7 @@
 						<a href="appedit.jsp?id=<%= model.getId() %>
 						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
+						<a href="appacount.jsp?id=<%= model.getId() %>&query=<%= query %>">用户分配</a>
 					</td>
 				</tr>
 				<%

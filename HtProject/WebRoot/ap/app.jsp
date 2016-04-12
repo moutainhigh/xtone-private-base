@@ -1,3 +1,4 @@
+<%@page import="com.system.util.Base64UTF"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.system.constant.Constant"%>
@@ -13,10 +14,10 @@
     int pageIndex = StringUtil.getInteger(request.getParameter("pageindex"), 1);
     String appname = StringUtil.getString(request.getParameter("appname"), "");
     String appkey = StringUtil.getString(request.getParameter("appkey"), "");
-    
+    String query = Base64UTF.encode(request.getQueryString());
+    int appType = StringUtil.getInteger(request.getParameter("app_type"), -1);
 
-    
-	Map<String,Object> map = new AppServer().loadApp(pageIndex, appname, appkey);
+	Map<String,Object> map = new AppServer().loadApp(pageIndex, appname, appkey,appType);
 	
 	List<AppModel> list = (List<AppModel>)map.get("list");
 	
@@ -26,6 +27,7 @@
 	
 	params.put("appname", appname);
 	params.put("appkey", appkey);
+	params.put("app_type",appType+"");
 	
 	String pageData = PageUtil.initPageQuery("app.jsp",params,rowCount,pageIndex); 
 %>
@@ -46,6 +48,11 @@
 			  window.location.href = "delet.jsp?id=" + id+"&type=1"+"&appname=<%=appname%>&appkey<%=appkey%>";	
 		  }
 	  }
+	  
+	  $(function()
+	  {
+		  $("#sel_app_type").val("<%= appType %>");
+	  });
 	
     </script>
   </head>
@@ -64,6 +71,14 @@
 					<dd class="dd03_me">
 						<input name="appkey" id="input_appkey" value="<%=appkey %>" type="text" style="width: 150px">
 					</dd>
+					<dd class="dd01_me">应用类型</dd>
+					<dd class="dd04_me">
+						<select name="app_type" id="sel_app_type" style="width: 150px;" title="应用类型">
+							<option value="-1">应用类型</option>
+							<option value="1">自营应用</option>
+							<option value="2">第三方应用</option>
+						</select>
+					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查 询" type="submit" >
 					</dd>
@@ -77,8 +92,10 @@
 					<td>序号</td>
 					<td>应用名</td>
 					<td>应用KEY</td>
+					<td>应用类型</td>
 					<td>信息费扣量比</td>
 					<td>备注</td>
+					<td>帐号名</td>
 					<td>操作</td>
 				</tr>
 			</thead>
@@ -86,7 +103,6 @@
 				<%
 					int rowNum = 1;
 					for (AppModel model : list)
-					
 					{
 						
 				%>
@@ -94,15 +110,17 @@
 					<td><%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getAppname()%></td>
 					<td><%=model.getAppkey()%></td>
+					<td><%= model.getAppType()==1 ? "自营" : "第三方" %></td>
 					<td><%=model.getHold_percent()%></td>
 					<td><%=model.getRemark()==null?"":model.getRemark()%></td>
+					<td><%= model.getUserName() %></td>
 					<td>
 						<%
 							String encodeStr = URLEncoder.encode(appname,"GBK"); 
 						%>
-						<a href="appedit.jsp?id=<%= model.getId() %>
-						&pageindex=<%=StringUtil.getInteger(request.getParameter("pageindex"), 1) %>&appkey=<%=appkey %>&appname=<%=appname%>">修改</a>
 						<a onclick="delTrone(<%= model.getId()%>)">删除</a>
+						<a href="appedit.jsp?id=<%= model.getId() %>&query=<%= query %>">修改</a>
+						<a href="appacount.jsp?id=<%= model.getId() %>&query=<%= query %>">用户分配</a>
 					</td>
 				</tr>
 				<%

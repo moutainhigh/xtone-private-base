@@ -6,6 +6,7 @@ public class XyUserModel
 	private String activeDate;
 	private String appKey;
 	private String appName;
+	private int appType;
 	private String channelKey;
 	private int dataRows;
 	private int showDataRows;
@@ -82,5 +83,12 @@ public class XyUserModel
 	{
 		this.status = status;
 	}
+	public int getAppType() {
+		return appType;
+	}
+	public void setAppType(int appType) {
+		this.appType = appType;
+	}
+	
 	
 }

@@ -51,5 +51,10 @@ public class AdAppServer {
 		return new AdAppDao().addApp(model);
 	}
 	
+	public boolean updateAdAppAccount(int id,int userId)
+	{
+		return new AdAppDao().updateAdAppAccount(id, userId);
+	}
+	
 	
 }

@@ -29,8 +29,10 @@
 	int spTroneId = StringUtil.getInteger(request.getParameter("sp_trone_id"), -1);
 	
 	int status = StringUtil.getInteger(request.getParameter("trone_status"), -1);
+	
+	String	keyWord = StringUtil.getString(request.getParameter("keyword"), "");
 
-	Map<String, Object> map =  new TroneOrderServer().loadTroneOrder(spId, spTroneId, cpId,status,pageIndex);
+	Map<String, Object> map =  new TroneOrderServer().loadTroneOrder(spId, spTroneId, cpId,status,pageIndex,keyWord);
 		
 	List<TroneOrderModel> list = (List<TroneOrderModel>)map.get("list");
 	
@@ -49,6 +51,7 @@
 	params.put("cp_id", cpId + "");
 	params.put("sp_trone_id", spTroneId + "");
 	params.put("trone_status",status + "");
+	params.put("keyword",keyWord);
 	
 	String pageData = PageUtil.initPageQuery("troneorder.jsp",params,rowCount,pageIndex);
 	
@@ -198,6 +201,10 @@
 							<option value="1">停用</option>
 						</select>
 					</dd>
+					<dd class="dd01_me">关键字</dd>
+					<dd class="dd03_me">
+						<input type="text" name="keyword" id="sel_keyword" value="<%= keyWord %>" />
+					</dd>
 					<dd class="ddbtn" style="margin-left: 10px; margin-top: 0px;">
 						<input class="btn_match" name="search" value="查     询" type="submit" />
 					</dd>
@@ -212,11 +219,13 @@
 					<td>SP名称</td>
 					<td>SP业务名称</td>
 					<td>通道名称</td>
+					<td>价格</td>
 					<td>指令</td>
 					<td>扣量设置</td>
 					<td>扣量比</td>
 					<td>同步金额</td>
-					<td>动态</td>
+					<td>起扣数</td>
+					<td>模糊</td>
 					<td>启用</td>
 					<td>操作</td>
 				</tr>
@@ -224,23 +233,27 @@
 			<tbody>
 				<%
 					int rowNum = 1;
+					String stopStyle = "class=\"StopStyle\"";
 					for (TroneOrderModel model : list)
 					{
 				%>
-				<tr>
+				<tr <%= model.getDisable() == 1 ? stopStyle : "" %>>
 					<td><%=(pageIndex-1)*Constant.PAGE_SIZE + rowNum++ %></td>
 					<td><%=model.getCpShortName()%></td>
 					<td><%=model.getSpShortName() %></td>
 					<td><%=model.getSpTroneName()%></td>
 					<td><%=model.getTroneName() %></td>
+					<td><%= model.getPrice() %></td>
 					<td><%=model.getOrderNum() %></td>
 					<td><%=model.getIsHoldCustom()==0 ? "URL" : "当前" %></td>
 					<td><%=model.getHoldPercent() %></td>
 					<td><%=model.getHoldAmount() %></td>
+					<td><%=model.getHoldAcount()%></td>
 					<td><%=model.getDynamic()==1 ? "是" : "否" %></td>
 					<td><%=model.getDisable() ==0 ? "是" : "否" %></td>
 					<td>
-						<a href="troneorderedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
+						<a href="troneorderedit.jsp?query=<%= query %>&id=<%= model.getId() %>" >修改</a>
+						<a href="troneordersync.jsp?id=<%= model.getId() %>" target="_blank">模拟</a>
 					</td>
 				</tr>
 				<%

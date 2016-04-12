@@ -8,9 +8,9 @@ import com.system.model.SpTroneModel;
 
 public class SpTroneServer
 {
-	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,String spTroneName)
+	public Map<String, Object> loadSpTroneList(int pageIndex,int spId,int userId,String spTroneName)
 	{
-		return new SpTroneDao().loadSpTroneList(pageIndex,spId,spTroneName);
+		return new SpTroneDao().loadSpTroneList(pageIndex,spId,userId,spTroneName);
 	}
 	
 	public void addSpTrone(SpTroneModel model)
@@ -46,5 +46,17 @@ public class SpTroneServer
 	public List<SpTroneModel> loadCpTroneList(int userId)
 	{
 		return new SpTroneDao().loadCpTroneList(userId);
+	}
+	
+	public List<SpTroneModel> loadTroneListByCpid(int cpId)
+	{
+		List<SpTroneModel> list = new SpTroneDao().loadTroneListByCpid(cpId);
+		
+		return list;
+	}
+	
+	public boolean updateSpTroneRate(int id,float rate)
+	{
+		return new SpTroneDao().updateSpTroneRate(id, rate);
 	}
 }	
