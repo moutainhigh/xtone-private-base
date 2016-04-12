@@ -1,7 +1,4 @@
-/xtone-s2s-interface/target
-/xtone-thirdpay-webhook/target
 /HtProject/WebRoot/WEB-INF/classes
-/xtone-interface-redirect/target
 /xtone-interface-redirect/WebRoot/WEB-INF/classes
 /xtone-vanggame-front/target/m2e-wtp
 /xtone-dotnet-interface/admin.n8wan.com/log
@@ -17,8 +14,10 @@
 /xtone-dotnet-interface/packages
 /x-out-ad-server/WebRoot/WEB-INF/classes
 /x-out-ad-server-db/WebRoot/WEB-INF/classes
-/HtProject/target
 /popobird/bin
+
+#maven
+*/target
 
 #java below
 *.class
