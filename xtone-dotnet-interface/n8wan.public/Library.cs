@@ -208,7 +208,18 @@ namespace n8wan.Public
 
             return string.Empty;
         }
-
+        /// <summary>
+        /// 下载远程代码(不带ContentType值)
+        /// </summary>
+        /// <param name="url">目标网址</param>
+        /// <param name="postdata">post数据,NULL时为GET</param>
+        /// <param name="timeout">超时时间,单位为毫秒,默认:3秒</param>
+        /// <param name="encode">编码方式,默认utf8</param>
+        /// <returns></returns>
+        public static string DownloadHTML(string url, string postdata, int timeout, string encode)
+        {
+            return DownloadHTML(url, postdata, timeout, encode, null);
+        }
 
         /// <summary>
         /// 下载远程代码
@@ -217,8 +228,9 @@ namespace n8wan.Public
         /// <param name="postdata">post数据,NULL时为GET</param>
         /// <param name="timeout">超时时间,单位为毫秒,默认:3秒</param>
         /// <param name="encode">编码方式,默认utf8</param>
+        /// <param name="ContentType">默认为空</param>
         /// <returns></returns>
-        public static string DownloadHTML(string url, string postdata, int timeout, string encode)
+        public static string DownloadHTML(string url, string postdata, int timeout, string encode, string ContentType)
         {
 
             Encoding ec = null;
@@ -228,45 +240,53 @@ namespace n8wan.Public
                 ec = ASCIIEncoding.GetEncoding(encode);
 
             System.Net.HttpWebRequest web = null;
+            Stream stm = null;
             web = (System.Net.HttpWebRequest)System.Net.WebRequest.Create(url);
-            System.Net.HttpWebResponse rsp = null;
+             
             web.Timeout = timeout < 1 ? 2888 : timeout;
             web.AllowAutoRedirect = false;
             web.AutomaticDecompression = System.Net.DecompressionMethods.GZip;
             web.ServicePoint.UseNagleAlgorithm = false;
-
             if (postdata != null)
             {
                 web.ServicePoint.Expect100Continue = false;
-                web.Method = "POST";
+                web.Method = System.Net.WebRequestMethods.Http.Post;
+
+                if (!string.IsNullOrEmpty(ContentType))
+                    web.ContentType = ContentType;
+
                 var bin = ec.GetBytes(postdata);
-                using (var stm = web.GetRequestStream())
+                using (  stm = web.GetRequestStream())
                 {
                     stm.Write(bin, 0, bin.Length);
                 }
-            }
+             stm = null;
+           }
 
-            try
-            {
-                rsp = (System.Net.HttpWebResponse)web.GetResponse();
-            }
-            catch
-            {
-                return null;
-            }
-            try
-            {
-                using (var stm = rsp.GetResponseStream())
-                {
-                    using (var rd = new System.IO.StreamReader(stm, ec))
-                        return rd.ReadToEnd();
-                }
-            }
-            catch //(Exception ex)
-            {
-                //msg = ex.Message;
-            }
-            return null;
+            StreamReader reader = null;
+             System.Net.WebResponse rsp =  web.GetResponse();
+             try
+             {
+                 stm = rsp.GetResponseStream();
+                 {
+                     using (var rd = new System.IO.StreamReader(stm, ec))
+                         return rd.ReadToEnd();
+                 }
+             }
+             finally
+             {
+                 if (reader != null)
+                     reader.Dispose();
+                 if (stm != null)
+                     stm.Dispose();
+                 if (rsp != null){
+                     try
+                     {
+                         rsp.Close();
+                     }
+                     catch { }
+                 }
+             }
 
         }
 

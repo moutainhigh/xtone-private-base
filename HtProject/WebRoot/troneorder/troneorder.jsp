@@ -252,7 +252,8 @@
 					<td><%=model.getDynamic()==1 ? "是" : "否" %></td>
 					<td><%=model.getDisable() ==0 ? "是" : "否" %></td>
 					<td>
-						<a href="troneorderedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
+						<a href="troneorderedit.jsp?query=<%= query %>&id=<%= model.getId() %>" >修改</a>
+						<a href="troneordersync.jsp?id=<%= model.getId() %>" target="_blank">模拟</a>
 					</td>
 				</tr>
 				<%

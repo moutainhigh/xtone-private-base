@@ -49,34 +49,6 @@
 			return;
 		}
 		
-		if (parseFloat($("#input_day_limit").val()).toString() == "NaN")
-		{
-			alert("请输入正确的日限");
-			$("#input_day_limit").focus();
-			return;
-		}
-		
-		if (parseFloat($("#input_month_limit").val()).toString() == "NaN")
-		{
-			alert("请输入正确的月限");
-			$("#input_month_limit").focus();
-			return;
-		}
-		
-		if (parseFloat($("#input_user_day_limit").val()).toString() == "NaN")
-		{
-			alert("请输入正确的用户日限");
-			$("#input_user_day_limit").focus();
-			return;
-		}
-		
-		if (parseFloat($("#input_day_limit").val()).toString() == "NaN") 
-		{
-			alert("请输入正确的用户月限");
-			$("#input_day_limit").focus();
-			return;
-		}
-
 		document.getElementById("addform").submit();
 	}
 	
@@ -85,17 +57,17 @@
 		$("#input_id").val("<%= model.getId() %>");
 		$("#input_sp_trone_api_name").val("<%= model.getName() %>");
 		$("#input_match_keyword").val("<%= model.getMatchKeyword() %>");
-		$("#input_day_limit").val("<%= model.getDayLimit() %>");
-		$("#input_month_limit").val("<%= model.getMonthLimit() %>");
-		$("#input_user_day_limit").val("<%= model.getUserDayLimit() %>");
-		$("#input_user_month_limit").val("<%= model.getUserMonthLimit() %>");
 		setRadioCheck("match_field",<%= model.getMatchField() %>);
 		setRadioCheck("locate_match",<%= model.getLocateMatch() %>);
 		var apiFildes = "<%= model.getApiFields() %>";
-		var files = apiFildes.split(",");
-		for(i=0; i<files.length; i++)
+		
+		if(apiFildes!="")
 		{
-			document.getElementById("api_fields_" + i).checked = true;	
+			var files = apiFildes.split(",");
+			for(i=0; i<files.length; i++)
+			{
+				document.getElementById("api_fields_" + files[i]).checked = true;	
+			}
 		}
 	});
 	
@@ -153,11 +125,17 @@
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_0" value="0">IMEI &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_1" value="1">IMSI &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_2" value="2">手机号码 &nbsp;
+						<!--  
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_3" value="3">IP &nbsp;
+						-->
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_4" value="4">包名 &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_5" value="5">Android版本 &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_6" value="6">网络类型 &nbsp;
 						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_7" value="7">客户端IP &nbsp;
+						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_8" value="8">LAC &nbsp;
+						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_9" value="9">CID &nbsp;
+						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_10" value="10">ICCID &nbsp;
+						<input type="checkbox" class="chpro" name="api_fields" id="api_fields_11" value="11">UserAgent &nbsp;
 					</dd>
 					
 					<br />
@@ -174,46 +152,6 @@
 						<label style="font-size: 14px;float:left">IP地区匹配</label>
 						<input type="radio" name="locate_match" style="width: 35px;float:left" value="3" >
 						<label style="font-size: 14px;float:left">手机和IP地区匹配</label>
-					</dd>
-
-					<br />
-					<br />
-					<br />
-					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">通道日限</dd>
-					<dd class="dd03_me">
-						<input type="text" name="day_limit" value="0" id="input_day_limit"
-							style="width: 200px">
-					</dd>
-					
-					<br />
-					<br />
-					<br />
-					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">通道月限</dd>
-					<dd class="dd03_me">
-						<input type="text" name="month_limit" value="0" id="input_month_limit"
-							style="width: 200px">
-					</dd>
-					
-					<br />
-					<br />
-					<br />
-					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">用户日限</dd>
-					<dd class="dd03_me">
-						<input type="text" name="user_day_limit" value="0" id="input_user_day_limit"
-							style="width: 200px">
-					</dd>
-					
-					<br />
-					<br />
-					<br />
-					<dd class="dd00_me"></dd>
-					<dd class="dd01_me">用户月限</dd>
-					<dd class="dd03_me">
-						<input type="text" name="user_month_limit"  value="0" id="input_user_month_limit"
-							style="width: 200px">
 					</dd>
 
 					<br />

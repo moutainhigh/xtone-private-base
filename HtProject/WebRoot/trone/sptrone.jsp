@@ -88,6 +88,62 @@
 		$("#sel_commerce_user_id").val(<%= commerceUserId %>);
 	});
 	
+	
+	function editShowData(editId)
+	{
+		var curShowRows = $("#hid_" + editId).val();
+		
+		var newHtml = "<input type='text' id='myput_" + editId + "' style='width:30px;background-color:#CDC5BF;text-align:center;' value='"+ curShowRows +"' />";
+		
+		newHtml += "<input type='button' value='更新' style='margin-left: 10px' onclick='updateShowData(" + editId + ")'/>";
+		 
+		newHtml += "<input type='button' value='取消' style='margin-left: 10px' onclick='cancelShowData(" + editId + ")'/>";
+		
+		$("#span_" + editId).html(newHtml);
+	}
+	
+	function updateShowData(editId)
+	{
+		var newShowRows = parseFloat($("#myput_" + editId).val());
+		
+		if(isNaN(newShowRows) || newShowRows>=1 || newShowRows<=0)
+		{
+			alert("请输入介于0和1之间的数据");
+			return;
+		}
+		
+		updateDbData(editId,newShowRows);
+	}
+	
+	function updateDbData(editId,newShowRows)
+	{
+		$.post("sptroneaction.jsp", 
+		{
+			type : 1,
+			jiesuanlv : newShowRows,
+			id :editId 
+		}, 
+		function(data) 
+		{
+			data = $.trim(data);
+			if ("OK" == data) 
+			{
+				$("#hid_" + editId).val(newShowRows);		
+				$("#span_" + editId).html(newShowRows);
+			} 
+			else 
+			{
+				alert("修改失败！请联系管理员");
+				$("#span_" + editId).html($("#hid_" + editId).val());
+			}
+		});
+	}
+	
+	function cancelShowData(editId)
+	{
+		$("#span_" + editId).html($("#hid_" + editId).val());
+	}
+	
 </script>
 <body>
 	<div class="main_content">
@@ -148,6 +204,10 @@
 					<td>商务人员</td>
 					<td>类型</td>
 					<td>结算率</td>
+					<td>日限</td>
+					<td>月限</td>
+					<td>用户日限</td>
+					<td>用户月限</td>
 					<td>状态</td>
 					<td>操作</td>
 				</tr>
@@ -160,13 +220,21 @@
 					{
 				%>
 				<tr <%= model.getStatus()==0 ? stopStyle : "" %>>
-					<td><%=(pageIndex - 1) * Constant.PAGE_SIZE + rowNum++%></td>
+					<td><%=(pageIndex - 1) * Constant.PAGE_SIZE + rowNum++%>
+						<input type="hidden" id="hid_<%= model.getId() %>" value="<%= model.getJieSuanLv() %>" />
+					</td>
 					<td><%=model.getSpName()%></td>
 					<td><%=model.getOperatorName()%></td>
 					<td><%=model.getSpTroneName()%></td>
 					<td><%= model.getCommerceUserName() %></td>
 					<td><%= troneTypes[model.getTroneType()]%></td>
-					<td><%=model.getJieSuanLv()%></td>
+					<td ondblclick="editShowData('<%= model.getId() %>')">
+						<span id="span_<%= model.getId() %>"><%= model.getJieSuanLv() %></span>
+					</td>
+					<td><%= model.getDayLimit() %></td>
+					<td><%= model.getMonthLimit() %></td>
+					<td><%= model.getUserDayLimit() %></td>
+					<td><%= model.getUserMonthLimit() %></td>
 					<td><%= model.getStatus()==1 ? "开启" : "关闭" %></td>
 					<td><a href="sptroneedit.jsp?query=<%= query %>&id=<%= model.getId() %>">修改</a>
 						<a href="#" onclick="delSpTrone(<%=model.getId()%>)">删除</a></td>
@@ -177,7 +245,7 @@
 			
 			<tbody>
 				<tr>
-					<td colspan="7" class="tfooter" style="text-align: center;"><%=pageData%></td>
+					<td colspan="13" class="tfooter" style="text-align: center;"><%=pageData%></td>
 				</tr>
 			</tbody>
 		</table>

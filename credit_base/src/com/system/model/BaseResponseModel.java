@@ -2,10 +2,24 @@ package com.system.model;
 
 import net.sf.json.JSONObject;
 
+/**
+ * 返回给CP的MODEL
+ * @author Andy.Chen
+ *
+ */
 public class BaseResponseModel
 {
+	/**
+	 * 访问状态
+	 */
 	private int status;
+	/**
+	 * 定单号
+	 */
 	private String orderNum;
+	/**
+	 * 服务器
+	 */
 	private JSONObject resultJson;
 	
 	public int getStatus()

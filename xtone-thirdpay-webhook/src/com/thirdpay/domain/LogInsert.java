@@ -131,7 +131,6 @@ public Long getId() {
         ps.setString(m++, this.getCommodity());
         ps.setString(m++, this.getOrderid());
         
-        
         ps.executeUpdate();
       }catch(Exception e){
         // TODO Auto-generated catch block

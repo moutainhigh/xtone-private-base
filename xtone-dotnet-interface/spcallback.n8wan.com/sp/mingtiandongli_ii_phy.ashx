@@ -17,8 +17,8 @@ public class mingtiandongli_ii_phy : n8wan.Public.Logical.BaseSPCallback
     {
         switch (Field.ToLower())
         {
-            case "linkid":
-                return _linkId;
+            //case "linkid":
+            //    return _linkId;
             case "mobile":
                 var m = Request["mobile"];
                 if (string.IsNullOrEmpty(m))

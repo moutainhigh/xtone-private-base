@@ -26,6 +26,16 @@ namespace Shotgun.Model.List
             this.dBase = dBase;
             this.PageSize = 10;
         }
+        public LightDataQueries(string TableName, string IdentityField, Database.IBaseDataClass2 dBase, string schema)
+        {
+            this.TableName = TableName;
+            this.IdentityField = IdentityField;
+            this.dBase = dBase;
+            this.PageSize = 10;
+            this.Schema = schema;
+        }
+
+
         #endregion
 
 
@@ -124,7 +134,11 @@ namespace Shotgun.Model.List
             }
             finally
             {
-                cmd.Cancel();//可快速关闭reader
+                try
+                {
+                    cmd.Cancel();//可快速关闭reader
+                }
+                catch { }
                 if (reader != null)
                     reader.Dispose();
                 cmd.Dispose();

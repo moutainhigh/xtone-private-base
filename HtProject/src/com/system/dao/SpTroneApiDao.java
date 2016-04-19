@@ -39,12 +39,6 @@ public class SpTroneApiDao
 					model.setMatchKeyword(StringUtil.getString(rs.getString("match_keyword"), ""));
 					model.setApiFields(StringUtil.getString(rs.getString("api_fields"), ""));
 					model.setLocateMatch(rs.getInt("locate_match"));
-					model.setDayLimit(rs.getFloat("day_limit"));
-					model.setMonthLimit(rs.getFloat("month_limit"));
-					model.setCurDayLimit(rs.getFloat("cur_day_limit"));
-					model.setCurMonthLimit(rs.getFloat("cur_month_limit"));
-					model.setUserDayLimit(rs.getFloat("user_day_limit"));
-					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
 					
 					list.add(model);
 				}
@@ -101,12 +95,6 @@ public class SpTroneApiDao
 					model.setMatchKeyword(StringUtil.getString(rs.getString("match_keyword"), ""));
 					model.setApiFields(StringUtil.getString(rs.getString("api_fields"), ""));
 					model.setLocateMatch(rs.getInt("locate_match"));
-					model.setUserDayLimit(rs.getFloat("user_day_limit"));
-					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
-					model.setDayLimit(rs.getFloat("day_limit"));
-					model.setMonthLimit(rs.getFloat("month_limit"));
-					model.setCurDayLimit(rs.getFloat("cur_day_limit"));
-					model.setCurMonthLimit(rs.getFloat("cur_month_limit"));
 					
 					list.add(model);
 				}
@@ -137,12 +125,6 @@ public class SpTroneApiDao
 					model.setMatchKeyword(StringUtil.getString(rs.getString("match_keyword"), ""));
 					model.setApiFields(StringUtil.getString(rs.getString("api_fields"), ""));
 					model.setLocateMatch(rs.getInt("locate_match"));
-					model.setUserDayLimit(rs.getFloat("user_day_limit"));
-					model.setUserMonthLimit(rs.getFloat("user_month_limit"));
-					model.setDayLimit(rs.getFloat("day_limit"));
-					model.setMonthLimit(rs.getFloat("month_limit"));
-					model.setCurDayLimit(rs.getFloat("cur_day_limit"));
-					model.setCurMonthLimit(rs.getFloat("cur_month_limit"));
 					
 					return model;
 				}
@@ -154,7 +136,7 @@ public class SpTroneApiDao
 	public boolean addSpTroneApiModel(SpTroneApiModel model)
 	{
 		String sql = "insert into daily_config.tbl_sp_trone_api(name,match_field,match_keyword,api_fields,"
-				+ "locate_match,user_day_limit,user_month_limit,day_limit,month_limit) values(?,?,?,?,?,?,?,?,?)";
+				+ "locate_match) values(?,?,?,?,?)";
 		
 		Map<Integer, Object> map = new HashMap<Integer, Object>();
 		
@@ -163,10 +145,6 @@ public class SpTroneApiDao
 		map.put(3, model.getMatchKeyword());
 		map.put(4, model.getApiFields());
 		map.put(5, model.getLocateMatch());
-		map.put(6, model.getUserDayLimit());
-		map.put(7, model.getUserMonthLimit());
-		map.put(8, model.getDayLimit());
-		map.put(9, model.getMonthLimit());
 		
 		return new JdbcControl().execute(sql, map);
 	}
@@ -174,7 +152,7 @@ public class SpTroneApiDao
 	public boolean updateSpTroneApiModel(SpTroneApiModel model)
 	{
 		String sql = "update daily_config.tbl_sp_trone_api set name = ?,match_field = ?,match_keyword = ?,api_fields = ?,"
-				+ "locate_match = ?,user_day_limit = ?,user_month_limit = ?,day_limit = ?,month_limit = ? where id = ?";
+				+ "locate_match = ? where id = ?";
 		
 		Map<Integer, Object> map = new HashMap<Integer, Object>();
 		
@@ -183,11 +161,7 @@ public class SpTroneApiDao
 		map.put(3, model.getMatchKeyword());
 		map.put(4, model.getApiFields());
 		map.put(5, model.getLocateMatch());
-		map.put(6, model.getUserDayLimit());
-		map.put(7, model.getUserMonthLimit());
-		map.put(8, model.getDayLimit());
-		map.put(9, model.getMonthLimit());
-		map.put(10, model.getId());
+		map.put(6, model.getId());
 		
 		return new JdbcControl().execute(sql, map);
 	}

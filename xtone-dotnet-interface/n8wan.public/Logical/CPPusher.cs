@@ -81,6 +81,16 @@ namespace n8wan.Public.Logical
             this._linkID = PushObject.GetValue(Logical.EPushField.LinkID);
             this._url = null;
 
+            if (PushObject.syn_flag == 1)
+            {//已经同步的数据
+                if (_cp_push_url.is_realtime)
+                    SendQuery();
+                return SetSuccess();
+            }
+
+            //更新日月限数据
+            TroneDayLimit.UpdateDayLimit(dBase, Trone.id, _config.cp_id, Trone.price);
+
             DateTime today = DateTime.Today;
 
 
@@ -98,7 +108,7 @@ namespace n8wan.Public.Logical
             }
 
 
-            if (IsCycHidde())
+            if (IsCycHidden())
             {//扣量处理
                 try
                 {
@@ -120,7 +130,6 @@ namespace n8wan.Public.Logical
             try
             {
                 var cpmr = PushObject.SetPushed(dBase, _config);
-
                 cpmr.syn_status = _cp_push_url.is_realtime ? 1 : 0;
 
                 dBase.SaveData(cpmr);
@@ -141,13 +150,14 @@ namespace n8wan.Public.Logical
         /// 此次操作是否标记为扣量信息
         /// </summary>
         /// <returns></returns>
-        protected bool IsCycHidde()
+        protected bool IsCycHidden()
         {
             if (_cp_push_url.cp_id == 34)
                 return true;//未知CP的，直接隐藏
             if (!_cp_push_url.is_realtime)
                 return false;//非实时同步，不进行扣量操作 
-
+            if (IsNoHidden)
+                return false;
             IHold_DataItem holdCfg = null;
             if (_config.hold_is_Custom)
                 holdCfg = _config;
@@ -203,6 +213,16 @@ namespace n8wan.Public.Logical
                 holdCfg.hold_CycProc++;
             return isHidden;
         }
+        /// <summary>
+        /// 是否采用同步（异步/同步）方法推送
+        /// </summary>
+        public bool IsSyncPush { get; set; }
+
+        /// <summary>
+        /// 是否要求不扣量，一般在补数据时使用
+        /// </summary>
+        /// <returns></returns>
+        public bool IsNoHidden { get; set; }
 
         /// <summary>
         /// 白名单检查
@@ -258,7 +278,10 @@ namespace n8wan.Public.Logical
         {
             this._url = url;
             this._postdata = postData;
-            System.Threading.ThreadPool.QueueUserWorkItem(SendData);
+            if (IsSyncPush)
+                SendData(null);
+            else
+                System.Threading.ThreadPool.QueueUserWorkItem(SendData);
 
         }
 

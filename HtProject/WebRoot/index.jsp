@@ -14,7 +14,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>翔通运营管理平台</title>
+<title>运营管理平台</title>
 </head>
 <frameset rows="104,*" cols="*" frameborder="no" border="0"
 	framespacing="0">

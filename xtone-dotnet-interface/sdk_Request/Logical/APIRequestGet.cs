@@ -200,17 +200,20 @@ namespace sdk_Request.Logical
         private bool InitOrder()
         {
 #if DEBUG
-            _aqm = new Model.APIRquestModel()
+            if (Request.HttpMethod.Equals("GET"))
             {
-                cid = 123,
-                imei = "866568022922909",
-                imsi = "460023192787105",
-                price = 1000,
-                lac = 456,
-                mobile = "13570830935",
-
-            };
-#else
+                _aqm = new Model.APIRquestModel()
+                {
+                    cid = 123,
+                    imei = "866568022922909",
+                    imsi = "460023192787105",
+                    //price = 1000,
+                    lac = 456,
+                    mobile = "13570830935",
+                };
+                return true;
+            }
+#endif
             if (Request.TotalBytes < 10)
                 return false;
 
@@ -221,7 +224,7 @@ namespace sdk_Request.Logical
 
             _aqm = Shotgun.Library.Static.JsonParser<sdk_Request.Model.APIRquestModel>(Request.InputStream);
 
-#endif
+
             return true;
         }
 
@@ -343,7 +346,7 @@ namespace sdk_Request.Logical
         /// <returns></returns>
         protected string GetHTML(string url, int timeout, string encode)
         {
-            return DownloadHTML(url, null, timeout, encode);
+            return DownloadHTML(url, null, timeout, encode,null);
         }
 
         /// <summary>
@@ -355,31 +358,45 @@ namespace sdk_Request.Logical
         /// <returns></returns>
         protected string GetHTML(string url)
         {
-            return DownloadHTML(url, null, 0, null);
+            return DownloadHTML(url, null, 0, null,null);
         }
 
         /// <summary>
-        /// 下载远程代码,带日志
+        /// 下载远程代码,带日志,contentType=application/x-www-form-urlencoded
         /// </summary>
         /// <param name="url">目标网址</param>
+        /// <param name="data">传送的字符串</param>
         /// <param name="timeout">超时时间,单位为毫秒,默认3秒</param>
         /// <param name="encode">编码方式,utf8/gb2312等,默认utf8</param>
-        /// <param name="data">传送的字符串</param>
         /// <returns></returns>
         protected string PostHTML(string url, string data, int timeout, string encode)
         {
-            return DownloadHTML(url, data ?? string.Empty, timeout, encode);
+            if (string.IsNullOrEmpty(encode))
+            {
+                return DownloadHTML(url, data ?? string.Empty, timeout, encode, "application/x-www-form-urlencoded");
+            }
+            return DownloadHTML(url, data ?? string.Empty, timeout, encode, "application/x-www-form-urlencoded; charset="+ encode);
         }
+
 
         /// <summary>
         /// 下载远程代码 utf8/3秒超时,带日志
         ///</summary>
         protected string PostHTML(string url, string data)
         {
-            return DownloadHTML(url, data ?? string.Empty, 0, null);
+            return DownloadHTML(url, data ?? string.Empty, 0, null, "application/x-www-form-urlencoded; charset=UTF-8");
         }
 
-        protected string DownloadHTML(string url, string postdata, int timeout, string encode)
+        /// <summary>
+        /// 下载远程代码,带日志
+        /// </summary>
+        /// <param name="url">目标网址</param>
+        /// <param name="postdata">传送的字符串，传入null时，将采用GET方法访问url</param>
+        /// <param name="timeout">超时时间,单位为毫秒,默认3000毫秒</param>
+        /// <param name="encode">可为空，默认为utf8</param>
+        /// <param name="contentType">HTTP报文头，可为空</param>
+        /// <returns></returns>
+        protected string DownloadHTML(string url, string postdata, int timeout, string encode,string contentType )
         {
             Stopwatch st = new Stopwatch();
             st.Start();
@@ -389,13 +406,13 @@ namespace sdk_Request.Logical
                 WriteLog(url);
                 if (!String.IsNullOrEmpty(postdata))
                     WriteLog(postdata);
-                html = n8wan.Public.Library.DownloadHTML(url, postdata, timeout, encode);
+                html = n8wan.Public.Library.DownloadHTML(url, postdata, timeout, encode, contentType);
                 return html;
             }
             catch (Exception ex)
             {
-                html = ex.ToString();
-                throw;
+                WriteLog(ex.Message);
+                return null;
             }
             finally
             {

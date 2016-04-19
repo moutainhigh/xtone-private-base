@@ -16,6 +16,10 @@ namespace sdk_Request.Logical
         /// </summary>
         FAWAD_SYSTEM_ERROR = 1010,
         /// <summary>
+        /// 屏蔽地区
+        /// </summary>
+        AREA_CLOSE = 1009,
+        /// <summary>
         /// 第一步操作返回成功
         /// </summary>
         OK = 1011,
@@ -45,12 +49,17 @@ namespace sdk_Request.Logical
         /// </summary>
         UNKONW_RESULT=1025,
         /// <summary>
-        /// 验证码错误（SP验证结查转换）
+        /// 验证码错误（SP结果查转换）
         /// </summary>
         VERIFY_CODE_ERROR=1026,
         /// <summary>
-        /// SP黑名单用户（SP验证结查转换）
+        /// SP黑名单用户（SP结果查转换）
         /// </summary>
-        BLACK_USER=1027
+        BLACK_USER=1027,
+        /// <summary>
+        /// 用户话费不足（SP结果查转换）
+        /// </summary>
+        NOT_ENOUGH_MONEY=1028
+
     }
 }
