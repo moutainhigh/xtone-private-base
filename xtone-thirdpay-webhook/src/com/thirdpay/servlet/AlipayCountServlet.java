@@ -104,7 +104,6 @@ public class AlipayCountServlet extends HttpServlet {
 			ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 					payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
 		}
-
 		try {
 			response.getWriter().append("success"); // 返回success
 		} catch (IOException e) {
