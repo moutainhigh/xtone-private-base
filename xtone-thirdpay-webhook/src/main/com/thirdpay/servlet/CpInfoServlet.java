@@ -78,10 +78,13 @@ public class CpInfoServlet extends HttpServlet {
 				// System.out.println("appkey找不到");
 				// }
 
-//				System.out.println(rs.getString("appKey") + "\n" + rs.getString("id") + "\n"
-//						+ rs.getString("notify_url") + "\n" + rs.getString("alipay") + "\n" + rs.getString("unionpay")
-//						+ "\n" + rs.getString("wechatpay") + "\n" + rs.getString("baidupay") + "\n"
-//						 + rs.getString("smspay"));
+				// System.out.println(rs.getString("appKey") + "\n" +
+				// rs.getString("id") + "\n"
+				// + rs.getString("notify_url") + "\n" + rs.getString("alipay")
+				// + "\n" + rs.getString("unionpay")
+				// + "\n" + rs.getString("wechatpay") + "\n" +
+				// rs.getString("baidupay") + "\n"
+				// + rs.getString("smspay"));
 
 				cpInfoBean.setAlipay(rs.getString("aliPay"));
 				cpInfoBean.setUnionpay(rs.getString("unionPay"));

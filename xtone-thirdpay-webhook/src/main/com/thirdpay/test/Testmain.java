@@ -29,7 +29,6 @@ import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.thirdpay.domain.CpInfoBean;
 import com.thirdpay.domain.LogInsert;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.domain.PayOperateBean;
