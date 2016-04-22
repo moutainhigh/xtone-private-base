@@ -100,7 +100,12 @@
 	</table>
 	<script type="text/javascript">
 		$(function(){
-			$('#table_id').DataTable();
+			$('#table_id').DataTable({
+				"bLengthChange": false,
+				"bFilter": false,
+				"bAutoWidth": false
+				
+			});
 			getData();
 		});
 		
@@ -116,7 +121,7 @@
 					if (msg.status == "success") {
 
 						//$("#list").val(msg.data); 
-						 var list = eval(msg.data);
+						var list = eval(msg.data);
 						 var listmsg="";
 						 for(var i=0;i<list.length;i++){
 							 console.log(list[i].id);
