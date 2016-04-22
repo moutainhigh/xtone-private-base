@@ -5,7 +5,7 @@ package org.demo.info;
  *
  */
 public class Pays {
-	private long id;
+	private String id;
 	private int price;                 //价格
 	private String payChannel;		   //支付
 	private String ip;				   //来源IP
@@ -19,10 +19,10 @@ public class Pays {
 	private int testStatus;            //状态
 	
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getPrice() {

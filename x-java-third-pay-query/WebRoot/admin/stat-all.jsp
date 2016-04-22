@@ -49,7 +49,10 @@
 	href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
 	src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
-
+<script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="../js-css/DatePicker.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../My97DatePicker/skin/default/datepicker.css">
 </head>
 
 <body>
@@ -77,7 +80,24 @@
 // 						&& request.getParameter("submit").equals("1")) {
 	%>
 	<input type="hidden" value="" id="list" />	
-	<input type="button" style="width: 150px;height: 30px;margin-bottom: 10px;margin-left:10px" value="新增文章" onclick="window.location.href='content-add.jsp'" >
+	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">开始日期</dd>
+			<dd class="dd03_me" style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input  style='width: 90px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
+						 id="endtime" type="text" onfocus="setday(this,'yyyy-MM-dd','2010-01-01','2010-12-30',1)" readonly="readonly"	/>
+			</dd>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">APPKey</dd>
+			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input name="appname" id="input_appkey" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+			</dd>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">应用KEY</dd>
+			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input name="appkey" id="input_chanell" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+			</dd>
+			<dd class="ddbtn" style="margin-left: 20px; width: 60px; height: 25px; float: left; margin-top: 0px;">
+				<input class="btn_match" name="search" value="查 询" type="button" onclick="getDate();" style='width: 60px; height: 28px; background: transparent url("../img/botton_099.gif") no-repeat scroll center center; text-align: center; line-height: 27px; color: rgb(255, 255, 255); font-weight: bold; cursor: pointer;'>
+			</dd>
+	</dl>
 	<table id="table_id" class="display">
 		<thead>
 			<tr>
@@ -110,11 +130,12 @@
 		});
 		
 		function getData(){
+			var date = '{"time":"","appkey":"","chanell":""}';
 			$.ajax({
 				type : "post",
 				url : "selectPays.jsp",
 				async : false,
-				data : null,
+				data : date,
 				dataType : "json",
 				success : function(msg) {
 										
@@ -124,7 +145,58 @@
 						var list = eval(msg.data);
 						 var listmsg="";
 						 for(var i=0;i<list.length;i++){
-							 console.log(list[i].id);
+							 listmsg += "<tr><td>"+list[i].id+"</td>";
+							 listmsg += "<td>"+list[i].price+"</td>";
+							 listmsg += "<td>"+list[i].payChannel+"</td>";
+							 listmsg += "<td>"+list[i].ip+"</td>";
+							 listmsg += "<td>"+list[i].payInfo+"</td>";
+							 listmsg += "<td>"+list[i].releaseChannel+"</td>";
+							 listmsg += "<td>"+list[i].appKey+"</td>";
+							 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
+							 listmsg += "<td>"+list[i].testStatus+"</td></tr>";
+						 }
+						$("#list2").empty();
+						$("#list2").append(listmsg);
+					} else {
+						alert('邮箱或密码错误!');
+					}
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					
+					var tip="登录失败!";
+					switch (XMLHttpRequest.status)
+					{
+						case 404:
+							tip="登录失败!请检查用户名和密码是否正确。";
+					  		break;
+						default:
+							tip="网络异常，请稍后再试。";
+							break;
+					  			
+					}
+					alert(tip);
+				}
+			});
+		}
+		
+		function getDate(){
+			
+			var date = '{"time":"'+$("#endtime").val()+'","appkey":"'+$("#input_appkey").val()+'","chanell":"'+$("#input_chanell").val()+'"}';
+			console.log(date);
+			$.ajax({
+				type : "post",
+				url : "selectPays.jsp",
+				async : false,
+				data : date,
+				dataType : "json",
+				success : function(msg) {
+										
+					if (msg.status == "success") {
+
+						//$("#list").val(msg.data); 
+						var list = eval(msg.data);
+						 var listmsg="";
+						 for(var i=0;i<list.length;i++){
 							 listmsg += "<tr><td>"+list[i].id+"</td>";
 							 listmsg += "<td>"+list[i].price+"</td>";
 							 listmsg += "<td>"+list[i].payChannel+"</td>";
