@@ -107,6 +107,16 @@ public class PayOperateBean implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
+				
+				if(ps!= null){
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
 				if (con != null) {
 					try {
 						con.close();

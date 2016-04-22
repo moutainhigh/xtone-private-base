@@ -34,7 +34,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
 
 /**
- * Servlet implementation class AlipayCountServlet
+ * 支付宝统计servlet
  */
 @WebServlet("/AlipayCountServlet")
 public class AlipayCountServlet extends HttpServlet {

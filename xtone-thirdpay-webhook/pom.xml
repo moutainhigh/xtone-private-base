@@ -15,10 +15,10 @@
 
 	<build>
 		<finalName>${final.name}</finalName>
-		<sourceDirectory>src/</sourceDirectory>
+		<sourceDirectory>src/main</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>src/</directory>
+				<directory>src/main</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
@@ -51,6 +51,7 @@
 					</webResources>
 				</configuration>
 			</plugin>
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
@@ -79,6 +80,7 @@
 				</executions>
 			</plugin>
 		</plugins>
+
 		<extensions>
 			<!-- Enabling the use of FTP -->
 			<extension>
@@ -91,32 +93,31 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>product</id>
+			<id>pc</id>
+
 			<properties>
-				<runtime.env>packageConfig\product</runtime.env>
+				<runtime.env>packageConfig\pc</runtime.env>
 				<final.name>thirdpay-webhook.n8wan.com</final.name>
-				<ftp.server.id>alphaOffice</ftp.server.id>
-				<ftp.to.url>ftp://192.168.0.51/server/tomcat-9.0.0/swapDir/</ftp.to.url>
+
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url>
+			</properties>
+		</profile>
+		<profile>
+			<id>online</id>
+
+			<properties>
+				<runtime.env>packageConfig\online</runtime.env>
+				<final.name>thirdpay-cs.n8wan.com</final.name>
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
 		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<runtime.env>packageConfig\test</runtime.env>
-				<final.name>thirdpay-webhook.n8wan.com-test</final.name>
-				<ftp.server.id>alphaOffice</ftp.server.id>
-				<ftp.to.url>ftp://192.168.0.51/server/tomcat-9.0.0/swapDir/</ftp.to.url>
-			</properties>
-
-		</profile>
 	</profiles>
-
-
-
 
 	<dependencies>
 

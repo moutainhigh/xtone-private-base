@@ -17,11 +17,9 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
-import com.thirdpay.test.CacheConfig;
-import com.thirdpay.test.LogInsert;
 
 /**
- * Servlet implementation class UnionpayCountServlet
+ * 银联统计Servlet
  */
 @WebServlet("/UnionpayCountServlet")
 public class UnionpayCountServlet extends HttpServlet {

@@ -22,7 +22,7 @@ public class ConnectionServicethirdpayCount {
 	}
 	
 	//private final static Logger logger = Logger.getLogger(ConnectionService.class);
-	private DataSource ds_isthird =setupDataSource(DB_PREFIX, 5, 10, 5, 2);
+	private DataSource ds_isthird =setupDataSource(DB_PREFIX, 5, 50, 5, 2);
 
 	public synchronized Connection getConnectionForLocal() {
 		try {

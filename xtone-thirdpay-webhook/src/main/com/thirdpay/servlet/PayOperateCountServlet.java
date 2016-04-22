@@ -17,7 +17,7 @@ import com.thirdpay.utils.Canv;
 import com.thirdpay.utils.EncodeUtils;
 
 /**
- * Servlet implementation class PayOperateCountServlet
+ * 支付操作统计Servlet
  */
 @WebServlet("/PayOperateCountServlet")
 public class PayOperateCountServlet extends HttpServlet {
@@ -45,22 +45,26 @@ public class PayOperateCountServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-
+		
+		System.out.println("访问了支付操作Servlet");
+		
 		String payOperateCode = request.getParameter("payOperateCode"); // 支付操作状态码
-		
 		String op_notifyData = request.getParameter("op_notifyData");
-		
+
 		op_notifyData = EncodeUtils.encode(op_notifyData);
-		
+
+		System.out.println("op_notifyData = " + op_notifyData);
+
 		if (op_notifyData != null) {
 			JSONObject json = JSON.parseObject(op_notifyData); // 解析自定义参数
 			// releaseChannel = json.getString("channel");
 			appKey = json.getString("appkey");
-			//添加sql查询语句
-			
+			// 添加sql查询语句
+
 			// payChannel = json.getString("platform");
 			ThreadPool.mThreadPool.execute(new PayOperateBean(Integer.parseInt(payOperateCode),
 					Canv.parm.get(payOperateCode), appKey, op_notifyData));
+			
 		}
 
 		response.getWriter().append("success");

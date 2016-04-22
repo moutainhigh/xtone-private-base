@@ -36,7 +36,7 @@ import com.thirdpay.servlet.AlipayCountServlet;
 import com.thirdpay.utils.ConnectionServiceCPInfo;
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
 
-public class Testmain {
+public class HttpTest {
 
 	public static void main(String[] args) throws Exception {
 		Map<String, String> params = new HashMap<String, String>();

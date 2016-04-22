@@ -9,14 +9,9 @@ public class CpInfoBean {
 	String smspay;
 	String productInfo;
 	String notify_url;
+	String gameType;
 
-	public String getProductInfo() {
-		return productInfo;
-	}
-
-	public void setProductInfo(String productInfo) {
-		this.productInfo = productInfo;
-	}
+	String webOrderid; // 订单号
 
 	public String getAppkey() {
 		return appkey;
@@ -66,12 +61,36 @@ public class CpInfoBean {
 		this.smspay = smspay;
 	}
 
+	public String getProductInfo() {
+		return productInfo;
+	}
+
+	public void setProductInfo(String productInfo) {
+		this.productInfo = productInfo;
+	}
+
 	public String getNotify_url() {
 		return notify_url;
 	}
 
 	public void setNotify_url(String notify_url) {
 		this.notify_url = notify_url;
+	}
+
+	public String getGameType() {
+		return gameType;
+	}
+
+	public void setGameType(String gameType) {
+		this.gameType = gameType;
+	}
+
+	public String getWebOrderid() {
+		return webOrderid;
+	}
+
+	public void setWebOrderid(String webOrderid) {
+		this.webOrderid = webOrderid;
 	}
 
 }

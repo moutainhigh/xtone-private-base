@@ -22,7 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.LogInsert;
 
 /**
- * Servlet implementation class thirdpayCountServlet
+ * 第三发支付统计(未使用)
  */
 
 @WebServlet("/thirdpayCountServlet")
@@ -61,7 +61,6 @@ public class thirdpayCountServlet extends HttpServlet {
 			if (payChannel.equals("unionpay")) {
 				System.out.println("调用银联支付回调统计");
 				UnionpayCountServlet.requestPostData(request, response);
-
 			} else if (payChannel.equals("alipay")) {
 				System.out.println("调用支付宝支付回调统计");
 				AlipayCountServlet.requestPostData(request, response);

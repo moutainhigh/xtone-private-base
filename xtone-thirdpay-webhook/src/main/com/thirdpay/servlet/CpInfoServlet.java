@@ -21,7 +21,7 @@ import com.thirdpay.utils.Canv;
 import com.thirdpay.utils.ConnectionServiceCPInfo;
 
 /**
- * Servlet implementation class CpInfoServlet
+ * 支付渠道查询Servlet , 返回json数据
  */
 @WebServlet("/CpInfoServlet")
 public class CpInfoServlet extends HttpServlet {
@@ -43,7 +43,12 @@ public class CpInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		appKey = request.getParameter("Appkey");
-		CheckInfo(response); // 查询数据
+		System.out.println("appKey = " + appKey);
+		if (appKey != null) {
+			CheckInfo(response); // 查询数据
+		} else {
+			response.getWriter().append("fail");
+		}
 	}
 
 	/**
@@ -66,25 +71,10 @@ public class CpInfoServlet extends HttpServlet {
 			// DbKey 选择使用的数据库
 			con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" + "'" + appKey + "'");
-			// ps = con.prepareStatement("SELECT * FROM thirdpay_cp_information
-			// WHERE appkey='cbl'");
 
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-
-				// rs.getString("appKey").equals("");
-				// if (rs.getString("appKey").equals("")) {
-				// System.out.println("appkey找不到");
-				// }
-
-				// System.out.println(rs.getString("appKey") + "\n" +
-				// rs.getString("id") + "\n"
-				// + rs.getString("notify_url") + "\n" + rs.getString("alipay")
-				// + "\n" + rs.getString("unionpay")
-				// + "\n" + rs.getString("wechatpay") + "\n" +
-				// rs.getString("baidupay") + "\n"
-				// + rs.getString("smspay"));
 
 				cpInfoBean.setAlipay(rs.getString("aliPay"));
 				cpInfoBean.setUnionpay(rs.getString("unionPay"));
@@ -92,8 +82,14 @@ public class CpInfoServlet extends HttpServlet {
 				cpInfoBean.setBaidupay(rs.getString("baiduPay"));
 				cpInfoBean.setSmspay(rs.getString("smsPay"));
 				cpInfoBean.setProductInfo(rs.getString("productInfo"));
+				// cpInfoBean.setGameType(rs.getString("gameType")); //游戏类型(单机),
+				// (网游)
+
+				cpInfoBean.setWebOrderid(System.currentTimeMillis() + "");
+
 				// 用户组对象转JSON串
 				jsonString = JSON.toJSONString(cpInfoBean);
+				System.out.println("jsonString = " + jsonString);
 
 			}
 
@@ -106,6 +102,14 @@ public class CpInfoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
+			if(ps!= null){
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			if (con != null) {
 				try {
 					con.close();

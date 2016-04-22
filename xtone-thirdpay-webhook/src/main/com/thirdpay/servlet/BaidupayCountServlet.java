@@ -21,7 +21,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
 
 /**
- * Servlet implementation class BaidupayCountServlet
+ * 百度统计Servlet
  */
 @WebServlet("/BaidupayCountServlet")
 public class BaidupayCountServlet extends HttpServlet {

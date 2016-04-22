@@ -44,7 +44,7 @@ import com.thirdpay.domain.PayInfoBean;
  */
 
 /**
- * Servlet implementation class WechatpayCountServlet
+ * 微信支付统计Servlet
  */
 @WebServlet("/WechatpayCountServlet")
 public class WechatpayCountServlet extends HttpServlet {
