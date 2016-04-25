@@ -6,17 +6,19 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>thirdpay-webhook-interface</name>
+
 	<description />
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<build>
 		<finalName>${final.name}</finalName>
-		<sourceDirectory>src/</sourceDirectory>
+		<sourceDirectory>src/main</sourceDirectory>
 		<resources>
 			<resource>
-				<directory>src/</directory>
+				<directory>src/main</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
@@ -27,18 +29,18 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
+				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
 				<configuration>
-					<warSourceDirectory>${basedir}/WebContent</warSourceDirectory>
+					<warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
 					<version>3.0</version>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<webResources>
@@ -49,35 +51,79 @@
 					</webResources>
 				</configuration>
 			</plugin>
-			
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>1.0-beta-4</version>
+				<executions>
+					<execution>
+						<id>upload-war</id>
+						<phase>install</phase>
+						<goals>
+							<goal>upload-single</goal>
+							<!-- <goal>upload</goal> -->
+						</goals>
+						<configuration>
+							<!-- <fromDir>${basedir}/target</fromDir> -->
+							<!-- <includes>${project.build.finalName}.war</includes> -->
+							<!-- <url>ftp://xxx</url> -->
+							<!-- <toDir>/home/fuming</toDir> -->
+							<!-- <serverId>awstokyo01</serverId> -->
+							<fromFile>target/${final.name}.war</fromFile>
+							<url>${ftp.to.url}</url>
+							<serverId>${ftp.server.id}</serverId>
+							<skip>false</skip>
+							<toFile>${final.name}.war</toFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
+		<extensions>
+			<!-- Enabling the use of FTP -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
+
 	</build>
 	<profiles>
 		<profile>
-			<id>product</id>
+			<id>pc</id>
+
 			<properties>
-				<runtime.env>packageConfig\product</runtime.env>
+				<runtime.env>packageConfig\pc</runtime.env>
 				<final.name>thirdpay-webhook.n8wan.com</final.name>
+
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url>
+
+			</properties>
+		</profile>
+		<profile>
+			<id>online</id>
+
+			<properties>
+				<runtime.env>packageConfig\online</runtime.env>
+				<final.name>thirdpay-cs.n8wan.com</final.name>
+
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url>
+				
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
 		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<runtime.env>packageConfig\test</runtime.env>
-				<final.name>thirdpay-webhook.n8wan.com-test</final.name>
-			</properties>
-
-		</profile>
 	</profiles>
 
-
-
-
 	<dependencies>
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -90,13 +136,13 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.xtone.common</groupId>
 			<artifactId>xtone-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -108,12 +154,25 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.22</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.8</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.4</version>
+		</dependency>
+
 	</dependencies>
 
 
