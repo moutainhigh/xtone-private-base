@@ -5,7 +5,7 @@ package org.demo.info;
  *
  */
 public class Pays {
-	private long id;
+	private String id;
 	private int price;                 //价格
 	private String payChannel;		   //支付
 	private String ip;				   //来源IP
@@ -16,13 +16,13 @@ public class Pays {
 	private String ownUserId;          //付费用户ID
 	private String ownItemId;          //购买道具ID
 	private String ownOrderId;         //原始订单号ID
-	private int testStatus;            //状态
+	private String testStatus;            //状态
 	
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public int getPrice() {
@@ -85,10 +85,10 @@ public class Pays {
 	public void setOwnOrderId(String ownOrderId) {
 		this.ownOrderId = ownOrderId;
 	}
-	public int getTestStatus() {
+	public String getTestStatus() {
 		return testStatus;
 	}
-	public void setTestStatus(int testStatus) {
+	public void setTestStatus(String testStatus) {
 		this.testStatus = testStatus;
 	}
 	
