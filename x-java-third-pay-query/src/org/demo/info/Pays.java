@@ -16,7 +16,7 @@ public class Pays {
 	private String ownUserId;          //付费用户ID
 	private String ownItemId;          //购买道具ID
 	private String ownOrderId;         //原始订单号ID
-	private int testStatus;            //状态
+	private String testStatus;            //状态
 	
 	
 	public String getId() {
@@ -85,10 +85,10 @@ public class Pays {
 	public void setOwnOrderId(String ownOrderId) {
 		this.ownOrderId = ownOrderId;
 	}
-	public int getTestStatus() {
+	public String getTestStatus() {
 		return testStatus;
 	}
-	public void setTestStatus(int testStatus) {
+	public void setTestStatus(String testStatus) {
 		this.testStatus = testStatus;
 	}
 	

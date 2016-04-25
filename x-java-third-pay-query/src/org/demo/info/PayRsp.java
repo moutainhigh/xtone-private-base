@@ -3,7 +3,7 @@ package org.demo.info;
 public class PayRsp {
 	private String time;
 	private String appkey;
-	private String chanell;
+	private String channel;
 	public String getTime() {
 		return time;
 	}
@@ -16,11 +16,12 @@ public class PayRsp {
 	public void setAppkey(String appkey) {
 		this.appkey = appkey;
 	}
-	public String getChanell() {
-		return chanell;
+	public String getChannel() {
+		return channel;
 	}
-	public void setChanell(String chanell) {
-		this.chanell = chanell;
+	public void setChannel(String channel) {
+		this.channel = channel;
 	}
+	
 	
 }

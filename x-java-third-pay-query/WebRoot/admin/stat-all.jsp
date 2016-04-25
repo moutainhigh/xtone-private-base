@@ -21,7 +21,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 
-<title>所有文章</title>
+<title>数据查询</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet"
@@ -90,9 +90,9 @@
 			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
 				<input name="appname" id="input_appkey" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
 			</dd>
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">应用KEY</dd>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">Channel</dd>
 			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input name="appkey" id="input_chanell" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+				<input name="appkey" id="input_channel" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
 			</dd>
 			<dd class="ddbtn" style="margin-left: 20px; width: 60px; height: 25px; float: left; margin-top: 0px;">
 				<input class="btn_match" name="search" value="查 询" type="button" onclick="getDate();" style='width: 60px; height: 28px; background: transparent url("../img/botton_099.gif") no-repeat scroll center center; text-align: center; line-height: 27px; color: rgb(255, 255, 255); font-weight: bold; cursor: pointer;'>
@@ -102,7 +102,7 @@
 		<thead>
 			<tr>
 				<th>id</th>
-				<th>价格</th>
+				<th>价格（分）</th>
 				<th>支付通道</th>
 				<th>IP</th>
 				<th>内容</th>
@@ -130,7 +130,7 @@
 		});
 		
 		function getData(){
-			var date = '{"time":"","appkey":"","chanell":""}';
+			var date = '{"time":"","appkey":"","channel":""}';
 			$.ajax({
 				type : "post",
 				url : "selectPays.jsp",
@@ -181,7 +181,7 @@
 		
 		function getDate(){
 			
-			var date = '{"time":"'+$("#endtime").val()+'","appkey":"'+$("#input_appkey").val()+'","chanell":"'+$("#input_chanell").val()+'"}';
+			var date = '{"time":"'+$("#endtime").val()+'","appkey":"'+$("#input_appkey").val()+'","channel":"'+$("#input_channel").val()+'"}';
 			console.log(date);
 			$.ajax({
 				type : "post",

@@ -25,7 +25,6 @@
 		gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
 		Gson gson = gsonBuilder.create();
 		payrsp = gson.fromJson(info, PayRsp.class);
-		System.out.print(payrsp.getTime()+":"+payrsp.getAppkey()+":"+payrsp.getChanell());
 		con = ConnectionService.getInstance()
 				.getConnectionForLocal();
 		String sql = "SELECT FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS dt,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,testStatus"+
@@ -34,6 +33,13 @@
 			sql += " AND UNIX_TIMESTAMP('"+payrsp.getTime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getTime()+"')+86400)*1000*1000000>id ";
 			
 		}
+		if(!payrsp.getAppkey().equals("")){
+			sql += " AND appKey like '"+payrsp.getAppkey()+"' ";
+		}
+		if(!payrsp.getChannel().equals("")){
+			sql += " AND releaseChannel like '"+payrsp.getChannel()+"' ";
+		}
+		sql += " ORDER BY id DESC";
 		System.out.println(sql);
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
@@ -47,7 +53,12 @@
 			pays.setReleaseChannel(rs.getString("releaseChannel"));
 			pays.setAppKey(rs.getString("appKey"));
 			pays.setPayChannelOrderId(rs.getString("payChannelOrderId"));
-			pays.setTestStatus(rs.getInt("testStatus"));
+			if(rs.getInt("testStatus")==1){
+				pays.setTestStatus("测试");
+			}else{
+				pays.setTestStatus("正常");
+			}
+			
 			list.add(pays);
 		}
 		PaysData paysdata = new PaysData();

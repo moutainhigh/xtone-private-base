@@ -509,7 +509,7 @@ Calendar.prototype.valueSelected = function(date){
 * Set Auto Height for Calendar Panel Div
 */
 Calendar.prototype.setAutoHeight = function(){
-	var height = this.document.body.scrollHeight;
+	var height = "163px";
 	var width = this.getElementById("calendar").style.width;
 	width = (parseInt(width.substr(0,width.length-1)) + 2) + "px";
 	this.iframe.style.height = height;
@@ -595,5 +595,5 @@ Calendar.prototype.setDisplayStyle = function(tagName, style) {
   }
 }
 
-document.write('<div id="calendarPanel" style="position:absolute;visibility:hidden;z-index:9999;background-color:#FFFFFF;font-size:12px;width:20px;">');
+document.write('<div id="calendarPanel" style="position:absolute;visibility:hidden;z-index:9999;background-color:#FFFFFF;font-size:12px;width:20px;height: 163px;">');
 document.write("<iframe id='calendarIframe' scrolling='no' frameborder='0' width='100%' height='100%'></iframe></div>");
