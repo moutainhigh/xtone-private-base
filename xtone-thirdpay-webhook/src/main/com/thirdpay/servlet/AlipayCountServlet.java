@@ -91,16 +91,17 @@ public class AlipayCountServlet extends HttpServlet {
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
 		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
-		
+
 		int payStatus = payConstants.payStatus;// 是否是测试信息
 
-		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
-				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip);
+		 System.out.println("payChannel = " + payChannel + ",appKey = " +
+		 appKey + ",payChannelOrderId = "
+		 + payChannelOrderId + ",price = " + price + ",Ip = " + ip);
 
 		// wait_buyer_pay是创建订单成功的时候发送的
 		// trade_success是交易支付成功的时候发送的
 		String trade_status = request.getParameter("trade_status"); // 支付状态
-		
+
 		if (trade_status.equals("TRADE_SUCCESS")) {
 			// 数据库写入操作
 			ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
@@ -116,11 +117,12 @@ public class AlipayCountServlet extends HttpServlet {
 		return "";
 	}
 
+	
 	/**
 	 * 发送 post请求访问本地应用并根据传递参数不同返回不同结果
 	 */
 	public static void post(String url, List<BasicNameValuePair> formparams) {
-		
+
 		// 创建默认的httpClient实例.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 
@@ -129,6 +131,7 @@ public class AlipayCountServlet extends HttpServlet {
 		// 创建参数队列
 
 		UrlEncodedFormEntity uefEntity;
+		
 		try {
 			uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");
 			httppost.setEntity(uefEntity);
@@ -170,13 +173,12 @@ public class AlipayCountServlet extends HttpServlet {
 		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
-		
+
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<String,String[]> entry = (Map.Entry<String, String[]>) iterator
-					.next();
+			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey(); // key为参数名称
 			String[] value = map.get(key); // value为参数值
@@ -185,16 +187,15 @@ public class AlipayCountServlet extends HttpServlet {
 
 				payInfo += key + "=" + value[i] + ";";
 
-				 formparams.add(new BasicNameValuePair(key,value[i]));
+				formparams.add(new BasicNameValuePair(key, value[i]));
 
 			}
 
-
 		}
 
-		//转发地址从数据库得到
-		 String other_url = "http://thirdpay-webhook.n8wan.com:29141/AlipayCountServlet";
-		 post(other_url, formparams); //转发 发送数据
+		// 转发地址从数据库得到
+//		String other_url = "http://thirdpay-webhook.n8wan.com:29141/AlipayCountServlet";
+//		post(other_url, formparams); // 转发 发送数据
 
 		return payInfo;
 	}

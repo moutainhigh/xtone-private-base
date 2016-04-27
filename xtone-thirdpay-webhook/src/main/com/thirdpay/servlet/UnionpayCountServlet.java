@@ -77,8 +77,8 @@ public class UnionpayCountServlet extends HttpServlet {
 		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
 		int testStatus =  payConstants.payStatus;// 是否是测试信息
 
-//		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
-//				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip);
+		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
+				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
