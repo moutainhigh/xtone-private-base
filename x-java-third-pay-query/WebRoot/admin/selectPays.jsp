@@ -25,8 +25,13 @@
 		gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
 		Gson gson = gsonBuilder.create();
 		payrsp = gson.fromJson(info, PayRsp.class);
+		long curMils = System.currentTimeMillis();
+		//System.out.println("JiaBing start open connection");
 		con = ConnectionService.getInstance()
 				.getConnectionForLocal();
+		
+		//System.out.println("JiaBing end open connection spend times:" + (System.currentTimeMillis() - curMils));
+		
 		String sql = "SELECT FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS dt,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,testStatus"+
 				" FROM log_success_pays WHERE 1=1";
 		if(!payrsp.getTime().equals("")){
@@ -40,9 +45,18 @@
 			sql += " AND releaseChannel like '"+payrsp.getChannel()+"' ";
 		}
 		sql += " ORDER BY id DESC";
-		System.out.println(sql);
+		sql += " limit 0,50 ";
+		//System.out.println("JiaBing SQL:" + sql);
+		curMils = System.currentTimeMillis();
 		ps = con.prepareStatement(sql);
+		//System.out.println("JiaBing open ps spend times:" + (System.currentTimeMillis() - curMils));
+		
+		curMils = System.currentTimeMillis();
+		
 		rs = ps.executeQuery();
+		
+		//System.out.println("JiaBing executeQuery spend times:" + (System.currentTimeMillis() - curMils));
+		
 		while(rs.next()){
 			pays = new Pays();
 			pays.setId(rs.getString("dt"));
@@ -58,7 +72,7 @@
 			}else{
 				pays.setTestStatus("正常");
 			}
-			
+			//System.out.print(rs.getString("dt"));
 			list.add(pays);
 		}
 		PaysData paysdata = new PaysData();
@@ -71,6 +85,26 @@
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} finally {
+		
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		
 		if (con != null) {
 			try {
 				con.close();

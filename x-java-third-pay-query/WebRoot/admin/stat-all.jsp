@@ -143,6 +143,7 @@
 
 						//$("#list").val(msg.data); 
 						var list = eval(msg.data);
+						console.log(list);
 						 var listmsg="";
 						 for(var i=0;i<list.length;i++){
 							 listmsg += "<tr><td>"+list[i].id+"</td>";
