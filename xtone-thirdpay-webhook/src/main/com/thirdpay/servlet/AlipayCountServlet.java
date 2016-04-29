@@ -31,6 +31,7 @@ import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.thirdpay.domain.PayCallbackParaBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.payConstants;
 
@@ -78,25 +79,46 @@ public class AlipayCountServlet extends HttpServlet {
 
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
+		PayCallbackParaBean bean = new PayCallbackParaBean();
 
 		int price = (int) ((Float.parseFloat(request.getParameter("price"))) * 100); // 支付宝转换单位:元→分
 		String payChannel = json.getString("platform");// 支付通道channel
+
 		String ip = request.getHeader("X-Real-IP") != null ? request.getHeader("X-Real-IP") : request.getRemoteAddr();// 来源ip
 		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
 
 		String releaseChannel = json.getString("channel");// 发行通道ID，一般从payInfo中解析出
+
 		String appKey = json.getString("appkey");// CP方ID，一般从payInfo中解析出
+
 		String payChannelOrderId = request.getParameter("out_trade_no");// 支付通道的订单号，一般从payInfo中解析出
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
 
-		int payStatus = payConstants.payStatus;// 是否是测试信息
+		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
+		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
+		int payStatus = payConstants.paytestStatus;// 是否是测试信息
 
-		 System.out.println("payChannel = " + payChannel + ",appKey = " +
-		 appKey + ",payChannelOrderId = "
-		 + payChannelOrderId + ",price = " + price + ",Ip = " + ip);
+		if (payChannel == null) {
+			payChannel = json.getString("p");
+		}
+		if (releaseChannel == null) {
+			releaseChannel = json.getString("a");
+		}
+		if (appKey == null) {
+			appKey = json.getString("k");
+		}
+		if (ownOrderId == null) {
+			ownOrderId = json.getString("s");
+		}
+		if (cpOrderId == null) {
+			cpOrderId = json.getString("c");
+		}
+
+		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
+				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+				+ ",cpOrderId = " + cpOrderId);
 
 		// wait_buyer_pay是创建订单成功的时候发送的
 		// trade_success是交易支付成功的时候发送的
@@ -105,9 +127,9 @@ public class AlipayCountServlet extends HttpServlet {
 		if (trade_status.equals("TRADE_SUCCESS")) {
 			// 数据库写入操作
 			ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-					payChannelOrderId, ownUserId, ownItemId, ownOrderId, payStatus));
+					payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 		}
-		
+
 		try {
 			response.getWriter().append("success"); // 返回success
 		} catch (IOException e) {
@@ -117,7 +139,6 @@ public class AlipayCountServlet extends HttpServlet {
 		return "";
 	}
 
-	
 	/**
 	 * 发送 post请求访问本地应用并根据传递参数不同返回不同结果
 	 */
@@ -131,7 +152,7 @@ public class AlipayCountServlet extends HttpServlet {
 		// 创建参数队列
 
 		UrlEncodedFormEntity uefEntity;
-		
+
 		try {
 			uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");
 			httppost.setEntity(uefEntity);
@@ -187,15 +208,16 @@ public class AlipayCountServlet extends HttpServlet {
 
 				payInfo += key + "=" + value[i] + ";";
 
-				formparams.add(new BasicNameValuePair(key, value[i]));
+				// formparams.add(new BasicNameValuePair(key, value[i]));
 
 			}
 
 		}
 
 		// 转发地址从数据库得到
-//		String other_url = "http://thirdpay-webhook.n8wan.com:29141/AlipayCountServlet";
-//		post(other_url, formparams); // 转发 发送数据
+		// String other_url =
+		// "http://thirdpay-webhook.n8wan.com:29141/AlipayCountServlet";
+		// post(other_url, formparams); // 转发 发送数据
 
 		return payInfo;
 	}

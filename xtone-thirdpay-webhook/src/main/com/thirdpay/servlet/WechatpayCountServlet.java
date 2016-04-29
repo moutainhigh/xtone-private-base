@@ -89,7 +89,8 @@ public class WechatpayCountServlet extends HttpServlet {
 		String payChannel = "";// 支付通道channel
 		String appKey = "";// CP方ID，一般从payInfo中解析出
 		String releaseChannel = "";// 发行通道ID，一般从payInfo中解析出
-
+		String ownOrderId = "";// 原始订单号ID
+		String cpOrderId = "";// cp方订单号
 		String xx_notifyDataError = request.getParameter("xx_notifyData");
 		if (xx_notifyDataError != null) {
 			// 打印出数据xx_notifyData =
@@ -103,6 +104,24 @@ public class WechatpayCountServlet extends HttpServlet {
 			payChannel = json.getString("platform");
 			releaseChannel = json.getString("channel");
 			appKey = json.getString("appkey");
+			ownOrderId = json.getString("OrderIdSelf");
+			cpOrderId = json.getString("OrderIdCp");
+			if (payChannel == null) {
+				payChannel = json.getString("p");
+			}
+			if (releaseChannel == null) {
+				releaseChannel = json.getString("a");
+			}
+			if (appKey == null) {
+				appKey = json.getString("k");
+			}
+			if (ownOrderId == null) {
+				ownOrderId = json.getString("s");
+			}
+			if (cpOrderId == null) {
+				cpOrderId = json.getString("c");
+			}
+
 		}
 
 		// 得到回调参数
@@ -123,16 +142,19 @@ public class WechatpayCountServlet extends HttpServlet {
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
 
-		int testStatus =  payConstants.payStatus;// 是否是测试信息
+		int payStatus = payConstants.paytestStatus;// 是否是测试信息
+
+		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
+				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip + ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 		response.getWriter().append("<result>1</result>");
 
-//		System.out.println("支付状态 state = " + state + "\n" + "订单号sd51no = " + payChannelOrderId + "\n" + "价格price = "
-//				+ price + "\n" + "支付平台platform = " + payChannel);
+		// System.out.println("支付状态 state = " + state + "\n" + "订单号sd51no = " +
+		// payChannelOrderId + "\n" + "价格price = "
+		// + price + "\n" + "支付平台platform = " + payChannel);
 
 		return "";
 	}

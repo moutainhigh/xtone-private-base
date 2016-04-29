@@ -40,7 +40,7 @@ public class UnionpayCountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		requestPostData(request,response);
+		requestPostData(request, response);
 	}
 
 	/**
@@ -59,9 +59,10 @@ public class UnionpayCountServlet extends HttpServlet {
 	 * @param request
 	 * @return
 	 */
-	public static String requestPostData(HttpServletRequest request,HttpServletResponse response) {
+	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
 
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
+
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
 
 		int price = Integer.parseInt(request.getParameter("txnAmt")); // 商品价格
@@ -74,18 +75,36 @@ public class UnionpayCountServlet extends HttpServlet {
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
-		int testStatus =  payConstants.payStatus;// 是否是测试信息
+		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
+		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
 
-		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
-				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip);
+		int payStatus = payConstants.paytestStatus;// 是否是测试信息
+		if (payChannel == null) {
+			payChannel = json.getString("p");
+		}
+		if (releaseChannel == null) {
+			releaseChannel = json.getString("a");
+		}
+		if (appKey == null) {
+			appKey = json.getString("k");
+		}
+		if (ownOrderId == null) {
+			ownOrderId = json.getString("s");
+		}
+		if (cpOrderId == null) {
+			cpOrderId = json.getString("c");
+		}
+
+		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
+				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 
 		try {
-			response.getWriter().append(response.getStatus()+"");
-			
+			response.getWriter().append(response.getStatus() + "");
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,18 +115,18 @@ public class UnionpayCountServlet extends HttpServlet {
 
 	/**
 	 * 得到支付所有数据
+	 * 
 	 * @param request
 	 * @return
 	 */
 	public static String getPayInfo(HttpServletRequest request) {
-		String payInfo ="";
+		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator
-					.next();
+			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey();
 			String[] value = map.get(key);

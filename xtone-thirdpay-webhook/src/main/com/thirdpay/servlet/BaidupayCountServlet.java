@@ -19,6 +19,7 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.payConstants;
 
 /**
  * 百度统计Servlet
@@ -42,7 +43,7 @@ public class BaidupayCountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		requestPostData(request,response);
+		requestPostData(request, response);
 
 	}
 
@@ -56,30 +57,26 @@ public class BaidupayCountServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
 	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
-		
-		//先对xx_notifyData数据作处理 格式为aa:78-cc:123-xx:77
+
+		// 先对xx_notifyData数据作处理 格式为aa:78-cc:123-xx:77
 		StringBuilder builder = new StringBuilder("{");
-		String [] strings = xx_notifyData.split("-");
-		
+		String[] strings = xx_notifyData.split("-");
+
 		for (int i = 0; i < strings.length; i++) {
 			String str2 = strings[i];
 			String strings2[] = str2.split(":");
-			
-			
-			builder.append("\""+strings2[0]+"\":\""+strings2[1]+"\"");
+
+			builder.append("\"" + strings2[0] + "\":\"" + strings2[1] + "\"");
 			builder.append(',');
-//			System.out.print(strings2[0]+"   "); 
-//			System.out.print(strings2[1]);
-			
+			// System.out.print(strings2[0]+" ");
+			// System.out.print(strings2[1]);
+
 		}
-		builder.deleteCharAt(builder.length()-1);
+		builder.deleteCharAt(builder.length() - 1);
 		builder.append("}");
-		
-		
-		
+
 		JSONObject json = JSON.parseObject(builder.toString()); // 解析自定义参数
 
 		int price = Integer.parseInt(request.getParameter("unit_amount")); // 商品价格
@@ -93,21 +90,45 @@ public class BaidupayCountServlet extends HttpServlet {
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
-		int testStatus = 1;// 是否是测试信息
+		
+		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
+		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
+
+		int payStatus = payConstants.paytestStatus;// 是否是测试信息
+
+		if (payChannel == null) {
+			payChannel = json.getString("p");
+		}
+		if (releaseChannel == null) {
+			releaseChannel = json.getString("a");
+		}
+		if (appKey == null) {
+			appKey = json.getString("k");
+		}
+		if (ownOrderId == null) {
+			ownOrderId = json.getString("s");
+		}
+		if (cpOrderId == null) {
+			cpOrderId = json.getString("c");
+		}
+
+		System.out.println("xx_notifyData = " + builder.toString() + "\n" + "payChannel = " + payChannel + ",appKey = "
+				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 		try {
 			response.getWriter().append("200");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "";
-		
+
 	}
+
 	/**
 	 * 得到所有的参数与参数值
 	 * 
@@ -122,8 +143,7 @@ public class BaidupayCountServlet extends HttpServlet {
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator
-					.next();
+			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey(); // key为参数名称
 			String[] value = map.get(key); // value为参数值
