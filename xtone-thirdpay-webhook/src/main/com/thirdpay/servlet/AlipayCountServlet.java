@@ -174,7 +174,7 @@ public class AlipayCountServlet extends HttpServlet {
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
 
-		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+//		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
