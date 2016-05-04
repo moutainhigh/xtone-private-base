@@ -1,5 +1,8 @@
 package com.thirdpay.domain;
 
+/**
+ * 支付信息写入
+ */
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -7,8 +10,7 @@ import java.sql.SQLException;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
-
-
+import org.common.util.ThreadPool;
 
 public class PayInfoBean implements Runnable {
 	private Long id;
@@ -21,7 +23,8 @@ public class PayInfoBean implements Runnable {
 	private String payChannelOrderId;// 支付通道的订单号，一般从payInfo中解析出
 	private String ownUserId;// 付费用户ID，待用
 	private String ownItemId;// 购买道具ID，待用
-	private String ownOrderId;// 原始订单号ID，待用
+	private String ownOrderId;// 原始订单号ID
+	private String cpOrderId;// pc方订单号ID
 	private int testStatus;// 是否是测试信息
 
 	public Long getId() {
@@ -116,12 +119,21 @@ public class PayInfoBean implements Runnable {
 		return ownOrderId;
 	}
 
+	public String getCpOrderId() {
+		return cpOrderId;
+	}
+
+	public void setCpOrderId(String cpOrderId) {
+		this.cpOrderId = cpOrderId;
+	}
+
 	public void setOwnOrderId(String ownOrderId) {
 		this.ownOrderId = ownOrderId;
 	}
 
 	public PayInfoBean(int price, String payChannel, String ip, String payInfo, String releaseChannel, String appKey,
-			String payChannelOrderId, String ownUserId, String ownItemId, String ownOrderId, int testStatus) {
+			String payChannelOrderId, String ownUserId, String ownItemId, String ownOrderId, String cpOrderId,
+			int testStatus) {
 		super();
 		this.price = price;
 		this.payChannel = payChannel;
@@ -133,6 +145,7 @@ public class PayInfoBean implements Runnable {
 		this.ownUserId = ownUserId;
 		this.ownItemId = ownItemId;
 		this.ownOrderId = ownOrderId;
+		this.cpOrderId = cpOrderId;
 		this.testStatus = testStatus;
 	}
 
@@ -148,7 +161,8 @@ public class PayInfoBean implements Runnable {
 			Connection con = null;
 			try {
 				con = ConnectionService.getInstance().getConnectionForLocal();
-				ps = con.prepareStatement("insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,testStatus) values (?,?,?,?,?,?,?,?,?,?,?,?)");
+				ps = con.prepareStatement(
+						"insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,cpOrderId,testStatus) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getPrice());
@@ -161,14 +175,23 @@ public class PayInfoBean implements Runnable {
 				ps.setString(m++, this.getOwnUserId());
 				ps.setString(m++, this.getOwnItemId());
 				ps.setString(m++, this.getOwnOrderId());
+				ps.setString(m++, this.getCpOrderId());
 				ps.setInt(m++, this.getTestStatus());
-				ps.executeUpdate();
+
+				int i = ps.executeUpdate();
+				// if ((i+"").equals("1")) {
+				//
+				// ThreadPool.mThreadPool.execute(new ForwardsyncBean(0,
+				// "orderId", "3000", "0", "", "200", this.getAppKey(),
+				// "appkey"));
+				//
+				// }
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				
+
 				if (con != null) {
 					try {
 						con.close();

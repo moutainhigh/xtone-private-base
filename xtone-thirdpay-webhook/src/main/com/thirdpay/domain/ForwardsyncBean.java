@@ -119,9 +119,10 @@ public class ForwardsyncBean implements Runnable {
 			try {
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-				 ps = con.prepareStatement("insert into 'log_sync_generals'(id,logId,para01,para02,para03,para04,para05,para06,para07)values (?,?,?,?,?,?,?,?,?)");
+
+				ps = con.prepareStatement("insert into 'log_async_generals' (id,logId,para01,para02,para03,para04,para05,para06,para07) values (?,?,?,?,?,?,?,?,?)");
 				int m = 1;
-				ps.setLong(m++,this.getId());
+				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());
 				ps.setString(m++, this.getOrderId());
 				ps.setString(m++, this.getNext_time());
@@ -130,12 +131,14 @@ public class ForwardsyncBean implements Runnable {
 				ps.setString(m++, this.getSuccessCoditions());
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
+
 				ps.executeUpdate();
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
+
 				if (con != null) {
 					try {
 						con.close();
