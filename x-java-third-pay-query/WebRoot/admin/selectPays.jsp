@@ -1,3 +1,4 @@
+<%@page import="org.demo.utils.StringUtil"%>
 <%@page import="org.demo.info.PayRsp"%>
 <%@page import="com.google.gson.LongSerializationPolicy"%>
 <%@page import="com.google.gson.Gson"%>
@@ -20,6 +21,8 @@
 	PreparedStatement ps = null;
 	Connection con = null;
 	ResultSet rs = null;
+	String limit = " limit 0,50 ";
+	int n =1;
 	try{
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
@@ -32,21 +35,30 @@
 		
 		//System.out.println("JiaBing end open connection spend times:" + (System.currentTimeMillis() - curMils));
 		
-		String sql = "SELECT FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS dt,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,testStatus"+
-				" FROM log_success_pays WHERE 1=1";
-		if(!payrsp.getTime().equals("")){
-			sql += " AND UNIX_TIMESTAMP('"+payrsp.getTime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getTime()+"')+86400)*1000*1000000>id ";
-			
+		String sql = "SELECT FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS dt,price,payChannel,ip,payInfo,releaseChannel,appKey,ownOrderId,payChannelOrderId,cpOrderId,testStatus"+
+				" FROM log_success_pays WHERE 1=1 AND appKey='ea7e48e69d1149b2a5e2ef8d3a5d9e7a' ";
+		if(!StringUtil.isNullOrEmpty(payrsp.getStarttime())&&!StringUtil.isNullOrEmpty(payrsp.getEndtime())){
+			sql += " AND UNIX_TIMESTAMP('"+payrsp.getStarttime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getEndtime()+"')+86400)*1000*1000000>id ";
+		}else{
+			if(!StringUtil.isNullOrEmpty(payrsp.getStarttime())){
+				sql += " AND UNIX_TIMESTAMP('"+payrsp.getStarttime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getStarttime()+"')+86400)*1000*1000000>id ";
+			}
+			if(!StringUtil.isNullOrEmpty(payrsp.getEndtime())){
+				sql += " AND UNIX_TIMESTAMP('"+payrsp.getEndtime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getEndtime()+"')+86400)*1000*1000000>id ";
+			}
 		}
 		if(!payrsp.getAppkey().equals("")){
-			sql += " AND appKey like '"+payrsp.getAppkey()+"' ";
+			//sql += " AND appKey like 'ea7e48e69d1149b2a5e2ef8d3a5d9e7a' ";
 		}
 		if(!payrsp.getChannel().equals("")){
-			sql += " AND releaseChannel like '"+payrsp.getChannel()+"' ";
+			sql += " AND releaseChannel like '%"+payrsp.getChannel()+"%' ";
+		}
+		if(!payrsp.getEntries().equals("")){
+			limit =  " limit 0,"+payrsp.getEntries();
 		}
 		sql += " ORDER BY id DESC";
-		sql += " limit 0,50 ";
-		//System.out.println("JiaBing SQL:" + sql);
+		sql += limit;
+		System.out.println("JiaBing SQL:" + sql);
 		curMils = System.currentTimeMillis();
 		ps = con.prepareStatement(sql);
 		//System.out.println("JiaBing open ps spend times:" + (System.currentTimeMillis() - curMils));
@@ -66,13 +78,15 @@
 			pays.setPayInfo(rs.getString("payInfo"));
 			pays.setReleaseChannel(rs.getString("releaseChannel"));
 			pays.setAppKey(rs.getString("appKey"));
+			pays.setOwnOrderId(rs.getString("ownOrderId"));
 			pays.setPayChannelOrderId(rs.getString("payChannelOrderId"));
+			pays.setCpOrderId(rs.getString("cpOrderId"));
 			if(rs.getInt("testStatus")==1){
 				pays.setTestStatus("测试");
 			}else{
 				pays.setTestStatus("正常");
 			}
-			//System.out.print(rs.getString("dt"));
+			//System.out.println(""+n+++":"+rs.getString("dt"));
 			list.add(pays);
 		}
 		PaysData paysdata = new PaysData();
