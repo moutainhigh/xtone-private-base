@@ -1,4 +1,4 @@
-package com.thirdpay.servlet;
+package com.thirdpay.test;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
