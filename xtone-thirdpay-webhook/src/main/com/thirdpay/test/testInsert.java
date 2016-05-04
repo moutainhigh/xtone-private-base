@@ -35,13 +35,9 @@ public class testInsert {
 //			e.printStackTrace();
 //		}
 		
-//		ThreadPool.mThreadPool.execute(new ForwardsyncBean(0, "123456", "3000", "0", "url", "200", "zgt", "appkey"));
+		ThreadPool.mThreadPool.execute(new ForwardsyncBean(0, "123456", "3000", "0", "url", "200", "zgt", "appkey"));
 		
 		
-		Long key = GenerateIdService.getInstance()
-				.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1);
-		String keyy = key +"";
-		System.out.println(keyy);
 	}
 
 }
