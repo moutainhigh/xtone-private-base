@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.common.util.ConfigManager;
+import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
@@ -82,10 +84,13 @@ public class CpInfoServlet extends HttpServlet {
 				cpInfoBean.setBaidupay(rs.getString("baiduPay"));
 				cpInfoBean.setSmspay(rs.getString("smsPay"));
 				cpInfoBean.setProductInfo(rs.getString("productInfo"));
-				// cpInfoBean.setGameType(rs.getString("gameType")); //游戏类型(单机),
-				// (网游)
 
-				cpInfoBean.setWebOrderid(System.currentTimeMillis() + "");
+				// (网游)
+				Long key = GenerateIdService.getInstance()
+						.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1);
+				String orederKey = key + "";
+
+				cpInfoBean.setWebOrderid(orederKey);
 
 				// 用户组对象转JSON串
 				jsonString = JSON.toJSONString(cpInfoBean);
@@ -102,7 +107,7 @@ public class CpInfoServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(ps!= null){
+			if (ps != null) {
 				try {
 					ps.close();
 				} catch (SQLException e) {
