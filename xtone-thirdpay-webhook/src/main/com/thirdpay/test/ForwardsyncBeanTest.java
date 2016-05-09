@@ -1,4 +1,4 @@
-package com.thirdpay.domain;
+package com.thirdpay.test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,13 +8,14 @@ import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
+import com.thirdpay.utils.CheckCPInfo;
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
 
 /**
  * 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件 appkey or channelId
  * 填入配置的id值 id_type数据库字段对应
  */
-public class ForwardsyncBean implements Runnable {
+public class ForwardsyncBeanTest implements Runnable {
 
 	private Long id;
 	private int status;
@@ -26,8 +27,6 @@ public class ForwardsyncBean implements Runnable {
 	private String successCoditions;
 	private String appkey;
 	private String id_type;
-
-	
 
 	public Long getId() {
 		return id;
@@ -109,7 +108,7 @@ public class ForwardsyncBean implements Runnable {
 		this.id_type = id_type;
 	}
 
-	public ForwardsyncBean(int status, String orderId, String sync_status, String next_time, String sendCount,
+	public ForwardsyncBeanTest(int status, String orderId, String sync_status, String next_time, String sendCount,
 			String notify_url, String successCoditions, String appkey, String id_type) {
 		super();
 		this.status = status;
@@ -130,6 +129,7 @@ public class ForwardsyncBean implements Runnable {
 		setId(GenerateIdService.getInstance()
 				.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1));
 
+
 		if (this.id > 0) {
 			PreparedStatement ps = null;
 			Connection con = null;
@@ -137,8 +137,7 @@ public class ForwardsyncBean implements Runnable {
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 				ps = con.prepareStatement(
-						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
-				
+						"insert into `cbl_test` (id,status,orderId,sync_status,next_time,sendCount,notify_url,successConditions,appkey,id_type) values (?,?,?,?,?,?,?,?,?,?)");
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());

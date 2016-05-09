@@ -85,12 +85,9 @@ public class AlipayCountServlet extends HttpServlet {
 		String payChannel = json.getString("platform");// 支付通道channel
 
 		String ip = request.getHeader("X-Real-IP") != null ? request.getHeader("X-Real-IP") : request.getRemoteAddr();// 来源ip
-		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
 
 		String releaseChannel = json.getString("channel");// 发行通道ID，一般从payInfo中解析出
-
-		String appKey = json.getString("appkey");// CP方ID，一般从payInfo中解析出
-
+		String appKey = json.getString("appkey");
 		String payChannelOrderId = request.getParameter("out_trade_no");// 支付通道的订单号，一般从payInfo中解析出
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
@@ -99,6 +96,7 @@ public class AlipayCountServlet extends HttpServlet {
 		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
 		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
 		int payStatus = payConstants.paytestStatus;// 是否是测试信息
+		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
 
 		if (payChannel == null) {
 			payChannel = json.getString("p");
@@ -198,27 +196,39 @@ public class AlipayCountServlet extends HttpServlet {
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
+
 		while (iterator.hasNext()) {
 			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey(); // key为参数名称
-			String[] value = map.get(key); // value为参数值
+			if (!key.equals("xx_notifyData")) {
+				String[] value = map.get(key); // value为参数值
 
-			for (int i = 0; i < value.length; i++) {
+				for (int i = 0; i < value.length; i++) {
 
-				payInfo += key + "=" + value[i] + ";";
+					payInfo += "\"" + key + "\"" + ":" + "\"" + value[i] + "\"" + ",";
 
-				// formparams.add(new BasicNameValuePair(key, value[i]));
+				}
 
 			}
 
 		}
 
-		// 转发地址从数据库得到
-		// String other_url =
-		// "http://thirdpay-webhook.n8wan.com:29141/AlipayCountServlet";
-		// post(other_url, formparams); // 转发 发送数据
+		System.out.println("payInfo = " + payInfo);
 
-		return payInfo;
+		StringBuilder builder = new StringBuilder(payInfo);
+		builder.deleteCharAt(builder.length() - 1);
+		builder.insert(0, "{");
+		builder.append("}");
+		System.out.println("builder = " + builder);
+		String builderjson = builder.toString();
+		formparams.add(new BasicNameValuePair("payment", builderjson));
+
+		// 转发地址从数据库得到
+		String other_url = "http://chendefeng.f3322.net:54401/PopoBird/PayCallbackService";
+		post(other_url, formparams); // 转发 发送数据
+
+		return builderjson;
 	}
+
 }

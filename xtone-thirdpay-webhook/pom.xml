@@ -91,6 +91,7 @@
 		</extensions>
 
 	</build>
+	
 	<profiles>
 		<profile>
 			<id>pc</id>
@@ -104,6 +105,7 @@
 
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>online</id>
 

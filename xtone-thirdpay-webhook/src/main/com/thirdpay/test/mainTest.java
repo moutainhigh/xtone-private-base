@@ -31,9 +31,9 @@ public class mainTest {
 	            connection.setConnectTimeout(3000);  
 	            connection.setRequestMethod("GET");  
 	            connection.setDoInput(true);  //从服务器获得数据  
-	              
+	            
 	            int responseCode = connection.getResponseCode();              
-	              
+	            
 	            if (200 == responseCode) {  
 	                jsonString = changeInputStream(connection.getInputStream(),encode);  
 	                  

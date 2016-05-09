@@ -12,6 +12,8 @@ import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
+import com.thirdpay.utils.CheckCPInfo;
+
 public class PayInfoBean implements Runnable {
 	private Long id;
 	private int price; // 价格，单位人民币，分
@@ -179,19 +181,30 @@ public class PayInfoBean implements Runnable {
 				ps.setInt(m++, this.getTestStatus());
 
 				int i = ps.executeUpdate();
-				// if ((i+"").equals("1")) {
-				//
-				// ThreadPool.mThreadPool.execute(new ForwardsyncBean(0,
-				// "orderId", "3000", "0", "", "200", this.getAppKey(),
-				// "appkey"));
-				//
-				// }
+				/**
+				 * 数据同步状态码 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件
+				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
+				 */
+				if ((i + "").equals("1")) {
+
+					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
+					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "3000", "0",
+							notify_url, "200", this.getAppKey(), "appkey"));
+
+				}
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				if (con != null) {
 					try {
 						con.close();
