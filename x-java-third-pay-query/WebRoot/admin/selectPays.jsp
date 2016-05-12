@@ -179,22 +179,34 @@
 // 			//System.out.println(""+n+++":"+rs.getString("dt"));
 // 			list.add(pays);
 // 		}
- 	 		if(!payrsp.getEntries().equals("")){
+//  	 		if(!payrsp.getEntries().equals("")){
  				  
-                int num =Integer.parseInt(payrsp.getEntries());
-                int s = 1;
-                for(Pays pays5:list){
-               	 if(s>num)
-               		 list2.add(pays5);
-               	 s++;
-                }
-	 		}
+//                 int num =Integer.parseInt(payrsp.getEntries());
+//                 int s = 1;
+//                 for(Pays pays5:list){
+//                	 if(s>num)
+//                		 list2.add(pays5);
+//                	 s++;
+//                 }
+// 	 		}
 		PaysData paysdata = new PaysData();
 		paysdata.setStatus("success");
 		for(Pays pays4:list2){
 	    	list.remove(pays4);
 	    }
-	
+		if(!payrsp.getEntries().equals("")){
+			  
+            int num =Integer.parseInt(payrsp.getEntries());
+            int s = 1;
+            for(Pays pays5:list){
+           	 if(s>num)
+           		 list2.add(pays5);
+           	 s++;
+            }
+ 		}
+		for(Pays pays5:list2){
+	    	list.remove(pays5);
+	    }
 		paysdata.setData(list);
 		String rsp = gson.toJson(paysdata);
 		
