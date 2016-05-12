@@ -36,7 +36,8 @@
 		//System.out.println("JiaBing end open connection spend times:" + (System.currentTimeMillis() - curMils));
 		
 		String sql = "SELECT FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS dt,price,payChannel,ip,payInfo,releaseChannel,appKey,ownOrderId,payChannelOrderId,cpOrderId,testStatus"+
-				" FROM log_success_pays WHERE 1=1 AND appKey='ea7e48e69d1149b2a5e2ef8d3a5d9e7a' ";
+				" FROM log_success_pays WHERE 1=1 ";
+		//AND appKey ='ea7e48e69d1149b2a5e2ef8d3a5d9e7a' 
 		if(!StringUtil.isNullOrEmpty(payrsp.getStarttime())&&!StringUtil.isNullOrEmpty(payrsp.getEndtime())){
 			sql += " AND UNIX_TIMESTAMP('"+payrsp.getStarttime()+"')*1000*1000000<id AND (UNIX_TIMESTAMP('"+payrsp.getEndtime()+"')+86400)*1000*1000000>id ";
 		}else{
@@ -48,7 +49,7 @@
 			}
 		}
 		if(!payrsp.getAppkey().equals("")){
-			//sql += " AND appKey like 'ea7e48e69d1149b2a5e2ef8d3a5d9e7a' ";
+			sql += " AND appKey like 'ea7e48e69d1149b2a5e2ef8d3a5d9e7a' ";
 		}
 		if(!payrsp.getChannel().equals("")){
 			sql += " AND releaseChannel like '%"+payrsp.getChannel()+"%' ";
