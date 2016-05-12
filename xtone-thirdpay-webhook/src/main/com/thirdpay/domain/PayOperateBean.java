@@ -89,20 +89,8 @@ public class PayOperateBean implements Runnable {
 				ps.setString(m++,"appkey = "+this.getAppkey());
 				ps.setString(m++, this.getOp_notifyData());
 				
-//				ps.setInt(m++, this.getPrice());
-//				ps.setString(m++, this.getPayChannel());
-//				ps.setString(m++, this.getIp());
-//				ps.setString(m++, this.getPayInfo());
-//				ps.setString(m++, this.getReleaseChannel());
-//				ps.setString(m++, this.getAppKey());
-//				ps.setString(m++, this.getPayChannelOrderId());
-//				ps.setString(m++, this.getOwnUserId());
-//				ps.setString(m++, this.getOwnItemId());
-//				ps.setString(m++, this.getOwnOrderId());
-//				ps.setInt(m++, this.getTestStatus());
-				
 				ps.executeUpdate();
-
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

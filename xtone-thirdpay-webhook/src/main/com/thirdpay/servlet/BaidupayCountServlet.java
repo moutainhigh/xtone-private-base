@@ -19,6 +19,11 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.payConstants;
+/**
+ * 参数名 参数含义 格式说明 长度 是否必须 sp_no 百度钱包支付商户号 10位数字组成的字符串  是 order_no 商户订单号 不超过20个字符 Max(20) 是 bfb_order_no 百度钱包支付交易号 不超过32个字符 Max(32) 是 bfb_order_create_time 百度钱包支付交易创建 时间 YYYYMMDDHHMMSS  是 pay_time 支付时间 YYYYMMDDHHMMSS  是 pay_type 支付方式 默认取值2  是 unit_amount 商品单价，以分为单位 非负整数  否 unit_count 商品数量 非负整数  否 transport_amount 运费，以分为单位 非负整数  否 total_amount 总金额，以分为单位 非负整数  是 fee_amount 百度钱包支付收取商户 的手续费，以分为单位 非负整数  是 currency 币种，目前仅支持人民 币 取值范围参见附录  是 buyer_sp_username 买家在商户网站的用户 名 允许包含中文；不超过 64字符或32个汉字 Max(64) 否 pay_result 支付结果代码 取值范围参见附录  是 input_charset 请求参数的字符编码 取值范围参见附录  是 
+ */
+
 
 /**
  * 百度统计Servlet
@@ -42,7 +47,7 @@ public class BaidupayCountServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		requestPostData(request,response);
+		requestPostData(request, response);
 
 	}
 
@@ -56,30 +61,26 @@ public class BaidupayCountServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
 	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
-		
-		//先对xx_notifyData数据作处理 格式为aa:78-cc:123-xx:77
+
+		// 先对xx_notifyData数据作处理 格式为aa:78-cc:123-xx:77
 		StringBuilder builder = new StringBuilder("{");
-		String [] strings = xx_notifyData.split("-");
-		
+		String[] strings = xx_notifyData.split("-");
+
 		for (int i = 0; i < strings.length; i++) {
 			String str2 = strings[i];
 			String strings2[] = str2.split(":");
-			
-			
-			builder.append("\""+strings2[0]+"\":\""+strings2[1]+"\"");
+
+			builder.append("\"" + strings2[0] + "\":\"" + strings2[1] + "\"");
 			builder.append(',');
-//			System.out.print(strings2[0]+"   "); 
-//			System.out.print(strings2[1]);
-			
+			// System.out.print(strings2[0]+" ");
+			// System.out.print(strings2[1]);
+
 		}
-		builder.deleteCharAt(builder.length()-1);
+		builder.deleteCharAt(builder.length() - 1);
 		builder.append("}");
-		
-		
-		
+
 		JSONObject json = JSON.parseObject(builder.toString()); // 解析自定义参数
 
 		int price = Integer.parseInt(request.getParameter("unit_amount")); // 商品价格
@@ -93,21 +94,46 @@ public class BaidupayCountServlet extends HttpServlet {
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		String ownOrderId = request.getParameter("ownOrderId");// 原始订单号ID，待用
-		int testStatus = 1;// 是否是测试信息
+		
+		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
+		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
+
+		int payStatus = payConstants.paytestStatus;// 是否是测试信息
+
+		if (payChannel == null) {
+			payChannel = json.getString("p");
+		}
+		if (releaseChannel == null) {
+			releaseChannel = json.getString("a");
+		}
+		if (appKey == null) {
+			appKey = json.getString("k");
+		}
+		if (ownOrderId == null) {
+			ownOrderId = json.getString("s");
+		}
+		if (cpOrderId == null) {
+			cpOrderId = json.getString("c");
+		}
+
+		System.out.println("xx_notifyData = " + builder.toString() + "\n" + "payChannel = " + payChannel + ",appKey = "
+				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, testStatus));
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 		try {
-			response.getWriter().append("200");
+			//<meta name="VIP_BFB_PAYMENT" content="BAIFUBAO">
+			response.getWriter().append("<meta name=\"VIP_BFB_PAYMENT\" content=\"BAIFUBAO\">");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return "";
-		
+
 	}
+
 	/**
 	 * 得到所有的参数与参数值
 	 * 
@@ -118,12 +144,11 @@ public class BaidupayCountServlet extends HttpServlet {
 		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
-		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+//		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator
-					.next();
+			Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>) iterator.next();
 
 			String key = entry.getKey(); // key为参数名称
 			String[] value = map.get(key); // value为参数值
