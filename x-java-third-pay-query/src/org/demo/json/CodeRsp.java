@@ -6,8 +6,9 @@ public class CodeRsp {
 	private String status;
 	private Code data;
 
+	
 	public String getStatus() {
-		return status;
+		return status;          
 	}
 
 	public void setStatus(String status) {

@@ -3,6 +3,7 @@
 	<name>xtone-java-cp-admin</name>
 	<comment></comment>
 	<projects>
+		<project>xtone-common</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -30,8 +31,14 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
+		<buildCommand>
+			<name>org.maven.ide.eclipse.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>org.maven.ide.eclipse.maven2Nature</nature>
 		<nature>org.eclipse.m2e.core.maven2Nature</nature>
 		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>

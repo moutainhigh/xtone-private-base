@@ -4,10 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.common.util.ConnectionService;
+import org.demo.info.Apps;
+import org.demo.info.Pays;
 import org.demo.info.User;
+import org.demo.utils.ConnectionServiceConfig;
 
 public class UserService {
 
@@ -153,37 +158,160 @@ public class UserService {
   
   
 
-  public long checkLoginUser(User user) {
-    long result = 0;
-    PreparedStatement ps = null;
-    Connection con = null;
-    ResultSet rs = null;
-    try {
-      con = ConnectionService.getInstance().getConnectionForLocal();
-      ps = con.prepareStatement("select id from tbl_base_users where username=? and pwd=md5(?) and isAvail=1");
-      int m = 1;
-      ps.setString(m++, user.getUserName());
-      ps.setString(m++, user.getPassword());
-      rs = ps.executeQuery();
-      if (rs.next()) {
-        result = rs.getLong("id");
-      }
-    } catch (Exception e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    } finally {
-      if (con != null) {
-        try {
-          con.close();
-        } catch (SQLException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-      }
-    }
-    return result;
-  }
+//  public long checkLoginUser(User user) {
+//    long result = 0;
+//    PreparedStatement ps = null;
+//    Connection con = null;
+//    ResultSet rs = null;
+//    try {
+//      con = ConnectionService.getInstance().getConnectionForLocal();
+//      ps = con.prepareStatement("select id from tbl_thirdpay_cp_users where username=? and pwd=md5(?) and isAvail=1");
+//      int m = 1;
+//      ps.setString(m++, user.getUserName());
+//      ps.setString(m++, user.getPassword());
+//      rs = ps.executeQuery();
+//      if (rs.next()) {
+//        result = rs.getLong("id");
+//      }
+//    } catch (Exception e) {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    } finally {
+//      if (con != null) {
+//        try {
+//          con.close();
+//        } catch (SQLException e) {
+//          // TODO Auto-generated catch block
+//          e.printStackTrace();
+//        }
+//      }
+//    }
+//    return result;
+//  }
+  public User checkLoginUser(User user) {                 //通过username和password查询User(检查能否登录)
+	    User result = null;
+	    PreparedStatement ps = null;
+	    Connection con = null;
+	    ResultSet rs = null;
+	    try {
+	      con = ConnectionService.getInstance().getConnectionForLocal();                          //md5(?)
+	      ps = con.prepareStatement("select * from tbl_thirdpay_cp_users where username=? and pwd=md5(?) and isAvail=1");
+	      int m = 1;
+	      ps.setString(m++, user.getUserName());
+	      ps.setString(m++, user.getPassword());
+	      rs = ps.executeQuery();
+	      if (rs.next()) {
+	    	  result = new User();
+	    	  result.setAdmin(rs.getInt("isadmin"));
+	    	  result.setCpid(rs.getLong("cpid"));
+	    	  result.setEmail(rs.getString("email"));
+	    	  result.setId(rs.getLong("id"));
+	    	  result.setPassword(rs.getString("pwd"));
+	    	  
+	    	  result.setUserName(rs.getString("username"));
+	        
+	      }
+	    } catch (Exception e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    } finally {
+	      if (con != null) {
+	        try {
+	          con.close();
+	        } catch (SQLException e) {
+	          // TODO Auto-generated catch block
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	  
+	    return result;
+	  }
   
+  
+  
+  
+  public static List<Apps> selectByCpid(User user){                   //通过user中的cpid查询所有的Apps(为了获得Apps表中的appkey)
+	    ArrayList<Apps> list = new ArrayList<Apps>();
+	    Apps result = null;
+	    PreparedStatement ps = null;
+	    Connection con = null;
+	    ResultSet rs = null;
+	    try {
+	      con = ConnectionService.getInstance().getConnectionForLocal();
+	      ps = con.prepareStatement("select * from tbl_thirdpay_apps where cpid=?");
+	      int m = 1;
+	      ps.setLong(m, user.getCpid());
+	    
+	      rs = ps.executeQuery();
+	      while (rs.next()) {
+	    	  result = new Apps();
+	    	result.setAppkey(rs.getString("appkey"));
+	    	result.setAppname(rs.getString("appname"));
+	    	result.setCpid(rs.getLong("cpid"));
+	        list.add(result);
+	      }
+	    } catch (Exception e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    } finally {
+	      if (con != null) {
+	        try {
+	          con.close();
+	        } catch (SQLException e) {
+	          // TODO Auto-generated catch block
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	    return list;
+  }
+  public static List<Pays> selectByAppkey(Apps apps){                          //通过Apps表中的appkey查询所有的Pays(用于前台显示)
+	  ArrayList<Pays> list = new ArrayList<Pays>();
+	    Pays pays = null;
+	    PreparedStatement ps = null;
+	    Connection con = null;
+	    ResultSet rs = null;
+	    try {
+	      con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
+	      ps = con.prepareStatement("select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS id,price,paychannel,ip,payinfo,releasechannel,appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=?");
+	      int m = 1;
+	      ps.setString(m, apps.getAppkey());
+	      
+	      rs = ps.executeQuery();
+	      while (rs.next()) {
+	    	
+	    	  pays = new Pays();
+	    	  
+				pays.setId(rs.getString("id"));
+				pays.setPrice(rs.getInt("price"));
+				pays.setPayChannel(rs.getString("payChannel"));
+				pays.setIp(rs.getString("ip"));
+				pays.setPayInfo(rs.getString("payInfo"));
+				pays.setReleaseChannel(rs.getString("releaseChannel"));
+				pays.setAppKey(rs.getString("appKey"));
+				pays.setOwnOrderId(rs.getString("ownOrderId"));
+				pays.setPayChannelOrderId(rs.getString("payChannelOrderId"));
+				pays.setCpOrderId(rs.getString("cpOrderId"));
+				pays.setTestStatus(rs.getString("testStatus"));
+				list.add(pays);
+	        
+	      }
+	    } catch (Exception e) {
+	      // TODO Auto-generated catch block
+	      e.printStackTrace();
+	    } finally {
+	      if (con != null) {
+	        try {
+	          con.close();
+	        } catch (SQLException e) {
+	          // TODO Auto-generated catch block
+	          e.printStackTrace();
+	        }
+	      }
+	    }
+	    return list;
+  }
   public User getUserById(long userId){
     User user = null;
     PreparedStatement ps = null;

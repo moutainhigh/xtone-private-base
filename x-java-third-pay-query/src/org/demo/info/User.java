@@ -9,6 +9,15 @@ public class User {
 	private String email;
 	private int admin;
 	private int status = 1;
+	private long cpid;
+
+	public long getCpid() {
+		return cpid;
+	}
+
+	public void setCpid(long cpid) {
+		this.cpid = cpid;
+	}
 
 	public int getStatus() {
 		return status;
