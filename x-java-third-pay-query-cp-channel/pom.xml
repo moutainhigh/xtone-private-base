@@ -131,7 +131,7 @@
 				<runtime.env>packageConfig\pcpay</runtime.env>
 				<final.name>channel-query.n8wan.com</final.name>
 				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
 		</profile>
 		<profile>
@@ -140,7 +140,7 @@
 				<runtime.env>packageConfig\onlinepay</runtime.env>
 				<final.name>channel-cs-query.n8wan.com</final.name>
 				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
 		</profile>
 	</profiles>
