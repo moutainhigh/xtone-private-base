@@ -44,72 +44,66 @@
 -->
 <%@ include file="inc-receive-body.jsp"%>
 <%
-	User user = null;
-	PreparedStatement ps = null;
-	Connection con = null;
-	ResultSet rs = null;
+  User user = null;
+  PreparedStatement ps = null;
+  Connection con = null;
+  ResultSet rs = null;
 
-	Date date = new Date();
-	
-	try {
+  Date date = new Date();
 
+  try {
 
-		 OutputStream os = response.getOutputStream();
-		    OutputStreamWriter osw = new OutputStreamWriter(os);
-		    BufferedWriter bw = new BufferedWriter(osw);
-		GsonBuilder gsonBuilder = new GsonBuilder();
-		gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
-		Gson gson = gsonBuilder.create();
-		user = gson.fromJson(info, User.class);
-		UserService userService = new UserService();
-		
-		
-		User user2 = userService.checkLoginUser(user);
-		
-		
+    OutputStream os = response.getOutputStream();
+    OutputStreamWriter osw = new OutputStreamWriter(os);
+    BufferedWriter bw = new BufferedWriter(osw);
+    GsonBuilder gsonBuilder = new GsonBuilder();
+    gsonBuilder.setLongSerializationPolicy(LongSerializationPolicy.STRING);
+    Gson gson = gsonBuilder.create();
+    user = gson.fromJson(info, User.class);
+    UserService userService = new UserService();
 
-		if (user2!=null) {
-			LoginRsp loginRsp = new LoginRsp();
-			loginRsp.setData(user2);
-			loginRsp.setStatus("success");
-			String rsp = gson.toJson(loginRsp);
-			request.getSession(true);
-			session.setAttribute("user", user2);
-		   
-		    System.out.println(rsp);
-			bw.write(rsp);
-            
-		
-			con = ConnectionService.getInstance().getConnectionForLocal();	
-			String sql = "UPDATE tbl_thirdpay_cp_channel_users SET lastLogin=? WHERE id=?";
-			ps = con.prepareStatement(sql);
-			ps.setLong(1, date.getTime());
-			ps.setLong(2, user2.getId());
-			ps.executeUpdate();
-		
-		} else {
-			bw.write("{\"status\":\"error\"}");
-		}
-		
-		bw.flush();
-		
-		bw.close();
-	
-	    out.clear();  
-	    out = pageContext.pushBody();  
-      
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {	
+    User user2 = userService.checkLoginUser(user);
 
-  
-		if (con != null) {
-			try {
-				con.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
+    if (user2 != null) {
+      LoginRsp loginRsp = new LoginRsp();
+      loginRsp.setData(user2);
+      loginRsp.setStatus("success");
+      String rsp = gson.toJson(loginRsp);
+      request.getSession(true);
+      session.setAttribute("user", user2);
+
+      System.out.println(rsp);
+      bw.write(rsp);
+
+      con = ConnectionService.getInstance().getConnectionForLocal();
+      String sql = "UPDATE tbl_thirdpay_cp_channel_users SET lastLogin=? WHERE id=?";
+      ps = con.prepareStatement(sql);
+      ps.setLong(1, date.getTime());
+      ps.setLong(2, user2.getId());
+      ps.executeUpdate();
+
+    } else {
+      bw.write("{\"status\":\"error\"}");
+    }
+
+    bw.flush();
+
+    bw.close();
+
+    out.clear();
+    out = pageContext.pushBody();
+
+  } catch (Exception e) {
+    e.printStackTrace();
+  } finally {
+
+    if (con != null) {
+      try {
+        con.close();
+      } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+  }
 %>

@@ -178,9 +178,8 @@ public class UserService {
         result.setEmail(rs.getString("email"));
         result.setId(rs.getLong("id"));
         result.setPassword(rs.getString("pwd"));
-
+        result.setReleaseChannel(rs.getString("releaseChannel"));
         result.setUserName(rs.getString("username"));
-
       }
     } catch (Exception e) {
       // TODO Auto-generated catch block
@@ -235,7 +234,7 @@ public class UserService {
     return list;
   }
 
-  public static List<Pays> selectByAppkey(Apps apps) { // 通过Apps表中的appkey查询所有的Pays(用于前台显示)
+  public static List<Pays> selectByAppkeyAndReleaseChannel(Apps apps, String releaseChannel) { // 通过Apps表中的appkey查询所有的Pays(用于前台显示)
     ArrayList<Pays> list = new ArrayList<Pays>();
     Pays pays = null;
     PreparedStatement ps = null;
@@ -244,9 +243,11 @@ public class UserService {
     try {
       con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
       ps = con
-          .prepareStatement("select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS id,price,paychannel,ip,payinfo,releasechannel,appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=?");
+          .prepareStatement("select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS id,price,paychannel,ip,'' as payInfo,releasechannel,"
+              + "'' as appKey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=? and releaseChannel=?");
       int m = 1;
-      ps.setString(m, apps.getAppkey());
+      ps.setString(m++, apps.getAppkey());
+      ps.setString(m++, releaseChannel);
 
       rs = ps.executeQuery();
       while (rs.next()) {

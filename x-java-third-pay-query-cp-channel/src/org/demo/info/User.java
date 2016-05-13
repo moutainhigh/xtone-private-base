@@ -2,77 +2,86 @@ package org.demo.info;
 
 public class User {
 
-	private long id;
-	private String userName;
-	private String password;
-	private String newPassword;
-	private String email;
-	private int admin;
-	private int status = 1;
-	private long cpid;
+  private long id;
+  private String userName;
+  private String password;
+  private String newPassword;
+  private String email;
+  private int admin;
+  private int status = 1;
+  private long cpid;
+  private String releaseChannel;
 
-	public long getCpid() {
-		return cpid;
-	}
+  public String getReleaseChannel() {
+    return releaseChannel;
+  }
 
-	public void setCpid(long cpid) {
-		this.cpid = cpid;
-	}
+  public void setReleaseChannel(String releaseChannel) {
+    this.releaseChannel = releaseChannel;
+  }
 
-	public int getStatus() {
-		return status;
-	}
+  public long getCpid() {
+    return cpid;
+  }
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+  public void setCpid(long cpid) {
+    this.cpid = cpid;
+  }
 
-	public long getId() {
-		return id;
-	}
+  public int getStatus() {
+    return status;
+  }
 
-	public void setId(long id) {
-		this.id = id;
-	}
+  public void setStatus(int status) {
+    this.status = status;
+  }
 
-	public String getUserName() {
-		return userName;
-	}
+  public long getId() {
+    return id;
+  }
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+  public void setId(long id) {
+    this.id = id;
+  }
 
-	public String getPassword() {
-		return password;
-	}
+  public String getUserName() {
+    return userName;
+  }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+  public void setUserName(String userName) {
+    this.userName = userName;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getPassword() {
+    return password;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-	public String getNewPassword() {
-		return newPassword;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public int getAdmin() {
-		return admin;
-	}
+  public String getNewPassword() {
+    return newPassword;
+  }
 
-	public void setAdmin(int admin) {
-		this.admin = admin;
-	}
-	
+  public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
+  }
+
+  public int getAdmin() {
+    return admin;
+  }
+
+  public void setAdmin(int admin) {
+    this.admin = admin;
+  }
+
 }
