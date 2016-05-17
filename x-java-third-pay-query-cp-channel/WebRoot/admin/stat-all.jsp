@@ -9,9 +9,7 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="org.common.util.ConnectionService"%>
 <%@page import="java.text.SimpleDateFormat"%> 
-<%@page import="org.common.util.ConnectionService"%>
 <%@page import="org.demo.info.Content"%>
 
 <html lang="en">
@@ -79,7 +77,7 @@
 // 	  if (request.getParameter("submit") != null
 // 						&& request.getParameter("submit").equals("1")) {
 	%>
-<%-- 	<jsp:include page="menu.jsp"/> --%>
+	<jsp:include page="menu.jsp"/>
 	<input type="hidden" value="" id="list" />	
 	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
 			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">开始日期</dd>

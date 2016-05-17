@@ -6,7 +6,6 @@
 <%@page import="org.demo.json.PaysData"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="org.common.util.ConnectionService"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
