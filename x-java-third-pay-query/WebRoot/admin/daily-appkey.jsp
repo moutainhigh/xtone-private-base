@@ -9,7 +9,6 @@
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="org.common.util.ConnectionService"%>
 <%@page import="java.text.SimpleDateFormat"%>
 
 <html lang="en">
