@@ -57,10 +57,10 @@
 	<a href='stat-all.jsp' class='menus' style='margin-left: 0px;'>数据展示</a>
 	<a href='daily.jsp' class='menus'>日统计</a>
 	<%
-// 			if(user.getAdmin() == 1){
+			if(user.getAdmin() == 1){
 				
-// 				out.write("<a href='user-all.jsp' class='menus'>用户管理</a>");
-// 			}
+				out.write("<a href='user-all.jsp' class='menus'>用户管理</a>");
+			}
 	%>
 	 <a href="password-update.jsp" class="menus">更换密码</a>
 </div>
