@@ -137,7 +137,7 @@
 			var reg = /^[0-9]*[1-9][0-9]*$/i;
 			return reg.test(a);
 		}
-		
+	    var totalData=0;
 		$(function(){
 			$('#table_id').DataTable({
 				"bLengthChange": false,
@@ -165,6 +165,7 @@
 						var list = eval(msg.data);
 						console.log(list);
 						 var listmsg="";
+						 totalData=0;
 						 for(var i=0;i<list.length;i++){
 							 listmsg += "<tr><td>"+list[i].id+"</td>";
 							 listmsg += "<td>"+list[i].price+"</td>";
@@ -177,8 +178,10 @@
 							 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
 							 listmsg += "<td>"+list[i].cpOrderId+"</td>";
 							 listmsg += "<td>"+list[i].testStatus+"</td></tr>";
+							 totalData += list[i].price;
 						 }
 						$("#list2").empty();
+						listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 						$("#list2").append(listmsg);
 					} else {
 						alert('邮箱或密码错误!');
@@ -231,6 +234,7 @@
 							//$("#list").val(msg.data); 
 							var list = eval(msg.data);
 							 var listmsg="";
+							 totalData=0;
 							 for(var i=0;i<list.length;i++){
 								 listmsg += "<tr><td>"+list[i].id+"</td>";
 								 listmsg += "<td>"+list[i].price+"</td>";
@@ -243,8 +247,10 @@
 								 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
 								 listmsg += "<td>"+list[i].cpOrderId+"</td>";
 								 listmsg += "<td>"+list[i].testStatus+"</td></tr>";
+								 totalData += list[i].price;
 							 }
 							$("#list2").empty();
+							listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 							$("#list2").append(listmsg);
 						} else {
 							alert('邮箱或密码错误!');

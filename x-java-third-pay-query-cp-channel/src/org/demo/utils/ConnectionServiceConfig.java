@@ -13,7 +13,7 @@ import org.common.util.ConfigManager;
  */
 public class ConnectionServiceConfig {
 
-	private static final String DB_PREFIX="cs_local";
+	private static final String DB_PREFIX="cs_log";
   private static ConnectionServiceConfig instance = new ConnectionServiceConfig();
 	private ConnectionServiceConfig(){
 	}
