@@ -54,7 +54,7 @@
 
 </style>
 <div style="margin-top: 5px; margin-left: 10px; margin-bottom: 10px">
-	<a href='stat-all.jsp' class='menus' style='margin-left: 0px;'>数据展示</a>
+	<a href='stat-all.jsp' class='menus' style='margin-left: 0px;'>实时数据</a>
 	<a href='daily.jsp' class='menus'>日统计</a>
 	<%
 			if(user.getAdmin() == 1){
