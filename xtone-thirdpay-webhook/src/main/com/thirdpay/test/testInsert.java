@@ -16,6 +16,8 @@ import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.ForwardsyncBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.CheckCPInfo;
@@ -90,10 +92,18 @@ public class testInsert {
 		// builder.insert(0, "{");
 		// builder.append("}");
 		// System.out.println(builder);
-		String url = CheckCPInfo.CheckInfo("zgt").getNotify_url();
-		ThreadPool.mThreadPool
-				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", url, "200", "zgt", "appkey"));
+		
+//		String url = CheckCPInfo.CheckInfo("zgt").getNotify_url();
+//		ThreadPool.mThreadPool
+//				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", url, "200", "zgt", "appkey"));
 
+		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"商品名称是苹果商品id为123456\",\"productId\":\"12345\",\"productName\":\"苹果\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
+		
+//		System.out.println(str.replace("\\", ""));
+		
+		JSONObject payParamsjson =  JSON.parseObject(str.replace("\\", "")); 
+		
+		
 	}
 
 }

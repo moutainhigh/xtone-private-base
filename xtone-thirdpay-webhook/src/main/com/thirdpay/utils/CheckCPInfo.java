@@ -25,7 +25,6 @@ public class CheckCPInfo {
 	public static CpInfoBean CheckInfo(String appKey) {
 		// TODO Auto-generated method stub
 		CpInfoBean cpInfoBean = new CpInfoBean();
-		String jsonString = "";
 		PreparedStatement ps = null;
 		Connection con = null;
 		try {
@@ -54,10 +53,6 @@ public class CheckCPInfo {
 
 			}
 			
-			// 用户组对象转JSON串
-			jsonString = JSON.toJSONString(cpInfoBean);
-			System.out.println("jsonString = " + jsonString);
-
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
@@ -28,6 +29,7 @@ import com.thirdpay.utils.ConnectionServiceCPInfo;
  */
 @WebServlet("/CpInfoServlet")
 public class CpInfoServlet extends HttpServlet {
+	private static final Logger LOG = Logger.getLogger(CpInfoServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -45,7 +47,6 @@ public class CpInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String appKey = request.getParameter("Appkey");
-		System.out.println("appKey = " + appKey);
 
 		if (appKey != null) {
 			CheckInfo(appKey, response); // 查询数据
@@ -77,7 +78,7 @@ public class CpInfoServlet extends HttpServlet {
 			}
 		} else {
 			String jsonString = JSON.toJSONString(cpInfoBean);
-			System.out.println("jsonString = " + jsonString);
+			LOG.info("open jsonString = " + jsonString);
 
 			try {
 				response.getWriter().append(jsonString);
@@ -89,77 +90,4 @@ public class CpInfoServlet extends HttpServlet {
 
 	}
 
-	// private CpInfoBean CheckInfo(HttpServletResponse response) {
-	// // TODO Auto-generated method stub
-	// CpInfoBean cpInfoBean = new CpInfoBean();
-	// String jsonString = "";
-	// PreparedStatement ps = null;
-	// Connection con = null;
-	// try {
-	// // DbKey 选择使用的数据库
-	// con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); //
-	// DbKey选择使用config.properties
-	// ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information
-	// WHERE appKey=" + "'" + appKey + "'");
-	//
-	// ResultSet rs = ps.executeQuery();
-	//
-	// while (rs.next()) {
-	// cpInfoBean.setAppkey(rs.getString("appKey"));
-	// cpInfoBean.setAlipay(rs.getString("aliPay"));
-	// cpInfoBean.setUnionpay(rs.getString("unionPay"));
-	// cpInfoBean.setWechatpay(rs.getString("wechatPay"));
-	// cpInfoBean.setBaidupay(rs.getString("baiduPay"));
-	// cpInfoBean.setSmspay(rs.getString("smsPay"));
-	// cpInfoBean.setProductInfo(rs.getString("productInfo"));
-	//
-	// // (网游)
-	// Long key = GenerateIdService.getInstance()
-	// .generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()),
-	// "clicks", 1);
-	// String orederKey = key + "";
-	//
-	// cpInfoBean.setWebOrderid(orederKey);
-	//
-	// // 用户组对象转JSON串
-	// jsonString = JSON.toJSONString(cpInfoBean);
-	// System.out.println("jsonString = " + jsonString);
-	//
-	// }
-	//
-	//// if (!rs.isAfterLast()) {
-	//// response.getWriter().append("-1");
-	////
-	//// }
-	//
-	// } catch (Exception e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } finally {
-	// if (ps != null) {
-	// try {
-	// ps.close();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// if (con != null) {
-	// try {
-	// con.close();
-	// } catch (SQLException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-	//
-	// try {
-	// response.getWriter().append(jsonString);
-	// } catch (IOException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// } // 回调json数据格式的数据
-	//
-	// }
 }

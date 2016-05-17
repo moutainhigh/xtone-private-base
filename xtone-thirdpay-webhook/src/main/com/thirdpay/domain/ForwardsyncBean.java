@@ -136,8 +136,7 @@ public class ForwardsyncBean implements Runnable {
 			try {
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-				ps = con.prepareStatement(
-						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
+				ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
 				
 				int m = 1;
 				ps.setLong(m++, this.getId());

@@ -10,21 +10,25 @@ import org.common.util.GenerateIdService;
 
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
 
-
 public class PayOperateBean implements Runnable {
-	
+
 	private Long id;
-	private int logId ; // 价格，单位人民币，分
-	private String payOperateStatus ; //支付操作状态
-	private String Appkey ; 
-	private String op_notifyData ; 
-	
-	public PayOperateBean(int logId, String payOperateStatus,String Appkey,String op_notifyData) {
+	private int logId; // 价格，单位人民币，分
+	private String payOperateStatus; // 支付操作状态
+	private String Appkey;
+	private String op_notifyData;
+	private String payParams;
+	private String ownOrderid;
+
+	public PayOperateBean(int logId, String payOperateStatus, String Appkey, String op_notifyData, String payParams,
+			String ownOrderid) {
 		super();
 		this.logId = logId;
 		this.payOperateStatus = payOperateStatus;
 		this.Appkey = Appkey;
 		this.op_notifyData = op_notifyData;
+		this.payParams = payParams;
+		this.ownOrderid = ownOrderid;
 	}
 
 	public String getOp_notifyData() {
@@ -67,6 +71,21 @@ public class PayOperateBean implements Runnable {
 		this.id = id;
 	}
 
+	public String getPayParams() {
+		return payParams;
+	}
+
+	public void setPayParams(String payParams) {
+		this.payParams = payParams;
+	}
+
+	public String getOwnOrderid() {
+		return ownOrderid;
+	}
+
+	public void setOwnOrderid(String ownOrderid) {
+		this.ownOrderid = ownOrderid;
+	}
 
 	@Override
 	public void run() {
@@ -79,24 +98,26 @@ public class PayOperateBean implements Runnable {
 			PreparedStatement ps = null;
 			Connection con = null;
 			try {
-				//DbKey 选择使用的数据库
-				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); //DbKey选择使用config.properties
-				ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03) values (?,?,?,?,?)");
+				// DbKey 选择使用的数据库
+				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+				ps = con.prepareStatement(
+						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05) values (?,?,?,?,?,?,?)");
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getLogId());
-				ps.setString(m++,this.getPayOperateStatus());
-				ps.setString(m++,"appkey = "+this.getAppkey());
+				ps.setString(m++, this.getPayOperateStatus());
+				ps.setString(m++, "appkey = " + this.getAppkey());
 				ps.setString(m++, this.getOp_notifyData());
-				
+				ps.setString(m++, this.getPayParams());
+				ps.setString(m++, this.getOwnOrderid());
 				ps.executeUpdate();
-				
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-				
-				if(ps!= null){
+
+				if (ps != null) {
 					try {
 						ps.close();
 					} catch (SQLException e) {
@@ -104,7 +125,7 @@ public class PayOperateBean implements Runnable {
 						e.printStackTrace();
 					}
 				}
-				
+
 				if (con != null) {
 					try {
 						con.close();
@@ -117,7 +138,5 @@ public class PayOperateBean implements Runnable {
 		}
 
 	}
-
-
 
 }

@@ -214,21 +214,21 @@ public class AlipayCountServlet extends HttpServlet {
 
 		}
 
-		System.out.println("payInfo = " + payInfo);
-
-		StringBuilder builder = new StringBuilder(payInfo);
-		builder.deleteCharAt(builder.length() - 1);
-		builder.insert(0, "{");
-		builder.append("}");
-		System.out.println("builder = " + builder);
-		String builderjson = builder.toString();
-		formparams.add(new BasicNameValuePair("payment", builderjson));
+//		System.out.println("payInfo = " + payInfo);
+//
+//		StringBuilder builder = new StringBuilder(payInfo);
+//		builder.deleteCharAt(builder.length() - 1);
+//		builder.insert(0, "{");
+//		builder.append("}");
+//		System.out.println("builder = " + builder);
+//		String builderjson = builder.toString();
+//		formparams.add(new BasicNameValuePair("payment", builderjson));
 
 		// 转发地址从数据库得到
-		String other_url = "http://chendefeng.f3322.net:54401/PopoBird/PayCallbackService";
-		post(other_url, formparams); // 转发 发送数据
+		//String other_url = "http://chendefeng.f3322.net:54401/PopoBird/PayCallbackService";
+		//post(other_url, formparams); // 转发 发送数据
 
-		return builderjson;
+		return payInfo;
 	}
 
 }
