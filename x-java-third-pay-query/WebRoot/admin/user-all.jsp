@@ -64,7 +64,7 @@
 				try {
 					con = ConnectionService.getInstance().getConnectionForLocal();
 					String sql = "SELECT id,username,pwd,email,isAvail,isAdmin,lastLogin,ADDTIME "+
-							" FROM `tbl_base_users`";
+							" FROM `tbl_thirdpay_cp_users`";
 					ps = con.prepareStatement(sql);
 					rs = ps.executeQuery();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
