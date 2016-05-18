@@ -1,3 +1,6 @@
+<%@page import="org.demo.info.Apps"%>
+<%@page import="java.util.List"%>
+<%@page import="org.demo.service.UserService"%>
 <%@page import="org.common.util.ConnectionService"%>
 <%@page import="org.demo.info.User"%>
 <%@page import="org.demo.utils.ConnectionServiceConfig"%>
@@ -56,65 +59,31 @@
 			request.setCharacterEncoding("UTF-8");
 			request.getSession(true);
 			User user = (User) session.getAttribute("user");
-				Daily daily;
-				PreparedStatement ps = null;
-				Connection con = null;
-				ResultSet rs = null;
-				String sql =null;
-				float totalData = 0;
-				try {
-					con = ConnectionService.getInstance().getConnectionForLocal();
-					sql = "select GROUP_CONCAT(DISTINCT appkey) AS appkey from tbl_thirdpay_apps where cpid="+user.getCpid();
-					ps = con.prepareStatement(sql);
-					rs = ps.executeQuery();
-					String appkey=null;
-// 					String appkey="ea7e48e69d1149b2a5e2ef8d3a5d9e7a,ea7e48e69d1149b2a5e2ef8d3a5d9e7a,ea7e48e69d1149b2a5e2ef8d3a5d9e7a";
-					if (rs.next()) {
-						appkey=rs.getString("appKey");
-						appkey=appkey.replace(",", "' or appkey='");
-					}
-// 					System.out.println(appkey.replace(",", "' or appkey='"));
-					con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-					sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"+appkey+"' group by date ORDER BY date DESC";
-					ps = con.prepareStatement(sql);
-					rs = ps.executeQuery();
-					while (rs.next()) {
-						daily = new Daily();
-						daily.setId(rs.getString("date"));
-						daily.setAppKey(rs.getString("appKey"));
-						String appKeys[] = daily.getAppKey().split(",");
-						daily.setMoney(rs.getFloat("price"));
-						totalData+=daily.getMoney();
-			%>
+			List<Daily> listDaily=UserService.getDailyByAppkeys(user);
+			float sum=0;
+			String appKeys[]=null;
+			for(Daily daily:listDaily)
+			{
+				appKeys= daily.getAppKey().split(",");
+				sum+=daily.getPrice();
+				%>
+			
 			<tr>
 				<td><%=daily.getId()%></td>
 				<td>
 				<%for(int i=0;i<appKeys.length;i++){%>
 				<a href='daily-appkey.jsp?appkey=<%=appKeys[i]%>' class='menus' target="_blank" style="font-size: 14px"><%=appKeys[i]%></a>
 				<% }%></td>
-				<td><%=daily.getMoney()/100%></td>
+				<td><%=daily.getPrice()/100%></td>
 			</tr>
 			<%
-				}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					if (con != null) {
-						try {
-							con.close();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
+			}
 			%>
 		</tbody>
 			<tr>
 				<td></td>
 				<td></td>
-				<td>总金额:<%=totalData/100 %>元</td>
+				<td>总金额:<%=sum/100 %>元</td>
 			</tr>
 	</table>
 	<script type="text/javascript">
