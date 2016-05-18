@@ -75,7 +75,7 @@
 					}
 // 					System.out.println(appkey.replace(",", "' or appkey='"));
 					con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-					sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"+appkey+"' group by date";
+					sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"+appkey+"' group by date ORDER BY date DESC";
 					ps = con.prepareStatement(sql);
 					rs = ps.executeQuery();
 					while (rs.next()) {
@@ -119,7 +119,11 @@
 	</table>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#table_id').DataTable();
+			$('#table_id').DataTable({
+		        "aaSorting": [
+		                      [ 0, "desc" ]
+		                  ]
+		              } );
 		});
 	</script>
 
