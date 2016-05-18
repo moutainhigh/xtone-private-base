@@ -75,7 +75,7 @@
 					}
 // 					System.out.println(appkey.replace(",", "' or appkey='"));
 					con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-					sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"+appkey+"' group by date";
+					sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"+appkey+"' and releaseChannel='"+user.getReleaseChannel()+"' group by date";
 					ps = con.prepareStatement(sql);
 					rs = ps.executeQuery();
 					while (rs.next()) {
