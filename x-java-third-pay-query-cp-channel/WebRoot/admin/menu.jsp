@@ -16,7 +16,7 @@
 	String sql = "";
 	try{
 		con = ConnectionService.getInstance().getConnectionForLocal();
-		sql = "SELECT isAdmin FROM `tbl_thirdpay_cp_users` WHERE id="+user.getId();
+		sql = "SELECT isAdmin FROM `tbl_thirdpay_cp_channel_users` WHERE id="+user.getId();
 		ps = con.prepareStatement(sql);
 		rs = ps.executeQuery();
 		if(rs.next()){

@@ -30,7 +30,7 @@
 		userChange.setId(user.getId());
 		userChange.setUserName(user.getUserName());
 		con = ConnectionService.getInstance().getConnectionForLocal();
-		String sql = "select id from tbl_thirdpay_cp_users where username=? and pwd=md5(?)";
+		String sql = "select id from tbl_thirdpay_cp_channel_users where username=? and pwd=md5(?)";
 		ps = con.prepareStatement(sql);
 		int m = 1;
 	    ps.setString(m++, userChange.getUserName());
@@ -46,7 +46,7 @@
 	    	return;
 	    }
 		
-		sql = "UPDATE tbl_thirdpay_cp_users SET pwd=md5(?) WHERE id=?";
+		sql = "UPDATE tbl_thirdpay_cp_channel_users SET pwd=md5(?) WHERE id=?";
 		ps = con.prepareStatement(sql);
 		m = 1;
 		ps.setString(m++, userChange.getNewPassword());

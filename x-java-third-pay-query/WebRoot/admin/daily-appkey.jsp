@@ -56,6 +56,7 @@
 				PreparedStatement ps = null;
 				Connection con = null;
 				ResultSet rs = null;
+				float totalData=0;
 				try {
 					con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
 					String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT payChannel) AS payChannel from log_success_pays where appKey='"+appKey+"' group by date";
@@ -66,6 +67,7 @@
 						daily.setId(rs.getString("date"));
 						daily.setChannel(rs.getString("payChannel"));
 						daily.setMoney(rs.getFloat("price"));
+						totalData+=daily.getMoney();
 			%>
 			<tr>
 				<td><%=daily.getId()%></td>
@@ -89,6 +91,11 @@
 				}
 			%>
 		</tbody>
+		<tr>
+				<td></td>
+				<td></td>
+				<td>总金额:<%=totalData/100 %>元</td>
+			</tr>
 	</table>
 	<script type="text/javascript">
 		$(document).ready(function() {

@@ -29,7 +29,7 @@ public class UserService {
       long tmp = System.currentTimeMillis() * 100000L + rnd.nextInt(99999);
       try {
         con = ConnectionService.getInstance().getConnectionForLocal();
-        ps = con.prepareStatement("select id from tbl_thirdpay_cp_users where id = ?");
+        ps = con.prepareStatement("select id from tbl_thirdpay_cp_channel_users where id = ?");
         int m = 1;
         ps.setLong(m++, tmp);
         rs = ps.executeQuery();
@@ -63,7 +63,7 @@ public class UserService {
     // max loop try time = 5
     try {
       con = ConnectionService.getInstance().getConnectionForLocal();
-      ps = con.prepareStatement("select id from tbl_thirdpay_cp_users where username = ?");
+      ps = con.prepareStatement("select id from tbl_thirdpay_cp_channel_users where username = ?");
       int m = 1;
       ps.setString(m++, userName);
       rs = ps.executeQuery();
@@ -94,7 +94,7 @@ public class UserService {
       Connection con = null;
       try {
         con = ConnectionService.getInstance().getConnectionForLocal();
-        ps = con.prepareStatement("insert into tbl_thirdpay_cp_users (id,username,pwd,email,add_time) values (?,?,md5(?),?,?)");
+        ps = con.prepareStatement("insert into tbl_thirdpay_cp_channel_users (id,username,pwd,email,add_time) values (?,?,md5(?),?,?)");
         int m = 1;
         ps.setLong(m++, tmpId);
         ps.setString(m++, user.getUserName());
@@ -129,7 +129,7 @@ public class UserService {
       Connection con = null;
       try {
         con = ConnectionService.getInstance().getConnectionForLocal();
-        ps = con.prepareStatement("insert into tbl_thirdpay_cp_users (id,username,pwd,email,add_time) values (?,?,md5(?),?,?)");
+        ps = con.prepareStatement("insert into tbl_thirdpay_cp_channel_users (id,username,pwd,email,add_time) values (?,?,md5(?),?,?)");
         int m = 1;
         ps.setLong(m++, tmpId);
         ps.setString(m++, "anonymous-" + tmpId);
@@ -289,7 +289,7 @@ public class UserService {
     ResultSet rs = null;
     try {
       con = ConnectionService.getInstance().getConnectionForLocal();
-      ps = con.prepareStatement("select username,email from tbl_thirdpay_cp_users where id=? ");
+      ps = con.prepareStatement("select username,email from tbl_thirdpay_cp_channel_users where id=? ");
       int m = 1;
       ps.setLong(m++, userId);
       rs = ps.executeQuery();
@@ -328,14 +328,14 @@ public class UserService {
     ResultSet rs = null;
     try {
       con = ConnectionService.getInstance().getConnectionForLocal();
-      ps = con.prepareStatement("select balance from tbl_thirdpay_cp_users where id=? ");
+      ps = con.prepareStatement("select balance from tbl_thirdpay_cp_channel_users where id=? ");
       int m = 1;
       ps.setLong(m++, userId);
       rs = ps.executeQuery();
       if (rs.next()) {
         float balance = rs.getFloat("balance");
         if (balance>=consumeValue){
-          ps.execute("update balance = balance - ? from tbl_thirdpay_cp_users where id = ?");
+          ps.execute("update balance = balance - ? from tbl_thirdpay_cp_channel_users where id = ?");
           //todo:lock and log
           result = balance - consumeValue;
         } else {

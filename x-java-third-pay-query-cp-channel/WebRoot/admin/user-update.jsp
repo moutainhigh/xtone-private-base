@@ -75,7 +75,7 @@
 		ResultSet rs = null;
 		try {
 			con = ConnectionService.getInstance().getConnectionForLocal();
-			String sql = "SELECT username,pwd,email,isAvail,isAdmin,lastLogin,ADDTIME FROM `tbl_thirdpay_cp_users` WHERE id=?";
+			String sql = "SELECT username,pwd,email,isAvail,isAdmin,lastLogin,ADDTIME FROM `tbl_thirdpay_cp_channel_users` WHERE id=?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
