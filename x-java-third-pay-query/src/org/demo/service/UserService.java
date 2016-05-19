@@ -279,7 +279,7 @@ public class UserService {
 		try {
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
 			ps = con.prepareStatement(
-					"select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d %h:%i:%s') AS id,price,paychannel,ip,'' as payinfo,releasechannel,'' as appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=? ORDER BY id DESC");
+					"select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d %H:%i:%s') AS id,price,paychannel,ip,'' as payinfo,releasechannel,'' as appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=? ORDER BY id DESC");
 			int m = 1;
 			ps.setString(m, apps.getAppkey());
 
