@@ -4,8 +4,7 @@ public class Daily {
 	private String id;
 	private String appKey;
 	private String channel;
-//	private int money;
-	private float money;
+	private float price;
 	public String getId() {
 		return id;
 	}
@@ -24,17 +23,11 @@ public class Daily {
 	public void setChannel(String channel) {
 		this.channel = channel;
 	}
-//	public int getMoney() {
-//		return money;
-//	}
-//	public void setMoney(int money) {
-//		this.money = money;
-//	}
-	public float getMoney() {
-		return money;
+	public float getPrice() {
+		return price;
 	}
-	public void setMoney(float money) {
-		this.money = money;
+	public void setPrice(float price) {
+		this.price = price;
 	}
 	
 }

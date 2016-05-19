@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="org.demo.service.UserService"%>
 <%@page import="org.demo.utils.ConnectionServiceConfig"%>
 <%@page import="org.demo.info.Daily"%>
 <%@page import="java.util.Date"%>
@@ -52,54 +54,35 @@
 		</thead>
 		<tbody>
 			<%
-				Daily daily;
-				PreparedStatement ps = null;
-				Connection con = null;
-				ResultSet rs = null;
-				float totalData=0;
-				try {
-					con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-					String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT payChannel) AS payChannel from log_success_pays where appKey='"+appKey+"' group by date";
-					ps = con.prepareStatement(sql);
-					rs = ps.executeQuery();
-					while (rs.next()) {
-						daily = new Daily();
-						daily.setId(rs.getString("date"));
-						daily.setChannel(rs.getString("payChannel"));
-						daily.setMoney(rs.getFloat("price"));
-						totalData+=daily.getMoney();
-			%>
+			List<Daily> listDaily=UserService.getChannelByAppkeys(appKey);
+			float sum=0;
+			String appKeys[]=null;
+			for(Daily daily:listDaily)
+			{
+				sum+=daily.getPrice();
+				%>
 			<tr>
 				<td><%=daily.getId()%></td>
 				<td><%=daily.getChannel()%></td>
-				<td><%=daily.getMoney() / 100%></td>
+				<td><%=daily.getPrice() / 100%></td>
 			</tr>
 			<%
-				}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} finally {
-					if (con != null) {
-						try {
-							con.close();
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}
+			}
 			%>
 		</tbody>
 		<tr>
 				<td></td>
 				<td></td>
-				<td>总金额:<%=totalData/100 %>元</td>
+				<td>总金额:<%=sum/100 %>元</td>
 			</tr>
 	</table>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#table_id').DataTable();
+			$('#table_id').DataTable({
+		        "aaSorting": [
+		                      [ 0, "desc" ]
+		                  ]
+		              } );
 		});
 	</script>
 
