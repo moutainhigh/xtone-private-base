@@ -76,7 +76,7 @@
 	
 		<form id="form1" name="form1">
 			<span>用户修改</span><br></br>
-			<span>用户名：</span><input id="user" placeholder="在此编辑兑换码" name="title" type="text"
+			<span>用户名：</span><input id="user" name="title" type="text"
 				class="input1"> <input type="hidden"name="type" id="type" value="1"> <br></br>
 			<span>密码： </span><input type="password"
 				name="pwd" id="pwd" value="" class="input1"><br></br>
