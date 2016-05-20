@@ -93,7 +93,7 @@
 	
 		<form id="form1" name="form1">
 			<span>用户修改</span><br></br>
-			<span>用户名：</span><input id="user" placeholder="在此编辑兑换码"
+			<span>用户名：</span><input id="user"
 				value="<%=rs.getString("username")%>" name="title" type="text"
 				class="input1"> <input type="hidden"
 				name="id" id="id" value="<%=id%>"><input type="hidden"name="type" id="type" value="2"> <br></br>
