@@ -1,3 +1,4 @@
+<%@page import="org.demo.info.User"%>
 <%@page import="org.demo.info.Content"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -58,13 +59,16 @@
 		</thead>
 		<tbody>
 		<%
+		request.setCharacterEncoding("UTF-8");
+		request.getSession(true);
+		User user = (User) session.getAttribute("user");
 				PreparedStatement ps = null;
 				Connection con = null;
 				ResultSet rs = null;	
 				try {
 					con = ConnectionService.getInstance().getConnectionForLocal();
 					String sql = "SELECT id,username,pwd,email,isAvail,isAdmin,lastLogin,ADDTIME "+
-							" FROM `tbl_base_users`";
+							" FROM `tbl_thirdpay_cp_users` WHERE cpid="+user.getCpid();
 					ps = con.prepareStatement(sql);
 					rs = ps.executeQuery();
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
