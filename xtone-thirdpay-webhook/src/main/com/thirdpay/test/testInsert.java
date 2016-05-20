@@ -3,7 +3,9 @@ package com.thirdpay.test;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +23,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.ForwardsyncBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.Forward;
+import com.thirdpay.utils.HttpUtils;
 
 public class testInsert {
 
@@ -97,12 +101,22 @@ public class testInsert {
 //		ThreadPool.mThreadPool
 //				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", url, "200", "zgt", "appkey"));
 
-		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"商品名称是苹果商品id为123456\",\"productId\":\"12345\",\"productName\":\"苹果\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
+//		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"商品名称是苹果商品id为123456\",\"productId\":\"12345\",\"productName\":\"苹果\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
 		
 //		System.out.println(str.replace("\\", ""));
 		
-		JSONObject payParamsjson =  JSON.parseObject(str.replace("\\", "")); 
+//		JSONObject payParamsjson =  JSON.parseObject(str.replace("\\", "")); 
 		
+//		Forward.wj_forward("cbl", "cbl", "1", "testbl1", "cbl", "cbl", "cbltest");
+//		
+////		String url = "http://h1.n8wan.com:2109/xyapp/app.ashx?createdate=2016-05-20 13:51:59&appkey=tt&channelid=bl&amount=1&orderid=test2&imei=cbl&imsi=cbl&userorderid=cbl&status=0";
+//		String url = "http://h1.n8wan.com:2109/xyapp/app.ashx?createdate=2016-05-20%14:18:59&appkey=tt&channelid=bl&amount=1&orderid=test4&imei=cbl&imsi=cbl&userorderid=cbl&status=0";
+////		String urltest = "http://192.168.0.101:8080/thirdpay-webhook/TestServlet?appkey=cbl";
+//		HttpUtils.get(url);
+		
+		
+		String createdate = new SimpleDateFormat("yyyy-MM-dd%HH:mm:ss").format(new Date());
+		System.out.println(createdate);
 		
 	}
 

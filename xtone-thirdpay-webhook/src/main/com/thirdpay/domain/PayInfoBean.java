@@ -6,15 +6,23 @@ package com.thirdpay.domain;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
+import com.thirdpay.servlet.AlipayCountServlet;
 import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.Forward;
+import com.thirdpay.utils.HttpUtils;
+import com.thirdpay.utils.payConstants;
 
 public class PayInfoBean implements Runnable {
+	private static final Logger LOG = Logger.getLogger(PayInfoBean.class);
 	private Long id;
 	private int price; // 价格，单位人民币，分
 	private String payChannel;// 支付通道
@@ -188,6 +196,51 @@ public class PayInfoBean implements Runnable {
 				if ((i + "").equals("1")) {
 
 					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
+
+					LOG.info("notify_url  == " + notify_url);
+					LOG.info("apppppkey  =  " + this.getAppKey());
+
+					// Forward.wj_forward(this.getAppKey(),
+					// this.getReleaseChannel(), this.getPrice() + "",
+					// this.getOwnOrderId(), "", "", this.getCpOrderId());
+
+					//转发数据到wj_url
+					String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
+					StringBuilder builder = new StringBuilder(payConstants.wj_url);
+
+					builder.append("?createdate=" + createdate);
+					builder.append("&appkey=" + this.getAppKey());
+					builder.append("&channelid=" + this.getReleaseChannel());
+					builder.append("&amount=" + this.getPrice() + "");
+					builder.append("&orderid=" + this.getPayChannelOrderId());
+					builder.append("&imei=" + "");
+					builder.append("&imsi=" + "");
+					builder.append("&userorderid=" + this.getCpOrderId());
+					builder.append("&status=" + "0");
+					LOG.info("--------------------------builder = "+builder.toString());
+					String responseStr = HttpUtils.get(builder.toString());
+					if (responseStr.equals("ok")) {
+						LOG.info("插入h1.n8wan成功");
+					} else {
+						LOG.info("responseStr = " + responseStr);
+					}
+
+					// if(this.getAppKey().equals("77936856340f4709a3fa6d7115d0db2b")){
+					// 转发一遍
+					// // 异步发送
+					// new Thread(new Runnable() {
+					// public void run() {
+					// Forward.forward(notify_url, ownOrderId);
+					// }
+					// }).start();
+
+					// Forward.forward(notify_url, this.getOwnOrderId());
+					// }
+
+					// if(this.getAppKey().equals("f17d2fb4eff547c8bebc1e7cc4dcd43c")){
+					// Forward.forward(notify_url, this.getOwnOrderId());
+					// }
+
 					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "3000", "0",
 							notify_url, "200", this.getAppKey(), "appkey"));
 

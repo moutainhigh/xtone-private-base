@@ -37,11 +37,24 @@ public class TestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String jsonString = request.getParameter("payment");
-		System.out.println("接收到的jsonString = " + jsonString );
-		response.getWriter().append("200");
-		
-		
+
+		// String jsonString = request.getParameter("appkey");
+		//
+		// System.out.println("接收到的jsonString = " + jsonString );
+		//
+		// if(jsonString != null){
+		//
+		// response.getWriter().append("200");
+		// }
+
+		String appkey = request.getParameter("appkey");
+
+		if (appkey.equals("cbl")) {
+			System.out.println("接收到的appkey = " + appkey);
+			response.getWriter().append(appkey);
+
+		}
+
 		// ThreadPool.mThreadPool.execute(
 		// new ForwardsyncBean(1001, "ownOrderId", "0", "3000", "0", "url",
 		// "200", "appkey=cbl", "appkey"));

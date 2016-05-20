@@ -27,6 +27,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
@@ -40,6 +41,7 @@ import com.thirdpay.utils.payConstants;
  */
 @WebServlet("/AlipayCountServlet")
 public class AlipayCountServlet extends HttpServlet {
+	private static final Logger LOG = Logger.getLogger(AlipayCountServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -113,7 +115,8 @@ public class AlipayCountServlet extends HttpServlet {
 		if (cpOrderId == null) {
 			cpOrderId = json.getString("c");
 		}
-
+		
+		
 		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
 				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
 				+ ",cpOrderId = " + cpOrderId);
