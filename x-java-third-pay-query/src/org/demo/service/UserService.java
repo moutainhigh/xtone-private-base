@@ -293,7 +293,12 @@ public class UserService {
 				pays.setOwnOrderId(rs.getString("ownOrderId"));
 				pays.setPayChannelOrderId(rs.getString("payChannelOrderId"));
 				pays.setCpOrderId(rs.getString("cpOrderId"));
-				pays.setTestStatus(rs.getString("testStatus"));
+				//pays.setTestStatus(rs.getString("testStatus"));
+				if(rs.getString("testStatus").equals("1")){
+					pays.setTestStatus("测试");
+				}else {
+					pays.setTestStatus("正常");
+				}
 				list.add(pays);
 	        
 	      }
@@ -312,6 +317,7 @@ public class UserService {
 	    }
 	    return list;
   }
+  
   public User getUserById(long userId){
     User user = null;
     PreparedStatement ps = null;
