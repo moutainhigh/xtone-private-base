@@ -244,7 +244,7 @@
 
     <build>
         <finalName>${final.name}</finalName>
-        <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src/main</sourceDirectory>
 		<resources>
             <resource>
                 <directory>src/main</directory>
@@ -257,8 +257,8 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -307,14 +307,49 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>1.0-beta-4</version>
+				<executions>
+					<execution>
+						<id>upload-war</id>
+						<phase>install</phase>
+						<goals>
+							<goal>upload-single</goal>
+							<!-- <goal>upload</goal> -->
+						</goals>
+						<configuration>
+							<!-- <fromDir>${basedir}/target</fromDir> -->
+							<!-- <includes>${project.build.finalName}.war</includes> -->
+							<!-- <url>ftp://xxx</url> -->
+							<!-- <toDir>/home/fuming</toDir> -->
+							<!-- <serverId>awstokyo01</serverId> -->
+							<fromFile>target/${final.name}.war</fromFile>
+							<url>${ftp.to.url}</url>
+							<serverId>${ftp.server.id}</serverId>
+							<skip>false</skip>
+							<toFile>${final.name}.war</toFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
         </plugins>
+        <extensions>
+			<!-- Enabling the use of FTP -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
     </build>
 	<profiles>
 		<profile>
 			<id>product</id>
 			<properties>
 				<runtime.env>packageConfig\product</runtime.env>
-				<final.name>www.x_u8server.com</final.name>
+				<final.name>eight.n8wan.com</final.name>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -324,7 +359,16 @@
 			<id>test</id>
 			<properties>
 				<runtime.env>packageConfig\test</runtime.env>
-				<final.name>www.x_u8server-test.com</final.name>
+				<final.name>eight.n8wan.com -test</final.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>u8product</id>
+			<properties>
+				<runtime.env>packageConfig\product</runtime.env>
+				<final.name>eight.n8wan.com</final.name>
+				<ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
 		</profile>
 	</profiles>
