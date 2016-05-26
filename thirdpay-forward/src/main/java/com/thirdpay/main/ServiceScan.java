@@ -36,7 +36,7 @@ public class ServiceScan {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				// m = processToken(rs, m);
+				
 				String notify_url = rs.getString("para05"); // 回调地址
 				String ownOrderId = rs.getString("para01"); // 自己生成的订单号
 				// 开始转发
@@ -45,19 +45,19 @@ public class ServiceScan {
 					// 异步发送
 					new Thread(new Runnable() {
 						public void run() {
-							LOG.info(ownOrderId + " 数据开始转发,地址为"+notify_url);
-							Forward.forward(notify_url, ownOrderId);
+							LOG.info(ownOrderId + " 数据开始转发,地址为   "+notify_url);
+							
+								Forward.forward(notify_url, ownOrderId);
+							
 						}
 					}).start();
 
-//					Forward.forward(notify_url, ownOrderId);
 				}
 				m++;
 			}
 
 			if (m == 0) {
 				LOG.info("scan nothing");
-				System.out.println("nothing");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

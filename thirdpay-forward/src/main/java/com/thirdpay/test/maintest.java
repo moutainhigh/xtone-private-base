@@ -1,5 +1,7 @@
 package com.thirdpay.test;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 import org.apache.log4j.net.SyslogAppender;
@@ -23,20 +25,29 @@ public class maintest {
 //				"send_time", "rsp_time", "send_url", "send_header", "body", "rsp_status","rsp_header", "rsp_body", "task_id",
 //				"key_type", "id_type"));
 //		
-		Scanner sc = new Scanner(System.in);
-		
-		String control = sc.next();
-		System.out.println(control);
 		
 		
-		while(true){
-			
-			System.out.println("kkkkkkkkkk");
-			
-			if(control == "stop"){
-				break;
-			}
-		}
+//		Scanner sc = new Scanner(System.in);
+//		
+//		String control = sc.next();
+//		System.out.println(control);
+//		
+//		
+//		while(true){
+//			
+//			System.out.println("kkkkkkkkkk");
+//			
+//			if(control == "stop"){
+//				break;
+//			}
+//		}
+		
+		
+//		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		System.out.println(dateFormat2);
+		
+		CheckPayInfo.UpdataInfoTime("1462939173346035157");
+		
 	}
 
 }

@@ -25,6 +25,7 @@
 		</resources>
 
 		<plugins>
+		
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.3</version>
@@ -33,7 +34,6 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
-
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -58,10 +58,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-
-
-
 
 		</plugins>
 	</build>
@@ -115,4 +111,5 @@
 			<version>4.3.5</version>
 		</dependency>
 	</dependencies>
+	
 </project>

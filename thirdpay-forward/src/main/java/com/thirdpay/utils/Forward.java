@@ -25,7 +25,7 @@ public class Forward {
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));
 
-		String responseContent = HttpUtils.post(notify_url, formparams);
+		String responseContent = HttpUtils.post(notify_url, formparams,ownOrderId);
 
 		// 判断返回状态
 		if (responseContent.equals(Contents.successCondition)) {
@@ -37,7 +37,9 @@ public class Forward {
 
 		} else {
 			//返回不为200重复发送
-			LOG.info(ownOrderId + "返回失败 , 1分钟后重新转发...");
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			//更新1001的下次转发时间为1分钟
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
 		}
 	}
 }

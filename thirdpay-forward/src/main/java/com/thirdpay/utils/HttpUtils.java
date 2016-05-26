@@ -22,7 +22,7 @@ public class HttpUtils {
 	/**
 	 * 发送 post请求访问本地应用并根据传递参数不同返回不同结果
 	 */
-	public static String post(String url, List<BasicNameValuePair> formparams) {
+	public static String post(String url, List<BasicNameValuePair> formparams,String ownOrderId) {
 		String responseContent = "" ;
 		// 创建默认的httpClient实例.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -36,13 +36,14 @@ public class HttpUtils {
 			UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");
 			httppost.setEntity(uefEntity);
 			
-			System.out.println("executing request = " + httppost.getURI());
+//			System.out.println("executing request = " + httppost.getURI());
 			CloseableHttpResponse response = httpclient.execute(httppost);
 			try {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
 //					System.out.println("--------------------------------------");
 					responseContent = EntityUtils.toString(entity, "UTF-8");
+					
 //					System.out.println("Response content: " + responseContent);
 //					System.out.println("--------------------------------------");
 				}
@@ -55,7 +56,9 @@ public class HttpUtils {
 			e1.printStackTrace();
 		} catch (IOException e) {
 //			e.printStackTrace();
-			LOG.info("通知地址连接异常,1分钟再次转发...");
+			LOG.info("通知地址连接异常,30秒后再次转发...");
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
+			
 		} finally {
 			// 关闭连接,释放资源
 			try {
