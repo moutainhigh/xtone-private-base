@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -19,6 +20,8 @@ public class mainTest {
 		String str = getJsonContent(url, "utf-8");
 		JSONObject json = JSON.parseObject(str); // 解析自定义参数
 		System.out.println(json.getString("baidupay"));
+		
+		
 	}
 	
 	 public static String getJsonContent(String url_path ,String encode){  

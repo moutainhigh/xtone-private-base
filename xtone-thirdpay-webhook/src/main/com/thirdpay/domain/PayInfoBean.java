@@ -241,7 +241,7 @@ public class PayInfoBean implements Runnable {
 					// Forward.forward(notify_url, this.getOwnOrderId());
 					// }
 
-					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "3000", "0",
+					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
 							notify_url, "200", this.getAppKey(), "appkey"));
 
 				}

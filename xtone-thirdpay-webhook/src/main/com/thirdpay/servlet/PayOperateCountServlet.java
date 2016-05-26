@@ -52,6 +52,7 @@ public class PayOperateCountServlet extends HttpServlet {
 		String str = "";
 		String payOperateCode = request.getParameter("payOperateCode"); // 支付操作状态码
 		String op_notifyData = request.getParameter("op_notifyData");
+		
 		op_notifyData = EncodeUtils.encode(op_notifyData);
 
 		System.out.println("op_notifyData = " + op_notifyData);

@@ -47,14 +47,19 @@ public class TestServlet extends HttpServlet {
 		// response.getWriter().append("200");
 		// }
 
-		String appkey = request.getParameter("appkey");
-
-		if (appkey.equals("cbl")) {
-			System.out.println("接收到的appkey = " + appkey);
-			response.getWriter().append(appkey);
-
+//		String appkey = request.getParameter("appkey");
+//
+//		if (appkey.equals("cbl")) {
+//			System.out.println("接收到的appkey = " + appkey);
+//
+//		}
+		String payment = request.getParameter("payment");
+		if(!payment.equals("")){
+			System.out.println("recivier-payment = " + payment);
+			response.getWriter().append("200");
 		}
 
+		
 		// ThreadPool.mThreadPool.execute(
 		// new ForwardsyncBean(1001, "ownOrderId", "0", "3000", "0", "url",
 		// "200", "appkey=cbl", "appkey"));
