@@ -43,7 +43,7 @@
 				success : function(msg) {
 								
 					if (msg.status == "success") {
-                         alert(msg.status);
+                         //alert(msg.status);
 						location.href='console.jsp';
 						
 					} else {

@@ -1,3 +1,4 @@
+<%@page import="org.demo.info.Apps"%>
 <%@page import="org.demo.utils.StringUtil"%>
 <%@page import="org.demo.info.PayRsp"%>
 <%@page import="com.google.gson.LongSerializationPolicy"%>
@@ -11,7 +12,6 @@
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="org.demo.info.Pays"%>
 <%@page import="org.demo.info.User"%>
-<%@page import="org.demo.info.Apps"%>
 <%@page import="org.demo.service.UserService"%>
 <%@page import="org.demo.utils.ConnectionServiceConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
