@@ -55,8 +55,9 @@ public abstract class ConnConfigMain
         bds.close();
     }
 
-    public static void main(String args[])
+    public static void main(String args[]) throws SQLException
     {
+    	
     }
 
     static DataSource instance = setupDataSource();
