@@ -107,6 +107,37 @@ public class UserDao
 				return null;
 			}
 		});
+	}
+	
+	public void updateLoginTime(String name)
+	{
+		String sql = "udpate tbl_user set last_login_date = now() where name = '" + name + "'";
+		new JdbcControl().execute(sql);
+	}
+	
+	public UserModel getUser(String nameOrEmail)
+	{
+		String sql = "SELECT * FROM tbl_user WHERE NAME = '" + nameOrEmail + "' OR email = '" + nameOrEmail + "'";
+		return (UserModel)new JdbcControl().query(sql, new QueryCallBack()
+		{
+			@Override
+			public Object onCallBack(ResultSet rs) throws SQLException
+			{
+				if(rs.next())
+				{
+					UserModel model = new UserModel();
+					model.setName(StringUtil.getString(rs.getString("name"), ""));
+					model.setPwd(StringUtil.getString(rs.getString("pwd"), ""));
+					model.setEmail(StringUtil.getString(rs.getString("email"), ""));
+					model.setNickName(StringUtil.getString(rs.getString("nick_name"), ""));
+					model.setFlag(rs.getInt("flag"));
+					model.setUuid(StringUtil.getString(rs.getString("uuid"), ""));
+					model.setId(rs.getInt("id"));
+					return model;
+				}
+				return null;
+			}
+		});
 		
 	}
 	

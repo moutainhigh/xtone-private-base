@@ -95,6 +95,8 @@ public class UserServer
 			return StringUtil.getJsonFormObject(model);
 		}
 		
+		dao.updateLoginTime(model.getNAME());
+		
 		model.setEMAIL(userModel.getEmail());
 		model.setNAME(userModel.getName());
 		model.setSTATUS(1);
