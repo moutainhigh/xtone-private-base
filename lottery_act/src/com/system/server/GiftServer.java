@@ -22,6 +22,12 @@ public class GiftServer
 		model.setSTATUS(0);
 		model.setDESCRIPTION("莫名，我就失败了~");
 		
+		if(StringUtil.isNullOrEmpty(nameOrEmail))
+		{
+			model.setDESCRIPTION("用户或邮箱不存在");
+			return StringUtil.getJsonFormObject(model);
+		}
+		
 		UserModel user = new UserDao().getUser(nameOrEmail);
 		
 		if(user==null)
@@ -66,8 +72,11 @@ public class GiftServer
 		if(StringUtil.isNullOrEmpty(ticketList))
 			ticketList = ticketList.substring(0, ticketList.length()-1);
 		
+		//保存数据到数据库
+		new UserLotteryDao().addUserLotteryCode(user.getId(),activity.getId(),idList);
+		
 		model.setSTATUS(1);
-		model.setDESCRIPTION("嘿，莫名你就成功了");
+		model.setDESCRIPTION("");
 		model.setLOTTERY_LIST(ticketList);
 		
 		return StringUtil.getJsonFormObject(model);

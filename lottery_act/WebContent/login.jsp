@@ -8,5 +8,10 @@
 	model.setEmail(StringUtil.getString(request.getParameter("email"), ""));
 	model.setName(StringUtil.getString(request.getParameter("name"),""));
 	model.setPwd(StringUtil.getString(request.getParameter("pwd"), ""));
+	
+	System.out.println(model.getEmail());
+	System.out.println(model.getName());
+	System.out.println(model.getPwd());
+	
 	out.print(new UserServer().handleUserLogin(model));
 %>

@@ -13,9 +13,9 @@ public class ActivityDao
 	public ActivityModel getActivityDao(int flag,String curDate)
 	{
 		String sql = "SELECT * FROM `tbl_activity` WHERE flag = " + flag
-				+ " AND STATUS = 1  AND start_date > '" + curDate
-				+ "' AND endt_date < '" + curDate
-				+ "' ORDER BY id DESC LIMIT 1";
+				+ " AND STATUS = 1  AND '" + curDate
+				+ "' > start_date  AND '" + curDate
+				+ "' < end_date   ORDER BY id DESC LIMIT 1";
 		
 		return (ActivityModel)new JdbcControl().query(sql, new QueryCallBack()
 		{

@@ -8,6 +8,24 @@ public class ReAccountModel
 	private String NAME;
 	private String UUID;
 	private JSONArray DATA;
+	private int STATUS;
+	public int getSTATUS()
+	{
+		return STATUS;
+	}
+	public void setSTATUS(int sTATUS)
+	{
+		STATUS = sTATUS;
+	}
+	public String getDESCRIPTION()
+	{
+		return DESCRIPTION;
+	}
+	public void setDESCRIPTION(String dESCRIPTION)
+	{
+		DESCRIPTION = dESCRIPTION;
+	}
+	private String DESCRIPTION;
 	
 	public String getEMAIL()
 	{

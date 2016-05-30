@@ -87,20 +87,35 @@ public class UserServer
 		
 		UserDao dao = new UserDao();
 		
-		userModel = dao.login(userModel);
+		UserModel user = dao.getUser(userModel.getName());
 		
-		if(userModel==null)
+		//数据库根本没有这个用户名或是EMAIL
+		if(user==null)
 		{
 			model.setDESCRIPTION("登录失败");
 			return StringUtil.getJsonFormObject(model);
 		}
 		
-		dao.updateLoginTime(model.getNAME());
+		if(StringUtil.isNullOrEmpty(user.getUuid()))
+		{
+			model.setDESCRIPTION("用户还没有注册");
+			return StringUtil.getJsonFormObject(model);
+		}
 		
-		model.setEMAIL(userModel.getEmail());
-		model.setNAME(userModel.getName());
+		user = dao.login(userModel);
+		
+		if(user==null)
+		{
+			model.setDESCRIPTION("登录失败");
+			return StringUtil.getJsonFormObject(model);
+		}
+		
+		dao.updateLoginTime(user.getId());
+		
+		model.setEMAIL(user.getEmail());
+		model.setNAME(user.getName());
 		model.setSTATUS(1);
-		model.setUUID(userModel.getUuid());
+		model.setUUID(user.getUuid());
 		model.setDESCRIPTION("");
 		
 		return StringUtil.getJsonFormObject(model);

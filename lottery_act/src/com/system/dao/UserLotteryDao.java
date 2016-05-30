@@ -20,7 +20,7 @@ public class UserLotteryDao
 	@SuppressWarnings("unchecked")
 	public List<UserLotteryModel> loadUserLotteryByUserId(int userId)
 	{
-		String sql = "SELECT a.*,c.*,d.* FROM `tbl_user_lottery_list` a  LEFT JOIN tbl_user b ON a.`user_id` = b.`id` LEFT JOIN tbl_lottery_ticket c ON a.`ticket_id` = c.`id` LEFT JOIN tbl_activity d ON a.`activity_id`= d.`id` WHERE b.id = " + userId + " ORDER BY a.`add_time` DESC,,a.activity_id desc,c.`exchange_code` ASC;";
+		String sql = "SELECT a.*,c.*,d.* FROM `tbl_user_lottery_list` a  LEFT JOIN tbl_user b ON a.`user_id` = b.`id` LEFT JOIN tbl_lottery_ticket c ON a.`ticket_id` = c.`id` LEFT JOIN tbl_activity d ON a.`activity_id`= d.`id` WHERE b.id = " + userId + " ORDER BY a.`add_time` DESC,a.activity_id desc,c.`exchange_code` ASC";
 		
 		return (List<UserLotteryModel>)new JdbcControl().query(sql, new QueryCallBack()
 		{
@@ -74,4 +74,23 @@ public class UserLotteryDao
 			}
 		});
 	}
+	
+	
+	public void addUserLotteryCode(int userId,int activityId,List<Integer> ticketList)
+	{
+		if(ticketList==null || ticketList.isEmpty())
+			return;
+		
+		String sql = "insert into tbl_user_lottery_list(user_id,ticket_id,activity_id,add_time) values";
+		
+		for(int ticket : ticketList)
+		{
+			sql += "(" + userId + "," + ticket + "," + activityId + ",now()),";
+		}
+		
+		sql = sql.substring(0,sql.length()-1);
+		
+		new JdbcControl().execute(sql);
+	}
+	
 }

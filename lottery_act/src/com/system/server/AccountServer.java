@@ -2,7 +2,6 @@ package com.system.server;
 
 import java.util.List;
 
-import com.google.gson.JsonObject;
 import com.system.dao.UserDao;
 import com.system.dao.UserLotteryDao;
 import com.system.model.UserLotteryModel;
@@ -11,6 +10,7 @@ import com.system.remodel.ReAccountModel;
 import com.system.util.StringUtil;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class AccountServer
 {
@@ -18,12 +18,26 @@ public class AccountServer
 	{
 		ReAccountModel  model = new ReAccountModel();
 		
+		model.setSTATUS(0);
+		
+		model.setDESCRIPTION("不知你为什么失败");
+		
+		if(StringUtil.isNullOrEmpty(nameOrEmail))
+		{
+			model.setDESCRIPTION("用户名或邮件为空");
+			return StringUtil.getJsonFormObject(model);
+		}
+		
 		UserModel user = new UserDao().getUser(nameOrEmail);
 		
 		if(user==null)
 		{
+			model.setDESCRIPTION("用户不存在");
 			return StringUtil.getJsonFormObject(model);
 		}
+		
+		model.setSTATUS(1);
+		model.setDESCRIPTION("");
 		
 		model.setNAME(user.getName());
 		model.setEMAIL(user.getEmail());
@@ -34,28 +48,39 @@ public class AccountServer
 		JSONArray joArray = new JSONArray();
 		
 		int lastActivityId = 0;
-		JsonObject jo = null;
+		JSONObject jo = null;
 		String lotteryList = "";
 		
 		for(UserLotteryModel ulModel : list)
 		{
-			if(ulModel.getActivityId()!=lastActivityId)
+			if(lastActivityId==0)
 			{
-				if(!StringUtil.isNullOrEmpty(lotteryList))
-					lotteryList = lotteryList.substring(0,lotteryList.length()-1);
-				
-				jo.addProperty("LOTTERY_LIST", lotteryList);
-				joArray.add(jo);
-				
 				lastActivityId = ulModel.getActivityId();
-				jo = new JsonObject();
+				jo = new JSONObject();
 				lotteryList = ulModel.getExchangeCode() + "," + ulModel.getPwdCode() + "," + ulModel.getExpireTime() + "|";
-				jo.addProperty("ACTIVITY_DATE", ulModel.getActStartDate() + "-" + ulModel.getActEndDate());
-				jo.addProperty("ACTIVITY_TIME", ulModel.getAddTime());
+				jo.accumulate("ACTIVITY_DATE", ulModel.getActStartDate() + "-" + ulModel.getActEndDate());
+				jo.accumulate("ACTIVITY_TIME", ulModel.getAddTime());
 			}
 			else
 			{
-				lotteryList += ulModel.getExchangeCode() + "," + ulModel.getPwdCode() + "," + ulModel.getExpireTime() + "|";
+				if(ulModel.getActivityId()!=lastActivityId)
+				{
+					if(!StringUtil.isNullOrEmpty(lotteryList))
+						lotteryList = lotteryList.substring(0,lotteryList.length()-1);
+					
+					jo.accumulate("LOTTERY_LIST", lotteryList);
+					joArray.add(jo);
+					
+					lastActivityId = ulModel.getActivityId();
+					jo = new JSONObject();
+					lotteryList = ulModel.getExchangeCode() + "," + ulModel.getPwdCode() + "," + ulModel.getExpireTime() + "|";
+					jo.accumulate("ACTIVITY_DATE", ulModel.getActStartDate() + "-" + ulModel.getActEndDate());
+					jo.accumulate("ACTIVITY_TIME", ulModel.getAddTime());
+				}
+				else
+				{
+					lotteryList += ulModel.getExchangeCode() + "," + ulModel.getPwdCode() + "," + ulModel.getExpireTime() + "|";
+				}
 			}
 		}
 		
@@ -64,7 +89,7 @@ public class AccountServer
 		
 		if(jo!=null)
 		{
-			jo.addProperty("LOTTERY_LIST", lotteryList);
+			jo.accumulate("LOTTERY_LIST", lotteryList);
 			joArray.add(jo);
 		}
 		

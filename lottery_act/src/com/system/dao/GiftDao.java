@@ -53,7 +53,7 @@ public class GiftDao
 		if(ids.length()>0)
 			ids = ids.substring(0, ids.length()-1);
 		
-		String sql = "update tbl_lottery_ticeket set status = " + status + " where id in(" + ids + ")";
+		String sql = "update tbl_lottery_ticket set status = " + status + " where id in(" + ids + ")";
 		
 		new JdbcControl().execute(sql);
 	}

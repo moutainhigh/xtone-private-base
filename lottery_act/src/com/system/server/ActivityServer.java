@@ -16,6 +16,8 @@ public class ActivityServer
 		
 		ReActivityModel model = new ReActivityModel();
 		
+		model.setDESCRIPTION("就是没有活动呗");
+		
 		model.setSTATUS(0);
 		
 		ActivityDao dao = new ActivityDao();
@@ -27,7 +29,7 @@ public class ActivityServer
 		UserModel user = null;
 		
 		//如果当前EMAIL为空或者是用户不存在的话的话，呆需要查找普通的开启活动就行了
-		if(StringUtil.isNullOrEmpty(email) || (user = userDao.getUser(email)) == null)
+		if(StringUtil.isNullOrEmpty(email))
 		{
 			activity = dao.getActivityDao(0, curDate);
 			
@@ -35,6 +37,19 @@ public class ActivityServer
 			{
 				return StringUtil.getJsonFormObject(model);
 			}
+			else
+			{
+				model.setDESCRIPTION(activity.getDescription());
+				model.setSTATUS(1);
+				return StringUtil.getJsonFormObject(model);
+			}
+		}
+		
+		user = userDao.getUser(email);
+		
+		if(user==null)
+		{
+			return StringUtil.getJsonFormObject(model);
 		}
 		
 		activity = dao.getActivityDao(user.getFlag(), curDate);

@@ -101,6 +101,7 @@ public class UserDao
 					model.setNickName(StringUtil.getString(rs.getString("nick_name"), ""));
 					model.setFlag(rs.getInt("flag"));
 					model.setUuid(StringUtil.getString(rs.getString("uuid"), ""));
+					model.setId(rs.getInt("id"));
 					return model;
 				}
 				
@@ -111,7 +112,13 @@ public class UserDao
 	
 	public void updateLoginTime(String name)
 	{
-		String sql = "udpate tbl_user set last_login_date = now() where name = '" + name + "'";
+		String sql = "update tbl_user set last_login_date = now() where name = '" + name + "'";
+		new JdbcControl().execute(sql);
+	}
+	
+	public void updateLoginTime(int id)
+	{
+		String sql = "update tbl_user set last_login_date = now() where id = " + id + "";
 		new JdbcControl().execute(sql);
 	}
 	
