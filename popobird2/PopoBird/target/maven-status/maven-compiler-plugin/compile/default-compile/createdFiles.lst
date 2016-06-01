@@ -1,0 +1,5 @@
+com\bird\bean\PayParams.class
+com\bird\service\PayCallbackService.class
+com\bird\utils\FileUtils.class
+com\bird\bean\CherryBean.class
+com\bird\service\BirdService.class
