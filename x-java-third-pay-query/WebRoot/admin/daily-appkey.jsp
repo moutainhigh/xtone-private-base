@@ -39,6 +39,9 @@
 	href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
 	src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+
+<!-- echarts  -->
+<script src="../js-css/echarts.common.min.js"></script>
 </head>
 <%String appKey = request.getParameter("appkey"); %>
 <body>
@@ -76,6 +79,9 @@
 				<td>总金额:<%=sum/100 %>元</td>
 			</tr>
 	</table>
+	
+	
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#table_id').DataTable({
@@ -84,6 +90,8 @@
 		                  ]
 		              } );
 		});
+		
+		
 	</script>
 
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

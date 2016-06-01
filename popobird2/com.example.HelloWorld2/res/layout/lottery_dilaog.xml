@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dip"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@drawable/button_rromp_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" 
+        android:layout_margin="10dip">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="110dp"
+            android:layout_height="62dp"
+            android:src="@drawable/logo_zc" />
+
+        <TextView
+            android:id="@+id/txt01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兑换序列号"
+            android:textColor="#000000"
+             />
+
+        <TextView
+            android:id="@+id/txt_xl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WJYX111759010481" 
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/txt02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="兑换验证码" 
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/txt_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="849355" 
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/txt03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="过期时间"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2017-05-15"
+            android:textColor="#000000" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_cancle"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/btn_copy"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="复制序列号" />
+    </LinearLayout>
+
+</LinearLayout>

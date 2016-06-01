@@ -349,7 +349,7 @@
 			<id>product</id>
 			<properties>
 				<runtime.env>packageConfig\product</runtime.env>
-				<final.name>eight.n8wan.com</final.name>
+				<final.name>nine.n8wan.com</final.name>
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
@@ -359,14 +359,14 @@
 			<id>test</id>
 			<properties>
 				<runtime.env>packageConfig\test</runtime.env>
-				<final.name>eight.n8wan.com -test</final.name>
+				<final.name>nine.n8wan.com -test</final.name>
 			</properties>
 		</profile>
 		<profile>
 			<id>u8product</id>
 			<properties>
 				<runtime.env>packageConfig\product</runtime.env>
-				<final.name>eight.n8wan.com</final.name>
+				<final.name>nine.n8wan.com</final.name>
 				<ftp.server.id>HYServer</ftp.server.id>
 				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
