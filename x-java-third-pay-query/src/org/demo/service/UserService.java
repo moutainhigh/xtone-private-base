@@ -317,6 +317,61 @@ public class UserService {
 		}
 		return list;
 	}
+	
+	/*
+	 * 按日期查看统计数据 日期格式为日分秒
+	 */
+	public static List<Daily> getDailyByAppkeys2(User user) {
+		Daily daily;
+		List<Daily> listDaily = new ArrayList<Daily>();
+		PreparedStatement ps = null;
+		Connection con = null;
+		ResultSet rs = null;
+		String sql = null;
+		try {
+			// List<Apps> appList=new ArrayList<Apps>();
+			// Apps a=new Apps();
+			// a.setAppkey("1");
+			// appList.add(a);
+			// Apps b=new Apps();
+			// b.setAppkey("2");
+			// appList.add(b);
+			// Apps c=new Apps();
+			// c.setAppkey("3");
+			// appList.add(c);
+			List<Apps> appList = UserService.selectByCpid(user);
+			String appkeys = appList.get(0).getAppkey();
+			for (int i = 1; i < appList.size(); i++) {
+				appkeys += "' or appkey='" + appList.get(i).getAppkey();
+			}
+			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
+			sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
+					+ appkeys + "' group by date ORDER BY date ASC";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				daily = new Daily();
+				daily.setId(rs.getString("date"));
+				daily.setAppKey(rs.getString("appKey"));
+				daily.setPrice(rs.getFloat("price"));
+				listDaily.add(daily);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return listDaily;
+	}
+	
 
 	/*
 	 * 按日期查看统计数据 日期格式为日分秒
@@ -353,6 +408,44 @@ public class UserService {
 				daily = new Daily();
 				daily.setId(rs.getString("date"));
 				daily.setAppKey(rs.getString("appKey"));
+				daily.setPrice(rs.getFloat("price"));
+				listDaily.add(daily);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return listDaily;
+	}
+	
+	/*
+	 * 按日期查看某appkey的统计 日期格式为日分秒
+	 */
+	public static List<Daily> getDailyByAppkey(String appKey) {
+		Daily daily;
+		List<Daily> listDaily = new ArrayList<Daily>();
+		PreparedStatement ps = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
+			String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
+					+ appKey + "' group by date ORDER BY date ASC";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				daily = new Daily();
+				daily.setId(rs.getString("date"));
+				daily.setChannel(rs.getString("appkey"));
 				daily.setPrice(rs.getFloat("price"));
 				listDaily.add(daily);
 			}

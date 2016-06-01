@@ -51,28 +51,12 @@
 <script type="text/javascript" src="../js-css/DatePicker.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="../My97DatePicker/skin/default/datepicker.css">
+<link rel="stylesheet" type="text/css" media="screen" href="../js-css/css-table.css" />
+<script type="text/javascript" src="../js-css/style-table.js"></script>
 </head>
 
 <body>
-	<%--<div class="con tainer">
-
-		<form class="form-signin" role="form">
-			from:<input size="10" name="dateFrom" type="text"
-				value="<%=dateFrom%>" class="form_datetime"> 00:00:00 to:<input
-				size="10" name="dateTo" type="text" value="<%=dateTo%>"
-				class="form_datetime"> 23:59:59
-			<script type="text/javascript">
-				$(".form_datetime").datetimepicker({
-					format : 'yyyy-mm-dd',
-					minView : 2,
-					autoclose : 1
-				});
-			</script>
-
-			<button type="submit" name="submit" value="1">view</button>
-		</form>
-
-	</div> --%>
+	
 	<%
 // 	  if (request.getParameter("submit") != null
 // 						&& request.getParameter("submit").equals("1")) {
@@ -81,13 +65,13 @@
 	<input type="hidden" value="" id="list" />	
 	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
 			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">开始日期</dd>
-			<dd class="dd03_me" style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input  style='width: 90px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
+			<dd class="dd03_me" style='width: 100px; -background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input  style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
 						 id="starttime" type="text" onfocus="setday(this,'yyyy-MM-dd','2010-01-01','2010-12-30',1)" readonly="readonly"	/>
 			</dd>
 			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">结束日期</dd>
-			<dd class="dd03_me" style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input  style='width: 90px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
+			<dd class="dd03_me" style='width: 100px; -background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input  style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
 						 id="endtime" type="text" onfocus="setday(this,'yyyy-MM-dd','2010-01-01','2010-12-30',1)" readonly="readonly"	/>
 			</dd>
 			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">APPKey</dd>
@@ -113,9 +97,9 @@
 				<th>价格（分）</th>
 				<th>支付通道</th>
 				<th>IP</th>
-				<th>内容</th>
+				<!--  <th>内容</th> -->
 				<th>通道ID</th>
-				<th>APPKey</th>
+				<!-- <th>APPKey</th> -->
 				<th>原始订单号</th> 
 				<th>渠道订单号</th> 
 				<th>CP订单号</th> 
@@ -127,7 +111,16 @@
 			
 			
 		</tbody>
+		<tfoot>
+	    	<tr>
+	        	<th scope="row" >总金额</th>
+	            
+	            <td id="money" colspan="8"></td>
+	            
+	        </tr>
+	    </tfoot>
 	</table>
+	
 	<script type="text/javascript">
 		function isNum(a)
 		{
@@ -147,6 +140,7 @@
 				
 			});
 			getData();
+			
 		});
 		
 		function getData(){
@@ -171,20 +165,30 @@
 							 listmsg += "<td>"+list[i].price+"</td>";
 							 listmsg += "<td>"+list[i].payChannel+"</td>";
 							 listmsg += "<td>"+list[i].ip+"</td>";
-							 listmsg += "<td>"+list[i].payInfo+"</td>";
+							 //listmsg += "<td>"+list[i].payInfo+"</td>";
 							 listmsg += "<td>"+list[i].releaseChannel+"</td>";
-							 listmsg += "<td>"+list[i].appKey+"</td>";
+							 //listmsg += "<td>"+list[i].appKey+"</td>";
 							 listmsg += "<td>"+list[i].ownOrderId+"</td>";
 							 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
 							 listmsg += "<td>"+list[i].cpOrderId+"</td>";
-							 listmsg += "<td>"+list[i].testStatus+"</td></tr>";
+							 if(list[i].testStatus==1){
+								 listmsg += "<td>正常</td></tr>";
+							 }else{
+								 listmsg += "<td>测试</td></tr>";
+							 }
+							 
 							 
 							 totalData += list[i].price;
 							 
 						 }
 						$("#list2").empty();
-						listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 						$("#list2").append(listmsg);
+						$("#money").text(totalData/100+"元");
+						$('#list2 tr').hover(function() {
+							  $(this).addClass('odd');
+							}, function() {
+							  $(this).removeClass('odd');
+							});
 					} else {
 						alert('邮箱或密码错误!');
 					}
@@ -242,19 +246,26 @@
 								 listmsg += "<td>"+list[i].price+"</td>";
 								 listmsg += "<td>"+list[i].payChannel+"</td>";
 								 listmsg += "<td>"+list[i].ip+"</td>";
-								 listmsg += "<td>"+list[i].payInfo+"</td>";
 								 listmsg += "<td>"+list[i].releaseChannel+"</td>";
-								 listmsg += "<td>"+list[i].appKey+"</td>";
 								 listmsg += "<td>"+list[i].ownOrderId+"</td>";
 								 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
 								 listmsg += "<td>"+list[i].cpOrderId+"</td>";
-								 listmsg += "<td>"+list[i].testStatus+"</td></tr>";
+								 if(list[i].testStatus==1){
+									 listmsg += "<td>正常</td></tr>";
+								 }else{
+									 listmsg += "<td>测试</td></tr>";
+								 }
 								 
 								 totalData += list[i].price;
 							 }
 							$("#list2").empty();
-							listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 							$("#list2").append(listmsg);
+							$("#money").text(totalData/100+"元");
+							$('#list2 tr').hover(function() {
+								  $(this).addClass('odd');
+								}, function() {
+								  $(this).removeClass('odd');
+								});
 						} else {
 							alert('邮箱或密码错误!');
 						}
