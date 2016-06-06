@@ -12,7 +12,7 @@ public class ActivityServer
 {
 	public String handleActivity(String email)
 	{
-		String curDate = StringUtil.getDefaultDate();
+		String curDate = StringUtil.getDefaultDateTime();
 		
 		ReActivityModel model = new ReActivityModel();
 		
