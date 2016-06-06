@@ -28,6 +28,12 @@ public class UserServer
 			return StringUtil.getJsonFormObject(model);
 		}
 		
+		if(userModel.getName().length()>=50)
+		{
+			model.setDESCRIPTION("用户名长度超过50个字符！");
+			return StringUtil.getJsonFormObject(model);
+		}
+		
 		if(StringUtil.isNullOrEmpty(userModel.getPwd()))
 		{
 			model.setDESCRIPTION("密码为空！");
