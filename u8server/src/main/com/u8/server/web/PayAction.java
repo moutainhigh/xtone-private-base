@@ -50,7 +50,7 @@ public class PayAction extends UActionSupport{
     private UOrderManager orderManager;
 
     private boolean isSignOK(UUser user) throws UnsupportedEncodingException {
-
+    	System.out.println(user);
         StringBuilder sb = new StringBuilder();
         sb.append("userID=").append(this.userID).append("&")
                 .append("productID=").append(this.productID).append("&")
@@ -71,7 +71,9 @@ public class PayAction extends UActionSupport{
 
         Log.d("The encoded getOrderID sign is "+encoded);
         Log.d("The getOrderID sign is "+sign);
-
+        System.out.println("The encoded getOrderID sign is "+encoded);
+        System.out.println("The getOrderID sign is "+sign);
+        System.out.println(user.getGame().getAppRSAPubKey());
         return RSAUtils.verify(encoded, sign,  user.getGame().getAppRSAPubKey(), "UTF-8");
 
     }

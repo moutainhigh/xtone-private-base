@@ -81,7 +81,7 @@ public class RSAUtils {
 
             signature.initVerify(pubKey);
             signature.update( content.getBytes(input_charset));
-
+            System.out.println();
             return signature.verify( Base64.decode2Bytes(sign) );
 
         }
