@@ -12,13 +12,20 @@ public class Pays {
 	private String payInfo;			   //从支付通道获取的原始内容
 	private String releaseChannel;     //发行通道ID
 	private String appKey;             //CP方ID
-	private String payChannelOrderId;  //订单号
+	private String payChannelOrderId;  //支付通道的订单号
 	private String ownUserId;          //付费用户ID
 	private String ownItemId;          //购买道具ID
 	private String ownOrderId;         //原始订单号ID
-	private String testStatus;            //状态
+	private String cpOrderId;          //cp订单号
+	private String testStatus;         //状态
 	
 	
+	public String getCpOrderId() {
+		return cpOrderId;
+	}
+	public void setCpOrderId(String cpOrderId) {
+		this.cpOrderId = cpOrderId;
+	}
 	public String getId() {
 		return id;
 	}

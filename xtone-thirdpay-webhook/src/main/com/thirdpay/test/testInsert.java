@@ -27,6 +27,8 @@ import com.thirdpay.utils.Forward;
 import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
 
+
+
 public class testInsert {
 
 	public static void main(String[] args) {
@@ -60,7 +62,7 @@ public class testInsert {
 		// MyStringBuilder.deleteCharAt(MyStringBuilder.length()-1);
 		// System.out.println(MyStringBuilder);
 
-		// æµ‹è¯•ç”¨æ•°æ®
+		// ²âÊÔÓÃÊı¾İ
 		// String payInfo = "";
 		// String[] cbl = { "aa" };
 		// String[] zgt = { "cc" };
@@ -79,9 +81,9 @@ public class testInsert {
 		// Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>)
 		// iterator.next();
 		//
-		// String key = entry.getKey(); // keyä¸ºå‚æ•°åç§°
+		// String key = entry.getKey(); // keyÎª²ÎÊıÃû³Æ
 		// if (key != "cbl") {
-		// String[] value = map.get(key); // valueä¸ºå‚æ•°å€¼
+		// String[] value = map.get(key); // valueÎª²ÎÊıÖµ
 		//
 		// for (int i = 0; i < value.length; i++) {
 		//
@@ -102,7 +104,7 @@ public class testInsert {
 //		ThreadPool.mThreadPool
 //				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", url, "200", "zgt", "appkey"));
 
-//		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"å•†å“åç§°æ˜¯è‹¹æœå•†å“idä¸º123456\",\"productId\":\"12345\",\"productName\":\"è‹¹æœ\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
+//		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"ÉÌÆ·Ãû³ÆÊÇÆ»¹ûÉÌÆ·idÎª123456\",\"productId\":\"12345\",\"productName\":\"Æ»¹û\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
 		
 //		System.out.println(str.replace("\\", ""));
 		
@@ -123,7 +125,7 @@ public class testInsert {
 		StringBuilder builder = new StringBuilder(payConstants.wj_url);
 
 		builder.append("?createdate=" + "BL");
-		builder.append("&oprator=" +"BL"); // 2016-06-12å¢åŠ æ”¯ä»˜æ¸ é“å‚æ•°
+		builder.append("&oprator=" +"BL"); // 2016-06-12Ôö¼ÓÖ§¸¶ÇşµÀ²ÎÊı
 		builder.append("&appkey=" + "BL");
 		builder.append("&channelid=" + "BL");
 		builder.append("&amount=" + "BL");

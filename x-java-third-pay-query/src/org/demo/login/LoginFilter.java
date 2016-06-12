@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -22,6 +23,7 @@ public class LoginFilter implements Filter {
   private static final Logger LOG = Logger.getLogger(LoginFilter.class);
 
   private List<String> exceptList;
+  private String filePath;
 
   public void destroy() {
     // TODO Auto-generated method stub
@@ -45,8 +47,13 @@ public class LoginFilter implements Filter {
       if (!(session!=null&&session.getAttribute("user")!=null)){
 //        session.setAttribute("lastFileName", fileName);
     	session.setAttribute("lastFileName", "stat-all.jsp");//固定跳转到列表页
+    	request.getRemoteHost();
+    	StringBuffer temp =  ((HttpServletRequest) request).getRequestURL(); 
+    	String path = ""+filePath;
+    	//path = path.substring(0, path.lastIndexOf("/"))+"/login.jsp";
+    	System.out.println(path);
         HttpServletResponse resp = (HttpServletResponse) response;
-        resp.sendRedirect("login.jsp");
+        resp.sendRedirect(path);
         return ;
       }
     }
@@ -64,6 +71,7 @@ public class LoginFilter implements Filter {
 
   public void init(FilterConfig filterConfig) throws ServletException {
 		String exceptPages = filterConfig.getInitParameter("exceptPages");
+		//filePath = request.getRequestURI();
 		if (exceptPages != null) {
 			exceptList = Arrays.asList(exceptPages.split(";"));
 		} else {
