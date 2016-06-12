@@ -100,6 +100,7 @@ public class AlipayCountServlet extends HttpServlet {
 		int payStatus = payConstants.paytestStatus;// 是否是测试信息
 		String payInfo = getPayInfo(request); // 从支付通道获取的原始内容
 
+		//版本兼容
 		if (payChannel == null) {
 			payChannel = json.getString("p");
 		}
@@ -218,7 +219,6 @@ public class AlipayCountServlet extends HttpServlet {
 		}
 
 //		System.out.println("payInfo = " + payInfo);
-//
 //		StringBuilder builder = new StringBuilder(payInfo);
 //		builder.deleteCharAt(builder.length() - 1);
 //		builder.insert(0, "{");
