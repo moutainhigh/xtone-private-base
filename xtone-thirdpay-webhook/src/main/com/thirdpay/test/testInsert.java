@@ -25,6 +25,7 @@ import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.CheckCPInfo;
 import com.thirdpay.utils.Forward;
 import com.thirdpay.utils.HttpUtils;
+import com.thirdpay.utils.payConstants;
 
 public class testInsert {
 
@@ -115,9 +116,25 @@ public class testInsert {
 //		HttpUtils.get(url);
 		
 		
-		String createdate = new SimpleDateFormat("yyyy-MM-dd%HH:mm:ss").format(new Date());
-		System.out.println(createdate);
+//		String createdate = new SimpleDateFormat("yyyy-MM-dd%HH:mm:ss").format(new Date());
+//		System.out.println(createdate);
 		
+		
+		StringBuilder builder = new StringBuilder(payConstants.wj_url);
+
+		builder.append("?createdate=" + "BL");
+		builder.append("&oprator=" +"BL"); // 2016-06-12增加支付渠道参数
+		builder.append("&appkey=" + "BL");
+		builder.append("&channelid=" + "BL");
+		builder.append("&amount=" + "BL");
+		builder.append("&orderid=" + "BL");
+		builder.append("&imei=" + "");
+		builder.append("&imsi=" + "");
+		builder.append("&userorderid=" +"BL");
+		builder.append("&status=" + "0");
+		//LOG.info("--------------------------builder = " + builder.toString());
+		
+		System.out.println( "--------------------------builder = "+builder.toString());
 	}
 
 }

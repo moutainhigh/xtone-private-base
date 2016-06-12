@@ -79,6 +79,7 @@ public class CpInfoServlet extends HttpServlet {
 		} else {
 			String jsonString = JSON.toJSONString(cpInfoBean);
 			LOG.info("open jsonString = " + jsonString);
+			LOG.info("-------------------------------------");
 
 			try {
 				response.getWriter().append(jsonString);

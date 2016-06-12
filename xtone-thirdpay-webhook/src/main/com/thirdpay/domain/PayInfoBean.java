@@ -197,6 +197,8 @@ public class PayInfoBean implements Runnable {
 
 					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
 
+					String oprator = getOprator(this.getPayChannel());
+					
 					LOG.info("notify_url  == " + notify_url);
 					LOG.info("apppppkey  =  " + this.getAppKey());
 
@@ -204,11 +206,12 @@ public class PayInfoBean implements Runnable {
 					// this.getReleaseChannel(), this.getPrice() + "",
 					// this.getOwnOrderId(), "", "", this.getCpOrderId());
 
-					//转发数据到wj_url
+					// 转发数据到wj_url
 					String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
 					StringBuilder builder = new StringBuilder(payConstants.wj_url);
 
 					builder.append("?createdate=" + createdate);
+					builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
 					builder.append("&appkey=" + this.getAppKey());
 					builder.append("&channelid=" + this.getReleaseChannel());
 					builder.append("&amount=" + this.getPrice() + "");
@@ -217,7 +220,7 @@ public class PayInfoBean implements Runnable {
 					builder.append("&imsi=" + "");
 					builder.append("&userorderid=" + this.getCpOrderId());
 					builder.append("&status=" + "0");
-					LOG.info("--------------------------builder = "+builder.toString());
+					LOG.info("--------------------------builder = " + builder.toString());
 					String responseStr = HttpUtils.get(builder.toString());
 					if (responseStr.equals("ok")) {
 						LOG.info("插入h1.n8wan成功");
@@ -268,7 +271,24 @@ public class PayInfoBean implements Runnable {
 				}
 			}
 		}
+	}
 
+	public static String getOprator(String payChannel) {
+		
+		String oprator = "";
+		if (payChannel.equals("wx")) {
+			oprator = "4";
+		} else if (payChannel.equals("alipay")) {
+			oprator = "5";
+			LOG.info("------------ oprator =  " + oprator);
+		} else if (payChannel.equals("unionpay")) {
+			oprator = "6";
+		} else if (payChannel.equals("baidu")) {
+			oprator = "7";
+		} else {
+			oprator = "otherpay";
+		}
+		return oprator;
 	}
 
 }
