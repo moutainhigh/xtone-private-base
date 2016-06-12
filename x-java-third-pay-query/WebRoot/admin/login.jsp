@@ -32,7 +32,8 @@
 				password : $("#inputPassword").val()
 			};
 			var date = '{"userName":"'+$("#inputEmail").val()+'","password":"'+$("#inputPassword").val()+'"}';
-			console.log(oriData);
+ 			console.log(oriData);
+           
 			$.ajax({
 				type : "post",
 				url : "check-login.jsp",
@@ -40,17 +41,18 @@
 				data : date,
 				dataType : "json",
 				success : function(msg) {
-										
+								
 					if (msg.status == "success") {
-
+                         //alert(msg.status);
 						location.href='console.jsp';
 						
 					} else {
+						
 						alert('邮箱或密码错误!');
 					}
 				},
 				error : function(XMLHttpRequest, textStatus, errorThrown) {
-					
+					alert(XMLHttpRequest.readyState)
 					var tip="登录失败!";
 					switch (XMLHttpRequest.status)
 					{
@@ -58,7 +60,8 @@
 							tip="登录失败!请检查用户名和密码是否正确。";
 					  		break;
 						default:
-							tip="网络异常，请稍后再试。";
+						//	location.href='console.jsp';
+ 							tip="网络异常，请稍后再试。";
 							break;
 					  			
 					}
