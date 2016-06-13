@@ -1,33 +1,28 @@
-﻿<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@page import="java.util.Calendar"%>
-<%@page import="java.util.TimeZone"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="java.sql.PreparedStatement"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.text.SimpleDateFormat"%> 
-<%@page import="org.demo.info.Content"%>
-
-<html lang="en">
+﻿<%@page import="org.common.util.ConfigManager"%>
+<%
+    String name = ConfigManager.getConfigData("servicename");
+%>
+<!DOCTYPE HTML>
+<html>
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><%=name%>中控</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="">
-
-<title>数据查询</title>
-
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet"
-	href="http://cdn.bootcss.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<!-- code.jquery.com -->
-<!-- <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script> -->
-<script src="../js-css/jquery-1.7.js"></script>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<!-- Custom CSS -->
+<link href="css/style.css" rel='stylesheet' type='text/css' />
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<!-- jQuery -->
+<script src="js/jquery.min.js"></script>
+<!----webfonts--->
+<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
+<!---//webfonts--->  
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <script src="../js-css/ie-emulation-modes-warning.js"></script>
@@ -54,16 +49,58 @@
 <link rel="stylesheet" type="text/css" media="screen" href="../js-css/css-table.css" />
 <script type="text/javascript" src="../js-css/style-table.js"></script>
 </head>
-
 <body>
-	
-	<%
-// 	  if (request.getParameter("submit") != null
-// 						&& request.getParameter("submit").equals("1")) {
-	%>
-	<jsp:include page="menu.jsp"/>
-	<input type="hidden" value="" id="list" />	
-	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
+<div id="wrapper">
+     <!-- Navigation -->
+        <nav class="top1 navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="stat-all.jsp"><%=name%>平台</a>
+            </div>
+            <!-- /.navbar-header -->
+            <ul class="nav navbar-nav navbar-right">
+				
+			    <li class="dropdown">
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="images/9.jpg" alt=""/></a>
+	        		<ul class="dropdown-menu">
+						<li class="dropdown-menu-header text-center">
+							<strong>Settings</strong>
+						</li>
+						<li class="m_2"><a href="user-all.jsp"><i class="fa fa-user"></i> User</a></li>
+						<li class="m_2"><a href="password-update.jsp"><i class="fa fa-wrench"></i> Update_PWD</a></li>
+						<li class="m_2"><a href="login.jsp"><i class="fa fa-lock"></i> Logout</a></li>
+	        		</ul>
+	      		</li>
+			</ul>
+			<!-- <form class="navbar-form navbar-right">
+              <input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
+            </form> -->
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="stat-all.jsp"><i class="fa fa-table nav_icon"></i>实时数据</a>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="daily.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>日统计</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+        <div id="page-wrapper">
+        <div class="col-md-12 graphs">
+	   <div class="xs">
+  	 <h3>Date Table</h3>
+  	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
 			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">开始日期</dd>
 			<dd class="dd03_me" style='width: 100px; -background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
 				<input  style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
@@ -90,6 +127,8 @@
 				<input class="btn_match" name="search" value="查 询" type="button" onclick="getDate();" style='width: 60px; height: 28px; background: transparent url("../img/botton_099.gif") no-repeat scroll center center; text-align: center; line-height: 27px; color: rgb(255, 255, 255); font-weight: bold; cursor: pointer;'>
 			</dd>
 	</dl>
+	<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
+				<div class="panel-body no-padding">
 	<table id="table_id" class="display">
 		<thead>
 			<tr>
@@ -120,8 +159,23 @@
 	        </tr>
 	    </tfoot>
 	</table>
-	
-	<script type="text/javascript">
+		</div>
+	</div>
+  </div>
+  <div class="copy_layout">
+      <p>Copyright &copy; 2016.Company name All rights reserved. <a href="http://www.vanggame.com/" target="_blank" title="模板之家">万家无线</a> 版权所有 </p>
+  </div>
+   </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="js/metisMenu.min.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript">
 		function isNum(a)
 		{
 			//var reg=/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i;
@@ -168,9 +222,9 @@
 							 //listmsg += "<td>"+list[i].payInfo+"</td>";
 							 listmsg += "<td>"+list[i].releaseChannel+"</td>";
 							 //listmsg += "<td>"+list[i].appKey+"</td>";
-							 listmsg += "<td>"+list[i].ownOrderId+"</td>";
-							 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
-							 listmsg += "<td>"+list[i].cpOrderId+"</td>";
+							 listmsg += "<td class='maxtd'>"+list[i].ownOrderId+"</td>";
+							 listmsg += "<td class='maxtd'>"+list[i].payChannelOrderId+"</td>";
+							 listmsg += "<td class='maxtd'>"+list[i].cpOrderId+"</td>";
 							 if(list[i].testStatus==1){
 								 listmsg += "<td>正常</td></tr>";
 							 }else{
@@ -247,9 +301,9 @@
 								 listmsg += "<td>"+list[i].payChannel+"</td>";
 								 listmsg += "<td>"+list[i].ip+"</td>";
 								 listmsg += "<td>"+list[i].releaseChannel+"</td>";
-								 listmsg += "<td>"+list[i].ownOrderId+"</td>";
-								 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
-								 listmsg += "<td>"+list[i].cpOrderId+"</td>";
+								 listmsg += "<td class='maxtd'>"+list[i].ownOrderId+"</td>";
+								 listmsg += "<td class='maxtd'>"+list[i].payChannelOrderId+"</td>";
+								 listmsg += "<td class='maxtd'>"+list[i].cpOrderId+"</td>";
 								 if(list[i].testStatus==1){
 									 listmsg += "<td>正常</td></tr>";
 								 }else{
@@ -294,14 +348,5 @@
 		
 	
 	</script>
-	<%
-// 	  }
-	%>
-
-	<!-- /container -->
-
-
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="../js-css/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>

@@ -143,5 +143,14 @@
 				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
 		</profile>
+		<profile>
+			<id>ykpcpay</id>
+			<properties>
+				<runtime.env>packageConfig\ykpcpay</runtime.env>
+				<final.name>channel-query.youkala.com</final.name>
+				<ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://112.74.83.34/swap_dir</ftp.to.url>
+			</properties>
+		</profile>
 	</profiles>
 </project>

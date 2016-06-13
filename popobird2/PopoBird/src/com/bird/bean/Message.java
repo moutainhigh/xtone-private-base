@@ -1,6 +1,6 @@
 package com.bird.bean;
 
-public class LoginMessage {
+public class Message {
 	private int state;
 	private Data data;
 	public int getState() {

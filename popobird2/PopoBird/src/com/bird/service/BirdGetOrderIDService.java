@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.bird.bean.Message;
 import com.bird.utils.StringUtil;
+import com.google.gson.Gson;
 
 /**
  * 用于向U8获取订单号
@@ -51,6 +53,10 @@ public class BirdGetOrderIDService extends HttpServlet{
 	        com.bird.utils.HttpsRequest httpsRequest = new com.bird.utils.HttpsRequest();
 	        String msg = httpsRequest.sendGet(url);
 	        //System.out.println("msg: "+msg);
+//	        Gson gson = new Gson();
+//	        Message msgtem = gson.fromJson(msg, Message.class);
+//	        msgtem.getData().setExtension("http://nine.n8wan.com/pay/xiaomi/payCallback/17");
+//	        msg = gson.toJson(msgtem);
 	        LOG.info("msg: "+msg);
 	        response.getWriter().append(msg);
 		} catch (Exception e) {

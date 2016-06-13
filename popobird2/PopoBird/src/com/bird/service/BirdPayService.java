@@ -6,6 +6,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.log4j.Logger;
+import org.common.util.ConnectionService;
 
+import com.bird.bean.Message;
 import com.bird.utils.StringUtil;
+import com.google.gson.Gson;
 
 /**
  * 用于处理U8的处理结果
@@ -93,6 +101,62 @@ public class BirdPayService extends HttpServlet{
 	        return hexValue.toString();
 	}
 	
+	/**
+	 * 更新用户的樱桃
+	 */
+	private String  updateUsercherry(String uid,String cherryNum) {
+		
+			PreparedStatement ps = null;
+			Connection con = null;
+			try {
+				ConnectionService service = ConnectionService.getInstance();
+				con = service.getConnectionForLocal();
+				
+				Statement st = con.createStatement();
+				
+				String sql = "SELECT uid,cherryNum FROM `user_cherry` WHERE uid = '"+uid+"'";
+				ResultSet rs = st.executeQuery(sql);
+				if(rs!=null){
+					rs.last();
+					int rowCount = rs.getRow();
+					
+					if(rowCount>0){
+						if(cherryNum==null||"".equals(cherryNum)){
+						   return rs.getInt("cherryNum")+"";
+						}
+					}
+					
+					rs.beforeFirst();
+					if(cherryNum!=null&&!"".equals(cherryNum)){
+						int num = Integer.valueOf(cherryNum);
+						if(rowCount>0){
+							String uSql = "UPDATE  `user_cherry` SET `cherryNum` = "+num+" WHERE `uid` = '"+uid+"'";
+							int up = st.executeUpdate(uSql);
+							System.out.println("更新:"+up);
+							return cherryNum;
+						}else {
+							String iSql = "INSERT INTO `user_cherry` (`uid`, `cherryNum`) VALUES ('"+uid+"', "+num+")";
+							int inser = st.executeUpdate(iSql);
+							System.out.println("插入:"+inser);
+							return cherryNum;
+						}
+					}
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+	return "-2";
+		}
+	
 
 	/**
 	 * @throws IOException 
@@ -116,6 +180,22 @@ public class BirdPayService extends HttpServlet{
         // 将资料解码
         String reqBody = sb.toString();
         //System.out.println("reqBody: "+reqBody);
-        LOG.error("reqBody: "+reqBody);
+        LOG.info("reqBody: "+reqBody);
+        Gson gson = new Gson();
+        Message msg = gson.fromJson(reqBody, Message.class);
+        if(msg.getState()==1){
+        	//游戏服务器进行sign验证
+        	//更新用户樱桃
+        	//int cherryNum = msg.getData().getMoney()*100;
+        	//String re = updateUsercherry(msg.getData().getUserID(), cherryNum+"");
+        	//游戏服处理成功，直接返回一个"SUCCESS"字符串到U8Server
+        	response.getWriter().append("SUCCESS");
+        	LOG.info("SUCCESS! ");
+        }else {
+        	//游戏服处理失败，返回一个"FAIL"字符串到U8Server
+        	response.getWriter().append("FAIL");
+        	LOG.info("ERRO! ");
+		}
+        
 	}
 }
