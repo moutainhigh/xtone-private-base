@@ -9,7 +9,6 @@ public class CpInfoBean {
 	String smspay;
 	String productInfo;
 	String notify_url;
-	String gameType;
 
 	String webOrderid; // 订单号
 
@@ -75,14 +74,6 @@ public class CpInfoBean {
 
 	public void setNotify_url(String notify_url) {
 		this.notify_url = notify_url;
-	}
-
-	public String getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
 	}
 
 	public String getWebOrderid() {

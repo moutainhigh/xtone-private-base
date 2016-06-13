@@ -29,7 +29,20 @@ public class TestReceiverServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("getReveiver success");
+//		String payment = request.getParameter("payment");
+//		if(!payment.equals("")){
+//			System.out.println("recivier-payment = " + payment);
+//			response.getWriter().append("200");
+//		}
+		
+		response.getWriter().append("200");
+//		String payment = request.getParameter("appkey");
+//		System.out.println("appkey = " + payment);
+//		response.setCharacterEncoding("gbk");
+//		response.setContentType("text/html;charset=gbk");
+//		
+//		response.getWriter().append("小心我锋哥打你 ");
+		
 	}
 
 	/**

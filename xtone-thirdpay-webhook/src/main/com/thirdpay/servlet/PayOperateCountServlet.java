@@ -28,6 +28,10 @@ public class PayOperateCountServlet extends HttpServlet {
 
 	private String payChannel;
 
+	private String payParams;
+
+	private String ownOrderid;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -45,26 +49,40 @@ public class PayOperateCountServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		
-//		System.out.println("访问了支付操作Servlet");
-		
+		String str = "";
 		String payOperateCode = request.getParameter("payOperateCode"); // 支付操作状态码
 		String op_notifyData = request.getParameter("op_notifyData");
-
+		
 		op_notifyData = EncodeUtils.encode(op_notifyData);
 
-//		System.out.println("op_notifyData = " + op_notifyData);
+		System.out.println("op_notifyData = " + op_notifyData);
 
 		if (op_notifyData != null) {
 			JSONObject json = JSON.parseObject(op_notifyData); // 解析自定义参数
 			// releaseChannel = json.getString("channel");
 			appKey = json.getString("appkey");
+			payParams = json.getString("payParams"); // 传给cp的信息
+			
+			if (payParams != null) {
+
+				str = payParams.replace("\\", "");
+
+				JSONObject payParamsjson = JSON.parseObject(str); //
+
+				ownOrderid = payParamsjson.getString("webOrderid");
+
+			}
+			if (ownOrderid == null) {
+
+				ownOrderid = "88888888";
+
+			}
 			// 添加sql查询语句
 
-			// payChannel = json.getString("platform");
+			payChannel = json.getString("platform");
 			ThreadPool.mThreadPool.execute(new PayOperateBean(Integer.parseInt(payOperateCode),
-					Canv.parm.get(payOperateCode), appKey, op_notifyData));
-			
+					Canv.parm.get(payOperateCode), appKey, op_notifyData, str, ownOrderid));
+
 		}
 
 		response.getWriter().append("success");

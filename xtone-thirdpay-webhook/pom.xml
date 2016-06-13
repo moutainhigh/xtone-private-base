@@ -7,7 +7,6 @@
 	<packaging>war</packaging>
 	<name>thirdpay-webhook-interface</name>
 
-	<description />
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -51,7 +50,7 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
+		<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 				<version>1.0-beta-4</version>
@@ -61,14 +60,14 @@
 						<phase>install</phase>
 						<goals>
 							<goal>upload-single</goal>
-							<!-- <goal>upload</goal> -->
+							<goal>upload</goal>
 						</goals>
 						<configuration>
-							<!-- <fromDir>${basedir}/target</fromDir> -->
-							<!-- <includes>${project.build.finalName}.war</includes> -->
-							<!-- <url>ftp://xxx</url> -->
-							<!-- <toDir>/home/fuming</toDir> -->
-							<!-- <serverId>awstokyo01</serverId> -->
+							<fromDir>${basedir}/target</fromDir>
+							<includes>${project.build.finalName}.war</includes>
+							<url>ftp://xxx</url>
+							<toDir>/home/fuming</toDir>
+							<serverId>awstokyo01</serverId>
 							<fromFile>target/${final.name}.war</fromFile>
 							<url>${ftp.to.url}</url>
 							<serverId>${ftp.server.id}</serverId>
@@ -77,11 +76,10 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> 
 		</plugins>
 
-		<extensions>
-			<!-- Enabling the use of FTP -->
+	 	<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
@@ -90,6 +88,7 @@
 		</extensions>
 
 	</build>
+	
 	<profiles>
 		<profile>
 			<id>pc</id>
@@ -98,11 +97,12 @@
 				<runtime.env>packageConfig\pc</runtime.env>
 				<final.name>thirdpay-webhook.n8wan.com</final.name>
 
-				<ftp.server.id>thirdwebhook</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url>
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url> -->
 
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>online</id>
 
@@ -110,8 +110,8 @@
 				<runtime.env>packageConfig\online</runtime.env>
 				<final.name>thirdpay-cs.n8wan.com</final.name>
 
-				<ftp.server.id>thirdwebhook</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url>
+			<!-- 	<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
 				
 			</properties>
 			<activation>
