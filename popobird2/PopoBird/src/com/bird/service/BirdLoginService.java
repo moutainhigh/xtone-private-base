@@ -26,7 +26,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.common.util.ConnectionService;
 
-import com.bird.bean.LoginMessage;
+import com.bird.bean.Message;
 import com.bird.utils.Coder;
 import com.bird.utils.HttpGetUtil;
 import com.google.gson.Gson;

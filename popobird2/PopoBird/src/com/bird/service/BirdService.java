@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
 import com.bird.utils.FileUtils;
@@ -23,7 +24,7 @@ import com.bird.utils.FileUtils;
 @WebServlet("/BirdService")
 public class BirdService extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	static private final Logger LOG = Logger.getLogger(BirdService.class);   
     /**
      * 
      * 外网http://popobird.n8wan.com:29141/
@@ -43,6 +44,7 @@ public class BirdService extends HttpServlet {
         request.setCharacterEncoding("utf-8");
 		
         String uid = request.getParameter("uid");
+        LOG.info("uid: "+uid);
         String cherryNum = request.getParameter("cherryNum");
        // String value = FileUtils.updateCherryNum(uid, cherryNum);
         
@@ -54,6 +56,7 @@ public class BirdService extends HttpServlet {
         //response.getWriter().append("Served at: ").append(request.getContextPath());
         
         
+        //String re = SelectCherryNum(uid);
         String re = updateUsercherry(uid, cherryNum);
         System.out.println(":"+re);
         
@@ -117,6 +120,39 @@ public class BirdService extends HttpServlet {
 return "-2";
 	}
 	
+	/**
+	 * 更新用户的樱桃
+	 */
+	private String  SelectCherryNum(String uid) {
+		LOG.info("SelectCherryNum sid: "+uid);
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			String sql = "SELECT cherryNum FROM `user_cherry` WHERE uid = ?";
+			LOG.info(sql);
+			ps = con.prepareStatement(sql);
+			ps.setString(1, uid);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				return rs.getInt("cherryNum")+"";
+			}else{
+				return "0";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return "0";
+	}
 	
 
 	/**
