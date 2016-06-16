@@ -30,6 +30,7 @@ import java.util.Date;
 /***
  * 用户登录
  */
+@SuppressWarnings("serial")
 @Controller
 @Namespace("/user")
 public class UserAction extends UActionSupport{

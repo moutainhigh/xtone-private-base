@@ -60,13 +60,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="stat-all.jsp"><%=name%>平台</a>
+                <div class="vg_logo"></div>
+                <div class="vg_title"><%=name%>平台</div>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">
 				
 			    <li class="dropdown">
-	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="images/9.jpg" alt=""/></a>
+	        		<a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><img src="images/002.png" alt=""/></a>
 	        		<ul class="dropdown-menu">
 						<li class="dropdown-menu-header text-center">
 							<strong>Settings</strong>
@@ -88,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="daily.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>日统计</a>
+                            <a href="daily.jsp"><i class="fa fa-dashboard fa-fw nav_icon"></i>日统计 </a>
                         </li>
                     </ul>
                 </div>
@@ -96,35 +97,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-        <div id="page-wrapper">
+        <div id="page-wrapper" style="min-height: 286px; width: 86%;">
         <div class="col-md-12 graphs">
 	   <div class="xs">
   	 <h3>Date Table</h3>
   	<dl style="height: 41px; margin-top: 35px; margin-bottom: 28px;">
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">开始日期</dd>
+  			
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(101, 124, 149); line-height: 25px; text-align: center; background: rgb(193, 216, 222) none repeat scroll 0% 0%;-moz-border-radius: 3.5px; -webkit-border-radius: 3.5px; border-radius:3.5px;">开始日期</dd>
 			<dd class="dd03_me" style='width: 100px; -background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input  style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
+				<input  class="tableinput"
 						 id="starttime" type="text" onfocus="setday(this,'yyyy-MM-dd','2010-01-01','2010-12-30',1)" readonly="readonly"	/>
 			</dd>
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">结束日期</dd>
+			
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(101, 124, 149); line-height: 25px; text-align: center; background: rgb(193, 216, 222) none repeat scroll 0% 0%;-moz-border-radius: 3.5px; -webkit-border-radius: 3.5px; border-radius:3.5px;">结束日期</dd>
 			<dd class="dd03_me" style='width: 100px; -background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input  style='width: 100px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'
+				<input  class="tableinput"
 						 id="endtime" type="text" onfocus="setday(this,'yyyy-MM-dd','2010-01-01','2010-12-30',1)" readonly="readonly"	/>
 			</dd>
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">APPKey</dd>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(101, 124, 149); line-height: 25px; text-align: center; background: rgb(193, 216, 222) none repeat scroll 0% 0%;-moz-border-radius: 3.5px; -webkit-border-radius: 3.5px; border-radius:3.5px;">APPKey</dd>
 			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input name="appname" id="input_appkey" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+				<input name="appname" id="input_appkey" value="" type="text" class="tableinput2">
 			</dd>
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">Channel</dd>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(101, 124, 149); line-height: 25px; text-align: center; background: rgb(193, 216, 222) none repeat scroll 0% 0%;-moz-border-radius: 3.5px; -webkit-border-radius: 3.5px; border-radius:3.5px;">Channel</dd>
 			<dd class="dd03_me" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input name="appkey" id="input_channel" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+				<input name="appkey" id="input_channel" value="" type="text" class="tableinput2">
 			</dd>
-			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(102, 102, 102); line-height: 25px; text-align: center; background: rgb(192, 192, 192) none repeat scroll 0% 0%;">条目数</dd>
-			<dd class="dd03_me" style='width: 85px; background: transparent url("../img/member_input.gif") no-repeat scroll right top; padding-right: 5px; margin-left: 10px; float: left;'>
-				<input name="entries" id="entries" value="" type="text" style='width: 150px; background: transparent url("../img/member_input.gif") no-repeat scroll left top; text-align: left; padding-left: 6px; line-height: 25px; height: 25px; color: rgb(102, 102, 102);'>
+			<dd class="dd01_me" style="width: 80px; float: left; margin-left: 10px; color: rgb(101, 124, 149); line-height: 25px; text-align: center; background: rgb(193, 216, 222) none repeat scroll 0% 0%;-moz-border-radius: 3.5px; -webkit-border-radius: 3.5px; border-radius:3.5px;">条目数</dd>
+			<dd class="dd03_me" style='width: 85px; padding-right: 5px; margin-left: 10px; float: left;'>
+				<input name="entries" id="entries" value="" type="text" class="tableinput2">
 			</dd>
-			<dd class="ddbtn" style="margin-left: 20px; width: 60px; height: 25px; float: left; margin-top: 0px;">
-				<input class="btn_match" name="search" value="查 询" type="button" onclick="getDate();" style='width: 60px; height: 28px; background: transparent url("../img/botton_099.gif") no-repeat scroll center center; text-align: center; line-height: 27px; color: rgb(255, 255, 255); font-weight: bold; cursor: pointer;'>
+			<dd class="ddbtn" style="margin-left: 20px; width: 60px; height: 25px; float: left;margin-top: -4px; margin-left: 76px;">
+				<input class="btn_match" name="search" value="" type="button" onclick="getDate();" style='width: 60px; height: 28px; background: transparent url("images/btn001.png") no-repeat scroll center center; text-align: center; line-height: 27px; color: rgb(255, 255, 255); font-weight: bold; cursor: pointer;'>
 			</dd>
 	</dl>
 	<div class="panel panel-warning" data-widget="{&quot;draggable&quot;: &quot;false&quot;}" data-widget-static="">
@@ -163,7 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
   </div>
   <div class="copy_layout">
-      <p>Copyright &copy; 2016.Company name All rights reserved. <a href="http://www.vanggame.com/" target="_blank" title="模板之家">万家无线</a> 版权所有 </p>
+      <p>Copyright &copy; 2016.Company name All rights reserved. <%=name %>平台 </p>
   </div>
    </div>
       </div>
