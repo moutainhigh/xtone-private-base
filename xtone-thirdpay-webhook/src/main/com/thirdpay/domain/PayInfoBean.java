@@ -220,7 +220,7 @@ public class PayInfoBean implements Runnable {
 					builder.append("&imsi=" + "");
 					builder.append("&userorderid=" + this.getCpOrderId());
 					builder.append("&status=" + "0");
-					LOG.info("--------------------------builder = " + builder.toString());
+						LOG.info("--------------------------builder = " + builder.toString());
 					String responseStr = HttpUtils.get(builder.toString());
 					if (responseStr.equals("ok")) {
 						LOG.info("插入h1.n8wan成功");
@@ -280,13 +280,16 @@ public class PayInfoBean implements Runnable {
 			oprator = "4";
 		} else if (payChannel.equals("alipay")) {
 			oprator = "5";
-			LOG.info("------------ oprator =  " + oprator);
+//			LOG.info("------------ oprator =  " + oprator);
 		} else if (payChannel.equals("unionpay")) {
 			oprator = "6";
 		} else if (payChannel.equals("baidu")) {
 			oprator = "7";
-		} else {
+		} else if(payChannel.equals("wxwap")){
+			oprator = "8";
+		}else{
 			oprator = "otherpay";
+			
 		}
 		return oprator;
 	}

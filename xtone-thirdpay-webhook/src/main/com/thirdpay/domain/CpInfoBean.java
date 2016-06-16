@@ -9,8 +9,17 @@ public class CpInfoBean {
 	String smspay;
 	String productInfo;
 	String notify_url;
+	String wxwap;
 
 	String webOrderid; // 订单号
+
+	public String getWxwap() {
+		return wxwap;
+	}
+
+	public void setWxwap(String wxwap) {
+		this.wxwap = wxwap;
+	}
 
 	public String getAppkey() {
 		return appkey;
