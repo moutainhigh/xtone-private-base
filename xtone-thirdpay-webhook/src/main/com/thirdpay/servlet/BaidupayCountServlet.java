@@ -94,7 +94,7 @@ public class BaidupayCountServlet extends HttpServlet {
 
 		String ownUserId = request.getParameter("ownUserId");// 付费用户ID，待用
 		String ownItemId = request.getParameter("ownItemId");// 购买道具ID，待用
-		
+
 		String ownOrderId = json.getString("OrderIdSelf");// 原始订单号ID
 		String cpOrderId = json.getString("OrderIdCp"); // cp方订单号
 
@@ -123,7 +123,6 @@ public class BaidupayCountServlet extends HttpServlet {
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
 		try {
-			//<meta name="VIP_BFB_PAYMENT" content="BAIFUBAO">
 			response.getWriter().append("<meta name=\"VIP_BFB_PAYMENT\" content=\"BAIFUBAO\">");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.common.util.ConfigManager;
 
 public class LoginFilter implements Filter {
   
@@ -49,11 +50,22 @@ public class LoginFilter implements Filter {
     	session.setAttribute("lastFileName", "stat-all.jsp");//固定跳转到列表页
     	request.getRemoteHost();
     	StringBuffer temp =  ((HttpServletRequest) request).getRequestURL(); 
-    	String path = ""+filePath;
-    	//path = path.substring(0, path.lastIndexOf("/"))+"/login.jsp";
-    	System.out.println(path);
+    	String str = new String(temp);
+    	String path = "";
+    	if(!ConfigManager.getConfigData("port").equals("8080")){
+    		/*path = "http://"+temp.substring(str.indexOf("/"), temp.lastIndexOf(":"))+":"+ConfigManager.getConfigData("port")+
+        			temp.substring(str.indexOf("/"),str.lastIndexOf("/"))+"/login.jsp";*/
+    		
+    		int i2 = str.indexOf("/",str.indexOf("/")+1);
+    		int i3 = str.indexOf("/",i2+1);
+    		path = "http:/"+str.substring(i2, i3)+":"+ConfigManager.getConfigData("port")+"/admin/login.jsp";
+    	}else{
+    		path = "login.jsp";
+    	}
+    	
         HttpServletResponse resp = (HttpServletResponse) response;
         resp.sendRedirect(path);
+        //resp.sendRedirect("http://www.baidu.com");
         return ;
       }
     }

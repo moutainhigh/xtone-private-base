@@ -82,7 +82,7 @@
 				<input class="btn1" type="button"
 				value="确认修改" onclick="updateAjax()"> 
 				<input class="btn1" type="button"
-				value="取消修改" onclick="window.location.href='code-all.jsp'">
+				value="取消修改" onclick="window.location.href='stat-all.jsp'">
 
 		</form>
 	</div>

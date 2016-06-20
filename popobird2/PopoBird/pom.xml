@@ -6,39 +6,30 @@
   <packaging>war</packaging>
   
   <build>
-    <sourceDirectory>src</sourceDirectory>
-    
-    <resources>
+		<finalName>${final.name}</finalName>
+		<sourceDirectory>src/main</sourceDirectory>
+		<resources>
 			<resource>
-				<directory>src</directory>
+				<directory>src/main</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
 				</excludes>
 			</resource>
-	</resources>
-     
-    <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
-        <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <!-- <artifactId>maven-war-plugin</artifactId>
-        <version>2.6</version>
-        <configuration>
-          <warSourceDirectory>WebContent</warSourceDirectory>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
-        </configuration> -->
-        
-        
-        <artifactId>maven-war-plugin</artifactId>
-		<version>2.6</version>
+		</resources>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
-					<warSourceDirectory>${basedir}/WebContent</warSourceDirectory>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<warSourceDirectory>${basedir}/WebRoot</warSourceDirectory>
 					<version>3.0</version>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<webResources>
@@ -48,10 +39,44 @@
 						</resource>
 					</webResources>
 				</configuration>
-      </plugin>
-    </plugins>
-    <finalName>${final.name}</finalName>
-  </build>
+			</plugin>
+		<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>wagon-maven-plugin</artifactId>
+				<version>1.0-beta-4</version>
+				<executions>
+					<execution>
+						<id>upload-war</id>
+						<phase>install</phase>
+						<goals>
+							<goal>upload-single</goal>
+							<!-- <goal>upload</goal> -->
+						</goals>
+						<configuration>
+							<!-- <fromDir>${basedir}/target</fromDir> -->
+							<!-- <includes>${project.build.finalName}.war</includes> -->
+							<!-- <url>ftp://xxx</url> -->
+							<!-- <toDir>/home/fuming</toDir> -->
+							<!-- <serverId>awstokyo01</serverId> -->
+							<fromFile>target/${final.name}.war</fromFile>
+							<url>${ftp.to.url}</url>
+							<serverId>${ftp.server.id}</serverId>
+							<skip>false</skip>
+							<toFile>${final.name}.war</toFile>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<extensions>
+			<!-- Enabling the use of FTP -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ftp</artifactId>
+				<version>1.0-beta-6</version>
+			</extension>
+		</extensions>
+	</build>
   
   
   
@@ -94,8 +119,36 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
-    
-    
+    <dependency>
+	    <groupId>commons-logging</groupId>
+	    <artifactId>commons-logging</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+	<dependency>
+	    <groupId>commons-codec</groupId>
+	    <artifactId>commons-codec</artifactId>
+	    <version>1.6</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.springsource.org.apache.commons.httpclient</groupId>
+	    <artifactId>com.springsource.org.apache.commons.httpclient</artifactId>
+	    <version>3.1.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.code.gson</groupId>
+		<artifactId>gson</artifactId>
+		<version>2.3.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.httpcomponents</groupId>
+		<artifactId>httpclient</artifactId>
+		<version>4.3.5</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.thoughtworks.xstream</groupId>
+	    <artifactId>xstream</artifactId>
+	    <version>1.4.7</version>
+	</dependency>
   </dependencies>
   
   
@@ -116,6 +169,15 @@
 			<properties>
 				<runtime.env>packageConfig\alphaTest</runtime.env>
 				<final.name>popobird.n8wan.com</final.name>
+			</properties>
+		</profile>
+		<profile>
+			<id>popobird</id>
+			<properties>
+				<runtime.env>packageConfig\product</runtime.env>
+				<final.name>popobird.n8wan.com</final.name>
+				<ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
 			</properties>
 		</profile>
 	</profiles>

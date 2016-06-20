@@ -50,7 +50,7 @@ public class PayAction extends UActionSupport{
     private UOrderManager orderManager;
 
     private boolean isSignOK(UUser user) throws UnsupportedEncodingException {
-
+    	//System.out.println(user);
         StringBuilder sb = new StringBuilder();
         sb.append("userID=").append(this.userID).append("&")
                 .append("productID=").append(this.productID).append("&")
@@ -71,7 +71,11 @@ public class PayAction extends UActionSupport{
 
         Log.d("The encoded getOrderID sign is "+encoded);
         Log.d("The getOrderID sign is "+sign);
-
+        Log.i("The encoded getOrderID sign is "+encoded);
+        Log.i("The getOrderID sign is "+sign);
+        //System.out.println("The encoded getOrderID sign is "+encoded);
+       // System.out.println("The getOrderID sign is "+sign);
+       // System.out.println(user.getGame().getAppRSAPubKey());
         return RSAUtils.verify(encoded, sign,  user.getGame().getAppRSAPubKey(), "UTF-8");
 
     }
@@ -81,7 +85,7 @@ public class PayAction extends UActionSupport{
 
         try{
 
-            UUser user = userManager.getUser(this.userID);
+        	final UUser user = userManager.getUser(this.userID);
 
             if(user == null){
                 renderState(StateCode.CODE_USER_NONE, null);
@@ -117,7 +121,12 @@ public class PayAction extends UActionSupport{
                 script.onGetOrderID(user, order, new ISDKOrderListener() {
                     @Override
                     public void onSuccess(String jsonStr) {
-
+                    	String channelName = user.getName().substring(user.getName().lastIndexOf(".")+1);
+                    	Log.d("The onGetOrderID the channelName : "+channelName);
+                    	Log.d("The onGetOrderID the jsonStr : "+jsonStr);
+                    	if(jsonStr.isEmpty()){
+                    		jsonStr = "{'notifyUrl':'http://nine.n8wan.com/pay/"+channelName+"/payCallback/"+user.getChannelID()+"'}";
+                    	}
                         JSONObject data = new JSONObject();
                         data.put("orderID", order.getOrderID());
                         data.put("extension", jsonStr);

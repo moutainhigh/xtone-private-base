@@ -36,7 +36,7 @@ public class GiftServer
 			return StringUtil.getJsonFormObject(model);
 		}
 		
-		ActivityModel activity = new ActivityDao().getActivityDao(user.getFlag(), StringUtil.getDefaultDate());
+		ActivityModel activity = new ActivityDao().getActivityDao(user.getFlag(), StringUtil.getDefaultDateTime());
 		
 		if(activity==null)
 		{

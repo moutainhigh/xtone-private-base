@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Random;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -19,6 +20,8 @@ public class mainTest {
 		String str = getJsonContent(url, "utf-8");
 		JSONObject json = JSON.parseObject(str); // 解析自定义参数
 		System.out.println(json.getString("baidupay"));
+		
+		
 	}
 	
 	 public static String getJsonContent(String url_path ,String encode){  
@@ -31,9 +34,9 @@ public class mainTest {
 	            connection.setConnectTimeout(3000);  
 	            connection.setRequestMethod("GET");  
 	            connection.setDoInput(true);  //从服务器获得数据  
-	              
+	            
 	            int responseCode = connection.getResponseCode();              
-	              
+	            
 	            if (200 == responseCode) {  
 	                jsonString = changeInputStream(connection.getInputStream(),encode);  
 	                  

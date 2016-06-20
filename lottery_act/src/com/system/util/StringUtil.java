@@ -143,6 +143,11 @@ public class StringUtil
 		return sdf1.format(new Date());
 	}
 	
+	public static String getDefaultDateTime()
+	{
+		return sdf3.format(new Date());
+	}
+	
 	public static String getMonthHeadDate()
 	{
 		Calendar ca = Calendar.getInstance();
@@ -186,6 +191,7 @@ public class StringUtil
 	
 	private static SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMM");
+	private static SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	//传入 yyyy-MM-dd 的格式 传回 yyyyMM 的格式
 	public static String getMonthFormat(String date)

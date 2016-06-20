@@ -9,9 +9,17 @@ public class CpInfoBean {
 	String smspay;
 	String productInfo;
 	String notify_url;
-	String gameType;
+	String wxwap;
 
 	String webOrderid; // 订单号
+
+	public String getWxwap() {
+		return wxwap;
+	}
+
+	public void setWxwap(String wxwap) {
+		this.wxwap = wxwap;
+	}
 
 	public String getAppkey() {
 		return appkey;
@@ -75,14 +83,6 @@ public class CpInfoBean {
 
 	public void setNotify_url(String notify_url) {
 		this.notify_url = notify_url;
-	}
-
-	public String getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
 	}
 
 	public String getWebOrderid() {

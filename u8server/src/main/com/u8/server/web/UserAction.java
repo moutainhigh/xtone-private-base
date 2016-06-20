@@ -30,6 +30,7 @@ import java.util.Date;
 /***
  * 用户登录
  */
+@SuppressWarnings("serial")
 @Controller
 @Namespace("/user")
 public class UserAction extends UActionSupport{
@@ -61,20 +62,26 @@ public class UserAction extends UActionSupport{
         Log.d("getToken...");
 
         try{
-
+        	/*
+        	 * 根据客户端传来的appID得到UGame
+        	 */
             final UGame game = gameManager.queryGame(this.appID);
             if(game == null){
                 renderState(StateCode.CODE_GAME_NONE, null);
                 return;
             }
-
+            /*
+             * 根据客户端传来的channelID得到UChannel
+             */
             final UChannel channel = channelManager.queryChannel(this.channelID);
             if(channel == null){
 
                 renderState(StateCode.CODE_CHANNEL_NONE, null);
                 return;
             }
-
+            /*
+             * 获得渠道商对象(比如UC，当乐。。。)
+             */
             UChannelMaster master = channel.getMaster();
             if(master == null){
                 renderState(StateCode.CODE_CHANNEL_NONE, null);
