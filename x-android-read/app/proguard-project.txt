@@ -24,8 +24,7 @@
 -keep interface android.support.v4.app.** { *; }  
 -keep public class * extends android.support.v4.**  
 -keep public class * extends android.app.Fragment
-
--libraryjars libs/umeng_sdk.jar
+#-libraryjars libs/umeng_sdk.jar
 -keepclassmembers class * {
    public <init>(org.json.JSONObject);
 }

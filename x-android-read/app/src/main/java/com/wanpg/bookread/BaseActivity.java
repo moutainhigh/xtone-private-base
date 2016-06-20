@@ -23,7 +23,7 @@ import com.wanpg.bookread.widget.NoticeDialog;
 /**
  * Activity基础类，其它Activity要继承此类，一些固定的常用参数在此处定义
  *
- * @author 王金鹏
+ * @author
  */
 public class BaseActivity extends FragmentActivity {
 
@@ -102,7 +102,7 @@ public class BaseActivity extends FragmentActivity {
 	/**
 	 * 打开书架上指定索引的数据
 	 *
-	 * @param pos
+	 * @param
 	 */
 	public boolean openBook(ShelfBook shelfBookmode) {
 		if(shelfBookmode==null)

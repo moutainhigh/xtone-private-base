@@ -34,7 +34,7 @@
                     android:layout_height="21dp"
                     android:gravity="center_vertical"
                     android:textSize="15sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black1"
                     android:text="有爱，每天都是情人节"/>
 
             <TextView

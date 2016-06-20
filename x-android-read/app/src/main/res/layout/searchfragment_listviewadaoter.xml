@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/search_xp_banner"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	 >
+
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="80dp"
+		android:paddingBottom="5dp"
+		android:paddingTop="5dp"
+		>
+
+	<ImageView
+
+		android:layout_width="60dp"
+		android:layout_height="100dp"
+		android:id="@+id/search_imge_icon"
+		android:scaleType="fitXY"
+		android:background="#c0c0"
+		/>
+
+	<TextView
+		android:id="@+id/search_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="卧底"
+
+		android:layout_marginBottom="20dp"
+		android:layout_marginLeft="5dp"
+		android:layout_toRightOf="@id/search_imge_icon"
+		android:textSize="14dp"
+		android:textColor="@color/white"
+
+		android:layout_marginTop="20dp"
+		/>
+
+		<TextView
+			android:id="@+id/search_author"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="作者"
+
+			android:layout_marginBottom="20dp"
+			android:layout_marginLeft="5dp"
+			android:layout_toRightOf="@id/search_imge_icon"
+			android:textSize="14dp"
+			android:textColor="@color/white"
+
+			android:layout_marginTop="40dp"
+
+			android:visibility="gone"
+			/>
+
+	<ImageView
+		android:id="@+id/search_jh"
+		android:layout_width="30dp"
+		android:layout_height="25dp"
+		android:src="@drawable/jh"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:layout_marginRight="5dp"
+		/>
+	</RelativeLayout>
+
+</RelativeLayout>

@@ -27,11 +27,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/layout"
-        android:background="@color/white"
-        android:cacheColorHint="@android:color/transparent"
+
+        android:background="@color/bg"
         android:clickable="true"
         android:divider="@color/gainsboro"
-        android:dividerHeight="0.5dp"
+
         android:scrollbarThumbVertical="@drawable/scrollbar_bg" >
     </ListView>
 

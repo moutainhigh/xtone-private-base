@@ -1,7 +1,5 @@
 package com.wanpg.bookread.ui;
 
-import java.util.Stack;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +31,8 @@ import com.wanpg.bookread.utils.DisplayUtil;
 import com.wanpg.bookread.utils.TextUtil;
 import com.wanpg.bookread.widget.Notice;
 import com.wanpg.bookread.widget.ScrollFragmentLayout;
+
+import java.util.Stack;
 
 /**
  * 主界面
@@ -121,7 +121,7 @@ public class MainActivity extends SlidingFragmentActivity {
 	private void showBookMain() {
 		// TODO Auto-generated method stub
 		mScrollFragmentLayout.setCanTouchScroll(false);
-		transaction = mFragmentManager.beginTransaction();
+		transaction = mFragmentManager.beginTransaction();//开启一个事务
 		if(mCurFragment!=null){
 			transaction.setCustomAnimations(animOut, animOut);
 			transaction.detach(mCurFragment);

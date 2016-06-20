@@ -84,7 +84,9 @@ public class KeywordsFlowFrameLayout extends FrameLayout implements OnGlobalLayo
             R.color.shelf_back_06,
             R.color.shelf_back_07,
             R.color.shelf_back_08,
-            R.color.shelf_back_09
+            R.color.shelf_back_09,
+            R.color.shelf_back_10,
+            R.color.shelf_back_11
     };
     /**
      * go2Show()中被赋值为true，标识开发人员触发其开始动画显示。<br/>

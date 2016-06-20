@@ -5,7 +5,7 @@
               android:orientation="horizontal"
               android:paddingTop="8dp"
               android:paddingBottom="8dp"
-              android:background="@drawable/transparent_orange_selector">
+              android:background="@drawable/transparent_selector">
 
     <LinearLayout
             android:layout_width="fill_parent"
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@id/iv_maker_date"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:text="时间"/>
 
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/iv_maker_progress"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="14sp"
                     android:text="进度"/>
 
@@ -64,7 +64,7 @@
                     android:layout_marginRight="5dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/del_icon"
-                    android:background="@drawable/transparent_orange_selector"/>
+                    android:background="@drawable/transparent_selector"/>
         </RelativeLayout>
 
         <ImageView
@@ -77,7 +77,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/黒橡"
+                android:textColor="@color/white"
                 android:textSize="13sp"
                 android:text="时间时间时间时间时间时间时间时间时间时间时间时间时间时间"/>
     </LinearLayout>
