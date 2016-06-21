@@ -52,7 +52,7 @@ public class GuideActivity extends Activity{
 
 
         //资源初始化
-        List<ImageView> list = new ArrayList<>();
+        List<ImageView> list = new ArrayList<ImageView>();
 
         for (int i = 0; i < bitmaps.length; i++) {
 
