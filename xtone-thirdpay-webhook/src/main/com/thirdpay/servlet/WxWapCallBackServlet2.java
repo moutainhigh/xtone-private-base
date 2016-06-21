@@ -13,6 +13,7 @@ import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.thirdpay.domain.PayInfoBean;
 
 /**
  * 微信支付wap 回调
@@ -79,12 +80,13 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 			String string = new String(bytes, 0, len);
 			builder.append(string);
 		}
-		System.out.println(builder);
+		//System.out.println(builder);
 		String xmlData = builder.toString();
 		
 		String price = getVale(xmlData,"total_fee");//总金额，以分为单位，不允许包含任何字、符号
 		String ip =  getVale(xmlData,"device_info");//
-		String payInfo =  getVale(xmlData,"pay_info");//支付结果信息，支付成功时为空 
+		//String payInfo =  getVale(xmlData,"pay_info");//支付结果信息，支付成功时为空 
+		String payInfo = jsonBuilder.toString()+builder.toString();
 		
 		String payChannelOrderId =  getVale(xmlData,"out_transaction_id");//第三方订单号
         String payStatus =  getVale(xmlData,"result_code");
@@ -93,7 +95,7 @@ public class WxWapCallBackServlet2 extends HttpServlet {
         String ownItemId =  getVale(xmlData,"nonce_str");
 		
 		
-		ThreadPool.mThreadPool.execute(new com.thirdpay.domain.PayInfoBean(Integer.valueOf(price), payChannel, ip, payInfo, releaseChannel, appKey,
+		ThreadPool.mThreadPool.execute(new PayInfoBean(Integer.valueOf(price), payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, Integer.valueOf(payStatus)));
 		
 		
@@ -112,7 +114,7 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 	}
 	
 	public static String subStr(String str,String beginStr,String endStr ){
-		System.out.println(str);
+		
 		if(str.contains(beginStr)){
 			 String mnonce_str = str.substring(str.indexOf(beginStr), str.indexOf(endStr));
 			 String newStr = mnonce_str.substring(mnonce_str.lastIndexOf("[")+1, mnonce_str.length());

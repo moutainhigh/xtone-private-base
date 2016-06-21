@@ -20,6 +20,7 @@ import com.wanpg.bookread.ui.activity.BookSettingReadActivity;
 import com.wanpg.bookread.ui.activity.BookSettingSoftActivity;
 import com.wanpg.bookread.widget.Notice;
 
+//侧边栏适配器
 public class MenuBarListAdapter extends BaseAdapter {
 
     private BaseActivity mActivity;

@@ -1,6 +1,6 @@
 body { 
 	margin:0; 
-	padding:20px; 
+	padding: 0 20px 20px 20px; 
 	font:13px "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif;
 	}
 	
@@ -78,4 +78,7 @@ table {
 			
 	tbody tr.odd td { 
 		background:#bcd9e1;
+		}
+	.display tr td{
+		text-align: center;
 		}

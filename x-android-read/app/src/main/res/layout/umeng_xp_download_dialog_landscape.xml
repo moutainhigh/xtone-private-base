@@ -113,7 +113,8 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="1"
                     android:textColor="#666666"
-                    android:textSize="17sp" >
+                    android:text="确定"
+                    android:textSize="10dp" >
                 </Button>
 
                 <Button

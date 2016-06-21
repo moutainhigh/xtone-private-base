@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/umeng_xp_icon"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
             android:src="@drawable/umeng_xp_zhanwei" >
@@ -39,7 +39,7 @@
         android:layout_toRightOf="@+id/umeng_xp_icon_area"
         android:lines="1"
         android:text="开心听"
-        android:textColor="#000000"
+        android:textColor="@color/white"
         android:textSize="14dp" >
     </TextView>
 
@@ -63,7 +63,7 @@
 
     <Button
         android:id="@+id/umeng_xp_ad_action_btn"
-        android:layout_width="55dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
@@ -74,6 +74,8 @@
         android:shadowDy="0"
         android:shadowRadius="3"
         android:text="下载"
-        android:visibility="visible" />
+        android:textColor="@color/white"
+        android:visibility="visible"
+        />
 
 </RelativeLayout>

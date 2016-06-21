@@ -64,7 +64,7 @@ public class WXWapServlet extends HttpServlet {
 	     resp.setCharacterEncoding("utf-8");
 	     
 	     String xx_notifyData = req.getParameter("xx_notifyData");
-	     System.out.println(xx_notifyData);
+	     ////System.out.println(xx_notifyData);
 	     //{"c":"12345","k":"zgt","p":"wxWap","a":"zgt10010"}
 	     /**
 	      * a = channel
@@ -117,9 +117,9 @@ public class WXWapServlet extends HttpServlet {
          map.put("sign", sign);
          
          String reqUrl = SwiftpassConfig.req_url;
-         System.out.println("reqUrl：" + reqUrl);
+         ////System.out.println("reqUrl：" + reqUrl);
          
-         System.out.println("reqParams:" + XmlUtils.parseXML(map));
+        // //System.out.println("reqParams:" + XmlUtils.parseXML(map));
          CloseableHttpResponse response = null;
          CloseableHttpClient client = null;
          String res = null;
@@ -133,7 +133,7 @@ public class WXWapServlet extends HttpServlet {
              if(response != null && response.getEntity() != null){
                  Map<String,String> resultMap = XmlUtils.toMap(EntityUtils.toByteArray(response.getEntity()), "utf-8");
                  res = XmlUtils.toXml(resultMap);
-                 System.out.println("请求结果：" + res);
+                 //System.out.println("请求结果：" + res);
                  
                  if(resultMap.containsKey("sign")){
                      if(!SignUtils.checkParam(resultMap, SwiftpassConfig.key)){
@@ -146,10 +146,10 @@ public class WXWapServlet extends HttpServlet {
                              orderResult.put(map.get("out_trade_no"), "0");//初始状态
                              
                              String pay_info = resultMap.get("pay_info");
-                             System.out.println("pay_info = "+pay_info);
+                             //System.out.println("pay_info = "+pay_info);
                              //处理支付结果
                              String string =  HttpUtils.get(pay_info);
-                             System.out.println(string);
+                             //System.out.println(string);
                              if(string!=null){  
                             	 String patternString = "weixin://wap/pay.*"; 
                             	 Pattern pattern = Pattern.compile(patternString);
@@ -161,10 +161,8 @@ public class WXWapServlet extends HttpServlet {
                             	if(matcher.find()){
                             		String wixin = matcher.group(0);
                             		String _string = wixin.substring(0, wixin.length()-2);
-                            		System.out.println(_string);
+                            		//System.out.println(_string);
                             		builder.append("\"wixin\":"+"\""+_string+"\",");
-
-
                             	}
                             	
                             	String patternString2 = "https://paya.swiftpass.cn/pay/unifiedCheck.*";
@@ -173,7 +171,7 @@ public class WXWapServlet extends HttpServlet {
                             	 if(matcher2.find()){
                              		String https = matcher2.group(0);
                              		String _string2 = https.substring(0, https.length()-2);
-                             		System.out.println(_string2);
+                             		//System.out.println(_string2);
                              		builder.append("\"https\":"+"\""+_string2+"\"");
                              		
                              		builder.append("}");

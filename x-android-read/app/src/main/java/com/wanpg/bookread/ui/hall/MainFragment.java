@@ -1,7 +1,5 @@
 package com.wanpg.bookread.ui.hall;
 
-import java.util.ArrayList;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +27,9 @@ import com.wanpg.bookread.widget.Notice;
 import com.wanpg.bookread.widget.ViewPager;
 import com.wanpg.bookread.widget.ViewPager.OnPageChangeListener;
 
+import java.util.ArrayList;
+
+//app总入口
 public class MainFragment extends BaseFragment{
 
 	private View mMainView;
@@ -51,6 +52,8 @@ public class MainFragment extends BaseFragment{
 	private ViewPager vp_main;
 	private TextView tv_head_shelf, tv_head_store, tv_head_search, tv_head_recommend;
 
+	//private TextView tv_head_shelf,tv_head_search, tv_head_recommend;
+
 	private ImageView ivBottomLine;
 	private int bottomLineWidth;
 	private int offset = 0;
@@ -60,10 +63,12 @@ public class MainFragment extends BaseFragment{
 	private int currIndex = 0;
 
 	private MainFragmentAdapter mMainFragmentAdapter;
-	private ShelfFragment mShelfFragment;
-	private StoreFragment mStoreFragment;
-	private SearchFragment mSearchFragment;
-	private SoftwareFragment mSoftwareFragment;
+	private ShelfFragment mShelfFragment; //书架页面
+	//private StoreFragment mStoreFragment; //书城页面
+	private StoreFragmentone mStoreFragment; //书城页面
+
+	private SearchFragment mSearchFragment;//搜索页面
+	private SoftwareFragment mSoftwareFragment;//推荐页面
 
 	/**
 	 * 初始化界面
@@ -99,7 +104,7 @@ public class MainFragment extends BaseFragment{
 		vp_main = (ViewPager) mMainView.findViewById(R.id.vp_main);
 
 		mShelfFragment = new ShelfFragment();
-		mStoreFragment = new StoreFragment();
+		mStoreFragment = new StoreFragmentone();
 		mSearchFragment = new SearchFragment();
 		mSoftwareFragment = new SoftwareFragment();
 		mShelfFragment.setOnFragmentDoListener(mChildFragmentDoListener);
@@ -124,12 +129,22 @@ public class MainFragment extends BaseFragment{
 				// TODO Auto-generated method stub
 				initChildView(arg0);
 				switch (arg0) {
+
+					//修改前
 				case 3:
 					onFragmentDo(TYPE_TO_CHANGE_SLIDEMODE, SlidingMenu.TOUCHMODE_FULLSCREEN);
 					break;
 				default:
 					onFragmentDo(TYPE_TO_CHANGE_SLIDEMODE, SlidingMenu.TOUCHMODE_MARGIN);
 					break;
+
+					/*case 2:
+						onFragmentDo(TYPE_TO_CHANGE_SLIDEMODE, SlidingMenu.TOUCHMODE_FULLSCREEN);
+						break;
+					default:
+						onFragmentDo(TYPE_TO_CHANGE_SLIDEMODE, SlidingMenu.TOUCHMODE_MARGIN);
+						break;*/
+
 				}
 				if(arg0==1){
 					
@@ -226,6 +241,8 @@ public class MainFragment extends BaseFragment{
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
+
+			//修改前
 			if (v.equals(tv_head_shelf)) {
 				vp_main.setCurrentItem(0, true);
 			} else if (v.equals(tv_head_store)) {
@@ -236,6 +253,13 @@ public class MainFragment extends BaseFragment{
 				vp_main.setCurrentItem(3, true);
 			}
 
+		/*	if (v.equals(tv_head_shelf)) {
+				vp_main.setCurrentItem(0, true);
+			}  else if (v.equals(tv_head_search)) {
+				vp_main.setCurrentItem(1, true);
+			} else if (v.equals(tv_head_recommend)) {
+				vp_main.setCurrentItem(2, true);
+			}*/
 		}
 	};
 

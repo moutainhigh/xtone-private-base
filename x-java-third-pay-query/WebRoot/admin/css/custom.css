@@ -10,9 +10,9 @@
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 250px;
+        margin: 0 0 0 143px;
         /*--padding: 0 30px;--*/
-        border-left: 1px solid #e7e7e7;
+        /*border-left: 1px solid #e7e7e7;*/
     }
 }
 
@@ -109,8 +109,8 @@
     .sidebar {
         z-index: 1;
         position: absolute;
-        width: 250px;
-        margin-top: 51px;
+        width: 143px;
+        margin-top: 100px;
     }
 
     .navbar-top-links .dropdown-messages,

@@ -29,8 +29,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>1.7</source>
+					<target>1.7</target>
 				</configuration>
 			</plugin>
 
@@ -50,7 +50,7 @@
 				</configuration>
 			</plugin>
 
-		<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 				<version>1.0-beta-4</version>
@@ -60,14 +60,14 @@
 						<phase>install</phase>
 						<goals>
 							<goal>upload-single</goal>
-							<goal>upload</goal>
+							<!-- <goal>upload</goal> -->
 						</goals>
 						<configuration>
-							<fromDir>${basedir}/target</fromDir>
-							<includes>${project.build.finalName}.war</includes>
-							<url>ftp://xxx</url>
-							<toDir>/home/fuming</toDir>
-							<serverId>awstokyo01</serverId>
+							<!-- <fromDir>${basedir}/target</fromDir> -->
+							<!-- <includes>${project.build.finalName}.war</includes> -->
+							<!-- <url>ftp://xxx</url> -->
+							<!-- <toDir>/home/fuming</toDir> -->
+							<!-- <serverId>awstokyo01</serverId> -->
 							<fromFile>target/${final.name}.war</fromFile>
 							<url>${ftp.to.url}</url>
 							<serverId>${ftp.server.id}</serverId>
@@ -76,10 +76,10 @@
 						</configuration>
 					</execution>
 				</executions>
-			</plugin> 
+			</plugin>
 		</plugins>
-
-	 	<extensions>
+		<extensions>
+			<!-- Enabling the use of FTP -->
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ftp</artifactId>
@@ -88,7 +88,7 @@
 		</extensions>
 
 	</build>
-	
+
 	<profiles>
 		<profile>
 			<id>pc</id>
@@ -97,12 +97,12 @@
 				<runtime.env>packageConfig\pc</runtime.env>
 				<final.name>thirdpay-webhook.n8wan.com</final.name>
 
-				<!-- <ftp.server.id>thirdwebhook</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url> -->
-
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat_test_8010/swap_dir/</ftp.to.url> -->
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url>
 			</properties>
 		</profile>
-		
+
 		<profile>
 			<id>online</id>
 
@@ -110,15 +110,53 @@
 				<runtime.env>packageConfig\online</runtime.env>
 				<final.name>thirdpay-cs.n8wan.com</final.name>
 
-			<!-- 	<ftp.server.id>thirdwebhook</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
-				
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
+
 			</properties>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 
 		</profile>
+		<profile>
+			<id>yk_pc</id>
+
+			<properties>
+				<runtime.env>packageConfig\yk_pc</runtime.env>
+				<final.name>thirdpay.youkala.com</final.name>
+
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
+
+			</properties>
+
+		</profile>
+		<profile>
+			<id>yk_online</id>
+
+			<properties>
+				<runtime.env>packageConfig\yk_online</runtime.env>
+				<final.name>thirdpay.youkala.com</final.name>
+
+				<ftp.server.id>thirdwebhook</ftp.server.id>
+				<ftp.to.url>ftp://112.74.83.34/data/server/tomcat-8_9000/swap_dir</ftp.to.url>
+			</properties>
+
+		</profile>
+		<profile>
+			<id>oss_online</id>
+
+			<properties>
+				<runtime.env>packageConfig\oss_online</runtime.env>
+				<final.name>thirdpay.youkala.com</final.name>
+
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
+				<ftp.server.id>ossServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.243.171/var/ftp/pub1/data_update</ftp.to.url>
+			</properties>
+
+		</profile>
+		
+		
 	</profiles>
 
 	<dependencies>
@@ -159,7 +197,7 @@
 			<artifactId>fastjson</artifactId>
 			<version>1.2.8</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -172,6 +210,11 @@
 			<version>4.4.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
 	</dependencies>
 
 

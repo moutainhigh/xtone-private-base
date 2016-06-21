@@ -7,15 +7,25 @@
 
     <RelativeLayout
         android:id="@+id/shelf_main_cell_book_layout"
-        android:layout_width="94dp"
-        android:layout_height="163dp"
-        android:background="@drawable/shelf_book_bg_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shelf_book_bg_selector2"
         android:visibility="gone" >
 
-        <com.wanpg.bookread.widget.AsyncShelfImageView
+      <!--  <com.wanpg.bookread.widget.AsyncShelfImageView
             android:id="@+id/shelf_book_cover"
             android:layout_width="78dp"
-            android:layout_height="120dp"
+            android:layout_height="135dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY" />
+-->
+
+        <!--书本封面大小设置-->
+        <com.wanpg.bookread.widget.AsyncShelfImageView
+            android:id="@+id/shelf_book_cover"
+            android:layout_width="95dp"
+            android:layout_height="140dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:scaleType="fitXY" />
@@ -35,7 +45,7 @@
                 android:paddingTop="3dp"
                 android:singleLine="true"
                 android:text="人生若只..."
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="12sp"
                 android:typeface="serif" />
 
@@ -64,8 +74,8 @@
 
     <RelativeLayout
         android:id="@+id/shelf_main_cell_add_layout"
-        android:layout_width="94dp"
-        android:layout_height="163dp"
+        android:layout_width="95dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/shelf_book_bg_selector"
         android:visibility="visible" >
 
@@ -84,10 +94,21 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageView1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp"
+
             android:text="添加书籍"
-            android:textColor="@color/black"
+            android:textColor="@color/soft_bg"
             android:textSize="14sp" />
     </RelativeLayout>
+   <!-- <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shelf_main_cell_add_layout"
+        android:paddingLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:text="添加书籍"
+        android:textColor="@color/soft_bg"
+        android:textSize="14sp"
+
+        />-->
 
 </RelativeLayout>

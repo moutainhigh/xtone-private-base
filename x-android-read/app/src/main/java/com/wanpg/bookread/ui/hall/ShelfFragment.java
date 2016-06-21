@@ -18,6 +18,7 @@ import com.wanpg.bookread.db.DaoManager;
 import com.wanpg.bookread.db.ShelfDao;
 import com.wanpg.bookread.ui.adapter.BookShelfGridViewAdapter;
 
+//书架添加书架页面
 public class ShelfFragment extends BaseFragment {
 
 	private GridView gv_bookshelf;

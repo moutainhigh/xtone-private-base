@@ -1,5 +1,6 @@
 package com.wanpg.bookread.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,8 +8,8 @@ import android.os.Bundle;
 import com.wanpg.bookread.BaseActivity;
 import com.wanpg.bookread.BaseApplication;
 import com.wanpg.bookread.R;
-import com.wanpg.bookread.common.Config;
 import com.wanpg.bookread.ui.MainActivity;
+import com.wanpg.bookread.utils.Constants;
 import com.wanpg.bookread.utils.DeviceUtil;
 import com.wanpg.bookread.widget.Notice;
 
@@ -31,12 +32,29 @@ public class LauncherActivity extends BaseActivity {
             this.overridePendingTransition(R.anim.out_none, R.anim.out_none);
             this.finish();
         } else {
+
+          /*  //判断一下是否第一次使用该应用
+            if(isFristUsed()){
+
+                //如果是第一次使用
+
+                Intent intent = new Intent(LauncherActivity.this,GuideActivity.class);
+                startActivity(intent);
+
+                //为了避免从HomeActivity返回的时候又到了当前这个界面
+                finish();
+
+            }else{
+
+                initUI();
+            }*/
             initUI();
         }
     }
 
     private void initUI() {
         // TODO Auto-generated method stub
+
         setContentView(R.layout.activity_launcher);
         new Thread() {
             @Override
@@ -86,4 +104,21 @@ public class LauncherActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
     }  //空调用，不能在loading中进行返回
+
+
+
+    /**
+     *判断是否第一次使用该应用
+     * @return
+     */
+
+    private boolean isFristUsed(){
+
+        SharedPreferences preferences =getSharedPreferences(Constants.PREFERENCE_FIRST_USED, Context.MODE_PRIVATE);
+
+        boolean firstUsed = preferences.getBoolean(Constants.PREFERENCE_FIRST_USED_KEY,true);
+
+        return  firstUsed;
+
+    }
 }

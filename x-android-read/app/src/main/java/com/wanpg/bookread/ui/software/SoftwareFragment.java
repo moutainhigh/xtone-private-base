@@ -1,5 +1,6 @@
 package com.wanpg.bookread.ui.software;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +17,12 @@ import com.wanpg.bookread.ui.MainActivity;
 
 public class SoftwareFragment extends BaseFragment {
 
-	private TextView tv_recommend, tv_rank, tv_classify, tv_subject;
+	private  TextView tv_recommend, tv_rank, tv_classify, tv_subject;
 	private ImageView iv_recommend_tag, iv_rank_tag, iv_classify_tag, iv_subject_tag;
 	private LinearLayout ll_recommend, ll_rank, ll_classify, ll_subject;
 
 	private SoftRecommendPage recommendPage;
-	private SoftClassifyPage classifyPage;
+	private SoftClassifyPage classifyPage;//分类页面
 	private SoftRankPage rankPage;
 
 	private View parent;
@@ -83,6 +84,7 @@ public class SoftwareFragment extends BaseFragment {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			if (v.equals(tv_recommend)) {
+
 				initRecommend();
 			} else if (v.equals(tv_rank)) {
 				initRank();
@@ -110,6 +112,11 @@ public class SoftwareFragment extends BaseFragment {
 	public void initClassify() {
 		// TODO Auto-generated method stub
 		hideAll();
+
+		tv_rank.setTextColor(Color.WHITE);
+		tv_recommend.setTextColor(Color.WHITE);
+		tv_classify.setTextColor(Color.rgb(255,190,0));
+
 		iv_classify_tag.setVisibility(View.VISIBLE);
 		ll_classify.setVisibility(View.VISIBLE);
 		if (classifyPage == null) {
@@ -120,6 +127,11 @@ public class SoftwareFragment extends BaseFragment {
 	private void initRank() {
 		// TODO Auto-generated method stub
 		hideAll();
+
+		tv_rank.setTextColor(Color.rgb(255,190,0));
+		tv_recommend.setTextColor(Color.WHITE);
+		tv_classify.setTextColor(Color.WHITE);
+
 		iv_rank_tag.setVisibility(View.VISIBLE);
 		ll_rank.setVisibility(View.VISIBLE);
 		if (rankPage == null) {
@@ -130,10 +142,15 @@ public class SoftwareFragment extends BaseFragment {
 	private void initRecommend() {
 		// TODO Auto-generated method stub
 		hideAll();
+		tv_recommend.setTextColor(Color.rgb(255,190,0));
+		tv_rank.setTextColor(Color.WHITE);
+		tv_classify.setTextColor(Color.WHITE);
+
 		iv_recommend_tag.setVisibility(View.VISIBLE);
 		ll_recommend.setVisibility(View.VISIBLE);
 		if (recommendPage == null) {
 			recommendPage = new SoftRecommendPage(activity, ll_recommend);
+
 		}
 
 	}

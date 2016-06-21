@@ -3,7 +3,7 @@
                 android:id="@+id/rl_head"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
-                android:background="@color/nav_bar_back">
+                android:background="@color/nav_bar_backone">
 
     <ImageButton
             android:id="@+id/ib_back"
@@ -19,7 +19,7 @@
             android:layout_width="1dp"
             android:layout_height="34dp"
             android:layout_centerVertical="true"
-            android:background="@color/nav_bar_divider"/>
+            android:background="@color/nav_bar_backone"/>
 
     <TextView
             android:layout_toRightOf="@id/ib_back"
