@@ -16,6 +16,8 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.IBinder;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.wanpg.bookread.api.ShuPengApi;
 import com.wanpg.bookread.common.Config;
 import com.wanpg.bookread.common.CrashHandler;
@@ -86,6 +88,13 @@ public class BaseApplication extends Application {
 		intentFilter.addAction(Intent.ACTION_MEDIA_SCANNER_STARTED);
 		registerReceiver(SDCardStateBroadReceiver, intentFilter);
 		initShelfData();
+
+		//创建默认的ImageLoader配置参数
+		ImageLoaderConfiguration configuration = ImageLoaderConfiguration
+				.createDefault(this);
+
+		//Initialize ImageLoader with configuration.
+		ImageLoader.getInstance().init(configuration);
 	}
 
 	@Override
@@ -134,12 +143,22 @@ public class BaseApplication extends Application {
 				String sName = "";
 				if (sBook[i].equals("ehsz.txt")) {
 					sName = "二号首长";
-				} else if (sBook[i].equals("gdzsj.txt")) {
-					sName = "官道之色戒";
-				} else if (sBook[i].equals("hzqr.txt")) {
-					sName = "合租情人";
+				} else if (sBook[i].equals("wd.txt")) {
+					sName = "卧底";
+				} else if (sBook[i].equals("xyqq.txt")) {
+					sName = "心语轻轻";
 				} else if (sBook[i].equals("rmssjcld.txt")) {
 					sName = "人脉式设计出来的";
+				} else if (sBook[i].equals("yydtt.txt")) {
+					sName = "遥远的天堂";
+				}else if (sBook[i].equals("xy.txt")) {
+					sName = "心缘";
+				}else if (sBook[i].equals("zswx.txt")) {
+					sName = "真水无香";
+				}else if (sBook[i].equals("bjydcz.txt")) {
+					sName = "不经意的成长";
+				}else if (sBook[i].equals("qt.txt")) {
+					sName = "圈套";
 				}
 
 				String bookPath = Config.BOOK_SD_BOOK + "/" + sName + ".txt";

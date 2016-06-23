@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="270dp"
               android:layout_height="wrap_content"
-              android:background="@drawable/custom_corner_white_bg"
+
               android:orientation="vertical">
 
+   <!-- android:background="@drawable/custom_corner_white_bg"-->
+
     <LinearLayout
-            android:layout_width="270dp"
+
+        android:background="@drawable/umeng_xp_download_dialog_bg"
+            android:layout_width="250dp"
             android:layout_height="250dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -14,13 +18,13 @@
         <ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/ic_launcher"/>
+                android:src="@drawable/icon_about"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:text="@string/app_name"/>
 
@@ -28,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 android:text="爱读书   读好书"/>
 
@@ -36,43 +40,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="51工作室   版权所有"/>
+                android:text="月阅读书工作室"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="Copy@2013  Studio 51"/>
+                android:text="yuexiang@youxiang.com"/>
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"
-                android:text="All Rights Reserved"/>
+                android:text="yuewenzimuyiduiduide"/>
     </LinearLayout>
 
-    <ImageView
+   <!-- <ImageView
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_marginLeft="3dp"
             android:layout_marginRight="3dp"
-            android:background="@color/nav_bar_back"/>
+            android:background="@drawable/fg"/>-->
 
     <TextView
             android:id="@+id/tv_confirm"
-            android:layout_marginTop="1.5dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginBottom="3dp"
-            android:layout_width="fill_parent"
-            android:layout_height="42dp"
+
+
+
+
+          android:layout_width="28dp"
+           android:layout_height="28dp"
+        android:layout_alignParentRight="true"
+           android:layout_marginRight="10dp"
+
             android:gravity="center"
             android:textSize="15sp"
-            android:textColor="@color/black"
-            android:background="@drawable/transparent_orange_selector"
-            android:text="确定"/>
-</LinearLayout>
+            android:textColor="@color/white"
+        android:background="@drawable/umeng_xp_download_dialog_close_selector"
+          />
+</RelativeLayout>

@@ -209,6 +209,7 @@ public class BookReadCatalogActivity extends BaseActivity {
         overridePendingTransition(R.anim.out_none, R.anim.slide_out_from_right);
     }
 
+
     private class MyEpubCatalogAdapter extends BaseAdapter {
 
         ViewHolder holder;

@@ -1,9 +1,5 @@
 package com.wanpg.bookread.ui.hall;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,6 +34,10 @@ import com.wanpg.bookread.widget.ChildViewPager.OnSingleTouchListener;
 import com.wanpg.bookread.widget.HeightBasedChildListView;
 import com.wanpg.bookread.widget.SwitchAdBarView;
 import com.wanpg.bookread.widget.SwitchAdBarView.OnCheckedPageListener;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 书城页面
@@ -87,6 +87,8 @@ public class StoreFragment extends BaseFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+
+
 		handler = new Handler() {
 			@Override
 			public void handleMessage(Message msg) {

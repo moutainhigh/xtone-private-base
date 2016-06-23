@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    >
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        >
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        android:layout_weight="1"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本月推荐"
+            android:background="@drawable/sbg"
+            android:textColor="@color/nav_bar_backone"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:textSize="17sp"
+
+            />
+
+       <com.wanpg.bookread.widget.MyGridView
+           android:id="@+id/store_grid_tj"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:numColumns="4"
+           android:verticalSpacing="5dp"
+           android:layout_marginTop="3dp"
+           android:stretchMode="columnWidth"
+           >
+
+
+       </com.wanpg.bookread.widget.MyGridView>
+
+ </LinearLayout>
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="女生专区"
+            android:background="@drawable/sbg"
+            android:textColor="@color/nav_bar_backone"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:textSize="17sp"
+            />
+
+
+
+                <com.wanpg.bookread.widget.MyGridView
+                    android:id="@+id/store_grid_nv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp"
+                    android:layout_marginTop="3dp"
+                    >
+
+                </com.wanpg.bookread.widget.MyGridView>
+
+
+        </LinearLayout>
+
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg"
+        android:layout_weight="1"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="男生专区"
+            android:background="@drawable/sbg"
+            android:textColor="@color/nav_bar_backone"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:textSize="17sp"
+            />
+
+        <com.wanpg.bookread.widget.MyGridView
+            android:id="@+id/store_grid_man"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+
+            android:verticalSpacing="5dp"
+            android:layout_marginTop="3dp"
+
+
+            >
+
+        </com.wanpg.bookread.widget.MyGridView>
+
+</LinearLayout>
+            </LinearLayout>
+
+</ScrollView>
