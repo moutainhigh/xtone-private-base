@@ -7,6 +7,7 @@ public class AuthInfo {
 
     private int errcode;
     private String errMsg;
+    
 
     public int getErrcode() {
         return errcode;
