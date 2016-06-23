@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dip"
+    android:layout_height="400dip"
+    android:orientation="vertical" 
+    android:background="#F2F2F2">
+
+  
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F2F2F2"
+        android:orientation="vertical"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip" 
+        android:paddingBottom="5dip"
+        android:paddingTop="20dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="充值1分送5注彩票"
+            android:textColor="#FF3300"
+            android:textSize="25sp"
+            android:layout_gravity="center_horizontal" 
+            android:layout_marginBottom="10dip"/>
+
+        <TextView
+            android:id="@+id/txt_dilaog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dip"
+            android:padding="5dip"
+            android:text="请在中彩宝App(点击打开或下载)中\n兑换彩豆进行彩票兑换。\n过期日期：2012-05-15"
+            android:textColor="#4A4D3E"
+            android:textSize="14sp" />
+
+        <ListView 
+            android:id="@+id/lottery_dialog_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" 
+            android:cacheColorHint="#00000000"
+            />
+    </LinearLayout>
+  <Button
+        android:id="@+id/cancle_btn"
+        android:layout_width="45dip"
+        android:layout_height="45dip"
+        android:layout_alignParentRight="true"
+        android:text="X" />
+</RelativeLayout>
