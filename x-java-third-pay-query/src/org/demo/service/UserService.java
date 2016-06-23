@@ -14,9 +14,11 @@ import java.util.Random;
 import org.common.util.ConnectionService;
 import org.demo.info.Apps;
 import org.demo.info.Daily;
+import org.demo.info.PayRsp;
 import org.demo.info.Pays;
 import org.demo.info.User;
 import org.demo.utils.ConnectionServiceConfig;
+import org.demo.utils.StringUtil;
 
 public class UserService {
 
@@ -270,19 +272,31 @@ public class UserService {
 		return list;
 	}
 
-	public static List<Pays> selectByAppkey(Apps apps) { // 通过Apps表中的appkey查询所有的Pays(用于前台显示)
+	public static List<Pays> selectByAppkey(Apps apps,PayRsp rsp) { // 通过Apps表中的appkey查询所有的Pays(用于前台显示)
+		System.out.println("channel: "+rsp.getChannel());
+		System.out.println("appkey: "+apps.getAppkey());
 		ArrayList<Pays> list = new ArrayList<Pays>();
 		Pays pays = null;
 		PreparedStatement ps = null;
 		Connection con = null;
 		ResultSet rs = null;
+		String sql = "";
 		try {
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(
-					"select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d %H:%i:%s') AS id,price,paychannel,ip,'' as payinfo,releasechannel,'' as appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where appkey=? ORDER BY id DESC");
+			sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d %H:%i:%s') AS id,price,paychannel,ip,'' as payinfo,releasechannel,'' as appkey,ownOrderID,paychannelorderid,cporderid,teststatus from log_success_pays where 1=1 ";
+			sql+= " AND appkey=? ";
+			if(!rsp.getChannel().equals("")){
+				sql +=" AND releaseChannel LIKE ? ";
+			}
+			sql +=" ORDER BY id DESC ";
+			System.out.println("sql :"+sql);
+			ps = con.prepareStatement(sql);
 			int m = 1;
 			ps.setString(m, apps.getAppkey());
-
+			if(!StringUtil.isNullOrEmpty(rsp.getChannel())){
+				ps.setString(m+1, "%"+rsp.getChannel()+"%");
+			}
+			
 			rs = ps.executeQuery();
 			while (rs.next()) {
 

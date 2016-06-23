@@ -5,8 +5,7 @@ import com.u8.server.data.UOrder;
 import com.u8.server.data.UUser;
 import com.u8.server.log.Log;
 import com.u8.server.sdk.*;
-import com.u8.server.sdk.xiaomi.AuthInfo;
-import com.u8.server.utils.HmacSHA1Encryption;
+import com.u8.server.sdk.wanjia.AuthInfo;
 import com.u8.server.utils.JsonUtils;
 import net.sf.json.JSONObject;
 
@@ -25,20 +24,10 @@ public class WanJiaSDK implements ISDKScript {
 
 			JSONObject json = JSONObject.fromObject(extension);
 			final String sid = json.getString("token");
-			//final String session = json.getString("token");
 
 			Map<String, String> params = new HashMap<String, String>();
-			//params.put("appId", channel.getCpAppID());
-			//params.put("session", session);
 			params.put("token", sid);
 
-			/*StringBuilder sb = new StringBuilder();
-			sb.append("appId=").append(channel.getCpAppID()).append("&")
-					.append("uid=").append(sid);
-
-			String signature = HmacSHA1Encryption.HmacSHA1Encrypt(sb.toString(), channel.getCpAppSecret());
-
-			params.put("signature", signature);*/
 			UHttpAgent.getInstance().get(channel.getChannelAuthUrl(), params, new UHttpFutureCallback() {
 				@Override
 				public void completed(String content) {
@@ -46,9 +35,10 @@ public class WanJiaSDK implements ISDKScript {
 					Log.e("The wanjia auth result is " + content);
 					try {
 
-						AuthInfo info = (AuthInfo) JsonUtils.decodeJson(content, AuthInfo.class);
-						if (info != null && info.getErrcode() == 200) {
-							SDKVerifyResult vResult = new SDKVerifyResult(true, sid + "", "", "",info.getErrMsg());
+						AuthInfo info = (AuthInfo)JsonUtils.decodeJson(content, AuthInfo.class);
+						
+						if (info != null && info.getStatus().equals("success")) {
+							SDKVerifyResult vResult = new SDKVerifyResult(true, sid + "", "", "",info.getData().getToken());
 							callback.onSuccess(vResult); 
 							return;
 						}
