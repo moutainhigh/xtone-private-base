@@ -36,6 +36,28 @@ public class SwiftpassConfig {
      */
     public static String notify_url;
     
+    /**
+     * 官包转发无线平台url
+     */
+    public static String wj_notify_url;
+    /**
+     * 官包支付宝PID
+     */
+    public static String Alipay_PARTNER;
+    /**
+     * 官包支付宝商户收款账号
+     */
+    public static String Alipay_SELLER;
+    /**
+     * 官包支付宝商户私钥，pkcs8格式
+     */
+    public static String Alipay_RSA_PRIVATE;
+    /**
+     * 官包支付宝支付通知地址
+     */
+    public static String Alipay_notify_url;
+    
+    
     static{
         Properties prop = new Properties();   
         InputStream in = SwiftpassConfig.class.getResourceAsStream("/swift_config.properties");   
@@ -45,6 +67,11 @@ public class SwiftpassConfig {
             mch_id = prop.getProperty("mch_id").trim();   
             req_url = prop.getProperty("req_url").trim();   
             notify_url = prop.getProperty("notify_url").trim();   
+            wj_notify_url = prop.getProperty("wj_notify_url").trim();   
+            Alipay_PARTNER = prop.getProperty("Alipay_PARTNER").trim();   
+            Alipay_SELLER = prop.getProperty("Alipay_SELLER").trim();   
+            Alipay_RSA_PRIVATE = prop.getProperty("Alipay_RSA_PRIVATE").trim();   
+            Alipay_notify_url = prop.getProperty("Alipay_notify_url").trim();   
         } catch (IOException e) {   
             e.printStackTrace();   
         } 

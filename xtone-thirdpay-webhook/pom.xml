@@ -147,11 +147,11 @@
 
 			<properties>
 				<runtime.env>packageConfig\oss_online</runtime.env>
-				<final.name>thirdpay.youkala.com</final.name>
+				<final.name>thirdpay.oss.vanggame.com</final.name>
 
 				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
 				<ftp.server.id>ossServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.243.171/var/ftp/pub1/data_update</ftp.to.url>
+				<ftp.to.url>ftp://121.40.243.171/pub/</ftp.to.url>
 			</properties>
 
 		</profile>

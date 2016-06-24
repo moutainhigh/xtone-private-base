@@ -15,7 +15,9 @@ import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
+import com.swiftpass.util.SwiftpassConfig;
 import com.thirdpay.servlet.AlipayCountServlet;
+import com.thirdpay.utils.AppkeyCanv;
 import com.thirdpay.utils.CheckCPInfo;
 import com.thirdpay.utils.Forward;
 import com.thirdpay.utils.HttpUtils;
@@ -194,56 +196,52 @@ public class PayInfoBean implements Runnable {
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
-
 					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
-
-					String oprator = getOprator(this.getPayChannel());
-					
+					String Wj_notify_url ="";
 					LOG.info("notify_url  == " + notify_url);
-					LOG.info("apppppkey  =  " + this.getAppKey());
+					LOG.info("apppppkey  == " + this.getAppKey());
 
-					// Forward.wj_forward(this.getAppKey(),
-					// this.getReleaseChannel(), this.getPrice() + "",
-					// this.getOwnOrderId(), "", "", this.getCpOrderId());
-
-					// 转发数据到wj_url
-					String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
-					StringBuilder builder = new StringBuilder(payConstants.wj_url);
-
-					builder.append("?createdate=" + createdate);
-					builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
-					builder.append("&appkey=" + this.getAppKey());
-					builder.append("&channelid=" + this.getReleaseChannel());
-					builder.append("&amount=" + this.getPrice() + "");
-					builder.append("&orderid=" + this.getPayChannelOrderId());
-					builder.append("&imei=" + "");
-					builder.append("&imsi=" + "");
-					builder.append("&userorderid=" + this.getCpOrderId());
-					builder.append("&status=" + "0");
-						LOG.info("--------------------------builder = " + builder.toString());
-					String responseStr = HttpUtils.get(builder.toString());
-					if (responseStr.equals("ok")) {
-						LOG.info("插入h1.n8wan成功");
-					} else {
-						LOG.info("responseStr = " + responseStr);
+					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
+						// 根据appkey转发数据
+						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
+								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
 					}
 
-					// if(this.getAppKey().equals("77936856340f4709a3fa6d7115d0db2b")){
-					// 转发一遍
-					// // 异步发送
-					// new Thread(new Runnable() {
-					// public void run() {
-					// Forward.forward(notify_url, ownOrderId);
-					// }
-					// }).start();
+					// 转发数据到wj_url
+					// 从配置文件得到转发地址wj_url
+					try {
+						 Wj_notify_url = SwiftpassConfig.wj_notify_url;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					
+					if (Wj_notify_url.equals(payConstants.wj_url)) {
+						String oprator = getOprator(this.getPayChannel());
+						String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
+						// StringBuilder builder = new
+						// StringBuilder(payConstants.wj_url);
+						StringBuilder builder = new StringBuilder(SwiftpassConfig.wj_notify_url);
 
-					// Forward.forward(notify_url, this.getOwnOrderId());
-					// }
+						builder.append("?createdate=" + createdate);
+						builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
+						builder.append("&appkey=" + this.getAppKey());
+						builder.append("&channelid=" + this.getReleaseChannel());
+						builder.append("&amount=" + this.getPrice() + "");
+						builder.append("&orderid=" + this.getPayChannelOrderId());
+						builder.append("&imei=" + "");
+						builder.append("&imsi=" + "");
+						builder.append("&userorderid=" + this.getCpOrderId());
+						builder.append("&status=" + "0");
+						LOG.info("--------------------------builder = " + builder.toString());
+						String responseStr = HttpUtils.get(builder.toString());
+						if (responseStr.equals("ok")) {
+							LOG.info("插入DawuxianpingTai成功");
+						} else {
+							LOG.info("responseStr = " + responseStr);
+						}
+					}
 
-					// if(this.getAppKey().equals("f17d2fb4eff547c8bebc1e7cc4dcd43c")){
-					// Forward.forward(notify_url, this.getOwnOrderId());
-					// }
-
+					// 转发插入日志表
 					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
 							notify_url, "200", this.getAppKey(), "appkey"));
 
@@ -274,24 +272,45 @@ public class PayInfoBean implements Runnable {
 	}
 
 	public static String getOprator(String payChannel) {
-		
+
 		String oprator = "";
 		if (payChannel.equals("wx")) {
 			oprator = "4";
 		} else if (payChannel.equals("alipay")) {
 			oprator = "5";
-//			LOG.info("------------ oprator =  " + oprator);
+			// LOG.info("------------ oprator = " + oprator);
 		} else if (payChannel.equals("unionpay")) {
 			oprator = "6";
 		} else if (payChannel.equals("baidu")) {
 			oprator = "7";
-		} else if(payChannel.equals("wxwap")){
+		} else if (payChannel.equals("wxWap")) {
 			oprator = "8";
-		}else{
+		} else {
 			oprator = "otherpay";
-			
+
 		}
 		return oprator;
+	}
+
+	public void appkeyFroward(String appKey, String price, String payChannel, String ip, String releaseChannel,
+			String payChannelOrderId, String cpOrderId) {
+		String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+		StringBuilder builder = new StringBuilder(forward_url);
+
+		builder.append("?price=" + price);
+		builder.append("&payChannel=" + payChannel); // 2016-06-12增加支付渠道参数
+		builder.append("&ip=" + ip);
+		builder.append("&releaseChannel=" + releaseChannel);
+		builder.append("&appKey=" + appKey);
+		builder.append("&payChannelOrderId=" + payChannelOrderId);
+		builder.append("&cpOrderId=" + cpOrderId);
+		LOG.info("--------------------------bingfenggu builder = " + builder.toString());
+		String responseStr = HttpUtils.get(builder.toString());
+		if (responseStr.equals("ok")) {
+			LOG.info("插入bingfenggu成功");
+		} else {
+			LOG.info("responseStr = " + responseStr);
+		}
 	}
 
 }

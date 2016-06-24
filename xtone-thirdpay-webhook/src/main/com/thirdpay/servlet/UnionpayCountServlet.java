@@ -24,7 +24,7 @@ import com.thirdpay.utils.payConstants;
  */
 @WebServlet("/UnionpayCountServlet")
 public class UnionpayCountServlet extends HttpServlet {
-
+	private static final Logger LOG = Logger.getLogger(UnionpayCountServlet.class);
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -60,7 +60,7 @@ public class UnionpayCountServlet extends HttpServlet {
 	 * @return
 	 */
 	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
-
+		LOG.info("访问了银联UnionpayCountServlet  - --- - - - - - - - - - -- - - ");
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
 
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
@@ -95,9 +95,9 @@ public class UnionpayCountServlet extends HttpServlet {
 			cpOrderId = json.getString("c");
 		}
 
-		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
-				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
-				+ ",cpOrderId = " + cpOrderId);
+//		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
+//				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+//				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));

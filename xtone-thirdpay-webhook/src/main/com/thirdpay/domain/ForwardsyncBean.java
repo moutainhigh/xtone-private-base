@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
+import com.thirdpay.servlet.AlipayCountServlet;
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
 
 /**
@@ -15,7 +17,7 @@ import com.thirdpay.utils.ConnectionServicethirdpayCount;
  * 填入配置的id值 id_type数据库字段对应
  */
 public class ForwardsyncBean implements Runnable {
-
+	private static final Logger LOG = Logger.getLogger(ForwardsyncBean.class);
 	private Long id;
 	private int status;
 	private String orderId;
@@ -26,8 +28,6 @@ public class ForwardsyncBean implements Runnable {
 	private String successCoditions;
 	private String appkey;
 	private String id_type;
-
-	
 
 	public Long getId() {
 		return id;
@@ -134,10 +134,13 @@ public class ForwardsyncBean implements Runnable {
 			PreparedStatement ps = null;
 			Connection con = null;
 			try {
+
+				LOG.info("-------------------------插入1001");
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-				ps = con.prepareStatement("insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
-				
+				ps = con.prepareStatement(
+						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
+
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());
@@ -149,6 +152,7 @@ public class ForwardsyncBean implements Runnable {
 				ps.setString(m++, this.getSuccessCoditions());
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
+
 				ps.executeUpdate();
 
 			} catch (Exception e) {

@@ -78,7 +78,7 @@ public class AlipayCountServlet extends HttpServlet {
 	 * @return
 	 */
 	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
-
+		LOG.info("--------------------调用了AlipayCountServlet ------------------------ ");
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
 		PayCallbackParaBean bean = new PayCallbackParaBean();
@@ -118,9 +118,9 @@ public class AlipayCountServlet extends HttpServlet {
 		}
 		
 		
-		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
-				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
-				+ ",cpOrderId = " + cpOrderId);
+//		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
+//				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+//				+ ",cpOrderId = " + cpOrderId);
 
 		// wait_buyer_pay是创建订单成功的时候发送的
 		// trade_success是交易支付成功的时候发送的
