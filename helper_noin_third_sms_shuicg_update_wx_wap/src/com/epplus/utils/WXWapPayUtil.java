@@ -126,6 +126,7 @@ public class WXWapPayUtil {
 					
 				} catch (JSONException e) {
 					e.printStackTrace();
+					wapHandler.wxWapFailed("失败", "204");
 				}
 				}else {
 					wapHandler.wxWapFailed("失败", "204");
@@ -163,6 +164,9 @@ public class WXWapPayUtil {
 							    LogUtils.e("支付成功");
 								wapHandler.wxWapSuccess(msg, status);
 							//	paySuccessCall();
+						}else if ("201".equals(status)) {
+							 LogUtils.e("支付成功");
+							 wapHandler.wxWapSuccess(msg, status);
 						}else {
 							if(times>=timeCount){
 								 LogUtils.e("支付失败");
