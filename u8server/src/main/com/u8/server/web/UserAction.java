@@ -93,9 +93,9 @@ public class UserAction extends UActionSupport{
                     .append("channelID=").append(this.channelID)
                     .append("extension=").append(this.extension).append(game.getAppkey());
 
-
             if(!userManager.isSignOK(sb.toString(), sign)){
                 Log.e("the sign is invalid. sign:"+sign);
+                System.out.println("the sign is invalid. sign:"+sign);
                 renderState(StateCode.CODE_SIGN_ERROR, null);
                 return;
             }
@@ -104,6 +104,7 @@ public class UserAction extends UActionSupport{
 
             if(verifier == null){
                 Log.e("the ISDKScript is not found . channelID:"+channelID);
+                System.out.println("the ISDKScript is not found . channelID:"+channelID);
                 renderState(StateCode.CODE_VERIFY_FAILED, null);
                 return;
             }
@@ -128,7 +129,7 @@ public class UserAction extends UActionSupport{
                             }
 
                             user.setToken(UGenerator.generateToken(user, game.getAppSecret()));
-
+                            System.out.println("user Token:"+user.getToken());
                             userManager.saveUser(user);
 
                             JSONObject data = new JSONObject();
@@ -139,6 +140,7 @@ public class UserAction extends UActionSupport{
                             data.put("token", user.getToken());
                             data.put("extension", sdkResult.getExtension());
                             data.put("timestamp", user.getLastLoginTime());
+                            
                             renderState(StateCode.CODE_SUCCESS, data);
 
                         }else{
@@ -173,7 +175,6 @@ public class UserAction extends UActionSupport{
             JSONObject json = new JSONObject();
             json.put("state", state);
             json.put("data", data);
-
             super.renderJson(json.toString());
 
         }catch(Exception e){
