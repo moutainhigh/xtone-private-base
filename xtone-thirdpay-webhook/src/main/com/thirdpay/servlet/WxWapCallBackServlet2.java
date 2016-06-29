@@ -28,10 +28,8 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			request.setCharacterEncoding("utf-8");
 		request.setCharacterEncoding("utf-8");
 	    String a = request.getParameter("a");
-	    
 		
 		String payChannel = null;
 		String releaseChannel = null;
@@ -52,8 +50,6 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 			jsonBuilder.append("}");
 			JSONObject json = JSON.parseObject(jsonBuilder.toString()); // 解析自定义参数
 
-			
-
 			if (payChannel == null) {
 				payChannel = json.getString("p");
 			}
@@ -69,6 +65,7 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 			if (cpOrderId == null) {
 				cpOrderId = json.getString("c");
 			} 
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

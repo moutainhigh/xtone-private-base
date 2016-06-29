@@ -191,59 +191,39 @@ public class PayInfoBean implements Runnable {
 				ps.setInt(m++, this.getTestStatus());
 
 				int i = ps.executeUpdate();
+				
 				/**
 				 * 数据同步状态码 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
 					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
-					String Wj_notify_url ="";
+					
 					LOG.info("notify_url  == " + notify_url);
 					LOG.info("apppppkey  == " + this.getAppKey());
 
+					//冰风谷定制
 					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
 						// 根据appkey转发数据
+						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
 						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
-								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
-					}
-
-					// 转发数据到wj_url
-					// 从配置文件得到转发地址wj_url
-					try {
-						 Wj_notify_url = SwiftpassConfig.wj_notify_url;
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					
-					if (Wj_notify_url.equals(payConstants.wj_url)) {
-						String oprator = getOprator(this.getPayChannel());
-						String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
-						// StringBuilder builder = new
-						// StringBuilder(payConstants.wj_url);
-						StringBuilder builder = new StringBuilder(SwiftpassConfig.wj_notify_url);
-
-						builder.append("?createdate=" + createdate);
-						builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
-						builder.append("&appkey=" + this.getAppKey());
-						builder.append("&channelid=" + this.getReleaseChannel());
-						builder.append("&amount=" + this.getPrice() + "");
-						builder.append("&orderid=" + this.getPayChannelOrderId());
-						builder.append("&imei=" + "");
-						builder.append("&imsi=" + "");
-						builder.append("&userorderid=" + this.getCpOrderId());
-						builder.append("&status=" + "0");
-						LOG.info("--------------------------builder = " + builder.toString());
-						String responseStr = HttpUtils.get(builder.toString());
-						if (responseStr.equals("ok")) {
-							LOG.info("插入DawuxianpingTai成功");
-						} else {
-							LOG.info("responseStr = " + responseStr);
-						}
+								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),
+								forward_url);
 					}
 
 					// 转发插入日志表
 					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
 							notify_url, "200", this.getAppKey(), "appkey"));
+
+					// 转发数据到Wj_url
+					Wj_Froward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
+							this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
+
+					// 根据appKey的地址转发数据
+					if (!notify_url.equals("")) {
+						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
+								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(), notify_url);
+					}
 
 				}
 
@@ -278,7 +258,6 @@ public class PayInfoBean implements Runnable {
 			oprator = "4";
 		} else if (payChannel.equals("alipay")) {
 			oprator = "5";
-			// LOG.info("------------ oprator = " + oprator);
 		} else if (payChannel.equals("unionpay")) {
 			oprator = "6";
 		} else if (payChannel.equals("baidu")) {
@@ -293,8 +272,8 @@ public class PayInfoBean implements Runnable {
 	}
 
 	public void appkeyFroward(String appKey, String price, String payChannel, String ip, String releaseChannel,
-			String payChannelOrderId, String cpOrderId) {
-		String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+			String payChannelOrderId, String cpOrderId, String forward_url) {
+
 		StringBuilder builder = new StringBuilder(forward_url);
 
 		builder.append("?price=" + price);
@@ -304,13 +283,52 @@ public class PayInfoBean implements Runnable {
 		builder.append("&appKey=" + appKey);
 		builder.append("&payChannelOrderId=" + payChannelOrderId);
 		builder.append("&cpOrderId=" + cpOrderId);
-		LOG.info("--------------------------bingfenggu builder = " + builder.toString());
+
+		LOG.info("-------------------------- builder = " + builder.toString());
 		String responseStr = HttpUtils.get(builder.toString());
 		if (responseStr.equals("ok")) {
-			LOG.info("插入bingfenggu成功");
+			LOG.info("appkeyFroward 插入成功,返回200");
 		} else {
-			LOG.info("responseStr = " + responseStr);
+			LOG.info("appkeyFroward 插入失败    返回---- responseStr = " + responseStr);
 		}
 	}
 
+	public void Wj_Froward(String appKey, String price, String payChannel, String ip, String releaseChannel,
+			String payChannelOrderId, String cpOrderId) {
+
+		// 转发数据到wj_url
+		// 从配置文件得到转发地址wj_url
+		try {
+			String Wj_notify_url = SwiftpassConfig.wj_notify_url;
+
+			if (Wj_notify_url.equals(payConstants.wj_url)) {
+				String oprator = getOprator(payChannel);
+				String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
+				// StringBuilder builder = new
+				// StringBuilder(payConstants.wj_url);
+				StringBuilder builder = new StringBuilder(SwiftpassConfig.wj_notify_url);
+
+				builder.append("?createdate=" + createdate);
+				builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
+				builder.append("&appkey=" + appKey);
+			builder.append("&channelid=" + releaseChannel);
+				builder.append("&amount=" + price);
+				builder.append("&orderid=" + payChannelOrderId);
+				builder.append("&imei=" + "");
+				builder.append("&imsi=" + "");
+				builder.append("&userorderid=" + cpOrderId);
+				builder.append("&status=" + "0");
+				LOG.info("--------------------------builder = " + builder.toString());
+				String responseStr = HttpUtils.get(builder.toString());
+				if (responseStr.equals("ok")) {
+					LOG.info("插入DawuxianpingTai成功");
+				} else {
+					LOG.info("responseStr = " + responseStr);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
