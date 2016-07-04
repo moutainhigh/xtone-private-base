@@ -3,14 +3,19 @@ package com.thirdpay.domain;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
 import com.thirdpay.servlet.AlipayCountServlet;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
+import com.thirdpay.utils.HttpUtils;
 
 /**
  * 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件 appkey or channelId
@@ -20,7 +25,7 @@ public class ForwardsyncBean implements Runnable {
 	private static final Logger LOG = Logger.getLogger(ForwardsyncBean.class);
 	private Long id;
 	private int status;
-	private String orderId;
+	private String own_orderId;
 	private String sync_status;
 	private String next_time;
 	private String sendCount;
@@ -45,12 +50,12 @@ public class ForwardsyncBean implements Runnable {
 		this.status = status;
 	}
 
-	public String getOrderId() {
-		return orderId;
+	public String getOwn_orderId() {
+		return own_orderId;
 	}
 
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
+	public void setOwn_orderId(String own_orderId) {
+		this.own_orderId = own_orderId;
 	}
 
 	public String getSync_status() {
@@ -109,11 +114,11 @@ public class ForwardsyncBean implements Runnable {
 		this.id_type = id_type;
 	}
 
-	public ForwardsyncBean(int status, String orderId, String sync_status, String next_time, String sendCount,
+	public ForwardsyncBean(int status, String own_orderId, String sync_status, String next_time, String sendCount,
 			String notify_url, String successCoditions, String appkey, String id_type) {
 		super();
 		this.status = status;
-		this.orderId = orderId;
+		this.own_orderId = own_orderId;
 		this.sync_status = sync_status;
 		this.next_time = next_time;
 		this.sendCount = sendCount;
@@ -144,7 +149,7 @@ public class ForwardsyncBean implements Runnable {
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());
-				ps.setString(m++, this.getOrderId());
+				ps.setString(m++, this.getOwn_orderId());
 				ps.setString(m++, this.getSync_status());
 				ps.setString(m++, this.getNext_time());
 				ps.setString(m++, this.getSendCount());
@@ -153,8 +158,21 @@ public class ForwardsyncBean implements Runnable {
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
 
-				ps.executeUpdate();
+				int i = ps.executeUpdate();
 
+				if ((i + "").equals("1")) {
+					// 如果插入成功
+					// 根据appKey的地址转发payment数据
+					String notify_url = this.getNotify_url();
+					String own_orderId = this.getOwn_orderId();
+
+					if (!notify_url.equals("")) {
+
+						postPayment(notify_url, own_orderId);
+
+					}
+
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			} finally {
@@ -178,5 +196,32 @@ public class ForwardsyncBean implements Runnable {
 		}
 
 	}
+/**
+ * post转发数据
+ * @param notify_url
+ * @param ownOrderId
+ */
+	public void postPayment(String notify_url, String ownOrderId) {
+		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
 
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("payment", forwardString));
+
+		String responseContent = HttpUtils.post(notify_url, formparams, ownOrderId);
+
+		// 判断返回状态
+		if (responseContent.equals("200")) {
+
+			// 更新0为
+			LOG.info(ownOrderId + "返回200 , 更新数据中...");
+			// 插入1002数据
+			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+
+		} else {
+			// 返回不为200重复发送
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			// 更新1001的下次转发时间为1分钟
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
+		}
+	}
 }

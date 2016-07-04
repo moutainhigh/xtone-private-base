@@ -43,9 +43,12 @@ public class TestReceiverServlet extends HttpServlet {
 		// System.out.println("recivier-payment = " + payment);
 		// response.getWriter().append("200");
 		// }
+		
 		String payinfo = getPayInfo(request);
 		response.getWriter().append("200");
 		LOG.info("----------------------payinfo = " + payinfo);
+		
+		
 		// String payment = request.getParameter("appkey");
 		// System.out.println("appkey = " + payment);
 		// response.setCharacterEncoding("gbk");

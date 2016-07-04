@@ -117,7 +117,6 @@ public class AlipayCountServlet extends HttpServlet {
 			cpOrderId = json.getString("c");
 		}
 		
-		
 //		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
 //				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
 //				+ ",cpOrderId = " + cpOrderId);

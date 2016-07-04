@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
@@ -16,10 +19,9 @@ import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
 import com.swiftpass.util.SwiftpassConfig;
-import com.thirdpay.servlet.AlipayCountServlet;
 import com.thirdpay.utils.AppkeyCanv;
 import com.thirdpay.utils.CheckCPInfo;
-import com.thirdpay.utils.Forward;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
 
@@ -218,12 +220,7 @@ public class PayInfoBean implements Runnable {
 					// 转发数据到Wj_url
 					Wj_Froward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 							this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
-
-					// 根据appKey的地址转发数据
-					if (!notify_url.equals("")) {
-						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
-								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(), notify_url);
-					}
+				
 
 				}
 
@@ -288,8 +285,10 @@ public class PayInfoBean implements Runnable {
 		String responseStr = HttpUtils.get(builder.toString());
 		if (responseStr.equals("ok")) {
 			LOG.info("appkeyFroward 插入成功,返回200");
+			//插入1002日志表,并更新插入表1001
 		} else {
 			LOG.info("appkeyFroward 插入失败    返回---- responseStr = " + responseStr);
+		
 		}
 	}
 
@@ -311,7 +310,7 @@ public class PayInfoBean implements Runnable {
 				builder.append("?createdate=" + createdate);
 				builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
 				builder.append("&appkey=" + appKey);
-			builder.append("&channelid=" + releaseChannel);
+				builder.append("&channelid=" + releaseChannel);
 				builder.append("&amount=" + price);
 				builder.append("&orderid=" + payChannelOrderId);
 				builder.append("&imei=" + "");
@@ -329,6 +328,30 @@ public class PayInfoBean implements Runnable {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void postPayment(String notify_url, String ownOrderId){
+		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
+
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("payment", forwardString));
+
+		String responseContent = HttpUtils.post(notify_url, formparams,ownOrderId);
+
+		// 判断返回状态
+		if (responseContent.equals("200")) {
+
+			// 更新0为
+			LOG.info(ownOrderId + "返回200 , 更新数据中...");
+			// 插入1002数据
+			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+
+		} else {
+			//返回不为200重复发送
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			//更新1001的下次转发时间为1分钟
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
 		}
 	}
 }

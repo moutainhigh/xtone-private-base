@@ -23,29 +23,30 @@ public class HttpUtils {
 	/**
 	 * 发送 post请求访问本地应用并根据传递参数不同返回不同结果
 	 */
-	public static String post(String url, List<BasicNameValuePair> formparams) {
-		String responseContent = "";
+	public static String post(String url, List<BasicNameValuePair> formparams,String ownOrderId) {
+		String responseContent = "" ;
 		// 创建默认的httpClient实例.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		// 创建httppost
 		HttpPost httppost = new HttpPost(url);
 		// 创建参数队列
 
+
 		try {
 
 			UrlEncodedFormEntity uefEntity = new UrlEncodedFormEntity(formparams, "UTF-8");
 			httppost.setEntity(uefEntity);
-
-			// System.out.println("executing request = " + httppost.getURI());
+			
+//			System.out.println("executing request = " + httppost.getURI());
 			CloseableHttpResponse response = httpclient.execute(httppost);
 			try {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					// System.out.println("--------------------------------------");
+//					System.out.println("--------------------------------------");
 					responseContent = EntityUtils.toString(entity, "UTF-8");
-					// System.out.println("Response content: " +
-					// responseContent);
-					// System.out.println("--------------------------------------");
+					
+//					System.out.println("Response content: " + responseContent);
+//					System.out.println("--------------------------------------");
 				}
 			} finally {
 				response.close();
@@ -55,8 +56,10 @@ public class HttpUtils {
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		} catch (IOException e) {
-			// e.printStackTrace();
-			System.out.println("连接异常");
+//			e.printStackTrace();
+			//LOG.info("通知地址连接异常,30秒后再次转发...");
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
+			
 		} finally {
 			// 关闭连接,释放资源
 			try {
@@ -66,7 +69,7 @@ public class HttpUtils {
 			}
 		}
 		return responseContent;
-
+	
 	}
 
 	public static String get(String url) {
