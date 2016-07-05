@@ -13,7 +13,9 @@
         android:layout_height="fill_parent"
         android:fillViewport="true"
         android:fadingEdge="none"
-        android:scrollbarThumbVertical="@drawable/scrollbar_bg" >
+        android:scrollbarThumbVertical="@drawable/scrollbar_bg"
+        android:background="@color/bg"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -39,8 +41,8 @@
 
                 <ImageView
                     android:layout_width="fill_parent"
-                    android:layout_height="0.8dp"
-                    android:background="@color/gainsboro" />
+                    android:layout_height="2dp"
+                     android:background="@drawable/fg" />
 
                 <RelativeLayout
                     android:id="@+id/rl_soft_skin"
@@ -61,10 +63,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -72,22 +74,28 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/su"
+
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:text="下载设置"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/nav_bar_backone"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:id="@+id/rl_custom_download_path"
@@ -108,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
                         android:text="自定义书籍下载目录"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -118,17 +126,17 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="3dp"
                         android:text="scard/ssss"
-                        android:textColor="@color/darkgray"
+                        android:textColor="@color/white"
                         android:textSize="13sp" />
                 </LinearLayout>
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -142,7 +150,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="下载后自动添加到书架"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -155,10 +163,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:id="@+id/rl_clear_cache"
@@ -174,16 +182,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="清除缓存"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -197,16 +205,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="其他"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:id="@+id/rl_about_us"
@@ -222,16 +230,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="关于我们"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:id="@+id/rl_check_update"
@@ -247,16 +255,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="检查更新"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:id="@+id/rl_set_default"
@@ -272,16 +280,16 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="恢复默认"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg" />
         </LinearLayout>
     </ScrollView>
 

@@ -2,7 +2,6 @@ package com.wanpg.bookread.ui.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,6 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.wanpg.bookread.BaseActivity;
 import com.wanpg.bookread.R;
 import com.wanpg.bookread.data.ShelfBook;
@@ -23,6 +21,7 @@ import com.wanpg.bookread.ui.activity.BookFileBrowserActivity;
 import com.wanpg.bookread.ui.hall.ShelfFragment;
 import com.wanpg.bookread.widget.AsyncShelfImageView;
 import com.wanpg.bookread.widget.ShelfBookManageDialog;
+
 
 public class BookShelfGridViewAdapter extends BaseAdapter {
 
@@ -84,6 +83,8 @@ public class BookShelfGridViewAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
+        //显示书架添加的书籍
         if (position < listItems.size()) {
             ShelfBook book = listItems.get(position);
         	holder.shelf_main_cell_book_layout.setVisibility(View.VISIBLE);
@@ -98,6 +99,8 @@ public class BookShelfGridViewAdapter extends BaseAdapter {
             holder.tv_bookname.setText(bookName);
             holder.tv_bookauthor.setText("作者：" + bookAuthor);
         } else {
+
+            //显示可以添加本地书籍的图标
             holder.shelf_main_cell_book_layout.setVisibility(View.GONE);
             holder.shelf_main_cell_add_layout.setVisibility(View.VISIBLE);
         }
@@ -110,6 +113,9 @@ public class BookShelfGridViewAdapter extends BaseAdapter {
             	mFragment.mActivity.openBook(listItems.get(pos));
             }
         });
+
+
+        //添加本地书籍到书架的点击事件
         holder.shelf_main_cell_add_layout.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -118,15 +124,21 @@ public class BookShelfGridViewAdapter extends BaseAdapter {
                 Intent intent = new Intent();
                 intent.setClass(activity, BookFileBrowserActivity.class);
                 activity.startActivityForResult(intent, 1);
+
+                //activity跳转动画
                 activity.overridePendingTransition(R.anim.slide_in_from_right, R.anim.out_none);
             }
         });
+
+        //阅读书架书籍事件
         holder.shelf_main_cell_book_layout.setOnLongClickListener(new OnLongClickListener() {
 
             @Override
             public boolean onLongClick(View arg0) {
                 // TODO Auto-generated method stub
                 if (pos < listItems.size()) {
+
+                    //删除书架书籍或查看书籍属性
                     ShelfBookManageDialog bookManageDialog = new ShelfBookManageDialog(activity, R.style.about_dialog, listItems.get(pos)) {
 						
 						@Override

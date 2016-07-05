@@ -12,7 +12,9 @@
         android:layout_height="fill_parent"
         android:fillViewport="true"
         android:fadingEdge="none"
-        android:scrollbarThumbVertical="@drawable/scrollbar_bg" >
+        android:scrollbarThumbVertical="@drawable/scrollbar_bg"
+        android:background="@color/bg"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -25,22 +27,29 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" >
 
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:src="@drawable/su"
+
+                 />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:text="翻页方式"
-                    android:textColor="@color/gray"
+
+                    android:textColor="@color/nav_bar_backone"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                android:background="@drawable/fg" />
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -69,7 +78,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:text="无"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -93,7 +102,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:text="仿真"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -118,7 +127,7 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:text="平滑"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -150,10 +159,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -174,10 +183,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro"
+                android:background="@drawable/fg"
                 android:visibility="gone" />
 
             <RelativeLayout
@@ -186,22 +195,28 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/su"
+
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:text="屏显模式"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/nav_bar_backone"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -215,7 +230,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="显示系统状态栏"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -228,10 +243,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -245,7 +260,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="显示顶部信息"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -258,10 +273,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                android:background="@drawable/fg" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -275,7 +290,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="显示底部信息"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -288,10 +303,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -305,7 +320,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="电池百分比显示模式"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -318,10 +333,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -329,22 +344,28 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/su"
+
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:text="锁屏时间"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/nav_bar_backone"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <LinearLayout
                 android:layout_width="fill_parent"
@@ -373,7 +394,7 @@
                         android:layout_height="fill_parent"
                         android:gravity="center"
                         android:text="5分钟"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -397,7 +418,7 @@
                         android:layout_height="fill_parent"
                         android:gravity="center"
                         android:text="15分钟"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -421,7 +442,7 @@
                         android:layout_height="fill_parent"
                         android:gravity="center"
                         android:text="30分钟"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
 
@@ -445,17 +466,17 @@
                         android:layout_height="fill_parent"
                         android:gravity="center"
                         android:text="不锁屏"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </RelativeLayout>
             </LinearLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -463,22 +484,28 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp" >
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/su"
+
+                    />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="3dp"
+                    android:layout_marginLeft="10dp"
                     android:text="其他"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/nav_bar_backone"
                     android:textSize="15sp" />
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -492,7 +519,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="3dp"
                     android:text="音量键翻页"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="15sp" />
 
                 <ToggleButton
@@ -505,10 +532,10 @@
 
             <ImageView
                 android:layout_width="fill_parent"
-                android:layout_height="0.8dp"
+                android:layout_height="2dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/gainsboro" />
+                 android:background="@drawable/fg"/>
         </LinearLayout>
     </ScrollView>
 

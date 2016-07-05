@@ -35,7 +35,7 @@
 		</plugins>
 	</build>
 	<dependencies>
-				<dependency>
+		 <dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.8.0</version>
@@ -47,7 +47,7 @@
 			<version>3.2.1</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
@@ -123,7 +123,7 @@
 		</dependency>
 		-->
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.sun.faces</groupId>
 			<artifactId>jsf-impl</artifactId>
 			<version>2.2.12</version>
@@ -188,7 +188,7 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>2.5.6</version>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 </project>

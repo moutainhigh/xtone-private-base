@@ -6,6 +6,10 @@
                 android:background="@drawable/menu_list_button_selector"
                 android:paddingLeft="7dp">
 
+    <RelativeLayout
+        android:id="@+id/fg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
             android:id="@+id/iv_menu_bar_icon"
             android:layout_width="40dp"
@@ -24,4 +28,23 @@
             android:text="本地图书"
             android:textColor="@color/white"
             android:gravity="center_vertical"/>
+   <!-- <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:src="@drawable/fg"
+        android:layout_below="@+id/tv_menu_bar"
+        />-->
+    </RelativeLayout>
+
+    <!--<ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:src="@drawable/fg"
+        android:layout_below="@+id/fg"/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:drawableBottom="@drawable/fg"
+        android:layout_below="@+id/fg"
+        />
 </RelativeLayout>

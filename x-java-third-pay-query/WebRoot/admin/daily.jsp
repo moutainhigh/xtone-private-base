@@ -76,7 +76,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="stat-all.jsp"><%=name%>平台</a>
+                <div class="vg_logo"></div>
+                <div class="vg_title"><%=name%>平台</div>
             </div>
             <!-- /.navbar-header -->
             <ul class="nav navbar-nav navbar-right">

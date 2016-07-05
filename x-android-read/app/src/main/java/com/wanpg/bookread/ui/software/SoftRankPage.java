@@ -106,8 +106,11 @@ public class SoftRankPage {
 
         isShowingGame = true;
         isShowingApp = false;
-        bt_game.setBackgroundResource(R.drawable.subtab_item_bg_selected_right);
-        bt_app.setBackgroundResource(R.drawable.subtab_left_selector);
+        //bt_game.setBackgroundResource(R.drawable.subtab_item_bg_selected_right);
+      //  bt_game.setBackgroundResource(R.drawable.bt_game);
+        bt_game.setBackgroundResource(R.drawable.ceyy);
+       //  bt_game.setBackgroundResource(R.drawable.subtab_right_selector);
+        bt_app.setBackgroundResource(R.drawable.csz);
     }
 
     private void initApp() {
@@ -125,7 +128,11 @@ public class SoftRankPage {
 
         isShowingGame = false;
         isShowingApp = true;
-        bt_game.setBackgroundResource(R.drawable.subtab_right_selector);
-        bt_app.setBackgroundResource(R.drawable.subtab_item_bg_selected_left);
+       // bt_game.setBackgroundResource(R.drawable.subtab_right_selector);
+      //  bt_app.setBackgroundResource(R.drawable.subtab_item_bg_selected_left);
+        //bt_app.setBackgroundResource(R.drawable.bt_game);
+
+        bt_game.setBackgroundResource(R.drawable.csy);
+        bt_app.setBackgroundResource(R.drawable.cezz);
     }
 }
