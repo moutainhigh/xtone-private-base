@@ -295,7 +295,7 @@ public class SMSRecive implements Runnable{
 
 	  		Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
 
-    		PropertyConfigurator.configure("log4j.properties");
+//    		PropertyConfigurator.configure("log4j.properties");
 
 	 			myLogger.info(FormatSysTime.getCurrentTimeA() + " exception msg--Exception:" + e.toString());
 
