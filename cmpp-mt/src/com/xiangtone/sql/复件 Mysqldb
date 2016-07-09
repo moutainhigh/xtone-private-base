@@ -1,0 +1,179 @@
+/*
+ *
+ *
+ */
+package com.xiangtone.sql;
+import java.sql.*;
+import com.xiangtone.util.*;
+
+public class Mysqldb 
+{
+	
+	/*
+	*
+	*
+	*/
+	 private String driver="org.gjt.mm.mysql.Driver";
+ 	 private String dbip="";
+ 	 private String dbport="";
+ 	 private String dbname="";
+ 	 private String dbuser = "root";
+ 	 private String dbpwd ="";
+ 	 private String sURL="";
+ 	 private String url = "";
+ 	 public long sTime = 0;
+ 	
+ 	 
+ 	 ConnectionParam param=null;
+ 	 ConnectionFactory cf1=null;
+ 	 public Mysqldb()
+ 	 {
+ 	 	
+ 	 	
+        	sTime = System.currentTimeMillis();
+ 	 	try
+ 	 	{
+ 	 		
+ 	 		sURL =  "jdbc:mysql://"+dbip+":"+dbport+"/"+dbname;
+ 	 		 
+ 	 	    param = new ConnectionParam(driver,sURL,dbuser,dbpwd);  
+ 	 	    cf1= new ConnectionFactory(param,new FactoryParam());   
+ 	 	    System.out.println(cf1);
+ 	 	}
+ 	 	catch(Exception e)
+ 	 	{
+ 	 		System.out.println("mysql contructor:"+e.toString());
+ 	 	}
+ 	 }
+ 	 
+ 
+ 	 public Mysqldb(String _dbip,String _dbport,String _dbname,String _dbuser,String _dbpwd)
+ 	 {
+        	sTime = System.currentTimeMillis();
+ 	 	try
+ 	 	{
+ 	 		
+ 	 		sURL =  "jdbc:mysql://"+_dbip+":"+_dbport+"/"+_dbname;
+ 	 		 System.out.println(sURL);
+ 	 	    param = new ConnectionParam(driver,sURL,_dbuser,_dbpwd);  
+ 	 	    cf1= new ConnectionFactory(param,new FactoryParam());   
+ 	 	    System.out.println(cf1);
+ 	 	}
+ 	 	catch(Exception e)
+ 	 	{
+ 	 		System.out.println("mysql contructor:"+e.toString());
+ 	 	}
+ 	 }
+ 	 
+	/**方法executeInsert()实现数据插入数据库功能
+	 *@param sqlstr
+	 *return void
+	 */
+    public void executeUpdate(String sql)
+    {
+    	try
+    	{
+		     Connection conn1 = cf1.getFreeConnection(); //取到一个连接   
+		     Statement stmt = conn1.createStatement(); 
+		     stmt.executeUpdate(sql);
+		     conn1.close();
+	    }
+        catch(SQLException ex)
+       {
+		    System.err.println("aq.executeInsert:" + ex.getMessage());
+		    System.err.println("aq.executeInsert:" + sql);
+       }
+    }
+    
+    /**方法executeInsert()实现数据插入数据库功能
+	 *@param sqlstr
+	 *return void
+	 */
+    public void execUpdate(String sql)
+    {
+    	try
+    	{
+		     Connection conn1 = cf1.getFreeConnection(); //取到一个连接   
+		     Statement stmt = conn1.createStatement(); 
+		     stmt.executeUpdate(sql);
+		     conn1.close();
+	    }
+        catch(SQLException ex)
+       {
+		    System.err.println("aq.executeInsert:" + ex.getMessage());
+		    System.err.println("aq.executeInsert:" + sql);
+       }
+    }
+	/**方法executeQuery()实现数据检索功能
+	*@param sql
+	* return ReusultSet
+	*/ 
+    public ResultSet executeQuery(String sql)
+    {
+    	ResultSet rs = null;
+       
+       try 
+       {
+		    Connection conn1 = cf1.getFreeConnection(); //取到一个连接   
+		    System.out.println("conn1:"+conn1);
+			Statement stmt = conn1.createStatement(); 
+	   		rs=stmt.executeQuery(sql);
+	   		conn1.close();
+       }
+       catch(SQLException ex)
+       {
+      	  System.err.println("aq.executeQuery:" + ex.getMessage());
+		  System.err.println("aq.executeQuery: " + sql);
+       }
+       return rs;
+    } 
+    
+    /**方法executeQuery()实现数据检索功能
+	*@param sql
+	* return ReusultSet
+	*/ 
+    public ResultSet execQuery(String sql)
+    {
+    	ResultSet rs = null;
+       
+       try 
+       {
+		    Connection conn1 = cf1.getFreeConnection(); //取到一个连接   
+		    System.out.println("conn1:"+conn1);
+			Statement stmt = conn1.createStatement(); 
+	   		rs=stmt.executeQuery(sql);
+	   		conn1.close();
+       }
+       catch(SQLException ex)
+       {
+      	  System.err.println("aq.executeQuery:" + ex.getMessage());
+		  System.err.println("aq.executeQuery: " + sql);
+       }
+       return rs;
+    } 
+
+   /**方法 close()实现数据库的关闭功能
+   *@param sql
+   *return void
+   */
+   public void close() throws Exception 
+   {
+		
+ 		   
+ 			 	try
+ 			 	{  
+ 			 		System.out.println("pool2:" + (System.currentTimeMillis()-sTime));   
+ 			 		cf1.close();   
+ 			 	}   
+ 			 	catch(Exception e)   
+ 			 	{    
+ 			 		e.printStackTrace();   
+ 			 	}  
+ 		
+	}
+}
+ 	
+ 	   
+ 	 	
+ 	 
+ 	 
