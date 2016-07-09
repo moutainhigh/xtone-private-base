@@ -3,4 +3,7 @@
     <item android:state_selected="true" android:drawable="@drawable/simple_switch_on"></item>
     <item android:state_checked="true" android:drawable="@drawable/simple_switch_on"></item>
     <item android:drawable="@drawable/simple_switch_off"></item>
+   <!-- <item android:state_selected="true" android:drawable="@drawable/k"></item>
+    <item android:state_checked="true" android:drawable="@drawable/k"></item>
+    <item android:drawable="@drawable/g"></item>-->
 </selector>

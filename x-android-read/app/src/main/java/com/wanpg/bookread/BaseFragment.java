@@ -75,7 +75,9 @@ public class BaseFragment extends Fragment{
 			});
 		}
 	}
-	
+
+
+	//后退键
 	public void onBackPressed(){
 		onFragmentDo(TYPE_TO_BACK, null);
 	}
@@ -85,9 +87,11 @@ public class BaseFragment extends Fragment{
 			fragmentDoListener.onFragmentDo(type, object);
 	}
 
+	//接口回调
 	public void setOnFragmentDoListener(OnFragmentDoListener fragmentDoListener) {
 		this.fragmentDoListener = fragmentDoListener;
 	}
+
 	private OnFragmentDoListener fragmentDoListener;
 	public interface OnFragmentDoListener{
 		void onFragmentDo(int type, Object data);

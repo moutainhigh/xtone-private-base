@@ -40,7 +40,7 @@
                 android:gravity="left"
                 android:singleLine="true"
                 android:text="名称：漂流瓶"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textSize="14sp" >
             </TextView>
 
@@ -55,7 +55,7 @@
                 android:gravity="left"
                 android:singleLine="true"
                 android:text="开发：开卷有益"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textSize="14sp" >
             </TextView>
 
@@ -68,7 +68,7 @@
                 android:layout_toRightOf="@+id/umeng_xp_photo"
                 android:gravity="left"
                 android:text="大小：125KB"
-                android:textColor="#000000"
+                android:textColor="@color/white"
                 android:textSize="12sp" >
             </TextView>
         </RelativeLayout>
@@ -103,8 +103,6 @@
         android:layout_width="28dp"
         android:layout_height="28dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="9dp"
-        android:layout_marginTop="12dp"
         android:background="@drawable/umeng_xp_download_dialog_close_selector"
         android:gravity="center" />
 
@@ -112,13 +110,14 @@
         android:id="@+id/umeng_xp_ok"
         style="@style/umeng_xp_dialog_download"
         android:layout_width="150dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="15dp"
         android:layout_marginLeft="72.5dp"
         android:gravity="center"
-        android:textColor="#ffffff"
-        android:textSize="17dp" >
+        android:text="马上下载"
+        android:textColor="@color/white"
+        android:textSize="11dp" >
     </Button>
 
 </RelativeLayout>

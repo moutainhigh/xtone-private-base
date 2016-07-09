@@ -30,6 +30,7 @@ import java.util.Date;
 /***
  * 用户登录
  */
+@SuppressWarnings("serial")
 @Controller
 @Namespace("/user")
 public class UserAction extends UActionSupport{
@@ -61,20 +62,26 @@ public class UserAction extends UActionSupport{
         Log.d("getToken...");
 
         try{
-
+        	/*
+        	 * 根据客户端传来的appID得到UGame
+        	 */
             final UGame game = gameManager.queryGame(this.appID);
             if(game == null){
                 renderState(StateCode.CODE_GAME_NONE, null);
                 return;
             }
-
+            /*
+             * 根据客户端传来的channelID得到UChannel
+             */
             final UChannel channel = channelManager.queryChannel(this.channelID);
             if(channel == null){
 
                 renderState(StateCode.CODE_CHANNEL_NONE, null);
                 return;
             }
-
+            /*
+             * 获得渠道商对象(比如UC，当乐。。。)
+             */
             UChannelMaster master = channel.getMaster();
             if(master == null){
                 renderState(StateCode.CODE_CHANNEL_NONE, null);
@@ -86,9 +93,9 @@ public class UserAction extends UActionSupport{
                     .append("channelID=").append(this.channelID)
                     .append("extension=").append(this.extension).append(game.getAppkey());
 
-
             if(!userManager.isSignOK(sb.toString(), sign)){
                 Log.e("the sign is invalid. sign:"+sign);
+                System.out.println("the sign is invalid. sign:"+sign);
                 renderState(StateCode.CODE_SIGN_ERROR, null);
                 return;
             }
@@ -97,6 +104,7 @@ public class UserAction extends UActionSupport{
 
             if(verifier == null){
                 Log.e("the ISDKScript is not found . channelID:"+channelID);
+                System.out.println("the ISDKScript is not found . channelID:"+channelID);
                 renderState(StateCode.CODE_VERIFY_FAILED, null);
                 return;
             }
@@ -121,7 +129,7 @@ public class UserAction extends UActionSupport{
                             }
 
                             user.setToken(UGenerator.generateToken(user, game.getAppSecret()));
-
+                            System.out.println("user Token:"+user.getToken());
                             userManager.saveUser(user);
 
                             JSONObject data = new JSONObject();
@@ -132,6 +140,7 @@ public class UserAction extends UActionSupport{
                             data.put("token", user.getToken());
                             data.put("extension", sdkResult.getExtension());
                             data.put("timestamp", user.getLastLoginTime());
+                            
                             renderState(StateCode.CODE_SUCCESS, data);
 
                         }else{
@@ -166,7 +175,6 @@ public class UserAction extends UActionSupport{
             JSONObject json = new JSONObject();
             json.put("state", state);
             json.put("data", data);
-
             super.renderJson(json.toString());
 
         }catch(Exception e){
@@ -210,7 +218,8 @@ public class UserAction extends UActionSupport{
                     .append("token=").append(this.token)
                     .append(user.getGame().getAppkey());
 
-
+            System.out.println("userInfo:"+sb.toString());
+            System.out.println("gameAppkey:"+user.getGame().getAppkey());
             if(!userManager.isSignOK(sb.toString(), sign)){
                 renderState(StateCode.CODE_SIGN_ERROR, null);
                 return;

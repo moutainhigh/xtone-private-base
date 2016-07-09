@@ -1,19 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 19
+    buildToolsVersion '20.0.0'
 
     defaultConfig {
         applicationId "com.wanpg.bookread"
         minSdkVersion 8
-        targetSdkVersion 22
+        targetSdkVersion 23
     }
 
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles 'proguard-project.txt'
+         proguardFiles 'proguard-project.txt'
+
         }
     }
 }
@@ -25,4 +26,5 @@ dependencies {
     compile files('libs/java-unrar-0.3.jar')
     compile files('libs/shupeng-android-sdk1.5.jar')
     compile files('libs/umeng_sdk.jar')
+    compile files('libs/universal-image-loader-1.9.5.jar')
 }

@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="标题标题"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="14sp"/>
     </LinearLayout>
 </LinearLayout>

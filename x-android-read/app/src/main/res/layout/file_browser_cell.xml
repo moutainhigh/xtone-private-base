@@ -5,6 +5,10 @@
               android:orientation="horizontal">
 
     <RelativeLayout
+        android:id="@+id/ffg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
             android:id="@+id/rl_file_browser_back"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
@@ -29,6 +33,7 @@
                     android:id="@+id/tv_file_browser_filename"
                     android:text="Android"
                     android:textSize="13sp"
+                  android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -43,4 +48,14 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+        <ImageView
+            android:layout_below="@id/rl_file_browser_back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fg"
+            />
+
+    </RelativeLayout>
+
 </LinearLayout>
