@@ -3,119 +3,189 @@
  *2003-12-14 
  */
 
-
 package com.xiangtone.util;
-import java.util.Properties; 
-import java.io.FileInputStream; 
-import java.io.File; 
 
-public class ConfigManager 
-{ 
-	
-	/** 
-	* ÊôÐÔÎÄ¼þÈ«Ãû 
-	*/
-	final private static String PFILE = System.getProperty("user.dir") + File.separator + "config.ini"; 
-	/** 
-	* ¶ÔÓ¦ÓÚÊôÐÔÎÄ¼þµÄÎÄ¼þ¶ÔÏó±äÁ¿ 
-	*/ 
-	private File m_file = null; 
-	/** 
-	* ÊôÐÔÎÄ¼þµÄ×îºóÐÞ¸ÄÈÕÆÚ 
-	*/ 
-	private long m_lastModifiedTime = 0; 
-	/** 
-	* ÊôÐÔÎÄ¼þËù¶ÔÓ¦µÄÊôÐÔ¶ÔÏó±äÁ¿ 
-	*/ 
-	private Properties m_props = null; 
-	/** 
-	* ±¾Àà¿ÉÄÜ´æÔÚµÄÎ©Ò»µÄÒ»¸öÊµÀý 
-	*/ 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+public class ConfigManager {
+
+	final private static String PFILE = "config.ini";
+	/**
+	 * å¯¹åº”äºŽå±žæ€§æ–‡ä»¶çš„æ–‡ä»¶å¯¹è±¡å˜é‡
+	 */
+	private File m_file = null;
+	/**
+	 * å±žæ€§æ–‡ä»¶çš„æœ€åŽä¿®æ”¹æ—¥æœŸ
+	 */
+	private long m_lastModifiedTime = 0;
+	/**
+	 * å±žæ€§æ–‡ä»¶æ‰€å¯¹åº”çš„å±žæ€§å¯¹è±¡å˜é‡
+	 */
+	private static Properties m_props = null;
+	/**
+	 * æœ¬ç±»å¯èƒ½å­˜åœ¨çš„æƒŸä¸€çš„ä¸€ä¸ªå®žä¾‹
+	 */
 	private static ConfigManager m_instance = null;
-	/** 
-	* Ë½ÓÐµÄ¹¹Ôì×Ó£¬ÓÃÒÔ±£Ö¤Íâ½çÎÞ·¨Ö±½ÓÊµÀý»¯ 
-	*/ 
-	private ConfigManager() 
-	{ 
-		m_file = new File(PFILE); 
-		m_lastModifiedTime = m_file.lastModified(); 
-		if(m_lastModifiedTime == 0) 
-		{ 
-			System.err.println(PFILE + " file does not exist!"); 
-		} 
-		m_props = new Properties(); 
-		try 
-		{ 
-			m_props.load(new FileInputStream(PFILE)); 
-		} 
-		catch(Exception e) 
-		{ 
-			e.printStackTrace(); 
-		} 
-	} 
-	/** 
-	* ¾²Ì¬¹¤³§·½·¨ 
-	* @return ·µ»¹ConfigManager ÀàµÄµ¥Ò»ÊµÀý 
-	*/ 
-	synchronized public static ConfigManager getInstance() 
-	{ 
-		if(m_instance ==null)
-		{
-			 m_instance=new ConfigManager(); 
-		}
-		return m_instance; 
-	} 
-     
-	/** 
-	* ¶ÁÈ¡Ò»ÌØ¶¨µÄÊôÐÔÏî 
-	* 
-	* @param name ÊôÐÔÏîµÄÏîÃû 
-	* @param defaultVal ÊôÐÔÏîµÄÄ¬ÈÏÖµ 
-	* @return ÊôÐÔÏîµÄÖµ£¨Èç´ËÏî´æÔÚ£©£¬ Ä¬ÈÏÖµ£¨Èç´ËÏî²»´æÔÚ£© 
-	*/ 
-	final public Object getConfigItem(String name,Object defaultVal) 
-    { 
-		long newTime = m_file.lastModified(); 
-		// ¼ì²éÊôÐÔÎÄ¼þÊÇ·ñ±»ÆäËû³ÌÐò 
-		//£¨¶àÊýÇé¿öÊÇ³ÌÐòÔ±ÊÖ¶¯£©ÐÞ¸Ä¹ý 
-		// Èç¹ûÊÇ£¬ÖØÐÂ¶ÁÈ¡´ËÎÄ¼þ
 
-		if(newTime == 0) 
-		{ 
-			// ÊôÐÔÎÄ¼þ²»´æÔÚ 
-			if(m_lastModifiedTime == 0) 
-			{ 
-				System.err.println(PFILE + " file does not exist!"); 
-			} 
-			else 
-			{ 
-				System.err.println(PFILE + " file was deleted!!"); 
-			} 
-			return defaultVal; 
-		} 
-		else if(newTime > m_lastModifiedTime) 
-		{ 
-			// Get rid of the old properties 
-			m_props.clear(); 
-			try 
-			{ 
-				m_props.load(new FileInputStream(PFILE)); 
-			} 
-			catch(Exception e) 
-			{ 
-				e.printStackTrace(); 
-			} 
-		} 
-		m_lastModifiedTime = newTime; 
-		Object val = m_props.getProperty(name); 
-		if( val == null ) 
-		{ 
-			System.out.println("error:"+defaultVal);
-			return defaultVal; 
-		} 
-		else 
-		{ 
-			return val; 
-		} 
+	/**
+	 * ç§æœ‰çš„æž„é€ å­ï¼Œç”¨ä»¥ä¿è¯å¤–ç•Œæ— æ³•ç›´æŽ¥å®žä¾‹åŒ–
+	 */
+	private ConfigManager() {
+		// m_file = new File(PFILE);
+		// m_lastModifiedTime = m_file.lastModified();
+		// if(m_lastModifiedTime == 0)
+		// {
+		// System.err.println(PFILE + " file does not exist!");
+		// }
+		// m_props = new Properties();
+		// try
+		// {
+		// m_props.load(new FileInputStream(PFILE));
+		// }
+		// catch(Exception e)
+		// {
+		// e.printStackTrace();
+		// }
+		init(PFILE);
 	}
-} 
+
+	public static InputStream getResourceAsStream(String resource) throws IOException {
+		InputStream in = null;
+		ClassLoader loader = ConfigManager.class.getClassLoader();
+		try {
+			if (loader != null) {
+				in = loader.getResourceAsStream(resource);
+			}
+			if (in == null) {
+				in = ClassLoader.getSystemResourceAsStream(resource);
+			}
+			if (in == null) {
+				File file = new File(System.getProperty("user.dir") + "/" + resource);
+				if (file.exists()) {
+					in = new FileInputStream(System.getProperty("user.dir") + "/" + resource);
+				}
+			}
+			if (in == null) {
+				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString().replaceAll("file:",
+						"") + resource;
+				if (filePath.indexOf(":") == 2)
+					filePath = filePath.substring(1, filePath.length());
+				File file = new File(filePath);
+				if (file.exists()) {
+					in = new FileInputStream(filePath);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (in == null)
+			throw new IOException("Could not find resource " + resource);
+		return in;
+	}
+
+	private static void init(String filePath) {
+
+		m_props = new Properties();
+		try {
+			// filePath = (filePath == null || filePath.length() == 0) ?
+			// CONFIG_PATH : filePath;
+			// if(filePath.indexOf(":") == 2)
+			// filePath = filePath.substring(1, filePath.length());
+			// System.out.println(filePath);
+			// prop.load(new FileInputStream(filePath));
+			m_props.load(getResourceAsStream(filePath));
+			// File file = new File(CONFIG_PATH);
+			// lastModifyTime = file.lastModified();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static String getProperty(String key) {
+		String result = "";
+		if (m_props == null) {
+			init("");
+		}
+		try {
+			// File file = new File(CONFIG_PATH);
+			// long tempTime = file.lastModified();
+			// if (tempTime > lastModifyTime) {
+			// prop.clear();
+			// init("");
+			// }
+			if (m_props.containsKey(key)) {
+				result = m_props.getProperty(key);
+			}
+		} catch (Exception exce) {
+			exce.printStackTrace();
+		}
+		return result;
+	}
+
+	public static String getConfigData(String key) {
+		return getProperty(key);
+	}
+
+	public static String getConfigData(String key, String defaultValue) {
+		return getProperty(key).length() == 0 ? defaultValue : getProperty(key);
+	}
+
+	/**
+	 * é™æ€å·¥åŽ‚æ–¹æ³•
+	 * 
+	 * @return è¿”è¿˜ConfigManager ç±»çš„å•ä¸€å®žä¾‹
+	 */
+	synchronized public static ConfigManager getInstance() {
+		if (m_instance == null) {
+			m_instance = new ConfigManager();
+		}
+		return m_instance;
+	}
+
+	/**
+	 * è¯»å–ä¸€ç‰¹å®šçš„å±žæ€§é¡¹
+	 * 
+	 * @param name
+	 *          å±žæ€§é¡¹çš„é¡¹å
+	 * @param defaultVal
+	 *          å±žæ€§é¡¹çš„é»˜è®¤å€¼
+	 * @return å±žæ€§é¡¹çš„å€¼ï¼ˆå¦‚æ­¤é¡¹å­˜åœ¨ï¼‰ï¼Œ é»˜è®¤å€¼ï¼ˆå¦‚æ­¤é¡¹ä¸å­˜åœ¨ï¼‰
+	 */
+	final public Object getConfigItem(String name, Object defaultVal) {
+		long newTime = m_file.lastModified();
+		// æ£€æŸ¥å±žæ€§æ–‡ä»¶æ˜¯å¦è¢«å…¶ä»–ç¨‹åº
+		// ï¼ˆå¤šæ•°æƒ…å†µæ˜¯ç¨‹åºå‘˜æ‰‹åŠ¨ï¼‰ä¿®æ”¹è¿‡
+		// å¦‚æžœæ˜¯ï¼Œé‡æ–°è¯»å–æ­¤æ–‡ä»¶
+
+		if (newTime == 0) {
+			// å±žæ€§æ–‡ä»¶ä¸å­˜åœ¨
+			if (m_lastModifiedTime == 0) {
+				System.err.println(PFILE + " file does not exist!");
+			} else {
+				System.err.println(PFILE + " file was deleted!!");
+			}
+			return defaultVal;
+		} else if (newTime > m_lastModifiedTime) {
+			// Get rid of the old properties
+			m_props.clear();
+			try {
+				m_props.load(new FileInputStream(PFILE));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		m_lastModifiedTime = newTime;
+		Object val = m_props.getProperty(name);
+		if (val == null) {
+			System.out.println("error:" + defaultVal);
+			return defaultVal;
+		} else {
+			return val;
+		}
+	}
+}
