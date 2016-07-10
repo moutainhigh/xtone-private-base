@@ -45,10 +45,33 @@ public class SMSIsmgInfo
 	public boolean loadParam(){
 		Properties props;
 		try{
-			InputStream ins = getClass().getResourceAsStream(configFile);
-			if(ins != null){
+			InputStream in = getClass().getResourceAsStream(configFile);
+			if (in == null){
+				in = ClassLoader.getSystemResourceAsStream(configFile);
+			}
+			if (in == null) {
+				File file = new File(System.getProperty("user.dir") + "/"
+						+ configFile);
+				if (file.exists()) {
+					in = new FileInputStream(System.getProperty("user.dir")
+							+ "/" + configFile);
+				}
+			}
+			if (in == null) {
+				String filePath = Thread.currentThread()
+						.getContextClassLoader().getResource("").toString()
+						.replaceAll("file:", "")
+						+ configFile;
+				if (filePath.indexOf(":") == 2)
+					filePath = filePath.substring(1, filePath.length());
+				File file = new File(filePath);
+				if (file.exists()) {
+					in = new FileInputStream(filePath);
+				}
+			}
+			if(in != null){
 				props = new Properties();
-				props.load(ins);
+				props.load(in);
 			}
 			else{
 				System.out.println("Can not read the properties file:" + configFile);

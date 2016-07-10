@@ -71,7 +71,7 @@ public class SMSActiveTest implements Runnable {
                 	{
                 		Logger myLogger = Logger.getLogger("MsgSendLogger");
 	  								Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
-    								PropertyConfigurator.configure("log4j.properties");
+//    								PropertyConfigurator.configure("log4j.properties");
                 		myLogger.info(FormatSysTime.getCurrentTimeA() + "testActive exception msg--Exception:" + e.toString());
 
                 		System.out.println(e.toString());
