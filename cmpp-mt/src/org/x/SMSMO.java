@@ -16,10 +16,10 @@ public class SMSMO {
 	protected String cpn;
 	protected int cpnType;
 	protected String spCode; // �ر�����(����)
-	protected String spCode_first; // �ط����
+	protected String spCode_first;
 	protected String svcType; // ҵ������
 	protected String content; // ��������
-	protected String serverName; // content�ֽ�0 ,ҵ�����
+	protected String serverName;
 	protected String serverID; // ����id
 	protected String serverAction = ""; // content�ֽ�1 ,ҵ��ָ��
 	protected String deliverTime; // ����ʱ��

@@ -15,24 +15,24 @@ public class ConfigManager {
 
 	final private static String PFILE = "config.ini";
 	/**
-	 * 对应于属性文件的文件对象变量
+	 * 瀵瑰簲浜庡睘鎬ф枃浠剁殑鏂囦欢瀵硅薄鍙橀噺
 	 */
 	private File m_file = null;
 	/**
-	 * 属性文件的最后修改日期
+	 * 灞炴�ф枃浠剁殑鏈�鍚庝慨鏀规棩鏈�
 	 */
 	private long m_lastModifiedTime = 0;
 	/**
-	 * 属性文件所对应的属性对象变量
+	 * 灞炴�ф枃浠舵墍瀵瑰簲鐨勫睘鎬у璞″彉閲�
 	 */
 	private static Properties m_props = null;
 	/**
-	 * 本类可能存在的惟一的一个实例
+	 * 鏈被鍙兘瀛樺湪鐨勬儫涓�鐨勪竴涓疄渚�
 	 */
 	private static ConfigManager m_instance = null;
 
 	/**
-	 * 私有的构造子，用以保证外界无法直接实例化
+	 * 绉佹湁鐨勬瀯閫犲瓙锛岀敤浠ヤ繚璇佸鐣屾棤娉曠洿鎺ュ疄渚嬪寲
 	 */
 	private ConfigManager() {
 		// m_file = new File(PFILE);
@@ -109,7 +109,7 @@ public class ConfigManager {
 	private static String getProperty(String key) {
 		String result = "";
 		if (m_props == null) {
-			init("");
+			init(PFILE);
 		}
 		try {
 			// File file = new File(CONFIG_PATH);
@@ -136,9 +136,9 @@ public class ConfigManager {
 	}
 
 	/**
-	 * 静态工厂方法
+	 * 闈欐�佸伐鍘傛柟娉�
 	 * 
-	 * @return 返还ConfigManager 类的单一实例
+	 * @return 杩旇繕ConfigManager 绫荤殑鍗曚竴瀹炰緥
 	 */
 	synchronized public static ConfigManager getInstance() {
 		if (m_instance == null) {
@@ -148,22 +148,22 @@ public class ConfigManager {
 	}
 
 	/**
-	 * 读取一特定的属性项
+	 * 璇诲彇涓�鐗瑰畾鐨勫睘鎬ч」
 	 * 
 	 * @param name
-	 *          属性项的项名
+	 *          灞炴�ч」鐨勯」鍚�
 	 * @param defaultVal
-	 *          属性项的默认值
-	 * @return 属性项的值（如此项存在）， 默认值（如此项不存在）
+	 *          灞炴�ч」鐨勯粯璁ゅ��
+	 * @return 灞炴�ч」鐨勫�硷紙濡傛椤瑰瓨鍦級锛� 榛樿鍊硷紙濡傛椤逛笉瀛樺湪锛�
 	 */
 	final public Object getConfigItem(String name, Object defaultVal) {
 		long newTime = m_file.lastModified();
-		// 检查属性文件是否被其他程序
-		// （多数情况是程序员手动）修改过
-		// 如果是，重新读取此文件
+		// 妫�鏌ュ睘鎬ф枃浠舵槸鍚﹁鍏朵粬绋嬪簭
+		// 锛堝鏁版儏鍐垫槸绋嬪簭鍛樻墜鍔級淇敼杩�
+		// 濡傛灉鏄紝閲嶆柊璇诲彇姝ゆ枃浠�
 
 		if (newTime == 0) {
-			// 属性文件不存在
+			// 灞炴�ф枃浠朵笉瀛樺湪
 			if (m_lastModifiedTime == 0) {
 				System.err.println(PFILE + " file does not exist!");
 			} else {

@@ -133,7 +133,7 @@ public class SMSRecive implements Runnable {
 
 					byte[] str_content = cd.getMessage();
 
-					int i_report_flag = cd.getRegistered_delivery(); // ״̬�����
+					int i_report_flag = cd.getRegistered_delivery();
 
 					System.out.println("i_report_flag:" + i_report_flag);
 
@@ -214,7 +214,7 @@ public class SMSRecive implements Runnable {
 
 					handle.setDeliver_srcCpn(str_cpn);
 
-					handle.setDeliver_srcCpnType(cpn_type);// �ֻ���������� α�뻹�����롣
+					handle.setDeliver_srcCpnType(cpn_type);
 
 					handle.setDeliver_contentLen(i_len);
 
