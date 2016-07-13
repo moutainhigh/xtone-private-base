@@ -95,7 +95,8 @@ public class UUserManager {
         String newSign = EncryptUtils.md5(signStr);
 
         Log.d("The newSign is "+newSign);
-
+        System.out.println("newSign:"+newSign.toLowerCase());
+        System.out.println("oldSign:"+sign.toLowerCase());
         return newSign.toLowerCase().equals(sign.toLowerCase());
 
     }

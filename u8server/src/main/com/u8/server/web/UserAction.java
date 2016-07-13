@@ -218,7 +218,8 @@ public class UserAction extends UActionSupport{
                     .append("token=").append(this.token)
                     .append(user.getGame().getAppkey());
 
-
+            System.out.println("userInfo:"+sb.toString());
+            System.out.println("gameAppkey:"+user.getGame().getAppkey());
             if(!userManager.isSignOK(sb.toString(), sign)){
                 renderState(StateCode.CODE_SIGN_ERROR, null);
                 return;
