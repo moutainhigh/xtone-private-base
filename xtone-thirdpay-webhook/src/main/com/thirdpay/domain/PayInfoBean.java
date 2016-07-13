@@ -200,6 +200,7 @@ public class PayInfoBean implements Runnable {
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
+					
 					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
 					
 					LOG.info("notify_url  == " + notify_url);
@@ -209,6 +210,7 @@ public class PayInfoBean implements Runnable {
 					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
 						// 根据appkey转发数据
 						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+						
 						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),
 								forward_url);

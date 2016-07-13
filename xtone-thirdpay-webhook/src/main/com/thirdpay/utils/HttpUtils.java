@@ -24,6 +24,7 @@ public class HttpUtils {
 	 * 发送 post请求访问本地应用并根据传递参数不同返回不同结果
 	 */
 	public static String post(String url, List<BasicNameValuePair> formparams,String ownOrderId) {
+		
 		String responseContent = "" ;
 		// 创建默认的httpClient实例.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
