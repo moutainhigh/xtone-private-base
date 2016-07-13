@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class ConfigManager {
+
+	final private static Logger LOG = Logger.getLogger(ConfigManager.class);
 
 	final private static String PFILE = "config.ini";
 	/**
@@ -59,15 +63,20 @@ public class ConfigManager {
 		try {
 			if (loader != null) {
 				in = loader.getResourceAsStream(resource);
+				LOG.debug("load config from loader.getResourceAsStream:" + resource);
 			}
 			if (in == null) {
 				in = ClassLoader.getSystemResourceAsStream(resource);
+				LOG.debug("load config from ClassLoader.getSystemResourceAsStream:" + resource);
 			}
 			if (in == null) {
 				File file = new File(System.getProperty("user.dir") + "/" + resource);
 				if (file.exists()) {
 					in = new FileInputStream(System.getProperty("user.dir") + "/" + resource);
 				}
+				LOG.debug(
+						"load config from System.getProperty(\"user.dir\"):" + System.getProperty("user.dir") + "/" + resource);
+				// ClassLoader.getSystemResourceAsStream(System.getProperty("user.dir")+"/"+resource);
 			}
 			if (in == null) {
 				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString().replaceAll("file:",
@@ -78,6 +87,8 @@ public class ConfigManager {
 				if (file.exists()) {
 					in = new FileInputStream(filePath);
 				}
+				LOG.debug("load config from filePath:" + filePath);
+				// ClassLoader.getSystemResourceAsStream(System.getProperty("user.dir")+"/"+resource);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -92,7 +103,7 @@ public class ConfigManager {
 
 		m_props = new Properties();
 		try {
-			m_props.load(getResourceAsStream("config.ini"));
+			m_props.load(getResourceAsStream(filePath));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -101,7 +112,7 @@ public class ConfigManager {
 	private static String getProperty(String key) {
 		String result = "";
 		if (m_props == null) {
-			init("");
+			init(PFILE);
 		}
 		try {
 			// File file = new File(CONFIG_PATH);
@@ -139,45 +150,4 @@ public class ConfigManager {
 		return m_instance;
 	}
 
-	/**
-	 * 读取一特定的属性项
-	 * 
-	 * @param name
-	 *          属性项的项名
-	 * @param defaultVal
-	 *          属性项的默认值
-	 * @return 属性项的值（如此项存在）， 默认值（如此项不存在）
-	 */
-	final public Object getConfigItem(String name, Object defaultVal) {
-		long newTime = m_file.lastModified();
-		// 检查属性文件是否被其他程序
-		// （多数情况是程序员手动）修改过
-		// 如果是，重新读取此文件
-
-		if (newTime == 0) {
-			// 属性文件不存在
-			if (m_lastModifiedTime == 0) {
-				System.err.println(PFILE + " file does not exist!");
-			} else {
-				System.err.println(PFILE + " file was deleted!!");
-			}
-			return defaultVal;
-		} else if (newTime > m_lastModifiedTime) {
-			// Get rid of the old properties
-			m_props.clear();
-			try {
-				m_props.load(new FileInputStream(PFILE));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		m_lastModifiedTime = newTime;
-		Object val = m_props.getProperty(name);
-		if (val == null) {
-			System.out.println("error:" + defaultVal);
-			return defaultVal;
-		} else {
-			return val;
-		}
-	}
 }

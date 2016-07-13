@@ -4,18 +4,19 @@
 */
 package com.xiangtone.sql;
 
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.apache.log4j.Logger;
 
 import com.xiangtone.util.ConfigManager;
 
-import java.sql.*;
-
-/**
- * 数据库处理类
- *
- */
-
 public class Mysqldb {
+
+	static final private Logger LOG = Logger.getLogger(Mysqldb.class);
 
 	String sDBDriver = "com.mysql.jdbc.Driver";
 	Connection conn = null;
@@ -70,21 +71,17 @@ public class Mysqldb {
 		try {
 			Class.forName(sDBDriver);
 			this.dbip = (String) ConfigManager.getConfigData("w_dbip_public", "w_dbip_public" + " dbip not found!");
-			this.dbport = Integer.parseInt((String) ConfigManager.getConfigData("w_dbport_public",
-					"w_dbport_public" + " dbport not found!"));
-			this.dbname = (String) ConfigManager.getConfigData("w_dbname_public",
-					"w_dbname_public" + " dbname not found!");
-			this.dbuser = (String) ConfigManager.getConfigData("w_dbuser_public",
-					"w_dbuser_public" + " dbuser not found!");
-			this.dbpwd = (String) ConfigManager.getConfigData("w_dbpwd_public",
-					"w_dbpwd_public" + " dbpwd not found!");
+			this.dbport = Integer
+					.parseInt((String) ConfigManager.getConfigData("w_dbport_public", "w_dbport_public" + " dbport not found!"));
+			this.dbname = (String) ConfigManager.getConfigData("w_dbname_public", "w_dbname_public" + " dbname not found!");
+			this.dbuser = (String) ConfigManager.getConfigData("w_dbuser_public", "w_dbuser_public" + " dbuser not found!");
+			this.dbpwd = (String) ConfigManager.getConfigData("w_dbpwd_public", "w_dbpwd_public" + " dbpwd not found!");
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("Unable to load driver:" + e.getMessage());
 			e.printStackTrace();
 		}
 		DBCon = "jdbc:mysql://" + this.dbip + ":" + this.dbport + "/" + this.dbname + "?";
 		DBCon += "user=" + this.dbuser + "&password=" + this.dbpwd + "&useUnicode=true&characterEncoding=GBK";
-		System.out.println("SDBCon:" + DBCon);
 	}
 
 	/**
