@@ -26,6 +26,7 @@ import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
 
 public class PayInfoBean implements Runnable {
+	
 	private static final Logger LOG = Logger.getLogger(PayInfoBean.class);
 	private Long id;
 	private int price; // 价格，单位人民币，分
@@ -288,7 +289,6 @@ public class PayInfoBean implements Runnable {
 			//插入1002日志表,并更新插入表1001
 		} else {
 			LOG.info("appkeyFroward 插入失败    返回---- responseStr = " + responseStr);
-		
 		}
 	}
 

@@ -13,8 +13,10 @@ import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 
 import com.thirdpay.servlet.AlipayCountServlet;
+import com.thirdpay.utils.AES;
 import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.ConnectionServicethirdpayCount;
+import com.thirdpay.utils.Contents;
 import com.thirdpay.utils.HttpUtils;
 
 /**
@@ -200,10 +202,16 @@ public class ForwardsyncBean implements Runnable {
  * post转发数据
  * @param notify_url
  * @param ownOrderId
+ * @throws Exception 
  */
-	public void postPayment(String notify_url, String ownOrderId) {
+	public void postPayment(String notify_url, String ownOrderId) throws Exception {
+		
 		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
-
+        // 加密
+        String enString = AES.Encrypt(forwardString, Contents.cKey);
+        System.out.println("加密后的字串是：" + enString);
+    
+		
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));
 

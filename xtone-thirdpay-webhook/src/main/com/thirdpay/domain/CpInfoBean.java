@@ -10,7 +10,8 @@ public class CpInfoBean {
 	String productInfo;
 	String notify_url;
 	String wxwap;
-
+	String encrypt;
+	
 	String webOrderid; // 订单号
 
 	public String getWxwap() {
@@ -91,6 +92,14 @@ public class CpInfoBean {
 
 	public void setWebOrderid(String webOrderid) {
 		this.webOrderid = webOrderid;
+	}
+
+	public String getEncrypt() {
+		return encrypt;
+	}
+
+	public void setEncrypt(String encrypt) {
+		this.encrypt = encrypt;
 	}
 
 }
