@@ -26,21 +26,21 @@ public class Forward {
 		
 		LOG.info("forwardString = " + forwardString);
 		
-		String responseContent = HttpUtils.post(notify_url, formparams);
+//		String responseContent = HttpUtils.post(notify_url, formparams);
 
 		// 判断返回状态
-		if (responseContent.equals("200")) {
-
-			// 更新0为
-			// LOG.info("更新数据中...");
-			// 插入1002数据
-
-			// CheckPayInfo.InsertInfo(ownOrderId, notify_url);
-
-		} else {
-			// 返回不为200重复发送
-
-		}
+//		if (responseContent.equals("200")) {
+//
+//			// 更新0为
+//			// LOG.info("更新数据中...");
+//			// 插入1002数据
+//
+//			// CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+//
+//		} else {
+//			// 返回不为200重复发送
+//
+//		}
 	}
 	
 	
@@ -60,17 +60,17 @@ public class Forward {
 		formparams.add(new BasicNameValuePair("status", "0"));
 		
 //		String url = "http://192.168.0.101:8080/thirdpay-webhook/TestServlet";
-		String responseContent = HttpUtils.post(payConstants.wj_url, formparams);
-		System.out.println("--------------responseContent = " + responseContent);
+//		String responseContent = HttpUtils.post(payConstants.wj_url, formparams);
+//		System.out.println("--------------responseContent = " + responseContent);
 //		String responseContent = HttpUtils.post(url, formparams);
 
 		// 判断返回状态
-		if (responseContent.equals("ok")) {
+//		if (responseContent.equals("ok")) {
 
-			 LOG.info("收到ok");
-
-		} else {
-			LOG.info("返回error");
-		}
+//			 LOG.info("收到ok");
+//
+//		} else {
+//			LOG.info("返回error");
+//		}
 	}
 }

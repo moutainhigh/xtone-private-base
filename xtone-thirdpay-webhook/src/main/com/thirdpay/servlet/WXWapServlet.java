@@ -165,7 +165,7 @@ public class WXWapServlet extends HttpServlet {
                             		builder.append("\"wixin\":"+"\""+_string+"\",");
                             	}
                             	
-                            	String patternString2 = "https://paya.swiftpass.cn/pay/unifiedCheck.*";
+                            	String patternString2 = "https://pay.swiftpass.cn/pay/unifiedCheck.*";
                             	 Pattern pattern2 = Pattern.compile(patternString2);
                             	 Matcher matcher2 = pattern2.matcher(string);
                             	 if(matcher2.find()){
