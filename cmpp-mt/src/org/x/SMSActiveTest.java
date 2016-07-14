@@ -62,7 +62,7 @@ public class SMSActiveTest implements Runnable {
 				// }
 				try {
 					p.cmpp_active_test(cmppcon.con);
-					Thread.currentThread().sleep(3000);
+					Thread.currentThread().sleep(5000);
 					// i++;
 					/*
 					 * if(i%6 == 0){ myLogger.info(FormatSysTime.getCurrentTimeA() +
@@ -74,21 +74,21 @@ public class SMSActiveTest implements Runnable {
 					// PropertyConfigurator.configure("log4j.properties");
 					myLogger.info(FormatSysTime.getCurrentTimeA() + "testActive exception msg--Exception:" + e.toString());
 
-					System.out.println(e.toString());
-					System.out.println("��������...");
+					e.printStackTrace();
+					LOG.error("active exception");
 					p.cmpp_disconnect_from_ismg(con);
 					cmppcon.destroy();
 
 					// cmppcon =null;
 					try {
 						Thread.currentThread().sleep(10 * 1000);
-						cmppcon = CMPPSingleConnect.getInstance(); // ����
+						cmppcon = CMPPSingleConnect.getInstance();
 						con = cmppcon.con;
-						myLogger.info(FormatSysTime.getCurrentTimeA() + "ƽ̨0������������:" + e.toString());
+						myLogger.info(FormatSysTime.getCurrentTimeA() + "try to reconnect:" + e.toString());
 					} catch (Exception e1) {
-
+						e1.printStackTrace();
 					}
-					// cmppcon = CMPPSingleConnect.getInstance(); //����
+					// cmppcon = CMPPSingleConnect.getInstance();
 				}
 
 			}

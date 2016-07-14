@@ -28,7 +28,8 @@ public final class CMPP {
 		Socket s = null;
 		try {
 			s = new Socket(host, port);
-			System.out.println(s);
+			// System.out.println(s);
+			LOG.info(s);
 			s.setSoTimeout(0x927c0);
 		} catch (IOException e) {
 			throw e;
@@ -99,12 +100,10 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pk_cmd, 4);
 			tools.strcpy(buf, ch.pk_seq, 8);
 			for (int i = 0; i < ch.pk_len; i++) {
-				System.out.print(buf[i] + ",");
+				// System.out.print(buf[i] + ",");
 			}
-
 			out.write(buf, 0, ch.pk_len);
 			out.flush();
-
 			out = null;
 		} catch (IOException e1) {
 			out = null;
@@ -141,7 +140,7 @@ public final class CMPP {
 			// System.out.println("readHead_pk_len:" + p.pk_head.pk_len);
 			// System.out.println("readHead_pk_cmd:" + p.pk_head.pk_cmd);
 			// System.out.println("readHead_pk_seq:" + p.pk_head.pk_seq);
-			LOG.info("read resp message readHead_pk_seq" + p.pk_head.pk_seq);
+			LOG.info("read resp message readHead_pk_seq:" + p.pk_head.pk_seq);
 		} catch (IOException e) {
 			throw e;
 		}
@@ -251,9 +250,9 @@ public final class CMPP {
 
 	public void cmpp_active_test(conn_desc conn) throws IOException {
 		//////////////////////
-		System.out.println("conn socket::::::::::::");
-		System.out.println(conn.sock);
-		System.out.println("conn socket::::::::::::");
+		// System.out.println("conn socket::::::::::::");
+		// System.out.println(conn.sock);
+		// System.out.println("conn socket::::::::::::");
 		/////////////////////
 		DataOutputStream out = null;
 		cmppe_head ch = new cmppe_head();
@@ -270,17 +269,11 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pk_seq, 8);
 			out.write(buf, 0, 12); // 测试信息体为空
 			for (int i = 0; i < 12; i++) {
-				System.out.print(buf[i] + ",");
+				// System.out.print(buf[i] + ",");
 			}
 			// System.out.println("seq:"+conn.seq);
 			// System.out.println("sock:"+conn.sock);
 			out.flush();
-			System.out.println(":::::::::::");
-			System.out.println(":::::::::::");
-			System.out.println(":::::::::::");
-			System.out.println("have send it");
-			System.out.println(":::::::::::");
-			System.out.println(":::::::::::");
 			conn.seq++;
 			if (conn.seq == 0x7fffffff)
 				conn.seq = 1;
@@ -423,11 +416,13 @@ public final class CMPP {
 			case -2147483640:
 				// myLogger.info(FormatSysTime.getCurrentTimeA() + "---------active
 				// resp-----------: STAT " + cr.stat);
-				System.out.println("---------active resp-----------: STAT " + cr.stat);
+				// System.out.println("---------active resp-----------: STAT " +
+				// cr.stat);
 				break;
 
 			default:
-				System.out.println("---------Error packet-----------");
+				LOG.error("---------Error packet-----------");
+				// System.out.println("---------Error packet-----------");
 				break;
 			}
 		} catch (Exception e) {
@@ -466,13 +461,13 @@ public final class CMPP {
 			cl.pack_id = 0x80000001;
 			// cl.stat = in.readByte();
 			///////////////////
-			System.out.println("::::::::::::::::::::");
-			System.out.println("::::::::::::::::::::");
-			System.out.println("::::::::::::::::::::");
-			System.out.println("the length is:" + pack.pk_head.pk_len);
-			System.out.println("::::::::::::::::::::");
-			System.out.println("::::::::::::::::::::");
-			System.out.println("::::::::::::::::::::");
+			// System.out.println("::::::::::::::::::::");
+			// System.out.println("::::::::::::::::::::");
+			// System.out.println("::::::::::::::::::::");
+			// System.out.println("the length is:" + pack.pk_head.pk_len);
+			// System.out.println("::::::::::::::::::::");
+			// System.out.println("::::::::::::::::::::");
+			// System.out.println("::::::::::::::::::::");
 			///////////////////
 
 			cl.stat = in.readInt(); // 状态 =0(成功)
@@ -538,7 +533,7 @@ public final class CMPP {
 			int success_id = in.readByte();// change at 2008-11-11 in.readByte() ->
 																			// in.readInt();
 			cr.stat = success_id;
-			System.out.println("------------success_id--------:" + success_id);
+			// System.out.println("------------success_id--------:" + success_id);
 			return cr;
 
 		}
