@@ -6,6 +6,9 @@ package org.x;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 
+import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.MailUtil;
+
 /**
  * @author Administrator
  *
@@ -21,6 +24,8 @@ public class CMPPSingleConnect {
 	private CMPP p = new CMPP();
 	public static conn_desc con = new conn_desc();
 	private cmppe_login cl = new cmppe_login();
+	public static int count=0;
+  	private int maxConnect=Integer.parseInt(ConfigManager.getInstance().getConfigData("max_connect"));
 
 	private CMPPSingleConnect() {
 		connectIsmg();
@@ -42,7 +47,13 @@ public class CMPPSingleConnect {
 			cl.set_version((byte) 0x30);
 			cl.set_timestamp(1111101020);
 			p.cmpp_login(con, cl);
-		} catch (Exception e) {
+			count=0;
+  		}catch(Exception e){
+  			count++;
+  			if(count>=maxConnect){
+  				count=0;
+  				MailUtil.send("短信网关连接异常", ConfigManager.getInstance().getConfigData("SENDMAIL"), ConfigManager.getInstance().getConfigData("MAILTO"), "短信网关尝试重连次数超过"+maxConnect+"次！");
+  			}
 			System.out.println("err:login ismg failed! --CMPP_receive.java");
 			System.out.println(e.toString());
 		}
