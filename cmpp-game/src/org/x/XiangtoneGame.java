@@ -1,4 +1,7 @@
 package org.x;
+
+import org.apache.log4j.Logger;
+
 import com.xiangtone.util.ConfigManager;
 
 /**
@@ -9,9 +12,11 @@ import com.xiangtone.util.ConfigManager;
  * 
  */
 
-public class xiangtone_game
+public class XiangtoneGame
 
 {
+
+	private static final Logger LOG = Logger.getLogger(XiangtoneGame.class);
 
 	public static void main(String args[])
 
@@ -22,15 +27,13 @@ public class xiangtone_game
 		{
 			int port = Integer.parseInt((String) ConfigManager.getConfigData("listen_port"));
 
-			System.out.print("创世短信游戏线程开始....listen:" + port);
+			LOG.info("game start listen:" + port);
 
 			VCPServer server = new VCPServer(port);
 
 			server.start();
 
 			// Thread.currentThread().sleep(2000);
-
-			System.out.println("游戏定时触发发送线程开始....");
 
 			// GameServer game = new GameServer();
 
@@ -42,7 +45,7 @@ public class xiangtone_game
 
 		{
 
-			System.out.println("系统出错...");
+			LOG.error("error when start app...");
 
 			e.printStackTrace();
 
