@@ -5,23 +5,19 @@
 
 package comsd.commerceware.cmpp;
 
-
 // Referenced classes of package com.commerceware.cmpp:
 //            cmppe_result, cmppe_us_user
 
-public class CmppeSubmitResult extends CmppeResult
-{
+public class CmppeSubmitResult extends CmppeResult {
 
-    public CmppeSubmitResult()
-    {
-        msgId = new byte[8];
-        super.packId = 0x80000004;
-    }
-    
-    
-	    public static int seq;
-        public static byte msgId[];
-        //public static byte result;
-        public static int result;
-        public static int flag=-1;
+	public CmppeSubmitResult() {
+		msgId = new byte[8];
+		super.packId = 0x80000004;
+	}
+
+	public static int seq;
+	public static byte msgId[];
+	// public static byte result;
+	public static int result;
+	public static int flag = -1;
 }

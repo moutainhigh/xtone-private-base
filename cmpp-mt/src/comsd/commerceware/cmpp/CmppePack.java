@@ -4,19 +4,16 @@
 // Source File Name:   cmppe_pack.java
 package comsd.commerceware.cmpp;
 
-
 // Referenced classes of package com.commerceware.cmpp:
 //            cmppe_head
 
-public final class CmppePack
-{
+public final class CmppePack {
 
-    public CmppePack()
-    {
-        pkHead = new CmppeHead();
-        buf = new byte[512];
-    }
+	public CmppePack() {
+		pkHead = new CmppeHead();
+		buf = new byte[512];
+	}
 
-    protected CmppeHead pkHead;
-    protected byte buf[];
+	protected CmppeHead pkHead;
+	protected byte buf[];
 }

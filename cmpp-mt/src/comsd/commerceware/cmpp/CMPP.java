@@ -743,15 +743,4 @@ public final class CMPP
     public static final int CMPPE_RSP_MSG_NOT_FOUND = 50;
     public static final int CMPPE_RSP_LEN_BAD = 136;
     public static final byte CMPPE_NET_TIMEOUT = 120;
-    public static void main(String[] args) {
-    	try {
-			new CMPP().cmppCancel(null, null);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.error(e,e);
-		} catch (OutOfBoundsException e) {
-			// TODO Auto-generated catch block
-			logger.error(e,e);
-		}
-	}
 }

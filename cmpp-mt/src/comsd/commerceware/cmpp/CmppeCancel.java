@@ -17,7 +17,7 @@ public final class CmppeCancel
         msgId = new byte[8];
     }
 
-    public void set_msgid(String msgid)
+    public void setMsgid(String msgid)
         throws OutOfBoundsException
     {
         OutOfBoundsException e = new OutOfBoundsException();

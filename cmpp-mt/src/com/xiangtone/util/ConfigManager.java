@@ -17,14 +17,14 @@ import org.x.Test;
 public class ConfigManager {
 
 	final private static String PFILE = "config.ini";
-	
+
 	private static Logger logger = Logger.getLogger(ConfigManager.class);
 	/**
 	 * 对应于属性文件的文件对象变量
 	 */
 	private File m_file = null;
 	/**
-	 * 属性文件的最后修改日期 
+	 * 属性文件的最后修改日期
 	 */
 	private long m_lastModifiedTime = 0;
 	/**
@@ -75,8 +75,8 @@ public class ConfigManager {
 				}
 			}
 			if (in == null) {
-				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString().replaceAll("file:",
-						"") + resource;
+				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString()
+						.replaceAll("file:", "") + resource;
 				if (filePath.indexOf(":") == 2)
 					filePath = filePath.substring(1, filePath.length());
 				File file = new File(filePath);
@@ -141,8 +141,9 @@ public class ConfigManager {
 	}
 
 	/**
-	* 静态工厂方法 
-	* @return 返还ConfigManager 类的单一实例 
+	 * 静态工厂方法
+	 * 
+	 * @return 返还ConfigManager 类的单一实例
 	 */
 	synchronized public static ConfigManager getInstance() {
 		if (m_instance == null) {
@@ -152,20 +153,21 @@ public class ConfigManager {
 	}
 
 	/**
-	* 读取一特定的属性项 
-	* 
-	* @param name 属性项的项名 
-	* @param defaultVal 属性项的默认值 
-	* @return 属性项的值（如此项存在）， 默认值（如此项不存在） 
+	 * 读取一特定的属性项
+	 * 
+	 * @param name
+	 *            属性项的项名
+	 * @param defaultVal
+	 *            属性项的默认值
+	 * @return 属性项的值（如此项存在）， 默认值（如此项不存在）
 	 */
 	final public Object getConfigItem(String name, Object defaultVal) {
 		long newTime = m_file.lastModified();
-		// 检查属性文件是否被其他程序 
-		//（多数情况是程序员手动）修改过 
+		// 检查属性文件是否被其他程序
+		// （多数情况是程序员手动）修改过
 		// 如果是，重新读取此文件
 
-		if(newTime == 0) 
-		{ 
+		if (newTime == 0) {
 			// 属性文件不存在
 			if (m_lastModifiedTime == 0) {
 				logger.error(PFILE + " file does not exist!");

@@ -5,20 +5,17 @@
 
 package comsd.commerceware.cmpp;
 
-
 // Referenced classes of package com.commerceware.cmpp:
 //            cmppe_result
 
-public class CmppeLoginResult extends CmppeResult
-{
+public class CmppeLoginResult extends CmppeResult {
 
-    public CmppeLoginResult()
-    {
-        auth = new byte[16];
-        super.packId = 0x80000001;
-    }
+	public CmppeLoginResult() {
+		auth = new byte[16];
+		super.packId = 0x80000001;
+	}
 
-    public byte auth[];
-   // public byte version;
-   public byte version;
+	public byte auth[];
+	// public byte version;
+	public byte version;
 }

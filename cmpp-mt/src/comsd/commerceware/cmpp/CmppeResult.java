@@ -5,14 +5,11 @@
 
 package comsd.commerceware.cmpp;
 
+public class CmppeResult {
 
-public class CmppeResult
-{
+	public CmppeResult() {
+	}
 
-    public CmppeResult()
-    {
-    }
-
-    public int stat;
-    public int packId;
+	public int stat;
+	public int packId;
 }

@@ -5,16 +5,13 @@
 
 package comsd.commerceware.cmpp;
 
+public final class CmppeHead {
 
-public final class CmppeHead
-{
+	public CmppeHead() {
+	}
 
-    public CmppeHead()
-    {
-    }
-
-    protected int pkLen;
-    protected int pkCmd;
-    protected int pkStat;
-    protected int pkSeq;
+	protected int pkLen;
+	protected int pkCmd;
+	protected int pkStat;
+	protected int pkSeq;
 }
