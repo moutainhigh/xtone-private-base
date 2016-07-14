@@ -1,8 +1,8 @@
 package comsd.commerceware.cmpp;
-public class mytools
+public class MyTools
 {
 	
-	//ÕûĞÍ-->ËÄ¸ö×Ö½Ú
+	//æ•´å‹-->å››ä¸ªå­—èŠ‚
 	public  byte[] int2Bytes(int n)
 	{
 		byte[] bTmp = new byte[4];
@@ -12,7 +12,7 @@ public class mytools
     	bTmp[3]= (byte)((n & 0xFF) );
 		return bTmp;
    }
-   //×Ö´®str -->str.length¸ö×Ö½Ú
+   //å­—ä¸²str -->str.lengthä¸ªå­—èŠ‚
    public byte[] string2Bytes(String str)
    {
    	   byte[] bTmp = null;
@@ -28,7 +28,7 @@ public class mytools
    	  	
    	   return bTmp;
    }
-   //¶ÌÕûĞÎ £­£­> Á½¸ö×Ö½Ú
+   //çŸ­æ•´å½¢ ï¼ï¼> ä¸¤ä¸ªå­—èŠ‚
    public byte[] short2Bytes(short n)
    {
 		byte[] bTmp = new byte[2];
@@ -38,7 +38,7 @@ public class mytools
 		return bTmp;
 	}
    
-   //¿½±´×Ö½Ú×é,°ÑÒ»¸öÔ´×Ö½Ú×é ¿½±´µ½ Ä¿µÄ×Ö½Ú×é
+   //æ‹·è´å­—èŠ‚ç»„,æŠŠä¸€ä¸ªæºå­—èŠ‚ç»„ æ‹·è´åˆ° ç›®çš„å­—èŠ‚ç»„
      public int strcpy(byte dest[], byte source[], int from)
     {
         int i;
@@ -74,7 +74,7 @@ public class mytools
 
    public static void main(String args[])
    {
-   		mytools tools = new mytools();
+   		MyTools tools = new MyTools();
    		byte[] dest=new byte[20];
    		System.out.println(dest.length);
    		//byte[] b = tools.int2Bytes(257);
@@ -91,9 +91,5 @@ public class mytools
    			System.out.println(dest[i]);
    		}
    	}
-   	
-   	
-   	
-   		 
 }
 

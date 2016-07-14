@@ -121,7 +121,7 @@ public class SMSoperate {
 	}
 
 	/**
-	 * ����report
+	 * 
 	 *
 	 */
 
@@ -175,8 +175,8 @@ public class SMSoperate {
 				str_content = MyTools.UCS2GB2312(this.deliver_content);
 				break;
 			default:
-				System.out.println("��Ϣ��������");
-				str_content = "��Ϣ��������" + this.deliver_fmt;
+				System.out.println("消息编码有误");
+				str_content = "消息编码有误" + this.deliver_fmt;
 				break;
 			}
 			// change at 2012-08-07
@@ -191,12 +191,12 @@ public class SMSoperate {
 			System.out.println("..............:::::::::::::::");
 			System.out.println("mo.content:" + str_content);
 			System.out.println("spcode :" + deliver_spCode);
-			// ������//061116
+			// 处理长号//061116
 			smsus.getUserDetail(this.deliver_spCode, str_content);
 			// System.out.println("this.deliver_spCode:"+deliver_spCode);
-			// ������//061116
+			// 处理长号//061116
 
-			// ��¼�û�
+			// 记录用户
 			String str_time = FormatSysTime.getCurrentTimeA();
 			/*
 			 * user.setUser_cpn(this.deliver_srcCpn);

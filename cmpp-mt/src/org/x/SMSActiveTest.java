@@ -2,32 +2,23 @@ package org.x;
 /*
  * Created on 2006-11-15
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
- */
-
-/**
- * @author Administrator
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
- * ���ڷ����������Ӳ��԰���
+ * 用于发送网关连接测试包。
  */
 import comsd.commerceware.cmpp.*;
-import comsd.commerceware.cmpp.CMPP;
 import java.lang.*;
 import java.io.*;
-import com.xiangtone.util.FormatSysTime;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+
+import com.xiangtone.util.FormatSysTime;
 
 public class SMSActiveTest implements Runnable {
 	CMPP p = null;//new CMPP();
   	//public static conn_desc con = new conn_desc();
-  	public conn_desc con ;//= new conn_desc();
-  	cmppe_login cl = new cmppe_login();
+  	public ConnDesc con ;//= new conn_desc();
+  	CmppeLogin cl = new CmppeLogin();
   	CMPPSingleConnect cmppcon ;//= CMPPSingleConnect.getInstance();
-  	
+  	private static Logger logger = Logger.getLogger(SMSActiveTest.class);
   	public SMSActiveTest() 
   	{		
   						//p = new CMPP();
@@ -44,13 +35,6 @@ public class SMSActiveTest implements Runnable {
   	*/
   	public void run()
   	{
-  		//////////////////��־��¼/////////////
-  		/*
-	 		Logger myLogger = Logger.getLogger("MsgSendLogger");
-	  	Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
-    	PropertyConfigurator.configure("log4j.properties");
-			*/
-	 		//////////////////////////////////////
   		try
   		{
   			int i = 0;
@@ -63,7 +47,7 @@ public class SMSActiveTest implements Runnable {
   					//}
                 	try
                 	{	
-                		p.cmpp_active_test(cmppcon.con);
+                		p.cmppActiveTest(cmppcon.con);
                 		Thread.currentThread().sleep(3000);
                 		//i++;
                 		/*
@@ -77,26 +61,23 @@ public class SMSActiveTest implements Runnable {
                 	}
                 	catch(Exception e)
                 	{
-                		Logger myLogger = Logger.getLogger("MsgSendLogger");
-	  								Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
-//    								PropertyConfigurator.configure("log4j.properties");
-                		myLogger.info(FormatSysTime.getCurrentTimeA() + "testActive exception msg--Exception:" + e.toString());
+                		logger.debug("testActive exception msg--Exception:",e);
 
                 		System.out.println(e.toString());
-                		System.out.println("��������...");
-    		    	    p.cmpp_disconnect_from_ismg(con);
+                		System.out.println("重新连接...");
+    		    	    p.cmppDisconnectFromIsmg(con);
     		    	    cmppcon.destroy();
   								
     		    	    //cmppcon =null;
     		    	    try{
     		    	    	Thread.currentThread().sleep(10 * 1000);
-    		    	    	cmppcon = CMPPSingleConnect.getInstance(); //����
+    		    	    	cmppcon = CMPPSingleConnect.getInstance(); //重连
   									con = cmppcon.con;
-  									myLogger.info(FormatSysTime.getCurrentTimeA() + "ƽ̨0������������:" + e.toString());
+  									logger.debug("重连失败:",e);
     		    	    }catch(Exception e1){
     		    	    		
     		    	    }
-    		    	    //cmppcon = CMPPSingleConnect.getInstance(); //����
+    		    	    //cmppcon = CMPPSingleConnect.getInstance(); //重连
                 	}
   					
   			}
