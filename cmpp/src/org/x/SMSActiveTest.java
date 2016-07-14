@@ -62,7 +62,7 @@ public class SMSActiveTest implements Runnable {
 				// }
 				try {
 					p.cmpp_active_test(cmppcon.con);
-					Thread.currentThread().sleep(3000);
+					Thread.currentThread().sleep(5000);
 					// i++;
 					/*
 					 * if(i%6 == 0){ myLogger.info(FormatSysTime.getCurrentTimeA() +

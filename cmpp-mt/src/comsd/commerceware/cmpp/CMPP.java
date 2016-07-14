@@ -444,8 +444,11 @@ public final class CMPP {
 		do {
 
 			readHead(in, pack);
-			if (pack.pk_head.pk_cmd != 8)
+			if (pack.pk_head.pk_cmd != 8) {
 				break;
+			} else {
+				LOG.debug("receive gateway active");
+			}
 			// cmpp_send_active_resp(conn, pack.pk_head.pk_seq); //if pk_cmd =8 then
 			// send active_resp
 		} while (true);

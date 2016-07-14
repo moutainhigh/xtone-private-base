@@ -142,7 +142,7 @@ public final class CMPP {
 			// System.out.println("readHead_pk_len:" + p.pk_head.pk_len);
 			// System.out.println("readHead_pk_cmd:" + p.pk_head.pk_cmd);
 			// System.out.println("readHead_pk_seq:" + p.pk_head.pk_seq);
-
+			LOG.info("read resp message readHead_pk_seq:" + p.pk_head.pk_seq);
 		} catch (IOException e) {
 			System.out.println("readHead Exception");
 			e.printStackTrace();
@@ -272,7 +272,7 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pk_seq, 8);
 			out.write(buf, 0, 12); // 测试信息体为空
 			for (int i = 0; i < 12; i++) {
-				System.out.print(buf[i] + ",");
+				// System.out.print(buf[i] + ",");
 			}
 			// System.out.println("seq:"+conn.seq);
 			// System.out.println("sock:"+conn.sock);
@@ -458,7 +458,8 @@ public final class CMPP {
 			if (pack.pk_head.pk_cmd != 8) {
 				break;
 			} else {
-				System.out.println("receive gateway active...");
+				LOG.debug("receive gateway active");
+				// System.out.println("receive gateway active...");
 				cmpp_send_active_resp(conn, pack.pk_head.pk_seq); // if pk_cmd =8 then
 																													// send active_resp
 			}
