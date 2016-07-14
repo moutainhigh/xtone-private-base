@@ -120,11 +120,6 @@ public class ConfigManager {
 		return getProperty(key).length() == 0 ? defaultValue : getProperty(key);
 	}
 
-	/**
-	 * 闈欐�佸伐鍘傛柟娉�
-	 * 
-	 * @return 杩旇繕ConfigManager 绫荤殑鍗曚竴瀹炰緥
-	 */
 	synchronized public static ConfigManager getInstance() {
 		if (m_instance == null) {
 			m_instance = new ConfigManager();
