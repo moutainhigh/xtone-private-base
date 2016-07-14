@@ -1,6 +1,7 @@
 /**
  *Writter by airmirror
  *2003-12-14 
+ *单实例却有静态方法
  */
 
 package com.xiangtone.util;
@@ -151,3 +152,4 @@ public class ConfigManager {
 	}
 
 }
+
