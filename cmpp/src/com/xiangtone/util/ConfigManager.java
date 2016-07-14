@@ -1,9 +1,8 @@
 /**
  *Writter by airmirror
  *2003-12-14 
+ *单实例却有静态方法
  */
-
-
 package com.xiangtone.util;
 import java.util.Properties;
 
@@ -206,5 +205,9 @@ public class ConfigManager
 		{ 
 			return val; 
 		} 
+	}
+	
+	public static void main(String[] args) {
+		System.out.println((String)ConfigManager.getInstance().getConfigData("w_dbip_public", "w_dbip_public" + " dbip not found!"));
 	}
 } 
