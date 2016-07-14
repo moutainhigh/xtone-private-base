@@ -1,3 +1,4 @@
+package org.x;
 /**
 
 *Copyright 2003 Xiamen Xiangtone Co. Ltd.
@@ -8,7 +9,7 @@
 
 
 
-public class xiangtone_game
+public class gdxiangtone_game
 
 {
 
@@ -20,9 +21,9 @@ public class xiangtone_game
 
 		 {
 
-		  	System.out.print("创世短信游戏线程开始....");
+		  	System.out.print("创世广东短信游戏线程开始....");
 
-		  	VCPServer server = new VCPServer(7200);
+		  	VCPServer server = new VCPServer(7900);
 
           	server.start();
 
@@ -34,9 +35,9 @@ public class xiangtone_game
 
           	System.out.println("游戏定时触发发送线程开始...."); 
 
-         	 //GameServer game = new GameServer();
+         	 GameServer game = new GameServer();
 
-          	//new Thread(game).start();
+          	new Thread(game).start();
 
         }
 

@@ -1,3 +1,4 @@
+package org.x;
 /**
 *Copyright 2003 Xiamen Xiangtone Co. Ltd.
 *All right reserved.
