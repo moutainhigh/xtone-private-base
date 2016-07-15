@@ -30,6 +30,7 @@
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
+					<exclude>${runtime.env}/*.ini</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -42,6 +43,7 @@
 					<encoding>GBK</encoding>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -114,6 +116,13 @@
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<runtime.env>packageConfig\test</runtime.env>
+				<final.name>cmpp-test</final.name>
+			</properties>
 		</profile>
 	</profiles>
 </project>

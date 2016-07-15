@@ -26,7 +26,9 @@ public class CMPPSingleConnect {
   	public   static conn_desc con = new conn_desc();
   	private  cmppe_login cl = new cmppe_login();
   	public static int count=0;
-  	private int maxConnect=Integer.parseInt(ConfigManager.getInstance().getConfigData("max_connect"));
+  	private ConfigManager configManager=ConfigManager.getInstance();
+  	private int maxConnect=Integer.parseInt(configManager.getConfigData("max_connect"));
+  	
   	private CMPPSingleConnect(){
   		connectIsmg();
   	}
@@ -48,18 +50,25 @@ public class CMPPSingleConnect {
   			p.cmpp_login(con,cl);
   			count=0;
   		}catch(Exception e){
-  			count++;
-  			if(count>=maxConnect){
-  				count=0;
-  				try {
-					MailUtil.send("GATEWAY ERROR:form "+InetAddress.getLocalHost().getHostAddress(), ConfigManager.getInstance().getConfigData("mail_form"), ConfigManager.getInstance().getConfigData("mail_to"), "Trying to connect to dateway more than "+maxConnect);
-//  				MailUtil.send("短信网关连接异常", ConfigManager.getInstance().getConfigData("mail_form"), ConfigManager.getInstance().getConfigData("mail_to"), "短信网关尝试重连次数超过"+maxConnect+"次！");
-  				} catch (UnknownHostException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			if (configManager.getConfigData("mail_io").equals("true")) {
+				count++;
+				if (count >= maxConnect) {
+					count = 0;
+					try {
+						MailUtil.send("GATEWAY ERROR:form " + InetAddress.getLocalHost().getHostAddress(),
+								configManager.getConfigData("mail_form"), configManager.getConfigData("mail_to"),
+								"Trying to connect to dateway more than " + maxConnect);
+						// MailUtil.send("短信网关连接异常",
+						// configManager().getConfigData("mail_form"),
+						// configManager().getConfigData("mail_to"),
+						// "短信网关尝试重连次数超过"+maxConnect+"次！");
+					} catch (UnknownHostException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 
-  			}
+				}
+			}
   			System.out.println("err:login ismg failed! --CMPP_receive.java");
     		System.out.println(e.toString());
   		}
@@ -69,5 +78,7 @@ public class CMPPSingleConnect {
 		System.out.println("destory connect instance.......");
 		cmppcon = null;
 	}
-  	
+  	public static void main(String[] args) {
+		System.out.println(ConfigManager.getInstance().getConfigData("mail_io"));
+	}
 }
