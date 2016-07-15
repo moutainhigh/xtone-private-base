@@ -14,6 +14,9 @@ package org.x;
  */
 import comsd.commerceware.cmpp.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import com.xiangtone.util.ConfigManager;
 import com.xiangtone.util.MailUtil;
 
@@ -48,8 +51,14 @@ public class CMPPSingleConnect {
   			count++;
   			if(count>=maxConnect){
   				count=0;
-  				MailUtil.send("GATEWAY ERROR", ConfigManager.getInstance().getConfigData("SENDMAIL"), ConfigManager.getInstance().getConfigData("MAILTO"), "Trying to connect to dateway more than"+maxConnect);
-//  				MailUtil.send("短信网关连接异常", ConfigManager.getInstance().getConfigData("SENDMAIL"), ConfigManager.getInstance().getConfigData("MAILTO"), "短信网关尝试重连次数超过"+maxConnect+"次！");
+  				try {
+					MailUtil.send("GATEWAY ERROR:form "+InetAddress.getLocalHost().getHostAddress(), ConfigManager.getInstance().getConfigData("mail_form"), ConfigManager.getInstance().getConfigData("mail_to"), "Trying to connect to dateway more than "+maxConnect);
+//  				MailUtil.send("短信网关连接异常", ConfigManager.getInstance().getConfigData("mail_form"), ConfigManager.getInstance().getConfigData("mail_to"), "短信网关尝试重连次数超过"+maxConnect+"次！");
+  				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
   			}
   			System.out.println("err:login ismg failed! --CMPP_receive.java");
     		System.out.println(e.toString());
