@@ -211,8 +211,8 @@ public class SMSoperate {
 			smsmo.setMoCpnType(this.srcCpnType);
 			smsmo.setMOSpCode(smsus.getUSchedSpCode());
 			smsmo.setMOServerID(smsus.getUSchedServerID());
-			smsmo.setMOServerName(smsus.getUSched_gameCode());
-			smsmo.setMOServerAction(smsus.getUSched_actionCode());
+			smsmo.setMOServerName(smsus.getUSchedGameCode());
+			smsmo.setMOServerAction(smsus.getUSchedActionCode());
 			// smsmo.setMOVcpID(smsus.getUSchedVcpID());
 			smsmo.setMOVcpID(0);// ((r.nextInt(100)%4));
 			smsmo.setMOSpCodeFirst(this.deliverSpCode);

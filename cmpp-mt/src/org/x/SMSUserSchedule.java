@@ -48,7 +48,7 @@ public class SMSUserSchedule {
 		return gameCode;
 	}
 
-	public String getUSched_serverID() {
+	public String getUSchedServerID() {
 		return getServerIDbyServerName(getUSchedGameCode());
 	}
 
@@ -351,7 +351,7 @@ public class SMSUserSchedule {
 		String action_code = sms.getUSchedActionCode();
 		int vcp_id = sms.getUSchedVcpID();
 		String corp_id = sms.getUSchedCorpID();
-		String server_id = sms.getUSched_serverID();
+		String server_id = sms.getUSchedServerID();
 
 		System.out.println("game_code:" + game_code);
 		System.out.println("sp_code:" + sp_code);

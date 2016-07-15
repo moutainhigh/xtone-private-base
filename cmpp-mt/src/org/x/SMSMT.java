@@ -12,7 +12,6 @@ import org.apache.log4j.Logger;
 import com.xiangtone.sql.Mysqldb;
 
 import java.sql.*;
-import tempreportlog.*;
 
 public class SMSMT {
 	private static Logger logger = Logger.getLogger(SMSMT.class);

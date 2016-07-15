@@ -123,7 +123,7 @@ public class SMSRecive implements Runnable {
 
 					int iFmt = cd.getFmt();
 
-					int iTp_udhi = cd.getTp_udhi();
+					int iTp_udhi = cd.getTpUdhi();
 
 					String strSvcType = cd.getServerType();
 
