@@ -20,7 +20,12 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.2.Final</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${final.name}</finalName>

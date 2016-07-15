@@ -188,8 +188,13 @@ public class SMSRecive implements Runnable {
 
 							stat_dev = -1;
 
-						handle.receiveReport(this.ISMGID, msg_id, link_id, report_dest_cpn, str_spcode, str_cpn, submit_time,
-								done_time, stat_dev, stat2);
+						try {
+							handle.receiveReport(this.ISMGID, msg_id, link_id, report_dest_cpn, str_spcode, str_cpn, submit_time,
+									done_time, stat_dev, stat2);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
 						// handle.receiveReport(this.ISMGID,msg_id,report_dest_cpn,str_spcode,str_cpn,submit_time,done_time,stat_dev);
 
