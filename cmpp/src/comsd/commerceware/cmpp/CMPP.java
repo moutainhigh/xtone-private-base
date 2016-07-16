@@ -48,8 +48,112 @@ public final class CMPP {
 		}
 	}
 
+	public byte[] cmppLoginBytes(CmppLogin cl) {
+		byte[] buf = new byte[100];
+		int body_len = 0;
+
+		DataOutputStream out = null;
+		OutOfBoundsException e = new OutOfBoundsException();
+		// º”√‹
+		MD5 md5 = new MD5();
+		byte md5Byte[] = new byte[40];
+		memset(md5Byte, 40);
+		String strtime = Integer.toString(cl.icp_timestamp);
+		byte[] temp = tools.string2Bytes(strtime);
+
+		int id_len = cl.icp_id.length;
+
+		int auth_len = cl.icp_auth.length;
+		// System.out.println("auth_len:" + auth_len);
+
+		strcpy(md5Byte, cl.icp_id, 0, id_len);
+		strcpy(md5Byte, cl.icp_auth, 15, auth_len);
+		strcpy(md5Byte, temp, 15 + auth_len, temp.length);
+		int lengthMd5 = 15 + auth_len + temp.length;
+		int pkLen = 12;
+		int pkCmd = 0x00000001;
+		// if (conn.seq == 0x7fffffff)
+		// conn.seq = 1;
+		body_len = tools.strcpy(buf, cl.icp_id, pkLen);// add icp_id
+
+		byte[] bufMd5 = md5.getMD5ofStr(md5Byte, lengthMd5);// get md5 for
+																												// icp_auth
+		body_len += tools.strcpy(buf, bufMd5, body_len + pkLen); // add
+																															// icp_auth
+
+		body_len += tools.strcpy(buf, cl.icp_version, body_len + pkLen); // add
+																																			// icp_version
+		body_len += tools.strcpy(buf, cl.icp_timestamp, body_len + pkLen); // add
+																																				// icp_timestamp
+		// body_len
+		// +=tools.strcpy(buf,(short)cl.icp_timestamp,body_len+ch.pk_len); // add
+		// icp_timestamp
+
+		pkLen += body_len;
+		tools.strcpy(buf, pkLen, 0);
+		tools.strcpy(buf, pkCmd, 4);
+		tools.strcpy(buf, conn_desc.seq++, 8);
+		byte[] bufResult = new byte[pkLen];
+		for (int i = 0; i < pkLen; i++) {
+			bufResult[i] = buf[i];
+			// System.out.print(buf[i] + ",");
+		}
+
+		return bufResult;
+	}
+
+	public byte[] cmppLoginBodyBytes(CmppLogin cl) {
+		byte[] buf = new byte[100];
+		int body_len = 0;
+
+		DataOutputStream out = null;
+		OutOfBoundsException e = new OutOfBoundsException();
+		// º”√‹
+		MD5 md5 = new MD5();
+		byte md5Byte[] = new byte[40];
+		memset(md5Byte, 40);
+		String strtime = Integer.toString(cl.icp_timestamp);
+		byte[] temp = tools.string2Bytes(strtime);
+
+		int id_len = cl.icp_id.length;
+
+		int auth_len = cl.icp_auth.length;
+		// System.out.println("auth_len:" + auth_len);
+
+		strcpy(md5Byte, cl.icp_id, 0, id_len);
+		strcpy(md5Byte, cl.icp_auth, 15, auth_len);
+		strcpy(md5Byte, temp, 15 + auth_len, temp.length);
+		int lengthMd5 = 15 + auth_len + temp.length;
+		int pkLen = 0;
+		// if (conn.seq == 0x7fffffff)
+		// conn.seq = 1;
+		body_len = tools.strcpy(buf, cl.icp_id, pkLen);// add icp_id
+
+		byte[] bufMd5 = md5.getMD5ofStr(md5Byte, lengthMd5);// get md5 for
+																												// icp_auth
+		body_len += tools.strcpy(buf, bufMd5, body_len + pkLen); // add
+																															// icp_auth
+
+		body_len += tools.strcpy(buf, cl.icp_version, body_len + pkLen); // add
+																																			// icp_version
+		body_len += tools.strcpy(buf, cl.icp_timestamp, body_len + pkLen); // add
+																																				// icp_timestamp
+		// body_len
+		// +=tools.strcpy(buf,(short)cl.icp_timestamp,body_len+ch.pk_len); // add
+		// icp_timestamp
+
+		pkLen += body_len;
+		byte[] bufResult = new byte[pkLen];
+		for (int i = 0; i < pkLen; i++) {
+			bufResult[i] = buf[i];
+			// System.out.print(buf[i] + ",");
+		}
+
+		return bufResult;
+	}
+
 	// login ismg
-	public void cmpp_login(conn_desc conn, cmppe_login cl) throws IOException, OutOfBoundsException {
+	public void cmpp_login(conn_desc conn, CmppLogin cl) throws IOException, OutOfBoundsException {
 		cmppe_head ch = new cmppe_head();
 
 		byte[] buf = new byte[100];
