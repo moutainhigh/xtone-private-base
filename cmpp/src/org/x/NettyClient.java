@@ -25,7 +25,7 @@ public class NettyClient {
 	private final int port;
 	public static int SEQ = 1;
 	// Sleep 5 seconds before a reconnection attempt.
-	static final int RECONNECT_DELAY = 5;
+	public static final int RECONNECT_DELAY = 5;
 
 	// Reconnect when the server sends nothing for 10 seconds.
 	private static final int READ_TIMEOUT = 100;
@@ -46,7 +46,7 @@ public class NettyClient {
 		return configureBootstrap(b, new NioEventLoopGroup());
 	}
 
-	Bootstrap configureBootstrap(Bootstrap b, EventLoopGroup g) {
+	public Bootstrap configureBootstrap(Bootstrap b, EventLoopGroup g) {
 		b.group(g).channel(NioSocketChannel.class).remoteAddress(host, port).option(ChannelOption.TCP_NODELAY, true)
 				.handler(new ChannelInitializer<SocketChannel>() {
 					@Override

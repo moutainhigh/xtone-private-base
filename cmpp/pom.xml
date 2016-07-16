@@ -31,10 +31,13 @@
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
 			<resource>
+				<directory>${runtime.env}/</directory>
+			</resource>
+			<resource>
 				<directory>src</directory>
 				<excludes>
 					<exclude>**/*.java</exclude>
-					<exclude>${runtime.env}/*.ini</exclude>
+					<!-- <exclude>${runtime.env}/*.ini</exclude> -->
 				</excludes>
 			</resource>
 		</resources>
@@ -47,7 +50,7 @@
 					<encoding>GBK</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>

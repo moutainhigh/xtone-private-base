@@ -671,7 +671,7 @@ public final class CMPP {
 			ch.pk_seq = cd.seq;
 			sendHeader(ch, out);
 
-			ByteCode delv = new ByteCode(2);
+			ByteCode delv = new ByteCode(12);
 			delv.AddBytes(cd.msg_id);
 			// delv.AddInt8((short)cd.stat);
 			delv.AddInt32(cd.stat);
