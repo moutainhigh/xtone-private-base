@@ -18,7 +18,7 @@ import com.xiangtone.util.FormatSysTime;
  * ���ڷ����������Ӳ��԰���
  */
 import comsd.commerceware.cmpp.CMPP;
-import comsd.commerceware.cmpp.cmppe_login;
+import comsd.commerceware.cmpp.CmppLogin;
 import comsd.commerceware.cmpp.conn_desc;
 
 public class SMSActiveTest implements Runnable {
@@ -27,7 +27,7 @@ public class SMSActiveTest implements Runnable {
 	CMPP p = null;// new CMPP();
 	// public static conn_desc con = new conn_desc();
 	public conn_desc con;// = new conn_desc();
-	cmppe_login cl = new cmppe_login();
+	CmppLogin cl = new CmppLogin();
 	CMPPSingleConnect cmppcon;// = CMPPSingleConnect.getInstance();
 
 	public SMSActiveTest() {

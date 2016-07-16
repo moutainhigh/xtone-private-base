@@ -24,7 +24,7 @@ public class CMPPSingleConnect {
 	private  static CMPPSingleConnect cmppcon = null;
     private  CMPP p = new CMPP();
   	public   static conn_desc con = new conn_desc();
-  	private  cmppe_login cl = new cmppe_login();
+  	private  CmppLogin cl = new CmppLogin();
   	public static int count=0;
   	private ConfigManager configManager=ConfigManager.getInstance();
   	private int maxConnect=Integer.parseInt(configManager.getConfigData("max_connect"));
