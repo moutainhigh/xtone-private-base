@@ -355,67 +355,70 @@ public final class CMPP {
 		}
 	}
 
-	public void cmpp_active_test(conn_desc conn) throws IOException {
-		//////////////////////
-		// System.out.println("conn socket::::::::::::");
-		// System.out.println(conn.sock);
-		// System.out.println("conn socket::::::::::::");
-		/////////////////////
-		DataOutputStream out = null;
-		cmppe_head ch = new cmppe_head();
-		try {
-			out = new DataOutputStream(conn.sock.getOutputStream());
-			ch.pk_len = 12;
-			ch.pk_cmd = 8;
-			ch.pk_seq = conn.seq;
+	public synchronized void cmpp_active_test(conn_desc conn) throws IOException {
+		synchronized (conn) {
+			LOG.info("cmpp_active_test:begin");
+			DataOutputStream out = null;
+			cmppe_head ch = new cmppe_head();
+			try {
+				out = new DataOutputStream(conn.sock.getOutputStream());
+				ch.pk_len = 12;
+				ch.pk_cmd = 8;
+				ch.pk_seq = conn.seq;
 
-			byte[] buf = new byte[12];
-			int body_len = 0;
-			tools.strcpy(buf, ch.pk_len + body_len, 0);
-			tools.strcpy(buf, ch.pk_cmd, 4);
-			tools.strcpy(buf, ch.pk_seq, 8);
-			out.write(buf, 0, 12); // 测试信息体为空
-			for (int i = 0; i < 12; i++) {
-				// System.out.print(buf[i] + ",");
+				byte[] buf = new byte[12];
+				int body_len = 0;
+				tools.strcpy(buf, ch.pk_len + body_len, 0);
+				tools.strcpy(buf, ch.pk_cmd, 4);
+				tools.strcpy(buf, ch.pk_seq, 8);
+				out.write(buf, 0, 12); // 测试信息体为空
+				for (int i = 0; i < 12; i++) {
+					// System.out.print(buf[i] + ",");
+				}
+				// System.out.println("seq:"+conn.seq);
+				// System.out.println("sock:"+conn.sock);
+				out.flush();
+				conn.seq++;
+				if (conn.seq == 0x7fffffff)
+					conn.seq = 1;
+				out = null;
+			} catch (IOException e) {
+				out = null;
+				throw e;
 			}
-			// System.out.println("seq:"+conn.seq);
-			// System.out.println("sock:"+conn.sock);
-			out.flush();
-			conn.seq++;
-			if (conn.seq == 0x7fffffff)
-				conn.seq = 1;
-			out = null;
-		} catch (IOException e) {
-			out = null;
-			throw e;
+			LOG.info("cmpp_active_test:end");
 		}
 	}
 
 	protected void cmpp_send_active_resp(conn_desc conn, int seq) throws IOException {
-		cmppe_head ch = new cmppe_head();
+		synchronized (conn) {
+			LOG.info("cmpp_send_active_resp:begin");
+			cmppe_head ch = new cmppe_head();
 
-		try {
-			DataOutputStream out = new DataOutputStream(conn.sock.getOutputStream());
+			try {
+				DataOutputStream out = new DataOutputStream(conn.sock.getOutputStream());
 
-			ch.pk_len = 12;
-			ch.pk_cmd = 0x80000008;
-			ch.pk_seq = seq;
+				ch.pk_len = 12;
+				ch.pk_cmd = 0x80000008;
+				ch.pk_seq = seq;
 
-			byte active_resp_stat = 0;
-			byte[] buf = new byte[100];
-			int body_len = tools.strcpy(buf, active_resp_stat, ch.pk_len);
-			System.out.println("body_len is:" + body_len);
-			tools.strcpy(buf, ch.pk_len + body_len, 0);
-			tools.strcpy(buf, ch.pk_cmd, 4);
-			tools.strcpy(buf, ch.pk_seq, 8);
-			for (int i = 0; i < 13; i++) {
-				System.out.print(buf[i] + " ");
+				byte active_resp_stat = 0;
+				byte[] buf = new byte[100];
+				int body_len = tools.strcpy(buf, active_resp_stat, ch.pk_len);
+				// System.out.println("body_len is:" + body_len);
+				tools.strcpy(buf, ch.pk_len + body_len, 0);
+				tools.strcpy(buf, ch.pk_cmd, 4);
+				tools.strcpy(buf, ch.pk_seq, 8);
+				for (int i = 0; i < 13; i++) {
+					// System.out.print(buf[i] + " ");
+				}
+				// System.out.println();
+				out.write(buf, 0, 13);
+				out.flush();
+			} catch (IOException e) {
+				throw e;
 			}
-			System.out.println();
-			out.write(buf, 0, 13);
-			out.flush();
-		} catch (IOException e) {
-			throw e;
+			LOG.info("cmpp_send_active_resp:end");
 		}
 	}
 
@@ -663,39 +666,50 @@ public final class CMPP {
 	}
 
 	public void cmpp_send_deliver_resp(conn_desc conn, cmppe_deliver_result cd) throws IOException {
-		cmppe_head ch = new cmppe_head();
-		try {
-			DataOutput out = new DataOutputStream(conn.sock.getOutputStream());
-			ch.pk_cmd = 0x80000005;
-			ch.pk_len = 24;
-			ch.pk_seq = cd.seq;
-			sendHeader(ch, out);
+		synchronized (conn) {
+			LOG.info("cmpp_send_deliver_resp:begin" + " " + cd.msg_id);
+			// check msg_id
+			if (cd.msg_id.length != 8) {
+				LOG.error("cd.msg_id:" + cd.msg_id + " is wrong");
+				return;
+			}
+			cmppe_head ch = new cmppe_head();
+			try {
+				DataOutput out = new DataOutputStream(conn.sock.getOutputStream());
+				ch.pk_cmd = 0x80000005;
+				ch.pk_len = 24;
+				ch.pk_seq = cd.seq;
+				sendHeader(ch, out);
 
-			ByteCode delv = new ByteCode(12);
-			delv.AddBytes(cd.msg_id);
-			// delv.AddInt8((short)cd.stat);
-			delv.AddInt32(cd.stat);
-			out.write(delv.getBytes());
-		} catch (IOException e) {
-			throw e;
-		} catch (Exception e1) {
-			throw new IOException("decode error");
+				ByteCode delv = new ByteCode(12);
+				delv.AddBytes(cd.msg_id);
+				// delv.AddInt8((short)cd.stat);
+				delv.AddInt32(cd.stat);
+				out.write(delv.getBytes());
+			} catch (IOException e) {
+				throw e;
+			} catch (Exception e1) {
+				throw new IOException("decode error");
+			}
+			LOG.info("cmpp_send_deliver_resp:end");
 		}
 	}
 
 	protected void sendHeader(cmppe_head ch, DataOutput out) throws IOException {
-		try {
-			ByteCode bc = new ByteCode(3);
+		synchronized (out) {
+			try {
+				ByteCode bc = new ByteCode(3);
 
-			bc.AddInt32(ch.pk_len);
-			bc.AddInt32(ch.pk_cmd);
-			bc.AddInt32(ch.pk_seq);
+				bc.AddInt32(ch.pk_len);
+				bc.AddInt32(ch.pk_cmd);
+				bc.AddInt32(ch.pk_seq);
 
-			out.write(bc.getBytes());
-		} catch (IOException e) {
+				out.write(bc.getBytes());
+			} catch (IOException e) {
 
-			System.out.println("send Head Exception" + e.getMessage());
-			throw e;
+				System.out.println("send Head Exception" + e.getMessage());
+				throw e;
+			}
 		}
 	}
 
