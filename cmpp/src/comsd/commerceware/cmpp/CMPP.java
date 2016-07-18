@@ -560,17 +560,33 @@ public final class CMPP {
 		new DataOutputStream(conn.sock.getOutputStream());
 		in = new DataInputStream(conn.sock.getInputStream());
 		do {
-
-			readHead(in, pack);
-			if (pack.pk_head.pk_cmd != 8) {
-				break;
-			} else {
-				LOG.debug("receive gateway active");
-				// System.out.println("receive gateway active...");
-				cmpp_send_active_resp(conn, pack.pk_head.pk_seq); // if pk_cmd =8 then
-																													// send active_resp
+			if (in.available() >= 12) {
+				readHead(in, pack);
+				if (pack.pk_head.pk_cmd != 8) {
+					break;
+				} else {
+					LOG.debug("receive gateway active");
+					// System.out.println("receive gateway active...");
+					cmpp_send_active_resp(conn, pack.pk_head.pk_seq); // if pk_cmd =8 then
+					// send active_resp
+				}
 			}
 		} while (true);
+
+		// check package
+		boolean checkPackage = true;
+		while (checkPackage) {
+			if (in.available() >= pack.pk_head.pk_len - 12) {
+				checkPackage = false;
+			} else {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 
 		switch (pack.pk_head.pk_cmd) {
 		case -2147483648:

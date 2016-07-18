@@ -177,7 +177,7 @@ public class Mysqldb {
 			conn = DriverManager.getConnection(DBCon);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			conn.close();
+			// conn.close();
 		} catch (SQLException ex) {
 			System.err.println("aq.executeQuery:" + ex.getMessage());
 			System.err.println("aq.executeQuery: " + sql);
@@ -200,7 +200,7 @@ public class Mysqldb {
 		}
 		if (conn != null) {
 			try {
-				stmt.close();
+				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
