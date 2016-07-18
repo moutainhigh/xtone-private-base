@@ -7,150 +7,123 @@ package org.x;
 
 */
 
-import java.io.*;
+import java.io.IOException;
+import java.net.BindException;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-import java.net.*;
-//import org.apache.log4j.Logger;
-//import org.apache.log4j.PropertyConfigurator;
-
-
-/**
-
-*
-
-*
-
-*/
+import org.apache.log4j.Logger;
 
 public class VCPServer extends Thread
 
 {
 
+	private final static Logger LOG = Logger.getLogger(VCPServer.class);
+
+	protected int listenPort;
+
+	public VCPServer(int aListenPort)
+
+	{
+
+		listenPort = aListenPort;
+
+	}
+
 	/**
-
+	
 	*
-
+	
 	*
-
+	
 	*/
 
+	public void acceptConnections()
 
+	{
 
-    protected int listenPort;
+		try
 
-    
+		{
 
-    public VCPServer(int aListenPort) 
+			ServerSocket server = new ServerSocket(listenPort, 1000);
 
-    {
+			LOG.info("acceptConnections on port " + listenPort + " waiting ...");
 
-        listenPort = aListenPort;
+			Socket incomingConnection = null;
 
-     }
+			while (true)
 
-    /**
+			{
 
-    *
+				incomingConnection = server.accept();
 
-    *
+				// System.out.println(incomingConnection);
 
-    */
+				handleConnection(incomingConnection);
+			}
 
-    public void acceptConnections() 
+		}
 
-    {
+		catch (BindException e)
 
-        try 
+		{
+			e.printStackTrace();
+			// writeLog(e.toString());
+			System.out.println("Unable to bind to port " + listenPort);
 
-        {
+		}
 
-            ServerSocket server = new ServerSocket(listenPort, 1000);
+		catch (IOException e)
 
-             System.out.println("����vcp��Ϣ�ķ����߳�.... on port "+listenPort+" waiting ...");
+		{
+			e.printStackTrace();
+			// writeLog(e.toString());
+			System.out.println("Unable to instantiate a ServerSocket on port: " + listenPort);
 
-         
+		}
 
-            Socket incomingConnection = null;
+	}
 
-            while (true) 
+	/**
+	
+	*
+	
+	*
+	
+	*/
 
-            {
+	public void handleConnection(Socket connectionToHandle)
 
-                incomingConnection = server.accept();
+	{
 
-                //System.out.println(incomingConnection);
+		new Thread(new VCPConnectionHandler(connectionToHandle)).start();
 
-                handleConnection(incomingConnection);
-            }
+	}
 
-        } 
+	/**
+	
+	*
+	
+	*
+	
+	*/
 
-        catch (BindException e)
+	public void run()
 
-        {
-        	e.printStackTrace();
-						//writeLog(e.toString());
-            System.out.println("Unable to bind to port " + listenPort);
+	{
 
-        } 
+		VCPServer server = new VCPServer(listenPort);
 
-        catch (IOException e)
+		server.acceptConnections();
 
-        {
-        	e.printStackTrace();
-						//writeLog(e.toString());
-            System.out.println("Unable to instantiate a ServerSocket on port: " + listenPort);
-
-        }
-
-    }
-
-    /**
-
-    *
-
-    *
-
-    */
-
-    public void handleConnection(Socket connectionToHandle)
-
-    {
-
-        new Thread(new VCPConnectionHandler(connectionToHandle)).start();
-
-    
-
-    }
-
-    /**
-
-    *
-
-    *
-
-    */
-
-    public void run()
-
-    {
-
-        VCPServer server = new VCPServer(listenPort);
-
-        server.acceptConnections();
-
-        
-
-    }
-/*
-	private void writeLog(String logStr){//�����쳣��¼
-
-		Logger myLogger = Logger.getLogger("MsgSendLogger");
-		Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger"); 
-		PropertyConfigurator.configure("log4j.properties"); 
-		//logStr = this.compUrl + "\n" + logStr;
-		myLogger.info(logStr);
-	}   
-*/
+	}
+	/*
+	 * private void writeLog(String logStr){//�����쳣��¼
+	 * 
+	 * Logger myLogger = Logger.getLogger("MsgSendLogger"); Logger mySonLogger =
+	 * Logger.getLogger("myLogger.mySonLogger");
+	 * PropertyConfigurator.configure("log4j.properties"); //logStr = this.compUrl
+	 * + "\n" + logStr; myLogger.info(logStr); }
+	 */
 }
-

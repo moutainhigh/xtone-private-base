@@ -6,14 +6,12 @@ package comsd.commerceware.cmpp;
 
 import java.net.Socket;
 
-public final class conn_desc
-{
+public final class conn_desc {
 
-    public conn_desc()
-    {
-    }
+	public conn_desc() {
+	}
 
-    public Socket sock; //连接
-    public int seq;    //序号
-    public int status;
+	public Socket sock; // 连接
+	public static int seq; // 序号
+	public int status;
 }

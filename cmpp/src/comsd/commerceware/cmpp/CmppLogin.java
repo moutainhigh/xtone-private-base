@@ -9,10 +9,10 @@ package comsd.commerceware.cmpp;
 // Referenced classes of package com.commerceware.cmpp:
 //            OutOfBoundsException
 
-public final class cmppe_login
+public final class CmppLogin
 {
 
-    public cmppe_login()
+    public CmppLogin()
     {
         icp_id = new byte[6];
         icp_auth = new byte[9];

@@ -18,14 +18,16 @@ import com.xiangtone.util.FormatSysTime;
  * ���ڷ����������Ӳ��԰���
  */
 import comsd.commerceware.cmpp.CMPP;
-import comsd.commerceware.cmpp.cmppe_login;
+import comsd.commerceware.cmpp.CmppLogin;
 import comsd.commerceware.cmpp.conn_desc;
 
 public class SMSActiveTest implements Runnable {
+
+	static final private Logger LOG = Logger.getLogger(SMSActiveTest.class);
 	CMPP p = null;// new CMPP();
 	// public static conn_desc con = new conn_desc();
 	public conn_desc con;// = new conn_desc();
-	cmppe_login cl = new cmppe_login();
+	CmppLogin cl = new CmppLogin();
 	CMPPSingleConnect cmppcon;// = CMPPSingleConnect.getInstance();
 
 	public SMSActiveTest() {
@@ -52,14 +54,15 @@ public class SMSActiveTest implements Runnable {
 		try {
 			int i = 0;
 			while (true) {
-				System.out.println("-------send active test -------");
+
+				LOG.debug("send active test ");
 				// if(cmppcon == null )
 				// {
 				// cmppcon = CMPPSingleConnect.getInstance();
 				// }
 				try {
 					p.cmpp_active_test(cmppcon.con);
-					Thread.currentThread().sleep(3000);
+					Thread.currentThread().sleep(5000);
 					// i++;
 					/*
 					 * if(i%6 == 0){ myLogger.info(FormatSysTime.getCurrentTimeA() +
