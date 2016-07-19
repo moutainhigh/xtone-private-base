@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 public class SmSubmitResult extends SmResult {
 	private static Logger logger = Logger.getLogger(SmSubmitResult.class);
+
 	public SmSubmitResult() {
 
 	}
@@ -94,8 +95,8 @@ public class SmSubmitResult extends SmResult {
 		} catch (Exception e) {
 			// throw new Exception("decoding error");
 
-			logger.error("readInBytes",e);
-			
+			logger.error("readInBytes", e);
+
 		}
 	}
 
@@ -119,6 +120,7 @@ public class SmSubmitResult extends SmResult {
 	public static int feecpnType;
 	public static String linkId;
 	public static String msgId;
+
 	public static String getVcpId() {
 		return vcpId;
 	}

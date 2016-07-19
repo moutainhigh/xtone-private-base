@@ -9,8 +9,9 @@ import java.io.PrintStream;
 import org.apache.log4j.Logger;
 
 public final class CmppeDeliverResult extends CmppeResult {
-	
+
 	private static Logger logger = Logger.getLogger(CmppeDeliverResult.class);
+
 	public CmppeDeliverResult() {
 		msgId = new byte[8];
 		// submitTime = new byte[10];

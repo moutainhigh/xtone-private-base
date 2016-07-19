@@ -224,26 +224,26 @@ public class SMSMT {
 		// }
 		try {
 			strSql = "insert into sms_mtlog set ";
-			strSql+=" vcpid="+vcpID;
-			strSql+=",ismgid='"+ismgID+"'";
-			strSql+=",comp_msgid='"+submitMsgID+"'";// 用于标识下发的信息的Id
-			strSql+=",corpid='"+corpID+"'";
-			strSql+=",spcode='"+spCode+"'";
-			strSql+=",destcpn='"+destCpn+"'";
-			strSql+=",feecpn='"+feeCpn+"'";
-			strSql+=",serverid='"+serverID+"'";
-			strSql+=",servername='"+serverName+"'";
-			strSql+=",infofee='"+infoFee+"'";
-			strSql+=",feetype='"+feeType+"'";
-			strSql+=",feecode='"+feeCode+"'";
-			strSql+=",content='"+sendContent+"'";
-			strSql+=",linkid='"+linkID+"'";
-			strSql+=",mediatype="+mediaType;
-			strSql+=",sendtime='"+sendTime+"'";
-			//strSql+=",submit_msgid='"+submitMsgID+"'";
-			strSql+=",submit_msgid=''";
-			strSql+=",submit_result="+submitResult;
-			strSql+=",submit_seq="+submitSeq;
+			strSql += " vcpid=" + vcpID;
+			strSql += ",ismgid='" + ismgID + "'";
+			strSql += ",comp_msgid='" + submitMsgID + "'";// 用于标识下发的信息的Id
+			strSql += ",corpid='" + corpID + "'";
+			strSql += ",spcode='" + spCode + "'";
+			strSql += ",destcpn='" + destCpn + "'";
+			strSql += ",feecpn='" + feeCpn + "'";
+			strSql += ",serverid='" + serverID + "'";
+			strSql += ",servername='" + serverName + "'";
+			strSql += ",infofee='" + infoFee + "'";
+			strSql += ",feetype='" + feeType + "'";
+			strSql += ",feecode='" + feeCode + "'";
+			strSql += ",content='" + sendContent + "'";
+			strSql += ",linkid='" + linkID + "'";
+			strSql += ",mediatype=" + mediaType;
+			strSql += ",sendtime='" + sendTime + "'";
+			// strSql+=",submit_msgid='"+submitMsgID+"'";
+			strSql += ",submit_msgid=''";
+			strSql += ",submit_result=" + submitResult;
+			strSql += ",submit_seq=" + submitSeq;
 			logger.debug(strSql);
 			db.execUpdate(strSql);
 			/// add at 090525 ���ڽ��������п���
@@ -260,8 +260,9 @@ public class SMSMT {
 	*/
 	public void updateSubmitSeq(String ismgId, int seq, String msgId, int submitResult) {
 		try {
-			strSql = "update sms_mtlog set submit_seq = 0 ,submit_msgid='"+msgId+"',submit_result="+submitResult+" where submit_seq = "+seq+" and ismgid ='"+ismgId+"' order by id desc limit 1";
-    	    logger.debug(strSql);
+			strSql = "update sms_mtlog set submit_seq = 0 ,submit_msgid='" + msgId + "',submit_result=" + submitResult
+					+ " where submit_seq = " + seq + " and ismgid ='" + ismgId + "' order by id desc limit 1";
+			logger.debug(strSql);
 			db.execUpdate(strSql);
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.updateSubmitSeq(strSql);
@@ -305,22 +306,22 @@ public class SMSMT {
 		// }
 		try {
 			strSql = "insert into sms_mclog set ";
-			strSql+=" vcpid="+vcpID;
-			strSql+=",ismgid='"+ismgID+"'";
-			strSql+=",corpid='"+corpID+"'";
-			strSql+=",spcode='"+spCode+"'";
-			strSql+=",destcpn='"+destCpn+"'";
-			strSql+=",feecpn='"+feeCpn+"'";
-			strSql+=",serverid='"+serverID+"'";
-			strSql+=",servername='"+serverName+"'";
-			strSql+=",infofee='"+infoFee+"'";
-			strSql+=",feetype='"+feeType+"'";
-			strSql+=",feecode='"+feeCode+"'";
-			strSql+=",content='"+sendContent+"'";
-			strSql+=",mediatype="+mediaType;
-			strSql+=",sendtime='"+sendTime+"'";
-			strSql+=",submit_seq="+submitSeq;
-			strSql+=",card_flag="+cardFlag;
+			strSql += " vcpid=" + vcpID;
+			strSql += ",ismgid='" + ismgID + "'";
+			strSql += ",corpid='" + corpID + "'";
+			strSql += ",spcode='" + spCode + "'";
+			strSql += ",destcpn='" + destCpn + "'";
+			strSql += ",feecpn='" + feeCpn + "'";
+			strSql += ",serverid='" + serverID + "'";
+			strSql += ",servername='" + serverName + "'";
+			strSql += ",infofee='" + infoFee + "'";
+			strSql += ",feetype='" + feeType + "'";
+			strSql += ",feecode='" + feeCode + "'";
+			strSql += ",content='" + sendContent + "'";
+			strSql += ",mediatype=" + mediaType;
+			strSql += ",sendtime='" + sendTime + "'";
+			strSql += ",submit_seq=" + submitSeq;
+			strSql += ",card_flag=" + cardFlag;
 			logger.debug(strSql);
 			db.execUpdate(strSql);
 		} catch (Exception e) {

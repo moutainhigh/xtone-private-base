@@ -54,9 +54,10 @@ public class SMSRecive implements Runnable {
 
 	public void run() {
 
-		//////////////////日志记录/////////////
+		////////////////// 日志记录/////////////
 
-		// ThreadPoolManager moPoolManger = new ThreadPoolManager(500,this.ISMGID);
+		// ThreadPoolManager moPoolManger = new
+		// ThreadPoolManager(500,this.ISMGID);
 
 		//////////////////////////////////////
 
@@ -72,12 +73,12 @@ public class SMSRecive implements Runnable {
 
 				{
 
-					sr.flag = -1; //复位
+					sr.flag = -1; // 复位
 
 					String strRespMsgId = IntByteConvertor.getLong(sr.msgId, 0) + "";// MyTools.Bytes2HexString(sr.msgId);MyTools.Bytes2HexString(sr.msgId);//new
-																																							// String(sr.msgId2)//IntByteConvertor.getLong(sr.msgId,0)
-																																							// +
-																																							// "";//MyTools.Bytes2HexString(sr.msgId);
+																						// String(sr.msgId2)//IntByteConvertor.getLong(sr.msgId,0)
+																						// +
+																						// "";//MyTools.Bytes2HexString(sr.msgId);
 
 					int iRespResult = sr.result;
 
@@ -95,7 +96,7 @@ public class SMSRecive implements Runnable {
 
 				}
 
-				if (cd.STAT == 0) //说明有消息上来了
+				if (cd.STAT == 0) // 说明有消息上来了
 
 				{
 
@@ -107,7 +108,7 @@ public class SMSRecive implements Runnable {
 
 					// moPoolManger.process1(cd);
 
-					///////////////////////进行重构，加入线程池 date:2008-11-26 16:09
+					/////////////////////// 进行重构，加入线程池 date:2008-11-26 16:09
 
 					String msgId = IntByteConvertor.getLong(cd.msgId, 0) + "";// MyTools.Bytes2HexString(cd.getMsgId());
 
@@ -151,8 +152,10 @@ public class SMSRecive implements Runnable {
 
 					System.out.println("........................");
 
-					// myLogger.info(FormatSysTime.getCurrentTimeA() + " new msg--spcode:"
-					// + strSpcode +" cpn:" + strCpn.trim() + " linkId:" + linkId + "
+					// myLogger.info(FormatSysTime.getCurrentTimeA() + " new
+					// msg--spcode:"
+					// + strSpcode +" cpn:" + strCpn.trim() + " linkId:" +
+					// linkId + "
 					// content:" + new String(strContent));
 
 					if (iReportFlag == 1)
@@ -173,9 +176,12 @@ public class SMSRecive implements Runnable {
 
 						System.out.println("stat2:" + stat2);
 
-						// myLogger.info(FormatSysTime.getCurrentTimeA() + "report
-						// msg--spcode:" + strSpcode +" cpn:" + reportDestCpn.trim() + "
-						// msgid:" + msgId + " submitTime:" + submitTime +" doneTime:" +
+						// myLogger.info(FormatSysTime.getCurrentTimeA() +
+						// "report
+						// msg--spcode:" + strSpcode +" cpn:" +
+						// reportDestCpn.trim() + "
+						// msgid:" + msgId + " submitTime:" + submitTime +"
+						// doneTime:" +
 						// doneTime + " statDev:" + stat2);
 
 						int statDev = 0;
@@ -197,7 +203,7 @@ public class SMSRecive implements Runnable {
 
 					}
 
-					cd.printAll(); //打印mo消息;
+					cd.printAll(); // 打印mo消息;
 
 					///////////////////////////////
 					///////////////////////////////
@@ -255,7 +261,7 @@ public class SMSRecive implements Runnable {
 
 				}
 
-				cmppcon = CMPPSingleConnect.getInstance(); //重连
+				cmppcon = CMPPSingleConnect.getInstance(); // 重连
 
 				con = cmppcon.con;
 

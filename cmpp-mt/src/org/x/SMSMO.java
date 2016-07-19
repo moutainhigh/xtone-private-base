@@ -16,17 +16,17 @@ public class SMSMO {
 	 * 
 	 */
 	private static Logger logger = Logger.getLogger(SMSMO.class);
-	protected String cpn;//用户手机号
+	protected String cpn;// 用户手机号
 	protected int cpnType;
-	protected String spCode; //特别服务号(长号)
-	protected String spCodeFirst;//特服务号
-	protected String svcType; //业务类型
-	protected String content; //短信内容
-	protected String serverName;//content分解0 ,业务代号
-	protected String serverID; //服务id
-	protected String serverAction = ""; //content分解1 ,业务指令
-	protected String deliverTime; //接收时间
-	protected String ismgID; //省网关标志(01北京06辽宁08黑龙江15山东19广东  
+	protected String spCode; // 特别服务号(长号)
+	protected String spCodeFirst;// 特服务号
+	protected String svcType; // 业务类型
+	protected String content; // 短信内容
+	protected String serverName;// content分解0 ,业务代号
+	protected String serverID; // 服务id
+	protected String serverAction = ""; // content分解1 ,业务指令
+	protected String deliverTime; // 接收时间
+	protected String ismgID; // 省网关标志(01北京06辽宁08黑龙江15山东19广东
 	protected int vcpID;
 	protected int len;
 	protected int tpUdhi = 0;
@@ -189,7 +189,7 @@ public class SMSMO {
 			logger.debug(strSql);
 			db.execUpdate(strSql);
 		} catch (Exception e) {
-			logger.error("insertMOLog",e);
+			logger.error("insertMOLog", e);
 			e.printStackTrace();
 		}
 	}
@@ -215,7 +215,7 @@ public class SMSMO {
 			logger.debug(strSql);
 			db.execUpdate(strSql);
 		} catch (Exception e) {
-			logger.error("insertErrorMOLog",e);
+			logger.error("insertErrorMOLog", e);
 			e.printStackTrace();
 		}
 	}
@@ -230,7 +230,7 @@ public class SMSMO {
 				return corp_id;
 			}
 		} catch (Exception e) {
-			logger.error("getMOCorpID",e);
+			logger.error("getMOCorpID", e);
 			e.printStackTrace();
 		}
 		return "00";
@@ -250,7 +250,7 @@ public class SMSMO {
 				return gameid;
 			}
 		} catch (Exception e) {
-			logger.error("getGameID",e);
+			logger.error("getGameID", e);
 			e.printStackTrace();
 		}
 		return "";
@@ -271,7 +271,8 @@ public class SMSMO {
 				return ismgid;
 			}
 		} catch (Exception e) {
-			logger.error("getImsgID", e);;
+			logger.error("getImsgID", e);
+			;
 			e.printStackTrace();
 		}
 		return "01";

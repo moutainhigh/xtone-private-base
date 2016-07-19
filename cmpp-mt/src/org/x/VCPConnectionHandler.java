@@ -44,7 +44,7 @@ public class VCPConnectionHandler implements Runnable {
 	public void run() {
 		try {
 
-			mess.readPa(con); //读取提交信息
+			mess.readPa(con); // 读取提交信息
 			String stat = sm.getStat();
 			logger.debug("stat....:" + stat);
 			//
@@ -55,7 +55,8 @@ public class VCPConnectionHandler implements Runnable {
 				String corpId = "00";
 				int vcpId = 1;
 				vcpId = Integer.parseInt(sm.getVcpId()); // getvcpId();
-				String spCode = sm.getServerCode();//特服号没有  //sm.getServerCode();
+				String spCode = sm.getServerCode();// 特服号没有
+													// //sm.getServerCode();
 
 				int mediaType = Integer.parseInt(sm.getMediaType());
 				String destCpn = sm.getDestCpn();
@@ -114,13 +115,11 @@ public class VCPConnectionHandler implements Runnable {
 				 * logger.debug("////////////////");
 				 * logger.debug("////////////////");
 				 * logger.debug("////////////////");
-				 * logger.debug("////////////////");
-				 * logger.debug("serverId:" + serverId);
-				 * logger.debug("cpntype is:" + mt.cpnType);
-				 * logger.debug("linkid is:" + mt.linkID);
-				 * logger.debug("content is:" + mt.sendContent);
-				 * logger.debug("msgId is:" + mt.submitMsgID);
-				 * logger.debug("////////////////");
+				 * logger.debug("////////////////"); logger.debug("serverId:" +
+				 * serverId); logger.debug("cpntype is:" + mt.cpnType);
+				 * logger.debug("linkid is:" + mt.linkID); logger.debug(
+				 * "content is:" + mt.sendContent); logger.debug("msgId is:" +
+				 * mt.submitMsgID); logger.debug("////////////////");
 				 * logger.debug("////////////////");
 				 * logger.debug("////////////////");
 				 * logger.debug("////////////////");
@@ -138,17 +137,17 @@ public class VCPConnectionHandler implements Runnable {
 				CMPPSend mysms = myFactory.createSMS(ismgId, mt);
 				switch (mediaType) {
 				case 1:
-					mysms.sendTextSMS(); //发送文本
+					mysms.sendTextSMS(); // 发送文本
 					break;
 				case 2:
-					mysms.sendBinaryPicSMS(); //发送图片
+					mysms.sendBinaryPicSMS(); // 发送图片
 					break;
 				case 3:
-					mysms.sendBinaryRingSMS();//发送铃声
+					mysms.sendBinaryRingSMS();// 发送铃声
 					break;
 
 				default:
-					mysms.sendTextSMS(); //发送文本
+					mysms.sendTextSMS(); // 发送文本
 					break;
 				}
 				logger.debug("mt.feeType:" + mt.feeType);
@@ -159,7 +158,7 @@ public class VCPConnectionHandler implements Runnable {
 
 		} // end try
 		catch (Exception e) {
-			logger.error("Error handling a client: ",e);
+			logger.error("Error handling a client: ", e);
 			e.printStackTrace();
 		}
 

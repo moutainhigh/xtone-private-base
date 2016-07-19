@@ -70,7 +70,7 @@ public class SMSActiveTest implements Runnable {
 			}
 
 		} catch (Exception e) {
-			logger.error("SMSActiveTest",e);
+			logger.error("SMSActiveTest", e);
 		}
 	}
 }

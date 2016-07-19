@@ -60,7 +60,7 @@ public class SMSoperate {
 			if (srcCpn.length() > 11)
 				srcCpn = srcCpn.substring(2, 13);
 		} catch (IndexOutOfBoundsException e) {
-			logger.error("srcCpn length error",e);
+			logger.error("srcCpn length error", e);
 		}
 		this.deliverSrcCpn = srcCpn;
 
@@ -90,9 +90,9 @@ public class SMSoperate {
 	*/
 	public SMSoperate() {
 		/*
-		 * smsmo = new SMSMO(); smsmt = new SMSMT(); smsus = new SMSUserSchedule();
-		 * smsreport = new SMSReport(); smsTovcp = new SMSMOtoVCP(); user=new
-		 * SMSUser();
+		 * smsmo = new SMSMO(); smsmt = new SMSMT(); smsus = new
+		 * SMSUserSchedule(); smsreport = new SMSReport(); smsTovcp = new
+		 * SMSMOtoVCP(); user=new SMSUser();
 		 */
 		// smsus = new SMSUserSchedule();
 		// smsreport = new SMSReport();
@@ -114,7 +114,7 @@ public class SMSoperate {
 			smsmt.updateSubmitSeq();
 
 		} catch (Exception e) {
-			logger.error("receiveSubmitResp",e);
+			logger.error("receiveSubmitResp", e);
 		}
 	}
 
@@ -146,7 +146,7 @@ public class SMSoperate {
 			smsreport.insertReportLog();
 		} catch (Exception e) {
 			e.printStackTrace();
-			logger.error("receiveReport",e);
+			logger.error("receiveReport", e);
 		}
 	}
 
@@ -240,7 +240,7 @@ public class SMSoperate {
 			// user.db.close();
 			// Thread.currentThread().sleep(200);
 		} catch (Exception e) {
-			logger.error("",e);
+			logger.error("", e);
 		}
 
 	}

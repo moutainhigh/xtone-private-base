@@ -19,40 +19,43 @@ import java.lang.*;
 import org.apache.log4j.Logger;
 
 import java.io.*;
+
 public class CMPPSingleConnect {
-	private  static CMPPSingleConnect cmppcon = null;
+	private static CMPPSingleConnect cmppcon = null;
 	private static Logger logger = Logger.getLogger(CMPPSingleConnect.class);
-    private  CMPP p = new CMPP();
-  	public   static ConnDesc con = new ConnDesc();
-  	private  CmppeLogin cl = new CmppeLogin();
-  	private CMPPSingleConnect(){
-  		connectIsmg();
-  	}
-  	public static synchronized CMPPSingleConnect getInstance(){
-  		if(cmppcon == null){
-  			cmppcon = new CMPPSingleConnect();		
-  		}
-  		return cmppcon;
-  	}
-  	
-  	private void connectIsmg(){
-  		try{
-  			logger.debug("登陆北京网关:" + SMSIsmgInfo.qwIsmgIp);
-//  			p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
-  			p.cmppConnectToIsmg("127.0.0.1",7891,con);//test
-  			cl.setIcpid(SMSIsmgInfo.qwIcpID);
-  			cl.setAuth(SMSIsmgInfo.qwIcpShareKey);
-  			cl.setVersion((byte)0x30);
-  			cl.setTimestamp(1111101020);
-  			p.cmppLogin(con,cl);
-  		}catch(Exception e){
-  			logger.error("login ismg failed!",e);
-    		e.printStackTrace();
-  		}
-  	}
-  	synchronized public static void destroy()
-	{
-  		logger.debug("destory connect instance.......");
-		cmppcon =null;
+	private CMPP p = new CMPP();
+	public static ConnDesc con = new ConnDesc();
+	private CmppeLogin cl = new CmppeLogin();
+
+	private CMPPSingleConnect() {
+		connectIsmg();
+	}
+
+	public static synchronized CMPPSingleConnect getInstance() {
+		if (cmppcon == null) {
+			cmppcon = new CMPPSingleConnect();
+		}
+		return cmppcon;
+	}
+
+	private void connectIsmg() {
+		try {
+			logger.debug("登陆北京网关:" + SMSIsmgInfo.qwIsmgIp);
+			// p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
+			p.cmppConnectToIsmg("127.0.0.1", 7891, con);// test
+			cl.setIcpid(SMSIsmgInfo.qwIcpID);
+			cl.setAuth(SMSIsmgInfo.qwIcpShareKey);
+			cl.setVersion((byte) 0x30);
+			cl.setTimestamp(1111101020);
+			p.cmppLogin(con, cl);
+		} catch (Exception e) {
+			logger.error("login ismg failed!", e);
+			e.printStackTrace();
+		}
+	}
+
+	synchronized public static void destroy() {
+		logger.debug("destory connect instance.......");
+		cmppcon = null;
 	}
 }

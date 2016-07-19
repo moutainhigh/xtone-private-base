@@ -5,31 +5,26 @@
 
 package comsd.commerceware.cmpp;
 
-
 // Referenced classes of package com.commerceware.cmpp:
 //            OutOfBoundsException
 
-public final class CmppeCancel
-{
+public final class CmppeCancel {
 
-    public CmppeCancel()
-    {
-        msgId = new byte[8];
-    }
+	public CmppeCancel() {
+		msgId = new byte[8];
+	}
 
-    public void setMsgid(String msgid)
-        throws OutOfBoundsException
-    {
-        OutOfBoundsException e = new OutOfBoundsException();
-        int len = msgid.length();
-        if(len > 64)
-            throw e;
-        int j;
-        for(j = 0; j < len; j++)
-            msgId[j] = (byte)msgid.charAt(j);
+	public void setMsgid(String msgid) throws OutOfBoundsException {
+		OutOfBoundsException e = new OutOfBoundsException();
+		int len = msgid.length();
+		if (len > 64)
+			throw e;
+		int j;
+		for (j = 0; j < len; j++)
+			msgId[j] = (byte) msgid.charAt(j);
 
-        msgId[j] = 0;
-    }
+		msgId[j] = 0;
+	}
 
-    protected byte msgId[];
+	protected byte msgId[];
 }

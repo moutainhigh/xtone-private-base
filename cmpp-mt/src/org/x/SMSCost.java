@@ -92,7 +92,7 @@ public class SMSCost {
 			// rs =null;
 			// db =null;
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 	}
 
@@ -120,7 +120,7 @@ public class SMSCost {
 			rs = null;
 			// db =null;//not do it
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 	}
 }

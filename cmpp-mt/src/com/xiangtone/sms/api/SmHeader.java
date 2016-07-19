@@ -4,13 +4,11 @@
 */
 package com.xiangtone.sms.api;
 
-public final class SmHeader
-{
+public final class SmHeader {
 
-    public SmHeader()
-    {
-    }
+	public SmHeader() {
+	}
 
-    protected int pkLen;
-    protected int pkCmd;
+	protected int pkLen;
+	protected int pkCmd;
 }

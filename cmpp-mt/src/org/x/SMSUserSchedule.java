@@ -22,13 +22,13 @@ public class SMSUserSchedule {
 	Mysqldb db;
 	ResultSet rs = null;
 	String strSql;
-	public static final int SPCODE_LEN=8; //基础号长度
-	public static final int CORP_LEN=2;//媒体号长度
-	public static final int GAME_LEN=3;//游戏号长度
-	public static final int GAME_LEN1=2;//游戏长度为2
-	public static final int GAME_LEN2=1;//游戏长度为1
-	public static final int GAME_LEN3=4;//游戏长度为4
-	public static final int GAME_LEN4=5;//游戏长度为5
+	public static final int SPCODE_LEN = 8; // 基础号长度
+	public static final int CORP_LEN = 2;// 媒体号长度
+	public static final int GAME_LEN = 3;// 游戏号长度
+	public static final int GAME_LEN1 = 2;// 游戏长度为2
+	public static final int GAME_LEN2 = 1;// 游戏长度为1
+	public static final int GAME_LEN3 = 4;// 游戏长度为4
+	public static final int GAME_LEN4 = 5;// 游戏长度为5
 
 	String gameCode = "";
 	String spCode = "";
@@ -96,7 +96,7 @@ public class SMSUserSchedule {
 		}
 		logger.debug("game id:" + this.gameID);
 		logger.debug("spcode:" + this.spCode);
-		int offset = content.indexOf(" ", 0);//判断空格
+		int offset = content.indexOf(" ", 0);// 判断空格
 		if (offset > 0) {
 			gameCode = content.substring(0, offset);
 			actionCode = content.substring(offset + 1);
@@ -274,7 +274,7 @@ public class SMSUserSchedule {
 				this.vcpID = rs.getInt("vcpid");
 			}
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 		return flag;
 	}
@@ -286,8 +286,8 @@ public class SMSUserSchedule {
 	public boolean isGameIDExist(String gameId) {
 		boolean flag = false;
 		try {
-			strSql = "select gamename,gameid,vcpid from sms_gamelist where gameid='" + gameId + "' and ismgid='" + ismgId
-					+ "'";
+			strSql = "select gamename,gameid,vcpid from sms_gamelist where gameid='" + gameId + "' and ismgid='"
+					+ ismgId + "'";
 			logger.debug(strSql);
 			rs = db.execQuery(strSql);
 			if (rs.next()) {
@@ -299,15 +299,14 @@ public class SMSUserSchedule {
 				this.vcpID = rs.getInt("vcpid");
 			}
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 		return flag;
 	}
 
 	/**
-	*如果存在合作伙伴id 就返回
-	*不存在就使用默认
-	*/
+	 * 如果存在合作伙伴id 就返回 不存在就使用默认
+	 */
 	public boolean isCorpIDExist(String id) {
 		strSql = "select * from sms_company where corp_id='" + id + "'";
 		try {
@@ -316,7 +315,7 @@ public class SMSUserSchedule {
 			if (!rs.next())
 				return false;
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 		this.corpID = id;
 		return true;
@@ -324,7 +323,7 @@ public class SMSUserSchedule {
 	}
 
 	/**
-	 *通过servername 得到serverid
+	 * 通过servername 得到serverid
 	 *
 	 */
 	private String getServerIDbyServerName(String servername) {
@@ -338,7 +337,7 @@ public class SMSUserSchedule {
 				return _serverid;
 			}
 		} catch (Exception e) {
-			logger.error(strSql,e);
+			logger.error(strSql, e);
 		}
 		return this.serverID;
 	}

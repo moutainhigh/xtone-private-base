@@ -4,12 +4,10 @@
 */
 package com.xiangtone.sms.api;
 
+public class SmResult {
 
-public class SmResult
-{
+	public SmResult() {
+	}
 
-    public SmResult()
-    {
-    }
-    public int packCmd;
+	public int packCmd;
 }

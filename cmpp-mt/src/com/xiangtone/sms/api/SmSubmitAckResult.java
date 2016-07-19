@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 public class SmSubmitAckResult extends SmResult {
 	private static Logger logger = Logger.getLogger(SmSubmitAckResult.class);
+
 	public SmSubmitAckResult() {
 
 	}
@@ -36,7 +37,7 @@ public class SmSubmitAckResult extends SmResult {
 			}
 		} catch (Exception e) {
 			// throw new Exception("decoding error");
-			logger.error("readInBytes",e);
+			logger.error("readInBytes", e);
 		}
 
 	}

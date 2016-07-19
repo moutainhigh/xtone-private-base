@@ -263,9 +263,9 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pkSeq, 8);
 			out.write(buf, 0, 12); // 测试信息体为空
 			logger.debug(Arrays.toString(buf));
-//			for (int i = 0; i < 12; i++) {
-//				logger.debug(buf[i] + ",");
-//			}
+			// for (int i = 0; i < 12; i++) {
+			// logger.debug(buf[i] + ",");
+			// }
 			// System.out.println("seq:"+conn.seq);
 			// System.out.println("sock:"+conn.sock);
 			out.flush();
