@@ -67,8 +67,8 @@ public class Mysqldb {
 	public Mysqldb() {
 		try {
 			Class.forName(sDBDriver);
-			this.dbIp = (String) ConfigManager.getConfigData("xiangtone_dbIp", "xiangtone_dbIp" + " dbIp not found!");
-			this.dbPort = Integer.parseInt((String) ConfigManager.getConfigData("xiangtone_dbPort",
+			this.dbIp = (String) ConfigManager.getConfigData("xiangtone_dbip", "xiangtone_dbIp" + " dbIp not found!");
+			this.dbPort = Integer.parseInt((String) ConfigManager.getConfigData("xiangtone_dbport",
 					"xiangtone_dbPort" + " dbPort not found!"));
 			this.dbName = (String) ConfigManager.getConfigData("xiangtone_dbname",
 					"xiangtone_dbname" + " dbname not found!");

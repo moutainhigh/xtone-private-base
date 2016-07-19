@@ -187,7 +187,7 @@ public class ConfigManager {
 		m_lastModifiedTime = newTime;
 		Object val = m_props.getProperty(name);
 		if (val == null) {
-			System.out.println("error:" + defaultVal);
+			logger.error("error:" + defaultVal);
 			return defaultVal;
 		} else {
 			return val;

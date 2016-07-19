@@ -9,8 +9,10 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class SMSIsmgInfo {
+import org.apache.log4j.Logger;
 
+public class SMSIsmgInfo {
+	private static Logger logger = Logger.getLogger(SMSIsmgInfo.class);
 	public static String fjIsmgSpCode;
 	public static String fjIsmgIp;
 	public static int fjIsmgPort;
@@ -62,37 +64,38 @@ public class SMSIsmgInfo {
 				props = new Properties();
 				props.load(in);
 			} else {
-				System.out.println("Can not read the properties file:" + configFile);
+				logger.error("Can not read the properties file:" + configFile);
+				
 				return false;
 			}
 			////////////// fj ismg&sp information
 			String strTmp = "";
-			strTmp = props.getProperty("fjIsmgPort", "paramName").trim();
-			this.fjIsmgIp = props.getProperty("fjIsmgIp", "paramName").trim();
-			this.fjIsmgSpCode = props.getProperty("fjIsmgSpCode", "paraName").trim();
-			this.fjIcpID = props.getProperty("fjIcpID", "paramName").trim();
-			this.fjIcpShareKey = props.getProperty("fjIcpShareKey", "paramName").trim();
+			strTmp = props.getProperty("fj_ismg_port", "paramName").trim();
+			this.fjIsmgIp = props.getProperty("fj_ismg_ip", "paramName").trim();
+			this.fjIsmgSpCode = props.getProperty("fj_ismg_spCode", "paraName").trim();
+			this.fjIcpID = props.getProperty("fj_icpID", "paramName").trim();
+			this.fjIcpShareKey = props.getProperty("fj_icpShareKey", "paramName").trim();
 			try {
 				this.fjIsmgPort = Integer.parseInt(strTmp);
 			} catch (Exception e) {
-				System.out.println("ICPSocket conver to int error!!!!!!!");
+				logger.error("ICPSocket conver to int error!",e);
 			}
 			////////////// gd ismg&sp information
 			// String strTmp = "";
 
-			strTmp = props.getProperty("qwIsmgPort", "paramName").trim();
-			this.qwIsmgIp = props.getProperty("qwIsmgIp", "paramName").trim();
-			this.qwIsmgSpCode = props.getProperty("qwIsmgSpCode", "paraName").trim();
-			this.qwIcpID = props.getProperty("qwIcpID", "paramName").trim();
-			this.qwIcpShareKey = props.getProperty("qwIcpShareKey", "paramName").trim();
+			strTmp = props.getProperty("qw_ismg_port", "paramName").trim();
+			this.qwIsmgIp = props.getProperty("qw_ismg_ip", "paramName").trim();
+			this.qwIsmgSpCode = props.getProperty("qw_ismg_spCode", "paraName").trim();
+			this.qwIcpID = props.getProperty("qw_icpID", "paramName").trim();
+			this.qwIcpShareKey = props.getProperty("qw_icpShareKey", "paramName").trim();
 			try {
 				this.qwIsmgPort = Integer.parseInt(strTmp);
 			} catch (Exception e) {
-				System.out.println("ICPSocket conver to int error!!");
+				logger.error("ICPSocket conver to int error!",e);
 			}
 
 		} catch (Exception e) {
-			System.out.println("read profile.ini file error!" + e);
+			logger.error("read profile.ini file error!",e);
 			return false;
 		}
 		return true;
@@ -112,11 +115,11 @@ public class SMSIsmgInfo {
 	}
 
 	private void prt(String name, String content) {
-		System.out.println(name + content);
+		logger.debug(name + content);
 	}
 
 	private void prt(String name, int num) {
-		System.out.println(name + num);
+		logger.debug(name + num);
 	}
 
 	public static String getIsmgSpCode(String ismgid) {

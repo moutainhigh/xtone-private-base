@@ -21,7 +21,7 @@ import org.apache.log4j.Logger;
 import java.io.*;
 public class CMPPSingleConnect {
 	private  static CMPPSingleConnect cmppcon = null;
-	private static Logger logger = Logger.getLogger(Test.class);
+	private static Logger logger = Logger.getLogger(CMPPSingleConnect.class);
     private  CMPP p = new CMPP();
   	public   static ConnDesc con = new ConnDesc();
   	private  CmppeLogin cl = new CmppeLogin();
@@ -37,8 +37,9 @@ public class CMPPSingleConnect {
   	
   	private void connectIsmg(){
   		try{
-  			System.out.println("登陆北京网关:" + SMSIsmgInfo.qwIsmgIp);
-  			p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
+  			logger.debug("登陆北京网关:" + SMSIsmgInfo.qwIsmgIp);
+//  			p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
+  			p.cmppConnectToIsmg("127.0.0.1",7891,con);//test
   			cl.setIcpid(SMSIsmgInfo.qwIcpID);
   			cl.setAuth(SMSIsmgInfo.qwIcpShareKey);
   			cl.setVersion((byte)0x30);

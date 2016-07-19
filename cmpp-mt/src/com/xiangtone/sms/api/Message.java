@@ -20,7 +20,7 @@ public class Message {
 		try {
 			s = new Socket(host, port);
 			s.setSoTimeout(0x927c0);
-			System.out.println(s.toString());
+			logger.debug(s.toString());
 		} catch (IOException e) {
 			logger.error("connectToServer", e);
 			throw e;
@@ -53,7 +53,7 @@ public class Message {
 			int bodyLen = buf.length; // 信息体长度
 			byte[] header = new byte[8]; // 信息头
 			ByteCode bc = new ByteCode(8);
-			System.out.println(8 + bodyLen);
+			logger.debug(8 + bodyLen);
 			bc.AddInt(8 + bodyLen); // 信息头 add total length
 			bc.AddInt(StateCode.SM_DELIVER); // 信息头 add message type
 			// bc.AddInt(3);

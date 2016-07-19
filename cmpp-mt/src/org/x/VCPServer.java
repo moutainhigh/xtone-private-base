@@ -14,7 +14,7 @@ import java.net.*;
 import org.apache.log4j.Logger;
 
 public class VCPServer extends Thread {
-	private static Logger logger = Logger.getLogger(Test.class);
+	private static Logger logger = Logger.getLogger(VCPServer.class);
 	protected int listenPort;
 
 	public VCPServer(int aListenPort) {
