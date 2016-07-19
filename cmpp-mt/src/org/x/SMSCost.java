@@ -8,8 +8,7 @@ import java.io.*;
 import java.sql.*;
 
 import org.apache.log4j.Logger;
-
-import com.xiangtone.sql.Mysqldb;
+import org.common.util.ConnectionService;
 
 public class SMSCost {
 	private static Logger logger = Logger.getLogger(SMSCost.class);
@@ -23,9 +22,10 @@ public class SMSCost {
 	public String spCode;
 	public String memo;
 
-	Mysqldb db;
-	ResultSet rs = null;
-	String strSql;
+	private Connection con = null;
+	private PreparedStatement ps = null;
+	private ResultSet rs = null;
+	private String strSql;
 
 	public String getServerID() {
 		return serverID;
@@ -68,14 +68,15 @@ public class SMSCost {
 	}
 
 	public SMSCost() {
-		db = new Mysqldb();
 	}
 
 	public void lookupInfofeeByServerIDIOD(String serverID) {
 		try {
 			strSql = "select *  from sms_cost where serverid='" + serverID + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				// System.out.println("ddddddd");
 				this.serverID = serverID;
@@ -87,12 +88,31 @@ public class SMSCost {
 				this.mediaType = rs.getInt("mediatype");
 				this.spCode = rs.getString("spcode");
 				this.memo = rs.getString("memo");
-				// System.out.println("spcode::"+this.spCode);
 			}
-			// rs =null;
-			// db =null;
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -105,7 +125,9 @@ public class SMSCost {
 		try {
 			strSql = "select *  from sms_cost where serverid='" + serverID + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				this.serverID = serverID;
 				this.serverCodeIOD = rs.getString("feecode_iod");
@@ -117,10 +139,30 @@ public class SMSCost {
 				this.spCode = rs.getString("spcode");
 				this.memo = rs.getString("memo");
 			}
-			rs = null;
-			// db =null;//not do it
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

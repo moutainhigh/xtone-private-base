@@ -1,8 +1,12 @@
 package org.x;
 
-import org.apache.log4j.Logger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-import com.xiangtone.sql.Mysqldb;
+import org.apache.log4j.Logger;
+import org.common.util.ConnectionService;
 
 /**
  * Copyright 2003 Xiamen Xiangtone Co. Ltd. All right reserved.
@@ -12,24 +16,34 @@ public class MtSubmitSeq {
 	public String submitMsgID;
 	public int submitResult;
 	public String ismgID;
-	private Mysqldb db;
 	private static Logger logger = Logger.getLogger(MtSubmitSeq.class);
 
 	public MtSubmitSeq() {
-		db = new Mysqldb();
 	}
 
 	public void updateSubmitSeq() {
 		String strSql = null;
+		Connection con = null;
+		PreparedStatement ps = null;
 		try {
 			strSql = "update sms_mtlog set submit_seq = 0 ,submit_msgid='" + this.submitMsgID + "',submit_result="
 					+ this.submitResult + " where submit_seq = " + this.submitSeq + " and ismgid ='" + this.ismgID
 					+ "' order by id desc limit 1";
 			logger.debug(strSql);
-			db.execUpdate(strSql);
-			db.close();
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 
 	}

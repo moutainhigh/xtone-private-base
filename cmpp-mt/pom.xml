@@ -15,6 +15,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.29</version>
 		</dependency>
+		<dependency>
+			<groupId>org.xtone.common</groupId>
+			<artifactId>xtone-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${final.name}</finalName>
@@ -51,7 +56,7 @@
 								<transformer
 									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<manifestEntries>
-										<Main-Class>org.x.tlsmsmt_public</Main-Class>
+										<Main-Class>org.x.TlsmsmtPublic</Main-Class>
 									</manifestEntries>
 								</transformer>
 							</transformers>

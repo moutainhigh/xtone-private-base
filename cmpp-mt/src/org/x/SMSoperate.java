@@ -30,10 +30,6 @@ public class SMSoperate {
 	public byte[] deliverContent;
 	public String linkid = "";
 
-	/**
-	**
-	*
-	*/
 	public void setDeliverIsmgID(String ismgID) {
 		this.deliverIsmgID = ismgID;
 	}
@@ -85,9 +81,6 @@ public class SMSoperate {
 		this.linkid = linkid;
 	}
 
-	/**
-	*
-	*/
 	public SMSoperate() {
 		/*
 		 * smsmo = new SMSMO(); smsmt = new SMSMT(); smsus = new
@@ -118,11 +111,6 @@ public class SMSoperate {
 		}
 	}
 
-	/**
-	 * 
-	 *
-	 */
-
 	public void receiveReport(String IsmgID, String msgId, String linkId, String destCpn, String strSpcode,
 			String strCpn, String submitTime, String doneTime, int statDev, String reportMsg) {
 		try {
@@ -149,11 +137,6 @@ public class SMSoperate {
 			logger.error("receiveReport", e);
 		}
 	}
-
-	/**
-	*
-	*
-	*/
 
 	public void receiveDeliver() {
 		try {
@@ -236,11 +219,10 @@ public class SMSoperate {
 			if (stat.equals("-1")) {
 				smsmo.insertErrorMOLog();
 			}
-			smsmo.db.close();
 			// user.db.close();
 			// Thread.currentThread().sleep(200);
 		} catch (Exception e) {
-			logger.error("", e);
+			logger.error("receiveDeliver", e);
 		}
 
 	}

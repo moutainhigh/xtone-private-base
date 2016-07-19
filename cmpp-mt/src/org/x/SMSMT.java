@@ -8,8 +8,7 @@ import java.io.*;
 import java.util.*;
 
 import org.apache.log4j.Logger;
-
-import com.xiangtone.sql.Mysqldb;
+import org.common.util.ConnectionService;
 
 import java.sql.*;
 
@@ -47,8 +46,9 @@ public class SMSMT {
 	public int dataCoding;
 	public int reportFlag;
 
-	private Mysqldb db;
-	ResultSet rs = null;
+	private Connection con=null;
+	private PreparedStatement ps=null;
+	private ResultSet rs = null;
 	private String strSql;
 
 	/**
@@ -209,7 +209,6 @@ public class SMSMT {
 	 *
 	 */
 	public SMSMT() {
-		db = new Mysqldb();
 	}
 
 	/**
@@ -245,12 +244,29 @@ public class SMSMT {
 			strSql += ",submit_result=" + submitResult;
 			strSql += ",submit_seq=" + submitSeq;
 			logger.debug(strSql);
-			db.execUpdate(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 			/// add at 090525 ���ڽ��������п���
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.insertMtlog(strSql);
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -263,13 +279,29 @@ public class SMSMT {
 			strSql = "update sms_mtlog set submit_seq = 0 ,submit_msgid='" + msgId + "',submit_result=" + submitResult
 					+ " where submit_seq = " + seq + " and ismgid ='" + ismgId + "' order by id desc limit 1";
 			logger.debug(strSql);
-			db.execUpdate(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.updateSubmitSeq(strSql);
 
 		} catch (Exception e) {
 			logger.error(strSql, e);
-
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -294,8 +326,7 @@ public class SMSMT {
 			 * mtsMtLog.setMTIsmgID(this.ismgID); mtsMtLog.updateSubmitSeq();
 			 */
 		} catch (Exception e) {
-			logger.error(strSql, e);
-
+			logger.error("updateSubmitSeq", e);
 		}
 	}
 
@@ -323,11 +354,26 @@ public class SMSMT {
 			strSql += ",submit_seq=" + submitSeq;
 			strSql += ",card_flag=" + cardFlag;
 			logger.debug(strSql);
-			db.execUpdate(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 		} catch (Exception e) {
-
 			logger.error(strSql, e);
-
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }

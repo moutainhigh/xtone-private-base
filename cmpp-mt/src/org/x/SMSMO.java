@@ -1,10 +1,12 @@
 package org.x;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-
-import com.xiangtone.sql.Mysqldb;
+import org.common.util.ConnectionService;
 
 /**
  * A class respresenting a set of packet and byte couters. It is bservable to
@@ -32,7 +34,8 @@ public class SMSMO {
 	protected int tpUdhi = 0;
 	protected int fmt = 0;
 	protected String msgId = "";
-	public Mysqldb db;
+	private Connection con = null;
+	private PreparedStatement ps = null;
 	private String strSql = "";
 	private ResultSet rs = null;
 	protected String corpID;
@@ -164,7 +167,6 @@ public class SMSMO {
 	 *
 	 */
 	public SMSMO() {
-		db = new Mysqldb();
 	}
 
 	/**
@@ -187,10 +189,27 @@ public class SMSMO {
 			strSql += ",delivertime='" + deliverTime + "'";
 			strSql += ",linkid='" + linkID + "'";
 			logger.debug(strSql);
-			db.execUpdate(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 		} catch (Exception e) {
 			logger.error("insertMOLog", e);
 			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -213,10 +232,27 @@ public class SMSMO {
 			strSql += ",serveraction='" + serverAction + "'";
 			strSql += ",delivertime='" + deliverTime + "'";
 			logger.debug(strSql);
-			db.execUpdate(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate();
 		} catch (Exception e) {
 			logger.error("insertErrorMOLog", e);
 			e.printStackTrace();
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -224,7 +260,9 @@ public class SMSMO {
 		try {
 			strSql = "select corp_id from sms_user where cpn='" + cpn + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				String corp_id = rs.getString("corp_id");
 				return corp_id;
@@ -232,6 +270,28 @@ public class SMSMO {
 		} catch (Exception e) {
 			logger.error("getMOCorpID", e);
 			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return "00";
 	}
@@ -244,7 +304,9 @@ public class SMSMO {
 		try {
 			strSql = "select gameid from sms_gamelist where vcpid=" + vcpid + " and gamename='" + servername + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				String gameid = rs.getString("gameid");
 				return gameid;
@@ -252,6 +314,28 @@ public class SMSMO {
 		} catch (Exception e) {
 			logger.error("getGameID", e);
 			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return "";
 	}
@@ -265,7 +349,9 @@ public class SMSMO {
 		try {
 			strSql = " select ismgid from sms_user where cpn='" + scpn + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery();
 			if (rs.next()) {
 				String ismgid = rs.getString("ismgid");
 				return ismgid;
@@ -274,6 +360,28 @@ public class SMSMO {
 			logger.error("getImsgID", e);
 			;
 			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return "01";
 	}

@@ -4,22 +4,20 @@ package org.x;
 *All right reserved.
 */
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-
-import com.xiangtone.sql.Mysqldb;
+import org.common.util.ConnectionService;
 
 /**
  * this Class operate gamelisttbl
  *
  */
 public class SMSUserSchedule {
-	/**
-	*
-	*/
 	private static Logger logger = Logger.getLogger(SMSUserSchedule.class);
-	Mysqldb db;
 	ResultSet rs = null;
 	String strSql;
 	public static final int SPCODE_LEN = 8; // 基础号长度
@@ -39,11 +37,9 @@ public class SMSUserSchedule {
 	int vcpID = 1;
 	String ismgId = "01";
 
-	/**
-	 * get method
-	 *
-	 */
-
+	private Connection con=null;
+	private PreparedStatement ps=null;
+	
 	public String getUSchedGameCode() {
 		return gameCode;
 	}
@@ -68,14 +64,7 @@ public class SMSUserSchedule {
 		return corpID;
 	}
 
-	/**
-	 *
-	 *
-	 */
 	public SMSUserSchedule() {
-		if (db == null) {
-			db = new Mysqldb();
-		}
 	}
 
 	public void getUserDetail(String spcode, String info) {
@@ -246,11 +235,6 @@ public class SMSUserSchedule {
 		// System.out.println("***********this.vcpID:"+this.spCode);
 
 		}
-		try {
-			db.close();
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		}
 
 	}
 
@@ -265,7 +249,9 @@ public class SMSUserSchedule {
 			strSql = "select gamename,gameid,vcpid from sms_gamelist where gamename='" + strGameCode + "' and ismgid='"
 					+ ismgId + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery(strSql);
 			if (rs.next()) {
 				flag = true;
 				this.gameID = new Integer(rs.getInt("gameid")).toString();
@@ -275,21 +261,41 @@ public class SMSUserSchedule {
 			}
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return flag;
 	}
 
-	/**
-	*
-	*
-	*/
 	public boolean isGameIDExist(String gameId) {
 		boolean flag = false;
 		try {
 			strSql = "select gamename,gameid,vcpid from sms_gamelist where gameid='" + gameId + "' and ismgid='"
 					+ ismgId + "'";
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery(strSql);
 			if (rs.next()) {
 				flag = true;
 				this.gameCode = rs.getString("gamename");
@@ -300,6 +306,28 @@ public class SMSUserSchedule {
 			}
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return flag;
 	}
@@ -311,11 +339,35 @@ public class SMSUserSchedule {
 		strSql = "select * from sms_company where corp_id='" + id + "'";
 		try {
 			logger.debug(strSql);
-			rs = db.execQuery(strSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery(strSql);
 			if (!rs.next())
 				return false;
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		this.corpID = id;
 		return true;
@@ -331,13 +383,37 @@ public class SMSUserSchedule {
 		strSql = "select * from sms_cost where servername='" + servername + "' and spid='916006' limit 1";
 		try {
 			logger.debug(strSql);
-			ResultSet rs2 = db.execQuery(strSql);
-			if (rs2.next()) {
-				String _serverid = rs2.getString("serverid");
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			rs = ps.executeQuery(strSql);
+			if (rs.next()) {
+				String _serverid = rs.getString("serverid");
 				return _serverid;
 			}
 		} catch (Exception e) {
 			logger.error(strSql, e);
+		} finally {
+			try {
+				if (rs != null) {
+					rs.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return this.serverID;
 	}

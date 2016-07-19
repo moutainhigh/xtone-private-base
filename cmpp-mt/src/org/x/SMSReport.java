@@ -15,10 +15,13 @@ package org.x;
 import java.util.*;
 
 import org.apache.log4j.Logger;
+import org.common.util.ConnectionService;
 
 import java.io.*;
-
-import com.xiangtone.sql.Mysqldb;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SMSReport {
 	private static Logger logger = Logger.getLogger(SMSReport.class);
@@ -30,16 +33,17 @@ public class SMSReport {
 	String subTime;
 	String doneTime;
 	String linkId;
-	Mysqldb mydb;
 	int statDev;
 	String statDetail;
 
+	private Connection con=null;
+	private PreparedStatement ps=null;
+	
 	// FileWriter fw = null;
 	// StringBuffer sb;
 	public SMSReport() {
 		// String file_name = "";
 		// file_name = TimeTools.get_month();//取得系统当月时间用于作为日志的文件。
-		mydb = new Mysqldb();
 		/*
 		 * try{
 		 * 
@@ -47,7 +51,6 @@ public class SMSReport {
 		 * file_name+".txt",true); //sb = new StringBuffer(); }catch(IOException
 		 * e){ System.out.println(e.toString()); }
 		 */
-
 	}
 
 	public void insertReportLog() {
@@ -73,22 +76,34 @@ public class SMSReport {
 			logger.debug(strSql);
 			logger.debug(tempstrSql);
 			logger.debug(companystrSql);
-			mydb.execUpdate(strSql);
-			mydb.execUpdate(tempstrSql);
-			mydb.execUpdate(companystrSql);
+			con = ConnectionService.getInstance().getConnectionForLocal();
+			ps = con.prepareStatement(strSql);
+			ps.executeUpdate(strSql);
+			ps.executeUpdate(tempstrSql);
+			ps.executeUpdate(companystrSql);
 			// fw.write(sb.toString());tempstr_sql
 			// fw.flush();
 			// fw.close();
-			mydb.close();
 			// ReportHandle tempReportLog = new ReportHandle();
 			// tempReportLog.logReport(str_sql);
 		} catch (Exception e) {
 			logger.error("insertReportLog", e);
-			try {
-				mydb.close();
-			} catch (Exception e1) {
-			}
 
+		} finally {
+			try {
+				if (ps != null) {
+					ps.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if (con != null) {
+					con.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -123,10 +138,6 @@ public class SMSReport {
 
 	public void setLinkId(String linkId) {
 		this.linkId = linkId;
-	}
-
-	public void setMydb(Mysqldb mydb) {
-		this.mydb = mydb;
 	}
 
 	public void setStatDev(int statDev) {
