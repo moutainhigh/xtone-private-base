@@ -52,7 +52,7 @@ public class SMSoperate {
 
 	public void setDeliverSrcCpn(String srcCpn) {
 		try {
-			System.out.println(srcCpn.length());
+			logger.debug(srcCpn.length());
 			if (srcCpn.length() > 11)
 				srcCpn = srcCpn.substring(2, 13);
 		} catch (IndexOutOfBoundsException e) {
@@ -74,11 +74,11 @@ public class SMSoperate {
 		this.deliverContent = content;
 	}
 
-	public void setDeliverLinkId(String linkid) {
-		if (linkid.length() < 1) {
-			linkid = "";
+	public void setDeliverLinkId(String linkId) {
+		if (linkId.length() < 1) {
+			linkId = "";
 		}
-		this.linkid = linkid;
+		this.linkid = linkId;
 	}
 
 	public SMSoperate() {
@@ -133,15 +133,14 @@ public class SMSoperate {
 			// smsreport.saveReportLog();
 			smsreport.insertReportLog();
 		} catch (Exception e) {
-			e.printStackTrace();
 			logger.error("receiveReport", e);
+			e.printStackTrace();
 		}
 	}
 
 	public void receiveDeliver() {
 		try {
 			SMSMO smsmo = new SMSMO();
-			// User user=new SMSUser();
 			SMSUserSchedule smsus = new SMSUserSchedule();
 			SMSMOtoVCP smsTovcp = new SMSMOtoVCP();
 
@@ -175,18 +174,6 @@ public class SMSoperate {
 
 			// 记录用户
 			String strTime = FormatSysTime.getCurrentTimeA();
-			/*
-			 * user.setUserCpn(this.deliverSrcCpn);
-			 * user.setUserCpnType(this.srcCpnType);
-			 * user.setUserIsmgID(this.deliverIsmgID);
-			 * user.setUserCorpID(smsus.getUSchedCorpID());
-			 * user.setUserCorpSpcode(smsus.getUSchedSpCode());
-			 * user.setUser_registerTime(strTime);
-			 * user.setUserLastVisitTime(strTime); if(user.userIsExist()) {
-			 * user.updateUserVisitTime(); } else { user.insertNewUser();
-			 * 
-			 * }
-			 */
 
 			Random r = new Random();
 			smsmo.setMOMsgId(this.deliverMsgID);

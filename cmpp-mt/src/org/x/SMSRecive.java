@@ -24,9 +24,9 @@ import comsd.commerceware.cmpp.ConnDesc;
 
 public class SMSRecive implements Runnable {
 
-	CMPP p = new CMPP();
+	private static Logger logger = Logger.getLogger(SMSRecive.class);
 
-	// connDesc con = new connDesc();
+	CMPP p = new CMPP();
 
 	CmppeDeliverResult cd = new CmppeDeliverResult();
 
@@ -40,38 +40,21 @@ public class SMSRecive implements Runnable {
 	ConnDesc con = cmppcon.con;
 	public static final String ISMGID = "01";
 
-	public SMSRecive()
-
-	{
+	public SMSRecive() {
 
 		handle = new SMSoperate();
-
-		// cmppcon = CMPPSingleConnect.getInstance();
-
-		// con = cmppcon.con;
 
 	}
 
 	public void run() {
 
-		////////////////// 日志记录/////////////
-
-		// ThreadPoolManager moPoolManger = new
-		// ThreadPoolManager(500,this.ISMGID);
-
-		//////////////////////////////////////
-
 		while (true) {
 
 			try {
 
-				// SMSoperate handle = new SMSoperate();
-
-				p.readPa(con);
+				p.readPa(con);//读取接收到的数据包
 				Thread.currentThread().sleep(100);
-				if (sr.flag == 0) // submit resp
-
-				{
+				if (sr.flag == 0) {// submit resp
 
 					sr.flag = -1; // 复位
 
@@ -84,11 +67,11 @@ public class SMSRecive implements Runnable {
 
 					int iRespSeq = sr.seq;
 
-					System.out.println("sr.result:" + iRespResult);
+					logger.debug("sr.result:" + iRespResult);
 
-					System.out.println("sr.seq:" + iRespSeq);
+					logger.debug("sr.seq:" + iRespSeq);
 
-					System.out.println("sr.msgId:" + strRespMsgId);
+					logger.debug("sr.msgId:" + strRespMsgId);
 
 					handle.receiveSubmitResp(this.ISMGID, (int) iRespSeq, (String) strRespMsgId, (int) iRespResult);
 
@@ -96,13 +79,11 @@ public class SMSRecive implements Runnable {
 
 				}
 
-				if (cd.STAT == 0) // 说明有消息上来了
-
-				{
+				if (cd.STAT == 0) {// 说明有消息上来了
 
 					cd.STAT = -1;
 
-					System.out.println("有消息上来了...");
+					logger.debug("有消息上来了...");
 
 					/////////////////////////////
 
@@ -124,45 +105,25 @@ public class SMSRecive implements Runnable {
 
 					int iFmt = cd.getFmt();
 
-					int iTp_udhi = cd.getTpUdhi();
+					int iTpUdhi = cd.getTpUdhi();
 
 					String strSvcType = cd.getServerType();
 
 					String linkId = cd.getLinkId();
 
-					System.out.println("content:" + cd.getMessage());
+					logger.debug("content:" + cd.getMessage());
 
 					byte[] strContent = cd.getMessage();
 
 					int iReportFlag = cd.getRegisteredDelivery();
 
-					System.out.println("iReportFlag:" + iReportFlag);
+					logger.debug("iReportFlag:" + iReportFlag);
 
-					System.out.println("........................");
+					logger.debug("strSpcode:" + strSpcode);
 
-					System.out.println("........................");
+					if (iReportFlag == 1) {
 
-					System.out.println("........................");
-
-					System.out.println("strSpcode:" + strSpcode);
-
-					System.out.println("........................");
-
-					System.out.println("........................");
-
-					System.out.println("........................");
-
-					// myLogger.info(FormatSysTime.getCurrentTimeA() + " new
-					// msg--spcode:"
-					// + strSpcode +" cpn:" + strCpn.trim() + " linkId:" +
-					// linkId + "
-					// content:" + new String(strContent));
-
-					if (iReportFlag == 1)
-
-					{
-
-						System.out.println("状态报告信息....");
+						logger.debug("状态报告信息....");
 
 						String reportDestCpn = cd.getDestCpn();
 
@@ -174,15 +135,7 @@ public class SMSRecive implements Runnable {
 
 						String stat2 = cd.getStat();
 
-						System.out.println("stat2:" + stat2);
-
-						// myLogger.info(FormatSysTime.getCurrentTimeA() +
-						// "report
-						// msg--spcode:" + strSpcode +" cpn:" +
-						// reportDestCpn.trim() + "
-						// msgid:" + msgId + " submitTime:" + submitTime +"
-						// doneTime:" +
-						// doneTime + " statDev:" + stat2);
+						logger.debug("stat2:" + stat2);
 
 						int statDev = 0;
 
@@ -204,9 +157,6 @@ public class SMSRecive implements Runnable {
 					}
 
 					cd.printAll(); // 打印mo消息;
-
-					///////////////////////////////
-					///////////////////////////////
 
 					handle.setDeliverIsmgID(strIsmgid);
 
@@ -235,19 +185,9 @@ public class SMSRecive implements Runnable {
 				Thread.currentThread().sleep(100);
 			} catch (Exception e) {
 
-				Logger myLogger = Logger.getLogger("MsgSendLogger");
+				logger.error("SmsRecive 重新连接....", e);
 
-				Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
-
-				// PropertyConfigurator.configure("log4j.properties");
-
-				myLogger.info(FormatSysTime.getCurrentTimeA() + " exception msg--Exception:" + e.toString());
-
-				System.out.println(e.toString());
-
-				System.out.println("SmsRecive 重新连接....");
-
-				p.cmppDisconnectFromIsmg(con);
+				p.cmppDisConnectFromIsmg(con);
 
 				cmppcon.destroy();
 

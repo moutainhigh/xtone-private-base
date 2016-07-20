@@ -31,7 +31,7 @@ public final class CMPP {
 	}
 
 	// 断开连接
-	public void cmppDisconnectFromIsmg(ConnDesc conn) {
+	public void cmppDisConnectFromIsmg(ConnDesc conn) {
 		try {
 			conn.sock.close();
 		} catch (Exception e) {
@@ -263,11 +263,6 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pkSeq, 8);
 			out.write(buf, 0, 12); // 测试信息体为空
 			logger.debug(Arrays.toString(buf));
-			// for (int i = 0; i < 12; i++) {
-			// logger.debug(buf[i] + ",");
-			// }
-			// System.out.println("seq:"+conn.seq);
-			// System.out.println("sock:"+conn.sock);
 			out.flush();
 			logger.debug("have send it");
 			conn.seq++;
@@ -374,6 +369,9 @@ public final class CMPP {
 		return userSeq;
 	}
 
+	/*
+	 * 读取接收到的数据包
+	 */
 	public void readPa(ConnDesc con) throws Exception {
 		CmppeResult cr = null;
 		try {
@@ -412,8 +410,6 @@ public final class CMPP {
 				break;
 
 			case -2147483640:
-				// myLogger.info(FormatSysTime.getCurrentTimeA() +
-				// "---------active resp-----------: STAT " + cr.stat);
 				logger.debug("---------active resp-----------: STAT " + cr.stat);
 				break;
 

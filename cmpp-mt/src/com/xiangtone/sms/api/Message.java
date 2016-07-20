@@ -30,7 +30,7 @@ public class Message {
 	}
 
 	// disconnect from xtsms platform server
-	public void disconnectFromServer(ConnDesc conn) {
+	public void disConnectFromServer(ConnDesc conn) {
 		try {
 			conn.sock.getOutputStream().close();
 			conn.sock.getInputStream().close();

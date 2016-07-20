@@ -15,16 +15,12 @@ import com.xiangtone.util.FormatSysTime;
 
 public class SMSActiveTest implements Runnable {
 	CMPP p = null;// new CMPP();
-	// public static conn_desc con = new conn_desc();
 	public ConnDesc con;// = new conn_desc();
 	CmppeLogin cl = new CmppeLogin();
 	CMPPSingleConnect cmppcon;// = CMPPSingleConnect.getInstance();
 	private static Logger logger = Logger.getLogger(SMSActiveTest.class);
 
 	public SMSActiveTest() {
-		// p = new CMPP();
-		// instance2 = CMPPSingleConnect_fj.getInstance();
-		// con = instance2.con;
 		p = new CMPP();
 		cmppcon = CMPPSingleConnect.getInstance();
 		con = cmppcon.con;
@@ -36,23 +32,13 @@ public class SMSActiveTest implements Runnable {
 			int i = 0;
 			while (true) {
 				logger.debug("send active test");
-				// if(cmppcon == null )
-				// {
-				// cmppcon = CMPPSingleConnect.getInstance();
-				// }
 				try {
 					p.cmppActiveTest(cmppcon.con);
 					Thread.currentThread().sleep(3000);
-					// i++;
-					/*
-					 * if(i%6 == 0){
-					 * myLogger.info(FormatSysTime.getCurrentTimeA() +
-					 * "ActiveTest Msg"); } if(i == 90000){ i = 0; }
-					 */
 				} catch (Exception e) {
 					logger.error("testActive exception msg--Exception:", e);
 					logger.debug("重新连接...");
-					p.cmppDisconnectFromIsmg(con);
+					p.cmppDisConnectFromIsmg(con);
 					cmppcon.destroy();
 
 					// cmppcon =null;

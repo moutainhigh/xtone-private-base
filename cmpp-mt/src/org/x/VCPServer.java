@@ -35,23 +35,19 @@ public class VCPServer extends Thread {
 
 				incomingConnection = server.accept();
 
-				// System.out.println(incomingConnection);
-
 				handleConnection(incomingConnection);
 			}
 
 		}
 
 		catch (BindException e) {
+			logger.error("Unable to bind to port " + listenPort, e);
 			e.printStackTrace();
-			logger.debug("Unable to bind to port " + listenPort);
-
 		}
 
 		catch (IOException e) {
+			logger.error("Unable to instantiate a ServerSocket on port: " + listenPort, e);
 			e.printStackTrace();
-			logger.debug("Unable to instantiate a ServerSocket on port: " + listenPort);
-
 		}
 
 	}
@@ -69,12 +65,4 @@ public class VCPServer extends Thread {
 		server.acceptConnections();
 
 	}
-	/*
-	 * private void writeLog(String logStr){
-	 * 
-	 * Logger myLogger = Logger.getLogger("MsgSendLogger"); Logger mySonLogger =
-	 * Logger.getLogger("myLogger.mySonLogger");
-	 * PropertyConfigurator.configure("log4j.properties"); //logStr =
-	 * this.compUrl + "\n" + logStr; myLogger.info(logStr); }
-	 */
 }
