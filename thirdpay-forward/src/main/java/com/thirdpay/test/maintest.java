@@ -47,7 +47,6 @@ public class maintest {
 //		System.out.println(dateFormat2);
 		
 		CheckPayInfo.UpdataInfoTime("1462939173346035157");
-		
 	}
 
 }

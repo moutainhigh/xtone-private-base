@@ -44,13 +44,15 @@ public class CheckCPInfo {
 				cpInfoBean.setProductInfo(rs.getString("productInfo"));
 				cpInfoBean.setNotify_url(rs.getString("notify_url"));
 				cpInfoBean.setWxwap(rs.getString("WXwap"));
+				
 				// (网游)
 				Long key = GenerateIdService.getInstance()
 						.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1);
 				String orederKey = key + "";
 
 				cpInfoBean.setWebOrderid(orederKey);
-
+				
+				cpInfoBean.setEncrypt(rs.getString("encrypt"));
 			}
 			
 		} catch (Exception e) {

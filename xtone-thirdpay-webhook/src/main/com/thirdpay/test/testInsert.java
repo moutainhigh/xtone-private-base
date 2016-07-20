@@ -62,7 +62,7 @@ public class testInsert {
 		// MyStringBuilder.deleteCharAt(MyStringBuilder.length()-1);
 		// System.out.println(MyStringBuilder);
 
-		// ²âÊÔÓÃÊı¾İ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		// String payInfo = "";
 		// String[] cbl = { "aa" };
 		// String[] zgt = { "cc" };
@@ -81,9 +81,9 @@ public class testInsert {
 		// Map.Entry<String, String[]> entry = (Map.Entry<String, String[]>)
 		// iterator.next();
 		//
-		// String key = entry.getKey(); // keyÎª²ÎÊıÃû³Æ
+		// String key = entry.getKey(); // keyÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		// if (key != "cbl") {
-		// String[] value = map.get(key); // valueÎª²ÎÊıÖµ
+		// String[] value = map.get(key); // valueÎªï¿½ï¿½ï¿½ï¿½Öµ
 		//
 		// for (int i = 0; i < value.length; i++) {
 		//
@@ -102,9 +102,9 @@ public class testInsert {
 		
 //		String url = CheckCPInfo.CheckInfo("zgt").getNotify_url();
 //		ThreadPool.mThreadPool
-//				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", url, "200", "zgt", "appkey"));
+//				.execute(new ForwardsyncBeanTest(1001, "123456", "0", "3000", "0", "url", "200", "zgt", "appkey"));
 
-//		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"ÉÌÆ·Ãû³ÆÊÇÆ»¹ûÉÌÆ·idÎª123456\",\"productId\":\"12345\",\"productName\":\"Æ»¹û\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
+//		String str = "{\"buyNum\":0,\"coinNum\":0,\"price\":1,\"productDesc\":\"ï¿½ï¿½Æ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ»ï¿½ï¿½ï¿½ï¿½Æ·idÎª123456\",\"productId\":\"12345\",\"productName\":\"Æ»ï¿½ï¿½\",\"ratio\":0,\"roleLevel\":0,\"uid\":\"7d07ccb3-8d83-4ebc-b2e9-2f37b120fa0d\",\"webOrderid\":\"1462867117426032111\"}";
 		
 //		System.out.println(str.replace("\\", ""));
 		
@@ -122,21 +122,27 @@ public class testInsert {
 //		System.out.println(createdate);
 		
 		
-		StringBuilder builder = new StringBuilder(payConstants.wj_url);
-
-		builder.append("?createdate=" + "BL");
-		builder.append("&oprator=" +"BL"); // 2016-06-12Ôö¼ÓÖ§¸¶ÇşµÀ²ÎÊı
-		builder.append("&appkey=" + "BL");
-		builder.append("&channelid=" + "BL");
-		builder.append("&amount=" + "BL");
-		builder.append("&orderid=" + "BL");
-		builder.append("&imei=" + "");
-		builder.append("&imsi=" + "");
-		builder.append("&userorderid=" +"BL");
-		builder.append("&status=" + "0");
-		//LOG.info("--------------------------builder = " + builder.toString());
+//		StringBuilder builder = new StringBuilder(payConstants.wj_url);
+//
+//		builder.append("?createdate=" + "BL");
+//		builder.append("&oprator=" +"BL"); // 2016-06-12ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//		builder.append("&appkey=" + "BL");
+//		builder.append("&channelid=" + "BL");
+//		builder.append("&amount=" + "BL");
+//		builder.append("&orderid=" + "BL");
+//		builder.append("&imei=" + "");
+//		builder.append("&imsi=" + "");
+//		builder.append("&userorderid=" +"BL");
+//		builder.append("&status=" + "0");
+//		//LOG.info("--------------------------builder = " + builder.toString());
+//		
+//		System.out.println( "--------------------------builder = "+builder.toString());
 		
-		System.out.println( "--------------------------builder = "+builder.toString());
+		
+		// è½¬å‘æ’å…¥æ—¥å¿—è¡¨
+		ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, "orderid", "0", "0", "0",
+				"notify_url", "200", "cblappkey", "appkey"));
+
 	}
 
 }

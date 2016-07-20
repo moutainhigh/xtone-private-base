@@ -116,9 +116,9 @@ public class BaidupayCountServlet extends HttpServlet {
 			cpOrderId = json.getString("c");
 		}
 
-		System.out.println("xx_notifyData = " + builder.toString() + "\n" + "payChannel = " + payChannel + ",appKey = "
-				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
-				+ ",cpOrderId = " + cpOrderId);
+//		System.out.println("xx_notifyData = " + builder.toString() + "\n" + "payChannel = " + payChannel + ",appKey = "
+//				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
+//				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));

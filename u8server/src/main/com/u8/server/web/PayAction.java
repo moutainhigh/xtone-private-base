@@ -121,7 +121,8 @@ public class PayAction extends UActionSupport{
                 script.onGetOrderID(user, order, new ISDKOrderListener() {
                     @Override
                     public void onSuccess(String jsonStr) {
-                    	String channelName = user.getName().substring(user.getName().lastIndexOf(".")+1);
+//                    	String channelName = user.getName().substring(user.getName().lastIndexOf(".")+1);
+                    	String channelName = user.getChannel().getMaster().getSdkName();
                     	Log.d("The onGetOrderID the channelName : "+channelName);
                     	Log.d("The onGetOrderID the jsonStr : "+jsonStr);
                     	if(jsonStr.isEmpty()){

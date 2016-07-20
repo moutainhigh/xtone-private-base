@@ -20,6 +20,7 @@ public class Forward {
 	private static final Logger LOG = Logger.getLogger(ServiceScan.class);
 
 	public static void forward(String notify_url, String ownOrderId) {
+		
 		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
 
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();

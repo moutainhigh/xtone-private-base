@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title><%=name%>中控</title>
+<title><%=name%>平台</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Modern Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template, 

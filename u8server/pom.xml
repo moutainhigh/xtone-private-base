@@ -102,26 +102,30 @@
 			<artifactId>spring-core</artifactId>
 			<version>3.2.15.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
 			<version>3.2.15.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>3.2.15.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
 			<version>3.2.15.RELEASE</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>3.2.15.RELEASE</version>
-		</dependency>
+		</dependency> 
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -224,7 +228,8 @@
 			<artifactId>javassist</artifactId>
 			<version>3.9.0.GA</version>
 		</dependency>
-		<dependency>
+		
+		<!-- <dependency>
 			<groupId>com.lenovo</groupId>
 			<artifactId>lenovo_pay_sign</artifactId>
 			<version>1.0.0.5</version>
@@ -243,7 +248,7 @@
 			<groupId>com.signature</groupId>
 			<artifactId>signature</artifactId>
 			<version>1.0</version>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
 
@@ -350,6 +355,7 @@
 		</extensions>
 	</build>
 	<profiles>
+	
 		<profile>
 			<id>product</id>
 			<properties>
@@ -360,6 +366,7 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 		</profile>
+		
 		<profile>
 			<id>test</id>
 			<properties>
@@ -367,6 +374,7 @@
 				<final.name>nine.n8wan.com -test</final.name>
 			</properties>
 		</profile>
+		
 		<profile>
 			<id>u8product</id>
 			<properties>
@@ -374,6 +382,16 @@
 				<final.name>nine.n8wan.com</final.name>
 				<ftp.server.id>HYServer</ftp.server.id>
 				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url>
+			</properties>
+		</profile>
+		
+		<profile>
+			<id>yk_online</id>
+			<properties>
+				<runtime.env>packageConfig\yk_online</runtime.env>
+				<final.name>nine.youkala.com</final.name>
+			<!-- 	<ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_10000/swap_dir/</ftp.to.url> -->
 			</properties>
 		</profile>
 	</profiles>
