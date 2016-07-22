@@ -6,21 +6,21 @@ import com.xt.util.DateTimeTool;
 import java.io.File;
 import java.io.PrintStream;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 public class MtSend implements Runnable {
 	private static Logger logger = Logger.getLogger(MtSend.class);
 
 	private DB db = null;
 
-	private Map<String, Map<String, String>> service_map = new HashMap();
-	private Map<String, List<String>> messages_map = new HashMap();
-	private Map<String, List<String>> messages_special_map = new HashMap();
+	private Map<String, Map<String, String>> serviceMap = new HashMap();
+	private Map<String, List<String>> messagesMap = new HashMap();
+	private Map<String, List<String>> messagesSpecialMap = new HashMap();
 
 	public static void main(String[] args) {
 		MtSend ms = new MtSend();
@@ -62,122 +62,154 @@ public class MtSend implements Runnable {
 		}
 	}
 
-	private void loadServicePrice() throws Exception {
-		if (this.service_map.size() > 0) {
-			this.service_map.clear();
+	private void loadServicePrice(){
+		if (this.serviceMap.size() > 0) {
+			this.serviceMap.clear();
 		}
 		String sql = "select gameid,gamecode,spcode,gamename,price from companygames";
 		logger.debug(sql);
-		this.db.executeQuery(sql);
-		while (this.db.getRs().next()) {
-			String gamecode = this.db.getRs().getString("gamecode");
-			String gameid = this.db.getRs().getString("gameid");
-			String spcode = this.db.getRs().getString("spcode");
-			String gamename = this.db.getRs().getString("gamename");
-			int price = this.db.getRs().getInt("price") / 100;
-			Map map = new HashMap();
-			map.put("gameid", gameid);
-			map.put("spcode", spcode);
-			map.put("gamename", gamename);
-			map.put("price", String.valueOf(price));
-			map.put("gameid", gameid);
-			this.service_map.put(gamecode, map);
+		try {
+			this.db.executeQuery(sql);
+			while (this.db.getRs().next()) {
+				String gamecode = this.db.getRs().getString("gamecode");
+				String gameid = this.db.getRs().getString("gameid");
+				String spcode = this.db.getRs().getString("spcode");
+				String gamename = this.db.getRs().getString("gamename");
+				int price = this.db.getRs().getInt("price") / 100;
+				Map map = new HashMap();
+				map.put("gameid", gameid);
+				map.put("spcode", spcode);
+				map.put("gamename", gamename);
+				map.put("price", String.valueOf(price));
+				map.put("gameid", gameid);
+				this.serviceMap.put(gamecode, map);
+			}
+		} catch (Exception e) {
+			logger.error(sql,e);
 		}
-		logger.debug("size : " + this.service_map.size() + " service_map : " + this.service_map);
 	}
 
-	private void loadMessages() throws Exception {
-		if (this.messages_map.size() > 0) {
-			this.messages_map.clear();
+	private void loadMessages(){
+		if (this.messagesMap.size() > 0) {
+			this.messagesMap.clear();
 		}
 		String sql = "select serverid,msg from messages";
 		logger.debug(sql);
-		this.db.executeQuery(sql);
-		String msg;
-		while (this.db.getRs().next()) {
-			String serverid = this.db.getRs().getString("serverid");
-			msg = this.db.getRs().getString("msg");
-			List list = (List) this.messages_map.get(serverid);
-			if (list == null) {
-				list = new ArrayList();
-				list.add(msg);
-				this.messages_map.put(serverid, list);
-			} else {
-				list.add(msg);
+		try {
+			this.db.executeQuery(sql);
+			String msg;
+			while (this.db.getRs().next()) {
+				String serverid = this.db.getRs().getString("serverid");
+				msg = this.db.getRs().getString("msg");
+				List list = (List) this.messagesMap.get(serverid);
+				if (list == null) {
+					list = new ArrayList();
+					list.add(msg);
+					this.messagesMap.put(serverid, list);
+				} else {
+					list.add(msg);
+				}
 			}
+			for (String serverid : this.messagesMap.keySet())
+				logger.debug("'" + serverid + "' : " + ((List) this.messagesMap.get(serverid)).size());
+		} catch (Exception e) {
+			logger.error(sql,e);
 		}
-		for (String serverid : this.messages_map.keySet())
-			logger.debug("'" + serverid + "' : " + ((List) this.messages_map.get(serverid)).size());
+		
 	}
 
-	private void loadMessagesSpecial() throws Exception {
-		if (this.messages_special_map.size() > 0) {
-			this.messages_special_map.clear();
+	private void loadMessagesSpecial(){
+		if (this.messagesSpecialMap.size() > 0) {
+			this.messagesSpecialMap.clear();
 		}
 		String sql = "select serverid,msg from messages_special";
 		logger.debug(sql);
-		this.db.executeQuery(sql);
-		String msg;
-		while (this.db.getRs().next()) {
-			String serverid = this.db.getRs().getString("serverid");
-			msg = this.db.getRs().getString("msg");
-			List list = (List) this.messages_special_map.get(serverid);
-			if (list == null) {
-				list = new ArrayList();
-				list.add(msg);
-				this.messages_special_map.put(serverid, list);
-			} else {
-				list.add(msg);
+		try {
+			this.db.executeQuery(sql);
+			String msg;
+			while (this.db.getRs().next()) {
+				String serverid = this.db.getRs().getString("serverid");
+				msg = this.db.getRs().getString("msg");
+				List list = (List) this.messagesSpecialMap.get(serverid);
+				if (list == null) {
+					list = new ArrayList();
+					list.add(msg);
+					this.messagesSpecialMap.put(serverid, list);
+				} else {
+					list.add(msg);
+				}
 			}
+			for (String serverid : this.messagesSpecialMap.keySet())
+				logger.debug("'" + serverid + "' : " + ((List) this.messagesSpecialMap.get(serverid)).size());
+		} catch (Exception e) {
+			logger.error(sql,e);
 		}
-		logger.debug("load messages_special...");
-		for (String serverid : this.messages_special_map.keySet())
-			logger.debug("'" + serverid + "' : " + ((List) this.messages_special_map.get(serverid)).size());
+		
 	}
 
-	private int getSuccCount(String cpn, String serverid) throws Exception {
+	private int getSuccCount(String cpn, String serverid){
 		int count = 0;
 
 		String sql = "select count(*) as c from sms_platform.sms_mtlogbackup where feetype='03' and reptstat='DELIVRD' and destcpn = '"
 				+ cpn + "' and serverid = '" + serverid + "'";
 		logger.debug(sql);
-		this.db.executeQuery(sql);
-		logger.debug(sql);
-		if (this.db.getRs().next()) {
-			count = this.db.getRs().getInt("c");
+		try {
+			this.db.executeQuery(sql);
+			if (this.db.getRs().next()) {
+				count = this.db.getRs().getInt("c");
+			}
+			return count;
+		} catch (Exception e) {
+			logger.error(sql,e);
 		}
 		return count;
+		
 	}
 
-	private int updateCompanysUser(String id, String msgid, String sendate) throws Exception {
+	private int updateCompanysUser(String id, String msgid, String sendate){
 		String sql = "update companys_user set msgid = " + msgid + "," + "sendate = '" + sendate + "',"
 				+ "firstsend = '1'," + "sendflag = '1'," + "sendedtime = now() " + "where id = " + id;
 		logger.debug(sql);
-		return this.db.executeUpdate(sql);
+		try {
+			return this.db.executeUpdate(sql);
+		} catch (SQLException e) {
+			logger.error(sql,e);
+		}
+		return 0;
 	}
 
-	private int updateCompanysUser(String id, String sendate) throws Exception {
+	private int updateCompanysUser(String id, String sendate){
 		String sql = "update companys_user set sendate = '" + sendate + "' where id = " + id;
 		logger.debug(sql);
-		return this.db.executeUpdate(sql);
+		try {
+			return this.db.executeUpdate(sql);
+		} catch (SQLException e) {
+			logger.error(sql,e);
+		}
+		return 0;
 	}
 
-	private int insertSendRecord(Map<String, String> map) throws Exception {
+	private int insertSendRecord(Map<String, String> map){
 		String sql = "insert into sendrecord_month(cpn, serviceid, senddate, provid, sendtime, msg) values('"
 				+ (String) map.get("cpn") + "', " + "'" + (String) map.get("serviceid") + "', " + "'"
 				+ DateTimeTool.getToday() + "', " + "'" + (String) map.get("provid") + "', " + "now(), " + "'"
 				+ (String) map.get("msg") + "')";
 		logger.debug(sql);
-		return this.db.executeUpdate(sql);
+		try {
+			return this.db.executeUpdate(sql);
+		} catch (SQLException e) {
+			logger.error(sql,e);
+		}
+		return 0;
 	}
 
 	private void getMessage(Map<String, String> map) {
 		String serviceid = (String) map.get("serviceid");
 		int msgid = Integer.valueOf((String) map.get("msgid")).intValue();
 		String msg = "谢谢您的关注，精彩内容稍后奉上，敬请期待";
-		List list = (List) this.messages_special_map.get(serviceid);
+		List list = (List) this.messagesSpecialMap.get(serviceid);
 		if (list == null) {
-			list = (List) this.messages_map.get(serviceid);
+			list = (List) this.messagesMap.get(serviceid);
 		}
 		if (msgid >= list.size()) {
 			msgid = 0;
@@ -191,7 +223,7 @@ public class MtSend implements Runnable {
 		String serviceid = (String) map.get("serviceid");
 		int msgid = Integer.valueOf((String) map.get("msgid")).intValue();
 		String msg = "谢谢您的关注，精彩内容稍后奉上，敬请期待";
-		List list = (List) this.messages_map.get(serviceid);
+		List list = (List) this.messagesMap.get(serviceid);
 		if (list != null) {
 			if (msgid >= list.size()) {
 				msgid = 0;
@@ -204,11 +236,11 @@ public class MtSend implements Runnable {
 
 	private void filterSendList(List<Map<String, String>> list) {
 		long millis = System.currentTimeMillis();
-		int enough_count = 0;
-		int not_enough_count = 0;
-		int send_mt_count = 0;
-		int error_count = 0;
-		int send_mt_tmp_count = 0;
+		int enoughCount = 0;
+		int notEnoughCount = 0;
+		int sendMtCount = 0;
+		int errorCount = 0;
+		int sendMtTmpCount = 0;
 		for (int i = 0; i < list.size(); i++) {
 			Map map = (Map) list.get(i);
 			String id = (String) map.get("id");
@@ -218,69 +250,68 @@ public class MtSend implements Runnable {
 
 			logger.debug("RetainedUser filter " + (i + 1) + " count.");
 			try {
-				Map service = (Map) this.service_map.get(serviceid);
+				Map service = (Map) this.serviceMap.get(serviceid);
 				if (service != null) {
 					String serverid = (String) service.get("gameid");
 
-					int succ_count = getSuccCount(cpn, serverid);
+					int succCount = getSuccCount(cpn, serverid);
 					int price = Integer.valueOf((String) service.get("price")).intValue();
-					int fee_count = price / 2 + 1;
+					int feeCount = price / 2 + 1;
 
-					if (succ_count < fee_count) {
-						logger.debug("price : " + price + " fee_count : " + fee_count + " succ_count : "
-								+ succ_count + " not_enough.");
-						not_enough_count++;
+					if (succCount < feeCount) {
+						logger.debug("price : " + price + " fee_count : " + feeCount + " succ_count : "
+								+ succCount + " not_enough.");
+						notEnoughCount++;
 						getMessage(map);
 						updateCompanysUser(id, (String) map.get("msgid"), DateTimeTool.getTomorrow());
 						insertSendRecord(map);
-						String[] _msg = splitConent((String) map.get("msg"));
-						sendMT(map, _msg);
-						send_mt_count += _msg.length;
-						send_mt_tmp_count += _msg.length;
-						if (send_mt_tmp_count >= 18) {
-							long cur_millis = System.currentTimeMillis();
-							long send_millis = cur_millis - millis;
-							logger.debug("RetainedUser send 18 time " + send_millis + " ms.");
-							if (send_millis < 1000L) {
-								long sleep_millis = 1000L - send_millis;
-								logger.debug("RetainedUser sleep " + sleep_millis + " ms.");
-								Thread.sleep(sleep_millis);
+						String[] Msg = splitConent((String) map.get("msg"));
+						sendMT(map, Msg);
+						sendMtCount += Msg.length;
+						sendMtTmpCount += Msg.length;
+						if (sendMtTmpCount >= 18) {
+							long curMillis = System.currentTimeMillis();
+							long sendMillis = curMillis - millis;
+							logger.debug("RetainedUser send 18 time " + sendMillis + " ms.");
+							if (sendMillis < 1000L) {
+								long sleepMillis = 1000L - sendMillis;
+								logger.debug("RetainedUser sleep " + sleepMillis + " ms.");
+								Thread.sleep(sleepMillis);
 							}
-							send_mt_tmp_count = 0;
+							sendMtTmpCount = 0;
 							millis = System.currentTimeMillis();
 						}
 					} else {
-						logger.debug("price : " + price + " fee_count : " + fee_count + " succ_count : "
-								+ succ_count + " enough.");
-						enough_count++;
+						logger.debug("price : " + price + " fee_count : " + feeCount + " succ_count : "
+								+ succCount + " enough.");
+						enoughCount++;
 						updateCompanysUser(id, DateTimeTool.getNextMonthFirstday());
 					}
 				} else {
-					error_count++;
+					errorCount++;
 					logger.warn("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid);
 				}
 			} catch (Exception e) {
-				error_count++;
-				logger.debug("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid);
-				logger.error(e.getMessage(), e);
+				errorCount++;
+				logger.error("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid, e);
 			}
 		}
 		logger.debug("total :  " + list.size());
-		logger.debug("enough_count : " + enough_count);
-		logger.debug("send_mt_count : " + send_mt_count);
-		logger.debug("not_enough_count : " + not_enough_count);
-		logger.debug("error_count : " + error_count);
+		logger.debug("enoughCount : " + enoughCount);
+		logger.debug("sendMtCount : " + sendMtCount);
+		logger.debug("notEnoughCount : " + notEnoughCount);
+		logger.debug("errorCount : " + errorCount);
 	}
 
-	private void sendMT(Map<String, String> map, String[] _msg) {
-		String serviceid = (String) map.get("serviceid");
-		Map service = (Map) this.service_map.get(serviceid);
+	private void sendMT(Map<String, String> map, String[] msg) {
+		String serviceId = (String) map.get("serviceid");
+		Map service = (Map) this.serviceMap.get(serviceId);
 		if (service == null) {
 			return;
 		}
 		String destcpn = (String) map.get("cpn");
 		String feecpn = (String) map.get("cpn");
-		int temp_cpntype = 0;
+		int tempCpntype = 0;
 		String cpnlinkid = "";
 
 		String serverID = (String) service.get("gameid");
@@ -288,30 +319,30 @@ public class MtSend implements Runnable {
 
 		String provID = "01";
 
-		String sp_code = (String) service.get("spcode");
-		String str_feeType = "0";
+		String spCode = (String) service.get("spcode");
+		String strFeeType = "0";
 		String mediaType = "1";
 		String delivery = "0";
 
-		String gameCode = serviceid.substring(1);
-		String _msgId = "";
-		for (int i = 0; i < _msg.length; i++) {
+		String gameCode = serviceId.substring(1);
+		String msgId = "";
+		for (int i = 0; i < msg.length; i++) {
 			MessageSubmit ms = new MessageSubmit();
 			ms.setDestCpn(destcpn);
 			ms.setFeeCpn(feecpn);
-			ms.setCpnType(temp_cpntype);
+			ms.setCpnType(tempCpntype);
 			ms.setLinkId(cpnlinkid);
-			ms.setContent(_msg[i]);
+			ms.setContent(msg[i]);
 			ms.setServerID(serverID);
 			ms.setVcpID(vcpID);
 			ms.setProvID(provID);
-			ms.setSpCode(sp_code);
-			ms.setFeeType(str_feeType);
+			ms.setSpCode(spCode);
+			ms.setFeeType(strFeeType);
 
 			ms.setMediaType(mediaType);
 			ms.setDelivery(delivery);
 			ms.setGameCode(gameCode);
-			ms.setMsgId(_msgId);
+			ms.setMsgId(msgId);
 			ms.setSendTime(DateTimeTool.getCurrentTime());
 
 			logger.debug("destCpn : '" + ms.destCpn + "', " + "feeCpn : '" + ms.feeCpn + "', " + "cpnType : '"
@@ -327,7 +358,7 @@ public class MtSend implements Runnable {
 	private String[] splitConent(String smContent) {
 		int nLen = smContent.length();
 		int n1 = (nLen + 69) / 70;
-		System.out.println("短信条数:" + n1);
+		logger.debug("短信条数:" + n1);
 		String[] str1 = new String[n1];
 		for (int j = 0; j < n1; j++) {
 			int j1 = j * 70;
@@ -341,7 +372,7 @@ public class MtSend implements Runnable {
 		return str1;
 	}
 
-	private void sendRetainedUser() throws Exception {
+	private void sendRetainedUser(){
 		int id = 0;
 		List sendList = new ArrayList();
 		do {
@@ -349,11 +380,48 @@ public class MtSend implements Runnable {
 			String sql = "select id,company,cpn,serviceid,msgid,provid from companys_user where (state = '1' or state='3') and firstsend = 1 and sendate <= '"
 					+ DateTimeTool.getToday() + "' " + "and (UNIX_TIMESTAMP(now())-UNIX_TIMESTAMP(addate))>=3600*72 "
 					+ "and id > " + id + " " + "order by id limit 5000";
-			this.db.executeQuery(sql);
-			logger.debug("sql==" + sql);
+			logger.debug(sql);
+			try {
+				this.db.executeQuery(sql);
 
+				while (this.db.getRs().next()) {
+					id = this.db.getRs().getInt("id");
+					String company = this.db.getRs().getString("company");
+					String cpn = this.db.getRs().getString("cpn");
+					String serviceid = this.db.getRs().getString("serviceid");
+					int msgid = this.db.getRs().getInt("msgid");
+					String provid = this.db.getRs().getString("provid");
+
+					Map map = new HashMap();
+					map.put("id", String.valueOf(id));
+					map.put("company", company);
+					map.put("cpn", cpn);
+					map.put("serviceid", serviceid);
+					map.put("msgid", String.valueOf(msgid));
+					map.put("provid", provid);
+
+					sendList.add(map);
+				}
+			} catch (SQLException e) {
+				logger.error(sql,e);
+			}
+			
+			logger.debug("retained sendList : " + sendList.size());
+
+			filterSendList(sendList);
+		} while (sendList.size() > 0);
+	}
+
+	private void sendNewUser(){
+		List sendList = new ArrayList();
+
+		String sql = "select id,company,cpn,serviceid,msgid,provid from companys_user where (state = '1' or state='3') and firstsend = 0 order by id limit 1000";
+		logger.debug(sql);
+		
+		try {
+			this.db.executeQuery(sql);
 			while (this.db.getRs().next()) {
-				id = this.db.getRs().getInt("id");
+				int id = this.db.getRs().getInt("id");
 				String company = this.db.getRs().getString("company");
 				String cpn = this.db.getRs().getString("cpn");
 				String serviceid = this.db.getRs().getString("serviceid");
@@ -370,46 +438,16 @@ public class MtSend implements Runnable {
 
 				sendList.add(map);
 			}
-
-			logger.debug("retained sendList : " + sendList.size());
-
-			filterSendList(sendList);
-		} while (sendList.size() > 0);
-	}
-
-	private void sendNewUser() throws Exception {
-		List sendList = new ArrayList();
-
-		String sql = "select id,company,cpn,serviceid,msgid,provid from companys_user where (state = '1' or state='3') and firstsend = 0 order by id limit 1000";
-
-		this.db.executeQuery(sql);
-		logger.debug("sql==" + sql);
-
-		while (this.db.getRs().next()) {
-			int id = this.db.getRs().getInt("id");
-			String company = this.db.getRs().getString("company");
-			String cpn = this.db.getRs().getString("cpn");
-			String serviceid = this.db.getRs().getString("serviceid");
-			int msgid = this.db.getRs().getInt("msgid");
-			String provid = this.db.getRs().getString("provid");
-
-			Map map = new HashMap();
-			map.put("id", String.valueOf(id));
-			map.put("company", company);
-			map.put("cpn", cpn);
-			map.put("serviceid", serviceid);
-			map.put("msgid", String.valueOf(msgid));
-			map.put("provid", provid);
-
-			sendList.add(map);
+		} catch (SQLException e1) {
+			logger.error(sql,e1);
 		}
 
 		logger.debug("new user sendList : " + sendList.size());
 
 		long millis = System.currentTimeMillis();
-		int send_mt_count = 0;
-		int error_count = 0;
-		int send_mt_tmp_count = 0;
+		int sendMtCount = 0;
+		int errorCount = 0;
+		int sendMtTmpCount = 0;
 
 		for (int i = 0; i < sendList.size(); i++) {
 			Map map = (Map) sendList.get(i);
@@ -419,39 +457,38 @@ public class MtSend implements Runnable {
 			String serviceid = (String) map.get("serviceid");
 			logger.debug("NewUser send " + (i + 1) + " count.");
 			try {
-				Map service = (Map) this.service_map.get(serviceid);
+				Map service = (Map) this.serviceMap.get(serviceid);
 				if (service != null) {
 					getFirstSendMessage(map);
 					updateCompanysUser(id, (String) map.get("msgid"), DateTimeTool.getThreeDaysLater());
 					insertSendRecord(map);
-					String[] _msg = splitConent((String) map.get("msg"));
-					sendMT(map, _msg);
-					send_mt_count += _msg.length;
-					send_mt_tmp_count += _msg.length;
-					if (send_mt_tmp_count >= 18) {
-						long cur_millis = System.currentTimeMillis();
-						long send_millis = cur_millis - millis;
-						logger.debug("NewUser send 18 time " + send_millis + " ms.");
-						if (send_millis < 1000L) {
-							long sleep_millis = 1000L - send_millis;
-							logger.debug("NewUser sleep " + sleep_millis + " ms.");
-							Thread.sleep(sleep_millis);
+					String[] msg = splitConent((String) map.get("msg"));
+					sendMT(map, msg);
+					sendMtCount += msg.length;
+					sendMtTmpCount += msg.length;
+					if (sendMtTmpCount >= 18) {
+						long curMillis = System.currentTimeMillis();
+						long sendMillis = curMillis - millis;
+						logger.debug("NewUser send 18 time " + sendMillis + " ms.");
+						if (sendMillis < 1000L) {
+							long sleepMillis = 1000L - sendMillis;
+							logger.debug("NewUser sleep " + sleepMillis + " ms.");
+							Thread.sleep(sleepMillis);
 						}
-						send_mt_tmp_count = 0;
+						sendMtTmpCount = 0;
 						millis = System.currentTimeMillis();
 					}
 				} else {
-					error_count++;
+					errorCount++;
 					logger.debug("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid);
 				}
 			} catch (Exception e) {
-				error_count++;
-				logger.debug("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid);
-				logger.error(e.getMessage(), e);
+				errorCount++;
+				logger.error("error service : " + id + ", " + company + ", " + cpn + ", " + serviceid, e);
 			}
 		}
 		logger.debug("total :  " + sendList.size());
-		logger.debug("send_mt_count : " + send_mt_count);
-		logger.debug("error_count : " + error_count);
+		logger.debug("sendMtCount : " + sendMtCount);
+		logger.debug("errorCount : " + errorCount);
 	}
 }

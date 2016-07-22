@@ -2,6 +2,8 @@ package com.xt.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Properties;
 
@@ -11,7 +13,7 @@ public class ConfigManager {
 	
 	private static Logger myLogger = Logger.getLogger(ConfigManager.class);
 	
-	private static final String PFILE = System.getProperty("user.dir") + File.separator + "config.ini";
+	private static final String PFILE ="config.ini";
 
 	private File mFile = null;
 
@@ -23,15 +25,11 @@ public class ConfigManager {
 
 	private ConfigManager() {
 		this.mFile = new File(PFILE);
-		this.mLastModifiedTime = this.mFile.lastModified();
-		if (this.mLastModifiedTime == 0L) {
-			myLogger.debug(PFILE + " file does not exist!");
-		}
 		this.mProps = new Properties();
 		try {
-			this.mProps.load(new FileInputStream(PFILE));
+			this.mProps.load(getResourceAsStream(PFILE));
 		} catch (Exception e) {
-			e.printStackTrace();
+			myLogger.error("",e);
 		}
 	}
 
@@ -58,7 +56,7 @@ public class ConfigManager {
 			try {
 				this.mProps.load(new FileInputStream(PFILE));
 			} catch (Exception e) {
-				e.printStackTrace();
+				myLogger.error("",e);
 			}
 		}
 		this.mLastModifiedTime = newTime;
@@ -67,5 +65,43 @@ public class ConfigManager {
 			return defaultVal;
 		}
 		return val;
+	}
+	
+	public static InputStream getResourceAsStream(String resource) throws IOException {
+		InputStream in = null;
+		ClassLoader loader = ConfigManager.class.getClassLoader();
+		try {
+			if (loader != null) {
+				in = loader.getResourceAsStream(resource);
+			}
+			if (in == null) {
+				in = ClassLoader.getSystemResourceAsStream(resource);
+			}
+			if (in == null) {
+				File file = new File(System.getProperty("user.dir") + "/" + resource);
+				if (file.exists()) {
+					in = new FileInputStream(System.getProperty("user.dir") + "/" + resource);
+				}
+			}
+			if (in == null) {
+				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString()
+						.replaceAll("file:", "") + resource;
+				if (filePath.indexOf(":") == 2)
+					filePath = filePath.substring(1, filePath.length());
+				File file = new File(filePath);
+				if (file.exists()) {
+					in = new FileInputStream(filePath);
+				}
+			}
+		} catch (Exception e) {
+			myLogger.error("getResourceAsStream",e);
+		}
+		if (in == null)
+			throw new IOException("Could not find resource " + resource);
+		return in;
+	}
+	
+	public static void main(String[] args) {
+		new ConfigManager();
 	}
 }
