@@ -70,12 +70,13 @@ public class MtSend implements Runnable {
 		logger.debug(sql);
 		try {
 			this.db.executeQuery(sql);
-			while (this.db.getRs().next()) {
-				String gamecode = this.db.getRs().getString("gamecode");
-				String gameid = this.db.getRs().getString("gameid");
-				String spcode = this.db.getRs().getString("spcode");
-				String gamename = this.db.getRs().getString("gamename");
-				int price = this.db.getRs().getInt("price") / 100;
+			ResultSet rs=db.getRs();
+			while (rs.next()) {
+				String gamecode = rs.getString("gamecode");
+				String gameid = rs.getString("gameid");
+				String spcode = rs.getString("spcode");
+				String gamename = rs.getString("gamename");
+				int price = rs.getInt("price") / 100;
 				Map map = new HashMap();
 				map.put("gameid", gameid);
 				map.put("spcode", spcode);
@@ -84,7 +85,7 @@ public class MtSend implements Runnable {
 				map.put("gameid", gameid);
 				this.serviceMap.put(gamecode, map);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
 	}
@@ -97,10 +98,11 @@ public class MtSend implements Runnable {
 		logger.debug(sql);
 		try {
 			this.db.executeQuery(sql);
+			ResultSet rs=db.getRs();
 			String msg;
-			while (this.db.getRs().next()) {
-				String serverid = this.db.getRs().getString("serverid");
-				msg = this.db.getRs().getString("msg");
+			while (rs.next()) {
+				String serverid = rs.getString("serverid");
+				msg = rs.getString("msg");
 				List list = (List) this.messagesMap.get(serverid);
 				if (list == null) {
 					list = new ArrayList();
@@ -112,7 +114,7 @@ public class MtSend implements Runnable {
 			}
 			for (String serverid : this.messagesMap.keySet())
 				logger.debug("'" + serverid + "' : " + ((List) this.messagesMap.get(serverid)).size());
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
 		
@@ -126,10 +128,11 @@ public class MtSend implements Runnable {
 		logger.debug(sql);
 		try {
 			this.db.executeQuery(sql);
+			ResultSet rs=db.getRs();
 			String msg;
-			while (this.db.getRs().next()) {
-				String serverid = this.db.getRs().getString("serverid");
-				msg = this.db.getRs().getString("msg");
+			while (rs.next()) {
+				String serverid = rs.getString("serverid");
+				msg = rs.getString("msg");
 				List list = (List) this.messagesSpecialMap.get(serverid);
 				if (list == null) {
 					list = new ArrayList();
@@ -141,7 +144,7 @@ public class MtSend implements Runnable {
 			}
 			for (String serverid : this.messagesSpecialMap.keySet())
 				logger.debug("'" + serverid + "' : " + ((List) this.messagesSpecialMap.get(serverid)).size());
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
 		
@@ -155,11 +158,12 @@ public class MtSend implements Runnable {
 		logger.debug(sql);
 		try {
 			this.db.executeQuery(sql);
-			if (this.db.getRs().next()) {
-				count = this.db.getRs().getInt("c");
+			ResultSet rs=db.getRs();
+			if (rs.next()) {
+				count = rs.getInt("c");
 			}
 			return count;
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
 		return count;
@@ -383,14 +387,14 @@ public class MtSend implements Runnable {
 			logger.debug(sql);
 			try {
 				this.db.executeQuery(sql);
-
-				while (this.db.getRs().next()) {
-					id = this.db.getRs().getInt("id");
-					String company = this.db.getRs().getString("company");
-					String cpn = this.db.getRs().getString("cpn");
-					String serviceid = this.db.getRs().getString("serviceid");
-					int msgid = this.db.getRs().getInt("msgid");
-					String provid = this.db.getRs().getString("provid");
+				ResultSet rs=db.getRs();
+				while (rs.next()) {
+					id = rs.getInt("id");
+					String company = rs.getString("company");
+					String cpn = rs.getString("cpn");
+					String serviceid = rs.getString("serviceid");
+					int msgid = rs.getInt("msgid");
+					String provid = rs.getString("provid");
 
 					Map map = new HashMap();
 					map.put("id", String.valueOf(id));
@@ -420,13 +424,14 @@ public class MtSend implements Runnable {
 		
 		try {
 			this.db.executeQuery(sql);
-			while (this.db.getRs().next()) {
-				int id = this.db.getRs().getInt("id");
-				String company = this.db.getRs().getString("company");
-				String cpn = this.db.getRs().getString("cpn");
-				String serviceid = this.db.getRs().getString("serviceid");
-				int msgid = this.db.getRs().getInt("msgid");
-				String provid = this.db.getRs().getString("provid");
+			ResultSet rs=db.getRs();
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String company = rs.getString("company");
+				String cpn = rs.getString("cpn");
+				String serviceid = rs.getString("serviceid");
+				int msgid = rs.getInt("msgid");
+				String provid = rs.getString("provid");
 
 				Map map = new HashMap();
 				map.put("id", String.valueOf(id));

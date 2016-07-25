@@ -115,14 +115,13 @@ public class MessageSubmit {
 			this.sub.setRegisteredDelivery(this.delivery);
 			myLogger.debug("开始连接... 发送MT信息...");
 
-			String smsServerip = (String) ConfigManager.getInstance().getConfigItem("smsServerip",
+			String smsServerIp = (String) ConfigManager.getConfigData("sms_server_ip",
 					"xiangtoneServerip not found!");
-			String smsServerport = (String) ConfigManager.getInstance().getConfigItem("smsServerport",
+			String smsServerPort = (String) ConfigManager.getConfigData("sms_server_port",
 					"xiangtoneServerport not found!");
-			myLogger.debug(smsServerip);
-			myLogger.debug(smsServerport);
+			myLogger.debug(smsServerIp+":"+smsServerPort);
 
-			this.xtsms.connectToServer(smsServerip, Integer.parseInt(smsServerport), this.conn);
+			this.xtsms.connectToServer(smsServerIp, Integer.parseInt(smsServerPort), this.conn);
 			myLogger.debug(this.conn.sock);
 			this.xtsms.sendSmSubmit(this.conn, this.sub);
 			this.xtsms.readPa(this.conn);
