@@ -6,9 +6,10 @@ import java.sql.SQLException;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.log4j.Logger;
 
 public class ConnectionService {
-
+	private static Logger myLogger = Logger.getLogger(ConnectionService.class);
 	private static final String DB_LOG = "log";
 	private static final String DB_LOCAL = "local";
 	private static ConnectionService instance = new ConnectionService();
@@ -27,7 +28,7 @@ public class ConnectionService {
 		try {
 			return dsLog.getConnection();
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			myLogger.error("Connection", ex);
 		}
 		return null;
 	}
@@ -36,7 +37,7 @@ public class ConnectionService {
 		try {
 			return dsLocal.getConnection();
 		} catch (SQLException ex) {
-			ex.printStackTrace();
+			myLogger.error("Connection", ex);
 		}
 		return null;
 	}
@@ -90,4 +91,12 @@ public class ConnectionService {
 		bds.close();
 	}
 
+	public static void main(String[] args) {
+		System.out.println(ConfigManager.getConfigData("log.url"));
+		
+		ConnectionService.getInstance().getConnectionForLocal();
+		ConnectionService.getInstance().getConnectionForLog();
+		
+		System.out.println(ConfigManager.getConfigData("local.url"));
+	}
 }
