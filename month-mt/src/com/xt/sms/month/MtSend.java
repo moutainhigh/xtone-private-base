@@ -1,7 +1,8 @@
 package com.xt.sms.month;
 
 import com.xt.sms.mt.MessageSubmit;
-import com.xt.util.DB;
+import com.xt.util.DBForLocal;
+import com.xt.util.DBForLog;
 import com.xt.util.DateTimeTool;
 import java.io.File;
 import java.io.PrintStream;
@@ -16,7 +17,8 @@ import org.apache.log4j.Logger;
 public class MtSend implements Runnable {
 	private static Logger logger = Logger.getLogger(MtSend.class);
 
-	private DB db = null;
+	private DBForLocal dbLocal = null;
+	private DBForLog dbLog = null;
 
 	private Map<String, Map<String, String>> serviceMap = new HashMap();
 	private Map<String, List<String>> messagesMap = new HashMap();
@@ -31,7 +33,8 @@ public class MtSend implements Runnable {
 	public void run() {
 		while (true) {
 			try {
-				this.db = new DB();
+				this.dbLocal = new DBForLocal();
+				this.dbLog = new DBForLog();
 				int hourOfDay = DateTimeTool.getHourOfDay();
 				int min = DateTimeTool.getMinute();
 				if ((hourOfDay >= 9) && (hourOfDay < 19)) {
@@ -50,8 +53,11 @@ public class MtSend implements Runnable {
 			} catch (Exception e) {
 				logger.error("",e);
 			} finally {
-				if (this.db != null) {
-					this.db.close();
+				if (this.dbLocal != null) {
+					this.dbLocal.close();
+				}
+				if (this.dbLog != null) {
+					this.dbLog.close();
 				}
 			}
 			logger.debug("sleep 60s.");
@@ -69,8 +75,8 @@ public class MtSend implements Runnable {
 		String sql = "select gameid,gamecode,spcode,gamename,price from companygames";
 		logger.debug(sql);
 		try {
-			this.db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			this.dbLog.executeQuery(sql);
+			ResultSet rs=dbLog.getRs();
 			while (rs.next()) {
 				String gamecode = rs.getString("gamecode");
 				String gameid = rs.getString("gameid");
@@ -97,8 +103,8 @@ public class MtSend implements Runnable {
 		String sql = "select serverid,msg from messages";
 		logger.debug(sql);
 		try {
-			this.db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			this.dbLog.executeQuery(sql);
+			ResultSet rs=dbLog.getRs();
 			String msg;
 			while (rs.next()) {
 				String serverid = rs.getString("serverid");
@@ -127,8 +133,8 @@ public class MtSend implements Runnable {
 		String sql = "select serverid,msg from messages_special";
 		logger.debug(sql);
 		try {
-			this.db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			this.dbLog.executeQuery(sql);
+			ResultSet rs=dbLog.getRs();
 			String msg;
 			while (rs.next()) {
 				String serverid = rs.getString("serverid");
@@ -157,8 +163,8 @@ public class MtSend implements Runnable {
 				+ cpn + "' and serverid = '" + serverid + "'";
 		logger.debug(sql);
 		try {
-			this.db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			this.dbLog.executeQuery(sql);
+			ResultSet rs=dbLog.getRs();
 			if (rs.next()) {
 				count = rs.getInt("c");
 			}
@@ -175,7 +181,7 @@ public class MtSend implements Runnable {
 				+ "firstsend = '1'," + "sendflag = '1'," + "sendedtime = now() " + "where id = " + id;
 		logger.debug(sql);
 		try {
-			return this.db.executeUpdate(sql);
+			return this.dbLocal.executeUpdate(sql);
 		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
@@ -186,7 +192,7 @@ public class MtSend implements Runnable {
 		String sql = "update companys_user set sendate = '" + sendate + "' where id = " + id;
 		logger.debug(sql);
 		try {
-			return this.db.executeUpdate(sql);
+			return this.dbLocal.executeUpdate(sql);
 		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
@@ -200,7 +206,7 @@ public class MtSend implements Runnable {
 				+ (String) map.get("msg") + "')";
 		logger.debug(sql);
 		try {
-			return this.db.executeUpdate(sql);
+			return this.dbLocal.executeUpdate(sql);
 		} catch (SQLException e) {
 			logger.error(sql,e);
 		}
@@ -269,10 +275,10 @@ public class MtSend implements Runnable {
 						getMessage(map);
 						updateCompanysUser(id, (String) map.get("msgid"), DateTimeTool.getTomorrow());
 						insertSendRecord(map);
-						String[] Msg = splitConent((String) map.get("msg"));
-						sendMT(map, Msg);
-						sendMtCount += Msg.length;
-						sendMtTmpCount += Msg.length;
+						String[] msg = splitConent((String) map.get("msg"));
+						sendMT(map, msg);
+						sendMtCount += msg.length;
+						sendMtTmpCount += msg.length;
 						if (sendMtTmpCount >= 18) {
 							long curMillis = System.currentTimeMillis();
 							long sendMillis = curMillis - millis;
@@ -386,8 +392,8 @@ public class MtSend implements Runnable {
 					+ "and id > " + id + " " + "order by id limit 5000";
 			logger.debug(sql);
 			try {
-				this.db.executeQuery(sql);
-				ResultSet rs=db.getRs();
+				this.dbLog.executeQuery(sql);
+				ResultSet rs=dbLog.getRs();
 				while (rs.next()) {
 					id = rs.getInt("id");
 					String company = rs.getString("company");
@@ -423,8 +429,8 @@ public class MtSend implements Runnable {
 		logger.debug(sql);
 		
 		try {
-			this.db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			this.dbLog.executeQuery(sql);
+			ResultSet rs=dbLog.getRs();
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				String company = rs.getString("company");
