@@ -34,9 +34,7 @@ public class testInsert {
 	public static void main(String[] args) {
 
 		// while(true){
-		// ThreadPool.mThreadPool
-		// .execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl",
-		// "cbl", "cbl", "cbl", 0));
+		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
 		// }
 
 		// ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl",
@@ -140,8 +138,8 @@ public class testInsert {
 		
 		
 		// 转发插入日志表
-		ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, "orderid", "0", "0", "0",
-				"notify_url", "200", "cblappkey", "appkey"));
+//		ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, "orderid", "0", "0", "0",
+//				"notify_url", "200", "cblappkey", "appkey"));
 
 	}
 
