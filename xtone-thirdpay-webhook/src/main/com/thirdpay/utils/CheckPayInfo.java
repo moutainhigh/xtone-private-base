@@ -37,7 +37,6 @@ public class CheckPayInfo {
 			while (rs.next()) {
 				jsonString = rs.getString("para04");
 			}
-//			System.out.println("jsonString = " + jsonString );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,11 +72,11 @@ public class CheckPayInfo {
 
 		try {
 			// DbKey 选择使用的数据库
-			con = ConnectionService.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 			ps = con.prepareStatement("UPDATE `log_async_generals` SET para02 = 1 WHERE para01 = " + ownOrderId);
 			
 			if(!ps.execute()){
-				LOG.info("数据状态更新成功为1");
+				LOG.info("  1001     数据状态更新成功为1");
 			}
 			
 		} catch (Exception e) {
