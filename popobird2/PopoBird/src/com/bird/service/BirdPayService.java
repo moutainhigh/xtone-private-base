@@ -35,8 +35,6 @@ public class BirdPayService extends HttpServlet{
 	static private final Logger LOG = Logger.getLogger(BirdPayService.class);
 	/**
      * 
-     * 外网http://popobird.n8wan.com:29141/BirdPayService
-     * 
      * @see HttpServlet#HttpServlet()
      */
     public BirdPayService() {
