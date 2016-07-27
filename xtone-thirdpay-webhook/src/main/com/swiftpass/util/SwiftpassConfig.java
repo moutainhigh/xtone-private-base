@@ -56,7 +56,10 @@ public class SwiftpassConfig {
      * 官包支付宝支付通知地址
      */
     public static String Alipay_notify_url;
-    
+    /**
+     * 微信H5回调通知地址
+     */
+    public static String wxH5_notify_url;
     
     static{
         Properties prop = new Properties();   
@@ -72,6 +75,7 @@ public class SwiftpassConfig {
             Alipay_SELLER = prop.getProperty("Alipay_SELLER").trim();   
             Alipay_RSA_PRIVATE = prop.getProperty("Alipay_RSA_PRIVATE").trim();   
             Alipay_notify_url = prop.getProperty("Alipay_notify_url").trim();   
+            wxH5_notify_url = prop.getProperty("wxH5_notify_url").trim();   
         } catch (IOException e) {   
             e.printStackTrace();   
         } 

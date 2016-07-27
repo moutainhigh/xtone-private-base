@@ -19,7 +19,7 @@ import com.thirdpay.utils.payConstants;
 /**
  * 微信支付wap 回调
  */
-@WebServlet("/WxWapCallBackServlet2")
+@WebServlet("/WxH5CallBackServlet")
 public class WxH5CallBackServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
