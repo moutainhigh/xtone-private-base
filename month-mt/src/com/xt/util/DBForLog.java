@@ -31,7 +31,6 @@ public class DBForLog {
 		if (this.rs != null) {
 			try {
 				this.rs.close();
-				this.myLogger.debug("ResultSet close ok.");
 			} catch (SQLException localSQLException1) {
 				this.myLogger.error("ResultSet close", localSQLException1);
 			}

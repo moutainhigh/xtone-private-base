@@ -92,7 +92,7 @@ public class Message {
 		try {
 			p.pkHead.pkLen = in.readInt();
 			p.pkHead.pkCmd = in.readInt();
-			myLogger.error("readHead ...pkCmd:" + p.pkHead.pkCmd);
+			myLogger.debug("readHead ...pkCmd:" + p.pkHead.pkCmd);
 		} catch (IOException e) {
 			myLogger.error("readHead",e);
 			throw e;

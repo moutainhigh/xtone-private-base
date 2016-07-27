@@ -16,7 +16,9 @@ import org.apache.log4j.Logger;
 
 public class MtSend implements Runnable {
 	private static Logger logger = Logger.getLogger(MtSend.class);
-
+	private static boolean ifsend930=true;
+	private static boolean ifsend=true;
+	
 	private DBForLocal dbLocal = null;
 	private DBForLog dbLog = null;
 
@@ -44,11 +46,19 @@ public class MtSend implements Runnable {
 						loadMessagesSpecial();
 						sendRetainedUser();
 						sendNewUser();
+						ifsend=true;
+						ifsend930=true;
 					} else {
-						logger.debug("9:00-9:30 not send...");
+						if(ifsend930){
+							logger.debug("9:00-9:30 not send...");
+							ifsend930=false;
+						}
 					}
 				} else{
-					logger.debug("out of range 9:00-19:00 not send...");
+					if(ifsend){
+						logger.debug("out of range 9:00-19:00 not send...");
+						ifsend=false;
+					}
 				}
 			} catch (Exception e) {
 				logger.error("",e);
@@ -60,7 +70,7 @@ public class MtSend implements Runnable {
 					this.dbLog.close();
 				}
 			}
-			logger.debug("sleep 60s.");
+//			logger.debug("sleep 60s.");
 			try {
 				Thread.sleep(60000L);
 			} catch (InterruptedException e) {
