@@ -47,7 +47,7 @@ public class LoginFilter implements Filter {
       HttpSession session = ((HttpServletRequest) request).getSession();
       if (!(session!=null&&session.getAttribute("user")!=null)){
 //        session.setAttribute("lastFileName", fileName);
-    	session.setAttribute("lastFileName", "stat-all.jsp");//固定跳转到列表页
+    	session.setAttribute("lastFileName", "daily.jsp");//固定跳转到列表页
     	request.getRemoteHost();
     	StringBuffer temp =  ((HttpServletRequest) request).getRequestURL(); 
     	String str = new String(temp);
