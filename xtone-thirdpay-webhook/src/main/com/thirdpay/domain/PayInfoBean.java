@@ -216,7 +216,7 @@ public class PayInfoBean implements Runnable {
 								forward_url);
 					}
 					
-					if((!notify_url.equals("")) && (notify_url != null)){
+					if(! "".equals(notify_url) && notify_url != null){
 						
 						// 转发插入日志表
 						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",

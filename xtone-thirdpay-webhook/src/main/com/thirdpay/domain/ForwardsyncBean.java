@@ -180,7 +180,7 @@ public class ForwardsyncBean implements Runnable {
 					String own_orderId = this.getOwn_orderId();
 
 					if (!notify_url.equals("")) {
-						LOG.info("-------------------------转发数据到指定url");
+						LOG.info("-------------------------转发数据到指定url"+this.getNotify_url());
 						postPayment(notify_url, own_orderId,this.getEncrypt());
 
 					}
@@ -223,7 +223,7 @@ public class ForwardsyncBean implements Runnable {
 			
 			// 加密
 			LOG.info("--加密前的字串是：" + forwardString);
-//			forwardString= AES.Encrypt(forwardString, Contents.cKey);
+			forwardString= AES.Encrypt(forwardString, Contents.cKey);
 			LOG.info("加密后的字串是：" + forwardString);
 			
 		}

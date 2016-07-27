@@ -155,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</tbody>
 		<tfoot>
 	    	<tr>
-	        	<th scope="row" >总金额</th>
+	        	<th scope="row" >金额</th>
 	            
 	            <td id="money" colspan="8"></td>
 	            

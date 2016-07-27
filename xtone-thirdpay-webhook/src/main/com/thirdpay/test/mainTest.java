@@ -16,10 +16,24 @@ public class mainTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 //		JSONObject json = JSON.; // 解析自定义参数
-		String url = "http://thirdpay-cs.n8wan.com:29141/CpInfoServlet?Appkey=zgt";
-		String str = getJsonContent(url, "utf-8");
-		JSONObject json = JSON.parseObject(str); // 解析自定义参数
-		System.out.println(json.getString("baidupay"));
+//		String url = "http://thirdpay-cs.n8wan.com:29141/CpInfoServlet?Appkey=zgt";
+//		String str = getJsonContent(url, "utf-8");
+//		JSONObject json = JSON.parseObject(str); // 解析自定义参数
+//		System.out.println(json.getString("baidupay"));
+		
+		
+		String test = null;
+		
+//		if(test != null && !test.equals("")){
+//			System.out.println("is null");
+//		}
+		
+		if("".equals(test)){
+			
+//			if(test != null){
+//				
+//			}
+		}
 		
 		
 	}

@@ -130,7 +130,7 @@ public class CheckPayInfo {
 		try {
 
 			// DbKey 选择使用的数据库
-			con = ConnectionService.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 			
 			//找出上次查询次数
 			ps = con.prepareStatement("SELECT * FROM `log_async_generals` WHERE para01 = " + ownOrderId );
