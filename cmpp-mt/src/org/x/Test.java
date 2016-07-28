@@ -11,6 +11,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
+import com.xiangtone.util.DBForLocal;
+
 import comsd.commerceware.cmpp.CMPP;
 import comsd.commerceware.cmpp.OutOfBoundsException;
 
@@ -22,30 +24,21 @@ public class Test {
 		String strSql = null;
 		String strSql1 = null;
 		String strSql2 = null;
-		Connection con = null;
-		PreparedStatement ps = null;
+		DBForLocal db=new DBForLocal();
 		int rs;
 		try {
 			strSql = "update tbl_base_users set name ='x1' where id=5";
 			strSql1 = "update tbl_base_users set name ='y1' where id=6";
 			strSql2 = "update tbl_base_users set name ='z1' where id=7";
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps=con.prepareStatement(strSql);
-			rs=ps.executeUpdate();
-			rs=ps.executeUpdate(strSql1);
-			rs=ps.executeUpdate(strSql2);
-			System.out.println(rs);
+			db.executeUpdate(strSql);
+			db.executeUpdate(strSql1);
+			db.executeUpdate(strSql2);
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		}finally {
-			try {
-				con.close();
-			} catch (Exception e2) {
-				// TODO: handle exception
-			}
+			db.close();
 		}		
-		System.out.println(ps);
 		byte[] b = { 1, 2 };
 		System.out.println(Arrays.toString(b));
 

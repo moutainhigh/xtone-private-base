@@ -17,6 +17,8 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
+import com.xiangtone.util.DBForLocal;
+
 import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -36,9 +38,6 @@ public class SMSReport {
 	int statDev;
 	String statDetail;
 
-	private Connection con=null;
-	private PreparedStatement ps=null;
-	
 	// FileWriter fw = null;
 	// StringBuffer sb;
 	public SMSReport() {
@@ -54,7 +53,7 @@ public class SMSReport {
 	}
 
 	public void insertReportLog() {
-
+		DBForLocal db=new DBForLocal();
 		String strSql = "insert into sms_reportlog(id,ismgId,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) values('','"
 				+ ismgId + "','" + msgId + "','" + linkId + "','" + spCode + "','" + destCpn + "','" + srcCpn + "','"
 				+ subTime + "','" + doneTime + "','" + statDev + "','" + statDetail + "')";
@@ -74,13 +73,11 @@ public class SMSReport {
 		 */
 		try {
 			logger.debug(strSql);
+			db.executeUpdate(strSql);
 			logger.debug(tempstrSql);
+			db.executeUpdate(tempstrSql);
 			logger.debug(companystrSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			ps.executeUpdate(strSql);
-			ps.executeUpdate(tempstrSql);
-			ps.executeUpdate(companystrSql);
+			db.executeUpdate(companystrSql);
 			// fw.write(sb.toString());tempstr_sql
 			// fw.flush();
 			// fw.close();
@@ -88,22 +85,8 @@ public class SMSReport {
 			// tempReportLog.logReport(str_sql);
 		} catch (Exception e) {
 			logger.error("insertReportLog", e);
-
 		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 
 	}

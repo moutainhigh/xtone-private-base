@@ -10,6 +10,9 @@ import java.util.*;
 import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
+import com.xiangtone.util.DBForLocal;
+import com.xiangtone.util.DBForLog;
+
 import java.sql.*;
 
 public class SMSMT {
@@ -45,11 +48,6 @@ public class SMSMT {
 	public int tpUdhi;
 	public int dataCoding;
 	public int reportFlag;
-
-	private Connection con=null;
-	private PreparedStatement ps=null;
-	private ResultSet rs = null;
-	private String strSql;
 
 	/**
 	 * set and get method
@@ -204,23 +202,16 @@ public class SMSMT {
 		this.msgId = msgId;
 	}
 
-	/**
-	 * Constructor
-	 *
-	 */
 	public SMSMT() {
 	}
-
-	/**
-	*
-	*
-	*/
 
 	public void insertMTLog() {
 		// if(db == null)
 		// {
 		// db = new mysqldb();
 		// }
+		DBForLocal db=new DBForLocal();
+		String strSql=null;
 		try {
 			strSql = "insert into sms_mtlog set ";
 			strSql += " vcpid=" + vcpID;
@@ -244,29 +235,14 @@ public class SMSMT {
 			strSql += ",submit_result=" + submitResult;
 			strSql += ",submit_seq=" + submitSeq;
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			ps.executeUpdate();
+			db.executeUpdate(strSql);
 			/// add at 090525 ���ڽ��������п���
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.insertMtlog(strSql);
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 	}
 
@@ -275,33 +251,20 @@ public class SMSMT {
 	*
 	*/
 	public void updateSubmitSeq(String ismgId, int seq, String msgId, int submitResult) {
+		DBForLocal db=new DBForLocal();
+		String strSql=null;
 		try {
 			strSql = "update sms_mtlog set submit_seq = 0 ,submit_msgid='" + msgId + "',submit_result=" + submitResult
 					+ " where submit_seq = " + seq + " and ismgid ='" + ismgId + "' order by id desc limit 1";
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			ps.executeUpdate();
+			db.executeUpdate(strSql);
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.updateSubmitSeq(strSql);
 
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 	}
 
@@ -335,6 +298,8 @@ public class SMSMT {
 		// {
 		// db = new mysqldb();
 		// }
+		DBForLocal db=new DBForLocal();
+		String strSql=null;
 		try {
 			strSql = "insert into sms_mclog set ";
 			strSql += " vcpid=" + vcpID;
@@ -354,26 +319,11 @@ public class SMSMT {
 			strSql += ",submit_seq=" + submitSeq;
 			strSql += ",card_flag=" + cardFlag;
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			ps.executeUpdate();
+			db.close();
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		} finally {
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 	}
 }
