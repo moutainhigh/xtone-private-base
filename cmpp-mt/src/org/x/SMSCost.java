@@ -10,6 +10,8 @@ import java.sql.*;
 import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
+import com.xiangtone.util.DBForLog;
+
 public class SMSCost {
 	private static Logger logger = Logger.getLogger(SMSCost.class);
 	public String serverID = "8003";
@@ -21,11 +23,6 @@ public class SMSCost {
 	public int mediaType = 1;
 	public String spCode;
 	public String memo;
-
-	private Connection con = null;
-	private PreparedStatement ps = null;
-	private ResultSet rs = null;
-	private String strSql;
 
 	public String getServerID() {
 		return serverID;
@@ -63,22 +60,23 @@ public class SMSCost {
 		return memo;
 	}
 
-	public void setCost_serverID(String _serverID) {
-		this.serverID = _serverID;
+	public void setCostServerID(String serverID) {
+		this.serverID = serverID;
 	}
 
 	public SMSCost() {
 	}
 
 	public void lookupInfofeeByServerIDIOD(String serverID) {
+		String strSql=null;
+		DBForLog db=new DBForLog();
 		try {
+			ResultSet rs = null;
 			strSql = "select *  from sms_cost where serverid='" + serverID + "'";
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			rs = ps.executeQuery();
+			db.executeQuery(strSql);
+			rs = db.getRs();
 			if (rs.next()) {
-				// System.out.println("ddddddd");
 				this.serverID = serverID;
 				this.serverCodeIOD = rs.getString("feecode_iod");
 				this.serverName = rs.getString("servername");
@@ -92,42 +90,19 @@ public class SMSCost {
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 	}
 
-	/**
-	*
-	*
-	*/
 	public void lookupInfofeeByServerIDPUSH(String serverID) {
-
+		String strSql = null;
+		DBForLog db=new DBForLog();
 		try {
+			ResultSet rs = null;
 			strSql = "select *  from sms_cost where serverid='" + serverID + "'";
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			rs = ps.executeQuery();
+			db.executeQuery(strSql);
+			rs = db.getRs();
 			if (rs.next()) {
 				this.serverID = serverID;
 				this.serverCodeIOD = rs.getString("feecode_iod");
@@ -142,27 +117,7 @@ public class SMSCost {
 		} catch (Exception e) {
 			logger.error(strSql, e);
 		} finally {
-			try {
-				if (rs != null) {
-					rs.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (ps != null) {
-					ps.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (con != null) {
-					con.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 	}
 }

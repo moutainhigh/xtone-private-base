@@ -22,7 +22,7 @@ public class SMSBinary {
 	public int section;
 	public byte[][] content;
 	public int len;
-
+	
 	String strSql;
 
 	public SMSBinary() {
@@ -73,17 +73,15 @@ public class SMSBinary {
 		// default:
 		// db = new Mysqldb();
 		// }
-		Connection con = null;
-		PreparedStatement ps = null;
+		DBForLog db=new DBForLog();
 		ResultSet rs = null;
 		byte[] buffer = null;
 		byte[][] temp = new byte[20][161];
 		try {
 			strSql = "select ringid,content,len from sms_binary where ringid = " + ringID + " order by section";
 			logger.debug(strSql);
-			con = ConnectionService.getInstance().getConnectionForLocal();
-			ps = con.prepareStatement(strSql);
-			rs = ps.executeQuery();
+			db.executeQuery(strSql);
+			rs = db.getRs();
 			int i = 0;
 			while (rs.next()) {
 				int nsize = rs.getInt("len");
@@ -102,11 +100,7 @@ public class SMSBinary {
 			logger.error("SMS.java getRingBin:", e);
 
 		} finally {
-			try {
-				con.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			db.close();
 		}
 		return temp;
 	}
