@@ -121,51 +121,51 @@ public class SmSubmitResult extends SmResult {
 	public static String linkId;
 	public static String msgId;
 
-	public static String getVcpId() {
+	public String getVcpId() {
 		return vcpId;
 	}
 
-	public static String getServerCode() {
+	public String getServerCode() {
 		return serverCode;
 	}
 
-	public static String getProvCode() {
+	public String getProvCode() {
 		return provCode;
 	}
 
-	public static String getServerType() {
+	public String getServerType() {
 		return serverType;
 	}
 
-	public static String getDestCpn() {
+	public String getDestCpn() {
 		return destCpn;
 	}
 
-	public static String getFeeCpn() {
+	public String getFeeCpn() {
 		return feeCpn;
 	}
 
-	public static String getFeeType() {
+	public String getFeeType() {
 		return feeType;
 	}
 
-	public static String getFeeCode() {
+	public String getFeeCode() {
 		return feeCode;
 	}
 
-	public static String getMediaType() {
+	public String getMediaType() {
 		return mediaType;
 	}
 
-	public static byte[] getContent() {
+	public byte[] getContent() {
 		return content;
 	}
 
-	public static String getRegisteredDelivery() {
+	public String getRegisteredDelivery() {
 		return registeredDelivery;
 	}
 
-	public static String getStat() {
+	public String getStat() {
 		return stat;
 	}
 
@@ -173,15 +173,15 @@ public class SmSubmitResult extends SmResult {
 		return deByteCode;
 	}
 
-	public static int getFeecpnType() {
+	public int getFeecpnType() {
 		return feecpnType;
 	}
 
-	public static String getLinkId() {
+	public String getLinkId() {
 		return linkId;
 	}
 
-	public static String getMsgId() {
+	public String getMsgId() {
 		return msgId;
 	}
 

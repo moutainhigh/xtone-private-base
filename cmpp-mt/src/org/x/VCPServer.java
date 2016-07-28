@@ -27,7 +27,7 @@ public class VCPServer extends Thread {
 
 			ServerSocket server = new ServerSocket(listenPort, 1000);
 
-			logger.debug("接收vcp信息的服务线程.... on port " + listenPort + " waiting ...");
+			logger.debug("acceptConnections on port " + listenPort + " waiting ...");
 
 			Socket incomingConnection = null;
 

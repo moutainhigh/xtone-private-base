@@ -34,10 +34,10 @@ public class SMSActiveTest implements Runnable {
 				logger.debug("send active test");
 				try {
 					p.cmppActiveTest(cmppcon.con);
-					Thread.currentThread().sleep(3000);
+					Thread.currentThread().sleep(5000);
 				} catch (Exception e) {
 					logger.error("testActive exception msg--Exception:", e);
-					logger.debug("重新连接...");
+					logger.debug("Try to active again");
 					p.cmppDisConnectFromIsmg(con);
 					cmppcon.destroy();
 
@@ -48,7 +48,7 @@ public class SMSActiveTest implements Runnable {
 						con = cmppcon.con;
 
 					} catch (Exception e1) {
-						logger.error("重连失败:", e);
+						logger.error("Failed to active:", e);
 					}
 					// cmppcon = CMPPSingleConnect.getInstance(); //重连
 				}

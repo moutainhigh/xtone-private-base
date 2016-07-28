@@ -92,9 +92,9 @@ public class CMPPSendSd implements CMPPSend {
 	*
 	*
 	*/
-	private void sendBinarySMS(int Ringid) {
+	private void sendBinarySMS(int ringid) {
 		SMSBinary binary = new SMSBinary();
-		byte[][] buffer = binary.getBinaryContent(Ringid, mt.vcpID);
+		byte[][] buffer = binary.getBinaryContent(ringid, mt.vcpID);
 		String infofee = mt.infoFee;
 		String feetype = mt.feeType;
 		int flag = 0;
@@ -137,11 +137,7 @@ public class CMPPSendSd implements CMPPSend {
 
 	public void send(byte[] submitContent) {
 
-		logger.debug("----send sms by qw's gateway------");
-		logger.debug("mt.cpn:" + mt.feeCpn);
-		logger.debug("mt.feeCode:" + mt.feeCode);
-		logger.debug("mt.infoFee:" + mt.infoFee);
-		logger.debug("-----------------------------------");
+		logger.debug("send sms by qw's gateway---mt.cpn:" + mt.feeCpn +"mt.feeCode:" + mt.feeCode+ "mt.infoFee:" + mt.infoFee);
 
 		try {
 			// msgId
@@ -281,12 +277,6 @@ public class CMPPSendSd implements CMPPSend {
 			// content:" + new String(msgContent));
 
 		} catch (Exception e) {
-			// Logger myLogger = Logger.getLogger("MsgSendLogger");
-			// Logger mySonLogger = Logger.getLogger("myLogger.mySonLogger");
-			// PropertyConfigurator.configure("log4j.properties");
-			// logger.debug("SMSSd.java :");
-			// myLogger.info(FormatSysTime.getCurrentTimeA() + " wq send
-			// exception:" + e.toString());
 			logger.error("sendTextSMCSMS", e);
 			e.printStackTrace();
 

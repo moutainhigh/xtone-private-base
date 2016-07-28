@@ -155,7 +155,7 @@ public class SMSoperate {
 				strContent = MyTools.UCS2GB2312(this.deliverContent);
 				break;
 			default:
-				System.out.println("消息编码有误");
+				logger.debug("消息编码有误");
 				strContent = "消息编码有误" + this.deliverFmt;
 				break;
 			}
