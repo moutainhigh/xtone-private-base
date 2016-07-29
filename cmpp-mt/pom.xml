@@ -25,9 +25,9 @@
 		<finalName>${final.name}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
-			<resource>
-				<directory>${runtime.env}/</directory>
-			</resource>
+<!-- 			<resource> -->
+<!-- 				<directory>${runtime.env}/</directory> -->
+<!-- 			</resource> -->
 			<resource>
 				<directory>src</directory>
 				<excludes>
@@ -38,6 +38,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
 				<configuration>
 					<target>1.6</target>
 					<source>1.6</source>
@@ -127,7 +128,7 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>ture</id>
+			<id>test</id>
 			<properties>
 				<runtime.env>packageConfig\test</runtime.env>
 				<final.name>cmpp-mt-test</final.name>

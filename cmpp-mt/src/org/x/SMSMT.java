@@ -275,10 +275,10 @@ public class SMSMT {
 			// ='"+this.ismgID+"' order by id desc limit 1";
 			// db.execUpdate(strSql);
 			MtSubmitSeq mtSubmitSeq = new MtSubmitSeq();
-			mtSubmitSeq.setMTSubmitSeq(this.submitSeq);
-			mtSubmitSeq.setMTSubmitMsgID(this.submitMsgID);
-			mtSubmitSeq.setMTSubmitResult(this.submitResult);
-			mtSubmitSeq.setMTIsmgID(this.ismgID);
+			mtSubmitSeq.setSubmitSeq(this.submitSeq);
+			mtSubmitSeq.setSubmitMsgID(this.submitMsgID);
+			mtSubmitSeq.setSubmitResult(this.submitResult);
+			mtSubmitSeq.setIsmgID(this.ismgID);
 			mtSubmitSeq.updateSubmitSeq();
 			/*
 			 * MtsMtHandle mtsMtLog = new MtsMtHandle();

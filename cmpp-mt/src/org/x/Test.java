@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 
 import com.xiangtone.util.DBForLocal;
@@ -21,6 +22,7 @@ public class Test {
 	private static Logger logger = Logger.getLogger(Test.class);
 
 	public static void main(String[] args) {
+		System.out.println(ConfigManager.getConfigData("log.initialSize"));
 		String strSql = null;
 		String strSql1 = null;
 		String strSql2 = null;

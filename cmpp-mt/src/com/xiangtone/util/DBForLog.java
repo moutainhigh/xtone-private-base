@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 public class DBForLog {
-	private static Logger myLogger = Logger.getLogger(DBForLog.class);
+	private static Logger logger = Logger.getLogger(DBForLog.class);
 
 	private Connection connection = null;
 	private PreparedStatement preparedStatement= null;
@@ -18,10 +18,13 @@ public class DBForLog {
 	}
 	
 	public PreparedStatement getPreparedStatement(String paramString) {
+		if(connection==null){
+			connection=ConnectionService.getInstance().getConnectionForLog();
+		}
 		try {
 			preparedStatement = connection.prepareStatement(paramString);
 		} catch (SQLException e) {
-			myLogger.error("",e);
+			logger.error("",e);
 		}
 		return preparedStatement;
 	}
@@ -43,7 +46,7 @@ public class DBForLog {
 			try {
 				this.resultSet.close();
 			} catch (SQLException localSQLException1) {
-				this.myLogger.error("ResultSet close", localSQLException1);
+				this.logger.error("ResultSet close", localSQLException1);
 			}
 			this.resultSet = null;
 		}
@@ -51,7 +54,7 @@ public class DBForLog {
 			try {
 				this.preparedStatement.close();
 			} catch (SQLException localSQLException2) {
-				this.myLogger.error("Statement close", localSQLException2);
+				this.logger.error("Statement close", localSQLException2);
 			}
 			this.preparedStatement = null;
 		}
@@ -59,7 +62,7 @@ public class DBForLog {
 			try {
 				this.connection.close();
 			} catch (SQLException localSQLException3) {
-				this.myLogger.error("Connection close", localSQLException3);
+				this.logger.error("Connection close", localSQLException3);
 			}
 			this.connection = null;
 		}
@@ -69,13 +72,32 @@ public class DBForLog {
 		String sql="SELECT * FROM `tbl_base_users` WHERE id=1";
 		DBForLog db=new DBForLog();
 		try {
-			ResultSet rs=db.getPreparedStatement(sql).executeQuery();
-			
+//			db.getPreparedStatement(sql).executeQuery();
+			db.close();
+			db.executeQuery(sql);
+			ResultSet rs=db.getRs();
 			if(rs.next()){
-				myLogger.debug(rs.getString("name"));
+				logger.debug(rs.getString("name"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+
+	public void executeQuery(String strSql) {
+		if(connection==null){
+			connection=ConnectionService.getInstance().getConnectionForLog();
+		}
+		try {
+			preparedStatement=connection.prepareStatement(strSql);
+			resultSet=preparedStatement.executeQuery();
+		} catch (SQLException e) {
+			logger.error(strSql,e);
+		}
+	}
+
+	public ResultSet getRs() {
+		return resultSet;
+	}
+	
 }

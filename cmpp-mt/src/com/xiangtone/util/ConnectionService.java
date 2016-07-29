@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.log4j.Logger;
+import org.common.util.ConfigManager;
 
 public class ConnectionService {
 	private static Logger myLogger = Logger.getLogger(ConnectionService.class);
