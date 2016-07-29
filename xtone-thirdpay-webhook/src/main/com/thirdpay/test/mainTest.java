@@ -10,6 +10,7 @@ import java.util.Random;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.thirdpay.utils.CheckPayInfo;
 
 public class mainTest {
 
@@ -22,19 +23,23 @@ public class mainTest {
 //		System.out.println(json.getString("baidupay"));
 		
 		
-		String test = null;
+//		String test = null;
 		
 //		if(test != null && !test.equals("")){
 //			System.out.println("is null");
 //		}
 		
-		if("".equals(test)){
+//		if("".equals(test)){
 			
 //			if(test != null){
 //				
 //			}
-		}
+//		}
 		
+		String forwardString = CheckPayInfo.CheckInfo("87web1469686110398");
+		
+		
+		System.out.println(forwardString);
 		
 	}
 	

@@ -266,6 +266,8 @@ public class PayInfoBean implements Runnable {
 			oprator = "7";
 		} else if (payChannel.equals("wxWap")) {
 			oprator = "8";
+		} else if (payChannel.equals("wxH5")) {
+			oprator = "9";
 		} else {
 			
 			oprator = "otherpay";

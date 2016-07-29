@@ -25,13 +25,13 @@ public class CheckPayInfo {
 		// TODO Auto-generated method stub
 		// ForwardsyncBean forwardsyncBean = new ForwardsyncBean();
 		String jsonString = "";
-		PreparedStatement ps = null;
+		PreparedStatement ps = null; 
 		Connection con = null;
 
 		try {
 			// DbKey 选择使用的数据库
 			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + ownOrderId);
+			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + "'"+ownOrderId+"'");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {

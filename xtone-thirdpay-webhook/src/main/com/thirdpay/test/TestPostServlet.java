@@ -40,6 +40,7 @@ public class TestPostServlet extends HttpServlet {
 		
 		//得到payment
 		String payment =  request.getParameter("payment");
+		
 		//解密ckey
 		String ckey="6010401031024102";
 		// 解密

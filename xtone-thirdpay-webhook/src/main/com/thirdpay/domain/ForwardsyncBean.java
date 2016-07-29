@@ -180,7 +180,7 @@ public class ForwardsyncBean implements Runnable {
 					String own_orderId = this.getOwn_orderId();
 
 					if (!notify_url.equals("")) {
-						LOG.info("-------------------------转发数据到指定url"+this.getNotify_url());
+						LOG.info("------------------------own_orderId = "+own_orderId+" -转发数据到指定url = "+this.getNotify_url());
 						postPayment(notify_url, own_orderId,this.getEncrypt());
 
 					}
