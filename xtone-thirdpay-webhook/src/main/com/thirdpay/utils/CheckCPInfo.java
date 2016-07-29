@@ -30,6 +30,7 @@ public class CheckCPInfo {
 		try {
 			// DbKey 选择使用的数据库
 			con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+//			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" + "'" + appKey + "'");
 			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" + "'" + appKey + "'");
 
 			ResultSet rs = ps.executeQuery();
