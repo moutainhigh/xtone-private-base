@@ -25,6 +25,11 @@
 			<artifactId>netty-all</artifactId>
 			<version>4.1.2.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>${final.name}</finalName>

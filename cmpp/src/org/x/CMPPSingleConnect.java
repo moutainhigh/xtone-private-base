@@ -17,7 +17,7 @@ import comsd.commerceware.cmpp.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.ConfigManager1;
 import com.xiangtone.util.MailUtil;
 
 public class CMPPSingleConnect {
@@ -26,7 +26,7 @@ public class CMPPSingleConnect {
   	public   static conn_desc con = new conn_desc();
   	private  CmppLogin cl = new CmppLogin();
   	public static int count=0;
-  	private ConfigManager configManager=ConfigManager.getInstance();
+  	private ConfigManager1 configManager=ConfigManager1.getInstance();
   	private int maxConnect=Integer.parseInt(configManager.getConfigData("max_connect"));
   	
   	private CMPPSingleConnect(){
@@ -79,6 +79,6 @@ public class CMPPSingleConnect {
 		cmppcon = null;
 	}
   	public static void main(String[] args) {
-		System.out.println(ConfigManager.getInstance().getConfigData("mail_io"));
+		System.out.println(ConfigManager1.getInstance().getConfigData("mail_io"));
 	}
 }

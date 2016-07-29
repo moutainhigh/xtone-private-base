@@ -1,155 +1,92 @@
-/**
- *Writter by airmirror
- *2003-12-14 
- *单实例却有静态方法
- */
 
 package com.xiangtone.util;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
 
-public class ConfigManager {
+public class ConfigManager
+{
+	private static final String CONFIG_PATH = "config.ini";
+	private static Properties	prop			= null;
+	private static long			lastModifyTime	= 0;
 
-	final private static Logger LOG = Logger.getLogger(ConfigManager.class);
-
-	final private static String PFILE = "config.ini";
-	/**
-	 * 对应于属性文件的文件对象变量
-	 */
-	private File m_file = null;
-	/**
-	 * 属性文件的最后修改日期
-	 */
-	private long m_lastModifiedTime = 0;
-	/**
-	 * 属性文件所对应的属性对象变量
-	 */
-	private static Properties m_props = null;
-	/**
-	 * 本类可能存在的惟一的一个实例
-	 */
-	private static ConfigManager m_instance = null;
-
-	/**
-	 * 私有的构造子，用以保证外界无法直接实例化
-	 */
-	private ConfigManager() {
-		// m_file = new File(PFILE);
-		// m_lastModifiedTime = m_file.lastModified();
-		// if(m_lastModifiedTime == 0)
-		// {
-		// System.err.println(PFILE + " file does not exist!");
-		// }
-		// m_props = new Properties();
-		// try
-		// {
-		// m_props.load(new FileInputStream(PFILE));
-		// }
-		// catch(Exception e)
-		// {
-		// e.printStackTrace();
-		// }
-		init(PFILE);
+	private ConfigManager()
+	{
 	}
-
+	
 	public static InputStream getResourceAsStream(String resource) throws IOException {
-		InputStream in = null;
-		ClassLoader loader = ConfigManager.class.getClassLoader();
-		try {
-			if (loader != null) {
-				in = loader.getResourceAsStream(resource);
-				LOG.debug("load config from loader.getResourceAsStream:" + resource);
-			}
-			if (in == null) {
-				in = ClassLoader.getSystemResourceAsStream(resource);
-				LOG.debug("load config from ClassLoader.getSystemResourceAsStream:" + resource);
-			}
-			if (in == null) {
-				File file = new File(System.getProperty("user.dir") + "/" + resource);
-				if (file.exists()) {
-					in = new FileInputStream(System.getProperty("user.dir") + "/" + resource);
-				}
-				LOG.debug(
-						"load config from System.getProperty(\"user.dir\"):" + System.getProperty("user.dir") + "/" + resource);
-				// ClassLoader.getSystemResourceAsStream(System.getProperty("user.dir")+"/"+resource);
-			}
-			if (in == null) {
-				String filePath = Thread.currentThread().getContextClassLoader().getResource("").toString().replaceAll("file:",
-						"") + resource;
-				if (filePath.indexOf(":") == 2)
-					filePath = filePath.substring(1, filePath.length());
-				File file = new File(filePath);
-				if (file.exists()) {
-					in = new FileInputStream(filePath);
-				}
-				LOG.debug("load config from filePath:" + filePath);
-				// ClassLoader.getSystemResourceAsStream(System.getProperty("user.dir")+"/"+resource);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	     InputStream in = null;
+	     ClassLoader loader = ConfigManager.class.getClassLoader();
+	     if (loader != null) in = loader.getResourceAsStream(resource);
+	     if (in == null) in = ClassLoader.getSystemResourceAsStream(resource);
+	     if (in == null) throw new IOException("Could not find resource " + resource);
+	     return in;
+	 }
+
+	private static void init(String filePath)
+	{
+		prop = new Properties();
+		try
+		{
+			filePath = (filePath == null || filePath.length() == 0) ? CONFIG_PATH
+					: filePath;
+			if (filePath.indexOf(":") == 2)
+				filePath = filePath.substring(1, filePath.length());
+			prop.load(getResourceAsStream(filePath));
+			File file = new File(CONFIG_PATH);
+			lastModifyTime = file.lastModified();
 		}
-		if (in == null)
-			throw new IOException("Could not find resource " + resource);
-		return in;
-	}
-
-	private static void init(String filePath) {
-
-		m_props = new Properties();
-		try {
-			m_props.load(getResourceAsStream(filePath));
-		} catch (Exception e) {
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	private static String getProperty(String key) {
+	private static String getProperty(String key)
+	{
 		String result = "";
-		if (m_props == null) {
-			init(PFILE);
+		if (prop == null)
+		{
+			init("");
 		}
-		try {
-			// File file = new File(CONFIG_PATH);
-			// long tempTime = file.lastModified();
-			// if (tempTime > lastModifyTime) {
-			// prop.clear();
-			// init("");
-			// }
-			if (m_props.containsKey(key)) {
-				result = m_props.getProperty(key);
+		try
+		{
+			File file = new File(CONFIG_PATH);
+			long tempTime = file.lastModified();
+			if (tempTime > lastModifyTime)
+			{
+				prop.clear();
+				init("");
 			}
-		} catch (Exception exce) {
+			if (prop.containsKey(key))
+			{
+				result = prop.getProperty(key);
+			}
+		}
+		catch (Exception exce)
+		{
 			exce.printStackTrace();
 		}
 		return result;
 	}
 
-	public static String getConfigData(String key) {
+	public static String getConfigData(String key)
+	{
 		return getProperty(key);
 	}
 
-	public static String getConfigData(String key, String defaultValue) {
+	public static String getConfigData(String key, String defaultValue)
+	{
 		return getProperty(key).length() == 0 ? defaultValue : getProperty(key);
 	}
 
-	/**
-	 * 静态工厂方法
-	 * 
-	 * @return 返还ConfigManager 类的单一实例
-	 */
-	synchronized public static ConfigManager getInstance() {
-		if (m_instance == null) {
-			m_instance = new ConfigManager();
-		}
-		return m_instance;
+	public static void main(String[] args){
+		//System.out.println(System.getProperty("java.class.path").split(";")[0]);
+		System.out.println(getConfigData("MainConfigDbServer"));
 	}
-
+	
+	
 }
-

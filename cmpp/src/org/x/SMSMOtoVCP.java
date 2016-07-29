@@ -4,7 +4,7 @@ import com.xiangtone.sms.api.conn_desc;
 import com.xiangtone.sms.api.message;
 import com.xiangtone.sms.api.sm_deliver;
 import com.xiangtone.sms.api.sm_deliver_ack_result;
-import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.ConfigManager1;
 
 /**
 *
@@ -21,10 +21,10 @@ public class SMSMOtoVCP {
 	public conn_desc xtconn;
 	// public SMSMO smsmo;
 
-	String vcp_ip1 = (String) ConfigManager.getInstance().getConfigData("vcp_ip1", "vcp_ip1 not found");
-	String vcp_port1 = (String) ConfigManager.getInstance().getConfigData("vcp_port1", "vcp_port1 not found");
-	String vcp_ip2 = (String) ConfigManager.getInstance().getConfigData("vcp_ip2", "vcp_ip2 not found");
-	String vcp_port2 = (String) ConfigManager.getInstance().getConfigData("vcp_port2", "vcp_port2 not found");
+	String vcp_ip1 = (String) ConfigManager1.getInstance().getConfigData("vcp_ip1", "vcp_ip1 not found");
+	String vcp_port1 = (String) ConfigManager1.getInstance().getConfigData("vcp_port1", "vcp_port1 not found");
+	String vcp_ip2 = (String) ConfigManager1.getInstance().getConfigData("vcp_ip2", "vcp_ip2 not found");
+	String vcp_port2 = (String) ConfigManager1.getInstance().getConfigData("vcp_port2", "vcp_port2 not found");
 
 	// String vcp_ip1="192.168.1.154";
 	// int vcp_port1=7100;

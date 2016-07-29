@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 
 import com.xiangtone.sql.Mysqldb;
-import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.ConfigManager1;
 import com.xiangtone.util.MyTools;
 
 /**
@@ -48,16 +48,16 @@ public class SMSBinary {
 			db = new Mysqldb();
 			break;
 		case 2:
-			String w_dbip_xt = (String) ConfigManager.getInstance().getConfigData("w_dbip_xt", "w_dbip_xt not found!");
-			String w_dbport_xt = (String) ConfigManager.getInstance().getConfigData("w_dbport_xt", "w_dbport_xt not found!");
-			String w_dbname_xt = (String) ConfigManager.getInstance().getConfigData("w_dbname_xt", "w_dbname_xt not found!");
-			String w_dbuser_xt = (String) ConfigManager.getInstance().getConfigData("w_dbuser_xt", "w_dbuser_xt not found!");
-			String w_dbpwd_xt = (String) ConfigManager.getInstance().getConfigData("w_dbpwd_xt", "w_dbpwd_xt not found!");
-			String r_dbip_xt = (String) ConfigManager.getInstance().getConfigData("r_dbip_xt", "r_dbip_xt not found!");
-			String r_dbport_xt = (String) ConfigManager.getInstance().getConfigData("r_dbport_xt", "r_dbport_xt not found!");
-			String r_dbname_xt = (String) ConfigManager.getInstance().getConfigData("r_dbname_xt", "r_dbname_xt not found!");
-			String r_dbuser_xt = (String) ConfigManager.getInstance().getConfigData("r_dbuser_xt", "r_dbuser_xt not found!");
-			String r_dbpwd_xt = (String) ConfigManager.getInstance().getConfigData("r_dbpwd_xt", "r_dbpwd_xt not found!");
+			String w_dbip_xt = (String) ConfigManager1.getInstance().getConfigData("w_dbip_xt", "w_dbip_xt not found!");
+			String w_dbport_xt = (String) ConfigManager1.getInstance().getConfigData("w_dbport_xt", "w_dbport_xt not found!");
+			String w_dbname_xt = (String) ConfigManager1.getInstance().getConfigData("w_dbname_xt", "w_dbname_xt not found!");
+			String w_dbuser_xt = (String) ConfigManager1.getInstance().getConfigData("w_dbuser_xt", "w_dbuser_xt not found!");
+			String w_dbpwd_xt = (String) ConfigManager1.getInstance().getConfigData("w_dbpwd_xt", "w_dbpwd_xt not found!");
+			String r_dbip_xt = (String) ConfigManager1.getInstance().getConfigData("r_dbip_xt", "r_dbip_xt not found!");
+			String r_dbport_xt = (String) ConfigManager1.getInstance().getConfigData("r_dbport_xt", "r_dbport_xt not found!");
+			String r_dbname_xt = (String) ConfigManager1.getInstance().getConfigData("r_dbname_xt", "r_dbname_xt not found!");
+			String r_dbuser_xt = (String) ConfigManager1.getInstance().getConfigData("r_dbuser_xt", "r_dbuser_xt not found!");
+			String r_dbpwd_xt = (String) ConfigManager1.getInstance().getConfigData("r_dbpwd_xt", "r_dbpwd_xt not found!");
 			db = new Mysqldb(w_dbip_xt, w_dbport_xt, w_dbname_xt, w_dbuser_xt, w_dbpwd_xt);
 			break;
 		default:

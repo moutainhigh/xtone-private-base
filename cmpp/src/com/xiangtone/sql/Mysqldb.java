@@ -12,7 +12,7 @@ import java.sql.Statement;
 
 import org.apache.log4j.Logger;
 
-import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.ConfigManager1;
 
 public class Mysqldb {
 
@@ -70,12 +70,12 @@ public class Mysqldb {
 	public Mysqldb() {
 		try {
 			Class.forName(sDBDriver);
-			this.dbip = (String) ConfigManager.getConfigData("w_dbip_public", "w_dbip_public" + " dbip not found!");
+			this.dbip = (String) ConfigManager1.getConfigData("w_dbip_public", "w_dbip_public" + " dbip not found!");
 			this.dbport = Integer
-					.parseInt((String) ConfigManager.getConfigData("w_dbport_public", "w_dbport_public" + " dbport not found!"));
-			this.dbname = (String) ConfigManager.getConfigData("w_dbname_public", "w_dbname_public" + " dbname not found!");
-			this.dbuser = (String) ConfigManager.getConfigData("w_dbuser_public", "w_dbuser_public" + " dbuser not found!");
-			this.dbpwd = (String) ConfigManager.getConfigData("w_dbpwd_public", "w_dbpwd_public" + " dbpwd not found!");
+					.parseInt((String) ConfigManager1.getConfigData("w_dbport_public", "w_dbport_public" + " dbport not found!"));
+			this.dbname = (String) ConfigManager1.getConfigData("w_dbname_public", "w_dbname_public" + " dbname not found!");
+			this.dbuser = (String) ConfigManager1.getConfigData("w_dbuser_public", "w_dbuser_public" + " dbuser not found!");
+			this.dbpwd = (String) ConfigManager1.getConfigData("w_dbpwd_public", "w_dbpwd_public" + " dbpwd not found!");
 		} catch (java.lang.ClassNotFoundException e) {
 			System.err.println("Unable to load driver:" + e.getMessage());
 			e.printStackTrace();

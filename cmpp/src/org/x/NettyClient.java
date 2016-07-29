@@ -5,7 +5,7 @@ import org.x.netty.support.CmppClientHandler;
 import org.x.netty.support.CmppDecoder;
 import org.x.netty.support.CmppEncoder;
 
-import com.xiangtone.util.ConfigManager;
+import com.xiangtone.util.ConfigManager1;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -89,9 +89,9 @@ public class NettyClient {
 		info.loadParam();
 		info.printParam();
 
-		String host = ConfigManager.getConfigData("gd_ismg_ip");
+		String host = ConfigManager1.getConfigData("gd_ismg_ip");
 
-		int port = Integer.parseInt(ConfigManager.getConfigData("gd_ismg_port"));
+		int port = Integer.parseInt(ConfigManager1.getConfigData("gd_ismg_port"));
 
 		LOG.info(host + ":" + port);
 

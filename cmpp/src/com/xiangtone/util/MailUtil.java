@@ -27,7 +27,7 @@ public class MailUtil {
 		 */
 		public static void send(String fromTitle, String mailFrom, String mailTo, final String strText) {
 			try {
-				ConfigManager configManager=ConfigManager.getInstance();
+				ConfigManager1 configManager=ConfigManager1.getInstance();
 				// 发件人使用发邮件的电子信箱服务器
 				String host = configManager.getConfigData("mail_host");
 
@@ -66,7 +66,7 @@ public class MailUtil {
 		}
 
 		public static void main(String[] args) {
-			ConfigManager configManager=ConfigManager.getInstance();
+			ConfigManager1 configManager=ConfigManager1.getInstance();
 			StringBuffer url = new StringBuffer(configManager.getConfigData("ACTIVATION_URL") + "confrimAccount.action");
 			String sendMail=configManager.getConfigData("mail_form");
 			try {

@@ -6,8 +6,12 @@ package org.x;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 
+import com.xiangtone.sql.JdbcControl;
 import com.xiangtone.sql.Mysqldb;
 
 public class SMSReport {
@@ -24,68 +28,62 @@ public class SMSReport {
 	int stat_dev;
 	String statDetail;
 
-	// FileWriter fw = null;
-	// StringBuffer sb;
 	public SMSReport() {
 		// String file_name = "";
 		// file_name = TimeTools.get_month();//取得系统当月时间用于作为日志的文件。
-		mydb = new Mysqldb();
-		/*
-		 * try{
-		 * 
-		 * //fw = new FileWriter("/home/smsapp/smsapp/CMPP/log/" +
-		 * file_name+".txt",true); //sb = new StringBuffer(); }catch(IOException e){
-		 * System.out.println(e.toString()); }
-		 */
 
 	}
 
 	public void insertReportLog() {
 
-		String str_sql = "insert into sms_reportlog(ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) values('"
-				+ ismgid + "','" + msgid + "','" + linkId + "','" + spcode + "','" + destcpn + "','" + src_cpn + "','"
-				+ sub_time + "','" + done_time + "','" + stat_dev + "','" + statDetail + "')";
-		String tempstr_sql = "insert into sms_tempreportlog(ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) values('"
-				+ ismgid + "','" + msgid + "','" + linkId + "','" + spcode + "','" + destcpn + "','" + src_cpn + "','"
-				+ sub_time + "','" + done_time + "','" + stat_dev + "','" + statDetail + "')";
-		String companystr_sql = "insert into companysms_reportlog(ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) values('"
-				+ ismgid + "','" + msgid + "','" + linkId + "','" + spcode + "','" + destcpn + "','" + src_cpn + "','"
-				+ sub_time + "','" + done_time + "','" + stat_dev + "','" + statDetail + "')";
+		String sql = "INSERT INTO sms_reportlog(id,ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) VALUES('',?,?,?,?,?,?,?,?,?,?)";
 
-		LOG.debug("insertReportLog:" + str_sql);
-		// System.out.println(str_sql);
-		// System.out.println(tempstr_sql);
+		Map<Integer, Object> param = new HashMap<Integer, Object>();
 
-		/*
-		 * sb.append("ismg:" + ismgid + "."); sb.append("msgid:" + msgid + ".");
-		 * sb.append("destcpn:" + destcpn + "."); sb.append("spcode:" + spcode +
-		 * "."); sb.append("srcpn:" + src_cpn + "."); sb.append("subtime:" +
-		 * sub_time + "."); sb.append("donetime:" + done_time + ".");
-		 * sb.append("stat:" + stat_dev + ".");
-		 */
-		try {
+		param.put(1, ismgid);
+		param.put(2, msgid);
+		param.put(3, linkId);
+		param.put(4, spcode);
+		param.put(5, destcpn);
+		param.put(6, src_cpn);
+		param.put(7, sub_time);
+		param.put(8, done_time);
+		param.put(9, stat_dev);
+		param.put(10, statDetail);
+		new JdbcControl().execute(sql, param);
 
-			mydb.execUpdate(str_sql);
-			mydb.execUpdate(tempstr_sql);
-			mydb.execUpdate(companystr_sql);
-			// System.out.println("start to insert temprept");
-			// mydb.execUpdate(tempstr_sql);
-			// fw.write(sb.toString());tempstr_sql
-			// fw.flush();
-			// fw.close();
-			mydb.close();
-			// ReportHandle tempReportLog = new ReportHandle();
-			// tempReportLog.logReport(str_sql);
-		} catch (Exception e) {
-			System.out.println(e.toString());
-		} finally {
-			try {
-				mydb.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		String sql2 = "INSERT INTO sms_tempreportlog(id,ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) VALUES('',?,?,?,?,?,?,?,?,?,?)";
+
+		Map<Integer, Object> param2 = new HashMap<Integer, Object>();
+
+		param2.put(1, ismgid);
+		param2.put(2, msgid);
+		param2.put(3, linkId);
+		param2.put(4, spcode);
+		param2.put(5, destcpn);
+		param2.put(6, src_cpn);
+		param2.put(7, sub_time);
+		param2.put(8, done_time);
+		param2.put(9, stat_dev);
+		param2.put(10, statDetail);
+		new JdbcControl().execute(sql2, param2);
+
+		String sql3 = "INSERT INTO companysms_reportlog(id,ismgid,msg_id,linkid,spcode,dest_cpn,src_cpn,submit_time,done_time,stat,stat_msg) VALUES('',?,?,?,?,?,?,?,?,?,?)";
+
+		Map<Integer, Object> param3 = new HashMap<Integer, Object>();
+
+		param3.put(1, ismgid);
+		param3.put(2, msgid);
+		param3.put(3, linkId);
+		param3.put(4, spcode);
+		param3.put(5, destcpn);
+		param3.put(6, src_cpn);
+		param3.put(7, sub_time);
+		param3.put(8, done_time);
+		param3.put(9, stat_dev);
+		param3.put(10, statDetail);
+		new JdbcControl().execute(sql3, param3);
+
 
 	}
 
