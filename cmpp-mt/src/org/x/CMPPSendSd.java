@@ -118,7 +118,7 @@ public class CMPPSendSd implements CMPPSend {
 			mt.infoFee = "0";
 			mt.feeType = "01";
 			mt.feeCode = "BZ";
-			send(errorPicSend); // å‘é€æ–‡æœ¬
+			send(errorPicSend); // ·¢ËÍÎÄ±¾
 		}
 	}
 
@@ -146,7 +146,7 @@ public class CMPPSendSd implements CMPPSend {
 			// logger.debug(tempMsgId);
 			long intMsgId = (new Long(tempMsgId)).longValue();
 			logger.debug(intMsgId);
-			byte[] msgId = new byte[8];// åˆå§‹å€¼ä¸º0
+			byte[] msgId = new byte[8];// ³õÊ¼ÖµÎª0
 
 			IntByteConvertor.putLong(msgId, intMsgId, 0);
 
@@ -225,7 +225,7 @@ public class CMPPSendSd implements CMPPSend {
 
 			// System.arraycopy(spcode,0,srcTerminalId,0,spcode.length);
 			byte feecpnType = (byte) mt.cpnType;
-			CmppeSubmit sub = new CmppeSubmit();// æäº¤çŸ­ä¿¡å¯¹
+			CmppeSubmit sub = new CmppeSubmit();// Ìá½»¶ÌĞÅ¶Ô
 			sub.setMsgid(msgId);
 			sub.setPktotal(pkTotal);
 			sub.setPknumber(pkNumber);
@@ -267,7 +267,7 @@ public class CMPPSendSd implements CMPPSend {
 			int seq = p.cmppSubmit(con, sub);
 			mt.submitSeq = seq;
 			mt.insertMTLog();
-			logger.debug("seqæäº¤æˆåŠŸ:" + seq);
+			logger.debug("seqÌá½»³É¹¦:" + seq);
 			// Thread.currentThread().sleep(100);
 			// myLogger.info(FormatSysTime.getCurrentTimeA() + " send
 			// msg--spcode:" +

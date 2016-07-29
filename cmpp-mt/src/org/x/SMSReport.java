@@ -42,7 +42,7 @@ public class SMSReport {
 	// StringBuffer sb;
 	public SMSReport() {
 		// String file_name = "";
-		// file_name = TimeTools.get_month();//å–å¾—ç³»ç»Ÿå½“æœˆæ—¶é—´ç”¨äºä½œä¸ºæ—¥å¿—çš„æ–‡ä»¶ã€‚
+		// file_name = TimeTools.get_month();//È¡µÃÏµÍ³µ±ÔÂÊ±¼äÓÃÓÚ×÷ÎªÈÕÖ¾µÄÎÄ¼ş¡£
 		/*
 		 * try{
 		 * 

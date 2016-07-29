@@ -2,7 +2,7 @@ package comsd.commerceware.cmpp;
 
 public class MyTools {
 
-	// æ•´å‹-->å››ä¸ªå­—èŠ‚
+	// ÕûĞÍ-->ËÄ¸ö×Ö½Ú
 	public byte[] int2Bytes(int n) {
 		byte[] bTmp = new byte[4];
 		bTmp[0] = (byte) ((n & 0xFF000000) >> 24);
@@ -12,7 +12,7 @@ public class MyTools {
 		return bTmp;
 	}
 
-	// å­—ä¸²str -->str.lengthä¸ªå­—èŠ‚
+	// ×Ö´®str -->str.length¸ö×Ö½Ú
 	public byte[] string2Bytes(String str) {
 		byte[] bTmp = null;
 		try {
@@ -24,7 +24,7 @@ public class MyTools {
 		return bTmp;
 	}
 
-	// çŸ­æ•´å½¢ ï¼ï¼> ä¸¤ä¸ªå­—èŠ‚
+	// ¶ÌÕûĞÎ £­£­> Á½¸ö×Ö½Ú
 	public byte[] short2Bytes(short n) {
 		byte[] bTmp = new byte[2];
 		bTmp[0] = (byte) ((n & 0xFF00) >> 8);
@@ -33,7 +33,7 @@ public class MyTools {
 		return bTmp;
 	}
 
-	// æ‹·è´å­—èŠ‚ç»„,æŠŠä¸€ä¸ªæºå­—èŠ‚ç»„ æ‹·è´åˆ° ç›®çš„å­—èŠ‚ç»„
+	// ¿½±´×Ö½Ú×é,°ÑÒ»¸öÔ´×Ö½Ú×é ¿½±´µ½ Ä¿µÄ×Ö½Ú×é
 	public int strcpy(byte dest[], byte source[], int from) {
 		int i;
 		for (i = 0; i < source.length; i++)

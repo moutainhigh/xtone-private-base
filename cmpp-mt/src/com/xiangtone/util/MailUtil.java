@@ -21,47 +21,47 @@ public class MailUtil {
 	
 		/**
 		 * @param fromTitle
-		 *            é‚®ä»¶æ ‡é¢˜
+		 *            ÓÊ¼ş±êÌâ
 		 * @param mailFrom
-		 *            å‘é€é‚®ä»¶çš„é‚®ç®±
+		 *            ·¢ËÍÓÊ¼şµÄÓÊÏä
 		 * @param mailTo
-		 *            æ¥æ”¶é‚®ä»¶çš„é‚®ç®±
+		 *            ½ÓÊÕÓÊ¼şµÄÓÊÏä
 		 * @param strText
-		 *            é‚®ä»¶å†…å®¹
+		 *            ÓÊ¼şÄÚÈİ
 		 */
 		public static void send(String fromTitle, String mailFrom, String mailTo, final String strText) {
 			try {
 				ConfigManager configManager=ConfigManager.getInstance();
-				// å‘ä»¶äººä½¿ç”¨å‘é‚®ä»¶çš„ç”µå­ä¿¡ç®±æœåŠ¡å™¨
+				// ·¢¼şÈËÊ¹ÓÃ·¢ÓÊ¼şµÄµç×ÓĞÅÏä·şÎñÆ÷
 				String host = configManager.getConfigData("mail_host");
 
-				// åˆ›å»º properties ï¼Œé‡Œé¢åŒ…å«äº†å‘é€é‚®ä»¶æœåŠ¡å™¨çš„åœ°å€ã€‚
+				// ´´½¨ properties £¬ÀïÃæ°üº¬ÁË·¢ËÍÓÊ¼ş·şÎñÆ÷µÄµØÖ·¡£
 				Properties props = new Properties();
-				// å‘é€é‚®ä»¶æœåŠ¡å™¨çš„åœ°å€
+				// ·¢ËÍÓÊ¼ş·şÎñÆ÷µÄµØÖ·
 				props.put("mail.smtp.host", host);
-				// é€šè¿‡éªŒè¯ é»˜è®¤ä¸ºfalse
+				// Í¨¹ıÑéÖ¤ Ä¬ÈÏÎªfalse
 				props.put("mail.smtp.auth", "true");
 				props.put("mail.smtp.localhost", "localhost");
-				// æ ¡éªŒå‘ä¿¡äººæƒé™
+				// Ğ£Ñé·¢ĞÅÈËÈ¨ÏŞ
 				MyAuthenticator myauth = new MyAuthenticator(configManager.getConfigData("send_mail"), configManager.getConfigData("mail_pass"));
-				// åˆ›å»º session
+				// ´´½¨ session
 				Session session = Session.getDefaultInstance(props, myauth);
-				// session.setDebug(true);//æ‰“å¼€è°ƒè¯•
-				// åˆ›å»º é‚®ä»¶çš„messageï¼Œmessageå¯¹è±¡åŒ…å«äº†é‚®ä»¶ä¼—å¤šæœ‰çš„éƒ¨ä»¶ï¼Œéƒ½æ˜¯å°è£…æˆäº†setæ–¹æ³•å»è®¾ç½®çš„
+				// session.setDebug(true);//´ò¿ªµ÷ÊÔ
+				// ´´½¨ ÓÊ¼şµÄmessage£¬message¶ÔÏó°üº¬ÁËÓÊ¼şÖÚ¶àÓĞµÄ²¿¼ş£¬¶¼ÊÇ·â×°³ÉÁËset·½·¨È¥ÉèÖÃµÄ
 				MimeMessage message = new MimeMessage(session);
-				// è®¾ç½®å‘ä¿¡äºº
+				// ÉèÖÃ·¢ĞÅÈË
 				message.setFrom(new InternetAddress(mailFrom));
 				message.setDataHandler(new DataHandler(new ByteArrayDataSource(strText.toString(), "text/html")));
-				// æ”¶ä¿¡äºº
+				// ÊÕĞÅÈË
 				message.addRecipients(Message.RecipientType.TO,InternetAddress.parse(mailTo));
-				// é‚®ä»¶æ ‡é¢˜
+				// ÓÊ¼ş±êÌâ
 				message.setSubject(fromTitle);
-				// é‚®ä»¶å†…å®¹
+				// ÓÊ¼şÄÚÈİ
 				// message.setText(strText);
-				// ä¿å­˜ä»¥ä¸Šå·¥ä½œ
+				// ±£´æÒÔÉÏ¹¤×÷
 				message.saveChanges();
 
-				// å‘é€é‚®ä»¶
+				// ·¢ËÍÓÊ¼ş
 				Transport.send(message);
 			} catch (Exception ex) {
 				logger.error("Failed to send mail",ex);
@@ -75,7 +75,7 @@ public class MailUtil {
 			try {
 				send("test", sendMail, "429379083@qq.com,Shirp@bjxiangtone.com", "test2");
 			} catch (Exception e) {
-				System.out.println("å‘é€é‚®ä»¶æ—¶å‘ç”Ÿå¼‚å¸¸");
+				System.out.println("·¢ËÍÓÊ¼şÊ±·¢ÉúÒì³£");
 				e.printStackTrace();
 			}
 		}

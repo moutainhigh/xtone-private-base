@@ -1,69 +1,76 @@
 package com.xiangtone.util;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import org.apache.log4j.Logger;
 
 public class DBForLog {
 	private static Logger myLogger = Logger.getLogger(DBForLog.class);
 
-	private Connection conn = null;
-	private Statement stmt = null;
-	private ResultSet rs = null;
+	private Connection connection = null;
+	private PreparedStatement preparedStatement= null;
+	private ResultSet resultSet = null;
 
 	public DBForLog(){
+		connection=ConnectionService.getInstance().getConnectionForLog();
+	}
+	
+	public PreparedStatement getPreparedStatement(String paramString) {
 		try {
-			conn=ConnectionService.getInstance().getConnectionForLog();
-			stmt = conn.createStatement();
+			preparedStatement = connection.prepareStatement(paramString);
 		} catch (SQLException e) {
-			myLogger.error("DB",e);
+			myLogger.error("",e);
 		}
+		return preparedStatement;
 	}
 
-	public void executeQuery(String paramString) throws SQLException {
-		this.rs = null;
-		this.rs = this.stmt.executeQuery(paramString);
+	public Connection getConnection() {
+		return connection;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
+	}
+
+	public ResultSet getResultSet() {
+		return resultSet;
 	}
 
 	public void close() {
-		if (this.rs != null) {
+		if (this.resultSet != null) {
 			try {
-				this.rs.close();
+				this.resultSet.close();
 			} catch (SQLException localSQLException1) {
 				this.myLogger.error("ResultSet close", localSQLException1);
 			}
-			this.rs = null;
+			this.resultSet = null;
 		}
-		if (this.stmt != null) {
+		if (this.preparedStatement != null) {
 			try {
-				this.stmt.close();
+				this.preparedStatement.close();
 			} catch (SQLException localSQLException2) {
 				this.myLogger.error("Statement close", localSQLException2);
 			}
-			this.stmt = null;
+			this.preparedStatement = null;
 		}
-		if (this.conn != null) {
+		if (this.connection != null) {
 			try {
-				this.conn.close();
+				this.connection.close();
 			} catch (SQLException localSQLException3) {
 				this.myLogger.error("Connection close", localSQLException3);
 			}
-			this.conn = null;
+			this.connection = null;
 		}
-	}
-
-	public ResultSet getRs() {
-		return this.rs;
 	}
 
 	public static void main(String[] args) {
 		String sql="SELECT * FROM `tbl_base_users` WHERE id=1";
 		DBForLog db=new DBForLog();
 		try {
-			db.executeQuery(sql);
-			ResultSet rs=db.getRs();
+			ResultSet rs=db.getPreparedStatement(sql).executeQuery();
+			
 			if(rs.next()){
 				myLogger.debug(rs.getString("name"));
 			}

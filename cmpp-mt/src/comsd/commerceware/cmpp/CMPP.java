@@ -15,7 +15,7 @@ public final class CMPP {
 
 	}
 
-	// è¿æ¥ç½‘å…³
+	// Á¬½ÓÍø¹Ø
 	public void cmppConnectToIsmg(String host, int port, ConnDesc conn) throws IOException {
 		Socket s = null;
 		try {
@@ -26,11 +26,11 @@ public final class CMPP {
 			logger.error("cmppConnectToIsmg", e);
 			throw e;
 		}
-		conn.seq = 1; // åºå·ä¸º1 ä»£è¡¨å¼€å§‹
+		conn.seq = 1; // ĞòºÅÎª1 ´ú±í¿ªÊ¼
 		conn.sock = s;
 	}
 
-	// æ–­å¼€è¿æ¥
+	// ¶Ï¿ªÁ¬½Ó
 	public void cmppDisConnectFromIsmg(ConnDesc conn) {
 		try {
 			conn.sock.close();
@@ -49,7 +49,7 @@ public final class CMPP {
 
 		DataOutputStream out = null;
 		OutOfBoundsException e = new OutOfBoundsException();
-		// åŠ å¯†
+		// ¼ÓÃÜ
 		MD5 md5 = new MD5();
 		byte md5Byte[] = new byte[40];
 		memset(md5Byte, 40);
@@ -261,7 +261,7 @@ public final class CMPP {
 			tools.strcpy(buf, ch.pkLen + bodyLen, 0);
 			tools.strcpy(buf, ch.pkCmd, 4);
 			tools.strcpy(buf, ch.pkSeq, 8);
-			out.write(buf, 0, 12); // æµ‹è¯•ä¿¡æ¯ä½“ä¸ºç©º
+			out.write(buf, 0, 12); // ²âÊÔĞÅÏ¢ÌåÎª¿Õ
 			logger.debug(Arrays.toString(buf));
 			out.flush();
 			logger.debug("have send it");
@@ -351,7 +351,7 @@ public final class CMPP {
 
 			// for(int i=0;i<len;i++)
 			// System.out.print(buf[i]+",");
-			os.write(buf, 0, len); // å†™
+			os.write(buf, 0, len); // Ğ´
 			os.flush();
 			userSeq = conn.seq;
 			conn.seq++;
@@ -370,7 +370,7 @@ public final class CMPP {
 	}
 
 	/*
-	 * è¯»å–æ¥æ”¶åˆ°çš„æ•°æ®åŒ…
+	 * ¶ÁÈ¡½ÓÊÕµ½µÄÊı¾İ°ü
 	 */
 	public void readPa(ConnDesc con) throws Exception {
 		CmppeResult cr = null;
@@ -454,12 +454,12 @@ public final class CMPP {
 
 			logger.debug("the length is:" + pack.pkHead.pkLen);
 
-			cl.stat = in.readInt(); // çŠ¶æ€ =0(æˆåŠŸ)
+			cl.stat = in.readInt(); // ×´Ì¬ =0(³É¹¦)
 			if (pack.pkHead.pkLen > 16) {
 				for (int k = 0; k < 16; k++)
-					cl.auth[k] = in.readByte(); // è®¤è¯ç 
+					cl.auth[k] = in.readByte(); // ÈÏÖ¤Âë
 
-				// cl.version = in.readByte(); //æœåŠ¡å™¨æ”¯æŒçš„æœ€é«˜ç‰ˆæœ¬å· =18
+				// cl.version = in.readByte(); //·şÎñÆ÷Ö§³ÖµÄ×î¸ß°æ±¾ºÅ =18
 				cl.version = in.readByte();
 			}
 			return cl;
@@ -476,7 +476,7 @@ public final class CMPP {
 			sr.stat = pack.pkHead.pkStat;
 			if (pack.pkHead.pkLen - 16 > 0) {
 				for (int k = 0; k < 8; k++)
-					sr.msgId[k] = in.readByte(); // è®¤è¯ç 
+					sr.msgId[k] = in.readByte(); // ÈÏÖ¤Âë
 			} else {
 				sr.msgId = null;
 				return sr;
@@ -491,7 +491,7 @@ public final class CMPP {
 			try {
 				byte packbuf[] = new byte[pack.pkHead.pkLen - 12];
 				in.read(packbuf);
-				cd.readInBytes(packbuf); // è§£ædeliverä¿¡æ¯
+				cd.readInBytes(packbuf); // ½âÎödeliverĞÅÏ¢
 
 				cd.seq = pack.pkHead.pkSeq;
 				cd.packId = 5;

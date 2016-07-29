@@ -20,24 +20,24 @@ public class ConfigManager {
 
 	private static Logger logger = Logger.getLogger(ConfigManager.class);
 	/**
-	 * å¯¹åº”äºå±æ€§æ–‡ä»¶çš„æ–‡ä»¶å¯¹è±¡å˜é‡
+	 * ¶ÔÓ¦ÓÚÊôĞÔÎÄ¼şµÄÎÄ¼ş¶ÔÏó±äÁ¿
 	 */
 	private File m_file = null;
 	/**
-	 * å±æ€§æ–‡ä»¶çš„æœ€åä¿®æ”¹æ—¥æœŸ
+	 * ÊôĞÔÎÄ¼şµÄ×îºóĞŞ¸ÄÈÕÆÚ
 	 */
 	private long m_lastModifiedTime = 0;
 	/**
-	 * å±æ€§æ–‡ä»¶æ‰€å¯¹åº”çš„å±æ€§å¯¹è±¡å˜é‡
+	 * ÊôĞÔÎÄ¼şËù¶ÔÓ¦µÄÊôĞÔ¶ÔÏó±äÁ¿
 	 */
 	private static Properties m_props = null;
 	/**
-	 * æœ¬ç±»å¯èƒ½å­˜åœ¨çš„æƒŸä¸€çš„ä¸€ä¸ªå®ä¾‹
+	 * ±¾Àà¿ÉÄÜ´æÔÚµÄÎ©Ò»µÄÒ»¸öÊµÀı
 	 */
 	private static ConfigManager m_instance = null;
 
 	/**
-	 * ç§æœ‰çš„æ„é€ å­ï¼Œç”¨ä»¥ä¿è¯å¤–ç•Œæ— æ³•ç›´æ¥å®ä¾‹åŒ–
+	 * Ë½ÓĞµÄ¹¹Ôì×Ó£¬ÓÃÒÔ±£Ö¤Íâ½çÎŞ·¨Ö±½ÓÊµÀı»¯
 	 */
 	private ConfigManager() {
 		// m_file = new File(PFILE);
@@ -141,9 +141,9 @@ public class ConfigManager {
 	}
 
 	/**
-	 * é™æ€å·¥å‚æ–¹æ³•
+	 * ¾²Ì¬¹¤³§·½·¨
 	 * 
-	 * @return è¿”è¿˜ConfigManager ç±»çš„å•ä¸€å®ä¾‹
+	 * @return ·µ»¹ConfigManager ÀàµÄµ¥Ò»ÊµÀı
 	 */
 	synchronized public static ConfigManager getInstance() {
 		if (m_instance == null) {
@@ -153,22 +153,22 @@ public class ConfigManager {
 	}
 
 	/**
-	 * è¯»å–ä¸€ç‰¹å®šçš„å±æ€§é¡¹
+	 * ¶ÁÈ¡Ò»ÌØ¶¨µÄÊôĞÔÏî
 	 * 
 	 * @param name
-	 *            å±æ€§é¡¹çš„é¡¹å
+	 *            ÊôĞÔÏîµÄÏîÃû
 	 * @param defaultVal
-	 *            å±æ€§é¡¹çš„é»˜è®¤å€¼
-	 * @return å±æ€§é¡¹çš„å€¼ï¼ˆå¦‚æ­¤é¡¹å­˜åœ¨ï¼‰ï¼Œ é»˜è®¤å€¼ï¼ˆå¦‚æ­¤é¡¹ä¸å­˜åœ¨ï¼‰
+	 *            ÊôĞÔÏîµÄÄ¬ÈÏÖµ
+	 * @return ÊôĞÔÏîµÄÖµ£¨Èç´ËÏî´æÔÚ£©£¬ Ä¬ÈÏÖµ£¨Èç´ËÏî²»´æÔÚ£©
 	 */
 	final public Object getConfigItem(String name, Object defaultVal) {
 		long newTime = m_file.lastModified();
-		// æ£€æŸ¥å±æ€§æ–‡ä»¶æ˜¯å¦è¢«å…¶ä»–ç¨‹åº
-		// ï¼ˆå¤šæ•°æƒ…å†µæ˜¯ç¨‹åºå‘˜æ‰‹åŠ¨ï¼‰ä¿®æ”¹è¿‡
-		// å¦‚æœæ˜¯ï¼Œé‡æ–°è¯»å–æ­¤æ–‡ä»¶
+		// ¼ì²éÊôĞÔÎÄ¼şÊÇ·ñ±»ÆäËû³ÌĞò
+		// £¨¶àÊıÇé¿öÊÇ³ÌĞòÔ±ÊÖ¶¯£©ĞŞ¸Ä¹ı
+		// Èç¹ûÊÇ£¬ÖØĞÂ¶ÁÈ¡´ËÎÄ¼ş
 
 		if (newTime == 0) {
-			// å±æ€§æ–‡ä»¶ä¸å­˜åœ¨
+			// ÊôĞÔÎÄ¼ş²»´æÔÚ
 			if (m_lastModifiedTime == 0) {
 				logger.error(PFILE + " file does not exist!");
 			} else {

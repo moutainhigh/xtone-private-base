@@ -47,11 +47,11 @@ public class SmDeliverResult extends SmResult {
 					logger.debug("ismgCode:" + ismgCode);
 					break;
 				default:
-					stat = "01"; //æ— æ•ˆçš„æ¶ˆæ¯ç±»å‹
+					stat = "01"; //ÎŞĞ§µÄÏûÏ¢ÀàĞÍ
 					return;
 				}
 			}
-			stat = "00"; //æˆåŠŸ
+			stat = "00"; //³É¹¦
 		} catch (Exception e) {
 			logger.error("readInBytes",e);
 		}

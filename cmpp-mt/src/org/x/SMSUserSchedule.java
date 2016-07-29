@@ -20,13 +20,13 @@ import com.xiangtone.util.DBForLog;
  */
 public class SMSUserSchedule {
 	private static Logger logger = Logger.getLogger(SMSUserSchedule.class);
-	public static final int SPCODE_LEN = 8; // åŸºç¡€å·é•¿åº¦
-	public static final int CORP_LEN = 2;// åª’ä½“å·é•¿åº¦
-	public static final int GAME_LEN = 3;// æ¸¸æˆå·é•¿åº¦
-	public static final int GAME_LEN1 = 2;// æ¸¸æˆé•¿åº¦ä¸º2
-	public static final int GAME_LEN2 = 1;// æ¸¸æˆé•¿åº¦ä¸º1
-	public static final int GAME_LEN3 = 4;// æ¸¸æˆé•¿åº¦ä¸º4
-	public static final int GAME_LEN4 = 5;// æ¸¸æˆé•¿åº¦ä¸º5
+	public static final int SPCODE_LEN = 8; // »ù´¡ºÅ³¤¶È
+	public static final int CORP_LEN = 2;// Ã½ÌåºÅ³¤¶È
+	public static final int GAME_LEN = 3;// ÓÎÏ·ºÅ³¤¶È
+	public static final int GAME_LEN1 = 2;// ÓÎÏ·³¤¶ÈÎª2
+	public static final int GAME_LEN2 = 1;// ÓÎÏ·³¤¶ÈÎª1
+	public static final int GAME_LEN3 = 4;// ÓÎÏ·³¤¶ÈÎª4
+	public static final int GAME_LEN4 = 5;// ÓÎÏ·³¤¶ÈÎª5
 
 	String gameCode = "";
 	String spCode = "";
@@ -82,7 +82,7 @@ public class SMSUserSchedule {
 		}
 		logger.debug("game id:" + this.gameID);
 		logger.debug("spcode:" + this.spCode);
-		int offset = content.indexOf(" ", 0);// åˆ¤æ–­ç©ºæ ¼
+		int offset = content.indexOf(" ", 0);// ÅĞ¶Ï¿Õ¸ñ
 		if (offset > 0) {
 			gameCode = content.substring(0, offset);
 			actionCode = content.substring(offset + 1);
@@ -289,7 +289,7 @@ public class SMSUserSchedule {
 	}
 
 	/**
-	 * å¦‚æœå­˜åœ¨åˆä½œä¼™ä¼´id å°±è¿”å› ä¸å­˜åœ¨å°±ä½¿ç”¨é»˜è®¤
+	 * Èç¹û´æÔÚºÏ×÷»ï°éid ¾Í·µ»Ø ²»´æÔÚ¾ÍÊ¹ÓÃÄ¬ÈÏ
 	 */
 	public boolean isCorpIDExist(String id) {
 		DBForLog db=new DBForLog();
@@ -313,7 +313,7 @@ public class SMSUserSchedule {
 	}
 
 	/**
-	 * é€šè¿‡servername å¾—åˆ°serverid
+	 * Í¨¹ıservername µÃµ½serverid
 	 *
 	 */
 	private String getServerIDbyServerName(String servername) {

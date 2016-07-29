@@ -24,12 +24,12 @@ public class SMSFactory {
 	*/
 	public CMPPSend createSMS(String type, SMSMT mt) {
 		/*
-		 * if(type.equals("06")) { return new CMPPSend_ln(mt); //è¾½å®æ²ˆé˜³ } else
-		 * if(type.equals("08")) { return new CMPPSend_hl(mt); //é»‘é¾™æ±Ÿ } else
-		 * if(type.equals("10")) { return new CMPPSend_bj(mt); //æ±Ÿè‹ç§»åŠ¨ } else
-		 * if(type.equals("01")) { return new CMPPSend_bj(mt); //åŒ—äº¬ç§»åŠ¨ } else
-		 * if(type.equals("15")) { return new CMPPSend_sd(mt); //å±±ä¸œç§»åŠ¨ } else
-		 * if(type.equals("19")) { return new CMPPSend_gd(mt); //å¹¿ä¸œç§»åŠ¨ } else {
+		 * if(type.equals("06")) { return new CMPPSend_ln(mt); //ÁÉÄşÉòÑô } else
+		 * if(type.equals("08")) { return new CMPPSend_hl(mt); //ºÚÁú½­ } else
+		 * if(type.equals("10")) { return new CMPPSend_bj(mt); //½­ËÕÒÆ¶¯ } else
+		 * if(type.equals("01")) { return new CMPPSend_bj(mt); //±±¾©ÒÆ¶¯ } else
+		 * if(type.equals("15")) { return new CMPPSend_sd(mt); //É½¶«ÒÆ¶¯ } else
+		 * if(type.equals("19")) { return new CMPPSend_gd(mt); //¹ã¶«ÒÆ¶¯ } else {
 		 * return new CMPPSend_bj(mt); }
 		 */
 		System.out.println("content is:" + mt.sendContent);

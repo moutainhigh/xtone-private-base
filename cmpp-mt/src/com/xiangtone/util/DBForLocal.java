@@ -1,47 +1,51 @@
 package com.xiangtone.util;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 
 public class DBForLocal {
 	private static Logger myLogger = Logger.getLogger(DBForLocal.class);
 
-	private Connection conn = null;
-	private Statement stmt = null;
+	private Connection connection = null;
+	private PreparedStatement preparedStatement = null;
 
-	public DBForLocal(){
-		try {
-			conn=ConnectionService.getInstance().getConnectionForLocal();
-			stmt = conn.createStatement();
-		} catch (SQLException e) {
-			myLogger.error("DB",e);
-		}
+	public DBForLocal() {
+		connection = ConnectionService.getInstance().getConnectionForLocal();
 	}
 
-	public int executeUpdate(String paramString) throws SQLException {
-		return this.stmt.executeUpdate(paramString);
+	public PreparedStatement getPreparedStatement(String paramString) {
+		try {
+			preparedStatement = connection.prepareStatement(paramString);
+		} catch (SQLException e) {
+			myLogger.error("",e);
+		}
+		return preparedStatement;
+	}
+
+	public Connection getConnection() {
+		return connection;
 	}
 
 	public void close() {
-		if (this.stmt != null) {
+		if (this.preparedStatement != null) {
 			try {
-				this.stmt.close();
+				this.preparedStatement.close();
 			} catch (SQLException localSQLException2) {
 				this.myLogger.error("Statement close", localSQLException2);
 			}
-			this.stmt = null;
+			this.preparedStatement = null;
 		}
-		if (this.conn != null) {
+		if (this.connection != null) {
 			try {
-				this.conn.close();
+				this.connection.close();
 			} catch (SQLException localSQLException3) {
 				this.myLogger.error("Connection close", localSQLException3);
 			}
-			this.conn = null;
+			this.connection = null;
 		}
 	}
-	
+
 }

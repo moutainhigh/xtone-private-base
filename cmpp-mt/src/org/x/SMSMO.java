@@ -17,17 +17,17 @@ public class SMSMO {
 	 * 
 	 */
 	private static Logger logger = Logger.getLogger(SMSMO.class);
-	protected String cpn;// ç”¨æˆ·æ‰‹æœºå·
+	protected String cpn;// ÓÃ»§ÊÖ»úºÅ
 	protected int cpnType;
-	protected String spCode; // ç‰¹åˆ«æœåŠ¡å·(é•¿å·)
-	protected String spCodeFirst;// ç‰¹æœåŠ¡å·
-	protected String svcType; // ä¸šåŠ¡ç±»å‹
-	protected String content; // çŸ­ä¿¡å†…å®¹
-	protected String serverName;// contentåˆ†è§£0 ,ä¸šåŠ¡ä»£å·
-	protected String serverID; // æœåŠ¡id
-	protected String serverAction = ""; // contentåˆ†è§£1 ,ä¸šåŠ¡æŒ‡ä»¤
-	protected String deliverTime; // æ¥æ”¶æ—¶é—´
-	protected String ismgID; // çœç½‘å…³æ ‡å¿—(01åŒ—äº¬06è¾½å®08é»‘é¾™æ±Ÿ15å±±ä¸œ19å¹¿ä¸œ
+	protected String spCode; // ÌØ±ğ·şÎñºÅ(³¤ºÅ)
+	protected String spCodeFirst;// ÌØ·şÎñºÅ
+	protected String svcType; // ÒµÎñÀàĞÍ
+	protected String content; // ¶ÌĞÅÄÚÈİ
+	protected String serverName;// content·Ö½â0 ,ÒµÎñ´úºÅ
+	protected String serverID; // ·şÎñid
+	protected String serverAction = ""; // content·Ö½â1 ,ÒµÎñÖ¸Áî
+	protected String deliverTime; // ½ÓÊÕÊ±¼ä
+	protected String ismgID; // Ê¡Íø¹Ø±êÖ¾(01±±¾©06ÁÉÄş08ºÚÁú½­15É½¶«19¹ã¶«
 	protected int vcpID;
 	protected int len;
 	protected int tpUdhi = 0;
@@ -248,7 +248,7 @@ public class SMSMO {
 	}
 
 	/**
-	 * å–åˆ°gameid
+	 * È¡µ½gameid
 	 *
 	 */
 	public String getGameID(int vcpid, String servername) {

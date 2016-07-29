@@ -44,7 +44,7 @@ public class VCPConnectionHandler implements Runnable {
 	public void run() {
 		try {
 
-			mess.readPa(con); // è¯»å–æäº¤ä¿¡æ¯
+			mess.readPa(con); // ¶ÁÈ¡Ìá½»ÐÅÏ¢
 			String stat = sm.getStat();
 			logger.debug("stat....:" + stat);
 			//
@@ -55,7 +55,7 @@ public class VCPConnectionHandler implements Runnable {
 				String corpId = "00";
 				int vcpId = 1;
 				vcpId = Integer.parseInt(sm.getVcpId()); // getvcpId();
-				String spCode = sm.getServerCode();// ç‰¹æœå·æ²¡æœ‰
+				String spCode = sm.getServerCode();// ÌØ·þºÅÃ»ÓÐ
 													// //sm.getServerCode();
 
 				int mediaType = Integer.parseInt(sm.getMediaType());
@@ -132,22 +132,22 @@ public class VCPConnectionHandler implements Runnable {
 					mt.setMTServerName("AutoHELP");
 					mt.setMTFeeCode("HELP");
 				}
-				// mt.insertMTLog(); Ö¾
+				// mt.insertMTLog(); 
 				///////////////////
 				CMPPSend mysms = myFactory.createSMS(ismgId, mt);
 				switch (mediaType) {
 				case 1:
-					mysms.sendTextSMS(); // å‘é€æ–‡æœ¬
+					mysms.sendTextSMS(); // ·¢ËÍÎÄ±¾
 					break;
 				case 2:
-					mysms.sendBinaryPicSMS(); // å‘é€å›¾ç‰‡
+					mysms.sendBinaryPicSMS(); // ·¢ËÍÍ¼Æ¬
 					break;
 				case 3:
-					mysms.sendBinaryRingSMS();// å‘é€é“ƒå£°
+					mysms.sendBinaryRingSMS();// ·¢ËÍÁåÉù
 					break;
 
 				default:
-					mysms.sendTextSMS(); // å‘é€æ–‡æœ¬
+					mysms.sendTextSMS(); // ·¢ËÍÎÄ±¾
 					break;
 				}
 				logger.debug("mt.feeType:" + mt.feeType);
@@ -163,13 +163,4 @@ public class VCPConnectionHandler implements Runnable {
 		}
 
 	}
-	/*
-	 * public static void main(String[] args){ try{ SMSIsmgInfo info = new
-	 * SMSIsmgInfo("config.ini"); info.loadParam(); info.printParam();
-	 * SMSActiveTest sdc = new SMSActiveTest(); new Thread(sdc).start();
-	 * SMSRecive sr = new SMSRecive(); new Thread(sr).start(); }catch(Exception
-	 * e){ logger.debug(">>>>>>Æ½Ì¨ï¿½ï¿½ï¿½ï¿½"); e.printStackTrace(); } VCPServer
-	 * vcpserver = new VCPServer(8001); vcpserver.start();
-	 * //VCPConnectionHandler vcphanlder = new VCPConnectionHandler(); }
-	 */
 }

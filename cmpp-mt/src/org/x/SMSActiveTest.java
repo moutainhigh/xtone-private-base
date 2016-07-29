@@ -1,10 +1,5 @@
 package org.x;
 
-/*
- * Created on 2006-11-15
- *
- * 用于发送网关连接测试包。
- */
 import comsd.commerceware.cmpp.*;
 import java.lang.*;
 import java.io.*;
@@ -44,13 +39,13 @@ public class SMSActiveTest implements Runnable {
 					// cmppcon =null;
 					try {
 						Thread.currentThread().sleep(10 * 1000);
-						cmppcon = CMPPSingleConnect.getInstance(); // 重连
+						cmppcon = CMPPSingleConnect.getInstance(); 
 						con = cmppcon.con;
 
 					} catch (Exception e1) {
 						logger.error("Failed to active:", e);
 					}
-					// cmppcon = CMPPSingleConnect.getInstance(); //重连
+					// cmppcon = CMPPSingleConnect.getInstance(); 
 				}
 
 			}

@@ -22,13 +22,13 @@ public class SMSMT {
 	public String ismgID;
 	public String spCode;
 
-	public String destCpn; // æ¥æ”¶æ–¹çš„æ‰‹æœºå·
-	public String feeCpn; // å‘é€æ–¹çš„æ‰‹æœºå·
-	public String serverID; // å†…å®¹å±äºé‚£ä¸ªé¡¹ç›®çš„
+	public String destCpn; // ½ÓÊÕ·½µÄÊÖ»úºÅ
+	public String feeCpn; // ·¢ËÍ·½µÄÊÖ»úºÅ
+	public String serverID; // ÄÚÈİÊôÓÚÄÇ¸öÏîÄ¿µÄ
 	public String serverName;
-	public String infoFee; // è´¹ç”¨çš„å€¼(ä»¥åˆ†ä¸ºå•ä½)
+	public String infoFee; // ·ÑÓÃµÄÖµ(ÒÔ·ÖÎªµ¥Î»)
 	public String feeCode;
-	public String feeType; // æ”¶è´¹çš„æ–¹å¼
+	public String feeType; // ÊÕ·ÑµÄ·½Ê½
 	public String sendContent;
 	public int mediaType;
 	public String sendTime; //
@@ -216,7 +216,7 @@ public class SMSMT {
 			strSql = "insert into sms_mtlog set ";
 			strSql += " vcpid=" + vcpID;
 			strSql += ",ismgid='" + ismgID + "'";
-			strSql += ",comp_msgid='" + submitMsgID + "'";// ç”¨äºæ ‡è¯†ä¸‹å‘çš„ä¿¡æ¯çš„Id
+			strSql += ",comp_msgid='" + submitMsgID + "'";// ÓÃÓÚ±êÊ¶ÏÂ·¢µÄĞÅÏ¢µÄId
 			strSql += ",corpid='" + corpID + "'";
 			strSql += ",spcode='" + spCode + "'";
 			strSql += ",destcpn='" + destCpn + "'";
@@ -236,7 +236,6 @@ public class SMSMT {
 			strSql += ",submit_seq=" + submitSeq;
 			logger.debug(strSql);
 			db.executeUpdate(strSql);
-			/// add at 090525 ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½ï¿½
 			// MtsMtHandle mtsMtLog = new MtsMtHandle();
 			// mtsMtLog.insertMtlog(strSql);
 		} catch (Exception e) {

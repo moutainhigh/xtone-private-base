@@ -68,8 +68,8 @@ public class ConnectionService {
 	public static void main(String[] args) {
 		System.out.println(ConfigManager.getConfigData("log.url"));
 
-		ConnectionService.getInstance().getConnectionForLog();
+//		ConnectionService.getInstance().getConnectionForLog();
 
-		System.out.println(ConfigManager.getConfigData("local.url"));
+		System.out.println(ConfigManager.getConfigData("log.initialSize"));
 	}
 }

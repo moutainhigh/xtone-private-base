@@ -68,19 +68,19 @@ public class SMSMOtoVCP {
 			xtdeliver.setLinkID(smsmo.getMOLinkID());
 			xtdeliver.setMsgId(smsmo.getMOMsgId());
 
-			logger.debug("å¼€å§‹è¿æ¥...å‘é€moæ¶ˆæ¯....");
+			logger.debug("¿ªÊ¼Á¬½Ó...·¢ËÍmoÏûÏ¢....");
 
 			int vcpID = smsmo.getMOVcpID();
-			logger.debug("æ´¾å‘ç»™çš„vcpID:" + vcpID);
+			logger.debug("ÅÉ·¢¸øµÄvcpID:" + vcpID);
 
 			switch (vcpID) {
 			case 0:
 				logger.debug(vcpIp1);
-				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort1), xtconn); // è¿æ¥æœåŠ¡å™¨
+				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort1), xtconn); // Á¬½Ó·şÎñÆ÷
 				break;
 			case 1:
 				logger.debug(vcpIp1);
-				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort2), xtconn); // è¿æ¥æœåŠ¡å™¨
+				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort2), xtconn); // Á¬½Ó·şÎñÆ÷
 				break;
 			case 2:
 				logger.debug(vcpIp1);
@@ -93,21 +93,21 @@ public class SMSMOtoVCP {
 				break;
 			default:
 				logger.debug(vcpIp1);
-				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort1), xtconn); // è¿æ¥æœåŠ¡å™¨
+				xtsms.connectToServer(vcpIp1, Integer.parseInt(vcpPort1), xtconn); // Á¬½Ó·şÎñÆ÷
 				break;
 			/*
 			 * case 1: System.out.println(vcpIp1);
 			 * xtsms.connectToServer(vcpIp1,Integer.parseInt(vcp_port1),
-			 * xtconn); // è¿æ¥æœåŠ¡å™¨ break; case 2: System.out.println(vcpIp2);
+			 * xtconn); // Á¬½Ó·şÎñÆ÷ break; case 2: System.out.println(vcpIp2);
 			 * xtsms.connectToServer(vcpIp2,Integer.parseInt(vcp_port2),
 			 * xtconn); break; default: System.out.println(vcpIp1);
 			 * xtsms.connectToServer(vcpIp1,Integer.parseInt(vcp_port1),
-			 * xtconn); // è¿æ¥æœåŠ¡å™¨ break;
+			 * xtconn); // Á¬½Ó·şÎñÆ÷ break;
 			 */
 			}
 
-			xtsms.sendSmDeliver(xtconn, xtdeliver); // æäº¤ä¿¡æ¯
-			xtsms.readPa(xtconn);// è¯»å–è¿”å›
+			xtsms.sendSmDeliver(xtconn, xtdeliver); // Ìá½»ĞÅÏ¢
+			xtsms.readPa(xtconn);// ¶ÁÈ¡·µ»Ø
 
 			stat = xtdeliverAck.getAckStat();
 			logger.debug("stat:" + stat);
@@ -119,7 +119,7 @@ public class SMSMOtoVCP {
 			// PropertyConfigurator.configure("mo2vcplog4j.properties");
 			// myLogger.info(FormatSysTime.getCurrentTimeA() + " exception
 			// mo2vcp--Exception:" + e.toString());
-			logger.error("æ–­å¼€è¿æ¥", e);
+			logger.error("¶Ï¿ªÁ¬½Ó", e);
 			e.printStackTrace();
 		}
 		return stat;

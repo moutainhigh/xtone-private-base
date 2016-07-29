@@ -49,15 +49,15 @@ public class Message {
 		try {
 			out = new DataOutputStream(conn.sock.getOutputStream());
 
-			byte[] buf = deliver.getBytes(); // ä¿¡æ¯ä½“ message body
-			int bodyLen = buf.length; // ä¿¡æ¯ä½“é•¿åº¦
-			byte[] header = new byte[8]; // ä¿¡æ¯å¤´
+			byte[] buf = deliver.getBytes(); // ĞÅÏ¢Ìå message body
+			int bodyLen = buf.length; // ĞÅÏ¢Ìå³¤¶È
+			byte[] header = new byte[8]; // ĞÅÏ¢Í·
 			ByteCode bc = new ByteCode(8);
 			logger.debug(8 + bodyLen);
-			bc.AddInt(8 + bodyLen); // ä¿¡æ¯å¤´ add total length
-			bc.AddInt(StateCode.SM_DELIVER); // ä¿¡æ¯å¤´ add message type
+			bc.AddInt(8 + bodyLen); // ĞÅÏ¢Í· add total length
+			bc.AddInt(StateCode.SM_DELIVER); // ĞÅÏ¢Í· add message type
 			// bc.AddInt(3);
-			bc.AddBytes(buf);// ä¿¡æ¯ä½“ add message body
+			bc.AddBytes(buf);// ĞÅÏ¢Ìå add message body
 			out.write(bc.getBytes());
 			out.flush();
 
@@ -76,15 +76,15 @@ public class Message {
 		try {
 			out = new DataOutputStream(conn.sock.getOutputStream());
 
-			byte[] buf = sub.getBytes(); // ä¿¡æ¯ä½“ message body
-			int bodyLen = buf.length; // ä¿¡æ¯ä½“é•¿åº¦
-			byte[] header = new byte[8]; // ä¿¡æ¯å¤´
+			byte[] buf = sub.getBytes(); // ĞÅÏ¢Ìå message body
+			int bodyLen = buf.length; // ĞÅÏ¢Ìå³¤¶È
+			byte[] header = new byte[8]; // ĞÅÏ¢Í·
 			ByteCode bc = new ByteCode(8);
 
-			bc.AddInt(8 + bodyLen); // ä¿¡æ¯å¤´ add total length
-			bc.AddInt(StateCode.SM_SUBMIT); // ä¿¡æ¯å¤´ add message type
+			bc.AddInt(8 + bodyLen); // ĞÅÏ¢Í· add total length
+			bc.AddInt(StateCode.SM_SUBMIT); // ĞÅÏ¢Í· add message type
 			// bc.AddInt(3);
-			bc.AddBytes(buf);// ä¿¡æ¯ä½“ add message body
+			bc.AddBytes(buf);// ĞÅÏ¢Ìå add message body
 			out.write(bc.getBytes());
 			out.flush();
 		} catch (IOException e) {
@@ -243,7 +243,7 @@ public class Message {
 			System.out.println("------- Case 1 -------");
 			SmSubmitResult ssr = new SmSubmitResult();
 			try {
-				ssr.readInBytes(packbuf); // å¤„ç†ä¿¡æ¯ä½“
+				ssr.readInBytes(packbuf); // ´¦ÀíĞÅÏ¢Ìå
 				ssr.packCmd = 1;
 				return ssr;
 			} catch (Exception e) {

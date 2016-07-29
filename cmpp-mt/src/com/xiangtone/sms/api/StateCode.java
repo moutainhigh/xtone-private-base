@@ -5,26 +5,26 @@
 package com.xiangtone.sms.api;
 
 public class StateCode {
-	public static final int SM_SUBMIT = 1; // ä¸‹è¡Œæ¶ˆæ¯ VCP-->XTSMS
-	public static final int SM_SUBMIT_ACK = 2; // ä¸‹è¡Œæ¶ˆæ¯åº”ç­” XTSMS-->VCP
+	public static final int SM_SUBMIT = 1; // ÏÂĞĞÏûÏ¢ VCP-->XTSMS
+	public static final int SM_SUBMIT_ACK = 2; // ÏÂĞĞÏûÏ¢Ó¦´ğ XTSMS-->VCP
 	public static final int SM_DELIVER = 3;
 	public static final int SM_DELIVER_ACK = 4;
 	public static final int SM_REPORT = 5;
 	public static final int SM_REPORT_ACK = 6;
 
 	// filed attributes
-	public static final byte VCP_ID = 1; // åˆ†é…ç»™VCPçš„IDå·ï¼Œç”¨äºç½‘å…³å¯¹VSPèº«ä»½ç¡®è®¤
-	public static final byte SERVER_CODE = 2; // ç‰¹æœå·
-	public static final byte PROV_ID = 3; // çœä»½
-	public static final byte SERVER_ID = 4; // åº”ç”¨æœåŠ¡ç±»å‹
-	public static final byte DEST_CPN = 5; // ç›®çš„æ‰‹æœºå·ç 
-	public static final byte FEE_CPN = 6; // è´¹ç”¨æ‰‹æœºå·ç 
-	public static final byte FEE_CPNTYPE = 13;// è´¹ç”¨æ‰‹æœºçš„å·ç ç±»å‹ ä¼ªç æˆ–æ˜ç 
-	public static final byte FEE_TYPE = 7; // èµ„è´¹ç±»åˆ«
-	public static final byte FEE_CODE = 8; // è´¹ç”¨å€¼ï¼ˆä»¥åˆ†ä¸ºå•ä½ï¼‰
-	public static final byte MEDIA_TYPE = 9; // åª’ä½“ç±»å‹
-	public static final byte CONTENT = 10; // çŸ­ä¿¡å†…å®¹
-	public static final byte REGISTERED_DELIVERY = 11; // çŠ¶æ€æŠ¥å‘Š
+	public static final byte VCP_ID = 1; // ·ÖÅä¸øVCPµÄIDºÅ£¬ÓÃÓÚÍø¹Ø¶ÔVSPÉí·İÈ·ÈÏ
+	public static final byte SERVER_CODE = 2; // ÌØ·şºÅ
+	public static final byte PROV_ID = 3; // Ê¡·İ
+	public static final byte SERVER_ID = 4; // Ó¦ÓÃ·şÎñÀàĞÍ
+	public static final byte DEST_CPN = 5; // Ä¿µÄÊÖ»úºÅÂë
+	public static final byte FEE_CPN = 6; // ·ÑÓÃÊÖ»úºÅÂë
+	public static final byte FEE_CPNTYPE = 13;// ·ÑÓÃÊÖ»úµÄºÅÂëÀàĞÍ Î±Âë»òÃ÷Âë
+	public static final byte FEE_TYPE = 7; // ×Ê·ÑÀà±ğ
+	public static final byte FEE_CODE = 8; // ·ÑÓÃÖµ£¨ÒÔ·ÖÎªµ¥Î»£©
+	public static final byte MEDIA_TYPE = 9; // Ã½ÌåÀàĞÍ
+	public static final byte CONTENT = 10; // ¶ÌĞÅÄÚÈİ
+	public static final byte REGISTERED_DELIVERY = 11; // ×´Ì¬±¨¸æ
 	public static final byte LINK_ID = 12;// link id add at 061120
 	public static final byte MSGID = 14;// msgid add at 08-11-27
 
@@ -35,5 +35,5 @@ public class StateCode {
 	public static final byte SP_CODE = 4;
 	public static final byte ISMG_CODE = 5;
 
-	public static final byte ACK_CODE = 100; // åº”ç­”ä¿¡æ¯ä¸­è¿”å›
+	public static final byte ACK_CODE = 100; // Ó¦´ğĞÅÏ¢ÖĞ·µ»Ø
 }

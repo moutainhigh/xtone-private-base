@@ -126,5 +126,12 @@
 				<ftp.to.url>ftp://alphaZ.test:29281/server/java-app/cy-wechat-token/swap/</ftp.to.url>
 			</properties>
 		</profile>
+		<profile>
+			<id>ture</id>
+			<properties>
+				<runtime.env>packageConfig\test</runtime.env>
+				<final.name>cmpp-mt-test</final.name>
+			</properties>
+		</profile>
 	</profiles>
 </project>

@@ -31,10 +31,10 @@ public class DeByteCode {
 		bytes = a;
 		size = a.length;
 		len = a.length;
-		offset = 0; // é•¿åº¦åç§»æŒ‡é’ˆ
+		offset = 0; // ³¤¶ÈÆ«ÒÆÖ¸Õë
 	}
 
-	// è¯»å– i ä¸ª å­—èŠ‚
+	// ¶ÁÈ¡ i ¸ö ×Ö½Ú
 	public byte[] getBytes(int i) throws Exception {
 		if (offset + i > size) {
 			throw new Exception("underrun.int16.");
@@ -44,7 +44,7 @@ public class DeByteCode {
 				b[j] = bytes[offset + j];
 			}
 
-			offset += i;// è¯¥æŒ‡é’ˆå‘åç§»åŠ¨i
+			offset += i;// ¸ÃÖ¸ÕëÏòºóÒÆ¶¯i
 			return b;
 		}
 	}

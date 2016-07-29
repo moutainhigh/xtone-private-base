@@ -87,11 +87,11 @@ public class SmSubmitResult extends SmResult {
 					logger.debug("msgId value is:" + msgId);
 					break;
 				default:
-					stat = "01"; // æ— æ•ˆçš„æ¶ˆæ¯ç±»å‹
+					stat = "01"; // ÎŞĞ§µÄÏûÏ¢ÀàĞÍ
 					return;
 				}
 			}
-			stat = "00"; // æˆåŠŸ
+			stat = "00"; // ³É¹¦
 		} catch (Exception e) {
 			// throw new Exception("decoding error");
 

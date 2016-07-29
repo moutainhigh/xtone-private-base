@@ -52,11 +52,11 @@ public class SMSRecive implements Runnable {
 
 			try {
 
-				p.readPa(con);//è¯»å–æ¥æ”¶åˆ°çš„æ•°æ®åŒ…
+				p.readPa(con);//¶ÁÈ¡½ÓÊÕµ½µÄÊı¾İ°ü
 				Thread.currentThread().sleep(100);
 				if (sr.flag == 0) {// submit resp
 
-					sr.flag = -1; // å¤ä½
+					sr.flag = -1; // ¸´Î»
 
 					String strRespMsgId = IntByteConvertor.getLong(sr.msgId, 0) + "";// MyTools.Bytes2HexString(sr.msgId);MyTools.Bytes2HexString(sr.msgId);//new
 																						// String(sr.msgId2)//IntByteConvertor.getLong(sr.msgId,0)
@@ -79,17 +79,17 @@ public class SMSRecive implements Runnable {
 
 				}
 
-				if (cd.STAT == 0) {// è¯´æ˜æœ‰æ¶ˆæ¯ä¸Šæ¥äº†
+				if (cd.STAT == 0) {// ËµÃ÷ÓĞÏûÏ¢ÉÏÀ´ÁË
 
 					cd.STAT = -1;
 
-					logger.debug("æœ‰æ¶ˆæ¯ä¸Šæ¥äº†...");
+					logger.debug("ÓĞÏûÏ¢ÉÏÀ´ÁË...");
 
 					/////////////////////////////
 
 					// moPoolManger.process1(cd);
 
-					/////////////////////// è¿›è¡Œé‡æ„ï¼ŒåŠ å…¥çº¿ç¨‹æ±  date:2008-11-26 16:09
+					/////////////////////// ½øĞĞÖØ¹¹£¬¼ÓÈëÏß³Ì³Ø date:2008-11-26 16:09
 
 					String msgId = IntByteConvertor.getLong(cd.msgId, 0) + "";// MyTools.Bytes2HexString(cd.getMsgId());
 
@@ -123,7 +123,7 @@ public class SMSRecive implements Runnable {
 
 					if (iReportFlag == 1) {
 
-						logger.debug("çŠ¶æ€æŠ¥å‘Šä¿¡æ¯....");
+						logger.debug("×´Ì¬±¨¸æĞÅÏ¢....");
 
 						String reportDestCpn = cd.getDestCpn();
 
@@ -156,7 +156,7 @@ public class SMSRecive implements Runnable {
 
 					}
 
-					cd.printAll(); // æ‰“å°moæ¶ˆæ¯;
+					cd.printAll(); // ´òÓ¡moÏûÏ¢;
 
 					handle.setDeliverIsmgID(strIsmgid);
 
@@ -185,7 +185,7 @@ public class SMSRecive implements Runnable {
 				Thread.currentThread().sleep(100);
 			} catch (Exception e) {
 
-				logger.error("SmsRecive é‡æ–°è¿æ¥....", e);
+				logger.error("SmsRecive ÖØĞÂÁ¬½Ó....", e);
 
 				p.cmppDisConnectFromIsmg(con);
 
@@ -201,7 +201,7 @@ public class SMSRecive implements Runnable {
 
 				}
 
-				cmppcon = CMPPSingleConnect.getInstance(); // é‡è¿
+				cmppcon = CMPPSingleConnect.getInstance(); // ÖØÁ¬
 
 				con = cmppcon.con;
 
