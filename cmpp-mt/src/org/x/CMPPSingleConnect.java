@@ -45,10 +45,10 @@ public class CMPPSingleConnect {
 
 	private void connectIsmg() {
 		try {
-//			logger.debug("login ismg:" + SMSIsmgInfo.qwIsmgIp);
-			// p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
-			logger.debug("登陆测试网关:127.0.0.1");
-			p.cmppConnectToIsmg("127.0.0.1", 7891, con);// test
+			logger.debug("login ismg:" + SMSIsmgInfo.qwIsmgIp);
+			p.cmppConnectToIsmg(SMSIsmgInfo.qwIsmgIp,SMSIsmgInfo.qwIsmgPort,con);
+//			logger.debug("登陆测试网关:127.0.0.1");
+//			p.cmppConnectToIsmg("127.0.0.1", 7891, con);// test
 			cl.setIcpid(SMSIsmgInfo.qwIcpID);
 			cl.setAuth(SMSIsmgInfo.qwIcpShareKey);
 			cl.setVersion((byte) 0x30);

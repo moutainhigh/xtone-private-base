@@ -25,9 +25,9 @@
 		<finalName>${final.name}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
-<!-- 			<resource> -->
-<!-- 				<directory>${runtime.env}/</directory> -->
-<!-- 			</resource> -->
+			<resource>
+				<directory>${runtime.env}/</directory>
+			</resource>
 			<resource>
 				<directory>src</directory>
 				<excludes>
