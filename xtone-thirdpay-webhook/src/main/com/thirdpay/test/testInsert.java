@@ -34,7 +34,7 @@ public class testInsert {
 	public static void main(String[] args) {
 
 		// while(true){
-		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
+//		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
 		// }
 
 		// ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl",

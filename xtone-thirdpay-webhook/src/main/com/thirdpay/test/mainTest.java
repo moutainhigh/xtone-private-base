@@ -19,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.CpInfoBean;
 import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.ConnectionServiceCPInfo;
+import com.thirdpay.utils.ConnectionServicethirdpayCount;
 
 public class mainTest {
 
@@ -48,32 +49,45 @@ public class mainTest {
 		//
 		//
 		// System.out.println(forwardString);
-
 		// TODO Auto-generated method stub
 		// CpInfoBean cpInfoBean = new CpInfoBean();
 		PreparedStatement ps = null;
 		Connection con = null;
 		try {
+			
+			
+			
+			///////------------------
 			// DbKey 选择使用的数据库
-			con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" +  "'zgt'" );
+//			con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+//			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" +  "'zgt'" );
 //			ps = con.prepareStatement("SELECT * FROM 'tbl_thirdpay_apps left join' course on tbl_thirdpay_apps left.appKey = tbl_thirdpay_app_pay_channel_relations.appKey WHERE appKey=" +  "'zgt'"  );
 			
+//			ResultSet rs = ps.executeQuery();
+//			while (rs.next()) {
+//				System.out.println("appKey = " + rs.getString("appKey"));
+//				System.out.println("aliPay = " + rs.getString("aliPay"));
+//				System.out.println("unionPay = " + rs.getString("unionPay"));
+//				System.out.println("wechatPay = " + rs.getString("wechatPay"));
+//				System.out.println("baiduPay = " + rs.getString("baiduPay"));
+//				System.out.println("smsPay = " + rs.getString("smsPay"));
+//				System.out.println("productInfo = " + rs.getString("productInfo"));
+//				System.out.println("notify_url = " + rs.getString("notify_url"));
+//				System.out.println("WXwap = " + rs.getString("WXwap"));
+//				System.out.println("encrypt = " + rs.getString("encrypt"));
+//
+//			}
+///////////////----------------------
+			
+			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + "'"+"88888888"+"'");
 			ResultSet rs = ps.executeQuery();
+			String jsonString = "";
 			while (rs.next()) {
-				System.out.println("appKey = " + rs.getString("appKey"));
-				System.out.println("aliPay = " + rs.getString("aliPay"));
-				System.out.println("unionPay = " + rs.getString("unionPay"));
-				System.out.println("wechatPay = " + rs.getString("wechatPay"));
-				System.out.println("baiduPay = " + rs.getString("baiduPay"));
-				System.out.println("smsPay = " + rs.getString("smsPay"));
-				System.out.println("productInfo = " + rs.getString("productInfo"));
-				System.out.println("notify_url = " + rs.getString("notify_url"));
-				System.out.println("WXwap = " + rs.getString("WXwap"));
-				System.out.println("encrypt = " + rs.getString("encrypt"));
-
+				jsonString = rs.getString("para04");
 			}
-
+			
+			System.out.println(jsonString);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
