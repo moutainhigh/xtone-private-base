@@ -13,7 +13,6 @@ public class SReport implements Runnable{
 	private static Logger logger = Logger.getLogger(SReport.class);
 
 	public SReport() {
-		
 	}
 
 	@Override
@@ -22,13 +21,12 @@ public class SReport implements Runnable{
 		PreparedStatement db = null;
 		while (true) {
 			try {
-				logger.debug("aa==" + System.currentTimeMillis());
 				conn = ConnectionService.getInstance().getConnectionForLocal();
 				logger.debug("the conn is:" + conn);
 				db = conn.prepareStatement("");
 				long startTime = System.currentTimeMillis();
 
-				logger.debug(System.currentTimeMillis());
+				logger.debug("System.currentTimeMillis():"+System.currentTimeMillis());
 				// MysqlDB db=new MysqlDB("league");
 				try {
 					ReportAll rAll = new ReportAll();
