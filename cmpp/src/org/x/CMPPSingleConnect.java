@@ -14,16 +14,24 @@ package org.x;
  */
 import comsd.commerceware.cmpp.*;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import org.apache.log4j.Logger;
+
 import com.xiangtone.util.ConfigManager;
 import com.xiangtone.util.MailUtil;
 
 public class CMPPSingleConnect {
+	static private Logger logger = Logger.getLogger(CMPPSingleConnect.class);
 	private  static CMPPSingleConnect cmppcon = null;
     private  CMPP p = new CMPP();
-  	public   static conn_desc con = new conn_desc();
-  	private  cmppe_login cl = new cmppe_login();
+  	public   static ConnDesc con = new ConnDesc();
+  	private  CmppLogin cl = new CmppLogin();
   	public static int count=0;
-  	private int maxConnect=Integer.parseInt(ConfigManager.getInstance().getConfigData("max_connect"));
+  	private ConfigManager configManager=ConfigManager.getInstance();
+  	private int maxConnect=Integer.parseInt(configManager.getConfigData("max_connect"));
+  	
   	private CMPPSingleConnect(){
   		connectIsmg();
   	}
@@ -36,28 +44,42 @@ public class CMPPSingleConnect {
   	
   	private void connectIsmg(){
   		try{
-  			System.out.println("login gateway:" + SMSIsmgInfo.gd_ismg_ip);
-			p.cmpp_connect_to_ismg(SMSIsmgInfo.gd_ismg_ip, SMSIsmgInfo.gd_ismg_port, con);
-  			cl.set_icpid(SMSIsmgInfo.gd_icpID);
-  			cl.set_auth(SMSIsmgInfo.gd_icpShareKey);
-  			cl.set_version((byte)0x30);
-  			cl.set_timestamp(1111101020);
-  			p.cmpp_login(con,cl);
+  			logger.debug("login gateway:" + SMSIsmgInfo.gdIsmgIp);
+			p.cmppConnectToIsmg(SMSIsmgInfo.gdIsmgIp, SMSIsmgInfo.gdIsmgPort, con);
+  			cl.setIcpid(SMSIsmgInfo.gdIcpID);
+  			cl.setAuth(SMSIsmgInfo.gdIcpShareKey);
+  			cl.setVersion((byte)0x30);
+  			cl.setTimestamp(1111101020);
+  			p.cmppLogin(con,cl);
   			count=0;
   		}catch(Exception e){
-  			count++;
-  			if(count>=maxConnect){
-  				count=0;
-  				MailUtil.send("短信网关连接异常", ConfigManager.getInstance().getConfigData("SENDMAIL"), ConfigManager.getInstance().getConfigData("MAILTO"), "短信网关尝试重连次数超过"+maxConnect+"次！");
-  			}
-  			System.out.println("err:login ismg failed! --CMPP_receive.java");
-    		System.out.println(e.toString());
+			if (configManager.getConfigData("mail_io").equals("true")) {
+				count++;
+				if (count >= maxConnect) {
+					count = 0;
+					try {
+						MailUtil.send("GATEWAY ERROR:form " + InetAddress.getLocalHost().getHostAddress(),
+								configManager.getConfigData("mail_form"), configManager.getConfigData("mail_to"),
+								"Trying to connect to dateway more than " + maxConnect);
+						// MailUtil.send("短信网关连接异常",
+						// configManager().getConfigData("mail_form"),
+						// configManager().getConfigData("mail_to"),
+						// "短信网关尝试重连次数超过"+maxConnect+"次！");
+					} catch (Exception e1) {
+						logger.error("Mail send error",e1);
+					}
+
+				}
+			}
+  			logger.debug("err:login ismg failed! --CMPP_receive.java");
   		}
   	}
   	synchronized public static void destroy()
 	{
-		System.out.println("destory connect instance.......");
+		logger.debug("destory connect instance.......");
 		cmppcon = null;
 	}
-  	
+  	public static void main(String[] args) {
+		logger.debug(ConfigManager.getInstance().getConfigData("mail_io"));
+	}
 }
