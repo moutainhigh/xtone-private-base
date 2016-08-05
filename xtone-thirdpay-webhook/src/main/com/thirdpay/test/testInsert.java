@@ -140,7 +140,17 @@ public class testInsert {
 		// 转发插入日志表
 //		ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, "orderid", "0", "0", "0",
 //				"notify_url", "200", "cblappkey", "appkey"));
-
+		
+//		HashMap<String, String > map = new HashMap<String, String>();
+//		  map.put("username", "zhangsan");
+//		  map.put("age", "24");
+//		  map.put("sex", "男");
+//		String a = JSON.toJSONString(map);
+//		System.out.println(a);
+		HashMap<String, String > map = new HashMap<String, String>();
+		map = CheckCPInfo.CheckInfoMap("zgt");
+//		map.get("notify_url");
+		System.out.println(map.get("WXwapH5"));
 	}
 
 }

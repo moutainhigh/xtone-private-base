@@ -94,6 +94,9 @@ public class mainTest {
 //			}
 //			
 //			System.out.println(jsonString);
+			
+//			JSON.toJSONString(cpInfoBean);
+		
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
