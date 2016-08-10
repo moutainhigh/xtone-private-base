@@ -17,7 +17,7 @@
 </body>
 <script language="javascript" type="text/javascript">
 	$(function(){
-		window.location = "<%=path%>/stat-all.jsp";
+		window.location = "<%=path%>/daily.jsp";
 	});    
 </script>
 </html>
