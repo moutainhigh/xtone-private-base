@@ -101,6 +101,10 @@
 				<ftp.server.id>thirdwebhook</ftp.server.id>
 				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url>
 			</properties>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 		</profile>
 
 		<profile>
@@ -113,9 +117,7 @@
 				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
 
 			</properties>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
+
 
 		</profile>
 		<profile>
@@ -155,8 +157,8 @@
 			</properties>
 
 		</profile>
-		
-		
+
+
 	</profiles>
 
 	<dependencies>

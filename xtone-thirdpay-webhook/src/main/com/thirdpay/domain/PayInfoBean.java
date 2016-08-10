@@ -200,28 +200,32 @@ public class PayInfoBean implements Runnable {
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
-					String notify_url = CheckCPInfo.CheckInfo(this.getAppKey()).getNotify_url();// 通过appkey得到转发url
+					CpInfoBean	cpInfoBean = CheckCPInfo.CheckInfo(this.getAppKey());
+					String notify_url = cpInfoBean.getNotify_url();// 通过appkey得到转发url
+					String encrypt = cpInfoBean.getEncrypt();
 					
-					LOG.info("notify_url  == " + notify_url);
-					LOG.info("apppppkey  == " + this.getAppKey());
+					LOG.info("apppppkey  == " + this.getAppKey() + "\n" +"notify_url  == " + notify_url);
 
 					//冰风谷定制
 					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
 						// 根据appkey转发数据
 						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+						
 						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),
 								forward_url);
 					}
-
-					// 转发插入日志表
-					ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
-							notify_url, "200", this.getAppKey(), "appkey"));
-
+					
+					if(! "".equals(notify_url) && notify_url != null){
+						
+						// 转发插入日志表
+						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
+								notify_url, "200", this.getAppKey(), "appkey",encrypt));
+					}
+					
 					// 转发数据到Wj_url
 					Wj_Froward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 							this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
-				
 
 				}
 
@@ -262,9 +266,11 @@ public class PayInfoBean implements Runnable {
 			oprator = "7";
 		} else if (payChannel.equals("wxWap")) {
 			oprator = "8";
+		} else if (payChannel.equals("wxWapH5")) {
+			oprator = "9";
 		} else {
+			
 			oprator = "otherpay";
-
 		}
 		return oprator;
 	}

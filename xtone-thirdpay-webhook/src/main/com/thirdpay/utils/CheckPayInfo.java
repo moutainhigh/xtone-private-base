@@ -25,19 +25,18 @@ public class CheckPayInfo {
 		// TODO Auto-generated method stub
 		// ForwardsyncBean forwardsyncBean = new ForwardsyncBean();
 		String jsonString = "";
-		PreparedStatement ps = null;
+		PreparedStatement ps = null; 
 		Connection con = null;
 
 		try {
 			// DbKey 选择使用的数据库
 			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + ownOrderId);
+			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + "'"+ownOrderId+"'");
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
 				jsonString = rs.getString("para04");
 			}
-//			System.out.println("jsonString = " + jsonString );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,11 +72,11 @@ public class CheckPayInfo {
 
 		try {
 			// DbKey 选择使用的数据库
-			con = ConnectionService.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 			ps = con.prepareStatement("UPDATE `log_async_generals` SET para02 = 1 WHERE para01 = " + ownOrderId);
 			
 			if(!ps.execute()){
-				LOG.info("数据状态更新成功为1");
+				LOG.info("  1001     数据状态更新成功为1");
 			}
 			
 		} catch (Exception e) {
@@ -131,7 +130,7 @@ public class CheckPayInfo {
 		try {
 
 			// DbKey 选择使用的数据库
-			con = ConnectionService.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 			
 			//找出上次查询次数
 			ps = con.prepareStatement("SELECT * FROM `log_async_generals` WHERE para01 = " + ownOrderId );

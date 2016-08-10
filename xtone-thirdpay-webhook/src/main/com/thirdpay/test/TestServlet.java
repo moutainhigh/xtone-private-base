@@ -60,7 +60,8 @@ public class TestServlet extends HttpServlet {
 //		}
 
 		response.getWriter().append("200");
-
+		String ip = request.getRemoteAddr();
+		System.out.println("-------------------------ip------------------"+"\n"+ip);
 		// ThreadPool.mThreadPool.execute(
 		// new ForwardsyncBean(1001, "ownOrderId", "0", "3000", "0", "url",
 		// "200", "appkey=cbl", "appkey"));

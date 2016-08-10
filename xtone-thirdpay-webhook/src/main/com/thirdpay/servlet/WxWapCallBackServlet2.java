@@ -14,6 +14,7 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.payConstants;
 
 /**
  * 微信支付wap 回调
@@ -97,9 +98,8 @@ public class WxWapCallBackServlet2 extends HttpServlet {
         String ownUserId = getVale(xmlData,"mch_id");
         String ownItemId =  getVale(xmlData,"nonce_str");
 		
-		
 		ThreadPool.mThreadPool.execute(new PayInfoBean(Integer.valueOf(price), payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, Integer.valueOf(payStatus)));
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId,payConstants.paytestStatus ));
 		
 		
 		response.getWriter().append("success");

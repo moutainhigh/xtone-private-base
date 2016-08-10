@@ -288,7 +288,7 @@ public class UserService {
 			if(!rsp.getChannel().equals("")){
 				sql +=" AND releaseChannel LIKE ? ";
 			}
-			sql +=" ORDER BY id DESC ";
+			sql +=" ORDER BY id DESC LIMIT 500";
 			System.out.println("sql :"+sql);
 			ps = con.prepareStatement(sql);
 			int m = 1;
