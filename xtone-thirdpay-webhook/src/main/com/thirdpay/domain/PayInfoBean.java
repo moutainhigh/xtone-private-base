@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.http.message.BasicNameValuePair;
@@ -200,9 +201,13 @@ public class PayInfoBean implements Runnable {
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
-					CpInfoBean	cpInfoBean = CheckCPInfo.CheckInfo(this.getAppKey());
-					String notify_url = cpInfoBean.getNotify_url();// 通过appkey得到转发url
-					String encrypt = cpInfoBean.getEncrypt();
+//					CpInfoBean	cpInfoBean = CheckCPInfo.CheckInfo(this.getAppKey());
+//					String notify_url = cpInfoBean.getNotify_url();// 通过appkey得到转发url
+//					String encrypt = cpInfoBean.getEncrypt();
+					
+					HashMap<String, String > map = CheckCPInfo.CheckInfoMap(this.getAppKey());
+					String notify_url = map.get("notify_url");
+					String encrypt = map.get("encrypt");
 					
 					LOG.info("apppppkey  == " + this.getAppKey() + "\n" +"notify_url  == " + notify_url);
 

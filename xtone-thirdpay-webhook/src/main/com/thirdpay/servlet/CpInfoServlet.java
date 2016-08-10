@@ -49,8 +49,8 @@ public class CpInfoServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		String appKey = request.getParameter("Appkey");
 		if (appKey != null) {
-			CheckInfo(appKey, response); // 查询数据
-//			CheckInfoMap(appKey, response); // 查询数据
+//			CheckInfo(appKey, response); // 查询数据
+			CheckInfoMap(appKey, response); // 查询cpinfo新版
 		} else {
 			response.getWriter().append("fail");
 		}

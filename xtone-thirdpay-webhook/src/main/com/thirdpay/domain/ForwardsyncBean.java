@@ -181,7 +181,7 @@ public class ForwardsyncBean implements Runnable {
 
 					if (!notify_url.equals("")) {
 						LOG.info("------------------------own_orderId = "+own_orderId+" -转发数据到指定url = "+this.getNotify_url());
-						postPayment(notify_url, own_orderId,this.getEncrypt());
+						postPayment(notify_url, own_orderId,this.getEncrypt(),this.getAppkey());
 
 					}
 
@@ -215,16 +215,16 @@ public class ForwardsyncBean implements Runnable {
  * @param ownOrderId
  * @throws Exception 
  */
-	public void postPayment(String notify_url, String ownOrderId,String encrypt ) throws Exception {
+	public void postPayment(String notify_url, String ownOrderId,String encrypt,String appkey) throws Exception {
 		
 		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
 		
+		LOG.info("appkey = "+appkey + " ownOrderId = "+ ownOrderId + "--加密前的字串是：" + forwardString);
+		
 		if(encrypt.equals("1")){
-			
 			// 加密
-			LOG.info("ownOrderId = "+ ownOrderId + "--加密前的字串是：" + forwardString);
 			forwardString= AES.Encrypt(forwardString, Contents.cKey);
-			LOG.info("ownOrderId = "+ ownOrderId + "加密后的字串是：" + forwardString);
+			LOG.info("appkey = "+appkey + " ownOrderId = "+ ownOrderId + "加密后的字串是：" + forwardString);
 			
 		}
 		

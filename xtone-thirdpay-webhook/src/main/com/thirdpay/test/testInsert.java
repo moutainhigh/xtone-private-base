@@ -147,10 +147,10 @@ public class testInsert {
 //		  map.put("sex", "男");
 //		String a = JSON.toJSONString(map);
 //		System.out.println(a);
-		HashMap<String, String > map = new HashMap<String, String>();
-		map = CheckCPInfo.CheckInfoMap("zgt");
-//		map.get("notify_url");
-		System.out.println(map.get("WXwapH5"));
+		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+		String notify_url = map.get("notify_url");
+		String encrypt = map.get("encrypt");
+		System.out.println(notify_url+"\n" +encrypt);
 	}
 
 }
