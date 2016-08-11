@@ -29,6 +29,7 @@ import com.swiftpass.util.SignUtils;
 import com.swiftpass.util.SwiftpassConfig;
 import com.swiftpass.util.XmlUtils;
 import com.thirdpay.utils.HttpUtils;
+import com.thirdpay.utils.WeixinHttpsUtils;
 
 //import com.swiftpass.action.HttpUtils;
 //import com.swiftpass.config.SwiftpassConfig;
@@ -144,64 +145,26 @@ public class WXWapServlet extends HttpServlet {
 							// System.out.println("pay_info = "+pay_info);
 							// 处理支付结果
 							String string = HttpUtils.get(pay_info);
-							// System.out.println(string);
 							if (string != null) {
-								String patternString = "weixin://wap/pay.*";
-								Pattern pattern = Pattern.compile(patternString);
-								Matcher matcher = pattern.matcher(string);
-
-								StringBuilder builder = new StringBuilder();
-								builder.append("{");
-
-								if (matcher.find()) {
-									String wixin = matcher.group(0);
-									String _string = wixin.substring(0, wixin.length() - 2);
-									// System.out.println(_string);
-									builder.append("\"wixin\":" + "\"" + _string + "\",");
-								}
-
-								// String patternString2 =
-								// "https://statecheck.swiftpass.cn/pay/unifiedCheck.*";
-								// Pattern pattern2 =
-								// Pattern.compile(patternString2);
-								// Matcher matcher2 = pattern2.matcher(string);
-								// if(matcher2.find()){
-								// String https = matcher2.group(0);
-								// String _string2 = https.substring(0,
-								// https.length()-2);
-								// //System.out.println(_string2);
-								// builder.append("\"https\":"+"\""+_string2+"\"");
-								//
-								// builder.append("}");
-								//
-								// resp.getWriter().write(builder.toString());
-								//
-								//
-								// return ;
-								// }
 								
-								String patternString2 = "var.*queryString.*https://.*/pay/unifiedCheck.*uuid=.*\"";
-								Pattern pattern2 = Pattern.compile(patternString2);
-								Matcher matcher2 = pattern2.matcher(string);
-								if (matcher2.find()) {
-									String https = matcher2.group(0);
-									// String _string2 = https.substring(0,
-									// https.length()-2);
-									// System.out.println(_string2);
-									String myhttps = https.substring(https.indexOf("\"") + 1, https.lastIndexOf("\""));
+								StringBuilder builder = new StringBuilder();
+								String weixin=WeixinHttpsUtils.getWeixin(string);
+								builder.append("{");
+								builder.append("\"wixin\":" + "\"" + weixin + "\",");
 
-									builder.append("\"https\":" + "\"" + myhttps + "\"");
-
-									builder.append("}");
-
-									resp.getWriter().write(builder.toString());
-
-									return;
-								}
+								
+                        		String myhttps=WeixinHttpsUtils.getWeixinHttps(string);
+                        		builder.append("\"https\":"+"\""+myhttps+"\"");
+                         		
+                        		builder.append("}");
+                        		
+                        		resp.getWriter().write(builder.toString());
+                        		
+                        		
+                        		return ;
+								
 
 							}
-							// req.getRequestDispatcher("index-pay-result.jsp").forward(req,
-							// resp);
 						} else {
 							req.setAttribute("result", res);
 						}
