@@ -116,8 +116,9 @@ public class Form05_6_2_Consume extends HttpServlet {
 		/**对应答码的处理，请根据您的业务逻辑来编写程序,以下应答码处理逻辑仅供参考------------->**/
 		//应答码规范参考open.unionpay.com帮助中心 下载  产品接口规范  《平台接入接口规范-第5部分-附录》
 		String respCode = resmap.get("respCode");
-		System.err.println(respCode);
-		System.out.println(resmap.get("tn"));
+		
+//		System.err.println(respCode);
+//		System.out.println(resmap.get("tn"));
 		
 		if(("00").equals(respCode)){
 			//成功,获取tn号

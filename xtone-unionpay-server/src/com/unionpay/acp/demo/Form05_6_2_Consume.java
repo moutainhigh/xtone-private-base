@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.unionpay.acp.sdk.CertUtil;
 import com.unionpay.acp.sdk.SDKConfig;
 import com.unionpay.acp.sdk.SDKUtil;
+import com.unionpay.utils.LockConfig;
 
 /**
  * 重要：联调测试时请仔细阅读注释！
@@ -66,7 +67,7 @@ public class Form05_6_2_Consume extends HttpServlet {
 		
 		/***商户接入参数***/
 		//contentData.put("merId", merId);   		 				//商户号码，请改成自己申请的商户号或者open上注册得来的777商户号测试
-		contentData.put("merId", "898440379930020");   		 				//商户号码，请改成自己申请的商户号或者open上注册得来的777商户号测试
+		contentData.put("merId", LockConfig.merId);   		 				//商户号码，请改成自己申请的商户号或者open上注册得来的777商户号测试
 		contentData.put("accessType", "0");            		 	//接入类型，商户接入填0 ，不需修改（0：直连商户， 1： 收单机构 2：平台商户）
 		contentData.put("orderId", orderId);        	 	    //商户订单号，8-40位数字字母，不能含“-”或“_”，可以自行定制规则	
 		//contentData.put("txnTime", new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()));		 		    //订单发送时间，取系统时间，格式为YYYYMMDDhhmmss，必须取当前时间，否则会报txnTime无效
@@ -103,7 +104,7 @@ public class Form05_6_2_Consume extends HttpServlet {
 		//    5.后台通知地址如果上送了带有？的参数，例如：http://abc/web?a=b&c=d 在后台通知处理程序验证签名之前需要编写逻辑将这些字段去掉再验签，否则将会验签失败
 		
 		//online
-		contentData.put("backUrl","http://thirdpay-cs.n8wan.com:29141/UnionpayCountServlet?xx_notifyData="+xx_notifyData);
+		contentData.put("backUrl",LockConfig.unionpay_notify_url+xx_notifyData);
 		//pc
 //		contentData.put("backUrl","http://thirdpay-webhook.n8wan.com:29141/UnionpayCountServlet?xx_notifyData="+xx_notifyData);
 		
@@ -116,8 +117,8 @@ public class Form05_6_2_Consume extends HttpServlet {
 		/**对应答码的处理，请根据您的业务逻辑来编写程序,以下应答码处理逻辑仅供参考------------->**/
 		//应答码规范参考open.unionpay.com帮助中心 下载  产品接口规范  《平台接入接口规范-第5部分-附录》
 		String respCode = resmap.get("respCode");
-		System.err.println(respCode);
-		System.out.println(resmap.get("tn"));
+//		System.err.println(respCode);
+//		System.out.println(resmap.get("tn"));
 		
 		if(("00").equals(respCode)){
 			//成功,获取tn号
