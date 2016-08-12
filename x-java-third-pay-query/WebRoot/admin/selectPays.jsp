@@ -110,7 +110,7 @@
  	 			try{
                   for(Pays pays3:list){
  					
-	 				if(!pays3.getPayChannel().substring(0, payrsp.getChannel().length()). equalsIgnoreCase(payrsp.getChannel())){
+	 				if(!pays3.getReleaseChannel().substring(0, payrsp.getChannel().length()). equalsIgnoreCase(payrsp.getChannel())){
 	 					
 	 					list2.add(pays3);
 	 				}
@@ -209,7 +209,7 @@
 	    }
 		paysdata.setData(list);
 		String rsp = gson.toJson(paysdata);
-		
+		System.out.println("测试"+rsp);
 		out.print(rsp);
 	}catch (Exception e) {
 		// TODO Auto-generated catch block
