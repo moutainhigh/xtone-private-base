@@ -43,7 +43,7 @@
 				success : function(msg) {
 								
 					if (msg.status == "success") {
-                         alert(msg.status);
+                         //alert(msg.status);
 						location.href='console.jsp';
 						
 					} else {
@@ -85,7 +85,8 @@
 				type="email" id="inputEmail" class="form-control" name="username"
 				placeholder="Email address" required autofocus> <label
 				for="inputPassword" class="sr-only">Password</label> 
-				<input
+				
+			<input
 				name="password" type="password" id="inputPassword"
 				class="form-control" placeholder="Password" required>
 
@@ -95,6 +96,7 @@
 					Remember me
 				</label>
 			</div>
+			
 			<input class="btn btn-lg btn-primary btn-block" type="button" onclick="signInAjax()" value="Sign
 				in">
 		</form>

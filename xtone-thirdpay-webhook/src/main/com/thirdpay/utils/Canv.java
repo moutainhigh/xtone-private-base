@@ -36,6 +36,16 @@ public class Canv {
 		parm.put("602", "SmsCancel");
 		parm.put("603", "SmsSuccess");
 		parm.put("604", "SmsFail");
+		// 微信wap统计
+		parm.put("701", "WxWapClick");
+		parm.put("702", "WxWapCancel");
+		parm.put("703", "WxWapSuccess");
+		parm.put("704", "WxWapFail");
+		// 微信wapH5统计
+		parm.put("801", "WxH5Click");
+		parm.put("802", "WxH5Cancel");
+		parm.put("803", "WxH5Success");
+		parm.put("804", "WxH5Fail");
 
 	}
 

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Tel</key>
+	<string>充值未到账等问题,请咨询: </string>
+	<key>HighestScore</key>
+	<string>历史最高分：</string>
+	<key>Roundtext</key>
+	<string>关卡：</string>
+	<key>TargetScoretext</key>
+	<string>目标：</string>
+	<key>Round</key>
+	<string>关卡%d</string>
+	<key>TargetScore</key>
+	<string>目标分数%d</string>
+	
+	<key>remainscore</key>
+	<string>奖励%d分</string>
+	<key>remainstar</key>
+	<string>剩余%d颗心心</string>
+	<key>cleanscore</key>
+	<string>%d连消%d分</string>
+	
+	<key>PropsTips_Bomb</key>
+	<string>炸掉3×3心心</string>
+	<key>PropsTips_Paint</key>
+	<string>选择需要变色的心心</string>
+	<key>PropsTips_Rainbow</key>
+	<string>旋转花费5颗钻石</string>
+	
+	<key>MoneyUnit1</key>
+	<string>¥</string>
+	<key>MoneyUnit2</key>
+	<string>元</string>
+	<key>Unit_ge</key>
+	<string>个</string>
+	<key>OnceShopNum</key>
+	<string>10</string>
+	<key>OnceShopMoney1</key>
+	<string>只要</string>
+	<key>OnceShopMoney2</key>
+	<string>元喔！</string>
+	
+	<key>OnceShopText</key>
+	<string>点击领取需要信息费%s元(不含通信费)</string>
+	<key>HowMany</key>
+	<string>%d个</string>
+	<key>Have</key>
+	<string>持有：</string>
+	<key>buy</key>
+	<string>买</string>
+	<key>QuickShop</key>
+	<string>只需10元，买50个，送50个噢！</string>
+	<key>QuickShopPrice</key>
+	<string>1500</string>
+	<key>QuickShop10</key>
+	<string>十</string>
+	<key>QuickShop15</key>
+	<string>十五</string>
+	<key>QuickShop29</key>
+	<string>二十九</string>
+	<key>GiftTips</key>
+	<string>优惠大放送，0.1元买1个，就送1个噢！</string>
+	<key>GiftFeeTips</key>
+	<string> </string>
+	
+	<key>WebPrize_instruction1</key>
+	<string>抽奖说明：</string>
+	<key>WebPrize_instruction2</key>
+	<string>每15关就有一次免费抽奖。对应的关卡都有一个教授神秘大奖哦，奖品有限，先抽先得！&#x000A;快点闯关把教授奖品带回家！</string>
+	
+	<key>WebPrize1</key>
+	<string>恭喜您获得神秘大奖！</string>
+	<key>WebPrize2</key>
+	<string>下次领奖在%d关哦！</string>
+	<key>WebPrizeTips</key>
+	<string>提示：点击领奖需要连接网络</string>
+	
+	<key>second</key>
+	<string>秒</string>
+	<key>ContinueChallengeTips</key>
+	<string>挑战一次需要%d个钻石。</string>
+	<key>ContinueChallenge1</key>
+	<string>继续通关&#x000A;打爆机！</string>
+	<key>ContinueChallenge2</key>
+	<string>继续通关打爆机！</string>
+
+	<key>PlayMethod_1</key>
+	<string>玩法:点击颜色连接在一起的心心即消除，达到目标即可通关。</string>
+	<key>PlayMethod_2</key>
+	<string>消灭的心心越多得到的分数越高。</string>
+	<key>Props</key>
+	<string>道具：</string>
+	<key>Help_coin</key>
+	<string>（每次消耗%d个钻石）</string>
+	<key>Help_Bomb</key>
+	<string>炸弹:消除选中心心的周围9颗心心。</string>
+	<key>Help_Paint</key>
+	<string>变色:可随意改变选中心心的颜色。</string>
+	<key>Help_Rainbow</key>
+	<string>旋转:使用后所有心心颜色随机改变。</string>
+	<key>contract</key>
+	<string>有任何问题欢迎联系我们！&#x000A;客服电话： &#x000A;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;&#x20;</string>
+
+	<key>CDKEY_instruction</key>
+	<string>请在下方输入获得的兑换码，然后点击领取按钮即可取回购买的钻石。</string>
+	<key>CDKEY_fail</key>
+	<string>兑换码不存在或已被使用</string>
+	<key>CDKEY_success</key>
+	<string>兑换成功，增加%d枚钻石</string>
+
+	
+	<key>my_account</key>
+	<string>我的账户</string>
+	
+	<key>my_gif</key>
+	<string>充值1分送5注彩票!       每周限1次，连续4周哦</string>
+	
+</dict>
+</plist>

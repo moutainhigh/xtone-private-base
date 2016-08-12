@@ -6,13 +6,29 @@ package com.thirdpay.domain;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
 import org.common.util.ThreadPool;
 
+import com.swiftpass.util.SwiftpassConfig;
+import com.thirdpay.utils.AppkeyCanv;
+import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.CheckPayInfo;
+import com.thirdpay.utils.HttpUtils;
+import com.thirdpay.utils.payConstants;
+
 public class PayInfoBean implements Runnable {
+	
+	private static final Logger LOG = Logger.getLogger(PayInfoBean.class);
 	private Long id;
 	private int price; // 价格，单位人民币，分
 	private String payChannel;// 支付通道
@@ -179,19 +195,57 @@ public class PayInfoBean implements Runnable {
 				ps.setInt(m++, this.getTestStatus());
 
 				int i = ps.executeUpdate();
-				// if ((i+"").equals("1")) {
-				//
-				// ThreadPool.mThreadPool.execute(new ForwardsyncBean(0,
-				// "orderId", "3000", "0", "", "200", this.getAppKey(),
-				// "appkey"));
-				//
-				// }
+				
+				/**
+				 * 数据同步状态码 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件
+				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
+				 */
+				if ((i + "").equals("1")) {
+//					CpInfoBean	cpInfoBean = CheckCPInfo.CheckInfo(this.getAppKey());
+//					String notify_url = cpInfoBean.getNotify_url();// 通过appkey得到转发url
+//					String encrypt = cpInfoBean.getEncrypt();
+					
+					HashMap<String, String > map = CheckCPInfo.CheckInfoMap(this.getAppKey());
+					String notify_url = map.get("notify_url");
+					String encrypt = map.get("encrypt");
+					
+					LOG.info("apppppkey  == " + this.getAppKey() + "\n" +"notify_url  == " + notify_url);
+
+					//冰风谷定制
+					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
+						// 根据appkey转发数据
+						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+						
+						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
+								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),
+								forward_url);
+					}
+					
+					if(! "".equals(notify_url) && notify_url != null){
+						
+						// 转发插入日志表
+						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
+								notify_url, "200", this.getAppKey(), "appkey",encrypt));
+					}
+					
+					// 转发数据到Wj_url
+					Wj_Froward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
+							this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
+
+				}
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} finally {
-
+				if (ps != null) {
+					try {
+						ps.close();
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				if (con != null) {
 					try {
 						con.close();
@@ -202,7 +256,113 @@ public class PayInfoBean implements Runnable {
 				}
 			}
 		}
-
 	}
 
+	public static String getOprator(String payChannel) {
+
+		String oprator = "";
+		if (payChannel.equals("wx")) {
+			oprator = "4";
+		} else if (payChannel.equals("alipay")) {
+			oprator = "5";
+		} else if (payChannel.equals("unionpay")) {
+			oprator = "6";
+		} else if (payChannel.equals("baidu")) {
+			oprator = "7";
+		} else if (payChannel.equals("wxWap")) {
+			oprator = "8";
+		} else if (payChannel.equals("wxWapH5")) {
+			oprator = "9";
+		} else {
+			
+			oprator = "otherpay";
+		}
+		return oprator;
+	}
+
+	public void appkeyFroward(String appKey, String price, String payChannel, String ip, String releaseChannel,
+			String payChannelOrderId, String cpOrderId, String forward_url) {
+
+		StringBuilder builder = new StringBuilder(forward_url);
+
+		builder.append("?price=" + price);
+		builder.append("&payChannel=" + payChannel); // 2016-06-12增加支付渠道参数
+		builder.append("&ip=" + ip);
+		builder.append("&releaseChannel=" + releaseChannel);
+		builder.append("&appKey=" + appKey);
+		builder.append("&payChannelOrderId=" + payChannelOrderId);
+		builder.append("&cpOrderId=" + cpOrderId);
+
+		LOG.info("-------------------------- builder = " + builder.toString());
+		String responseStr = HttpUtils.get(builder.toString());
+		if (responseStr.equals("ok")) {
+			LOG.info("appkeyFroward 插入成功,返回200");
+			//插入1002日志表,并更新插入表1001
+		} else {
+			LOG.info("appkeyFroward 插入失败    返回---- responseStr = " + responseStr);
+		}
+	}
+
+	public void Wj_Froward(String appKey, String price, String payChannel, String ip, String releaseChannel,
+			String payChannelOrderId, String cpOrderId) {
+
+		// 转发数据到wj_url
+		// 从配置文件得到转发地址wj_url
+		try {
+			String Wj_notify_url = SwiftpassConfig.wj_notify_url;
+
+			if (Wj_notify_url.equals(payConstants.wj_url)) {
+				String oprator = getOprator(payChannel);
+				String createdate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss").format(new Date());
+				// StringBuilder builder = new
+				// StringBuilder(payConstants.wj_url);
+				StringBuilder builder = new StringBuilder(SwiftpassConfig.wj_notify_url);
+
+				builder.append("?createdate=" + createdate);
+				builder.append("&oprator=" + oprator); // 2016-06-12增加支付渠道参数
+				builder.append("&appkey=" + appKey);
+				builder.append("&channelid=" + releaseChannel);
+				builder.append("&amount=" + price);
+				builder.append("&orderid=" + payChannelOrderId);
+				builder.append("&imei=" + "");
+				builder.append("&imsi=" + "");
+				builder.append("&userorderid=" + cpOrderId);
+				builder.append("&status=" + "0");
+				LOG.info("--------------------------builder = " + builder.toString());
+				String responseStr = HttpUtils.get(builder.toString());
+				if (responseStr.equals("ok")) {
+					LOG.info("插入DawuxianpingTai成功");
+				} else {
+					LOG.info("responseStr = " + responseStr);
+				}
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void postPayment(String notify_url, String ownOrderId){
+		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
+
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("payment", forwardString));
+
+		String responseContent = HttpUtils.post(notify_url, formparams,ownOrderId);
+
+		// 判断返回状态
+		if (responseContent.equals("200")) {
+
+			// 更新0为
+			LOG.info(ownOrderId + "返回200 , 更新数据中...");
+			// 插入1002数据
+			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+
+		} else {
+			//返回不为200重复发送
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			//更新1001的下次转发时间为1分钟
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
+		}
+	}
 }

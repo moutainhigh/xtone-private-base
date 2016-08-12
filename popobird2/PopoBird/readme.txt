@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=com.springsource.org.apache.commons.httpclient-3.1.0.jar -DgroupId=com.springsource.org.apache.commons.httpclient -DartifactId=com.springsource.org.apache.commons.httpclient -Dversion=3.1.0 -Dpackaging=jar -DgeneratePom=true

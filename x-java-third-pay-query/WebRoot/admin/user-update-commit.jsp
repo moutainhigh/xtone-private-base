@@ -34,15 +34,15 @@
 		
 		con = ConnectionService.getInstance().getConnectionForLocal();
 		if(Aduser.getType()==2){
-			sql = "SELECT pwd FROM `tbl_base_users` WHERE id=?";
+			sql = "SELECT pwd FROM `tbl_thirdpay_cp_users` WHERE id=?";
 			ps = con.prepareStatement(sql);
 			ps.setLong(1, Aduser.getId());
 			rs = ps.executeQuery();
 			if(rs.next()){
 				if(Aduser.getPwd().equals(rs.getString("pwd"))){
-					sql = "UPDATE `tbl_base_users` SET username=?,pwd=?,email=?,isAdmin=?,isAvail=? WHERE id=?";
+					sql = "UPDATE `tbl_thirdpay_cp_users` SET username=?,pwd=?,email=?,isAdmin=?,isAvail=? WHERE id=?";
 				}else{
-					sql = "UPDATE `tbl_base_users` SET username=?,pwd=md5(?),email=?,isAdmin=?,isAvail=? WHERE id=?";
+					sql = "UPDATE `tbl_thirdpay_cp_users` SET username=?,pwd=md5(?),email=?,isAdmin=?,isAvail=? WHERE id=?";
 				}
 			}
 			
@@ -67,7 +67,7 @@
 				out.print("{\"status\":\"error\",\"data\":\"" + info + "\"}");
 			}
 		}else if(Aduser.getType()==1){
-			sql = "INSERT INTO `tbl_base_users`(username,pwd,email,isAdmin,isAvail,lastLogin,addTime) VALUES(?,md5(?),?,?,?,?,?)";
+			sql = "INSERT INTO `tbl_thirdpay_cp_users`(username,pwd,email,isAdmin,isAvail,lastLogin,addTime,cpId) VALUES(?,md5(?),?,?,?,?,?,?)";
 			ps = con.prepareStatement(sql);
 			
 			int m = 1;
@@ -78,6 +78,7 @@
 			ps.setInt(m++, Aduser.getStatus());
 			ps.setLong(m++, date.getTime());
 			ps.setLong(m++, date.getTime());
+			ps.setLong(m++, user.getCpid());
 			if(!ps.execute()){
 				CodeRsp codeRsp = new CodeRsp();
 				String rsp = gson.toJson(Aduser);

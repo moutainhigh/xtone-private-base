@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout  android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+        
+        
+   
+    <Button
+        android:id="@+id/exit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="退出账号"
+        android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="返回" />
+    
+     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dip"
+        android:layout_marginRight="35dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#D0E17D"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="用户名:"
+                android:textColor="#4A4D3E"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text_uname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adam"
+                android:textColor="#3A3A35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="#D0E17D"
+            android:orientation="horizontal"
+            android:padding="10dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="邮箱:"
+                android:textColor="#4A4D3E"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/text_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adam@youkala.com"
+                android:textColor="#3A3A35" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="#D0E17D"
+            android:orientation="vertical"
+            android:padding="10dip"
+            android:layout_marginBottom="20dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dip"
+                android:text="我的彩票:"
+                android:textColor="#4A4D3E"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dip"
+                android:padding="5dip"
+                android:text="请在中彩宝App(点击打开或下载)中\n兑换彩豆进行彩票兑换。\n过期日期：2012-05-15"
+                android:textColor="#4A4D3E"
+                android:textSize="14sp" />
+
+            <ListView
+                android:id="@+id/lotter_list" 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:cacheColorHint="#00000000"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
