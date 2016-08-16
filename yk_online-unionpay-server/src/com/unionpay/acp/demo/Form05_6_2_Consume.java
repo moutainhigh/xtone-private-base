@@ -103,7 +103,7 @@ public class Form05_6_2_Consume extends HttpServlet {
 		//    5.后台通知地址如果上送了带有？的参数，例如：http://abc/web?a=b&c=d 在后台通知处理程序验证签名之前需要编写逻辑将这些字段去掉再验签，否则将会验签失败
 		
 		//online
-		contentData.put("backUrl","http://thirdpay-cs.n8wan.com:29141/UnionpayCountServlet?xx_notifyData="+xx_notifyData);
+		contentData.put("backUrl","http://thirdpay.youkala.com:29141/UnionpayCountServlet?xx_notifyData="+xx_notifyData);
 		//pc
 //		contentData.put("backUrl","http://thirdpay-webhook.n8wan.com:29141/UnionpayCountServlet?xx_notifyData="+xx_notifyData);
 		
@@ -116,8 +116,9 @@ public class Form05_6_2_Consume extends HttpServlet {
 		/**对应答码的处理，请根据您的业务逻辑来编写程序,以下应答码处理逻辑仅供参考------------->**/
 		//应答码规范参考open.unionpay.com帮助中心 下载  产品接口规范  《平台接入接口规范-第5部分-附录》
 		String respCode = resmap.get("respCode");
-		System.err.println(respCode);
-		System.out.println(resmap.get("tn"));
+		
+//		System.err.println(respCode);
+//		System.out.println(resmap.get("tn"));
 		
 		if(("00").equals(respCode)){
 			//成功,获取tn号

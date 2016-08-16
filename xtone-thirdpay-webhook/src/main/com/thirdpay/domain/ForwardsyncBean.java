@@ -36,6 +36,8 @@ public class ForwardsyncBean implements Runnable {
 	private String appkey;
 	private String id_type;
 	private String encrypt;
+	private String encrypt_key;
+
 	public Long getId() {
 		return id;
 	}
@@ -116,7 +118,6 @@ public class ForwardsyncBean implements Runnable {
 		this.id_type = id_type;
 	}
 
-	
 	public String getEncrypt() {
 		return encrypt;
 	}
@@ -125,8 +126,17 @@ public class ForwardsyncBean implements Runnable {
 		this.encrypt = encrypt;
 	}
 
+	public String getEncrypt_key() {
+		return encrypt_key;
+	}
+
+	public void setEncrypt_key(String encrypt_key) {
+		this.encrypt_key = encrypt_key;
+	}
+
 	public ForwardsyncBean(int status, String own_orderId, String sync_status, String next_time, String sendCount,
-			String notify_url, String successCoditions, String appkey, String id_type,String encrypt) {
+			String notify_url, String successCoditions, String appkey, String id_type, String encrypt,
+			String encrypt_key) {
 		super();
 		this.status = status;
 		this.own_orderId = own_orderId;
@@ -138,6 +148,7 @@ public class ForwardsyncBean implements Runnable {
 		this.appkey = appkey;
 		this.id_type = id_type;
 		this.encrypt = encrypt;
+		this.encrypt_key = encrypt_key;
 	}
 
 	@Override
@@ -152,7 +163,6 @@ public class ForwardsyncBean implements Runnable {
 			Connection con = null;
 			try {
 
-				
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 				ps = con.prepareStatement(
@@ -178,10 +188,11 @@ public class ForwardsyncBean implements Runnable {
 					// 根据appKey的地址转发payment数据
 					String notify_url = this.getNotify_url();
 					String own_orderId = this.getOwn_orderId();
-
+					String encrypt_key = this.getEncrypt_key();
 					if (!notify_url.equals("")) {
-						LOG.info("------------------------own_orderId = "+own_orderId+" -转发数据到指定url = "+this.getNotify_url());
-						postPayment(notify_url, own_orderId,this.getEncrypt(),this.getAppkey());
+						LOG.info("------------------------own_orderId = " + own_orderId + " -转发数据到指定url = "
+								+ this.getNotify_url());
+						postPayment(notify_url, own_orderId, this.getEncrypt(), this.getAppkey(), encrypt_key);
 
 					}
 
@@ -209,25 +220,28 @@ public class ForwardsyncBean implements Runnable {
 		}
 
 	}
-/**
- * post转发数据
- * @param notify_url
- * @param ownOrderId
- * @throws Exception 
- */
-	public void postPayment(String notify_url, String ownOrderId,String encrypt,String appkey) throws Exception {
-		
+
+	/**
+	 * post转发数据
+	 * 
+	 * @param notify_url
+	 * @param ownOrderId
+	 * @throws Exception
+	 */
+	public void postPayment(String notify_url, String ownOrderId, String encrypt, String appkey, String encrypt_key)
+			throws Exception {
+
 		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
-		
-		LOG.info("appkey = "+appkey + " ownOrderId = "+ ownOrderId + "--加密前的字串是：" + forwardString);
-		
-		if(encrypt.equals("1")){
+
+		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "--加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
+
+		if ("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length() == 16) {
 			// 加密
-			forwardString= AES.Encrypt(forwardString, Contents.cKey);
-			LOG.info("appkey = "+appkey + " ownOrderId = "+ ownOrderId + "加密后的字串是：" + forwardString);
-			
+			forwardString = AES.Encrypt(forwardString, encrypt_key);
+			LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "加密后的字串是：" + forwardString);
+   
 		}
-		
+
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));
 
@@ -247,6 +261,6 @@ public class ForwardsyncBean implements Runnable {
 			// 更新1001的下次转发时间为1分钟
 			CheckPayInfo.UpdataInfoTime(ownOrderId);
 		}
-		
+
 	}
 }
