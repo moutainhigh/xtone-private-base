@@ -112,6 +112,7 @@ public class CheckCPInfo {
 				map.put(rs.getString("payChannelName"), rs.getString("status"));
 				map.put("encrypt",rs.getString("encrypt"));
 				map.put("webOrderid",orederKey);
+				map.put("encrypt_key",rs.getString("encrypt_key"));
 
 			}
 

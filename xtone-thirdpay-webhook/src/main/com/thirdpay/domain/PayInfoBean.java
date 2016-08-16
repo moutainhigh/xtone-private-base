@@ -208,7 +208,7 @@ public class PayInfoBean implements Runnable {
 					HashMap<String, String > map = CheckCPInfo.CheckInfoMap(this.getAppKey());
 					String notify_url = map.get("notify_url");
 					String encrypt = map.get("encrypt");
-					
+					String encrypt_key = map.get("encrypt_key");
 					LOG.info("apppppkey  == " + this.getAppKey() + "\n" +"notify_url  == " + notify_url);
 
 					//冰风谷定制
@@ -225,7 +225,7 @@ public class PayInfoBean implements Runnable {
 						
 						// 转发插入日志表
 						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
-								notify_url, "200", this.getAppKey(), "appkey",encrypt));
+								notify_url, "200", this.getAppKey(), "appkey",encrypt,encrypt_key));
 					}
 					
 					// 转发数据到Wj_url
