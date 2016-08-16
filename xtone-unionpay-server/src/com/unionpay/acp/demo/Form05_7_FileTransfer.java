@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ import com.unionpay.acp.sdk.SDKUtil;
  *           解析落地后的对账文件可以参考BaseDemo.java中的parseZMFile();parseZMEFile();方法
  *        
  */
+@WebServlet("/Form05_7_FileTransfer")
 public class Form05_7_FileTransfer extends HttpServlet {
 
 	@Override

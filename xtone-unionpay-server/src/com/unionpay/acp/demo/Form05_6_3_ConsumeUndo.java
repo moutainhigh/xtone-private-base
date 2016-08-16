@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +30,7 @@ import com.unionpay.acp.sdk.SDKUtil;
  * 交易说明:1）确定交易成功机制：商户必须开发后台通知接口和交易状态查询接口（Form09_6_5_Query）确定交易是否成功，建议发起查询交易的机制：可查询N次（不超过6次），每次时间间隔2N秒发起,即间隔1，2，4，8，16，32S查询（查询到03，04，05继续查询，否则终止查询）
  *        2）消费撤销仅能对当清算日的消费做，必须为全额，一般当日或第二日到账。
  */
-
+@WebServlet("/Form05_6_3_ConsumeUndo")
 public class Form05_6_3_ConsumeUndo extends HttpServlet {
 
 	@Override

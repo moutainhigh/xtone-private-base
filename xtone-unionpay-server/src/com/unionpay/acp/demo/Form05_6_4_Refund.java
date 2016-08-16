@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +27,7 @@ import com.unionpay.acp.sdk.SDKUtil;
  *        2）退货金额不超过总金额，可以进行多次退货
  *        3）退货能对11个月内的消费做（包括当清算日），支持部分退货或全额退货，到账时间较长，一般1-10个清算日（多数发卡行5天内，但工行可能会10天），所有银行都支持
  */
-
+@WebServlet("/Form05_6_4_Refund")
 public class Form05_6_4_Refund extends HttpServlet {
 	
 	@Override

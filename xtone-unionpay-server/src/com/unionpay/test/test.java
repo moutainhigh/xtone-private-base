@@ -6,7 +6,7 @@ import com.unionpay.utils.LockConfig;
 
 public class test {
 	public static void main(String[] args) {
-		String url = LockConfig.unionpay_notify_url;
+		String url = LockConfig.merId;
 		System.out.println(url);
 	}
 }

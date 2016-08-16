@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +26,7 @@ import com.unionpay.acp.sdk.SDKUtil;
  * 交易说明：代付同步返回00，如果未收到后台通知建议3分钟后发起查询交易，可查询N次（不超过6次），每次时间间隔2N秒发起,即间隔1，2，4，8，16，32S查询（查询到03 04 05 01 12 34 60继续查询，否则终止查询）。【如果最终尚未确定交易是否成功请以对账文件为准】
  *        代付同步返03 04 05 01 12 34 60响应码及未得到银联响应（读超时）建议3分钟后发起查询交易，可查询N次（不超过6次），每次时间间隔2N秒发起,即间隔1，2，4，8，16，32S查询（查询到03 04 05 01 12 34 60继续查询，否则终止查询）。【如果最终尚未确定交易是否成功请以对账文件为准】
  */
+@WebServlet("/Form05_6_3_Query")
 public class Form05_6_3_Query extends HttpServlet {
 
 	@Override
