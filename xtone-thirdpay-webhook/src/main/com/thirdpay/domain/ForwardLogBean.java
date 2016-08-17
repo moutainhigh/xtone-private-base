@@ -184,6 +184,7 @@ public class ForwardLogBean implements Runnable {
 		this.notify_url = notify_url;
 		this.successCoditions = successCoditions;
 		this.result_status = result_status;
+		
 		this.send_time = send_time;
 		this.rsp_time = rsp_time;
 		this.send_url = send_url;
@@ -200,7 +201,9 @@ public class ForwardLogBean implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		
+		LOG.info(this.getOwnOrderId() + " 正在插入数据1002.. ");
+		
 		setId(GenerateIdService.getInstance()
 				.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1));
 
@@ -233,9 +236,8 @@ public class ForwardLogBean implements Runnable {
 				ps.setString(m++, this.getId_type());
 
 				if (ps.executeUpdate() == 1) {
-					//插入成功后更新
+					//插入1002成功
 					LOG.info(this.getOwnOrderId() + " 数据1002插入成功.. ");
-					CheckPayInfo.UpdataInfo(this.getOwnOrderId());
 				}
 
 			} catch (Exception e) {

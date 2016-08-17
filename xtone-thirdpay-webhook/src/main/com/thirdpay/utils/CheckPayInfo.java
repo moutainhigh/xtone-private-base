@@ -62,7 +62,7 @@ public class CheckPayInfo {
 		return jsonString;
 	}
 		
-	public static void UpdataInfo(String ownOrderId) {
+	public static void Updata1001(String ownOrderId,String notify_url) {
 		// TODO Auto-generated method stub
 		
 //	 	ForwardsyncBean forwardsyncBean = new ForwardsyncBean();
@@ -77,6 +77,7 @@ public class CheckPayInfo {
 			
 			if(!ps.execute()){
 				LOG.info("  1001     数据状态更新成功为1");
+				CheckPayInfo.InsertInfo(ownOrderId, notify_url);
 			}
 			
 		} catch (Exception e) {

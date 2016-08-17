@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
@@ -24,6 +25,7 @@ import com.thirdpay.domain.ForwardsyncBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.AES;
 import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.Forward;
 import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
@@ -31,9 +33,10 @@ import com.thirdpay.utils.payConstants;
 
 
 public class testInsert {
-
+	static Logger LOG = Logger.getLogger(testInsert.class);
 	public static void main(String[] args) throws Exception {
 
+	
 		// while(true){
 //		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
 		// }
@@ -193,14 +196,14 @@ public class testInsert {
 //		        System.out.println("解密后的字串是：" + DeString.length());
 		    
         //f17d2fb4eff547c8bebc1e7cc4dcd43c
-        HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
-		String notify_url = map.get("notify_url");
-		String encrypt = map.get("encrypt");
-		String encrypt_key = map.get("encrypt_key");
-		
-		        if("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length()==16){
-		        	System.out.println("jiami");
-		        }
+//        HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+//		String notify_url = map.get("notify_url");
+//		String encrypt = map.get("encrypt");
+//		String encrypt_key = map.get("encrypt_key");
+//		
+//		        if("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length()==16){
+//		        	System.out.println("jiami");
+//		        }
 //		String tes =null;
 //		tes.toString();
 //		String a   = tes.length()+"";
@@ -209,7 +212,55 @@ public class testInsert {
 //		}
 
 		        
-		        
+		//postPayment("http://pay.vpayplay.com:808/openapi/haotianpay", "1471366514906033671", "0","11cff472487b47069aa8ca239b42d9ad", "");
+  
+		
+		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+		String notify_url = map.get("notify_url");
+		String encrypt = map.get("encrypt");
+		String encrypt_key = map.get("encrypt_key");
+		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
 	}
+	/**
+	 * post转发数据
+	 * 
+	 * @param notify_url
+	 * @param ownOrderId
+	 * @throws Exception
+	 */
+	public static void postPayment(String notify_url, String ownOrderId, String encrypt, String appkey, String encrypt_key)
+			throws Exception {
 
+		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
+
+		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + " 加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
+
+		if ("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length() == 16) {
+			// 加密
+			forwardString = AES.Encrypt(forwardString, encrypt_key);
+			LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "加密后的字串是：" + forwardString);
+   
+		}
+
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("payment", forwardString));
+
+		String responseContent = HttpUtils.post(notify_url, formparams, ownOrderId);
+
+		// 判断返回状态
+		if (responseContent.equals("200")) {
+
+			// 更新0为
+			LOG.info(ownOrderId + "返回200 , 插入1002数据");
+			// 插入1002数据
+			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+
+		} else {
+			// 返回不为200重复发送
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			// 更新1001的下次转发时间为1分钟
+			CheckPayInfo.UpdataInfoTime(ownOrderId);
+		}
+
+	}
 }

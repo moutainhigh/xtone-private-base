@@ -172,11 +172,11 @@ public class ForwardsyncBean implements Runnable {
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());
 				ps.setString(m++, this.getOwn_orderId());
-				ps.setString(m++, this.getSync_status());
-				ps.setString(m++, this.getNext_time());
-				ps.setString(m++, this.getSendCount());
+				ps.setString(m++, "syncStatus="+this.getSync_status());
+				ps.setString(m++, "sendNextTime="+this.getNext_time());
+				ps.setString(m++, "sendCount="+this.getSendCount());
 				ps.setString(m++, this.getNotify_url());
-				ps.setString(m++, this.getSuccessCoditions());
+				ps.setString(m++, "SuccessCoditions="+this.getSuccessCoditions());
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
 
@@ -189,8 +189,9 @@ public class ForwardsyncBean implements Runnable {
 					String notify_url = this.getNotify_url();
 					String own_orderId = this.getOwn_orderId();
 					String encrypt_key = this.getEncrypt_key();
+					
 					if (!notify_url.equals("")) {
-						LOG.info("------------------------own_orderId = " + own_orderId + " -转发数据到指定url = "
+						LOG.info("---------appKey = "+this.getAppkey()+" --------------own_orderId = " + own_orderId + " -转发数据到指定url = "
 								+ this.getNotify_url());
 						postPayment(notify_url, own_orderId, this.getEncrypt(), this.getAppkey(), encrypt_key);
 
@@ -233,7 +234,7 @@ public class ForwardsyncBean implements Runnable {
 
 		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
 
-		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "--加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
+		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + " 加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
 
 		if ("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length() == 16) {
 			// 加密
@@ -251,9 +252,10 @@ public class ForwardsyncBean implements Runnable {
 		if (responseContent.equals("200")) {
 
 			// 更新0为
-			LOG.info(ownOrderId + "返回200 , 插入1002数据");
+			LOG.info(ownOrderId + "返回200 , 更新1001的status为 1 ");
 			// 插入1002数据
-			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+			CheckPayInfo.Updata1001(ownOrderId,notify_url);
+//			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
 
 		} else {
 			// 返回不为200重复发送
