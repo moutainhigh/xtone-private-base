@@ -152,13 +152,12 @@
 				<final.name>thirdpay.oss.vanggame.com</final.name>
 
 				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
-			<!-- 	<ftp.server.id>ossServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.243.171/pub/</ftp.to.url> -->
+				<!-- <ftp.server.id>ossServer</ftp.server.id> <ftp.to.url>ftp://121.40.243.171/pub/</ftp.to.url> -->
 			</properties>
 
 		</profile>
 
-	<profile>
+		<profile>
 			<id>test</id>
 
 			<properties>
