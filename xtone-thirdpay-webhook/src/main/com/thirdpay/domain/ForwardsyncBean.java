@@ -37,6 +37,7 @@ public class ForwardsyncBean implements Runnable {
 	private String id_type;
 	private String encrypt;
 	private String encrypt_key;
+	private String forwardString;
 
 	public Long getId() {
 		return id;
@@ -134,9 +135,17 @@ public class ForwardsyncBean implements Runnable {
 		this.encrypt_key = encrypt_key;
 	}
 
+	public String getForwardString() {
+		return forwardString;
+	}
+
+	public void setForwardString(String forwardString) {
+		this.forwardString = forwardString;
+	}
+
 	public ForwardsyncBean(int status, String own_orderId, String sync_status, String next_time, String sendCount,
 			String notify_url, String successCoditions, String appkey, String id_type, String encrypt,
-			String encrypt_key) {
+			String encrypt_key, String forwardString) {
 		super();
 		this.status = status;
 		this.own_orderId = own_orderId;
@@ -149,6 +158,7 @@ public class ForwardsyncBean implements Runnable {
 		this.id_type = id_type;
 		this.encrypt = encrypt;
 		this.encrypt_key = encrypt_key;
+		this.forwardString = forwardString;
 	}
 
 	@Override
@@ -166,19 +176,20 @@ public class ForwardsyncBean implements Runnable {
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 				ps = con.prepareStatement(
-						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08) values (?,?,?,?,?,?,?,?,?,?)");
+						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,para09) values (?,?,?,?,?,?,?,?,?,?,?)");
 
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getStatus());
 				ps.setString(m++, this.getOwn_orderId());
-				ps.setString(m++, "syncStatus="+this.getSync_status());
-				ps.setString(m++, "sendNextTime="+this.getNext_time());
-				ps.setString(m++, "sendCount="+this.getSendCount());
+				ps.setString(m++, this.getSync_status());
+				ps.setString(m++, "sendNextTime=" + this.getNext_time());
+				ps.setString(m++, "sendCount=" + this.getSendCount());
 				ps.setString(m++, this.getNotify_url());
-				ps.setString(m++, "SuccessCoditions="+this.getSuccessCoditions());
+				ps.setString(m++, "SuccessCoditions=" + this.getSuccessCoditions());
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
+				ps.setString(m++, this.getForwardString());
 
 				int i = ps.executeUpdate();
 
@@ -189,11 +200,11 @@ public class ForwardsyncBean implements Runnable {
 					String notify_url = this.getNotify_url();
 					String own_orderId = this.getOwn_orderId();
 					String encrypt_key = this.getEncrypt_key();
-					
+					String forwardString = this.getForwardString();
 					if (!notify_url.equals("")) {
-						LOG.info("---------appKey = "+this.getAppkey()+" --------------own_orderId = " + own_orderId + " -转发数据到指定url = "
-								+ this.getNotify_url());
-						postPayment(notify_url, own_orderId, this.getEncrypt(), this.getAppkey(), encrypt_key);
+						LOG.info("---------appKey = " + this.getAppkey() + " --------------own_orderId = " + own_orderId
+								+ " -转发数据到指定url = " + this.getNotify_url());
+						postPayment(notify_url, own_orderId, this.getEncrypt(), this.getAppkey(), encrypt_key,forwardString);
 
 					}
 
@@ -229,39 +240,38 @@ public class ForwardsyncBean implements Runnable {
 	 * @param ownOrderId
 	 * @throws Exception
 	 */
-	public void postPayment(String notify_url, String ownOrderId, String encrypt, String appkey, String encrypt_key)
+	public void postPayment(String notify_url, String ownOrderId, String encrypt, String appkey, String encrypt_key,String forwardString)
 			throws Exception {
-
-		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
-
-		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + " 加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
+		String Notencrypt_forwardString = forwardString;//未加密的forwardString
+		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + " 加密前的字串是：" + forwardString + " 加密的key是: "
+				+ encrypt_key);
 
 		if ("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length() == 16) {
 			// 加密
 			forwardString = AES.Encrypt(forwardString, encrypt_key);
 			LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "加密后的字串是：" + forwardString);
-   
+
 		}
 
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));
 
+		//返回的数据responseContent
 		String responseContent = HttpUtils.post(notify_url, formparams, ownOrderId);
 
 		// 判断返回状态
 		if (responseContent.equals("200")) {
 
-			// 更新0为
-			LOG.info(ownOrderId + "返回200 , 更新1001的status为 1 ");
-			// 插入1002数据
-			CheckPayInfo.Updata1001(ownOrderId,notify_url);
-//			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+			LOG.info(ownOrderId + "返回200 , 更新1001的status为 syncSuccess ");
+			// 更新1001的状态并插入1002数据
+			CheckPayInfo.Updata1001(ownOrderId, notify_url,Notencrypt_forwardString);
+			// CheckPayInfo.InsertInfo(ownOrderId, notify_url);
 
 		} else {
 			// 返回不为200重复发送
 			LOG.info(ownOrderId + "返回数据不为200 失败 ");
 			// 更新1001的下次转发时间为1分钟
-			CheckPayInfo.UpdataInfoTime(ownOrderId);
+			CheckPayInfo.Updata1001Time(ownOrderId,responseContent);
 		}
 
 	}

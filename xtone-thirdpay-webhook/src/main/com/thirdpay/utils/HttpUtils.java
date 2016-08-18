@@ -59,7 +59,7 @@ public class HttpUtils {
 		} catch (IOException e) {
 //			e.printStackTrace();
 			//LOG.info("通知地址连接异常,30秒后再次转发...");
-			CheckPayInfo.UpdataInfoTime(ownOrderId);
+			CheckPayInfo.Updata1001Time(ownOrderId,responseContent);
 			
 		} finally {
 			// 关闭连接,释放资源

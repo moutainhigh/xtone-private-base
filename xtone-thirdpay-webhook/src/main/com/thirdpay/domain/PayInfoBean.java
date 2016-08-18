@@ -7,12 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
@@ -201,9 +198,6 @@ public class PayInfoBean implements Runnable {
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
-//					CpInfoBean	cpInfoBean = CheckCPInfo.CheckInfo(this.getAppKey());
-//					String notify_url = cpInfoBean.getNotify_url();// 通过appkey得到转发url
-//					String encrypt = cpInfoBean.getEncrypt();
 					
 					HashMap<String, String > map = CheckCPInfo.CheckInfoMap(this.getAppKey());
 					String notify_url = map.get("notify_url");
@@ -224,10 +218,10 @@ public class PayInfoBean implements Runnable {
 					}
 					
 					if(! "".equals(notify_url) && notify_url != null){
-						
+						String forwardString = CheckPayInfo.CheckInfo(this.getOwnOrderId());
 						// 转发插入日志表
-						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "0", "0", "0",
-								notify_url, "200", this.getAppKey(), "Id_type",encrypt,encrypt_key));
+						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "notsync", "0", "0",
+								notify_url, "200", this.getAppKey(), "Id_type",encrypt,encrypt_key,forwardString));
 					}
 					
 					// 转发数据到Wj_url
@@ -344,27 +338,4 @@ public class PayInfoBean implements Runnable {
 		}
 	}
 	
-	public void postPayment(String notify_url, String ownOrderId){
-		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
-
-		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
-		formparams.add(new BasicNameValuePair("payment", forwardString));
-
-		String responseContent = HttpUtils.post(notify_url, formparams,ownOrderId);
-
-		// 判断返回状态
-		if (responseContent.equals("200")) {
-
-			// 更新0为
-			LOG.info(ownOrderId + "返回200 , 更新数据中...");
-			// 插入1002数据
-			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
-
-		} else {
-			//返回不为200重复发送
-			LOG.info(ownOrderId + "返回数据不为200 失败 ");
-			//更新1001的下次转发时间为1分钟
-			CheckPayInfo.UpdataInfoTime(ownOrderId);
-		}
-	}
 }

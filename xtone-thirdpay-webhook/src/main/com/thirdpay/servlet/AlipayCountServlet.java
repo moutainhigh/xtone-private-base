@@ -116,10 +116,6 @@ public class AlipayCountServlet extends HttpServlet {
 		if (cpOrderId == null) {
 			cpOrderId = json.getString("c");
 		}
-		
-//		System.out.println("xx_notifyData = " + xx_notifyData + "\n" + "payChannel = " + payChannel + ",appKey = "
-//				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
-//				+ ",cpOrderId = " + cpOrderId);
 
 		// wait_buyer_pay是创建订单成功的时候发送的
 		// trade_success是交易支付成功的时候发送的
@@ -196,8 +192,6 @@ public class AlipayCountServlet extends HttpServlet {
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
 
-//		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
-
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 
 		while (iterator.hasNext()) {
@@ -216,19 +210,6 @@ public class AlipayCountServlet extends HttpServlet {
 			}
 
 		}
-
-//		System.out.println("payInfo = " + payInfo);
-//		StringBuilder builder = new StringBuilder(payInfo);
-//		builder.deleteCharAt(builder.length() - 1);
-//		builder.insert(0, "{");
-//		builder.append("}");
-//		System.out.println("builder = " + builder);
-//		String builderjson = builder.toString();
-//		formparams.add(new BasicNameValuePair("payment", builderjson));
-
-		// 转发地址从数据库得到
-		//String other_url = "http://chendefeng.f3322.net:54401/PopoBird/PayCallbackService";
-		//post(other_url, formparams); // 转发 发送数据
 
 		return payInfo;
 	}

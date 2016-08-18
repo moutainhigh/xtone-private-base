@@ -253,13 +253,13 @@ public class testInsert {
 			// 更新0为
 			LOG.info(ownOrderId + "返回200 , 插入1002数据");
 			// 插入1002数据
-			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+			CheckPayInfo.Insert1002(ownOrderId, notify_url,forwardString);
 
 		} else {
 			// 返回不为200重复发送
 			LOG.info(ownOrderId + "返回数据不为200 失败 ");
 			// 更新1001的下次转发时间为1分钟
-			CheckPayInfo.UpdataInfoTime(ownOrderId);
+			CheckPayInfo.Updata1001Time(ownOrderId,responseContent);
 		}
 
 	}

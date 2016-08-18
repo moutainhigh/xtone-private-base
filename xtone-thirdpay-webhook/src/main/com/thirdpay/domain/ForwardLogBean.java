@@ -38,7 +38,7 @@ public class ForwardLogBean implements Runnable {
 	private String task_id;
 	private String key_type;
 	private String id_type;
-
+	private String forwardString;
 	public Long getId() {
 		return id;
 	}
@@ -175,16 +175,25 @@ public class ForwardLogBean implements Runnable {
 		this.id_type = id_type;
 	}
 
+	
+	
+	public String getForwardString() {
+		return forwardString;
+	}
+
+	public void setForwardString(String forwardString) {
+		this.forwardString = forwardString;
+	}
+
 	public ForwardLogBean(int status, String ownOrderId, String notify_url, String successCoditions,
 			String result_status, String send_time, String rsp_time, String send_url, String send_header, String body,
-			String rsp_status, String rsp_header, String rsp_body, String task_id, String key_type, String id_type) {
+			String rsp_status, String rsp_header, String rsp_body, String task_id, String key_type, String id_type,String forwardString) {
 		super();
 		this.status = status;
 		this.ownOrderId = ownOrderId;
 		this.notify_url = notify_url;
 		this.successCoditions = successCoditions;
 		this.result_status = result_status;
-		
 		this.send_time = send_time;
 		this.rsp_time = rsp_time;
 		this.send_url = send_url;
@@ -196,6 +205,7 @@ public class ForwardLogBean implements Runnable {
 		this.task_id = task_id;
 		this.key_type = key_type;
 		this.id_type = id_type;
+		this.forwardString =forwardString;
 	}
 
 	@Override
@@ -215,7 +225,7 @@ public class ForwardLogBean implements Runnable {
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); //
 				// DbKey选择使用config.properties
 				ps = con.prepareStatement(
-						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,para09,para10,para11,para12,para13,para14) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,para09,para10,para11,para12,para13,para14,para15) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 				int m = 1;
 				ps.setLong(m++, this.getId());
@@ -234,7 +244,8 @@ public class ForwardLogBean implements Runnable {
 				ps.setString(m++, this.getTask_id());
 				ps.setString(m++, this.getKey_type());
 				ps.setString(m++, this.getId_type());
-
+				ps.setString(m++, this.getForwardString());
+				
 				if (ps.executeUpdate() == 1) {
 					//插入1002成功
 					LOG.info(this.getOwnOrderId() + " 数据1002插入成功.. ");
