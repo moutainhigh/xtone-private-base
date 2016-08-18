@@ -13,14 +13,11 @@
 
 	<build>
 		<finalName>${final.name}</finalName>
-		<sourceDirectory>src/main/java</sourceDirectory>
+		<sourceDirectory>src/main</sourceDirectory>
 		<resources>
 			<!-- must sequence like below -->
 			<resource>
-				<directory>${runtime.env}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
+				<directory>/src/main</directory>
 			</resource>
 		</resources>
 
