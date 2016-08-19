@@ -38,7 +38,6 @@ public class ForwardsyncBean implements Runnable {
 	private String encrypt;
 	private String encrypt_key;
 	private String forwardString;
-
 	public Long getId() {
 		return id;
 	}
@@ -159,6 +158,7 @@ public class ForwardsyncBean implements Runnable {
 		this.encrypt = encrypt;
 		this.encrypt_key = encrypt_key;
 		this.forwardString = forwardString;
+		
 	}
 
 	@Override
@@ -176,7 +176,7 @@ public class ForwardsyncBean implements Runnable {
 				// DbKey 选择使用的数据库
 				con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 				ps = con.prepareStatement(
-						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,para09) values (?,?,?,?,?,?,?,?,?,?,?)");
+						"insert into `log_async_generals` (id,logId,para01,para02,para03,para04,para05,para06,para07,para08,para09,para10,para11) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 
 				int m = 1;
 				ps.setLong(m++, this.getId());
@@ -190,7 +190,8 @@ public class ForwardsyncBean implements Runnable {
 				ps.setString(m++, this.getAppkey());
 				ps.setString(m++, this.getId_type());
 				ps.setString(m++, this.getForwardString());
-
+				ps.setString(m++,"encrypt="+this.getEncrypt() );
+				ps.setString(m++,"encrypt_key="+this.getEncrypt_key());
 				int i = ps.executeUpdate();
 
 				if ((i + "").equals("1")) {

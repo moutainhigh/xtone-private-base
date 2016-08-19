@@ -220,6 +220,17 @@ public class testInsert {
 		String encrypt = map.get("encrypt");
 		String encrypt_key = map.get("encrypt_key");
 		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+		
+		
+		
+		int robbit = 100;
+		int money = 100;
+		int x ;
+		int y;
+		
+		
+		
+		
 	}
 	/**
 	 * post转发数据

@@ -20,6 +20,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -42,6 +43,8 @@ import com.thirdpay.utils.WeixinHttpsUtils;
  */
 @WebServlet("/WXH5Servlet")
 public class WXH5Servlet extends HttpServlet {
+	
+	private static final Logger LOG = Logger.getLogger(WXH5Servlet.class);
 	private static final long serialVersionUID = 1L;
 
 	public static Map<String, String> orderResult; // 用来存储订单的交易状态(key:订单号，value:状态(0:未支付，1：已支付))
@@ -150,20 +153,45 @@ public class WXH5Servlet extends HttpServlet {
 							if (string != null) {
 
 								
+//								StringBuilder builder = new StringBuilder();
+//								String weixin=WeixinHttpsUtils.getWeixin(string);
+//								builder.append("{");
+//								builder.append("\"wixin\":" + "\"" + weixin + "\",");
+//
+//								
+//                        		String myhttps=WeixinHttpsUtils.getWeixinHttps(string);
+//                        		builder.append("\"https\":"+"\""+myhttps+"\"");
+//                         		
+//                        		builder.append("}");
+//                        		LOG.debug(builder.toString());
+//                        		resp.getWriter().write(builder.toString());
+//                        		
+//                        		return ;
+
+
 								StringBuilder builder = new StringBuilder();
-								String weixin=WeixinHttpsUtils.getWeixin(string);
+								String weixin = WeixinHttpsUtils.getWeixin(string);
+								String myhttps = WeixinHttpsUtils.getWeixinHttps(string);
+
+								if (weixin == null) {
+									String checkWeb = WeixinHttpsUtils.getCheckmWebHttps(string);
+									String nextPage = HttpUtils.getWithHeaders(checkWeb,pay_info);
+									LOG.debug(nextPage);
+									weixin = WeixinHttpsUtils.getWeixin(nextPage);
+									LOG.debug(weixin);
+								}
 								builder.append("{");
 								builder.append("\"wixin\":" + "\"" + weixin + "\",");
-
 								
-                        		String myhttps=WeixinHttpsUtils.getWeixinHttps(string);
-                        		builder.append("\"https\":"+"\""+myhttps+"\"");
-                         		
-                        		builder.append("}");
-                        		
-                        		resp.getWriter().write(builder.toString());
-                        		
-                        		return ;
+								builder.append("\"https\":" + "\"" + myhttps + "\"");
+								
+								builder.append("}");
+
+								LOG.debug(builder.toString());
+								resp.getWriter().write(builder.toString());
+
+								return;
+
 							
 							}
 						} else {

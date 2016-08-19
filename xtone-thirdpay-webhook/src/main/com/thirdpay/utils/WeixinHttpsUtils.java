@@ -31,4 +31,17 @@ public class WeixinHttpsUtils {
         } 
         return null;
 	}
+	
+	public static String getCheckmWebHttps(String html){
+		String regex = "(http:|https:)//[^[A-Za-z0-9\\._\\?%&+\\-=/#]]*"; 
+		Pattern pattern = Pattern.compile(regex); 
+		Matcher matcher = pattern.matcher(html); 
+		while (matcher.find()) { 
+			String urlStr=matcher.group();
+			if(urlStr.contains("checkmweb?")){
+				return urlStr;
+			}
+		} 
+		return null;
+	}
 }

@@ -153,7 +153,7 @@ public class CheckPayInfo {
 			
 			//更新查询次数
 			ps = con.prepareStatement(
-					"UPDATE `log_async_generals` SET para03 = " + "'"+ next_forwardTime +"'" + ",para04 = "+ "'"+count+"'"+ ",para02 = 'syncFail'"+ ",para10 = "+"'"+responseContent+"'"+" WHERE para01 = " + ownOrderId +" AND logId = 1001");
+					"UPDATE `log_async_generals` SET para03 = " + "'"+ next_forwardTime +"'" + ",para04 = "+ "'"+count+"'"+ ",para02 = 'syncFail'"+ ",para12 = "+"'"+responseContent+"'"+" WHERE para01 = " + ownOrderId +" AND logId = 1001");
 			if (!ps.execute()) {
 				LOG.info(ownOrderId + " 距离下次转发时间更新为  " + next_forwardTime + "" +"s" + " 已处理次数为  " + count );
 			}
