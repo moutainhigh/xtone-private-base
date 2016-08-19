@@ -19,9 +19,7 @@ import com.thirdpay.main.ServiceScan;
 public class Forward {
 	private static final Logger LOG = Logger.getLogger(ServiceScan.class);
 
-	public static void forward(String notify_url, String ownOrderId) {
-		
-		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
+	public static void forward(String notify_url, String ownOrderId,String forwardString) {
 
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));

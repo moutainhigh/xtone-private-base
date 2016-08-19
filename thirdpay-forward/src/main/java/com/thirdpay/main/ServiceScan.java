@@ -24,7 +24,7 @@ public class ServiceScan {
 	}
 
 	public void scan() {
-		String sql = "select * from `log_async_generals` where logId = 1001 and para02 = 0";
+		String sql = "select * from `log_async_generals` where logId = 1001 and para02 = 'syncFail'";
 		PreparedStatement ps = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -39,6 +39,7 @@ public class ServiceScan {
 				
 				String notify_url = rs.getString("para05"); // 回调地址
 				String ownOrderId = rs.getString("para01"); // 自己生成的订单号
+				String forwardString = rs.getString("para09");
 				// 开始转发
 				if (notify_url != null && ownOrderId != null) {
 					
@@ -47,7 +48,7 @@ public class ServiceScan {
 						public void run() {
 							LOG.info(ownOrderId + " 数据开始转发,地址为   "+notify_url);
 							
-								Forward.forward(notify_url, ownOrderId);
+								Forward.forward(notify_url, ownOrderId,forwardString);
 							
 						}
 					}).start();
