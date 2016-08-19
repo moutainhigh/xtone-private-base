@@ -19,7 +19,7 @@ import com.thirdpay.main.ServiceScan;
 public class Forward {
 	private static final Logger LOG = Logger.getLogger(ServiceScan.class);
 
-	public static void forward(String notify_url, String ownOrderId,String forwardString) {
+	public static void forward(String notify_url, String ownOrderId,String forwardString,String encrypt,String encrypt_key) {
 
 		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 		formparams.add(new BasicNameValuePair("payment", forwardString));
@@ -32,13 +32,13 @@ public class Forward {
 			// 更新0为
 			LOG.info(ownOrderId + "返回200 , 更新数据中...");
 			// 插入1002数据
-			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
+//			CheckPayInfo.InsertInfo(ownOrderId, notify_url);
 
 		} else {
 			//返回不为200重复发送
 			LOG.info(ownOrderId + "返回数据不为200 失败 ");
 			//更新1001的下次转发时间为1分钟
-			CheckPayInfo.UpdataInfoTime(ownOrderId);
+//			CheckPayInfo.UpdataInfoTime(ownOrderId);
 		}
 	}
 }

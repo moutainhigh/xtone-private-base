@@ -46,7 +46,7 @@ public class maintest {
 //		DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //		System.out.println(dateFormat2);
 		
-		CheckPayInfo.UpdataInfoTime("1462939173346035157");
+//		CheckPayInfo.UpdataInfoTime("1462939173346035157");
 	}
 
 }
