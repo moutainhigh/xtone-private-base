@@ -180,9 +180,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('#table_id').DataTable({
-		        "aaSorting": [
-		                      [ 0, "desc" ]
-		                  ]
+		        "aaSorting": [[ 0, "desc" ]] 
+			     ,"aLengthMenu": [[100, 50, 25, 10], [100, 50, 25, 10]]
+			    /* ,"iDisplayLength":100  */
 		              } );
 		});
 		
