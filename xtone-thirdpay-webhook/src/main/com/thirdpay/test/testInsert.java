@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.log4j.Logger;
 import org.common.util.ConfigManager;
 import org.common.util.ConnectionService;
 import org.common.util.GenerateIdService;
@@ -22,7 +23,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.ForwardsyncBean;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.AES;
 import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.Forward;
 import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
@@ -30,11 +33,12 @@ import com.thirdpay.utils.payConstants;
 
 
 public class testInsert {
+	static Logger LOG = Logger.getLogger(testInsert.class);
+	public static void main(String[] args) throws Exception {
 
-	public static void main(String[] args) {
-
+	
 		// while(true){
-		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
+//		 ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl", "cbl", "cbl", "cbl", "cbl","cbl", "cbl", "cbl","cbl", 0));
 		// }
 
 		// ThreadPool.mThreadPool.execute(new PayInfoBean(0, "cbl", "cbl",
@@ -140,7 +144,134 @@ public class testInsert {
 		// 转发插入日志表
 //		ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, "orderid", "0", "0", "0",
 //				"notify_url", "200", "cblappkey", "appkey"));
+		
+//		HashMap<String, String > map = new HashMap<String, String>();
+//		  map.put("username", "zhangsan");
+//		  map.put("age", "24");
+//		  map.put("sex", "男");
+//		String a = JSON.toJSONString(map);
+//		System.out.println(a);
+		//f17d2fb4eff547c8bebc1e7cc4dcd43c
+		
+		
+		
+//        String cSrc = "12345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456www.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.so";
+//        System.out.println(cSrc.length());
+//        String enString = "";
+//		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("f17d2fb4eff547c8bebc1e7cc4dcd43c");
+//		String notify_url = map.get("notify_url");
+//		String encrypt = map.get("encrypt");
+//		String encrypt_key = map.get("encrypt_key");
+//		
+//		System.out.println(notify_url+"\n" +encrypt+"\n"+encrypt_key);
+//		
+//		
+//		if("1".equals(encrypt) && ! "".equals(encrypt_key)){
+//			 // 加密
+//			enString = AES.Encrypt(cSrc, encrypt_key);
+//	        System.out.println("加密后的字串是：" + enString);
+//		//	LOG.info("appkey = "+appkey + " ownOrderId = "+ ownOrderId + "加密后的字串是：" + forwardString);
+//			
+//		}
+//        // 解密
+//        String DeString = AES.Decrypt(enString, encrypt_key);
+//        System.out.println("解密后的字串是：" + DeString);
+//        System.out.println("解密后的字串是：" + DeString.length());
+    	
+        
+        
+		        // * 此处使用AES-128-ECB加密模式，key需要为16位。
+		         
+//		        String cKey = "6010401031024102";
+//		        // 需要加密的字串
+//		        String cSrc = "12345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456123456789012345612345678901234561234567890123456www.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowwww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.sowww.gowhere.so";
+//		        System.out.println(cSrc);
+//		        System.out.println(cSrc.length());
+//		        // 加密
+//		        String enString = AES.Encrypt(cSrc, cKey);
+//		        System.out.println("加密后的字串是：" + enString);
+//		        // 解密
+//		        String DeString = AES.Decrypt(enString, cKey);
+//		        System.out.println("解密后的字串是：" + DeString);
+//		        System.out.println("解密后的字串是：" + DeString.length());
+		    
+        //f17d2fb4eff547c8bebc1e7cc4dcd43c
+//        HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+//		String notify_url = map.get("notify_url");
+//		String encrypt = map.get("encrypt");
+//		String encrypt_key = map.get("encrypt_key");
+//		
+//		        if("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length()==16){
+//		        	System.out.println("jiami");
+//		        }
+//		String tes =null;
+//		tes.toString();
+//		String a   = tes.length()+"";
+//		if( "16"== tes.length()+""){
+//			System.out.println(tes);
+//		}
+
+		        
+		//postPayment("http://pay.vpayplay.com:808/openapi/haotianpay", "1471366514906033671", "0","11cff472487b47069aa8ca239b42d9ad", "");
+  
+		
+		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+		String notify_url = map.get("notify_url");
+		String encrypt = map.get("encrypt");
+		String encrypt_key = map.get("encrypt_key");
+		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+		
+		
+		
+		int robbit = 100;
+		int money = 100;
+		int x ;
+		int y;
+		
+		
+		
+		
+	}
+	/**
+	 * post转发数据
+	 * 
+	 * @param notify_url
+	 * @param ownOrderId
+	 * @throws Exception
+	 */
+	public static void postPayment(String notify_url, String ownOrderId, String encrypt, String appkey, String encrypt_key)
+			throws Exception {
+
+		String forwardString = CheckPayInfo.CheckInfo(ownOrderId);
+
+		LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + " 加密前的字串是：" + forwardString + " 加密的key是: "+encrypt_key);
+
+		if ("1".equals(encrypt) && encrypt_key != null && !"".equals(encrypt_key) && encrypt_key.length() == 16) {
+			// 加密
+			forwardString = AES.Encrypt(forwardString, encrypt_key);
+			LOG.info("appkey = " + appkey + " ownOrderId = " + ownOrderId + "加密后的字串是：" + forwardString);
+   
+		}
+
+		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
+		formparams.add(new BasicNameValuePair("payment", forwardString));
+
+		String responseContent = HttpUtils.post(notify_url, formparams, ownOrderId);
+
+		// 判断返回状态
+		if (responseContent.equals("200")) {
+
+			// 更新0为
+			LOG.info(ownOrderId + "返回200 , 插入1002数据");
+			// 插入1002数据
+			CheckPayInfo.Insert1002(ownOrderId, notify_url,forwardString);
+
+		} else {
+			// 返回不为200重复发送
+			LOG.info(ownOrderId + "返回数据不为200 失败 ");
+			// 更新1001的下次转发时间为1分钟
+			CheckPayInfo.Updata1001Time(ownOrderId,responseContent);
+		}
 
 	}
-
 }

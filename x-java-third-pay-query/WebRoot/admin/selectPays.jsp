@@ -1,4 +1,4 @@
-<%@page import="org.demo.info.Apps"%>
+﻿<%@page import="org.demo.info.Apps"%>
 <%@page import="org.demo.utils.StringUtil"%>
 <%@page import="org.demo.info.PayRsp"%>
 <%@page import="com.google.gson.LongSerializationPolicy"%>
@@ -110,7 +110,10 @@
  	 		if(!payrsp.getChannel().equals("")){
  	 			try{
                   for(Pays pays3:list){
-	 				if(!pays3.getReleaseChannel().substring(0, payrsp.getChannel().length()+1). equalsIgnoreCase(payrsp.getChannel())){
+
+ 					
+	 				if(!pays3.getReleaseChannel().substring(0, payrsp.getChannel().length()). equalsIgnoreCase(payrsp.getChannel())){
+
 	 					
 	 					list2.add(pays3);
 	 				}
@@ -209,7 +212,7 @@
 	    }
 		paysdata.setData(list);
 		String rsp = gson.toJson(paysdata);
-		
+		System.out.println("测试"+rsp);
 		out.print(rsp);
 	}catch (Exception e) {
 		// TODO Auto-generated catch block

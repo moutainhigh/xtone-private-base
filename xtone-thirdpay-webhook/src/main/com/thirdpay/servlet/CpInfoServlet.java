@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,9 +48,9 @@ public class CpInfoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String appKey = request.getParameter("Appkey");
-
 		if (appKey != null) {
-			CheckInfo(appKey, response); // 查询数据
+//			CheckInfo(appKey, response); // 查询数据
+			CheckInfoMap(appKey, response); // 查询cpinfo新版
 		} else {
 			response.getWriter().append("fail");
 		}
@@ -90,5 +91,35 @@ public class CpInfoServlet extends HttpServlet {
 		}
 
 	}
+	
+	
+	private void CheckInfoMap(String appKey, HttpServletResponse response) {
+//		CpInfoBean cpInfoBean = CheckCPInfo.CheckInfo(appKey); //得到cpInfobean对象
+//		String key = cpInfoBean.getAppkey();
+		
+		HashMap<String, String > map = CheckCPInfo.CheckInfoMap(appKey);
+		String key = map.get("appKey");
 
+		if (key == null) {
+			try {
+				response.getWriter().append("-1");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+//			String jsonString = JSON.toJSONString(cpInfoBean);
+			String jsonString = JSON.toJSONString(map);
+			LOG.info("open jsonString = " + jsonString);
+			LOG.info("-------------------------------------");
+
+			try {
+				response.getWriter().append(jsonString);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} // 回调json数据格式的数据
+		}
+
+	}
 }

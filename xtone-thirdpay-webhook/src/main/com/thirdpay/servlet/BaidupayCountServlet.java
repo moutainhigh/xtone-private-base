@@ -116,9 +116,6 @@ public class BaidupayCountServlet extends HttpServlet {
 			cpOrderId = json.getString("c");
 		}
 
-//		System.out.println("xx_notifyData = " + builder.toString() + "\n" + "payChannel = " + payChannel + ",appKey = "
-//				+ appKey + ",payChannelOrderId = " + payChannelOrderId + ",price = " + price + ",Ip = " + ip
-//				+ ",cpOrderId = " + cpOrderId);
 
 		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
@@ -143,7 +140,6 @@ public class BaidupayCountServlet extends HttpServlet {
 		String payInfo = "";
 		// 测试用数据
 		Map<String, String[]> map = request.getParameterMap();
-//		List<BasicNameValuePair> formparams = new ArrayList<BasicNameValuePair>();
 
 		Iterator<Entry<String, String[]>> iterator = map.entrySet().iterator();
 		while (iterator.hasNext()) {
@@ -155,7 +151,6 @@ public class BaidupayCountServlet extends HttpServlet {
 			// logger.info(key);
 
 			for (int i = 0; i < value.length; i++) {
-				// System.out.println(value[i]);
 
 				payInfo += key + "=" + value[i] + ";";
 
@@ -168,9 +163,6 @@ public class BaidupayCountServlet extends HttpServlet {
 
 		}
 
-		// 临时url
-		// String other_url = "";
-		// post(other_url, formparams);
 
 		return payInfo;
 	}

@@ -40,12 +40,13 @@ public class TestPostServlet extends HttpServlet {
 		
 		//得到payment
 		String payment =  request.getParameter("payment");
+		
 		//解密ckey
 		String ckey="6010401031024102";
 		// 解密
 		try {
 			  String DeString= Decrypt(payment, ckey);
-			  LOG.info("解密后的字串是: " +DeString );
+			  LOG.info("解密使用的key是  "+ckey+" 解密后的字串是: " +DeString );
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

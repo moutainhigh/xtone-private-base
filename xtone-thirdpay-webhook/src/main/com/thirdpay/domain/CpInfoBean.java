@@ -11,7 +11,7 @@ public class CpInfoBean {
 	String notify_url;
 	String wxwap;
 	String encrypt;
-	
+	String wxwaph5;
 	String webOrderid; // 订单号
 
 	public String getWxwap() {
@@ -102,4 +102,13 @@ public class CpInfoBean {
 		this.encrypt = encrypt;
 	}
 
+	public String getWxwaph5() {
+		return wxwaph5;
+	}
+
+	public void setWxwaph5(String wxwaph5) {
+		this.wxwaph5 = wxwaph5;
+	}
+
+	
 }

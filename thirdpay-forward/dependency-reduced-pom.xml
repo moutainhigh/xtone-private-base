@@ -5,13 +5,10 @@
   <artifactId>thirdpay-forward</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <build>
-    <sourceDirectory>src/main/java</sourceDirectory>
+    <sourceDirectory>src/main</sourceDirectory>
     <resources>
       <resource>
-        <directory>${runtime.env}/src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>${basedir}/src/main/resources</directory>
+        <directory>/src/main</directory>
       </resource>
     </resources>
     <finalName>${final.name}</finalName>
