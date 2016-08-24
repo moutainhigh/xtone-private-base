@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 import org.common.util.ConnectionService;
 import org.demo.info.Apps;
 import org.demo.info.Daily;
@@ -21,6 +22,8 @@ import org.demo.utils.ConnectionServiceConfig;
 import org.demo.utils.StringUtil;
 
 public class UserService {
+	
+	static final private Logger LOG = Logger.getLogger(UserService.class);
 
 	private static Random rnd = new Random();
 
@@ -490,9 +493,12 @@ public class UserService {
 		ResultSet rs = null;
 		try {
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-			String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT payChannel) AS payChannel from log_success_pays where appKey='"
-					+ appKey + "' group by date ORDER BY date DESC";
+//			String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT payChannel) AS payChannel from log_success_pays where appKey='"
+//					+ appKey + "' group by date ORDER BY date DESC";
+			String sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,payChannel from log_success_pays where appKey=? group by date,payChannel ORDER BY date DESC LIMIT 1000";			
 			ps = con.prepareStatement(sql);
+			int m = 1;
+			ps.setString(m++, appKey);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				daily = new Daily();

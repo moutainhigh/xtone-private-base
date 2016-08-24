@@ -6,6 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="java.util.Calendar"%>
+<%@page import="org.apache.log4j.Logger"%>
 <%@page import="java.util.TimeZone"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -13,6 +14,7 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.common.util.ConfigManager"%>
 <%
+    Logger LOG = Logger.getLogger(this.getClass());
     String name = ConfigManager.getConfigData("servicename");
 	String appKey = request.getParameter("appkey");
 %>
@@ -122,7 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<thead>
 			<tr>
 				<th>日期</th>
-				<th>channel渠道</th>
+				<th>支付通道</th>
 				<th>总额（元）</th>
 			</tr>
 		</thead>
@@ -131,15 +133,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			List<Daily> listDaily=UserService.getChannelByAppkeys(appKey);
 			float sum=0;
 			String appKeys[]=null;
+			String channel; //channel
 			for(Daily daily:listDaily)
 			{
 				sum+=daily.getPrice();
+				channel = daily.getChannel();
+				String [] csp=channel.split(",");
+				for(int i=0; i<csp.length;i++) {
 				%>
-			<tr>
-				<td><%=daily.getId()%></td>
-				<td><%=daily.getChannel()%></td>
-				<td><%=daily.getPrice() / 100%></td>
-			</tr>
+					<tr>
+						<td><%=daily.getId()%></td>
+						<%-- <td><%=daily.getChannel()%></td> --%>
+						<td><%=csp[i]%></td>
+						<td><%=daily.getPrice() / 100%></td>
+					</tr>
+				<%
+				}
+				%>	
+					
 			<%
 			}
 			%>
@@ -169,9 +180,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript">
 		$(document).ready(function() {
 			$('#table_id').DataTable({
-		        "aaSorting": [
-		                      [ 0, "desc" ]
-		                  ]
+		        "aaSorting": [[ 0, "desc"]] 			    
+			     ,"aLengthMenu": [[100, 50, 25, 10], [100, 50, 25, 10]]
+		        /* ,"iDisplayLength":100  */
 		              } );
 		});
 		
