@@ -94,8 +94,6 @@ public class CpInfoServlet extends HttpServlet {
 	
 	
 	private void CheckInfoMap(String appKey, HttpServletResponse response) {
-//		CpInfoBean cpInfoBean = CheckCPInfo.CheckInfo(appKey); //得到cpInfobean对象
-//		String key = cpInfoBean.getAppkey();
 		
 		HashMap<String, String > map = CheckCPInfo.CheckInfoMap(appKey);
 		String key = map.get("appKey");
@@ -108,7 +106,6 @@ public class CpInfoServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-//			String jsonString = JSON.toJSONString(cpInfoBean);
 			String jsonString = JSON.toJSONString(map);
 			LOG.info("open jsonString = " + jsonString);
 			LOG.info("-------------------------------------");

@@ -26,7 +26,7 @@ public class postDemo {
 		
 		
 		String notify_url = "http://pay.vpayplay.com:808/openapi/haotianpay";
-		String ownOrderId = "1471324382268034344";
+		String ownOrderId = "1471606336286036284";
 		String encrypt ="0";
 		String appkey = "11cff472487b47069aa8ca239b42d9ad";
 		String encrypt_key = "";
