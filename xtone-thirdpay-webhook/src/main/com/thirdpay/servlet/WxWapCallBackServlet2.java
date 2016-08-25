@@ -31,7 +31,8 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 		try {
 		request.setCharacterEncoding("utf-8");
 	    String a = request.getParameter("a");
-		
+		System.out.println( "---------------------------------testaaaaaa----------------"+a);
+
 		String payChannel = null;
 		String releaseChannel = null;
 		String appKey = null;
