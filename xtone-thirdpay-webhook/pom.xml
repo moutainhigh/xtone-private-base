@@ -168,6 +168,19 @@
 			</properties>
 
 		</profile>
+		
+		
+		<profile>
+			<id>yg</id>
+
+			<properties>
+				<runtime.env>packageConfig\yg</runtime.env>
+				<final.name>thirdpay.wifi8.com</final.name>
+
+				<!-- <ftp.server.id>thirdwebhook</ftp.server.id> <ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir</ftp.to.url> -->
+			</properties>
+
+		</profile>
 	</profiles>
 
 	<dependencies>

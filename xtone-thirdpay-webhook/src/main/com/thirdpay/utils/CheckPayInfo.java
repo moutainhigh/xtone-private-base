@@ -73,7 +73,7 @@ public class CheckPayInfo {
 		try {
 			// DbKey 选择使用的数据库
 			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
-			ps = con.prepareStatement("UPDATE `log_async_generals` SET para02 = 'syncSuccess'"+",para04 = 'sendCount1'"+ " WHERE para01 = " + ownOrderId +" AND logId = 1001");
+			ps = con.prepareStatement("UPDATE `log_async_generals` SET para02 = 'syncSuccess'"+",para04 = 'sendCount1'"+ " WHERE para01 = "+"'" + ownOrderId +"'"+" AND logId = 1001");
 			
 			if(!ps.execute()){
 				LOG.info(ownOrderId+" -- 1001     数据状态更新成功为1");
@@ -82,7 +82,9 @@ public class CheckPayInfo {
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			LOG.info(ownOrderId+" -- 1001  状态更新syncSuccess异常报错");
 			e.printStackTrace();
+			
 		} finally {
 			if (ps != null) {
 				try {
@@ -153,13 +155,16 @@ public class CheckPayInfo {
 			
 			//更新查询次数
 			ps = con.prepareStatement(
-					"UPDATE `log_async_generals` SET para03 = " + "'"+ next_forwardTime +"'" + ",para04 = "+ "'"+count+"'"+ ",para02 = 'syncFail'"+ ",para12 = "+"'"+responseContent+"'"+" WHERE para01 = " + ownOrderId +" AND logId = 1001");
+					"UPDATE `log_async_generals` SET para03 = " + "'"+ next_forwardTime +"'" + ",para04 = "+ "'"+count+"'"+ ",para02 = 'syncFail'"+ ",para12 = "+"'"+responseContent+"'"+" WHERE para01 = "+"'" + ownOrderId +"'"+" AND logId = 1001");
 			if (!ps.execute()) {
 				LOG.info(ownOrderId + " 距离下次转发时间更新为  " + next_forwardTime + "" +"s" + " 已处理次数为  " + count );
 			}
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			
+			LOG.info(ownOrderId + "--状态更新syncFail异常报错");
+			
 			e.printStackTrace();
 		} finally {
 			if (ps != null) {
