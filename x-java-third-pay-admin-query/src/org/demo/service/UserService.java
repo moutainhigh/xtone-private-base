@@ -25,6 +25,7 @@ public class UserService {
 	
 	static final private Logger LOG = Logger.getLogger(UserService.class);
 	static final private String USER_TABLE_NAME = "tbl_thirdpay_query_users";
+	static final private String APP_INFO_TABLE = " tbl_thirdpay_apps";
 
 	private static Random rnd = new Random();
 
@@ -597,6 +598,37 @@ public class UserService {
 			}
 		}
 		return user;
+	}
+	
+	public static Apps getAppNameByAppkey(String appkey) {
+		Apps apps = new Apps();
+		PreparedStatement ps = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			con = ConnectionService.getInstance().getConnectionForLocal();			
+			ps = con.prepareStatement("select appName from "+APP_INFO_TABLE+" where appkey=? ");
+			int m = 1;
+			ps.setString(m++, appkey);
+			rs = ps.executeQuery();
+			if (rs.next()) {				
+				apps.setAppname(rs.getString("appName"));
+			}
+				
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		return apps;
 	}
 
 	/**

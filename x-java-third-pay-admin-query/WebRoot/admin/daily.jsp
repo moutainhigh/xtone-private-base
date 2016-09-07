@@ -124,6 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<tr>
 				<th>日期</th>
 				<th>应用（appkey）</th>
+				<th>应用名称</th>
 				<th>支付通道</th>
 				<th>总额（元）</th>
 			</tr>
@@ -144,6 +145,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				//appKeys= daily.getAppKey().split(",");
 				//channels = daily.getChannel().split(",");
 				sum+=queryDaily.getPrice();
+				Apps apps = UserService.getAppNameByAppkey(queryDaily.getAppKey());
 				
 				//for(int i=0;i<appKeys.length;i++){
 				//	for(int j=0;j<channels.length;j++) {
@@ -151,6 +153,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<tr>
 							<td><%=queryDaily.getId()%></td>
 							<td><%=queryDaily.getAppKey() %></td>
+							<td><%=apps.getAppname()%></td>
 							<td><%=queryDaily.getChannel()%></td>
 							<td><%=queryDaily.getPrice()/100%></td>
 						</tr>
@@ -166,6 +169,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			%>
 		</tbody>
 			<tr>
+				<td></td>
 				<td></td>
 				<td></td>
 				<td></td>
