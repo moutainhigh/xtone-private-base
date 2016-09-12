@@ -9,4 +9,6 @@ public class Contents {
      * 此处使用AES-128-ECB加密模式，key需要为16位。
      */
 	public static final String cKey = "6010401031024102";
+	
+	public static final String alipayWapAES ="1234567890123456";
 }

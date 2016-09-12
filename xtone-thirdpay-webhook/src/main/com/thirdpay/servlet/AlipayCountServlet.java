@@ -79,7 +79,9 @@ public class AlipayCountServlet extends HttpServlet {
 	 */
 	public static String requestPostData(HttpServletRequest request, HttpServletResponse response) {
 		LOG.info("--------------------调用了AlipayCountServlet ------------------------ ");
+		
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
+		
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
 		PayCallbackParaBean bean = new PayCallbackParaBean();
 

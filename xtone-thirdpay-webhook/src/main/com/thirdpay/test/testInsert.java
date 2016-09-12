@@ -215,18 +215,25 @@ public class testInsert {
 		//postPayment("http://pay.vpayplay.com:808/openapi/haotianpay", "1471366514906033671", "0","11cff472487b47069aa8ca239b42d9ad", "");
   
 		
-		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
-		String notify_url = map.get("notify_url");
-		String encrypt = map.get("encrypt");
-		String encrypt_key = map.get("encrypt_key");
-		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+		HashMap<String, String > appkey_map = CheckCPInfo.CheckInfoMap("f17d2fb4eff547c8bebc1e7cc4dcd43c");
 		
+		String wxwap = appkey_map.get("wxwap");
 		
+//		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+		System.out.println(wxwap);
 		
-		int robbit = 100;
-		int money = 100;
-		int x ;
-		int y;
+//		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+//		String notify_url = map.get("notify_url");
+//		String encrypt = map.get("encrypt");
+//		String encrypt_key = map.get("encrypt_key");
+//		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+//		
+//		
+//		
+//		int robbit = 100;
+//		int money = 100;
+//		int x ;
+//		int y;
 		
 		
 		
