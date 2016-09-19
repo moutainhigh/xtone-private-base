@@ -1,0 +1,268 @@
+@CHARSET "UTF-8";
+
+/*这是banner的css  */
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	
+}
+
+.banner {
+	width: 100%;
+	overflow: hidden;
+	height: 470px;
+	position: relative
+}
+
+.banList {
+	position: absolute;
+	left: 50%;
+	margin-left: -960px;
+	height: 470px
+}
+
+.banList li {
+	height: 470px;
+	opacity: 0;
+	position: absolute;
+	transform: scale(0);
+	transition: transform 0.5s ease 0s, opacity 1.5s ease 0s;
+	z-index: 1;
+}
+
+.banList li.active {
+	opacity: 1;
+	transform: scale(1);
+	z-index: 2;
+}
+
+.fomW {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	height: 20px;
+	z-index: 9;
+	width: 1000px;
+	margin-left: -500px
+}
+
+.jsNav {
+	text-align: center;
+}
+
+.jsNav a {
+	display: inline-block;
+	background: #fff;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	margin: 0 5px;
+}
+
+.jsNav a.current {
+	background: #fc8f0f;
+	cursor: pointer
+}
+
+/*介绍信息info  */
+.info {
+	height: 800px;
+	min-width: 1024px;
+}
+
+}
+.info_title {
+	color: #7a7979;
+	height: 100px;
+	text-align: center;
+	padding-top: 100px;
+}
+
+.info_text {
+	font-size: 50px;
+	color: #7a7979;
+	text-align: center;
+	padding-top: 100px;
+}
+
+.info_english {
+	font-size: 30px;
+	color: #7a7979;
+}
+
+.info_img {
+	position: relative;
+	float: left;
+}
+
+.info_img_icon {
+	position: absolute;
+}
+
+.info_img_icon_1 {
+	position: absolute;
+	width: 60%;
+	padding-left: 53px;
+	padding-top: 130px;
+	text-align: center;
+}
+
+.info_img_icon_2 {
+	position: absolute;
+	width: 50%;
+	padding-left: 81px;
+	padding-top: 175px;
+}
+
+.info_jieshao {
+	
+	padding-top: 100px;
+	padding:0px;
+	margin:0px;
+	text-align:center;
+	min-width: 1920px;
+}
+/* 公司业务 */
+.business {
+	height: 800px;
+}
+
+.business_jieshao {
+	
+}
+
+.business_title {
+	color: #7a7979;
+	text-align: center;
+	padding-top: 50px;
+}
+
+.business_text {
+	font-size: 50px;
+	color: #7a7979;
+	text-align: center;
+	padding-top: 50px;
+}
+
+.business_english {
+	font-size: 30px;
+	color: #7a7979;
+}
+
+.business_list {
+	padding-top: 60px;
+	height: 430px;
+}
+
+.business_list ul {
+	font-size: 32px;
+	color: #7a7979;
+/* 	padding-left: 390px; */
+	float: left;
+}
+
+.business_list ul li {
+	padding-top: 10px;
+}
+/*作品欣赏*/
+
+@media ( min-width :168px) {
+}
+@media ( min-width :520px) {
+}
+@media ( min-width :768px) {
+	.zuopin {
+	height: 857px;
+	
+}
+	
+}
+@media ( min-width :970px) {
+	.zuopin {
+	height: 857px;
+}
+}
+@media ( min-width :1200px) {
+	.zuopin {
+	height: 1005px;
+}
+}
+
+.zuopin_text {
+	font-size: 50px;
+	color: #7a7979;
+	text-align: center;
+	padding-top: 70px;
+}
+
+.zuopin_english {
+	font-size: 30px;
+	color: #7a7979;
+}
+
+.zuopin_tu {
+	padding-top: 78px;
+	
+}
+
+.zuopin_tu img {
+	float: left;
+}
+/*关于我们*/
+.about_us {
+	height: 800px;
+}
+
+.about_us_text {
+	font-size: 50px;
+	color: #7a7979;
+	text-align: center;
+	padding-top: 60px;
+}
+
+.about_us_english {
+	font-size: 30px;
+	color: #7a7979;
+}
+
+.about_us_1 {
+	padding-top: 50px;
+	text-align: center;
+}
+
+.about_us_1 img {
+	float: left;
+	width: 20%;
+}
+
+.about_us_1 font {
+	float: left;
+    width: 39%;
+    padding-left: 33px;
+ font-size: 16px; 
+    color: #7a7979;
+    line-height: 46px;
+}
+/*主要合作客户*/
+.cooperative {
+	height: 800px;
+	text-align: center;
+}
+
+.cooperative_text {
+	font-size: 50px;
+	color: #7a7979;
+	text-align: center;
+	padding-top: 60px;
+}
+
+.cooperative_english {
+	font-size: 30px;
+	color: #7a7979;
+}
+.cooperative img{
+	padding-top: 80px;
+}
