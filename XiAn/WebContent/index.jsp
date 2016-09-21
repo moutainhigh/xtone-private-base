@@ -220,7 +220,7 @@ ul {
 	<br />
 	<div class="container-fluid" style="">
 		<div class="row">
-			<div class="col-md-2"></div>
+			<div class="col-md-1"></div>
 			<div class="col-md-3"">
 				<img style="width: 110%" src="./images/about_us.png">
 			</div>
@@ -284,18 +284,23 @@ ul {
 				<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <img
 					alt="" src="./images/bottom_logo.png"> <br /> <br /> <font
 					style="font-size: 18px; color: #ffffff">联系地址：陕西省西安市碑林区南二环69号5层</font>
-				<br /> <font style="font-size: 18px; color: #ffffff">商务联系:</font> <br />
-				<font style="font-size: 18px; color: #ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;陈佳</font>&nbsp;&nbsp;&nbsp;&nbsp;<img
-					alt="" src="./images/QQ.png" style="margin-bottom: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;<font
-					style="font-size: 18px; color: #ffffff">308187326</font> <br /> <font
-					style="font-size: 18px; color: #ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;<img
+				<br /> <font style="font-size: 18px; color: #ffffff">商务联系：陈佳</font>&nbsp;&nbsp;&nbsp;&nbsp;<img alt="" src="./images/QQ.png" style="margin-bottom: 5px;">&nbsp;&nbsp;&nbsp;&nbsp;<font
+					style="font-size: 18px; color: #ffffff">308187326</font> <br /><font
+					style="font-size: 18px; color: #ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img
 					alt="" src="./images/mobile_logo.png" style="margin-bottom: 5px;margin-left: 3px">&nbsp;&nbsp;&nbsp;&nbsp;<font
 					style="font-size: 18px; color: #ffffff">15029558113</font> <br /> <br />
 				<br /> <br />
 			</div>
-			<div class="col-md-3"></div>
+			<div class="col-md-3" style="text-align: center;">
+			
 			<br /> <br /> <br /> <br /> <br /> <br /> <br /> <img alt=""
-				src="./images/erweima_logo.jpg">
+				src="./images/erweima_logo.jpg" width="45%"><br/><br/>
+				<a href="http://www.miibeian.gov.cn/state/outPortal/loginPortal.action"  target="_Blank"><font style="font-size: 16px; color: #ffffff">粤ICP备12058124号</font></a>
+				
+			
+			</div>
+			
+				
 			<div class="col-md-2"></div>
 		</div>
 	</div>
