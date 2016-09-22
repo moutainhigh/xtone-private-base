@@ -113,9 +113,9 @@
 				<th>价格（分）</th>
 				<th>支付通道</th>
 				<th>IP</th>
-				<th>内容</th>
+				<!-- <th>内容</th> -->
 				<th>通道ID</th>
-				<th>APPKey</th>
+				<!-- <th>APPKey</th> -->
 				<th>原始订单号</th> 
 				<th>渠道订单号</th> 
 				<th>CP订单号</th> 
@@ -169,9 +169,9 @@
 							 listmsg += "<td>"+list[i].price+"</td>";
 							 listmsg += "<td>"+list[i].payChannel+"</td>";
 							 listmsg += "<td>"+list[i].ip+"</td>";
-							 listmsg += "<td>"+list[i].payInfo+"</td>";
+							 /* listmsg += "<td>"+list[i].payInfo+"</td>"; */
 							 listmsg += "<td>"+list[i].releaseChannel+"</td>";
-							 listmsg += "<td>"+list[i].appKey+"</td>";
+							 /* listmsg += "<td>"+list[i].appKey+"</td>"; */
 							 listmsg += "<td>"+list[i].ownOrderId+"</td>";
 							 listmsg += "<td>"+list[i].payChannelOrderId+"</td>";
 							 listmsg += "<td>"+list[i].cpOrderId+"</td>";
@@ -179,7 +179,7 @@
 							 totalData += list[i].price;
 						 }
 						$("#list2").empty();
-						listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
+						listmsg += "<tr><td></td><td>总金额:"+totalData/100+"元</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>";
 						$("#list2").append(listmsg);
 					} else {
 						alert('邮箱或密码错误!');

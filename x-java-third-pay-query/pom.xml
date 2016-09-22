@@ -142,8 +142,8 @@
 			<properties>
 				<runtime.env>packageConfig\pcpay</runtime.env>
 				<final.name>thirdpay-query.n8wan.com</final.name>
-				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<!-- <ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url> -->
 			</properties>
 		</profile>
 		<profile>
@@ -151,8 +151,8 @@
 			<properties>
 				<runtime.env>packageConfig\onlinepay</runtime.env>
 				<final.name>thirdpay-cs-query.n8wan.com</final.name>
-				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<!-- <ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url> -->
 			</properties>
 		</profile>
 		<!-- <profile> <id>ykpcpay</id> <properties> <runtime.env>packageConfig\ykpcpay</runtime.env> 
