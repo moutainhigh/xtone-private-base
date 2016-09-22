@@ -46,6 +46,11 @@ public class Canv {
 		parm.put("802", "WxH5Cancel");
 		parm.put("803", "WxH5Success");
 		parm.put("804", "WxH5Fail");
+		// 支付宝wap统计
+		parm.put("901", "AlipayWapClick");
+		parm.put("902", "AlipayWapCancel");
+		parm.put("903", "AlipayWapSuccess");
+		parm.put("904", "AlipayWapFail");
 
 	}
 

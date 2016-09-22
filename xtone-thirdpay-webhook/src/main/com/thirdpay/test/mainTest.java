@@ -62,7 +62,7 @@ public class mainTest {
 			con = ConnectionServiceCPInfo.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
 //			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" +  "'zgt'" );
 //			ps = con.prepareStatement("SELECT * FROM 'tbl_thirdpay_apps left join' course on tbl_thirdpay_apps left.appKey = tbl_thirdpay_app_pay_channel_relations.appKey WHERE appKey=" +  "'zgt'"  );
-			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_apps,tbl_thirdpay_app_pay_channel_relations,tbl_thirdpay_pay_channels WHERE tbl_thirdpay_app_pay_channel_relations.`payChannelName` = tbl_thirdpay_pay_channels.`payChannelName` AND tbl_thirdpay_app_pay_channel_relations.appKey = 'f17d2fb4eff547c8bebc1e7cc4dcd43c' AND tbl_thirdpay_apps.`appKey`='f17d2fb4eff547c8bebc1e7cc4dcd43c' ");
+			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_apps,tbl_thirdpay_app_pay_channel_relations,tbl_thirdpay_pay_channels WHERE tbl_thirdpay_app_pay_channel_relations.`payChannelName` = tbl_thirdpay_pay_channels.`payChannelName` AND tbl_thirdpay_app_pay_channel_relations.appKey = '3aa1d5b4e2474f0da4d129b985924f9b' AND tbl_thirdpay_apps.`appKey`='3aa1d5b4e2474f0da4d129b985924f9b' ");
 			
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {

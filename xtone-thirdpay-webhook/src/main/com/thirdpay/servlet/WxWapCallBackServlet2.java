@@ -14,6 +14,7 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.payConstants;
 
 /**
@@ -31,7 +32,8 @@ public class WxWapCallBackServlet2 extends HttpServlet {
 		try {
 		request.setCharacterEncoding("utf-8");
 	    String a = request.getParameter("a");
-		
+		System.out.println( "---------------------------------testaaaaaa----------------"+a);
+
 		String payChannel = null;
 		String releaseChannel = null;
 		String appKey = null;
@@ -98,9 +100,15 @@ public class WxWapCallBackServlet2 extends HttpServlet {
         String ownUserId = getVale(xmlData,"mch_id");
         String ownItemId =  getVale(xmlData,"nonce_str");
 		
+        String payChannelUserID = "";// 支付渠道的付费用户标识
+
+		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
+		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+		String payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+        
 		ThreadPool.mThreadPool.execute(new PayInfoBean(Integer.valueOf(price), payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId,payConstants.paytestStatus ));
-		
+				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId,payConstants.paytestStatus,payChannelUserID, payUserIMEI));
+			
 		
 		response.getWriter().append("success");
 		

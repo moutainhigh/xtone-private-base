@@ -215,22 +215,40 @@ public class testInsert {
 		//postPayment("http://pay.vpayplay.com:808/openapi/haotianpay", "1471366514906033671", "0","11cff472487b47069aa8ca239b42d9ad", "");
   
 		
-		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
-		String notify_url = map.get("notify_url");
-		String encrypt = map.get("encrypt");
-		String encrypt_key = map.get("encrypt_key");
-		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+//		HashMap<String, String > appkey_map = CheckCPInfo.CheckInfoMap("f17d2fb4eff547c8bebc1e7cc4dcd43c");
+		
+//		String wxwap = appkey_map.get("wxwap");
+		
+//		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+//		System.out.println(wxwap);
+		
+//		HashMap<String, String > map = CheckCPInfo.CheckInfoMap("zgt");
+//		String notify_url = map.get("notify_url");
+//		String encrypt = map.get("encrypt");
+//		String encrypt_key = map.get("encrypt_key");
+//		System.out.println(notify_url + "\n"+encrypt+"\n"+encrypt_key);
+//		
+//		
+//		
+//		int robbit = 100;
+//		int money = 100;
+//		int x ;
+//		int y;
 		
 		
 		
-		int robbit = 100;
-		int money = 100;
-		int x ;
-		int y;
 		
+		String payChannelUserID = "";// 支付渠道的付费用户标识
+
+		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI("1474423101595032007");
+		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+		String payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+		System.out.println(payUserIMEI);
 		
-		
-		
+		ThreadPool.mThreadPool
+				.execute(new PayInfoBean(100, "", "", "", "", "", "",
+						"", "", "", "", 1, payChannelUserID, payUserIMEI));
+
 	}
 	/**
 	 * post转发数据

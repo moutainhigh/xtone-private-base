@@ -30,6 +30,7 @@ import com.swiftpass.util.MD5;
 import com.swiftpass.util.SignUtils;
 import com.swiftpass.util.SwiftpassConfig;
 import com.swiftpass.util.XmlUtils;
+import com.thirdpay.utils.CheckCPInfo;
 import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.WeixinHttpsUtils;
 
@@ -63,10 +64,10 @@ public class WXWapServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("utf-8");
-
+		
 		String xx_notifyData = req.getParameter("xx_notifyData");
 		//// System.out.println(xx_notifyData);
 		// {"c":"12345","k":"zgt","p":"wxWap","a":"zgt10010"}
@@ -89,118 +90,135 @@ public class WXWapServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		StringBuilder _builder = new StringBuilder();
-		_builder.append("a:" + channel + "-");
-		_builder.append("k:" + appkey + "-");
-		_builder.append("p:" + platform + "-");
-		_builder.append("s:" + OrderIdSelf + "-");
-		_builder.append("c:" + OrderIdCp);
+		//bl - 根据appkey判断执行代码
+		HashMap<String, String > appkey_map = CheckCPInfo.CheckInfoMap(appkey);
+		String wxwap = appkey_map.get("wxwap");
+		
+		if(wxwap.equals("1")){
+			
+			StringBuilder _builder = new StringBuilder();
+			_builder.append("a:" + channel + "-");
+			_builder.append("k:" + appkey + "-");
+			_builder.append("p:" + platform + "-");
+			_builder.append("s:" + OrderIdSelf + "-");
+			_builder.append("c:" + OrderIdCp);
 
-		@SuppressWarnings("unchecked")
-		SortedMap<String, String> map = XmlUtils.getParameterMap(req);
-		map.put("mch_id", SwiftpassConfig.mch_id);
-		// map.put("notify_url",
-		// SwiftpassConfig.notify_url+"?"+_builder.toString());
-		map.put("notify_url", SwiftpassConfig.notify_url + "?a=" + _builder);
-		// map.put("notify_url","http://chendefeng.f3322.net/youkaxiaoxiao/lotteryctrl/"+channel+"/"+appkey+"/"+platform+"/"+OrderIdSelf+"/"+OrderIdCp+"/userlottery");
-		map.put("nonce_str", String.valueOf(new Date().getTime()));
+		
+			
+			@SuppressWarnings("unchecked")
+			SortedMap<String, String> map = XmlUtils.getParameterMap(req);
+			map.put("mch_id", SwiftpassConfig.mch_id);
+			// map.put("notify_url",
+			// SwiftpassConfig.notify_url+"?"+_builder.toString());
+			map.put("notify_url", SwiftpassConfig.notify_url + "?a=" + _builder);
+			// map.put("notify_url","http://chendefeng.f3322.net/youkaxiaoxiao/lotteryctrl/"+channel+"/"+appkey+"/"+platform+"/"+OrderIdSelf+"/"+OrderIdCp+"/userlottery");
+			map.put("nonce_str", String.valueOf(new Date().getTime()));
 
-		// 可以不要
-		map.put("callback_url", "http://chendefeng.f3322.net/baidupay/Test");
+			// 可以不要 
+			map.put("callback_url", "http://chendefeng.f3322.net/baidupay/Test");
 
-		Map<String, String> params = SignUtils.paraFilter(map);
-		StringBuilder buf = new StringBuilder((params.size() + 1) * 10);
-		SignUtils.buildPayParams(buf, params, false);
-		String preStr = buf.toString();
-		String sign = MD5.sign(preStr, "&key=" + SwiftpassConfig.key, "utf-8");
-		map.put("sign", sign);
+			Map<String, String> params = SignUtils.paraFilter(map);
+			StringBuilder buf = new StringBuilder((params.size() + 1) * 10);
+			SignUtils.buildPayParams(buf, params, false);
+			String preStr = buf.toString();
+			String sign = MD5.sign(preStr, "&key=" + SwiftpassConfig.key, "utf-8");
+			map.put("sign", sign);
 
-		String reqUrl = SwiftpassConfig.req_url;
-		//// System.out.println("reqUrl：" + reqUrl);
+			String reqUrl = SwiftpassConfig.req_url;
+			//// System.out.println("reqUrl：" + reqUrl);
 
-		// //System.out.println("reqParams:" + XmlUtils.parseXML(map));
-		CloseableHttpResponse response = null;
-		CloseableHttpClient client = null;
-		String res = null;
-		try {
-			HttpPost httpPost = new HttpPost(reqUrl);
-			StringEntity entityParams = new StringEntity(XmlUtils.parseXML(map), "utf-8");
-			httpPost.setEntity(entityParams);
-			// httpPost.setHeader("Content-Type",
-			// "text/xml;charset=ISO-8859-1");
-			client = HttpClients.createDefault();
-			response = client.execute(httpPost);
-			if (response != null && response.getEntity() != null) {
-				Map<String, String> resultMap = XmlUtils.toMap(EntityUtils.toByteArray(response.getEntity()), "utf-8");
-				res = XmlUtils.toXml(resultMap);
-				// System.out.println("请求结果：" + res);
+			// //System.out.println("reqParams:" + XmlUtils.parseXML(map));
+			CloseableHttpResponse response = null;
+			CloseableHttpClient client = null;
+			String res = null;
+			try {
+				HttpPost httpPost = new HttpPost(reqUrl);
+				StringEntity entityParams = new StringEntity(XmlUtils.parseXML(map), "utf-8");
+				httpPost.setEntity(entityParams);
+				// httpPost.setHeader("Content-Type",
+				// "text/xml;charset=ISO-8859-1");
+				client = HttpClients.createDefault();
+				response = client.execute(httpPost);
+				if (response != null && response.getEntity() != null) {
+					Map<String, String> resultMap = XmlUtils.toMap(EntityUtils.toByteArray(response.getEntity()), "utf-8");
+					res = XmlUtils.toXml(resultMap);
+					// System.out.println("请求结果：" + res);
 
-				if (resultMap.containsKey("sign")) {
-					if (!SignUtils.checkParam(resultMap, SwiftpassConfig.key)) {
-						res = "验证签名不通过";
-					} else {
-						if ("0".equals(resultMap.get("status")) && "0".equals(resultMap.get("result_code"))) {
-							if (orderResult == null) {
-								orderResult = new HashMap<String, String>();
-							}
-							orderResult.put(map.get("out_trade_no"), "0");// 初始状态
-
-							String pay_info = resultMap.get("pay_info");
-							// System.out.println("pay_info = "+pay_info);
-							// 处理支付结果
-							String string = HttpUtils.get(pay_info);
-							if (string != null) {
-
-								StringBuilder builder = new StringBuilder();
-								String weixin = WeixinHttpsUtils.getWeixin(string);
-								String myhttps = WeixinHttpsUtils.getWeixinHttps(string);
-
-								if (weixin == null) {
-									String checkWeb = WeixinHttpsUtils.getCheckmWebHttps(string);
-									String nextPage = HttpUtils.getWithHeaders(checkWeb,pay_info);
-									LOG.debug(nextPage);
-									weixin = WeixinHttpsUtils.getWeixin(nextPage);
-									LOG.debug(weixin);
-								}
-								builder.append("{");
-								builder.append("\"wixin\":" + "\"" + weixin + "\",");
-								
-								builder.append("\"https\":" + "\"" + myhttps + "\"");
-								
-								builder.append("}");
-
-								LOG.debug(builder.toString());
-								resp.getWriter().write(builder.toString());
-
-								return;
-
-							}
+					if (resultMap.containsKey("sign")) {
+						if (!SignUtils.checkParam(resultMap, SwiftpassConfig.key)) {
+							res = "验证签名不通过";
 						} else {
-							req.setAttribute("result", res);
+							if ("0".equals(resultMap.get("status")) && "0".equals(resultMap.get("result_code"))) {
+								if (orderResult == null) {
+									orderResult = new HashMap<String, String>();
+								}
+								orderResult.put(map.get("out_trade_no"), "0");// 初始状态
+
+								String pay_info = resultMap.get("pay_info");
+								// System.out.println("pay_info = "+pay_info);
+								// 处理支付结果
+								String string = HttpUtils.get(pay_info);
+								if (string != null) {
+
+									StringBuilder builder = new StringBuilder();
+									String weixin = WeixinHttpsUtils.getWeixin(string);
+									String myhttps = WeixinHttpsUtils.getWeixinHttps(string);
+
+									if (weixin == null) {
+										String checkWeb = WeixinHttpsUtils.getCheckmWebHttps(string);
+										String nextPage = HttpUtils.getWithHeaders(checkWeb,pay_info);
+										LOG.debug(nextPage);
+										weixin = WeixinHttpsUtils.getWeixin(nextPage);
+										LOG.debug(weixin);
+									}
+									builder.append("{");
+									builder.append("\"wixin\":" + "\"" + weixin + "\",");
+									
+									builder.append("\"https\":" + "\"" + myhttps + "\"");
+									
+									builder.append("}");
+
+									LOG.debug(builder.toString());
+									resp.getWriter().write(builder.toString());
+
+									return;
+
+								}
+							} else {
+								req.setAttribute("result", res);
+							}
 						}
 					}
+				} else {
+					res = "操作失败";
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				res = "系统异常";
+			} finally {
+				if (response != null) {
+					response.close();
+				}
+				if (client != null) {
+					client.close();
+				}
+			}
+			if (res.startsWith("<")) {
+				resp.setHeader("Content-type", "text/xml;charset=UTF-8");
 			} else {
-				res = "操作失败";
+				resp.setHeader("Content-type", "text/html;charset=UTF-8");
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			res = "系统异常";
-		} finally {
-			if (response != null) {
-				response.close();
-			}
-			if (client != null) {
-				client.close();
-			}
-		}
-		if (res.startsWith("<")) {
-			resp.setHeader("Content-type", "text/xml;charset=UTF-8");
-		} else {
-			resp.setHeader("Content-type", "text/html;charset=UTF-8");
-		}
-		resp.getWriter().write(res);
+			resp.getWriter().write(res);
 
+			
+			
+		}
+		
+		
+		//bl - 根据appkey判断执行代码
+		
+		
+		
 	}
 
 }
