@@ -417,7 +417,9 @@ public class UserService {
 				appkeys += "' or appkey='" + appList.get(i).getAppkey();
 			}
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
-			sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
+		/*	sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
+					+ appkeys + "' group by date ORDER BY date DESC";*/
+				sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
 					+ appkeys + "' group by date ORDER BY date DESC";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
@@ -426,6 +428,7 @@ public class UserService {
 				daily.setId(rs.getString("date"));
 				daily.setAppKey(rs.getString("appKey"));
 				daily.setPrice(rs.getFloat("price"));
+				daily.setPayUsers(rs.getInt("payUserIMEI"));
 				listDaily.add(daily);
 			}
 		} catch (Exception e) {
