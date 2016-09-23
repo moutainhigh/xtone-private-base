@@ -127,6 +127,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th>应用（appkey）</th>
 				<th>总额（元）</th>
 				<th>每日总付费用户</th>
+				<th>付费APRU值</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -145,6 +146,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				appKeys= daily.getAppKey().split(",");
 				sum+=daily.getPrice();
 				sumPayUsers+=daily.getPayUsers();
+				
 				%>
 			
 			<tr>
@@ -155,6 +157,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<% }%></td>
 				<td><%=daily.getPrice()/100%></td>
 				<td><%=daily.getPayUsers()%></td>
+				<%
+				if(daily.getPayUsers() == 0){ %>
+					<td><%= ""%></td>
+				<%}else{
+				%><td><%= daily.getPrice()/100/daily.getPayUsers()%></td>
+					
+				<%}
+				%>
 			</tr>
 			<%
 			}
@@ -165,6 +175,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<td></td>
 				<td>总金额:<%=sum/100 %>元</td>
 				<td>总付费用户:<%=sumPayUsers%>人</td>
+				<td><%=""%></td>
 			</tr>
 	</table>
 		</div>
