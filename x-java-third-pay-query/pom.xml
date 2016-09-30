@@ -1,10 +1,11 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>xtone-java-cp-admin</groupId>
-  <artifactId>xtone-java-cp-admin</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>xtone-java-cp-admin</groupId>
+	<artifactId>xtone-java-cp-admin</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
@@ -23,12 +24,15 @@
 			<artifactId>commons-dbcp</artifactId>
 			<version>1.4</version>
 		</dependency>
+		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>servlet-api</artifactId> 
+			<version>3.0-alpha-1</version> <scope>provided</scope> </dependency> -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -40,7 +44,7 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
- <build>
+	<build>
 		<finalName>${final.name}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<resources>
@@ -52,14 +56,24 @@
 			</resource>
 		</resources>
 		<plugins>
-			<plugin>
+		<!-- 	<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.3.2</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin> -->
+			
+				<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
 			</plugin>
+			
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.2</version>
@@ -75,7 +89,7 @@
 					</webResources>
 				</configuration>
 			</plugin>
-		<plugin>
+			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 				<version>1.0-beta-4</version>
@@ -112,7 +126,7 @@
 			</extension>
 		</extensions>
 	</build>
-  <profiles>
+	<profiles>
 		<profile>
 			<id>pcpaytest</id>
 			<properties>
@@ -128,8 +142,8 @@
 			<properties>
 				<runtime.env>packageConfig\pcpay</runtime.env>
 				<final.name>thirdpay-query.n8wan.com</final.name>
-				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<!-- <ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url> -->
 			</properties>
 		</profile>
 		<profile>
@@ -137,19 +151,14 @@
 			<properties>
 				<runtime.env>packageConfig\onlinepay</runtime.env>
 				<final.name>thirdpay-cs-query.n8wan.com</final.name>
-				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url>
+				<!-- <ftp.server.id>HYServer</ftp.server.id>
+				<ftp.to.url>ftp://121.40.137.243/tomcat-8_7000/swap_dir/</ftp.to.url> -->
 			</properties>
 		</profile>
-		<!-- <profile>
-			<id>ykpcpay</id>
-			<properties>
-				<runtime.env>packageConfig\ykpcpay</runtime.env>
-				<final.name>thirdpay-query.youkala.com</final.name>
-				<ftp.server.id>HYServer</ftp.server.id>
-				<ftp.to.url>ftp://112.74.83.34/docker_apps/youkala/swap_dir/</ftp.to.url>
-			</properties>
-		</profile> -->
+		<!-- <profile> <id>ykpcpay</id> <properties> <runtime.env>packageConfig\ykpcpay</runtime.env> 
+			<final.name>thirdpay-query.youkala.com</final.name> <ftp.server.id>HYServer</ftp.server.id> 
+			<ftp.to.url>ftp://112.74.83.34/docker_apps/youkala/swap_dir/</ftp.to.url> 
+			</properties> </profile> -->
 		<profile>
 			<id>ykonlinepay</id>
 			<properties>
@@ -163,7 +172,7 @@
 			<id>nfygpay</id>
 			<properties>
 				<runtime.env>packageConfig\nfygpay</runtime.env>
-				<final.name>thirdpay-query.wifi8.com</final.name>				
+				<final.name>thirdpay-query.wifi8.com</final.name>
 			</properties>
 		</profile>
 	</profiles>

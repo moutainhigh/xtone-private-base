@@ -21,6 +21,12 @@ import com.thirdpay.domain.ForwardLogBean;
  */
 public class CheckPayInfo {
 	private static final Logger LOG = Logger.getLogger(CheckPayInfo.class);
+	
+	/**
+	 * 返回转发数据
+	 * @param ownOrderId
+	 * @return
+	 */
 	public static String CheckInfo(String ownOrderId) {
 		// TODO Auto-generated method stub
 		// ForwardsyncBean forwardsyncBean = new ForwardsyncBean();
@@ -62,6 +68,49 @@ public class CheckPayInfo {
 		return jsonString;
 	}
 		
+public static String CheckInfoIMEI(String ownOrderId){
+
+	// TODO Auto-generated method stub
+	// ForwardsyncBean forwardsyncBean = new ForwardsyncBean();
+	String jsonString = "";
+	PreparedStatement ps = null; 
+	Connection con = null;
+
+	try {
+		// DbKey 选择使用的数据库
+		con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+		ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + "'"+ownOrderId+"'");
+		ResultSet rs = ps.executeQuery();
+
+		while (rs.next()) {
+			jsonString = rs.getString("para03");
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} finally {
+		if (ps != null) {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (con != null) {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	return jsonString;
+
+}
+	
 	public static void Updata1001(String ownOrderId,String notify_url,String forwardString) {
 		// TODO Auto-generated method stub
 		

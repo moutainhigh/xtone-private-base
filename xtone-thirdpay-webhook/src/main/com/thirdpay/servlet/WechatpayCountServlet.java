@@ -28,6 +28,7 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.payConstants;
 
 /**
@@ -148,8 +149,21 @@ public class WechatpayCountServlet extends HttpServlet {
 		System.out.println("payChannel = " + payChannel + ",appKey = " + appKey + ",payChannelOrderId = "
 				+ payChannelOrderId + ",price = " + price + ",Ip = " + ip + ",cpOrderId = " + cpOrderId);
 
-		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
+		String payChannelUserID = "";// 支付渠道的付费用户标识
+
+		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
+		String payUserIMEI ="";
+		if(!"".equals(IMEIforwardString)){
+			JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+			payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+			
+		}
+
+		ThreadPool.mThreadPool
+				.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey, payChannelOrderId,
+						ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus, payChannelUserID, payUserIMEI));
+
+		
 		response.getWriter().append("<result>1</result>");
 
 		// System.out.println("支付状态 state = " + state + "\n" + "订单号sd51no = " +

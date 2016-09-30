@@ -24,7 +24,7 @@ import com.thirdpay.utils.HttpUtils;
 import com.thirdpay.utils.payConstants;
 
 public class PayInfoBean implements Runnable {
-	
+
 	private static final Logger LOG = Logger.getLogger(PayInfoBean.class);
 	private Long id;
 	private int price; // 价格，单位人民币，分
@@ -39,6 +39,9 @@ public class PayInfoBean implements Runnable {
 	private String ownOrderId;// 原始订单号ID
 	private String cpOrderId;// pc方订单号ID
 	private int testStatus;// 是否是测试信息
+	private String payChannelUserID;// 支付渠道的付费用户标识
+	private String payUserIMEI;// 支付用户IMEI
+	
 
 	public Long getId() {
 		return id;
@@ -144,9 +147,26 @@ public class PayInfoBean implements Runnable {
 		this.ownOrderId = ownOrderId;
 	}
 
+	
+	public String getPayChannelUserID() {
+		return payChannelUserID;
+	}
+
+	public void setPayChannelUserID(String payChannelUserID) {
+		this.payChannelUserID = payChannelUserID;
+	}
+
+	public String getPayUserIMEI() {
+		return payUserIMEI;
+	}
+
+	public void setPayUserIMEI(String payUserIMEI) {
+		this.payUserIMEI = payUserIMEI;
+	}
+
 	public PayInfoBean(int price, String payChannel, String ip, String payInfo, String releaseChannel, String appKey,
 			String payChannelOrderId, String ownUserId, String ownItemId, String ownOrderId, String cpOrderId,
-			int testStatus) {
+			int testStatus,String payChannelUserID ,String payUserIMEI ) {
 		super();
 		this.price = price;
 		this.payChannel = payChannel;
@@ -160,6 +180,8 @@ public class PayInfoBean implements Runnable {
 		this.ownOrderId = ownOrderId;
 		this.cpOrderId = cpOrderId;
 		this.testStatus = testStatus;
+		this.payChannelUserID = payChannelUserID;
+		this.payUserIMEI = payUserIMEI;
 	}
 
 	@Override
@@ -175,7 +197,7 @@ public class PayInfoBean implements Runnable {
 			try {
 				con = ConnectionService.getInstance().getConnectionForLocal();
 				ps = con.prepareStatement(
-						"insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,cpOrderId,testStatus) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+						"insert into `log_success_pays` (id,price,payChannel,ip,payInfo,releaseChannel,appKey,payChannelOrderId,ownUserId,ownItemId,ownOrderId,cpOrderId,testStatus,payChannelUserID,payUserIMEI) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 				int m = 1;
 				ps.setLong(m++, this.getId());
 				ps.setInt(m++, this.getPrice());
@@ -190,40 +212,41 @@ public class PayInfoBean implements Runnable {
 				ps.setString(m++, this.getOwnOrderId());
 				ps.setString(m++, this.getCpOrderId());
 				ps.setInt(m++, this.getTestStatus());
-
+				ps.setString(m++, this.getPayChannelUserID());
+				ps.setString(m++, this.getPayUserIMEI());
 				int i = ps.executeUpdate();
-				
+
 				/**
 				 * 数据同步状态码 订单号状态0表示等待同步；1表示同步成功 计划下次处理时间，毫秒数 已经处理次数 目标地址 成功判定条件
 				 * appkey or channelId 填入配置的id值 id_type数据库字段对应
 				 */
 				if ((i + "").equals("1")) {
-					
-					HashMap<String, String > map = CheckCPInfo.CheckInfoMap(this.getAppKey());
+
+					HashMap<String, String> map = CheckCPInfo.CheckInfoMap(this.getAppKey());
 					String notify_url = map.get("notify_url");
 					String encrypt = map.get("encrypt");
 					String encrypt_key = map.get("encrypt_key");
-					
-					
-					LOG.info("apppppkey  == " + this.getAppKey() + "\n" +"notify_url  == " + notify_url);
 
-					//冰风谷定制
+					LOG.info("apppppkey  == " + this.getAppKey() + "\n" + "notify_url  == " + notify_url);
+
+					// 冰风谷定制
 					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
 						// 根据appkey转发数据
 						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
-						
+
 						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),
 								forward_url);
 					}
-					
-					if(! "".equals(notify_url) && notify_url != null){
+
+					if (!"".equals(notify_url) && notify_url != null) {
 						String forwardString = CheckPayInfo.CheckInfo(this.getOwnOrderId());
 						// 转发插入日志表
-						ThreadPool.mThreadPool.execute(new ForwardsyncBean(1001, this.getOwnOrderId(), "notsync", "0", "0",
-								notify_url, "200", this.getAppKey(), "Id_type",encrypt,encrypt_key,forwardString));
+						ThreadPool.mThreadPool.execute(
+								new ForwardsyncBean(1001, this.getOwnOrderId(), "notsync", "0", "0", notify_url, "200",
+										this.getAppKey(), "Id_type", encrypt, encrypt_key, forwardString));
 					}
-					
+
 					// 转发数据到Wj_url
 					Wj_Froward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 							this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId());
@@ -269,8 +292,10 @@ public class PayInfoBean implements Runnable {
 			oprator = "8";
 		} else if (payChannel.equals("wxWapH5")) {
 			oprator = "9";
+		} else if (payChannel.equals("alipayWapH5")) {
+			oprator = "10";
 		} else {
-			
+
 			oprator = "otherpay";
 		}
 		return oprator;
@@ -293,7 +318,7 @@ public class PayInfoBean implements Runnable {
 		String responseStr = HttpUtils.get(builder.toString());
 		if (responseStr.equals("ok")) {
 			LOG.info("appkeyFroward 插入成功,返回200");
-			//插入1002日志表,并更新插入表1001
+			// 插入1002日志表,并更新插入表1001
 		} else {
 			LOG.info("appkeyFroward 插入失败    返回---- responseStr = " + responseStr);
 		}
@@ -337,5 +362,5 @@ public class PayInfoBean implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 }

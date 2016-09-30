@@ -19,11 +19,11 @@ import org.common.util.ThreadPool;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.thirdpay.domain.PayInfoBean;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.payConstants;
 /**
  * 参数名 参数含义 格式说明 长度 是否必须 sp_no 百度钱包支付商户号 10位数字组成的字符串  是 order_no 商户订单号 不超过20个字符 Max(20) 是 bfb_order_no 百度钱包支付交易号 不超过32个字符 Max(32) 是 bfb_order_create_time 百度钱包支付交易创建 时间 YYYYMMDDHHMMSS  是 pay_time 支付时间 YYYYMMDDHHMMSS  是 pay_type 支付方式 默认取值2  是 unit_amount 商品单价，以分为单位 非负整数  否 unit_count 商品数量 非负整数  否 transport_amount 运费，以分为单位 非负整数  否 total_amount 总金额，以分为单位 非负整数  是 fee_amount 百度钱包支付收取商户 的手续费，以分为单位 非负整数  是 currency 币种，目前仅支持人民 币 取值范围参见附录  是 buyer_sp_username 买家在商户网站的用户 名 允许包含中文；不超过 64字符或32个汉字 Max(64) 否 pay_result 支付结果代码 取值范围参见附录  是 input_charset 请求参数的字符编码 取值范围参见附录  是 
  */
-
 
 /**
  * 百度统计Servlet
@@ -116,9 +116,20 @@ public class BaidupayCountServlet extends HttpServlet {
 			cpOrderId = json.getString("c");
 		}
 
+		String payChannelUserID = "";// 支付渠道的付费用户标识
 
-		ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
-				payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus));
+		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
+		String payUserIMEI ="";
+		if(!"".equals(IMEIforwardString)){
+			JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+			payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+			
+		}
+
+		ThreadPool.mThreadPool
+				.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey, payChannelOrderId,
+						ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus, payChannelUserID, payUserIMEI));
+
 		try {
 			response.getWriter().append("<meta name=\"VIP_BFB_PAYMENT\" content=\"BAIFUBAO\">");
 		} catch (IOException e) {
@@ -162,7 +173,6 @@ public class BaidupayCountServlet extends HttpServlet {
 			// entry.getValue()[0]));
 
 		}
-
 
 		return payInfo;
 	}
