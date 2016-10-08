@@ -1,4 +1,4 @@
-package com.thirdpay.servlet;
+package com.thirdpay.test;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -33,14 +33,14 @@ import com.thirdpay.utils.ConnectionServiceCPInfo;
 /**
  * 支付渠道查询Servlet , 返回json数据
  */
-@WebServlet("/CpInfoServlet")
-public class CpInfoServlet extends HttpServlet {
-	private static final Logger LOG = Logger.getLogger(CpInfoServlet.class);
+@WebServlet("/TestCpInfoServlet")
+public class TestCpInfoServlet extends HttpServlet {
+	private static final Logger LOG = Logger.getLogger(TestCpInfoServlet.class);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CpInfoServlet() {
+	public TestCpInfoServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

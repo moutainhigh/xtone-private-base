@@ -21,6 +21,7 @@ import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.swiftpass.util.SwiftpassConfig;
 import com.thirdpay.domain.ForwardsyncBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.AES;
@@ -238,17 +239,23 @@ public class testInsert {
 		
 		
 		
-		String payChannelUserID = "";// 支付渠道的付费用户标识
+//		String payChannelUserID = "";// 支付渠道的付费用户标识
+//
+//		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI("1474423101595032007");
+//		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+//		String payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+//		System.out.println(payUserIMEI);
+//		
+//		ThreadPool.mThreadPool
+//				.execute(new PayInfoBean(100, "", "", "", "", "", "",
+//						"", "", "", "", 1, payChannelUserID, payUserIMEI));
 
-		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI("1474423101595032007");
-		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
-		String payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
-		System.out.println(payUserIMEI);
 		
-		ThreadPool.mThreadPool
-				.execute(new PayInfoBean(100, "", "", "", "", "", "",
-						"", "", "", "", 1, payChannelUserID, payUserIMEI));
-
+		// 支付回调地址
+//		 String notify_url = SwiftpassConfig.WXSwiftPay_notify_url;
+//		System.out.println(notify_url);
+		System.out.println("/");
+		
 	}
 	/**
 	 * post转发数据
