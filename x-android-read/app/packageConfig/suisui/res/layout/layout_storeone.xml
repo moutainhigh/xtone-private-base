@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    >
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:src="@drawable/shucheng01"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+        </ImageView>
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本月推荐"
+            android:textColor="#333333"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:textSize="14sp"
+
+            />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="更多>"
+        android:textColor="#777777"
+        android:gravity="center_vertical|right"
+        android:layout_marginTop="4dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:layout_marginRight="10dp"
+        android:textSize="11sp"/>
+
+</LinearLayout>
+
+       <com.wanpg.bookread.widget.MyGridView
+           android:id="@+id/store_grid_tj"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:numColumns="4"
+           android:textColor="#444444"
+           android:verticalSpacing="5dp"
+           android:layout_marginTop="3dp"
+           android:stretchMode="columnWidth"
+           >
+
+
+       </com.wanpg.bookread.widget.MyGridView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sousuo"
+
+            ></ImageView>
+
+ </LinearLayout>
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女生专区"
+                android:textColor="#333333"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textSize="14sp"
+
+                />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/change"
+                android:layout_marginLeft="230dp"
+                ></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="换一换"
+                android:textColor="#777777"
+                android:gravity="center_vertical|left"
+                android:layout_marginTop="4dp"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:textSize="11sp"/>
+
+        </LinearLayout>
+
+
+                <com.wanpg.bookread.widget.MyGridView
+                    android:id="@+id/store_grid_nv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="4"
+                    android:textColor="#444444"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp"
+                    android:layout_marginTop="3dp"
+                    >
+
+                </com.wanpg.bookread.widget.MyGridView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sousuo"
+
+            ></ImageView>
+
+        </LinearLayout>
+
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男生专区"
+                android:textColor="#333333"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textSize="14sp"
+
+                />
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/change"
+                android:layout_marginLeft="230dp"
+                ></ImageView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="换一换"
+                android:textColor="#777777"
+                android:gravity="center_vertical|left"
+                android:layout_marginTop="4dp"
+                android:paddingTop="5dp"
+                android:layout_marginLeft="7dp"
+                android:textSize="11sp"/>
+
+        </LinearLayout>
+
+        <com.wanpg.bookread.widget.MyGridView
+            android:id="@+id/store_grid_man"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:textColor="#444444"
+            android:verticalSpacing="5dp"
+            android:layout_marginTop="3dp"
+
+
+            >
+
+        </com.wanpg.bookread.widget.MyGridView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/sousuo"
+
+            ></ImageView>
+</LinearLayout>
+            </LinearLayout>
+
+</ScrollView>

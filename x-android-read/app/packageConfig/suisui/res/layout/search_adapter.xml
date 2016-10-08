@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="306dp"
+    android:layout_height="wrap_content"
+    >
+
+    <!-- android:background="@drawable/custom_corner_white_bg"-->
+
+    <RelativeLayout
+        android:background="@drawable/whitroid"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="14dp"
+        android:orientation="vertical">
+
+
+        <ImageView
+
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_width="110dp"
+            android:layout_height="120dp"
+            android:id="@+id/search_dialog_imge_icon"
+
+            />
+
+        <TextView
+            android:id="@+id/search_dialog_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="红心灿烂"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/search_dialog_imge_icon"
+            android:textSize="14dp"
+            android:textColor="#111111"
+            android:layout_marginTop="15dp"
+            />
+
+        <TextView
+            android:id="@+id/search_dialog_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:text="曹其明"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/search_dialog_imge_icon"
+            android:layout_marginTop="50dp"
+
+
+
+            />
+
+        <TextView
+            android:id="@+id/search_dialog_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#666666"
+            android:textSize="14sp"
+            android:text="价格：6元"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/search_dialog_imge_icon"
+            android:layout_below="@+id/search_dialog_author"
+
+            />
+
+
+
+        <LinearLayout
+            android:id="@+id/lin"
+            android:layout_below="@+id/search_dialog_imge_icon"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            >
+         <TextView
+             android:layout_width="0dp"
+             android:layout_height="0dp"
+             />
+        </LinearLayout>
+
+       <LinearLayout
+           android:layout_below="@id/lin"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:padding="15dp"
+           android:orientation="vertical"
+           >
+
+           <TextView
+               android:id="@+id/search_dialog_fg"
+               android:layout_width="wrap_content"
+               android:layout_height="2dp"
+             />
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="简介"
+               android:textSize="14sp"
+               android:textColor="#1b1b1b"
+               android:layout_marginTop="5dp"
+               />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="60dp"
+               android:textColor="#555555"
+               android:textSize="12sp"
+               android:ellipsize="end"
+               android:maxLines="4"
+               android:text="科圃精耕二十年，潇湘帜艳领时先。能将余热开新韵，再把激情化锦篇。老凤长鸣存晚节，金风玉笛奏和弦。欣看硕果桑榆景，遍野花香任鸟喧"
+               android:layout_marginTop="3dp"
+               android:layout_marginLeft="10dp"
+
+               />
+
+
+       </LinearLayout>
+
+        <Button
+            android:id="@+id/search_dialog_pr"
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:background="@drawable/sousuo06"
+
+            android:layout_alignBottom="@+id/search_dialog_imge_icon"
+            android:layout_alignRight="@+id/search_dialog_price"
+            android:layout_alignEnd="@+id/search_dialog_price" />
+
+        <Button
+
+            android:layout_width="70dp"
+            android:layout_height="25dp"
+            android:background="@drawable/sousuo08"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/search_dialog_pr"
+            android:layout_toEndOf="@+id/search_dialog_pr"
+            android:layout_alignTop="@+id/search_dialog_pr" />
+
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/search_dialog_tv_confirm"
+
+
+
+
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="4dp"
+
+        android:gravity="center"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:background="@drawable/sousuo09"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

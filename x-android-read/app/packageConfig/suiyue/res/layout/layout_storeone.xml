@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:fillViewport="true"
+    >
+
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="268px"
+                android:background="@drawable/store_bg"
+                android:scaleType="matrix"/>
+        </LinearLayout>
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="76px"
+            android:layout_marginTop="3dp"
+            android:background="@color/white" >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/su2"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="本月推荐"
+            android:background="@color/white"
+            android:textColor="@color/umeng_fb_color_btn_normal"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:paddingTop="5dp"
+            android:textSize="17sp"
+
+            />
+        </RelativeLayout>
+       <com.wanpg.bookread.widget.MyGridView
+           android:id="@+id/store_grid_tj"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:numColumns="4"
+           android:verticalSpacing="5dp"
+           android:layout_marginTop="3dp"
+           android:stretchMode="columnWidth"
+           >
+
+
+       </com.wanpg.bookread.widget.MyGridView>
+
+ </LinearLayout>
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/block_column_6" />
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="76px"
+            android:layout_marginTop="8dp"
+            android:background="@color/white" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/su2"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="女生专区"
+                android:background="@color/white"
+                android:textColor="@color/umeng_fb_color_btn_normal"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="5dp"
+                android:textSize="17sp"
+
+                />
+        </RelativeLayout>
+
+
+
+                <com.wanpg.bookread.widget.MyGridView
+                    android:id="@+id/store_grid_nv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="5dp"
+                    android:layout_marginTop="3dp"
+                    >
+
+                </com.wanpg.bookread.widget.MyGridView>
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/block_column_6" />
+    <LinearLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_weight="1"
+        >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="76px"
+            android:layout_marginTop="8dp"
+            android:background="@color/white" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/su2"
+
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="男生专区"
+                android:background="@color/white"
+                android:textColor="@color/umeng_fb_color_btn_normal"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="20dp"
+                android:paddingTop="5dp"
+                android:textSize="17sp"
+
+                />
+        </RelativeLayout>
+
+        <com.wanpg.bookread.widget.MyGridView
+            android:id="@+id/store_grid_man"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+
+            android:verticalSpacing="5dp"
+            android:layout_marginTop="3dp"
+
+
+            >
+
+        </com.wanpg.bookread.widget.MyGridView>
+
+</LinearLayout>
+            </LinearLayout>
+
+</ScrollView>

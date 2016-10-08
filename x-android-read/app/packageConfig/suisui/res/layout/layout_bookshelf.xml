@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="10dp"
+    android:background="#f7f7f7"
+    >
+
+    <GridView
+        android:id="@+id/gv_bookshelf"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fadingEdge="none"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@null"
+        android:numColumns="3"
+        android:scrollbarThumbVertical="@drawable/scrollbar_bg"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="#f7f7f7"
+        >
+    </GridView>
+    <!--
+     <ListView
+         android:id="@+id/lv_bookshelf"
+         android:layout_margin="10dp"
+         android:fadingEdge="none"
+         android:dividerHeight="5dp"
+         android:divider="@android:color/transparent"
+         android:cacheColorHint="@android:color/transparent"
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent">
+     </ListView> -->
+
+</RelativeLayout>
