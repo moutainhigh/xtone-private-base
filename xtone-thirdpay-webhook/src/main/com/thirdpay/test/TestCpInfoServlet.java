@@ -25,6 +25,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.thirdpay.domain.CpInfoBean;
 import com.thirdpay.utils.Canv;
 import com.thirdpay.utils.CheckCPInfo;
@@ -36,6 +38,8 @@ import com.thirdpay.utils.ConnectionServiceCPInfo;
 @WebServlet("/TestCpInfoServlet")
 public class TestCpInfoServlet extends HttpServlet {
 	private static final Logger LOG = Logger.getLogger(TestCpInfoServlet.class);
+
+	private static LoadingCache<String, String> cahceBuilder = null;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -51,14 +55,39 @@ public class TestCpInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		String appKey = request.getParameter("Appkey");
+
 		if (appKey != null) {
-//			CheckInfo(appKey, response); // 查询数据
-			CheckInfoMap(appKey, response); // 查询cpinfo新版
+
+			LoadingCache<String, String> cahceBuilder = getcahceBuilder(appKey, response);
+			
+			try {
+				String guavaJsonString = cahceBuilder.get(appKey);
+				if("".equals(guavaJsonString)){
+					response.getWriter().append("-1");
+				}
+				response.getWriter().append(guavaJsonString);
+				System.out.println(guavaJsonString);
+			} catch (ExecutionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
-			response.getWriter().append("fail");
+			try {
+				response.getWriter().append("-1");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
+
+		// if (appKey != null) {
+		//// CheckInfo(appKey, response); // 查询数据
+		// CheckInfoMap(appKey, response); // 查询cpinfo新版
+		// } else {
+		// response.getWriter().append("fail");
+		// }
 	}
 
 	/**
@@ -72,7 +101,8 @@ public class TestCpInfoServlet extends HttpServlet {
 	}
 
 	private void CheckInfo(String appKey, HttpServletResponse response) {
-		CpInfoBean cpInfoBean = CheckCPInfo.CheckInfo(appKey); //得到cpInfobean对象
+
+		CpInfoBean cpInfoBean = CheckCPInfo.CheckInfo(appKey); // 得到cpInfobean对象
 		String key = cpInfoBean.getAppkey();
 
 		if (key == null) {
@@ -96,67 +126,69 @@ public class TestCpInfoServlet extends HttpServlet {
 		}
 
 	}
-	
-	
-	private void CheckInfoMap(String appKey, HttpServletResponse response) {
-		
-		HashMap<String, String > map = CheckCPInfo.CheckInfoMap(appKey);
+
+	private String CheckInfoMap(String appKey, HttpServletResponse response) {
+		String jsonString = "";
+		HashMap<String, String> map = CheckCPInfo.CheckInfoMap(appKey);
 		String key = map.get("appKey");
 
 		if (key == null) {
-			try {
-				response.getWriter().append("-1");
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			 try {
+			 response.getWriter().append("-1");
+			 } catch (IOException e) {
+			 // TODO Auto-generated catch block
+			 e.printStackTrace();
+			 }
 		} else {
-			String jsonString = JSON.toJSONString(map);
+			jsonString = JSON.toJSONString(map);
 			LOG.info("open jsonString = " + jsonString);
 			LOG.info("-------------------------------------");
 
-			try {
-				response.getWriter().append(jsonString);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} // 回调json数据格式的数据
+			// try {
+			// response.getWriter().append(jsonString);
+			// } catch (IOException e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// } // 回调json数据格式的数据
+
+		}
+		return jsonString;
+	}
+
+	public LoadingCache<String, String> getcahceBuilder(final String appKey, final HttpServletResponse response) {
+
+		if (cahceBuilder == null) {
+			cahceBuilder = CacheBuilder.newBuilder().maximumSize(10)// 最大缓存5000个对象
+					.expireAfterAccess(1, TimeUnit.MINUTES) // 5分钟后缓存失效
+					// 设置缓存的移除通知
+					.removalListener(new RemovalListener<Object, Object>() {
+						@Override
+						public void onRemoval(RemovalNotification<Object, Object> notification) {
+							System.out.println(
+									notification.getKey() + " was removed, cause is " + notification.getCause());
+						}
+					})
+
+					// build方法中可以指定CacheLoader，在缓存不存在时通过CacheLoader的实现自动加载缓存
+					.build(new CacheLoader<String, String>() {
+						@Override
+						public String load(String key) throws Exception {
+							// load a new TradeAccount not exists in cache
+							// 创造一个新的对象 如果String对象不存在
+							return createExpensiveGraph(key);
+						}
+
+						private String createExpensiveGraph(String key) {
+
+							System.out.println("缓存不存在,正自动加载缓存" + " key = " + key);
+
+							return CheckInfoMap(key, response);// 查询cpinfo新版
+
+						}
+
+					});
 		}
 
-	}
-	
-	
-	public void LoadingCache() throws ExecutionException{
-
-		  
-	       LoadingCache<String,String> cahceBuilder=CacheBuilder  
-	       .newBuilder().maximumSize(10000).expireAfterAccess(10, TimeUnit.MINUTES)  
-	       .build(new CacheLoader<String, String>(){  
-	           @Override  
-	           public String load(String key) throws Exception {          
-	               return createExpensiveGraph(key);  
-	           }  
-	  
-	   private String createExpensiveGraph(String key) {  
-	    System.out.println("load into cache!");  
-	    System.out.println("key = "+key);  
-	    return "hello "+key+"!";  
-	    }  
-	             
-	       });          
-//	       cahceBuilder.put("hh", "123");
-//	       cahceBuilder.put("aa", "321");
-//	       cahceBuilder.put("bb", "123456");
-	       
-	        System.out.println( "cahceBuilder = " + cahceBuilder.get("hh") );
-	        System.out.println( "cahceBuilder = " + cahceBuilder.get("aa") );
-	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
-//	       cahceBuilder.get("2");  
-//	       cahceBuilder.get("2");  
-//	       cahceBuilder.get("3");  
-	       //第二次就直接从缓存中取出  
-//	       cahceBuilder.get("2");  
-		
-	
+		return cahceBuilder;
 	}
 }

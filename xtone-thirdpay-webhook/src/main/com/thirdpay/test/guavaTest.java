@@ -14,10 +14,14 @@ public class guavaTest {
 	public static void main(String[] args) throws Exception {
 		  
 	       LoadingCache<String,String> cahceBuilder=CacheBuilder  
-	       .newBuilder().maximumSize(10000).expireAfterAccess(10, TimeUnit.MINUTES)  
+	       .newBuilder()
+	       .maximumSize(5000)//最大缓存5000个对象
+	       .expireAfterAccess(10, TimeUnit.MINUTES)  //5分钟后缓存失效
 	       .build(new CacheLoader<String, String>(){  
 	           @Override  
-	           public String load(String key) throws Exception {          
+	           public String load(String key) throws Exception {   
+	        	// load a new TradeAccount not exists in cache
+	        	   //创造一个新的对象 如果String对象不存在
 	               return createExpensiveGraph(key);  
 	           }  
 	  
@@ -27,7 +31,8 @@ public class guavaTest {
 	    return "hello "+key+"!";  
 	    }  
 	             
-	       });          
+	       });   
+	       
 	       cahceBuilder.put("hh", "123");
 	       cahceBuilder.put("aa", "321");
 	       cahceBuilder.put("bb", "123456");
@@ -83,5 +88,22 @@ public class guavaTest {
 	        });  
 	        System.out.println("peida value : " + resultVal);  
 	    }
+	   
+	   
+//public void ifind(){
+//	LoadingCache<String, TradeAccount> traLoadingCache =
+//			CacheBuilder.newBuilder()
+//				.expireAfterAccess(5L, TimeUnit.MINUTES) //5分钟后缓存失效
+//				.maximumSize(5000L) //最大缓存5000个对象
+//				.removalListener(new TradeAccountRemovalListener()) //注册缓存对象移除监听器
+//				.ticker(Ticker.systemTicker()) //定义缓存对象失效的时间精度为纳秒级
+//				.build(new CacheLoader<String, TradeAccount>(){ 
+//					@Override
+//					public TradeAccount load(String key) throws Exception {
+//						// load a new TradeAccount not exists in cache
+//						return null;
+//					}
+//				});
+//}
 	   
 }

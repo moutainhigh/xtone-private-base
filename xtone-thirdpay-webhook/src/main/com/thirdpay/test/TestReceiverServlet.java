@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+import com.google.common.cache.RemovalListener;
+import com.google.common.cache.RemovalNotification;
 import com.thirdpay.domain.PayInfoBean;
 
 /**
@@ -20,6 +27,9 @@ import com.thirdpay.domain.PayInfoBean;
  */
 @WebServlet("/TestReceiverServlet")
 public class TestReceiverServlet extends HttpServlet {
+	
+private static LoadingCache<String,String> cahceBuilder = null;
+	
 	private static final long serialVersionUID = 1L;
 	private static final Logger LOG = Logger.getLogger(TestReceiverServlet.class);
 
@@ -44,9 +54,9 @@ public class TestReceiverServlet extends HttpServlet {
 		// response.getWriter().append("200");
 		// }
 		
-		String payinfo = getPayInfo(request);
-		response.getWriter().append("200");
-		LOG.info("----------------------payinfo = " + payinfo);
+//		String payinfo = getPayInfo(request);
+//		response.getWriter().append("200");
+//		LOG.info("----------------------payinfo = " + payinfo);
 		
 		
 		// String payment = request.getParameter("appkey");
@@ -56,6 +66,87 @@ public class TestReceiverServlet extends HttpServlet {
 		//
 		// response.getWriter().append("小心我锋哥打你 ");
 
+//		 LoadingCache<String,String> cahceBuilder=CacheBuilder  
+//		   	       .newBuilder()
+//		   	       .maximumSize(50)//最大缓存5000个对象
+//		   	       .expireAfterAccess(10, TimeUnit.MINUTES)  //5分钟后缓存失效
+//		   	    //设置缓存的移除通知
+//	               .removalListener(new RemovalListener<Object, Object>() {
+//	                   @Override
+//	                   public void onRemoval(RemovalNotification<Object, Object> notification) {
+//	                       System.out.println(notification.getKey() + " was removed, cause is " + notification.getCause());
+//	                   }
+//	               })
+//	               
+//	               //build方法中可以指定CacheLoader，在缓存不存在时通过CacheLoader的实现自动加载缓存
+//		   	       .build(new CacheLoader<String, String>(){  
+//		   	           @Override  
+//		   	           public String load(String key) throws Exception {   
+//		   	        	// load a new TradeAccount not exists in cache
+//		   	        	   //创造一个新的对象 如果String对象不存在
+//		   	               return createExpensiveGraph(key);  
+//		   	           }  
+//		   	  
+//		   	   private String createExpensiveGraph(String key) {  
+//		   	    System.out.println("缓存不存在,正自动加载缓存"+" key = "+key);  
+//		   	    
+//		   	    return "hello "+key+"!";  
+//		   	    }  
+//		   	             
+//		   	       }); 
+	      
+	   	       
+//	   	       cahceBuilder.put("hh", "123");
+//	   	       cahceBuilder.put("aa", "321");
+//	   	       cahceBuilder.put("bb", "123456");
+	   	       
+//	   	        try {
+//					System.out.println( "cahceBuilder = " + cahceBuilder.get("hh") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("aa") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+//		   	        System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+//				} catch (ExecutionException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+	      
+		 LoadingCache<String,String> cahceBuilder = getcahceBuilder();
+		 
+	   	   String bb = request.getParameter("bb");
+	   	        if("clean".equals(bb)){
+	   	        	cahceBuilder.cleanUp();//清空缓存
+	   	        	System.out.println("清除缓存数据");
+	   	        }
+	   	     if("123456".equals(bb)){
+	   	    	 cahceBuilder.put("bb", "123456");
+	   	    	System.out.println("put了参数bb值为123456");
+	   			try {
+					System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+
+	   	        }
+	   	     if("321".equals(bb)){
+	   	      try {
+					System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+					System.out.println( "cahceBuilder = " + cahceBuilder.get("bb") );
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	   	     }
+	   	  if("456".equals(bb)){
+	   		  
+	   	    	 cahceBuilder.put("bb", "123456");
+	   	    	System.out.println("put了参数bb值为123456");
+
+	   	        }
 	}
 
 	/**
@@ -68,6 +159,45 @@ public class TestReceiverServlet extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public LoadingCache<String,String> getcahceBuilder(){
+		
+		if(cahceBuilder == null){
+			cahceBuilder=CacheBuilder  
+			   	       .newBuilder()
+			   	       .maximumSize(50)//最大缓存5000个对象
+			   	       .expireAfterAccess(10, TimeUnit.MINUTES)  //5分钟后缓存失效
+			   	    //设置缓存的移除通知
+		               .removalListener(new RemovalListener<Object, Object>() {
+		                   @Override
+		                   public void onRemoval(RemovalNotification<Object, Object> notification) {
+		                       System.out.println(notification.getKey() + " was removed, cause is " + notification.getCause());
+		                   }
+		               })
+		               
+		               //build方法中可以指定CacheLoader，在缓存不存在时通过CacheLoader的实现自动加载缓存
+			   	       .build(new CacheLoader<String, String>(){  
+			   	           @Override  
+			   	           public String load(String key) throws Exception {   
+			   	        	// load a new TradeAccount not exists in cache
+			   	        	   //创造一个新的对象 如果String对象不存在
+			   	               return createExpensiveGraph(key);  
+			   	           }  
+			   	  
+			   	   private String createExpensiveGraph(String key) {  
+			   		   
+			   	    System.out.println("缓存不存在,正自动加载缓存"+" key = "+key);  
+			   	    
+			   	    return "hello "+key+"!";  
+			   	    
+			   	    }  
+			   	             
+			   	       }); 
+		}
+		
+		return cahceBuilder;
+	}
+	
+	
 	/**
 	 * 得到所有的参数与参数值
 	 * 
@@ -100,3 +230,4 @@ public class TestReceiverServlet extends HttpServlet {
 		return payInfo;
 	}
 }
+
