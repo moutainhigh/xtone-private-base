@@ -15,6 +15,7 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="org.common.util.ConfigManager"%>
+<%@page import="java.text.DecimalFormat"%>
 <%
     String name = ConfigManager.getConfigData("servicename");
 %>
@@ -50,6 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <![endif]-->
 <link href="../js-css/bootstrap-datetimepicker.min.css" rel="stylesheet"
 	media="screen">
+	
 <script type="text/javascript"
 	src="../js-css/bootstrap-datetimepicker.js" charset="UTF-8"></script>
 
@@ -125,6 +127,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th>日期</th>
 				<th>应用（appkey）</th>
 				<th>总额（元）</th>
+				<th>每日总付费用户</th>
+				<th>付费APRU值</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -136,11 +140,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			List<Daily> listDaily2=UserService.getDailyByAppkeys2(user);
 			List<Apps> listApp = UserService.selectByCpid(user);
 			float sum=0;
+			int sumPayUsers =0;
 			String appKeys[]=null;
 			for(Daily daily:listDaily)
 			{
 				appKeys= daily.getAppKey().split(",");
 				sum+=daily.getPrice();
+				sumPayUsers+=daily.getPayUsers();
+				
+			
 				%>
 			
 			<tr>
@@ -150,15 +158,33 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<a href='daily-appkey.jsp?appkey=<%=appKeys[i]%>' class='menus' target="_blank" style="font-size: 14px"><%=appKeys[i]%></a>
 				<% }%></td>
 				<td><%=daily.getPrice()/100%></td>
+				<td><%=daily.getPayUsers()%></td>
+				<%
+				if(daily.getPayUsers() == 0){ %>
+					<td><%= ""%></td>
+				<%}else{
+					 float   scale   =   (float) daily.getPrice()/100/daily.getPayUsers();  
+					  DecimalFormat   fnum   =   new   DecimalFormat("##0.00");  
+					  String   dd=fnum.format(scale); 
+				%><td><%= 
+						
+						dd%></td>
+					
+				<%}
+				%>
 			</tr>
 			<%
 			}
+			
+		
 			%>
 		</tbody>
 			<tr>
 				<td></td>
 				<td></td>
 				<td>总金额:<%=sum/100 %>元</td>
+				<td>总付费用户:<%=sumPayUsers%>人</td>
+				<td><%=""%></td>
 			</tr>
 	</table>
 		</div>
