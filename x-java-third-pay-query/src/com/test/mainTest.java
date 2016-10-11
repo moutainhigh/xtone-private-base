@@ -9,7 +9,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+<<<<<<< HEAD
 import java.text.DecimalFormat;
+=======
+>>>>>>> master
 import java.util.Random;
 
 import org.common.util.ConfigManager;
@@ -47,6 +50,7 @@ public class mainTest {
 		// System.out.println(forwardString);
 		// TODO Auto-generated method stub
 		// CpInfoBean cpInfoBean = new CpInfoBean();
+<<<<<<< HEAD
 //		PreparedStatement ps = null;
 //		Connection con = null;
 //		try {
@@ -120,6 +124,77 @@ public class mainTest {
 		  DecimalFormat   fnum   =   new   DecimalFormat("##0.00");  
 		  String   dd=fnum.format(scale);      
 		  System.out.println(dd); 
+=======
+		PreparedStatement ps = null;
+		Connection con = null;
+		try {
+			
+			
+			
+			///////------------------
+			// DbKey 选择使用的数据库
+			con = ConnectionServiceConfig.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+//			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_cp_information WHERE appKey=" +  "'zgt'" );
+//			ps = con.prepareStatement("SELECT * FROM 'tbl_thirdpay_apps left join' course on tbl_thirdpay_apps left.appKey = tbl_thirdpay_app_pay_channel_relations.appKey WHERE appKey=" +  "'zgt'"  );
+//			ps = con.prepareStatement("SELECT * FROM tbl_thirdpay_apps,tbl_thirdpay_app_pay_channel_relations,tbl_thirdpay_pay_channels WHERE tbl_thirdpay_app_pay_channel_relations.`payChannelName` = tbl_thirdpay_pay_channels.`payChannelName` AND tbl_thirdpay_app_pay_channel_relations.appKey = '3aa1d5b4e2474f0da4d129b985924f9b' AND tbl_thirdpay_apps.`appKey`='3aa1d5b4e2474f0da4d129b985924f9b' ");
+			ps = con.prepareStatement("select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey, COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
+					+"f17d2fb4eff547c8bebc1e7cc4dcd43c' group by date ORDER BY date DESC");
+			
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				
+//				System.out.println("date = "+ rs.getString("date"));
+				System.out.println("imei = "+ rs.getString("payUserIMEI"));
+				
+//				System.out.println("aliPay = " + rs.getString("aliPay"));
+//				System.out.println("aliPay = " + rs.getString("aliPay"));
+//				System.out.println("unionPay = " + rs.getString("unionPay"));
+//				System.out.println("wechatPay = " + rs.getString("wechatPay"));
+//				System.out.println("baiduPay = " + rs.getString("baiduPay"));
+//				System.out.println("smsPay = " + rs.getString("smsPay"));
+//				System.out.println("productInfo = " + rs.getString("productInfo"));
+//				System.out.println("notify_url = " + rs.getString("notify_url"));
+//				System.out.println("WXwap = " + rs.getString("WXwap"));
+//				System.out.println("encrypt = " + rs.getString("encrypt"));
+
+			}
+///////////////----------------------
+			
+//			con = ConnectionServicethirdpayCount.getInstance().getConnectionForLocal(); // DbKey选择使用config.properties
+//			ps = con.prepareStatement("SELECT * FROM log_async_generals WHERE para05 = " + "'"+"88888888"+"'");
+//			ResultSet rs = ps.executeQuery();
+//			String jsonString = "";
+//			while (rs.next()) {
+//				jsonString = rs.getString("para04");
+//			}
+//			
+//			System.out.println(jsonString);
+			
+//			JSON.toJSONString(cpInfoBean);
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+>>>>>>> master
 	}
 
 	public static String getJsonContent(String url_path, String encode) {

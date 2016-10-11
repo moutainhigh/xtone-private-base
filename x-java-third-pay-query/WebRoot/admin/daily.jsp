@@ -148,7 +148,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				sum+=daily.getPrice();
 				sumPayUsers+=daily.getPayUsers();
 				
+<<<<<<< HEAD
 			
+=======
+>>>>>>> master
 				%>
 			
 			<tr>
@@ -163,12 +166,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				if(daily.getPayUsers() == 0){ %>
 					<td><%= ""%></td>
 				<%}else{
+<<<<<<< HEAD
 					 float   scale   =   (float) daily.getPrice()/100/daily.getPayUsers();  
 					  DecimalFormat   fnum   =   new   DecimalFormat("##0.00");  
 					  String   dd=fnum.format(scale); 
 				%><td><%= 
 						
 						dd%></td>
+=======
+				%><td><%= daily.getPrice()/100/daily.getPayUsers()%></td>
+>>>>>>> master
 					
 				<%}
 				%>

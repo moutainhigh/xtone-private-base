@@ -294,7 +294,10 @@ public class PayInfoBean implements Runnable {
 			oprator = "9";
 		} else if (payChannel.equals("alipayWapH5")) {
 			oprator = "10";
-		} else {
+		} else if (payChannel.equals("wxSwiftWAP")) {
+			oprator = "11";
+	} 
+		else  {
 
 			oprator = "otherpay";
 		}

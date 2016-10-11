@@ -52,6 +52,11 @@ public class Canv {
 		parm.put("903", "AlipayWapSuccess");
 		parm.put("904", "AlipayWapFail");
 
+		// 威富通微信wap支付统计
+		parm.put("1101", "WXSwiftPayClick");
+		parm.put("1102", "WXSwiftPayCancel");
+		parm.put("1103", "WXSwiftPaySuccess");
+		parm.put("1104", "WXSwiftPayFail");
 	}
 
 }

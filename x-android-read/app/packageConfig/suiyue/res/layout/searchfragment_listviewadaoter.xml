@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/search_xp_banner"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	 >
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="0.5dp"
+		android:layout_below="@id/booksearch_zz"
+		android:paddingTop="2dp"
+		android:background="@drawable/fg" />
+	<RelativeLayout
+		android:layout_width="match_parent"
+		android:layout_height="230px"
+		android:paddingBottom="5dp"
+		android:paddingTop="5dp"
+		android:layout_marginTop="1dp"
+		android:background="@color/white"
+		android:id="@+id/relativeLayout">
+	<ImageView
+
+		android:layout_width="136px"
+		android:layout_height="202px"
+		android:id="@+id/search_imge_icon"
+		android:scaleType="fitXY"
+		android:layout_marginLeft="10dp"
+		android:background="#c0c0"
+		/>
+
+	<TextView
+		android:id="@+id/search_name"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="卧底"
+
+		android:layout_marginBottom="20dp"
+		android:layout_marginLeft="34px"
+		android:layout_toRightOf="@id/search_imge_icon"
+		android:textSize="24px"
+		android:textColor="@color/nav_black_gray"
+
+		android:layout_marginTop="0dp"
+		/>
+
+		<TextView
+			android:id="@+id/search_author"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="作者"
+
+			android:layout_marginBottom="20dp"
+			android:layout_marginLeft="34px"
+			android:layout_toRightOf="@id/search_imge_icon"
+			android:textSize="20px"
+			android:textColor="@color/book_text3"
+
+			android:layout_marginTop="20dp"
+
+			/>
+
+		<TextView
+			android:id="@+id/search_size"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="17万字"
+
+			android:textSize="20px"
+			android:textColor="@color/book_text3"
+
+			android:layout_alignBottom="@+id/search_name"
+			android:layout_alignRight="@+id/search_jh"
+			android:layout_alignEnd="@+id/search_jh"
+			android:layout_marginRight="14dp"
+			android:layout_marginEnd="14dp" />
+
+		<TextView
+			android:id="@+id/search_remark"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="简介简介简介简介简介简介简介简介简介简介简介简介简介简介简简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介....."
+
+			android:layout_marginBottom="5dp"
+			android:layout_marginLeft="34px"
+			android:layout_toRightOf="@id/search_imge_icon"
+			android:textSize="20px"
+			android:textColor="@color/book_text3"
+
+			android:layout_marginTop="50dp"
+
+			/>
+
+	<ImageView
+		android:id="@+id/search_jh"
+		android:layout_width="30dp"
+		android:layout_height="0dp"
+		android:src="@drawable/jh"
+		android:layout_alignParentRight="true"
+		android:layout_centerVertical="true"
+		android:layout_marginRight="5dp"
+		/>
+	</RelativeLayout>
+	<ImageView
+		android:layout_width="fill_parent"
+		android:layout_height="0.5dp"
+		android:background="@drawable/fg"
+		android:layout_below="@+id/relativeLayout"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true" />
+
+</RelativeLayout>

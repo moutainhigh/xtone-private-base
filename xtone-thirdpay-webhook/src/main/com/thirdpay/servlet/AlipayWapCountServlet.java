@@ -138,8 +138,12 @@ public class AlipayWapCountServlet extends HttpServlet {
 		String payChannelUserID  = "";//支付渠道的付费用户标识
 		
 		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
-		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
-		String payUserIMEI = IMEIjson.getString("imei");//支付用户IMEI //2016/09/20
+		String payUserIMEI ="";
+		if(!"".equals(IMEIforwardString)){
+			JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+			payUserIMEI = IMEIjson.getString("imei");// 支付用户IMEI //2016/09/20
+			
+		}
 		
 		
 		// wait_buyer_pay是创建订单成功的时候发送的

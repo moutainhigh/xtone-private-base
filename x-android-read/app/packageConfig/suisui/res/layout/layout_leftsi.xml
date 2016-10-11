@@ -1,0 +1,175 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#4d555a"
+    >
+    <LinearLayout
+        android:background="#3a4248"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        ></LinearLayout>
+    <LinearLayout
+        android:id="@+id/loc"
+        android:background="#3a4248"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+    >
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:src="@drawable/leftloc"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1.7"
+        android:text="本地图书"
+        android:textColor="#ffffff"
+        android:gravity="center_vertical|left"
+        android:textSize="15dp"
+        />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/yuedu"
+        android:background="#3a4248"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:src="@drawable/leftxx"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="37dp"
+        android:layout_weight="1.7"
+        android:text="阅读选项"
+        android:textColor="#ffffff"
+        android:gravity="center_vertical|left"
+        android:textSize="15dp"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/xiazai"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:src="@drawable/leftxz"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1.7"
+            android:text="下载管理"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical|left"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/xitong"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:src="@drawable/leftxt"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1.7"
+            android:text="系统设置"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical|left"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/yijian"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:src="@drawable/leftyj"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1.7"
+            android:text="意见反馈"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical|left"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tuichu"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        >
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:src="@drawable/lefttc"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="37dp"
+            android:layout_weight="1.7"
+            android:text="退出"
+            android:textColor="#ffffff"
+            android:gravity="center_vertical|left"
+            android:textSize="15dp"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    </LinearLayout>

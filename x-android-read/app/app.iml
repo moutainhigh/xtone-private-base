@@ -8,41 +8,61 @@
     </facet>
     <facet type="android" name="Android">
       <configuration>
-        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="SELECTED_BUILD_VARIANT" value="suiyueDebug" />
         <option name="SELECTED_TEST_ARTIFACT" value="_android_test_" />
-        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
-        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
-        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleDebugAndroidTest" />
-        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileDebugAndroidTestSources" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleSuiyueDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileSuiyueDebugSources" />
+        <option name="ASSEMBLE_TEST_TASK_NAME" value="assembleSuiyueDebugAndroidTest" />
+        <option name="COMPILE_JAVA_TEST_TASK_NAME" value="compileSuiyueDebugAndroidTestSources" />
         <afterSyncTasks>
-          <task>generateDebugAndroidTestSources</task>
-          <task>generateDebugSources</task>
+          <task>generateSuiyueDebugAndroidTestSources</task>
+          <task>generateSuiyueDebugSources</task>
         </afterSyncTasks>
         <option name="ALLOW_USER_CONFIGURATION" value="false" />
-        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
         <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
-        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/packageConfig/suiyue/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
       </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_6" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/build/intermediates/classes/debug" />
-    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/debug" />
+    <output url="file://$MODULE_DIR$/build/intermediates/classes/suiyue/debug" />
+    <output-test url="file://$MODULE_DIR$/build/intermediates/classes/androidTest/suiyue/debug" />
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/debug" isTestSource="false" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/suiyue/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/suiyue/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/suiyue/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/suiyue/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/suiyue/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/suiyue/debug" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyueDebug/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/suiyue/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/suiyue/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/buildConfig/androidTest/suiyue/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/suiyue/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/suiyue/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/suiyue/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/packageConfig/suiyue/res" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyue/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/packageConfig/suiyue/assets" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyue/aidl" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/packageConfig/suiyue/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyue/jni" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/suiyue/rs" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/res" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/assets" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/java" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/androidTestSuiyue/rs" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
