@@ -203,7 +203,6 @@ public class UserService {
 		PreparedStatement ps = null;
 		Connection con = null;
 		ResultSet rs = null;
-		
 		try {
 			con = ConnectionService.getInstance().getConnectionForLocal(); // md5(?)
 			ps = con.prepareStatement(
