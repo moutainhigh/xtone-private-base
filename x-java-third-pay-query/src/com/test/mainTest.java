@@ -9,10 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-<<<<<<< HEAD
 import java.text.DecimalFormat;
-=======
->>>>>>> master
 import java.util.Random;
 
 import org.common.util.ConfigManager;
@@ -50,7 +47,6 @@ public class mainTest {
 		// System.out.println(forwardString);
 		// TODO Auto-generated method stub
 		// CpInfoBean cpInfoBean = new CpInfoBean();
-<<<<<<< HEAD
 //		PreparedStatement ps = null;
 //		Connection con = null;
 //		try {
@@ -124,7 +120,6 @@ public class mainTest {
 		  DecimalFormat   fnum   =   new   DecimalFormat("##0.00");  
 		  String   dd=fnum.format(scale);      
 		  System.out.println(dd); 
-=======
 		PreparedStatement ps = null;
 		Connection con = null;
 		try {
@@ -194,7 +189,6 @@ public class mainTest {
 			}
 		}
 
->>>>>>> master
 	}
 
 	public static String getJsonContent(String url_path, String encode) {
