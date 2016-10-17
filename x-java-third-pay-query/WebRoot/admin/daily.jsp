@@ -128,6 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th>总额（元）</th>
 				<th>每日总付费用户</th>
 				<th>付费APRU值</th>
+				<th>每日新增用户</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -165,6 +166,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 				<%}
 				%>
+				<td><%=daily.getPayUsers()%></td>
 			</tr>
 			<%
 			}

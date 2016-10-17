@@ -419,8 +419,11 @@ public class UserService {
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
 		/*	sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
 					+ appkeys + "' group by date ORDER BY date DESC";*/
-				sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
+/*				sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
 					+ appkeys + "' group by date ORDER BY date DESC";
+*/				
+			sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
+						+ appkeys + "' group by date ORDER BY date DESC";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
