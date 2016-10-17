@@ -7,6 +7,7 @@ public class Daily {
 	private String channel;
 	private float price;
 	private int payUsers;
+	private String newUsers;
 	
 	public String getId() {
 		return id;
@@ -46,6 +47,14 @@ public class Daily {
 
 	public void setPayUsers(int payUsers) {
 		this.payUsers = payUsers;
+	}
+
+	public String getNewUsers() {
+		return newUsers;
+	}
+
+	public void setNewUsers(String newUsers) {
+		this.newUsers = newUsers;
 	}
 
 }

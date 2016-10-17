@@ -2,6 +2,7 @@ package com.thirdpay.test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,8 +24,10 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.swiftpass.util.SwiftpassConfig;
 import com.thirdpay.domain.ForwardsyncBean;
+import com.thirdpay.domain.ImeiBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.AES;
+import com.thirdpay.utils.AppkeyCanv;
 import com.thirdpay.utils.CheckCPInfo;
 import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.Forward;
@@ -254,7 +257,74 @@ public class testInsert {
 		// 支付回调地址
 //		 String notify_url = SwiftpassConfig.WXSwiftPay_notify_url;
 //		System.out.println(notify_url);
-		System.out.println("/");
+//		System.out.println("/");
+		
+		
+		
+//		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
+//		String payUserIMEI ="";
+//		if(!"".equals(IMEIforwardString)){
+//			LOG.info("IMEIforwardString --------- "+IMEIforwardString);
+//			JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+//			 payUserIMEI = IMEIjson.getString("imei");//支付用户IMEI //2016/09/20
+//			LOG.info("payUserIMEI --------- "+payUserIMEI);
+//		}
+		
+
+//		PreparedStatement ps = null;
+//		Connection con = null;
+//		try {
+//			con = ConnectionService.getInstance().getConnectionForLocal();
+//			ps = con.prepareStatement(
+////					"insert into `tbl_imei_users` (id) values (?)");
+//		"SELECT COUNT(id) FROM tbl_imei_users WHERE id = 123");
+//			ResultSet rs = ps.executeQuery();
+//			
+//	while (rs.next()) {
+//		System.out.println(rs.getString("count(id)"));
+//		
+////				map.put("appKey", rs.getString("appKey") );
+////				map.put("notify_url", rs.getString("notify_url") );
+////				map.put(rs.getString("payChannelName"), rs.getString("status"));
+////				map.put("encrypt",rs.getString("encrypt"));
+////				map.put("webOrderid",orederKey);
+////				map.put("encrypt_key",rs.getString("encrypt_key"));
+//
+//			}
+//			
+////			int m = 1;
+////			ps.setString(m++, "312");
+////			int i = ps.executeUpdate();
+////System.out.println(" i = " + i );
+//			
+//			
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+////			e.printStackTrace();
+//			System.out.println("相同的imei插入失败");
+//		} finally {
+//			if (ps != null) {
+//				try {
+//					ps.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//	
+		String recentUseTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+		System.out.println(recentUseTime);
+		
+		ThreadPool.mThreadPool.execute(new ImeiBean("123123",123l , recentUseTime));
 		
 	}
 	/**

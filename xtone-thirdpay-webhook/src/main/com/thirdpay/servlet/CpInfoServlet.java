@@ -30,6 +30,7 @@ import com.google.common.cache.RemovalNotification;
 import com.thirdpay.domain.CpInfoBean;
 import com.thirdpay.utils.Canv;
 import com.thirdpay.utils.CheckCPInfo;
+import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.ConnectionServiceCPInfo;
 
 /**
@@ -86,12 +87,15 @@ public class CpInfoServlet extends HttpServlet {
 			}
 		}
 
+		
 		// if (appKey != null) {
 		//// CheckInfo(appKey, response); // 查询数据
 		// CheckInfoMap(appKey, response); // 查询cpinfo新版
 		// } else {
 		// response.getWriter().append("fail");
 		// }
+		
+		
 	}
 
 	/**

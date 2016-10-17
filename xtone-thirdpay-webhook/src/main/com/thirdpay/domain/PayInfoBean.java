@@ -232,7 +232,7 @@ public class PayInfoBean implements Runnable {
 					// 冰风谷定制
 					if (this.getAppKey().equals("ae03d9d6e0444bb08af1f1098b2afafc")) {
 						// 根据appkey转发数据
-						String forward_url = AppkeyCanv.parm.get(this.getAppKey());
+						String  forward_url = AppkeyCanv.parm.get(this.getAppKey());
 
 						appkeyFroward(this.getAppKey(), this.getPrice() + "", this.getPayChannel(), this.getIp(),
 								this.getReleaseChannel(), this.getPayChannelOrderId(), this.getCpOrderId(),

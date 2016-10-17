@@ -20,9 +20,10 @@ public class PayOperateBean implements Runnable {
 	private String payParams;
 	private String ownOrderid;
 
-	public PayOperateBean(int logId, String payOperateStatus, String Appkey, String op_notifyData, String payParams,
+	public PayOperateBean(Long timeid ,int logId, String payOperateStatus, String Appkey, String op_notifyData, String payParams,
 			String ownOrderid) {
 		super();
+		this.id=timeid;
 		this.logId = logId;
 		this.payOperateStatus = payOperateStatus;
 		this.Appkey = Appkey;
@@ -63,6 +64,7 @@ public class PayOperateBean implements Runnable {
 		this.payOperateStatus = payOperateStatus;
 	}
 
+
 	public Long getId() {
 		return id;
 	}
@@ -91,9 +93,7 @@ public class PayOperateBean implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 
-		setId(GenerateIdService.getInstance()
-				.generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()), "clicks", 1));
-
+	
 		if (this.id > 0) {
 			PreparedStatement ps = null;
 			Connection con = null;

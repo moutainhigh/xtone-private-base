@@ -103,7 +103,6 @@ public class CheckCPInfo {
 //			 .generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()),
 //			 "clicks", 1);
 //			 String orederKey = key + "";
-			 
 			while (rs.next()) {
 				
 				map.put("appKey", rs.getString("appKey") );
