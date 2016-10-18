@@ -18,9 +18,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
-<!----webfonts--->
-<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-<!---//webfonts--->  
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -39,9 +36,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css"
-	href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	href="../js-css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
-	src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+	src="../js-css/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="../js-css/DatePicker.js"></script>
 <link rel="stylesheet" type="text/css"
