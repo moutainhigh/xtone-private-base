@@ -142,12 +142,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			float sum=0;
 			int sumPayUsers =0;
 			String appKeys[]=null;
+			int sumNewUsers = 0;
 			for(Daily daily:listDaily)
 			{
 				appKeys= daily.getAppKey().split(",");
 				sum+=daily.getPrice();
 				sumPayUsers+=daily.getPayUsers();
-				
+				sumNewUsers+=daily.getNewUsers();
 				%>
 			
 			<tr>
@@ -158,6 +159,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<% }%></td>
 				<td><%=daily.getPrice()/100%></td>
 				<td><%=daily.getPayUsers()%></td>
+
 				<%
 				if(daily.getPayUsers() == 0){ %>
 					<td><%= ""%></td>
@@ -166,7 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 				<%}
 				%>
-				<td><%=daily.getPayUsers()%></td>
+								<td><%=daily.getNewUsers()%></td>
 			</tr>
 			<%
 			}
@@ -178,6 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<td>总金额:<%=sum/100 %>元</td>
 				<td>总付费用户:<%=sumPayUsers%>人</td>
 				<td><%=""%></td>
+				<td>总新增用户:<%=sumNewUsers%>人</td>
 			</tr>
 	</table>
 		</div>
