@@ -419,6 +419,7 @@ public class UserService {
 			con = ConnectionServiceConfig.getInstance().getConnectionForLocal();
 		/*	sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey from log_success_pays where appkey='"
 					+ appkeys + "' group by date ORDER BY date DESC";*/
+<<<<<<< HEAD
 				/*sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
 					+ appkeys + "' group by date ORDER BY date DESC";*/
 			/*sql = "SELECT FROM_UNIXTIME(log_success_pays.`id`/1000/1000000, '%Y-%m-%d') AS DATE,SUM(price) AS price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) AS payUserIMEI,COUNT(tbl_imei_users.`id`) AS newUsers FROM log_success_pays,tbl_imei_users WHERE log_success_pays.`appKey`= '"
@@ -429,6 +430,16 @@ public class UserService {
 					+ "' GROUP BY DATE ORDER BY DATE DESC";
 			 
 			
+=======
+/*				sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
+					+ appkeys + "' group by date ORDER BY date DESC";
+*/				
+			/*sql = "select FROM_UNIXTIME(id/1000/1000000, '%Y-%m-%d') AS date,sum(price) as price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) as payUserIMEI from log_success_pays where appkey='"
+						+ appkeys + "' group by date ORDER BY date DESC";*/
+			sql = "SELECT FROM_UNIXTIME(log_success_pays.`id`/1000/1000000, '%Y-%m-%d') AS DATE,SUM(price) AS price,GROUP_CONCAT(DISTINCT appkey) AS appkey,COUNT(DISTINCT payUserIMEI) AS payUserIMEI,COUNT(DISTINCT tbl_imei_users.`id`) AS newUsers FROM log_success_pays LEFT JOIN tbl_imei_users ON log_success_pays.id=tbl_imei_users.`addTime` WHERE log_success_pays.`appKey`= '"
+					+ appkeys
+					+ "' GROUP BY DATE ORDER BY DATE DESC";
+>>>>>>> dev.chenbol
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while (rs.next()) {
