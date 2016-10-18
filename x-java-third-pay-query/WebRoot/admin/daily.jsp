@@ -168,11 +168,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 				<%}
 				%>
-<<<<<<< HEAD
 				<td><%=daily.getNewUsers()%></td>
-=======
-								<td><%=daily.getNewUsers()%></td>
->>>>>>> dev.chenbol
 			</tr>
 			<%
 			}
