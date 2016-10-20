@@ -2,13 +2,11 @@ package com.thirdpay.servlet;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,13 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
@@ -32,7 +27,6 @@ import org.common.util.ThreadPool;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.thirdpay.domain.PayCallbackParaBean;
 import com.thirdpay.domain.PayInfoBean;
 import com.thirdpay.utils.CheckPayInfo;
 import com.thirdpay.utils.payConstants;
@@ -84,7 +78,6 @@ public class AlipayCountServlet extends HttpServlet {
 		String xx_notifyData = request.getParameter("xx_notifyData");// 自定义参数
 		
 		JSONObject json = JSON.parseObject(xx_notifyData); // 解析自定义参数
-		PayCallbackParaBean bean = new PayCallbackParaBean();
 
 		int price = (int) ((Float.parseFloat(request.getParameter("price"))) * 100); // 支付宝转换单位:元→分
 		String payChannel = json.getString("platform");// 支付通道channel
@@ -126,15 +119,20 @@ public class AlipayCountServlet extends HttpServlet {
 		String payChannelUserID  = "";//支付渠道的付费用户标识
 		
 		String IMEIforwardString = CheckPayInfo.CheckInfoIMEI(ownOrderId);
-		JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
-		String payUserIMEI = IMEIjson.getString("imei");//支付用户IMEI //2016/09/20
-		LOG.info("payUserIMEI --------- "+payUserIMEI);
+		String payUserIMEI ="";
+		if(!"".equals(IMEIforwardString)){
+			LOG.info("IMEIforwardString --------- "+IMEIforwardString);
+			JSONObject IMEIjson = JSON.parseObject(IMEIforwardString); // 解析自定义参数
+			 payUserIMEI = IMEIjson.getString("imei");//支付用户IMEI //2016/09/20
+			LOG.info("payUserIMEI --------- "+payUserIMEI);
+		}
+		
 		
 		// wait_buyer_pay是创建订单成功的时候发送的
 		// trade_success是交易支付成功的时候发送的
 		String trade_status = request.getParameter("trade_status"); // 支付状态
 
-		if (trade_status.equals("TRADE_SUCCESS") && !payUserIMEI.equals("")) {
+		if (trade_status.equals("TRADE_SUCCESS")) {
 			// 数据库写入操作
 			ThreadPool.mThreadPool.execute(new PayInfoBean(price, payChannel, ip, payInfo, releaseChannel, appKey,
 					payChannelOrderId, ownUserId, ownItemId, ownOrderId, cpOrderId, payStatus,payChannelUserID,payUserIMEI));

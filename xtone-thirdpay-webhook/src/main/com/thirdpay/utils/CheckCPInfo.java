@@ -99,19 +99,17 @@ public class CheckCPInfo {
 			ResultSet rs = ps.executeQuery();
 			
 			// (网游)
-			 Long key = GenerateIdService.getInstance()
-			 .generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()),
-			 "clicks", 1);
-			 
-			 String orederKey = key + "";
-			 
+//			 Long key = GenerateIdService.getInstance()
+//			 .generateNew(Integer.parseInt(ConfigManager.getConfigData("server.id").trim()),
+//			 "clicks", 1);
+//			 String orederKey = key + "";
 			while (rs.next()) {
 				
 				map.put("appKey", rs.getString("appKey") );
 				map.put("notify_url", rs.getString("notify_url") );
 				map.put(rs.getString("payChannelName"), rs.getString("status"));
 				map.put("encrypt",rs.getString("encrypt"));
-				map.put("webOrderid",orederKey);
+//				map.put("webOrderid",orederKey);
 				map.put("encrypt_key",rs.getString("encrypt_key"));
 
 			}

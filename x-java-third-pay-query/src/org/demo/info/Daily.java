@@ -1,11 +1,14 @@
 package org.demo.info;
 
 public class Daily {
+	
 	private String id;
 	private String appKey;
 	private String channel;
 	private float price;
-
+	private int payUsers;
+	private int newUsers;
+	
 	public String getId() {
 		return id;
 	}
@@ -36,6 +39,22 @@ public class Daily {
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public int getPayUsers() {
+		return payUsers;
+	}
+
+	public void setPayUsers(int payUsers) {
+		this.payUsers = payUsers;
+	}
+
+	public int getNewUsers() {
+		return newUsers;
+	}
+
+	public void setNewUsers(int newUsers) {
+		this.newUsers = newUsers;
 	}
 
 }

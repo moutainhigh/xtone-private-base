@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+<LinearLayout
+
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    >
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="本月推荐"
+        android:background="@drawable/sbg"
+        android:textColor="@color/nav_bar_backone"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:textSize="17sp"
+        />
+
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="15dp"
+           android:layout_marginLeft="20dp"
+
+           >
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               >
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   >
+           <ImageView
+               android:id="@+id/store_img_one"
+               android:layout_width="70dp"
+               android:layout_height="100dp"
+              android:background="@drawable/name_2"
+               />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="红心灿烂"
+                       android:textSize="14sp"
+                       android:layout_marginTop="5dp"
+                       android:textColor="@color/silver"
+                       android:layout_below="@id/store_img_one"
+                       />
+
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   >
+                   <ImageView
+                       android:id="@+id/store_img_two"
+                       android:layout_width="70dp"
+                       android:layout_height="100dp"
+                       android:background="@drawable/name_1"
+                       />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="黑色风暴"
+                       android:textSize="14sp"
+                       android:layout_marginTop="5dp"
+                       android:textColor="@color/silver"
+                       android:layout_below="@id/store_img_two"
+                       />
+
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   >
+                   <ImageView
+                       android:id="@+id/store_img_three"
+                       android:layout_width="70dp"
+                       android:layout_height="100dp"
+                       android:background="@drawable/name_3"
+                       />
+                   <TextView
+                       android:layout_width="70dp"
+                       android:layout_height="wrap_content"
+                       android:text="历史上的人物"
+                       android:textSize="14sp"
+                       android:layout_marginTop="5dp"
+                       android:textColor="@color/silver"
+                       android:layout_below="@id/store_img_three"
+                       />
+
+               </RelativeLayout>
+
+               <RelativeLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   >
+                   <ImageView
+                       android:id="@+id/store_img_four"
+                       android:layout_width="70dp"
+                       android:layout_height="100dp"
+                       android:background="@drawable/name_4"
+                       />
+                   <TextView
+                       android:id="@+id/store_author"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="卧底"
+                       android:textSize="14sp"
+                       android:layout_marginTop="5dp"
+                       android:textColor="@color/silver"
+                       android:layout_below="@id/store_img_four"
+                       />
+
+               </RelativeLayout>
+           </LinearLayout>
+       </RelativeLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="女生专区"
+        android:background="@drawable/sbg"
+        android:textColor="@color/nav_bar_backone"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:textSize="17sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_nv_one"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_2"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="红心灿烂"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_nv_one"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_nv_two"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="黑色风暴"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_nv_two"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_nv_three"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_3"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="历史上的人物"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_nv_three"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_nv_four"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_4"
+                    />
+                <TextView
+                    android:id="@+id/store_nv_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卧底"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_nv_four"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="男生专区"
+        android:background="@drawable/sbg"
+        android:textColor="@color/nav_bar_backone"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:textSize="17sp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_man_one"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_2"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="红心灿烂"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_man_one"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_man_two"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_1"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="黑色风暴"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_man_two"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_man_three"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_3"
+                    />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="历史上的人物"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_man_three"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:id="@+id/store_man_four"
+                    android:layout_width="70dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/name_4"
+                    />
+                <TextView
+                    android:id="@+id/store_man_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="卧底"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/silver"
+                    android:layout_below="@id/store_man_four"
+                    />
+
+            </RelativeLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>
+</ScrollView>
