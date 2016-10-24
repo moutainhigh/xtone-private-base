@@ -34,9 +34,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
-<!----webfonts--->
-<link href='http://fonts.useso.com/css?family=Roboto:400,100,300,500,700,900' rel='stylesheet' type='text/css'>
-<!---//webfonts--->  
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -56,9 +53,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css"
-	href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+	href="../js-css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
-	src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
+	src="../js-css/jquery.dataTables.js"></script>
 <script type="text/javascript" src="../My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript" src="../js-css/DatePicker.js"></script>
 <link rel="stylesheet" type="text/css"
@@ -128,6 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<th>总额（元）</th>
 				<th>每日总付费用户</th>
 				<th>付费APRU值</th>
+				<th>每日新增用户</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -141,12 +139,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			float sum=0;
 			int sumPayUsers =0;
 			String appKeys[]=null;
+			int sumNewUsers = 0;
 			for(Daily daily:listDaily)
 			{
 				appKeys= daily.getAppKey().split(",");
 				sum+=daily.getPrice();
 				sumPayUsers+=daily.getPayUsers();
-				
+				sumNewUsers+=daily.getNewUsers();
 				%>
 			
 			<tr>
@@ -157,6 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<% }%></td>
 				<td><%=daily.getPrice()/100%></td>
 				<td><%=daily.getPayUsers()%></td>
+
 				<%
 				if(daily.getPayUsers() == 0){ %>
 					<td><%= ""%></td>
@@ -165,6 +165,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					
 				<%}
 				%>
+				<td><%=daily.getNewUsers()%></td>
 			</tr>
 			<%
 			}
@@ -176,6 +177,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<td>总金额:<%=sum/100 %>元</td>
 				<td>总付费用户:<%=sumPayUsers%>人</td>
 				<td><%=""%></td>
+				<td>总新增用户:<%=sumNewUsers%>人</td>
 			</tr>
 	</table>
 		</div>
