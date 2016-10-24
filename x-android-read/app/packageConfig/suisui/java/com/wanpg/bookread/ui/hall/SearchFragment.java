@@ -52,9 +52,9 @@ public class SearchFragment extends BaseFragment {
     private String[] info_Names={"黑色风暴","红心灿烂封面","历史上的那些人","卧底","虚空里的盛宴","清风明月","心缘","幽默的智慧"};
     private Integer[] info_icon={R.drawable.name_1,R.drawable.name_2,R.drawable.name_3,R.drawable.name_4,
             R.drawable.name_5,R.drawable.name_6,R.drawable.name_7,R.drawable.name_8};
-    private String[] info_author={"周力军","曹其明","何跃青","周力军","孙欲言","刘瑛","心缘","邢延国"};
-
-
+    private String[] info_author={"周力军     著","曹其明     著","何跃青     著","周力军     著","孙欲言     著","刘瑛      著","心缘      著","邢延国     著"};
+    private String[] info_remark={"简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介","aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","","","","","",""};
+    private String[] info_size={"21万字","15万字","17万字","48万字","17万字","15万字","48万字","21万字"};
     private ArrayList<Map<String,Object>> listItems = new ArrayList<Map<String, Object>>();
 
 
@@ -74,10 +74,10 @@ public class SearchFragment extends BaseFragment {
         // TODO Auto-generated method stub
         LogUtil.D("wanpg", this.getClass().getSimpleName()+"_onCreateView");
         if(parent==null){
-	        parent = inflater.inflate(R.layout.layout_booksearch, null);
-	        initData();
+            parent = inflater.inflate(R.layout.layout_booksearch, null);
+            initData();
         }else{
-        	((ViewGroup)parent.getParent()).removeView(parent);
+            ((ViewGroup)parent.getParent()).removeView(parent);
         }
         return parent;
     }
@@ -95,7 +95,7 @@ public class SearchFragment extends BaseFragment {
             LogUtil.D("wanpg", "BookSearchFragment_initData 获取新数据");
     		initSearchTags();
     	}*/
-    	initUI();
+        initUI();
     }
 
     private void initUI() {
@@ -122,6 +122,8 @@ public class SearchFragment extends BaseFragment {
             map.put("name", info_Names[i]);
             map.put("author",info_author[i]);
             map.put("jh",R.drawable.jh);
+            map.put("remark",info_remark[i]);
+            map.put("size",info_size[i]);
             listItems.add(map);
         }
 
@@ -131,9 +133,9 @@ public class SearchFragment extends BaseFragment {
         search_lv.setAdapter(searchAdapter);
 
 
-       search_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-           @Override
-           public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        search_lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
               /* Search_SoftAboutDialog aboutDialog = new Search_SoftAboutDialog(getActivity(), R.style.about_dialog);
                Window win = aboutDialog.getWindow();
@@ -146,18 +148,18 @@ public class SearchFragment extends BaseFragment {
                aboutDialog.setCanceledOnTouchOutside(true);//设置点击Dialog外部任意区域关闭Dialog
                aboutDialog.show();*/
 
-             final  Search_SoftAboutDialogone ab = new Search_SoftAboutDialogone(getActivity());
+                final  Search_SoftAboutDialogone ab = new Search_SoftAboutDialogone(getActivity());
 
-             ab.setIcon((Integer) listItems.get(position).get("img"));
-             ab.setTitle( listItems.get(position).get("name")+"");
-               ab.setauthor(listItems.get(position).get("author")+"");
+                ab.setIcon((Integer) listItems.get(position).get("img"));
+                ab.setTitle( listItems.get(position).get("name")+"");
+                ab.setauthor(listItems.get(position).get("author")+"");
 
-               ab.setConfirm();
+                ab.setConfirm();
 
 
             /* ab.show();*/
-           }
-       });
+            }
+        });
 
 
        /* //适配器
@@ -312,7 +314,7 @@ public class SearchFragment extends BaseFragment {
     	}
     	return s1;
 	}*/
-    
+
     /**
      * 返回rSize个数的数组，随机的，返回在0-fsize中取，包括0，不包括fsize
      * @param rSzie
@@ -320,19 +322,19 @@ public class SearchFragment extends BaseFragment {
      * @return
      */
     private int[] getRandomPos(int rSzie, int fSize){
-    	int[] a = new int[rSzie];
-		for(int i=0;i<rSzie;i++){			
-			a[i] = (int) (Math.random() * fSize);  
-			for (int j=0; j<i;j++){  
-				if (a[j] == a[i]){
-					i--;
-					break;
-				}
-			}
-		}
-		return a;
+        int[] a = new int[rSzie];
+        for(int i=0;i<rSzie;i++){
+            a[i] = (int) (Math.random() * fSize);
+            for (int j=0; j<i;j++){
+                if (a[j] == a[i]){
+                    i--;
+                    break;
+                }
+            }
+        }
+        return a;
     }
-    
+
     public void hideSoftKeyborad() {
         InputMethodManager imm = (InputMethodManager) mActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         et_search_content.setCursorVisible(false);

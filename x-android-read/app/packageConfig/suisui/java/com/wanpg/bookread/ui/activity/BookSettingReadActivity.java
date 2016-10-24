@@ -3,6 +3,7 @@ package com.wanpg.bookread.ui.activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -93,12 +94,16 @@ public class BookSettingReadActivity extends BaseActivity {
         hideAllPageChangeTag();
         if (pageChangeMode.equals(Config.PAGE_CHANGE_FLIP)) {
             iv_pagechange_flip.setVisibility(View.VISIBLE);
+            tv_pagechange_flip.setTextColor(Color.parseColor("#ffffff"));
         } else if (pageChangeMode.equals(Config.PAGE_CHANGE_SLIDE)) {
             iv_pagechange_slide.setVisibility(View.VISIBLE);
+            tv_pagechange_slide.setTextColor(Color.parseColor("#ffffff"));
         } else if (pageChangeMode.equals(Config.PAGE_CHANGE_COVER)) {
             iv_pagechange_cover.setVisibility(View.VISIBLE);
+            tv_pagechange_cover.setTextColor(Color.parseColor("#ffffff"));
         } else if (pageChangeMode.equals(Config.PAGE_CHANGE_NONE)) {
             iv_pagechange_none.setVisibility(View.VISIBLE);
+            tv_pagechange_none.setTextColor(Color.parseColor("#ffffff"));
         }
 
         tb_fullscreen.setChecked(!isFullScreen);
@@ -111,15 +116,19 @@ public class BookSettingReadActivity extends BaseActivity {
         switch (lockScreenTime) {
             case -1://不锁屏
                 iv_lockscreen_none.setVisibility(View.VISIBLE);
+                tv_lockscreen_none.setTextColor(Color.parseColor("#ffffff"));
                 break;
             case 5 * 60 * 1000://5分钟
                 iv_lockscreen_5.setVisibility(View.VISIBLE);
+                tv_lockscreen_5.setTextColor(Color.parseColor("#ffffff"));
                 break;
             case 15 * 60 * 1000://15分钟
                 iv_lockscreen_15.setVisibility(View.VISIBLE);
+                tv_lockscreen_15.setTextColor(Color.parseColor("#ffffff"));
                 break;
             case 30 * 60 * 1000://30分钟
                 iv_lockscreen_30.setVisibility(View.VISIBLE);
+                tv_lockscreen_30.setTextColor(Color.parseColor("#ffffff"));
                 break;
         }
 
@@ -164,34 +173,60 @@ public class BookSettingReadActivity extends BaseActivity {
             if (v.equals(tv_pagechange_none)) {
                 pageChangeMode = Config.PAGE_CHANGE_NONE;
                 hideAllPageChangeTag();
+                tv_pagechange_none.setTextColor(Color.parseColor("#ffffff"));
+                tv_pagechange_flip.setTextColor(Color.parseColor("#222222"));
+                tv_pagechange_slide.setTextColor(Color.parseColor("#222222"));
                 iv_pagechange_none.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_pagechange_flip)) {
                 pageChangeMode = Config.PAGE_CHANGE_FLIP;
                 hideAllPageChangeTag();
+                tv_pagechange_flip.setTextColor(Color.parseColor("#ffffff"));
+                tv_pagechange_none.setTextColor(Color.parseColor("#222222"));
+                tv_pagechange_slide.setTextColor(Color.parseColor("#222222"));
                 iv_pagechange_flip.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_pagechange_slide)) {
                 pageChangeMode = Config.PAGE_CHANGE_SLIDE;
+                tv_pagechange_slide.setTextColor(Color.parseColor("#ffffff"));
+                tv_pagechange_none.setTextColor(Color.parseColor("#222222"));
+                tv_pagechange_flip.setTextColor(Color.parseColor("#222222"));
                 hideAllPageChangeTag();
                 iv_pagechange_slide.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_pagechange_cover)) {
                 pageChangeMode = Config.PAGE_CHANGE_COVER;
                 hideAllPageChangeTag();
+                tv_pagechange_cover.setTextColor(Color.parseColor("#ffffff"));
                 iv_pagechange_cover.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_lockscreen_5)) {
                 lockScreenTime = 5 * 60 * 1000;
                 hideAllLockScreenTag();
+                tv_lockscreen_5.setTextColor(Color.parseColor("#ffffff"));
+                tv_lockscreen_15.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_30.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_none.setTextColor(Color.parseColor("#222222"));
                 iv_lockscreen_5.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_lockscreen_15)) {
                 lockScreenTime = 15 * 60 * 1000;
                 hideAllLockScreenTag();
+                tv_lockscreen_15.setTextColor(Color.parseColor("#ffffff"));
+                tv_lockscreen_5.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_30.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_none.setTextColor(Color.parseColor("#222222"));
                 iv_lockscreen_15.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_lockscreen_30)) {
                 lockScreenTime = 30 * 60 * 1000;
                 hideAllLockScreenTag();
+                tv_lockscreen_30.setTextColor(Color.parseColor("#ffffff"));
+                tv_lockscreen_5.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_15.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_none.setTextColor(Color.parseColor("#222222"));
                 iv_lockscreen_30.setVisibility(View.VISIBLE);
             } else if (v.equals(tv_lockscreen_none)) {
                 lockScreenTime = -1;
                 hideAllLockScreenTag();
+                tv_lockscreen_none.setTextColor(Color.parseColor("#ffffff"));
+                tv_lockscreen_5.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_15.setTextColor(Color.parseColor("#222222"));
+                tv_lockscreen_30.setTextColor(Color.parseColor("#222222"));
                 iv_lockscreen_none.setVisibility(View.VISIBLE);
             }
             commitSharedPreferencesData();

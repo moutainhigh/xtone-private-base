@@ -45,7 +45,8 @@ public class SearchAdapter extends BaseAdapter {
         public TextView name;
         public ImageView jh;
         public TextView author;
-
+        public TextView remark;
+        public TextView size;
     }
 
     public SearchAdapter(Context context, List<Map<String, Object>> listItems) {
@@ -88,6 +89,8 @@ public class SearchAdapter extends BaseAdapter {
             listItemView.name = (TextView) convertView.findViewById(R.id.search_name);
             listItemView.jh = (ImageView) convertView.findViewById(R.id.search_jh);
             listItemView.author = (TextView) convertView.findViewById(R.id.search_author);
+            listItemView.remark = (TextView) convertView.findViewById(R.id.search_remark);
+            listItemView.size = (TextView) convertView.findViewById(R.id.search_size);
             //设置控件集到convertView
             convertView.setTag(listItemView);
 
@@ -105,12 +108,14 @@ public class SearchAdapter extends BaseAdapter {
 //        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
 //        listItemView.img.setImageBitmap(bitmap);
 
-       // listItemView.img.setImageResource((Integer) listItems.get(position).get("img"));
+        // listItemView.img.setImageResource((Integer) listItems.get(position).get("img"));
 //        listItemView.img.setBackgroundResource((Integer) listItems.get(position).get("img"));
 
         //  listItemView.img.setImageBitmap(BitmapFactory.decodeResource(context.getResources(),(Integer) listItems.get(position).get("img")));
         listItemView.name.setText((String) listItems.get(position).get("name"));
         listItemView.author.setText((String) listItems.get(position).get("author"));
+        listItemView.remark.setText((String) listItems.get(position).get("remark"));
+        listItemView.size.setText((String) listItems.get(position).get("size"));
 
 
         DisplayImageOptions options = new DisplayImageOptions.Builder()

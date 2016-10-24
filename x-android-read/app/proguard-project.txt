@@ -18,7 +18,7 @@
 -keepclassmembers class fqcn.of.javascript.interface.for.webview {
    public *;
 }
--libraryjars libs/android-support-v4.jar
+#-libraryjars libs/android-support-v4.jar
 -dontwarn android.support.v4.**    
 -keep class android.support.v4.** { *; }  
 -keep interface android.support.v4.app.** { *; }  
@@ -36,3 +36,4 @@
 
 -keep public class com.umeng.update.** { *; }
 -dontwarn com.umeng.update.**
+-dontwarn android.webkit.**

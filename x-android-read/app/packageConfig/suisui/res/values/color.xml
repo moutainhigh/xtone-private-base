@@ -331,6 +331,7 @@
     <color name="shelf_back_09">#7f8c8d</color>
     <color name="shelf_back_10">#fff</color>
     <color name="shelf_back_11">#ffdf1831</color>
+    <color name="shelf_back_12">#89be79</color>
 
     <!-- button的颜色 -->
     <color name="button_green_normal">#1abc9c</color>
@@ -369,8 +370,18 @@
     
     <color name="umeng_fb_color_btn_pressed">#1495F7</color>
     <color name="umeng_fb_color_btn_normal">#333333</color>
-    
-    
+
+    <color name="block_column_4">#777777</color>
+    <color name="block_column_5">#222222</color>
+    <color name="block_column_6">#d0d0d0</color>
+    <color name="block_column_7">#f7f7f7</color>
+    <color name="block_column_8">#367a90</color>
+    <color name="block_column_9">#636b71</color>
+    <color name="block_column_10">#2e2e2e</color>
+
+    <color name="book_text">#444444</color>
+    <color name="book_text2">#acacac</color>
+    <color name="book_text3">#666666</color>
     
     <color name="dot_selected">#0096ff</color>
     <color name="dot_unselected">#959595</color>
