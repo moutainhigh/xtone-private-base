@@ -3,7 +3,7 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <dependent-module archiveName="xtone-java-common.war" deploy-path="/WEB-INF/lib" handle="module:/resource/xtone-java-common/xtone-java-common">
+        <dependent-module archiveName="xtone-common-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/xtone-java-common/xtone-java-common">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/x-java-third-pay-query-pcpay/target/classes"/>
