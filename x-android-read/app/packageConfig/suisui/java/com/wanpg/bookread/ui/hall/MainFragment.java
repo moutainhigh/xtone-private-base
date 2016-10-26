@@ -1,6 +1,7 @@
 package com.wanpg.bookread.ui.hall;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -69,7 +70,7 @@ public class MainFragment extends BaseFragment{
 
 	private SearchFragment mSearchFragment;//搜索页面
 	private SoftwareFragment mSoftwareFragment;//推荐页面
-
+	private TextView indexTextview;
 	/**
 	 * 初始化界面
 	 */
@@ -88,7 +89,7 @@ public class MainFragment extends BaseFragment{
 
 		ivBottomLine = (ImageView) mMainView.findViewById(R.id.iv_bottom_line);
 		bottomLineWidth = ivBottomLine.getLayoutParams().width;
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(bottomLineWidth, DisplayUtil.dp2px(4));
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(bottomLineWidth, DisplayUtil.dp2px(2));
 		params.setMargins(((PhoneInfo.disWidthPx / 4 - bottomLineWidth) / 2), 0, 0, 0);
 		ivBottomLine.setLayoutParams(params);
 
@@ -224,7 +225,42 @@ public class MainFragment extends BaseFragment{
 			animation.setDuration(300);
 			ivBottomLine.startAnimation(animation);
 		}
+		switch (pos){
+			case 0:
+				if(indexTextview!=null && indexTextview!=tv_head_shelf){
+					indexTextview.setTextColor(Color.parseColor("#2e2e2e"));
+				}
+				indexTextview=tv_head_shelf;
+				tv_head_shelf.setTextColor(Color.parseColor("#89be79"));
 
+				break;
+			case 1:
+				if(indexTextview!=null && indexTextview!=tv_head_store){
+					indexTextview.setTextColor(Color.parseColor("#2e2e2e"));
+				}
+				indexTextview=tv_head_store;
+				tv_head_store.setTextColor(Color.parseColor("#89be79"));
+
+				break;
+			case 2:
+				if(indexTextview!=null && indexTextview!=tv_head_search){
+					indexTextview.setTextColor(Color.parseColor("#2e2e2e"));
+				}
+				indexTextview=tv_head_search;
+				tv_head_search.setTextColor(Color.parseColor("#89be79"));
+
+
+				break;
+			case 3:
+				if(indexTextview!=null && indexTextview!=tv_head_recommend){
+					indexTextview.setTextColor(Color.parseColor("#2e2e2e"));
+				}
+				indexTextview=tv_head_recommend;
+				tv_head_recommend.setTextColor(Color.parseColor("#89be79"));
+
+				break;
+
+		}
 	}
 	
 	private OnFragmentDoListener mChildFragmentDoListener = new OnFragmentDoListener() {

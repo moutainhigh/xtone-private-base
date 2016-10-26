@@ -113,6 +113,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+        <a style="color: #fff !important;background: transparent;min-width: 1.5em;margin-left:143px" href="cp-users.jsp">CP管理</a>
+        <a style="color: #fff !important;background: transparent;min-width: 1.5em;margin-left:20px" href="cp-channel-users.jsp">渠道管理</a>
+        <a style="color: #fff !important;background: transparent;min-width: 1.5em;margin-left:20px" href="apps.jsp">APP管理</a>
+        <br/>
         <div id="page-wrapper">
         <div class="col-md-12 graphs">
 	   <div class="xs">

@@ -25,7 +25,7 @@
         android:layout_marginLeft="16dp"
         android:gravity="center_vertical|left"
         android:textColor="#222222"
-        android:textSize="15sp"
+        android:textSize="18sp"
 
 
         />
@@ -35,7 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
-
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/sousuo" />
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="48dp"
@@ -57,15 +62,10 @@
                 android:text="翻页方式"
 
                 android:textColor="#777777"
-                android:textSize="15sp" />
+                android:textSize="13sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/sousuo" />
+
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -80,8 +80,8 @@
 
                 <ImageView
                     android:id="@+id/iv_pagechange_none"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/set_select_bg"
@@ -105,8 +105,8 @@
 
                 <ImageView
                     android:id="@+id/iv_pagechange_flip"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/set_select_bg"
                     android:visibility="invisible" />
@@ -130,8 +130,8 @@
 
                 <ImageView
                     android:id="@+id/iv_pagechange_slide"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:background="@drawable/set_select_bg"
                     android:visibility="invisible" />
@@ -173,12 +173,12 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-             android:background="@drawable/sousuo"/>
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+             <!--android:background="@drawable/sousuo"/>-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -197,13 +197,13 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/sousuo"
-            android:visibility="gone" />
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+            <!--android:background="@drawable/sousuo"-->
+            <!--android:visibility="gone" />-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -229,12 +229,7 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:background="@drawable/sousuo" />
+
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -261,7 +256,7 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/sousuo" />
@@ -291,7 +286,7 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/sousuo" />
@@ -321,7 +316,7 @@
 
         <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
+            android:layout_height="1dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
              android:background="@drawable/sousuo"/>
@@ -350,12 +345,12 @@
 
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-             android:background="@drawable/sousuo"/>
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+             <!--android:background="@drawable/sousuo"/>-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -381,12 +376,12 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-             android:background="@drawable/sousuo"/>
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+             <!--android:background="@drawable/sousuo"/>-->
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -402,8 +397,8 @@
 
                 <ImageView
                     android:id="@+id/iv_lockscreen_5"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/set_select_bg"
@@ -426,8 +421,8 @@
 
                 <ImageView
                     android:id="@+id/iv_lockscreen_15"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/set_select_bg"
@@ -451,8 +446,8 @@
 
                 <ImageView
                     android:id="@+id/iv_lockscreen_30"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/set_select_bg"
@@ -475,8 +470,8 @@
 
                 <ImageView
                     android:id="@+id/iv_lockscreen_none"
-                    android:layout_width="65dp"
-                    android:layout_height="35dp"
+                    android:layout_width="75dp"
+                    android:layout_height="30dp"
                     android:layout_centerInParent="true"
                     android:adjustViewBounds="true"
                     android:background="@drawable/set_select_bg"
@@ -493,12 +488,12 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-             android:background="@drawable/sousuo"/>
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+             <!--android:background="@drawable/sousuo"/>-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -524,12 +519,12 @@
                 android:textSize="15sp" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-             android:background="@drawable/sousuo"/>
+        <!--<ImageView-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="15dp"-->
+             <!--android:background="@drawable/sousuo"/>-->
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -561,7 +556,7 @@
             <!--></LinearLayout>-->
         <!--<ImageView-->
             <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="2dp"-->
+            <!--android:layout_height="1dp"-->
             <!--android:layout_marginLeft="15dp"-->
             <!--android:layout_marginRight="15dp"-->
              <!--android:background="@drawable/sousuo"/>-->

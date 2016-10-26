@@ -25,6 +25,14 @@ public class ShelfDao extends Dao{
         	cursor = db.rawQuery("select * from " + ShelfBookTable.TABLE_NAME, new String[]{});
             while (cursor.moveToNext()) {
                 ShelfBook book = parseCursor(cursor);
+                Log.d("Myselect",book.readMode);
+                Log.d("Myselect",book.author);
+                Log.d("Myselect",book.bookName);
+                Log.d("Myselect",book.bookPath);
+                Log.d("Myselect",book.chapterId);
+                Log.d("Myselect",book.chapterUrl);
+                Log.d("Myselect",book.coverPath);
+                Log.d("Myselect",book.innerFileType);
                 list.add(book);
             }
         }finally{

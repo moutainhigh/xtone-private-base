@@ -4,20 +4,23 @@ package org.demo.info;
  * @author dev.jiabin
  *
  */
-public class AdUser {
+public class CpChannelUser {
 	/**
 	 * 以下字段以user-update.jsp中json封装的字段相对应
 	 */
-	private long id;         //用户ID
-	private String user;     //用户名称
-	private int type;        //状态码，用于判断信息是增加界面传送的还是修改界面传送的
-	private String pwd;      //密码
-	private String email;    //邮箱
-	private int admin;       //是否为管理员
-	private int status;      //是否开启
-	private long addTime;    //创建时间
-	private long lastLogin;  //最近登录时间
-
+	private long id;    		     //用户ID
+	private String user;		     //用户名称
+	private int type;   		     //状态码，用于判断信息是增加界面传送的还是修改界面传送的
+	private String pwd;    			 //密码
+	private String email;  			 //邮箱
+	private int admin;      		 //是否为管理员
+	private int status;     		 //是否开启
+	private long addTime;  			 //创建时间
+	private long lastLogin; 		 //最近登录时间
+	private long cpId;				 //CP用户ID
+	private String relchannel;		 //发布渠道
+	private int rbamoumt;			 //扣量起始金额
+	private int redscale;			 //扣量比例
 	
 	/*     get、set方法      */
 	public long getId() {
@@ -74,7 +77,30 @@ public class AdUser {
 	public void setType(int type) {
 		this.type = type;
 	}
-
+	public long getCpId() {
+		return cpId;
+	}
+	public void setCpId(long cpId) {
+		this.cpId = cpId;
+	}
+	public String getRelchannel() {
+		return relchannel;
+	}
+	public void setRelchannel(String relchannel) {
+		this.relchannel = relchannel;
+	}
+	public int getRbamoumt() {
+		return rbamoumt;
+	}
+	public void setRbamoumt(int rbamoumt) {
+		this.rbamoumt = rbamoumt;
+	}
+	public int getRedscale() {
+		return redscale;
+	}
+	public void setRedscale(int redscale) {
+		this.redscale = redscale;
+	}
 	
 	
 }

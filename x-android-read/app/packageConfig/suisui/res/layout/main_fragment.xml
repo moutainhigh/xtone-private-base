@@ -50,9 +50,9 @@
 
             <ImageView
                 android:id="@+id/iv_bottom_line"
-                android:layout_width="65dp"
-                android:layout_height="4dp"
-                android:background="@color/white"
+                android:layout_width="72dp"
+                android:layout_height="1dp"
+                android:background="#89be79"
                 android:scaleType="matrix" />
         </LinearLayout>
     </RelativeLayout>
