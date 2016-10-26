@@ -4,7 +4,7 @@ package org.demo.info;
  * @author dev.jiabin
  *
  */
-public class AdUser {
+public class CpUser {
 	/**
 	 * 以下字段以user-update.jsp中json封装的字段相对应
 	 */
@@ -17,7 +17,7 @@ public class AdUser {
 	private int status;      //是否开启
 	private long addTime;    //创建时间
 	private long lastLogin;  //最近登录时间
-
+	private long cpId;		 //CP用户ID
 	
 	/*     get、set方法      */
 	public long getId() {
@@ -74,7 +74,12 @@ public class AdUser {
 	public void setType(int type) {
 		this.type = type;
 	}
-
+	public long getCpId() {
+		return cpId;
+	}
+	public void setCpId(long cpId) {
+		this.cpId = cpId;
+	}
 	
 	
 }

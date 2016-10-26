@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class ConfigManager
 {
-	private static final String CONFIG_PATH = "config.properties";
+	private static final String CONFIG_PATH = "jdbc.properties";
 	private static Properties	prop			= null;
 	private static long			lastModifyTime	= 0;
 
