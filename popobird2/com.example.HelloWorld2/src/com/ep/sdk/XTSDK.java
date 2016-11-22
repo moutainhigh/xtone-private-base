@@ -52,22 +52,22 @@ public class XTSDK {
 		Payment.init(ac);
 		isInit = true;
 		
-		//如果用户登录过自动登陆
-		AtomicBoolean initialized = new AtomicBoolean(false);
-		if(initialized.compareAndSet(false, true)){
-		   //自动登陆
-			AccountService.getInstances().autoLogin(ac, new CallBack() {
-				@Override
-				public void loginSuccess(UserInfo arg0) {
-					userInfo = arg0;
-					Toast.makeText(ac, "自动登陆", Toast.LENGTH_SHORT).show();
-					Message msg = mHandler.obtainMessage();
-					msg.what = 4011;
-					msg.obj =arg0; 
-					mHandler.sendMessage(msg);
-				}
-			});
-		}
+//		//如果用户登录过自动登陆
+//		AtomicBoolean initialized = new AtomicBoolean(false);
+//		if(initialized.compareAndSet(false, true)){
+//		   //自动登陆
+//			AccountService.getInstances().autoLogin(ac, new CallBack() {
+//				@Override
+//				public void loginSuccess(UserInfo arg0) {
+//					userInfo = arg0;
+//					Toast.makeText(ac, "自动登陆", Toast.LENGTH_SHORT).show();
+//					Message msg = mHandler.obtainMessage();
+//					msg.what = 4011;
+//					msg.obj =arg0; 
+//					mHandler.sendMessage(msg);
+//				}
+//			});
+//		}
 		
 	}
 	
@@ -75,23 +75,23 @@ public class XTSDK {
 	/**
 	 * 用户登录
 	 */
-	public void login(final Activity ac){
-		if(isInit){
-		
-		AccountService.getInstances().showWebDialog(ac, new CallBack() {
-			
-			@Override
-			public void loginSuccess(UserInfo arg0) {
-				userInfo = arg0;
-				Toast.makeText(ac, "登陆成功", Toast.LENGTH_SHORT).show();
-				Message msg = mHandler.obtainMessage();
-				msg.what = 4012;
-				msg.obj =arg0; 
-				mHandler.sendMessage(msg);
-			}
-		});
-		}
-	}
+//	public void login(final Activity ac){
+//		if(isInit){
+//		
+//		AccountService.getInstances().showWebDialog(ac, new CallBack() {
+//			
+//			@Override
+//			public void loginSuccess(UserInfo arg0) {
+//				userInfo = arg0;
+//				Toast.makeText(ac, "登陆成功", Toast.LENGTH_SHORT).show();
+//				Message msg = mHandler.obtainMessage();
+//				msg.what = 4012;
+//				msg.obj =arg0; 
+//				mHandler.sendMessage(msg);
+//			}
+//		});
+//		}
+//	}
 	
 	
 	/**
@@ -100,7 +100,7 @@ public class XTSDK {
 	public boolean pay(final Activity ac,final PayParams params){
 		
 		if(!ac.isFinishing()){
-			if(userInfo!=null&&!TextUtils.isEmpty(userInfo.getUserID())&&isInit){
+			if(isInit){
 				
 				final LogoDialog dialog = new LogoDialog(ac);
 				dialog.show();
@@ -110,13 +110,10 @@ public class XTSDK {
 					public void run() {
 						dialog.dismiss();
 						
-						params.setUid(userInfo.getUserID());
+//						params.setUid(userInfo.getUserID());
 						EPPayHelper.getInstance(ac).pay(params);
 					}
 				}, 2000);
-				
-				
-				
 				return true;
 			}else {
 				return false;
@@ -131,7 +128,7 @@ public class XTSDK {
 	 */
 	public void logout(){
 		userInfo = null;
-		AccountService.getInstances().logout();
+//		AccountService.getInstances().logout();
 		
 	}
 	

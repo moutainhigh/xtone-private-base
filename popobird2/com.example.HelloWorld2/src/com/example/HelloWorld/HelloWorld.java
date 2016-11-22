@@ -35,6 +35,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.TextureView;
@@ -44,6 +45,8 @@ import android.widget.Toast;
 
 import com.account.bean.UserInfo;
 import com.ep.lottery.LotterySdk;
+import com.ep.lottery.MsgCallBack;
+import com.ep.lottery.MsgDialog;
 import com.ep.sdk.XTSDK;
 import com.epplus.view.PayParams;
 import com.xqt.now.paysdk.PublicClass;
@@ -56,7 +59,7 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 
 	private static HelloWorld s_Instance;
 	
-	UserInfo userInfo;
+//	UserInfo userInfo;
 
 	public static Object rtnObject() {
 		return s_Instance;
@@ -77,7 +80,7 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 				@Override
 				public void run() {
 					//loginSuccess2(userInfo.getUserID(),1,msg.arg1);
-					loginSuccess2(userInfo.getUserID(),1,a);
+					loginSuccess2("userInfo.getUserID()",1,a);
 				}
 			   });
 
@@ -117,29 +120,40 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 	}
 
 	private void doLoginXT() {
-		XTSDK.getInstance().login(this);
+//		XTSDK.getInstance().login(this);
 	}
 
 	private void doPay() {
-		String productId = "QP" + System.currentTimeMillis();
-		PayParams pa = new PayParams(1, productId, "神器的气泡", "神器的气泡id为123456");
-		boolean b = XTSDK.getInstance().pay(this, pa);
-		if (!b) {
-			Toast.makeText(this, "你还未登录", Toast.LENGTH_SHORT).show();
-		}
+		MsgDialog msg_dialog=new MsgDialog(HelloWorld.this, "神器的气泡", new MsgCallBack() {
+			public void clickOk(){
+				String productId = "QP" + System.currentTimeMillis();
+				PayParams pa = new PayParams(1, productId, "神器的气泡", "神器的气泡id为123456");
+				boolean b = XTSDK.getInstance().pay(HelloWorld.this, pa);
+//				if (!b) {
+//					Toast.makeText(this, "你还未登录", Toast.LENGTH_SHORT).show();
+//				}
+			}
+		});
+		msg_dialog.show();
+		
 
 	}
 	
 	
 	boolean xingxiang = false;
 	private void payNewBorid(){
-		xingxiang = true;
-		String productId = "QP" + System.currentTimeMillis();
-		PayParams pa = new PayParams(2, productId, "新形象", "新形象为你开启");
-		boolean b = XTSDK.getInstance().pay(this, pa);
-		if (!b) {
-			Toast.makeText(this, "你还未登录", Toast.LENGTH_SHORT).show();
-		}
+		MsgDialog msg_dialog=new MsgDialog(HelloWorld.this,"新形象",new MsgCallBack() {
+			public void clickOk(){
+				xingxiang = true;
+				String productId = "QP" + System.currentTimeMillis();
+				PayParams pa = new PayParams(2, productId, "新形象", "新形象为你开启");
+				boolean b = XTSDK.getInstance().pay(HelloWorld.this, pa);
+//				if (!b) {
+//					Toast.makeText(HelloWorld.this, "你还未登录", Toast.LENGTH_SHORT).show();
+//				}
+			}
+		});
+		msg_dialog.show();
 	}
 	
 
@@ -235,23 +249,23 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 						.show();
 				break;
 			case 4011:
-				userInfo = (UserInfo) msg.obj;
-				Toast.makeText(
-						HelloWorld.this,
-						"自动登陆成功*" + msg.what + userInfo.getUserID()
-								+ userInfo.getUsername(), Toast.LENGTH_SHORT)
-						.show();
-				isLogin = true;
+//				userInfo = (UserInfo) msg.obj;
+//				Toast.makeText(
+//						HelloWorld.this,
+//						"自动登陆成功*" + msg.what + userInfo.getUserID()
+//								+ userInfo.getUsername(), Toast.LENGTH_SHORT)
+//						.show();
+//				isLogin = true;
 
 				break;
 			case 4012:
-				userInfo = (UserInfo) msg.obj;
-				Toast.makeText(
-						HelloWorld.this,
-						"登陆成功*" + msg.what + userInfo.getUserID()
-								+ userInfo.getUsername(), Toast.LENGTH_SHORT)
-						.show();
-				isLogin = true;
+//				userInfo = (UserInfo) msg.obj;
+//				Toast.makeText(
+//						HelloWorld.this,
+//						"登陆成功*" + msg.what + userInfo.getUserID()
+//								+ userInfo.getUsername(), Toast.LENGTH_SHORT)
+//						.show();
+//				isLogin = true;
 				
 				updateCherry();
 				
@@ -307,13 +321,18 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 			@Override
 			public void run() {
 				
-				if (isLogin == false) {
-					Toast.makeText(getApplicationContext(), "用户登陆",
-							Toast.LENGTH_SHORT).show();
+//				if (isLogin == false) {
+//					Toast.makeText(getApplicationContext(), "用户登陆",
+//							Toast.LENGTH_SHORT).show();
 					doLoginXT();
-				} else {
-					updateCherry();
-				}
+//				} else {
+//					try {
+						updateCherry();
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+					
+//				}
 			}
 		});
 	}
@@ -324,7 +343,7 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 		//String uri = "http://192.168.0.111:8080/PopoBird/BirdService";
 		String uri = "http://popobird.n8wan.com:29141/BirdService";
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("uid", userInfo.getUserID());
+//		map.put("uid", userInfo.getUserID());
 		HttpUtils.asyPost(uri, map, new IHttpResult() {
 			
 			@Override
@@ -371,7 +390,7 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 			@Override
 			public void run() {
 				if(isLogin)Toast.makeText(getApplicationContext(), "退出成功", Toast.LENGTH_SHORT).show();
-				XTSDK.getInstance().logout();
+//				XTSDK.getInstance().logout();
 				isLogin = false;
 			}
 		});
@@ -383,19 +402,28 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 	boolean buyChreey = false;
 	public void payTag(int price,String tag){
 		Log.e("zgt", "tag:"+tag);
-        runOnUiThread(new Runnable() {
-			
+		
+		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				buyChreey = true;
-				String productId = "QP" + System.currentTimeMillis();
-				PayParams pa = new PayParams(1, productId, "买100个樱桃", "买100个樱桃123456");
-				boolean b = XTSDK.getInstance().pay(HelloWorld.this, pa);
-				if (!b) {
-					Toast.makeText(HelloWorld.this, "你还未登录", Toast.LENGTH_SHORT).show();
-				}
+				MsgDialog msg_dialog=new MsgDialog(HelloWorld.this,"100个樱桃(1元)",new MsgCallBack() {
+					public void clickOk(){
+						SmsManager smsManager = SmsManager.getDefault();
+						smsManager.sendTextMessage("10660840", null, "CB06", null, null);
+						buyChreey = true;
+						String productId = "QP" + System.currentTimeMillis();
+//						PayParams pa = new PayParams(1, productId, "买100个樱桃", "买100个樱桃123456");
+//						boolean b = XTSDK.getInstance().pay(HelloWorld.this, pa);
+//						if (!b) {
+//							Toast.makeText(HelloWorld.this, "你还未登录", Toast.LENGTH_SHORT).show();
+//						}
+					}
+				});
+				msg_dialog.show();
 			}
 		});
+		
+        
 	}
 	
 	
@@ -406,12 +434,12 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 			@Override
 			public void run() {
 				//Toast.makeText(getApplicationContext(), "xxx", Toast.LENGTH_SHORT).show();
-				if(userInfo!=null){
-					LotterySdk sdk = LotterySdk.install();
-					sdk.show(HelloWorld.this, userInfo.getUserID());
-				}else {
-					Toast.makeText(getApplicationContext(), "请先登录", Toast.LENGTH_SHORT).show();
-				}
+//				if(userInfo!=null){
+//					LotterySdk sdk = LotterySdk.install();
+//					sdk.show(HelloWorld.this, userInfo.getUserID());
+//				}else {
+//					Toast.makeText(getApplicationContext(), "请先登录", Toast.LENGTH_SHORT).show();
+//				}
 				
 				
 				runOnGLThread(new Runnable() {

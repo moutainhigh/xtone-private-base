@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="40dp"
+    android:layout_marginRight="40dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:gravity="center"
+    android:orientation="vertical" 
+    android:background="@drawable/msg_dialog_bg">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="尊敬的用户，您将使用：" 
+        android:textSize="15sp"
+        android:textColor="#333333"/>
+    
+    <TextView
+        android:id="@+id/tv_stuff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="道具" 
+        android:textSize="15sp"
+        android:textColor="#ff0000"/>
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="由”恒大宏信公司记者查询服务“代收，咨询电话：4007100608" 
+        android:textSize="15sp"
+        android:textColor="#333333"/>
+   
+    <Button 
+        android:id="@+id/tv_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:background="@null"
+        android:text="确  定"
+        android:textSize="18sp"
+        android:textColor="#ffffff"
+        />
+
+</LinearLayout>
