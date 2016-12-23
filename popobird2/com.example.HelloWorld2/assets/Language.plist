@@ -15,14 +15,7 @@
 	<key>BUBBLE_FEE_TIPS</key>
 	<string> </string>
 	
-	<key>BUY_100</key>
-	<string>购买100樱桃</string>
-	
-	<key>lottery</key>
-	<string>中彩宝送彩票</string>
-	
-	<key>logout</key>
-	<string>退出</string>
+
 	
 </dict>
 </plist>

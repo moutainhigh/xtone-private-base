@@ -261,7 +261,7 @@
           "fontName": "微软雅黑",
           "fontSize": 16,
           "hAlignment": 0,
-          "text": "您将通过短信支付信息费1元。由运营商代收。",
+          "text": "",
           "touchScaleEnable": false,
           "vAlignment": 0
         }
