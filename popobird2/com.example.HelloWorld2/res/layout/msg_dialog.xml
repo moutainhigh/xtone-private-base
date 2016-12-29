@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:text="由”恒大宏信公司记者查询服务“代收，咨询电话：4007100608" 
+        android:text="由”深圳市万游引力科技有限公司“收取" 
         android:textSize="15sp"
         android:textColor="#333333"/>
    

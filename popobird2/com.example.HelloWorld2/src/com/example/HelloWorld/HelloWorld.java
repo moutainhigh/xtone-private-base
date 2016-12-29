@@ -46,7 +46,7 @@ import android.widget.Toast;
 import com.account.bean.UserInfo;
 //import com.ep.lottery.LotterySdk;
 import com.ep.lottery.MsgCallBack;
-//import com.ep.lottery.MsgDialog;
+import com.ep.lottery.MsgDialog;
 //import com.ep.sdk.XTSDK;
 import com.epplus.view.PayParams;
 import com.xqt.now.paysdk.PublicClass;
@@ -124,17 +124,17 @@ public class HelloWorld extends Cocos2dxActivity implements OnClickListener {
 	}
 
 	private void doPay() {
-//		MsgDialog msg_dialog=new MsgDialog(HelloWorld.this, "神器的气泡", new MsgCallBack() {
-//			public void clickOk(){
-//				String productId = "QP" + System.currentTimeMillis();
-//				PayParams pa = new PayParams(1, productId, "神器的气泡", "神器的气泡id为123456");
+		MsgDialog msg_dialog=new MsgDialog(HelloWorld.this, "神器的气泡", new MsgCallBack() {
+			public void clickOk(){
+				String productId = "QP" + System.currentTimeMillis();
+				PayParams pa = new PayParams(1, productId, "神器的气泡", "神器的气泡id为123456");
 //				boolean b = XTSDK.getInstance().pay(HelloWorld.this, pa);
-////				if (!b) {
-////					Toast.makeText(this, "你还未登录", Toast.LENGTH_SHORT).show();
-////				}
-//			}
-//		});
-//		msg_dialog.show();
+//				if (!b) {
+//					Toast.makeText(this, "你还未登录", Toast.LENGTH_SHORT).show();
+//				}
+			}
+		});
+		msg_dialog.show();
 		
 
 	}
